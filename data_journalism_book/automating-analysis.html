@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 22 Automating analysis | Data Journalism with R and the Tidyverse</title>
+  <meta name="description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 22 Automating analysis | Data Journalism with R and the Tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 22 Automating analysis | Data Journalism with R and the Tidyverse" />
+  
+  <meta name="twitter:description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  
+
+<meta name="author" content="Matt Waite (original author); updated by Derek Willis and Sean Mussenden" />
+
+
+<meta name="date" content="2021-11-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="geographic-analysis.html"/>
+<link rel="next" href="automating-geographic-analysis.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160712129-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160712129-1');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="http://smussenden.github.io/coursefiles/data_journalism_book/">Data Journalism With R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#modern-data-journalism"><i class="fa fa-check"></i><b>1.1</b> Modern data journalism</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#installations"><i class="fa fa-check"></i><b>1.2</b> Installations</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.3</b> About this book</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-well-cover"><i class="fa fa-check"></i><b>1.4</b> What we’ll cover</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="public-records.html"><a href="public-records.html"><i class="fa fa-check"></i><b>2</b> Public records</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="public-records.html"><a href="public-records.html#federal-law"><i class="fa fa-check"></i><b>2.1</b> Federal law</a></li>
+<li class="chapter" data-level="2.2" data-path="public-records.html"><a href="public-records.html#state-law"><i class="fa fa-check"></i><b>2.2</b> State law</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics.html"><a href="r-basics.html#about-libraries"><i class="fa fa-check"></i><b>3.1</b> About libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html"><i class="fa fa-check"></i><b>4</b> Data journalism in the age of replication</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#the-stylebook"><i class="fa fa-check"></i><b>4.1</b> The stylebook</a></li>
+<li class="chapter" data-level="4.2" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#replication"><i class="fa fa-check"></i><b>4.2</b> Replication</a></li>
+<li class="chapter" data-level="4.3" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#goodbye-excel"><i class="fa fa-check"></i><b>4.3</b> Goodbye Excel?</a></li>
+<li class="chapter" data-level="4.4" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#receptivity-is-high"><i class="fa fa-check"></i><b>4.4</b> “Receptivity … is high”</a></li>
+<li class="chapter" data-level="4.5" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#replication-in-notebooks"><i class="fa fa-check"></i><b>4.5</b> Replication in notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>5</b> Data, structures and types</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-mental-picture"><i class="fa fa-check"></i><b>5.1</b> A Mental Picture</a></li>
+<li class="chapter" data-level="5.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>5.2</b> Types</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>6</b> Aggregates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="aggregates.html"><a href="aggregates.html#libraries"><i class="fa fa-check"></i><b>6.1</b> Libraries</a></li>
+<li class="chapter" data-level="6.2" data-path="aggregates.html"><a href="aggregates.html#importing-data"><i class="fa fa-check"></i><b>6.2</b> Importing data</a></li>
+<li class="chapter" data-level="6.3" data-path="aggregates.html"><a href="aggregates.html#group-by-and-count"><i class="fa fa-check"></i><b>6.3</b> Group by and count</a></li>
+<li class="chapter" data-level="6.4" data-path="aggregates.html"><a href="aggregates.html#other-summarization-methods-summing-mean-median-min-and-max"><i class="fa fa-check"></i><b>6.4</b> Other summarization methods: summing, mean, median, min and max</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>7</b> Mutating data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mutating-data.html"><a href="mutating-data.html#another-use-of-mutate"><i class="fa fa-check"></i><b>7.1</b> Another use of mutate</a></li>
+<li class="chapter" data-level="7.2" data-path="mutating-data.html"><a href="mutating-data.html#a-more-powerful-use"><i class="fa fa-check"></i><b>7.2</b> A more powerful use</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="working-with-dates.html"><a href="working-with-dates.html"><i class="fa fa-check"></i><b>8</b> Working with dates</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="working-with-dates.html"><a href="working-with-dates.html#the-hard-way"><i class="fa fa-check"></i><b>8.1</b> The hard way</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>9</b> Filters and selections</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#combining-filters"><i class="fa fa-check"></i><b>9.1</b> Combining filters</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html"><i class="fa fa-check"></i><b>10</b> Data Cleaning Part I: Data smells</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#wrong-type"><i class="fa fa-check"></i><b>10.1</b> Wrong Type</a></li>
+<li class="chapter" data-level="10.2" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#missing-data"><i class="fa fa-check"></i><b>10.2</b> Missing Data</a></li>
+<li class="chapter" data-level="10.3" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#gaps-in-data"><i class="fa fa-check"></i><b>10.3</b> Gaps in data</a></li>
+<li class="chapter" data-level="10.4" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#supicious-outliers"><i class="fa fa-check"></i><b>10.4</b> Supicious Outliers</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html"><i class="fa fa-check"></i><b>11</b> Data Cleaning Part II: Janitor</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#cleaning-headers"><i class="fa fa-check"></i><b>11.1</b> Cleaning headers</a></li>
+<li class="chapter" data-level="11.2" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#changing-data-types"><i class="fa fa-check"></i><b>11.2</b> Changing data types</a></li>
+<li class="chapter" data-level="11.3" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#duplicates"><i class="fa fa-check"></i><b>11.3</b> Duplicates</a></li>
+<li class="chapter" data-level="11.4" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#cleaning-strings"><i class="fa fa-check"></i><b>11.4</b> Cleaning strings</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html"><i class="fa fa-check"></i><b>12</b> Data Cleaning Part III: Open Refine</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html#refinr-open-refine-in-r"><i class="fa fa-check"></i><b>12.1</b> Refinr, Open Refine in R</a></li>
+<li class="chapter" data-level="12.2" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html#manually-cleaning-data-with-open-refine"><i class="fa fa-check"></i><b>12.2</b> Manually cleaning data with Open Refine</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html"><i class="fa fa-check"></i><b>13</b> Cleaning Data Part IV: PDFs</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#easy-does-it"><i class="fa fa-check"></i><b>13.1</b> Easy does it</a></li>
+<li class="chapter" data-level="13.2" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#when-it-looks-good-but-needs-a-little-fixing"><i class="fa fa-check"></i><b>13.2</b> When it looks good, but needs a little fixing</a></li>
+<li class="chapter" data-level="13.3" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#cleaning-up-the-data-in-r"><i class="fa fa-check"></i><b>13.3</b> Cleaning up the data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="combining-and-joining.html"><a href="combining-and-joining.html"><i class="fa fa-check"></i><b>14</b> Combining and joining</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="combining-and-joining.html"><a href="combining-and-joining.html#combining-data-stacking"><i class="fa fa-check"></i><b>14.1</b> Combining data (stacking)</a></li>
+<li class="chapter" data-level="14.2" data-path="combining-and-joining.html"><a href="combining-and-joining.html#joining-data"><i class="fa fa-check"></i><b>14.2</b> Joining data</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="scraping-data-with-rvest.html"><a href="scraping-data-with-rvest.html"><i class="fa fa-check"></i><b>15</b> Scraping data with Rvest</a></li>
+<li class="chapter" data-level="16" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>16</b> Advanced rvest</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#using-for-loops"><i class="fa fa-check"></i><b>16.1</b> Using for loops</a></li>
+<li class="chapter" data-level="16.2" data-path="advanced-rvest.html"><a href="advanced-rvest.html#looping-and-rvest"><i class="fa fa-check"></i><b>16.2</b> Looping and rvest</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html"><i class="fa fa-check"></i><b>17</b> Intro to APIs: The Census</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#the-acs"><i class="fa fa-check"></i><b>17.1</b> The ACS</a></li>
+<li class="chapter" data-level="17.2" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#wide-results"><i class="fa fa-check"></i><b>17.2</b> “Wide” Results</a></li>
+<li class="chapter" data-level="17.3" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#sorting-results"><i class="fa fa-check"></i><b>17.3</b> Sorting Results</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html"><i class="fa fa-check"></i><b>18</b> Visualizing your data for reporting</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html#bar-charts"><i class="fa fa-check"></i><b>18.1</b> Bar charts</a></li>
+<li class="chapter" data-level="18.2" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html#line-charts"><i class="fa fa-check"></i><b>18.2</b> Line charts</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html"><i class="fa fa-check"></i><b>19</b> Visualizing your data for publication</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html#datawrapper"><i class="fa fa-check"></i><b>19.1</b> Datawrapper</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html#making-a-map"><i class="fa fa-check"></i><b>19.1.1</b> Making a Map</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="geographic-data-basics.html"><a href="geographic-data-basics.html"><i class="fa fa-check"></i><b>20</b> Geographic data basics</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="geographic-data-basics.html"><a href="geographic-data-basics.html#importing-and-viewing-data"><i class="fa fa-check"></i><b>20.1</b> Importing and viewing data</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="geographic-analysis.html"><a href="geographic-analysis.html"><i class="fa fa-check"></i><b>21</b> Geographic analysis</a></li>
+<li class="chapter" data-level="22" data-path="automating-analysis.html"><a href="automating-analysis.html"><i class="fa fa-check"></i><b>22</b> Automating analysis</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="automating-analysis.html"><a href="automating-analysis.html#automating-downloads-and-imports"><i class="fa fa-check"></i><b>22.1</b> Automating downloads and imports</a></li>
+<li class="chapter" data-level="22.2" data-path="automating-analysis.html"><a href="automating-analysis.html#exploring-the-data"><i class="fa fa-check"></i><b>22.2</b> Exploring the data</a></li>
+<li class="chapter" data-level="22.3" data-path="automating-analysis.html"><a href="automating-analysis.html#analysis"><i class="fa fa-check"></i><b>22.3</b> Analysis</a></li>
+<li class="chapter" data-level="22.4" data-path="automating-analysis.html"><a href="automating-analysis.html#making-updating-graphics"><i class="fa fa-check"></i><b>22.4</b> Making updating graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="automating-geographic-analysis.html"><a href="automating-geographic-analysis.html"><i class="fa fa-check"></i><b>23</b> Automating geographic analysis</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="automating-geographic-analysis.html"><a href="automating-geographic-analysis.html#mapping-continuously"><i class="fa fa-check"></i><b>23.1</b> Mapping continuously</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="basic-stats-linear-regression-and-the-t-test.html"><a href="basic-stats-linear-regression-and-the-t-test.html"><i class="fa fa-check"></i><b>24</b> Basic Stats: Linear Regression and The T-Test</a></li>
+<li class="chapter" data-level="25" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>25</b> Linear Regression</a></li>
+<li class="chapter" data-level="26" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>26</b> T-tests</a></li>
+<li class="chapter" data-level="27" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html"><i class="fa fa-check"></i><b>27</b> An intro to text analysis</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html#going-beyond-a-single-word"><i class="fa fa-check"></i><b>27.1</b> Going beyond a single word</a></li>
+<li class="chapter" data-level="27.2" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>27.2</b> Sentiment Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html"><i class="fa fa-check"></i><b>28</b> Writing with numbers</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#how-to-write-about-numbers-without-overwhelming-with-numbers."><i class="fa fa-check"></i><b>28.1</b> How to write about numbers without overwhelming with numbers.</a></li>
+<li class="chapter" data-level="28.2" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#when-exact-numbers-matter"><i class="fa fa-check"></i><b>28.2</b> When exact numbers matter</a></li>
+<li class="chapter" data-level="28.3" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#an-example"><i class="fa fa-check"></i><b>28.3</b> An example</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html"><i class="fa fa-check"></i><b>29</b> Ethics in data journalism</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#problems"><i class="fa fa-check"></i><b>29.1</b> Problems</a></li>
+<li class="chapter" data-level="29.2" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#the-googlebot"><i class="fa fa-check"></i><b>29.2</b> The Googlebot</a></li>
+<li class="chapter" data-level="29.3" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#data-lifetimes"><i class="fa fa-check"></i><b>29.3</b> Data Lifetimes</a></li>
+<li class="chapter" data-level="29.4" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#you-are-a-data-provider"><i class="fa fa-check"></i><b>29.4</b> You Are a Data Provider</a></li>
+<li class="chapter" data-level="29.5" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#ethical-data"><i class="fa fa-check"></i><b>29.5</b> Ethical Data</a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="using-github.html"><a href="using-github.html"><i class="fa fa-check"></i><b>30</b> Using GitHub</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="using-github.html"><a href="using-github.html#how-it-works"><i class="fa fa-check"></i><b>30.1</b> How It Works</a></li>
+<li class="chapter" data-level="30.2" data-path="using-github.html"><a href="using-github.html#getting-started"><i class="fa fa-check"></i><b>30.2</b> Getting Started</a></li>
+<li class="chapter" data-level="30.3" data-path="using-github.html"><a href="using-github.html#advanced-use"><i class="fa fa-check"></i><b>30.3</b> Advanced Use</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Journalism with R and the Tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="automating-analysis" class="section level1" number="22">
+<h1><span class="header-section-number">Chapter 22</span> Automating analysis</h1>
+<p>Many of the data analyses that you do will be largely one-off efforts – you’re going to do the analysis and write the story and be done. Maybe you’ll come back to it in a couple of months or years, but really you’re just doing it once.</p>
+<p>But what happens when you have a long-running story, where you’re going to update it every day, or every week? What changes when you’re writing that code?</p>
+<ol style="list-style-type: decimal">
+<li>How will this run again without changing anything?</li>
+<li>What questions do you have that have to be answered each time?</li>
+<li>What changes when you have to repeat questions to changing data?</li>
+</ol>
+<p>The global COVID-19 pandemic is something we’re going to be writing about and covering for some time. One element of it is data on vaccinations. That’s reported frequently (mostly daily), and we’ll be talking about it for some time. So it is an ideal candidate for repeating analysis – scripting the questions we want to answer every week and doing so in a way that we can just load it without having to change anything.</p>
+<p>Here’s a real-world example: you are covering public health in Maryland, focusing on Prince George’s County, and you want to see how many people are getting fully vaccinated over time. You could look at a county or state website, copy and paste some information into a file and then do some calculations, but there’s a better way. Instead, let’s build a system that goes out each day to retrieve the data, makes it easier to analyze and then calculates the percentage change in the number of people getting fully vaccinated between the latest date and a week earlier. And makes us a chart showing that.</p>
+<p>Let’s get some other libraries to our typical tidyverse import. We’ll start with lubridate and janitor to help wrangle the data, and we’re also going to add a library called <code>ggrepel</code>, which assists in putting tables on dots in charts.</p>
+<p>You install it the same way you do anything else – <code>install.packages("ggrepel")</code>.</p>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="automating-analysis.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb426-2"><a href="automating-analysis.html#cb426-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb426-3"><a href="automating-analysis.html#cb426-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb426-4"><a href="automating-analysis.html#cb426-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code></pre></div>
+<div id="automating-downloads-and-imports" class="section level2" number="22.1">
+<h2><span class="header-section-number">22.1</span> Automating downloads and imports</h2>
+<p>Now, where to find the data?</p>
+<p>Maryland <a href="https://coronavirus.maryland.gov/#Vaccine">publishes data daily on vaccinations on the state Department of Heath website</a>.</p>
+<p>The dashboard is a series of HTML pages placed on the main page via iframe. Like this one: <a href="https://state-of-maryland.github.io/VaccineDashboardGraphs/VaccinationDosesDaily.html" class="uri">https://state-of-maryland.github.io/VaccineDashboardGraphs/VaccinationDosesDaily.html</a>. But if you view the source on that URL, there’s … no data. It’s being pulled in from another URL. If we want to automate getting this data, we’ll need to find out where it lives. One big clue is in the composition of that URL: “github.io.” Are these files (and maybe the data) already on GitHub? Let’s find out. The easiest thing to do is to go to the GitHub user: <a href="https://github.com/state-of-maryland" class="uri">https://github.com/state-of-maryland</a>. There’s a repository there called <code>VaccineCSVs</code> that sounds pretty good. Let’s check it out.</p>
+<p>There are a lot of files here: <a href="https://github.com/state-of-maryland/VaccineCSVs" class="uri">https://github.com/state-of-maryland/VaccineCSVs</a>, and we want to focus our attention on the ones that are frequently updated. There are a bunch of those, some of which end in .json and .csv.xml, but we want to focus on the ones that end in .csv. Let’s use this one: <a href="https://raw.githubusercontent.com/state-of-maryland/VaccineCSVs/master/MD_COVID19_TotalVaccinationsCountyFirstandSecondSingleDose.csv" class="uri">https://raw.githubusercontent.com/state-of-maryland/VaccineCSVs/master/MD_COVID19_TotalVaccinationsCountyFirstandSecondSingleDose.csv</a></p>
+<p>We’ll read it into a dataframe like usual and clean up the column names:</p>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="automating-analysis.html#cb427-1" aria-hidden="true" tabindex="-1"></a>county_vaccinations_by_date <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/state-of-maryland/VaccineCSVs/master/MD_COVID19_TotalVaccinationsCountyFirstandSecondSingleDose.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb427-2"><a href="automating-analysis.html#cb427-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   OBJECTID = col_double(),
+##   VACCINATION_DATE = col_character(),
+##   County = col_character(),
+##   FirstDoseDaily = col_double(),
+##   FirstDoseCumulative = col_double(),
+##   SecondDoseDaily = col_double(),
+##   SecondDoseCumulative = col_double(),
+##   SingleDoseDaily = col_double(),
+##   SingleDoseCumulative = col_double(),
+##   AtLeastOneDose = col_double(),
+##   FullyVaccinated = col_double(),
+##   FullVaccinatedCumulative = col_double(),
+##   AtLeastOneDoseCumulative = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="automating-analysis.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(county_vaccinations_by_date)</span></code></pre></div>
+</div>
+<div id="exploring-the-data" class="section level2" number="22.2">
+<h2><span class="header-section-number">22.2</span> Exploring the data</h2>
+<p>Each row represents vaccination stats for a single county on a single day, including cumulative figures. But when we read in that data, the <code>vaccination_date</code> column is formatted as a <chr> column, not as a date. Let’s fix that using lubridate’s handy <code>mdy_hms</code> function, which matches the format in the dataframe. Then we’ll save <code>vaccination_date</code> as a date without the time:</p>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="automating-analysis.html#cb430-1" aria-hidden="true" tabindex="-1"></a>county_vaccinations_by_date <span class="ot">&lt;-</span> county_vaccinations_by_date <span class="sc">%&gt;%</span></span>
+<span id="cb430-2"><a href="automating-analysis.html#cb430-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vaccination_date =</span> <span class="fu">date</span>(<span class="fu">mdy_hms</span>(vaccination_date)))</span></code></pre></div>
+<p>Let’s see if there’s anything unusual in the data by counting the number of rows for each county:</p>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="automating-analysis.html#cb431-1" aria-hidden="true" tabindex="-1"></a>county_totals <span class="ot">&lt;-</span> county_vaccinations_by_date <span class="sc">%&gt;%</span></span>
+<span id="cb431-2"><a href="automating-analysis.html#cb431-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(county) <span class="sc">%&gt;%</span></span>
+<span id="cb431-3"><a href="automating-analysis.html#cb431-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">n</span>())</span>
+<span id="cb431-4"><a href="automating-analysis.html#cb431-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb431-5"><a href="automating-analysis.html#cb431-5" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(county_totals)</span></code></pre></div>
+<p>There are totals for all of Maryland’s jurisdictions, plus one for “Unknown” and one that’s NA. All but the last one have roughly the same number of records. What’s going on with the NA records?</p>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="automating-analysis.html#cb432-1" aria-hidden="true" tabindex="-1"></a>county_vaccinations_by_date <span class="sc">%&gt;%</span></span>
+<span id="cb432-2"><a href="automating-analysis.html#cb432-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(county))</span></code></pre></div>
+<pre><code>## # A tibble: 208 x 13
+##    objectid vaccination_date county first_dose_daily first_dose_cumulative
+##       &lt;dbl&gt; &lt;date&gt;           &lt;chr&gt;             &lt;dbl&gt;                 &lt;dbl&gt;
+##  1        1 2021-01-08       &lt;NA&gt;               8000                  8000
+##  2        2 2021-01-13       &lt;NA&gt;                  1                  8001
+##  3        3 2021-01-26       &lt;NA&gt;                  1                  8002
+##  4        4 2021-02-06       &lt;NA&gt;                  1                  8003
+##  5        5 2021-02-10       &lt;NA&gt;                 NA                  8003
+##  6        6 2021-02-11       &lt;NA&gt;                  1                  8004
+##  7        7 2021-02-13       &lt;NA&gt;                  1                  8005
+##  8        8 2021-02-23       &lt;NA&gt;                  1                  8006
+##  9        9 2021-03-06       &lt;NA&gt;                 NA                  8006
+## 10       10 2021-03-08       &lt;NA&gt;                  1                  8007
+## # … with 198 more rows, and 8 more variables: second_dose_daily &lt;dbl&gt;,
+## #   second_dose_cumulative &lt;dbl&gt;, single_dose_daily &lt;dbl&gt;,
+## #   single_dose_cumulative &lt;dbl&gt;, at_least_one_dose &lt;dbl&gt;,
+## #   fully_vaccinated &lt;dbl&gt;, full_vaccinated_cumulative &lt;dbl&gt;,
+## #   at_least_one_dose_cumulative &lt;dbl&gt;</code></pre>
+<p>They don’t seem to pertain to any county (or no county), and it’s not clear what these records represent. Let’s remove them from our dataset:</p>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="automating-analysis.html#cb434-1" aria-hidden="true" tabindex="-1"></a>county_vaccinations_by_date <span class="ot">&lt;-</span> county_vaccinations_by_date <span class="sc">%&gt;%</span></span>
+<span id="cb434-2"><a href="automating-analysis.html#cb434-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(county))</span></code></pre></div>
+<p>Now we can start to interview this data.</p>
+<p>Let’s look at the most recent date, and that’s something that takes on different meaning when we’re talking about updating data. We need to make this generic so that every time we pull this up and run it, it’s the most recent date at the top. This time, it’s very simple:</p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="automating-analysis.html#cb435-1" aria-hidden="true" tabindex="-1"></a>county_vaccinations_by_date <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(vaccination_date))</span></code></pre></div>
+<pre><code>## # A tibble: 8,555 x 13
+##    objectid vaccination_date county        first_dose_daily first_dose_cumulati…
+##       &lt;dbl&gt; &lt;date&gt;           &lt;chr&gt;                    &lt;dbl&gt;                &lt;dbl&gt;
+##  1      892 2021-11-23       Baltimore                  471               523442
+##  2     1256 2021-11-23       Anne Arundel               235               377615
+##  3     1544 2021-11-23       Baltimore Ci…              232               353969
+##  4     1833 2021-11-23       Allegany                    13                32895
+##  5     2459 2021-11-23       Cecil                       31                49289
+##  6     2737 2021-11-23       Carroll                     85               108660
+##  7     3028 2021-11-23       Calvert                     32                58787
+##  8     3221 2021-11-23       Charles                     47                96284
+##  9     3704 2021-11-23       Harford                     98               152295
+## 10     4069 2021-11-23       Caroline                     4                15100
+## # … with 8,545 more rows, and 8 more variables: second_dose_daily &lt;dbl&gt;,
+## #   second_dose_cumulative &lt;dbl&gt;, single_dose_daily &lt;dbl&gt;,
+## #   single_dose_cumulative &lt;dbl&gt;, at_least_one_dose &lt;dbl&gt;,
+## #   fully_vaccinated &lt;dbl&gt;, full_vaccinated_cumulative &lt;dbl&gt;,
+## #   at_least_one_dose_cumulative &lt;dbl&gt;</code></pre>
+</div>
+<div id="analysis" class="section level2" number="22.3">
+<h2><span class="header-section-number">22.3</span> Analysis</h2>
+<p>Now is when we need to start asking ourselves – what are the questions that are going to come up day after day? What about how this most current date compares to the previous day, or the previous week or month?</p>
+<p>What if we just ranked them? Where does this date rank? For that, we’ll create a new column called Rank using mutate and we’ll use a function called <code>min_rank</code> to rank them. Let’s start by looking at daily <code>fully_vaccinated</code> figures in Prince George’s County. I’m going to save them to a dataframe called <code>ranked</code>:</p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="automating-analysis.html#cb437-1" aria-hidden="true" tabindex="-1"></a>ranked <span class="ot">&lt;-</span> county_vaccinations_by_date <span class="sc">%&gt;%</span></span>
+<span id="cb437-2"><a href="automating-analysis.html#cb437-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(county <span class="sc">==</span> <span class="st">&quot;Prince George&#39;s&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb437-3"><a href="automating-analysis.html#cb437-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">min_rank</span>(<span class="fu">desc</span>(fully_vaccinated))) <span class="sc">%&gt;%</span></span>
+<span id="cb437-4"><a href="automating-analysis.html#cb437-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(vaccination_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb437-5"><a href="automating-analysis.html#cb437-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(county, vaccination_date, fully_vaccinated, rank)</span>
+<span id="cb437-6"><a href="automating-analysis.html#cb437-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb437-7"><a href="automating-analysis.html#cb437-7" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(ranked)</span></code></pre></div>
+<p>The most recent dates aren’t among the highest-ranked, meaning that fewer people are getting fully vaccinated on a given day compared to previous dates.</p>
+<p>Let’s think about this a little more. What else could we do with this? What are the recurring questions? How about the percent change between the latest date and one week ago? To do that, we need to find the latest date, which we’ve arranged to be the first one in our <code>ranked</code> dataframe. But what about a week ago? Luckily, if we have one date we can calculate another one by adding or subtracting days:</p>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="automating-analysis.html#cb438-1" aria-hidden="true" tabindex="-1"></a>latest_date <span class="ot">&lt;-</span> ranked <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span>)</span>
+<span id="cb438-2"><a href="automating-analysis.html#cb438-2" aria-hidden="true" tabindex="-1"></a>one_week_ago <span class="ot">&lt;-</span> ranked <span class="sc">%&gt;%</span> <span class="fu">filter</span>(vaccination_date <span class="sc">==</span> latest_date<span class="sc">$</span>vaccination_date <span class="sc">-</span> <span class="dv">7</span>)</span>
+<span id="cb438-3"><a href="automating-analysis.html#cb438-3" aria-hidden="true" tabindex="-1"></a>latest_date <span class="ot">&lt;-</span> latest_date <span class="sc">%&gt;%</span></span>
+<span id="cb438-4"><a href="automating-analysis.html#cb438-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_change_week =</span> (fully_vaccinated <span class="sc">-</span> one_week_ago<span class="sc">$</span>fully_vaccinated)<span class="sc">/</span>one_week_ago<span class="sc">$</span>fully_vaccinated <span class="sc">*</span><span class="dv">100</span>)</span></code></pre></div>
+<p>The <code>one_week_ago$fully_vaccinated</code> syntax is a way to reference a specific column in a specific dataframe. In this case, it’s a dataframe with exactly one row.</p>
+</div>
+<div id="making-updating-graphics" class="section level2" number="22.4">
+<h2><span class="header-section-number">22.4</span> Making updating graphics</h2>
+<p>More than numbers, we are going to want to see this data so we can spot potential stories. We can build this in steps. First, let’s just make a big bar chart.</p>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="automating-analysis.html#cb439-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb439-2"><a href="automating-analysis.html#cb439-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>ranked, <span class="fu">aes</span>(<span class="at">x=</span>vaccination_date, <span class="at">weight=</span>fully_vaccinated))</span></code></pre></div>
+<p><img src="datajournalism_files/figure-html/unnamed-chunk-264-1.png" width="864" /></p>
+<p>So that shows us that the trend is going down over time, which makes sense as fewer people in the county are unvaccinated. It also shows that just after vaccinations began there was an initial dip - supply problems? - before the figure leapt up in April and May.</p>
+<p>Let’s build up some more layers to highlight trends and the most recent spot.</p>
+<p>Now, in ggplot, we can add multiple layers.</p>
+<p>The first layer will be all the bars.</p>
+<p>The second layer will just be the latest, and we’ll make that bar red.</p>
+<p>Then we’ll add a point to the top of that line to really draw attention to it.</p>
+<p>Then we’ll use ggprepel to label it.</p>
+<p>Then I’m going to add a smoothing line. That’ll illustrate the trend clearly.</p>
+<p>The rest is labeling and adjusting the text to make it look more like a news graphic.</p>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="automating-analysis.html#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb440-2"><a href="automating-analysis.html#cb440-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>ranked, <span class="fu">aes</span>(<span class="at">x=</span>vaccination_date, <span class="at">weight=</span>fully_vaccinated)) <span class="sc">+</span></span>
+<span id="cb440-3"><a href="automating-analysis.html#cb440-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>latest_date, <span class="fu">aes</span>(<span class="at">x=</span>vaccination_date, <span class="at">weight=</span>fully_vaccinated), <span class="at">fill=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb440-4"><a href="automating-analysis.html#cb440-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>latest_date, <span class="fu">aes</span>(<span class="at">x=</span>vaccination_date, <span class="at">y=</span>fully_vaccinated)) <span class="sc">+</span></span>
+<span id="cb440-5"><a href="automating-analysis.html#cb440-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>latest_date, <span class="fu">aes</span>(<span class="at">x=</span>vaccination_date, <span class="at">y=</span>fully_vaccinated <span class="sc">+</span> <span class="dv">150</span>, <span class="at">label=</span><span class="st">&quot;Latest date&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb440-6"><a href="automating-analysis.html#cb440-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>ranked, <span class="fu">aes</span>(<span class="at">x=</span>vaccination_date, <span class="at">y=</span>fully_vaccinated), <span class="at">method=</span>loess, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb440-7"><a href="automating-analysis.html#cb440-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Prince George&#39;s County Fully Vaccinated Tailing Off&quot;</span>, <span class="at">x=</span><span class="st">&quot;Date&quot;</span>, <span class="at">y=</span><span class="st">&quot;Fully Vaccinated&quot;</span>) <span class="sc">+</span></span>
+<span id="cb440-8"><a href="automating-analysis.html#cb440-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb440-9"><a href="automating-analysis.html#cb440-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb440-10"><a href="automating-analysis.html#cb440-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb440-11"><a href="automating-analysis.html#cb440-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb440-12"><a href="automating-analysis.html#cb440-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb440-13"><a href="automating-analysis.html#cb440-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb440-14"><a href="automating-analysis.html#cb440-14" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 82 rows containing non-finite values (stat_smooth).</code></pre>
+<p><img src="datajournalism_files/figure-html/unnamed-chunk-265-1.png" width="864" /></p>
+<p>One thing we are missing? An automated summary. What if we programmatically wrote the description for this chart using the percent change calculation we did before?</p>
+<p>First, we format the percent change to look more news graphic like and not with 7 significant digits.</p>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="automating-analysis.html#cb443-1" aria-hidden="true" tabindex="-1"></a>changetext <span class="ot">&lt;-</span> <span class="fu">round</span>(latest_date<span class="sc">$</span>pct_change_week[[<span class="dv">1</span>]], <span class="at">digits=</span><span class="dv">2</span>)</span>
+<span id="cb443-2"><a href="automating-analysis.html#cb443-2" aria-hidden="true" tabindex="-1"></a>direction <span class="ot">&lt;-</span> <span class="fu">if_else</span>(changetext <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;increased&quot;</span>, <span class="st">&quot;decreased&quot;</span>)</span></code></pre></div>
+<p>Now we’re going to use a function called paste to merge some text together. We’re going to paste together a sentence fragment, the percent change number and another sentence fragment together to form a sentence. We’ll save it as sub, because that’s what it’s called in ggplot – a subtitle.</p>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="automating-analysis.html#cb444-1" aria-hidden="true" tabindex="-1"></a>sub <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;The number of people in Prince George&#39;s County fully vaccinated on &quot;</span>, <span class="fu">format</span>(latest_date<span class="sc">$</span>vaccination_date, <span class="at">format=</span><span class="st">&quot;%B %d&quot;</span>), <span class="st">&quot; &quot;</span>, direction, <span class="st">&quot; by &quot;</span>, changetext, <span class="st">&quot; percent compared to the week before&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p>Here’s our sentence:</p>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="automating-analysis.html#cb445-1" aria-hidden="true" tabindex="-1"></a>sub</span></code></pre></div>
+<pre><code>## [1] &quot;The number of people in Prince George&#39;s County fully vaccinated on November 23 decreased by -54.51 percent compared to the week before&quot;</code></pre>
+<p>Now we can add that to our labels.</p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="automating-analysis.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb447-2"><a href="automating-analysis.html#cb447-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>ranked, <span class="fu">aes</span>(<span class="at">x=</span>vaccination_date, <span class="at">weight=</span>fully_vaccinated)) <span class="sc">+</span></span>
+<span id="cb447-3"><a href="automating-analysis.html#cb447-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>latest_date, <span class="fu">aes</span>(<span class="at">x=</span>vaccination_date, <span class="at">weight=</span>fully_vaccinated), <span class="at">fill=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb447-4"><a href="automating-analysis.html#cb447-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>latest_date, <span class="fu">aes</span>(<span class="at">x=</span>vaccination_date, <span class="at">y=</span>fully_vaccinated)) <span class="sc">+</span></span>
+<span id="cb447-5"><a href="automating-analysis.html#cb447-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>latest_date, <span class="fu">aes</span>(<span class="at">x=</span>vaccination_date, <span class="at">y=</span>fully_vaccinated <span class="sc">+</span> <span class="dv">150</span>, <span class="at">label=</span><span class="st">&quot;Latest date&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb447-6"><a href="automating-analysis.html#cb447-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>ranked, <span class="fu">aes</span>(<span class="at">x=</span>vaccination_date, <span class="at">y=</span>fully_vaccinated), <span class="at">method=</span>loess, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb447-7"><a href="automating-analysis.html#cb447-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Prince George&#39;s County Fully Vaccinated Tailing Off&quot;</span>, <span class="at">subtitle=</span>sub, <span class="at">x=</span><span class="st">&quot;Date&quot;</span>, <span class="at">y=</span><span class="st">&quot;Fully Vaccinated&quot;</span>) <span class="sc">+</span></span>
+<span id="cb447-8"><a href="automating-analysis.html#cb447-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb447-9"><a href="automating-analysis.html#cb447-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb447-10"><a href="automating-analysis.html#cb447-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb447-11"><a href="automating-analysis.html#cb447-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb447-12"><a href="automating-analysis.html#cb447-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb447-13"><a href="automating-analysis.html#cb447-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb447-14"><a href="automating-analysis.html#cb447-14" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 82 rows containing non-finite values (stat_smooth).</code></pre>
+<p><img src="datajournalism_files/figure-html/unnamed-chunk-269-1.png" width="864" /></p>
+<p>This is going to be a story for months, if not years. So repeating this analysis is a must for a reporter covering health care in Maryland. We’ve set ourselves up to do this every week when the data comes out. We just open our notebook, go to Run &gt; Restart R and Run All Chunks and sit back and watch as it does it all again.</p>
+<p>Then we go report.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="geographic-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="automating-geographic-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/21-automatinganalysis.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["datajournalism.pdf", "datajournalism.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 21 Geographic analysis | Data Journalism with R and the Tidyverse</title>
+  <meta name="description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 21 Geographic analysis | Data Journalism with R and the Tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 21 Geographic analysis | Data Journalism with R and the Tidyverse" />
+  
+  <meta name="twitter:description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  
+
+<meta name="author" content="Matt Waite (original author); updated by Derek Willis and Sean Mussenden" />
+
+
+<meta name="date" content="2021-11-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="geographic-data-basics.html"/>
+<link rel="next" href="automating-analysis.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160712129-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160712129-1');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="http://smussenden.github.io/coursefiles/data_journalism_book/">Data Journalism With R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#modern-data-journalism"><i class="fa fa-check"></i><b>1.1</b> Modern data journalism</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#installations"><i class="fa fa-check"></i><b>1.2</b> Installations</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.3</b> About this book</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-well-cover"><i class="fa fa-check"></i><b>1.4</b> What we’ll cover</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="public-records.html"><a href="public-records.html"><i class="fa fa-check"></i><b>2</b> Public records</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="public-records.html"><a href="public-records.html#federal-law"><i class="fa fa-check"></i><b>2.1</b> Federal law</a></li>
+<li class="chapter" data-level="2.2" data-path="public-records.html"><a href="public-records.html#state-law"><i class="fa fa-check"></i><b>2.2</b> State law</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics.html"><a href="r-basics.html#about-libraries"><i class="fa fa-check"></i><b>3.1</b> About libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html"><i class="fa fa-check"></i><b>4</b> Data journalism in the age of replication</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#the-stylebook"><i class="fa fa-check"></i><b>4.1</b> The stylebook</a></li>
+<li class="chapter" data-level="4.2" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#replication"><i class="fa fa-check"></i><b>4.2</b> Replication</a></li>
+<li class="chapter" data-level="4.3" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#goodbye-excel"><i class="fa fa-check"></i><b>4.3</b> Goodbye Excel?</a></li>
+<li class="chapter" data-level="4.4" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#receptivity-is-high"><i class="fa fa-check"></i><b>4.4</b> “Receptivity … is high”</a></li>
+<li class="chapter" data-level="4.5" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#replication-in-notebooks"><i class="fa fa-check"></i><b>4.5</b> Replication in notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>5</b> Data, structures and types</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-mental-picture"><i class="fa fa-check"></i><b>5.1</b> A Mental Picture</a></li>
+<li class="chapter" data-level="5.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>5.2</b> Types</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>6</b> Aggregates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="aggregates.html"><a href="aggregates.html#libraries"><i class="fa fa-check"></i><b>6.1</b> Libraries</a></li>
+<li class="chapter" data-level="6.2" data-path="aggregates.html"><a href="aggregates.html#importing-data"><i class="fa fa-check"></i><b>6.2</b> Importing data</a></li>
+<li class="chapter" data-level="6.3" data-path="aggregates.html"><a href="aggregates.html#group-by-and-count"><i class="fa fa-check"></i><b>6.3</b> Group by and count</a></li>
+<li class="chapter" data-level="6.4" data-path="aggregates.html"><a href="aggregates.html#other-summarization-methods-summing-mean-median-min-and-max"><i class="fa fa-check"></i><b>6.4</b> Other summarization methods: summing, mean, median, min and max</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>7</b> Mutating data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mutating-data.html"><a href="mutating-data.html#another-use-of-mutate"><i class="fa fa-check"></i><b>7.1</b> Another use of mutate</a></li>
+<li class="chapter" data-level="7.2" data-path="mutating-data.html"><a href="mutating-data.html#a-more-powerful-use"><i class="fa fa-check"></i><b>7.2</b> A more powerful use</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="working-with-dates.html"><a href="working-with-dates.html"><i class="fa fa-check"></i><b>8</b> Working with dates</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="working-with-dates.html"><a href="working-with-dates.html#the-hard-way"><i class="fa fa-check"></i><b>8.1</b> The hard way</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>9</b> Filters and selections</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#combining-filters"><i class="fa fa-check"></i><b>9.1</b> Combining filters</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html"><i class="fa fa-check"></i><b>10</b> Data Cleaning Part I: Data smells</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#wrong-type"><i class="fa fa-check"></i><b>10.1</b> Wrong Type</a></li>
+<li class="chapter" data-level="10.2" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#missing-data"><i class="fa fa-check"></i><b>10.2</b> Missing Data</a></li>
+<li class="chapter" data-level="10.3" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#gaps-in-data"><i class="fa fa-check"></i><b>10.3</b> Gaps in data</a></li>
+<li class="chapter" data-level="10.4" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#supicious-outliers"><i class="fa fa-check"></i><b>10.4</b> Supicious Outliers</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html"><i class="fa fa-check"></i><b>11</b> Data Cleaning Part II: Janitor</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#cleaning-headers"><i class="fa fa-check"></i><b>11.1</b> Cleaning headers</a></li>
+<li class="chapter" data-level="11.2" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#changing-data-types"><i class="fa fa-check"></i><b>11.2</b> Changing data types</a></li>
+<li class="chapter" data-level="11.3" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#duplicates"><i class="fa fa-check"></i><b>11.3</b> Duplicates</a></li>
+<li class="chapter" data-level="11.4" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#cleaning-strings"><i class="fa fa-check"></i><b>11.4</b> Cleaning strings</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html"><i class="fa fa-check"></i><b>12</b> Data Cleaning Part III: Open Refine</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html#refinr-open-refine-in-r"><i class="fa fa-check"></i><b>12.1</b> Refinr, Open Refine in R</a></li>
+<li class="chapter" data-level="12.2" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html#manually-cleaning-data-with-open-refine"><i class="fa fa-check"></i><b>12.2</b> Manually cleaning data with Open Refine</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html"><i class="fa fa-check"></i><b>13</b> Cleaning Data Part IV: PDFs</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#easy-does-it"><i class="fa fa-check"></i><b>13.1</b> Easy does it</a></li>
+<li class="chapter" data-level="13.2" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#when-it-looks-good-but-needs-a-little-fixing"><i class="fa fa-check"></i><b>13.2</b> When it looks good, but needs a little fixing</a></li>
+<li class="chapter" data-level="13.3" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#cleaning-up-the-data-in-r"><i class="fa fa-check"></i><b>13.3</b> Cleaning up the data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="combining-and-joining.html"><a href="combining-and-joining.html"><i class="fa fa-check"></i><b>14</b> Combining and joining</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="combining-and-joining.html"><a href="combining-and-joining.html#combining-data-stacking"><i class="fa fa-check"></i><b>14.1</b> Combining data (stacking)</a></li>
+<li class="chapter" data-level="14.2" data-path="combining-and-joining.html"><a href="combining-and-joining.html#joining-data"><i class="fa fa-check"></i><b>14.2</b> Joining data</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="scraping-data-with-rvest.html"><a href="scraping-data-with-rvest.html"><i class="fa fa-check"></i><b>15</b> Scraping data with Rvest</a></li>
+<li class="chapter" data-level="16" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>16</b> Advanced rvest</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#using-for-loops"><i class="fa fa-check"></i><b>16.1</b> Using for loops</a></li>
+<li class="chapter" data-level="16.2" data-path="advanced-rvest.html"><a href="advanced-rvest.html#looping-and-rvest"><i class="fa fa-check"></i><b>16.2</b> Looping and rvest</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html"><i class="fa fa-check"></i><b>17</b> Intro to APIs: The Census</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#the-acs"><i class="fa fa-check"></i><b>17.1</b> The ACS</a></li>
+<li class="chapter" data-level="17.2" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#wide-results"><i class="fa fa-check"></i><b>17.2</b> “Wide” Results</a></li>
+<li class="chapter" data-level="17.3" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#sorting-results"><i class="fa fa-check"></i><b>17.3</b> Sorting Results</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html"><i class="fa fa-check"></i><b>18</b> Visualizing your data for reporting</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html#bar-charts"><i class="fa fa-check"></i><b>18.1</b> Bar charts</a></li>
+<li class="chapter" data-level="18.2" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html#line-charts"><i class="fa fa-check"></i><b>18.2</b> Line charts</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html"><i class="fa fa-check"></i><b>19</b> Visualizing your data for publication</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html#datawrapper"><i class="fa fa-check"></i><b>19.1</b> Datawrapper</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html#making-a-map"><i class="fa fa-check"></i><b>19.1.1</b> Making a Map</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="geographic-data-basics.html"><a href="geographic-data-basics.html"><i class="fa fa-check"></i><b>20</b> Geographic data basics</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="geographic-data-basics.html"><a href="geographic-data-basics.html#importing-and-viewing-data"><i class="fa fa-check"></i><b>20.1</b> Importing and viewing data</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="geographic-analysis.html"><a href="geographic-analysis.html"><i class="fa fa-check"></i><b>21</b> Geographic analysis</a></li>
+<li class="chapter" data-level="22" data-path="automating-analysis.html"><a href="automating-analysis.html"><i class="fa fa-check"></i><b>22</b> Automating analysis</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="automating-analysis.html"><a href="automating-analysis.html#automating-downloads-and-imports"><i class="fa fa-check"></i><b>22.1</b> Automating downloads and imports</a></li>
+<li class="chapter" data-level="22.2" data-path="automating-analysis.html"><a href="automating-analysis.html#exploring-the-data"><i class="fa fa-check"></i><b>22.2</b> Exploring the data</a></li>
+<li class="chapter" data-level="22.3" data-path="automating-analysis.html"><a href="automating-analysis.html#analysis"><i class="fa fa-check"></i><b>22.3</b> Analysis</a></li>
+<li class="chapter" data-level="22.4" data-path="automating-analysis.html"><a href="automating-analysis.html#making-updating-graphics"><i class="fa fa-check"></i><b>22.4</b> Making updating graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="automating-geographic-analysis.html"><a href="automating-geographic-analysis.html"><i class="fa fa-check"></i><b>23</b> Automating geographic analysis</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="automating-geographic-analysis.html"><a href="automating-geographic-analysis.html#mapping-continuously"><i class="fa fa-check"></i><b>23.1</b> Mapping continuously</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="basic-stats-linear-regression-and-the-t-test.html"><a href="basic-stats-linear-regression-and-the-t-test.html"><i class="fa fa-check"></i><b>24</b> Basic Stats: Linear Regression and The T-Test</a></li>
+<li class="chapter" data-level="25" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>25</b> Linear Regression</a></li>
+<li class="chapter" data-level="26" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>26</b> T-tests</a></li>
+<li class="chapter" data-level="27" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html"><i class="fa fa-check"></i><b>27</b> An intro to text analysis</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html#going-beyond-a-single-word"><i class="fa fa-check"></i><b>27.1</b> Going beyond a single word</a></li>
+<li class="chapter" data-level="27.2" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>27.2</b> Sentiment Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html"><i class="fa fa-check"></i><b>28</b> Writing with numbers</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#how-to-write-about-numbers-without-overwhelming-with-numbers."><i class="fa fa-check"></i><b>28.1</b> How to write about numbers without overwhelming with numbers.</a></li>
+<li class="chapter" data-level="28.2" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#when-exact-numbers-matter"><i class="fa fa-check"></i><b>28.2</b> When exact numbers matter</a></li>
+<li class="chapter" data-level="28.3" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#an-example"><i class="fa fa-check"></i><b>28.3</b> An example</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html"><i class="fa fa-check"></i><b>29</b> Ethics in data journalism</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#problems"><i class="fa fa-check"></i><b>29.1</b> Problems</a></li>
+<li class="chapter" data-level="29.2" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#the-googlebot"><i class="fa fa-check"></i><b>29.2</b> The Googlebot</a></li>
+<li class="chapter" data-level="29.3" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#data-lifetimes"><i class="fa fa-check"></i><b>29.3</b> Data Lifetimes</a></li>
+<li class="chapter" data-level="29.4" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#you-are-a-data-provider"><i class="fa fa-check"></i><b>29.4</b> You Are a Data Provider</a></li>
+<li class="chapter" data-level="29.5" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#ethical-data"><i class="fa fa-check"></i><b>29.5</b> Ethical Data</a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="using-github.html"><a href="using-github.html"><i class="fa fa-check"></i><b>30</b> Using GitHub</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="using-github.html"><a href="using-github.html#how-it-works"><i class="fa fa-check"></i><b>30.1</b> How It Works</a></li>
+<li class="chapter" data-level="30.2" data-path="using-github.html"><a href="using-github.html#getting-started"><i class="fa fa-check"></i><b>30.2</b> Getting Started</a></li>
+<li class="chapter" data-level="30.3" data-path="using-github.html"><a href="using-github.html#advanced-use"><i class="fa fa-check"></i><b>30.3</b> Advanced Use</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Journalism with R and the Tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="geographic-analysis" class="section level1" number="21">
+<h1><span class="header-section-number">Chapter 21</span> Geographic analysis</h1>
+<p>In the previous chapter, we looked at Maryland’s hospitals and used layers to show where hospitals sit on a map of Maryland’s counties, and to show a bit of a pattern regarding concentration of the largest hospitals. Let’s go little further.</p>
+<p>First, let’s load the libraries we’ll need. We’re also going to load tidycensus and set an API key for tidycensus.</p>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="geographic-analysis.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb386-2"><a href="geographic-analysis.html#cb386-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb386-3"><a href="geographic-analysis.html#cb386-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb386-4"><a href="geographic-analysis.html#cb386-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span>
+<span id="cb386-5"><a href="geographic-analysis.html#cb386-5" aria-hidden="true" tabindex="-1"></a><span class="fu">census_api_key</span>(<span class="st">&quot;549950d36c22ff16455fe196bbbd01d63cfbe6cf&quot;</span>)</span></code></pre></div>
+<pre><code>## To install your API key for use in future sessions, run this function with `install = TRUE`.</code></pre>
+<p>And now let’s load the dataframe of hospital information from the previous chapter, and filter for the 50 General Acute Care hospitals in Maryland.</p>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="geographic-analysis.html#cb388-1" aria-hidden="true" tabindex="-1"></a>md_hospitals <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/Hospitals/Hospitals.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb388-2"><a href="geographic-analysis.html#cb388-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STATE <span class="sc">==</span> <span class="st">&quot;MD&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb388-3"><a href="geographic-analysis.html#cb388-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(TYPE <span class="sc">==</span> <span class="st">&quot;GENERAL ACUTE CARE&quot;</span>)</span></code></pre></div>
+<pre><code>## Reading layer `Hospitals&#39; from data source 
+##   `/Users/derekwillis/code/datajournalismbook/data/Hospitals/Hospitals.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 7581 features and 32 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: -176.6403 ymin: -14.29024 xmax: 145.7245 ymax: 71.29285
+## Geodetic CRS:  WGS 84</code></pre>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="geographic-analysis.html#cb390-1" aria-hidden="true" tabindex="-1"></a>md_hospitals</span></code></pre></div>
+<pre><code>## Simple feature collection with 50 features and 32 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: -79.40098 ymin: 37.99756 xmax: -75.21133 ymax: 39.64783
+## Geodetic CRS:  WGS 84
+## First 10 features:
+##    OBJECTID         ID                                     NAME
+## 1       364 0000921287                   JOHNS HOPKINS HOSPITAL
+## 2       365 0001021205                KENNEDY KREIGER INSTITUTE
+## 3       366 0002321202                     MERCY MEDICAL CENTER
+## 4       367 0003721215              SINAI HOSPITAL OF BALTIMORE
+## 5       368 0004121201    UNIVERSITY OF MARYLAND MEDICAL CENTER
+## 6       370 0004821224     JOHNS HOPKINS BAYVIEW MEDICAL CENTER
+## 7       404 0003521742                   MERITUS MEDICAL CENTER
+## 8       443 0001920910                      HOLY CROSS HOSPITAL
+## 9       446 0002520744                 FORT WASHINGTON HOSPITAL
+## 10      473 0004521502 WESTERN MARYLAND REGIONAL MEDICAL CENTER
+##                      ADDRESS            CITY STATE   ZIP          ZIP4
+## 1    600 NORTH  WOLFE STREET       BALTIMORE    MD 21287 NOT AVAILABLE
+## 2             707 N BROADWAY       BALTIMORE    MD 21205 NOT AVAILABLE
+## 3          301 ST PAUL PLACE       BALTIMORE    MD 21202 NOT AVAILABLE
+## 4    2401 WEST BELVEDERE AVE       BALTIMORE    MD 21215 NOT AVAILABLE
+## 5             22 S GREENE ST       BALTIMORE    MD 21201 NOT AVAILABLE
+## 6        4940 EASTERN AVENUE       BALTIMORE    MD 21224 NOT AVAILABLE
+## 7  11116 MEDICAL CAMPUS ROAD      HAGERSTOWN    MD 21742 NOT AVAILABLE
+## 8      1500 FOREST GLEN ROAD   SILVER SPRING    MD 20910 NOT AVAILABLE
+## 9      11711 LIVINGSTON ROAD FORT WASHINGTON    MD 20744 NOT AVAILABLE
+## 10    12500 WILLOWBROOK ROAD      CUMBERLAND    MD 21502 NOT AVAILABLE
+##         TELEPHONE               TYPE STATUS POPULATION          COUNTY
+## 1  (410) 955-9540 GENERAL ACUTE CARE   OPEN        951  BALTIMORE CITY
+## 2  (443) 923-9305 GENERAL ACUTE CARE   OPEN         70  BALTIMORE CITY
+## 3  (410) 332-9237 GENERAL ACUTE CARE   OPEN        281  BALTIMORE CITY
+## 4  (410) 601-5131 GENERAL ACUTE CARE   OPEN        467  BALTIMORE CITY
+## 5  (410) 328-8667 GENERAL ACUTE CARE   OPEN        800  BALTIMORE CITY
+## 6  (410) 550-0123 GENERAL ACUTE CARE   OPEN        477  BALTIMORE CITY
+## 7  (240) 313-9500 GENERAL ACUTE CARE   OPEN        247      WASHINGTON
+## 8  (301) 754-7000 GENERAL ACUTE CARE   OPEN        409      MONTGOMERY
+## 9  (301) 292-7000 GENERAL ACUTE CARE   OPEN         37 PRINCE GEORGE&#39;S
+## 10 (240) 964-2196 GENERAL ACUTE CARE   OPEN        371        ALLEGANY
+##    COUNTYFIPS COUNTRY LATITUDE LONGITUDE NAICS_CODE
+## 1       24510     USA 39.29611 -76.59197     622110
+## 2       24510     USA 39.29928 -76.59282     622110
+## 3       24510     USA 39.29292 -76.61288     622110
+## 4       24510     USA 39.35230 -76.66209     622110
+## 5       24510     USA 39.28791 -76.62493     622110
+## 6       24510     USA 39.29068 -76.54678     622110
+## 7       24043     USA 39.62219 -77.68256     622110
+## 8       24031     USA 39.01472 -77.03574     622110
+## 9       24033     USA 38.72856 -76.99270     622110
+## 10      24001     USA 39.64783 -78.73324     622110
+##                                NAICS_DESC
+## 1  GENERAL MEDICAL AND SURGICAL HOSPITALS
+## 2  GENERAL MEDICAL AND SURGICAL HOSPITALS
+## 3  GENERAL MEDICAL AND SURGICAL HOSPITALS
+## 4  GENERAL MEDICAL AND SURGICAL HOSPITALS
+## 5  GENERAL MEDICAL AND SURGICAL HOSPITALS
+## 6  GENERAL MEDICAL AND SURGICAL HOSPITALS
+## 7  GENERAL MEDICAL AND SURGICAL HOSPITALS
+## 8  GENERAL MEDICAL AND SURGICAL HOSPITALS
+## 9  GENERAL MEDICAL AND SURGICAL HOSPITALS
+## 10 GENERAL MEDICAL AND SURGICAL HOSPITALS
+##                                                         SOURCE
+## 1  http://dhmh.maryland.gov/ohcq/pages/licensee-directory.aspx
+## 2  http://dhmh.maryland.gov/ohcq/pages/licensee-directory.aspx
+## 3  http://dhmh.maryland.gov/ohcq/pages/licensee-directory.aspx
+## 4  http://dhmh.maryland.gov/ohcq/pages/licensee-directory.aspx
+## 5  http://dhmh.maryland.gov/ohcq/pages/licensee-directory.aspx
+## 6  http://dhmh.maryland.gov/ohcq/pages/licensee-directory.aspx
+## 7  http://dhmh.maryland.gov/ohcq/pages/licensee-directory.aspx
+## 8  http://dhmh.maryland.gov/ohcq/pages/licensee-directory.aspx
+## 9  http://dhmh.maryland.gov/ohcq/pages/licensee-directory.aspx
+## 10 http://dhmh.maryland.gov/ohcq/pages/licensee-directory.aspx
+##                  SOURCEDATE    VAL_METHOD                 VAL_DATE
+## 1  2018-08-09T00:00:00.000Z       IMAGERY 2014-02-10T00:00:00.000Z
+## 2  2018-08-09T00:00:00.000Z       IMAGERY 2014-02-10T00:00:00.000Z
+## 3  2018-08-09T00:00:00.000Z       IMAGERY 2014-02-10T00:00:00.000Z
+## 4  2018-08-09T00:00:00.000Z       IMAGERY 2014-02-10T00:00:00.000Z
+## 5  2018-08-09T00:00:00.000Z       IMAGERY 2014-02-10T00:00:00.000Z
+## 6  2018-08-09T00:00:00.000Z IMAGERY/OTHER 2014-02-10T00:00:00.000Z
+## 7  2018-08-09T00:00:00.000Z       IMAGERY 2014-02-10T00:00:00.000Z
+## 8  2018-08-09T00:00:00.000Z       IMAGERY 2014-02-10T00:00:00.000Z
+## 9  2018-08-09T00:00:00.000Z       IMAGERY 2014-02-10T00:00:00.000Z
+## 10 2018-08-09T00:00:00.000Z       IMAGERY 2014-02-10T00:00:00.000Z
+##                                                                                        WEBSITE
+## 1                                                               http://www.hopkinsmedicine.org
+## 2                                                                http://www.kennedykrieger.org
+## 3                                                                       http://www.mdmercy.com
+## 4                                            http://www.lifebridgehealth.org/Sinai/Sinai1.aspx
+## 5                                                       http://www.umms.org/hospitals/ummc.htm
+## 6                                                                http://www.hopkinsbayview.org
+## 7  http://www.meritushealth.com/For-Hospital-Patients-and-Visitors/Meritus-Medical-Center.aspx
+## 8                                                               http://www.holycrosshealth.org
+## 9                                                             http://www.fortwashingtonmc.org/
+## 10                                                                         http://www.wmhs.com
+##         STATE_ID      ALT_NAME ST_FIPS      OWNER TTL_STAFF BEDS
+## 1  NOT AVAILABLE NOT AVAILABLE      24 NON-PROFIT      -999  951
+## 2  NOT AVAILABLE NOT AVAILABLE      24 NON-PROFIT      -999   70
+## 3  NOT AVAILABLE NOT AVAILABLE      24 NON-PROFIT      -999  281
+## 4  NOT AVAILABLE NOT AVAILABLE      24 NON-PROFIT      -999  467
+## 5  NOT AVAILABLE NOT AVAILABLE      24 NON-PROFIT      -999  800
+## 6  NOT AVAILABLE NOT AVAILABLE      24 NON-PROFIT      -999  477
+## 7  NOT AVAILABLE NOT AVAILABLE      24 NON-PROFIT      -999  247
+## 8  NOT AVAILABLE NOT AVAILABLE      24 NON-PROFIT      -999  409
+## 9  NOT AVAILABLE NOT AVAILABLE      24 NON-PROFIT      -999   37
+## 10 NOT AVAILABLE NOT AVAILABLE      24 NON-PROFIT      -999  371
+##                      TRAUMA HELIPAD                   geometry
+## 1  LEVEL I, LEVEL PEDIATRIC       Y POINT (-76.59197 39.29611)
+## 2             NOT AVAILABLE       Y POINT (-76.59282 39.29928)
+## 3             NOT AVAILABLE       N POINT (-76.61288 39.29292)
+## 4                  LEVEL II       Y  POINT (-76.66209 39.3523)
+## 5                      PARC       Y POINT (-76.62493 39.28791)
+## 6                  LEVEL II       Y POINT (-76.54678 39.29068)
+## 7                 LEVEL III       Y POINT (-77.68256 39.62219)
+## 8             NOT AVAILABLE       N POINT (-77.03574 39.01472)
+## 9             NOT AVAILABLE       Y  POINT (-76.9927 38.72856)
+## 10                LEVEL III       Y POINT (-78.73324 39.64783)</code></pre>
+<p>For the rest of this chapter, we’re going to work on building a map that will help us gain insight into geographic patterns in hospital bed availability by county in Maryland. Our question: by examining the number of hospital beds per 100,000 people in each county, what regional geographic patterns can we identify?</p>
+<p>Each hospital exists inside of a county, so we’re going to first calculate the total number of beds in each county. We do this by first converting the md_hospitals data to a standard dataframe (instead of a spatial dataframe) using as_tibble(), then grouping by county and totaling the number of beds. Finally, let’s sort by total_beds to see which county has the most.</p>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="geographic-analysis.html#cb392-1" aria-hidden="true" tabindex="-1"></a>md_beds_by_county <span class="ot">&lt;-</span> md_hospitals <span class="sc">%&gt;%</span></span>
+<span id="cb392-2"><a href="geographic-analysis.html#cb392-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb392-3"><a href="geographic-analysis.html#cb392-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(COUNTY) <span class="sc">%&gt;%</span></span>
+<span id="cb392-4"><a href="geographic-analysis.html#cb392-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb392-5"><a href="geographic-analysis.html#cb392-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_beds =</span> <span class="fu">sum</span>(BEDS)</span>
+<span id="cb392-6"><a href="geographic-analysis.html#cb392-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb392-7"><a href="geographic-analysis.html#cb392-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_beds))</span>
+<span id="cb392-8"><a href="geographic-analysis.html#cb392-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb392-9"><a href="geographic-analysis.html#cb392-9" aria-hidden="true" tabindex="-1"></a>md_beds_by_county</span></code></pre></div>
+<pre><code>## # A tibble: 22 x 2
+##    COUNTY          total_beds
+##    &lt;chr&gt;                &lt;dbl&gt;
+##  1 BALTIMORE CITY        4505
+##  2 MONTGOMERY            1298
+##  3 BALTIMORE             1152
+##  4 PRINCE GEORGE&#39;S        789
+##  5 ANNE ARUNDEL           673
+##  6 ALLEGANY               371
+##  7 HOWARD                 331
+##  8 FREDERICK              308
+##  9 WICOMICO               281
+## 10 HARFORD                255
+## # … with 12 more rows</code></pre>
+<p>So, what do we see here? Baltimore City has the most, followed by Montgomery, Baltimore County and Prince George’s. All big counties.</p>
+<p>Next, we’ll go out and get population data for each county from tidycensus. The variable for total population is B01001_001.</p>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="geographic-analysis.html#cb394-1" aria-hidden="true" tabindex="-1"></a>md_county_population <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb394-2"><a href="geographic-analysis.html#cb394-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">population =</span> <span class="st">&quot;B01001_001&quot;</span>),</span>
+<span id="cb394-3"><a href="geographic-analysis.html#cb394-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">state =</span> <span class="st">&quot;MD&quot;</span>)</span></code></pre></div>
+<pre><code>## Getting data from the 2015-2019 5-year ACS</code></pre>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="geographic-analysis.html#cb396-1" aria-hidden="true" tabindex="-1"></a>md_county_population</span></code></pre></div>
+<pre><code>## # A tibble: 24 x 5
+##    GEOID NAME                          variable   estimate   moe
+##    &lt;chr&gt; &lt;chr&gt;                         &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;
+##  1 24001 Allegany County, Maryland     population    71445    NA
+##  2 24003 Anne Arundel County, Maryland population   571275    NA
+##  3 24005 Baltimore County, Maryland    population   828018    NA
+##  4 24009 Calvert County, Maryland      population    91511    NA
+##  5 24011 Caroline County, Maryland     population    33049    NA
+##  6 24013 Carroll County, Maryland      population   167699    NA
+##  7 24015 Cecil County, Maryland        population   102552    NA
+##  8 24017 Charles County, Maryland      population   159428    NA
+##  9 24019 Dorchester County, Maryland   population    32138    NA
+## 10 24021 Frederick County, Maryland    population   251422    NA
+## # … with 14 more rows</code></pre>
+<p>Ultimately, we’re going to join this county population table with our beds by county table, and then calculate a beds per 100,000 people statistic. But remember, we then want to visualize this data by drawing a county map that helps us pick out trends. Thinking ahead, we know we’ll need a county map shapefile. Fortunately, we can pull this geometry information right from tidycensus at the same time that we pull in the population data by adding “geometry = TRUE” to our get_acs function.</p>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="geographic-analysis.html#cb398-1" aria-hidden="true" tabindex="-1"></a>md_county_population <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;county&quot;</span>,</span>
+<span id="cb398-2"><a href="geographic-analysis.html#cb398-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">population =</span> <span class="st">&quot;B01001_001&quot;</span>),</span>
+<span id="cb398-3"><a href="geographic-analysis.html#cb398-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">state =</span> <span class="st">&quot;MD&quot;</span>,</span>
+<span id="cb398-4"><a href="geographic-analysis.html#cb398-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">geometry =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Getting data from the 2015-2019 5-year ACS</code></pre>
+<pre><code>## Downloading feature geometry from the Census website.  To cache shapefiles for use in future sessions, set `options(tigris_use_cache = TRUE)`.</code></pre>
+<pre><code>## 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |                                                                      |   1%
+  |                                                                            
+  |=                                                                     |   1%
+  |                                                                            
+  |=                                                                     |   2%
+  |                                                                            
+  |==                                                                    |   2%
+  |                                                                            
+  |==                                                                    |   3%
+  |                                                                            
+  |==                                                                    |   4%
+  |                                                                            
+  |===                                                                   |   4%
+  |                                                                            
+  |===                                                                   |   5%
+  |                                                                            
+  |====                                                                  |   5%
+  |                                                                            
+  |====                                                                  |   6%
+  |                                                                            
+  |=====                                                                 |   7%
+  |                                                                            
+  |=====                                                                 |   8%
+  |                                                                            
+  |======                                                                |   8%
+  |                                                                            
+  |======                                                                |   9%
+  |                                                                            
+  |=======                                                               |   9%
+  |                                                                            
+  |=======                                                               |  10%
+  |                                                                            
+  |=========                                                             |  12%
+  |                                                                            
+  |============                                                          |  17%
+  |                                                                            
+  |=============                                                         |  18%
+  |                                                                            
+  |=============                                                         |  19%
+  |                                                                            
+  |==============                                                        |  19%
+  |                                                                            
+  |==============                                                        |  20%
+  |                                                                            
+  |================                                                      |  22%
+  |                                                                            
+  |====================                                                  |  28%
+  |                                                                            
+  |====================                                                  |  29%
+  |                                                                            
+  |=====================                                                 |  29%
+  |                                                                            
+  |=====================                                                 |  30%
+  |                                                                            
+  |=====================                                                 |  31%
+  |                                                                            
+  |======================                                                |  31%
+  |                                                                            
+  |======================                                                |  32%
+  |                                                                            
+  |=======================                                               |  33%
+  |                                                                            
+  |========================                                              |  34%
+  |                                                                            
+  |============================                                          |  40%
+  |                                                                            
+  |============================                                          |  41%
+  |                                                                            
+  |=============================                                         |  41%
+  |                                                                            
+  |=============================                                         |  42%
+  |                                                                            
+  |==============================                                        |  42%
+  |                                                                            
+  |==============================                                        |  43%
+  |                                                                            
+  |==============================                                        |  44%
+  |                                                                            
+  |===============================                                       |  44%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |======================================                                |  54%
+  |                                                                            
+  |=======================================                               |  55%
+  |                                                                            
+  |=======================================                               |  56%
+  |                                                                            
+  |========================================                              |  56%
+  |                                                                            
+  |========================================                              |  57%
+  |                                                                            
+  |=========================================                             |  59%
+  |                                                                            
+  |==========================================                            |  60%
+  |                                                                            
+  |===========================================                           |  62%
+  |                                                                            
+  |===============================================                       |  68%
+  |                                                                            
+  |==================================================                    |  71%
+  |                                                                            
+  |==================================================                    |  72%
+  |                                                                            
+  |===================================================                   |  72%
+  |                                                                            
+  |===================================================                   |  73%
+  |                                                                            
+  |======================================================                |  78%
+  |                                                                            
+  |=======================================================               |  78%
+  |                                                                            
+  |========================================================              |  79%
+  |                                                                            
+  |========================================================              |  80%
+  |                                                                            
+  |==========================================================            |  83%
+  |                                                                            
+  |================================================================      |  91%
+  |                                                                            
+  |=================================================================     |  93%
+  |                                                                            
+  |==================================================================    |  94%
+  |                                                                            
+  |===================================================================   |  96%
+  |                                                                            
+  |===================================================================== |  98%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="geographic-analysis.html#cb402-1" aria-hidden="true" tabindex="-1"></a>md_county_population</span></code></pre></div>
+<pre><code>## Simple feature collection with 24 features and 5 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -79.48765 ymin: 37.91172 xmax: -75.04894 ymax: 39.72304
+## Geodetic CRS:  NAD83
+## First 10 features:
+##    GEOID                             NAME   variable estimate moe
+## 1  24035    Queen Anne&#39;s County, Maryland population    49632  NA
+## 2  24005       Baltimore County, Maryland population   828018  NA
+## 3  24003    Anne Arundel County, Maryland population   571275  NA
+## 4  24013         Carroll County, Maryland population   167699  NA
+## 5  24021       Frederick County, Maryland population   251422  NA
+## 6  24039        Somerset County, Maryland population    25729  NA
+## 7  24029            Kent County, Maryland population    19536  NA
+## 8  24047       Worcester County, Maryland population    51765  NA
+## 9  24027          Howard County, Maryland population   318855  NA
+## 10 24033 Prince George&#39;s County, Maryland population   908670  NA
+##                          geometry
+## 1  MULTIPOLYGON (((-76.24918 3...
+## 2  MULTIPOLYGON (((-76.3257 39...
+## 3  MULTIPOLYGON (((-76.84036 3...
+## 4  MULTIPOLYGON (((-77.31151 3...
+## 5  MULTIPOLYGON (((-77.67716 3...
+## 6  MULTIPOLYGON (((-75.95962 3...
+## 7  MULTIPOLYGON (((-76.27737 3...
+## 8  MULTIPOLYGON (((-75.66061 3...
+## 9  MULTIPOLYGON (((-77.18711 3...
+## 10 MULTIPOLYGON (((-77.07995 3...</code></pre>
+<p>We now have a new column, geometry, that contains the “MULTIPOLYGON” data that will draw an outline of each county when we go to draw a map.</p>
+<p>The next step will be to join our population data to our hospital bed data on the county column.</p>
+<p>But there’s a problem. The column in our population data that has county names is called “NAME,” and it has the full name of the county spelled out in title case – first word capitalized and has “County” and “Maryland” in it. The beds data just has the uppercase name of the county. For example, the population data has “Anne Arundel County, Maryland” and the beds data has “ANNE ARUNDEL”</p>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="geographic-analysis.html#cb404-1" aria-hidden="true" tabindex="-1"></a>md_county_population</span></code></pre></div>
+<pre><code>## Simple feature collection with 24 features and 5 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -79.48765 ymin: 37.91172 xmax: -75.04894 ymax: 39.72304
+## Geodetic CRS:  NAD83
+## First 10 features:
+##    GEOID                             NAME   variable estimate moe
+## 1  24035    Queen Anne&#39;s County, Maryland population    49632  NA
+## 2  24005       Baltimore County, Maryland population   828018  NA
+## 3  24003    Anne Arundel County, Maryland population   571275  NA
+## 4  24013         Carroll County, Maryland population   167699  NA
+## 5  24021       Frederick County, Maryland population   251422  NA
+## 6  24039        Somerset County, Maryland population    25729  NA
+## 7  24029            Kent County, Maryland population    19536  NA
+## 8  24047       Worcester County, Maryland population    51765  NA
+## 9  24027          Howard County, Maryland population   318855  NA
+## 10 24033 Prince George&#39;s County, Maryland population   908670  NA
+##                          geometry
+## 1  MULTIPOLYGON (((-76.24918 3...
+## 2  MULTIPOLYGON (((-76.3257 39...
+## 3  MULTIPOLYGON (((-76.84036 3...
+## 4  MULTIPOLYGON (((-77.31151 3...
+## 5  MULTIPOLYGON (((-77.67716 3...
+## 6  MULTIPOLYGON (((-75.95962 3...
+## 7  MULTIPOLYGON (((-76.27737 3...
+## 8  MULTIPOLYGON (((-75.66061 3...
+## 9  MULTIPOLYGON (((-77.18711 3...
+## 10 MULTIPOLYGON (((-77.07995 3...</code></pre>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="geographic-analysis.html#cb406-1" aria-hidden="true" tabindex="-1"></a>md_beds_by_county</span></code></pre></div>
+<pre><code>## # A tibble: 22 x 2
+##    COUNTY          total_beds
+##    &lt;chr&gt;                &lt;dbl&gt;
+##  1 BALTIMORE CITY        4505
+##  2 MONTGOMERY            1298
+##  3 BALTIMORE             1152
+##  4 PRINCE GEORGE&#39;S        789
+##  5 ANNE ARUNDEL           673
+##  6 ALLEGANY               371
+##  7 HOWARD                 331
+##  8 FREDERICK              308
+##  9 WICOMICO               281
+## 10 HARFORD                255
+## # … with 12 more rows</code></pre>
+<p>If they’re going to join properly, we need to clean one of them up to make it match the other.</p>
+<p>Let’s clean the population table. We’re going to rename the “NAME” column to “COUNTY,” then convert it to uppercase while also removing “, Maryland” and “County.” Next we’ll remove any white spaces after that first cleaning step that, if left in, would prevent a proper join. We’re also going to rename the column that contains the population information from “estimate” to “population” and select only the county name and the population columns, along with the geometry. That leaves us with this tidy table.</p>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="geographic-analysis.html#cb408-1" aria-hidden="true" tabindex="-1"></a>md_county_population <span class="ot">&lt;-</span> md_county_population <span class="sc">%&gt;%</span></span>
+<span id="cb408-2"><a href="geographic-analysis.html#cb408-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">COUNTY =</span> NAME) <span class="sc">%&gt;%</span></span>
+<span id="cb408-3"><a href="geographic-analysis.html#cb408-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">COUNTY =</span> <span class="fu">toupper</span>(<span class="fu">str_remove_all</span>(COUNTY,<span class="st">&quot;, Maryland|County&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb408-4"><a href="geographic-analysis.html#cb408-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">COUNTY =</span> <span class="fu">str_trim</span>(COUNTY,<span class="at">side=</span><span class="st">&quot;both&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb408-5"><a href="geographic-analysis.html#cb408-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">population =</span> estimate) <span class="sc">%&gt;%</span></span>
+<span id="cb408-6"><a href="geographic-analysis.html#cb408-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(COUNTY, population, geometry)</span>
+<span id="cb408-7"><a href="geographic-analysis.html#cb408-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb408-8"><a href="geographic-analysis.html#cb408-8" aria-hidden="true" tabindex="-1"></a>md_county_population</span></code></pre></div>
+<pre><code>## Simple feature collection with 24 features and 2 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -79.48765 ymin: 37.91172 xmax: -75.04894 ymax: 39.72304
+## Geodetic CRS:  NAD83
+## First 10 features:
+##             COUNTY population                       geometry
+## 1     QUEEN ANNE&#39;S      49632 MULTIPOLYGON (((-76.24918 3...
+## 2        BALTIMORE     828018 MULTIPOLYGON (((-76.3257 39...
+## 3     ANNE ARUNDEL     571275 MULTIPOLYGON (((-76.84036 3...
+## 4          CARROLL     167699 MULTIPOLYGON (((-77.31151 3...
+## 5        FREDERICK     251422 MULTIPOLYGON (((-77.67716 3...
+## 6         SOMERSET      25729 MULTIPOLYGON (((-75.95962 3...
+## 7             KENT      19536 MULTIPOLYGON (((-76.27737 3...
+## 8        WORCESTER      51765 MULTIPOLYGON (((-75.66061 3...
+## 9           HOWARD     318855 MULTIPOLYGON (((-77.18711 3...
+## 10 PRINCE GEORGE&#39;S     908670 MULTIPOLYGON (((-77.07995 3...</code></pre>
+<p>Now we can join them.</p>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="geographic-analysis.html#cb410-1" aria-hidden="true" tabindex="-1"></a>md_beds_per_100k <span class="ot">&lt;-</span> md_county_population <span class="sc">%&gt;%</span></span>
+<span id="cb410-2"><a href="geographic-analysis.html#cb410-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(md_beds_by_county)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;COUNTY&quot;</code></pre>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="geographic-analysis.html#cb412-1" aria-hidden="true" tabindex="-1"></a>md_beds_per_100k</span></code></pre></div>
+<pre><code>## Simple feature collection with 24 features and 3 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -79.48765 ymin: 37.91172 xmax: -75.04894 ymax: 39.72304
+## Geodetic CRS:  NAD83
+## First 10 features:
+##             COUNTY population total_beds                       geometry
+## 1     QUEEN ANNE&#39;S      49632         NA MULTIPOLYGON (((-76.24918 3...
+## 2        BALTIMORE     828018       1152 MULTIPOLYGON (((-76.3257 39...
+## 3     ANNE ARUNDEL     571275        673 MULTIPOLYGON (((-76.84036 3...
+## 4          CARROLL     167699        189 MULTIPOLYGON (((-77.31151 3...
+## 5        FREDERICK     251422        308 MULTIPOLYGON (((-77.67716 3...
+## 6         SOMERSET      25729         89 MULTIPOLYGON (((-75.95962 3...
+## 7             KENT      19536         26 MULTIPOLYGON (((-76.27737 3...
+## 8        WORCESTER      51765         45 MULTIPOLYGON (((-75.66061 3...
+## 9           HOWARD     318855        331 MULTIPOLYGON (((-77.18711 3...
+## 10 PRINCE GEORGE&#39;S     908670        789 MULTIPOLYGON (((-77.07995 3...</code></pre>
+<p>We have two NAs after we join, for Queen Anne’s County and Caroline County. That’s not an error. There are no General Acute Care hospitals in those counties, according to our data (it’s why our beds table has 22 rows, not 24). So let’s convert those values to 0 using replace_na().</p>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="geographic-analysis.html#cb414-1" aria-hidden="true" tabindex="-1"></a>md_beds_per_100k <span class="ot">&lt;-</span> md_county_population <span class="sc">%&gt;%</span></span>
+<span id="cb414-2"><a href="geographic-analysis.html#cb414-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(md_beds_by_county) <span class="sc">%&gt;%</span></span>
+<span id="cb414-3"><a href="geographic-analysis.html#cb414-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_beds =</span> <span class="fu">replace_na</span>(total_beds,<span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## Joining, by = &quot;COUNTY&quot;</code></pre>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="geographic-analysis.html#cb416-1" aria-hidden="true" tabindex="-1"></a>md_beds_per_100k</span></code></pre></div>
+<pre><code>## Simple feature collection with 24 features and 3 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -79.48765 ymin: 37.91172 xmax: -75.04894 ymax: 39.72304
+## Geodetic CRS:  NAD83
+## First 10 features:
+##             COUNTY population total_beds                       geometry
+## 1     QUEEN ANNE&#39;S      49632          0 MULTIPOLYGON (((-76.24918 3...
+## 2        BALTIMORE     828018       1152 MULTIPOLYGON (((-76.3257 39...
+## 3     ANNE ARUNDEL     571275        673 MULTIPOLYGON (((-76.84036 3...
+## 4          CARROLL     167699        189 MULTIPOLYGON (((-77.31151 3...
+## 5        FREDERICK     251422        308 MULTIPOLYGON (((-77.67716 3...
+## 6         SOMERSET      25729         89 MULTIPOLYGON (((-75.95962 3...
+## 7             KENT      19536         26 MULTIPOLYGON (((-76.27737 3...
+## 8        WORCESTER      51765         45 MULTIPOLYGON (((-75.66061 3...
+## 9           HOWARD     318855        331 MULTIPOLYGON (((-77.18711 3...
+## 10 PRINCE GEORGE&#39;S     908670        789 MULTIPOLYGON (((-77.07995 3...</code></pre>
+<p>Our final step before visualization, let’s calculate the number of beds per 100,000 for each county and sort from highest to lowest to see waht trends we can identify just from the table.</p>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="geographic-analysis.html#cb418-1" aria-hidden="true" tabindex="-1"></a>md_beds_per_100k <span class="ot">&lt;-</span> md_county_population <span class="sc">%&gt;%</span></span>
+<span id="cb418-2"><a href="geographic-analysis.html#cb418-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(md_beds_by_county) <span class="sc">%&gt;%</span></span>
+<span id="cb418-3"><a href="geographic-analysis.html#cb418-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_beds =</span> <span class="fu">replace_na</span>(total_beds,<span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb418-4"><a href="geographic-analysis.html#cb418-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">beds_per_100k =</span> total_beds<span class="sc">/</span>population<span class="sc">*</span><span class="dv">100000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb418-5"><a href="geographic-analysis.html#cb418-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beds_per_100k))</span></code></pre></div>
+<pre><code>## Joining, by = &quot;COUNTY&quot;</code></pre>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="geographic-analysis.html#cb420-1" aria-hidden="true" tabindex="-1"></a>md_beds_per_100k</span></code></pre></div>
+<pre><code>## Simple feature collection with 24 features and 4 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -79.48765 ymin: 37.91172 xmax: -75.04894 ymax: 39.72304
+## Geodetic CRS:  NAD83
+## First 10 features:
+##            COUNTY population total_beds beds_per_100k
+## 1  BALTIMORE CITY     609032       4505      739.6984
+## 2        ALLEGANY      71445        371      519.2806
+## 3          TALBOT      37167        132      355.1538
+## 4        SOMERSET      25729         89      345.9132
+## 5        WICOMICO     102539        281      274.0421
+## 6         GARRETT      29235         55      188.1307
+## 7      WASHINGTON     150109        247      164.5471
+## 8      DORCHESTER      32138         46      143.1327
+## 9       BALTIMORE     828018       1152      139.1274
+## 10           KENT      19536         26      133.0876
+##                          geometry
+## 1  MULTIPOLYGON (((-76.71152 3...
+## 2  MULTIPOLYGON (((-79.06756 3...
+## 3  MULTIPOLYGON (((-76.34647 3...
+## 4  MULTIPOLYGON (((-75.95962 3...
+## 5  MULTIPOLYGON (((-75.92033 3...
+## 6  MULTIPOLYGON (((-79.48765 3...
+## 7  MULTIPOLYGON (((-78.36346 3...
+## 8  MULTIPOLYGON (((-76.06544 3...
+## 9  MULTIPOLYGON (((-76.3257 39...
+## 10 MULTIPOLYGON (((-76.27737 3...</code></pre>
+<p>Let’s take a look at the result of this table. Baltimore City is still up there at the top, even when measuring by beds per 100k. But there are some surpising ones at the top, some of Maryland’s smallest counties! Allegany, Talbot, Somerset may not have that many beds, but they also don’t have a lot of people.</p>
+<p>Okay, now let’s visualize. We’re going to build a choropleth map, with the color of each county – the fill – set according to the number of beds per 100K on a color gradient.</p>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="geographic-analysis.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb422-2"><a href="geographic-analysis.html#cb422-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>md_beds_per_100k, <span class="fu">aes</span>(<span class="at">fill=</span>beds_per_100k)) <span class="sc">+</span></span>
+<span id="cb422-3"><a href="geographic-analysis.html#cb422-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="datajournalism_files/figure-html/unnamed-chunk-252-1.png" width="672" />
+This map is okay, but the color scale makes it hard to draw fine-grained differences. Let’s try applying the magma color scale we learned in the last chapter.</p>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="geographic-analysis.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb423-2"><a href="geographic-analysis.html#cb423-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>md_beds_per_100k, <span class="fu">aes</span>(<span class="at">fill=</span>beds_per_100k)) <span class="sc">+</span></span>
+<span id="cb423-3"><a href="geographic-analysis.html#cb423-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb423-4"><a href="geographic-analysis.html#cb423-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_b</span>(<span class="at">option=</span><span class="st">&quot;magma&quot;</span>)</span></code></pre></div>
+<p><img src="datajournalism_files/figure-html/unnamed-chunk-253-1.png" width="672" />
+The highest ranking counties stand out nicely in this version, but it’s still hard to make out fine-grained differences between counties.</p>
+<p>So let’s change the color scale to a “log” scale, which will help us see those differences a bit more clearly.</p>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="geographic-analysis.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb424-2"><a href="geographic-analysis.html#cb424-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>md_beds_per_100k, <span class="fu">aes</span>(<span class="at">fill=</span>beds_per_100k)) <span class="sc">+</span></span>
+<span id="cb424-3"><a href="geographic-analysis.html#cb424-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb424-4"><a href="geographic-analysis.html#cb424-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_b</span>(<span class="at">option=</span><span class="st">&quot;magma&quot;</span>,<span class="at">trans =</span> <span class="st">&quot;log&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="datajournalism_files/figure-html/unnamed-chunk-254-1.png" width="672" />
+Some interesting regional patterns finally emerge.</p>
+<p>The Eastern Shore and Western Maryland have more beds per capita than Central Maryland (with the exception of Baltimore City). And Southern Maryland – PG, Charles, Calvert and St. Mary’s – has by far the fewest beds per capita of any other region.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="geographic-data-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="automating-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/20-geographicanalysis.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["datajournalism.pdf", "datajournalism.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

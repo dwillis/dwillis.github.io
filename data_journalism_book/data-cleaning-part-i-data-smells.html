@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 Data Cleaning Part I: Data smells | Data Journalism with R and the Tidyverse</title>
+  <meta name="description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 Data Cleaning Part I: Data smells | Data Journalism with R and the Tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 Data Cleaning Part I: Data smells | Data Journalism with R and the Tidyverse" />
+  
+  <meta name="twitter:description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  
+
+<meta name="author" content="Matt Waite (original author); updated by Derek Willis and Sean Mussenden" />
+
+
+<meta name="date" content="2021-11-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="filters-and-selections.html"/>
+<link rel="next" href="data-cleaning-part-ii-janitor.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160712129-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160712129-1');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="http://smussenden.github.io/coursefiles/data_journalism_book/">Data Journalism With R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#modern-data-journalism"><i class="fa fa-check"></i><b>1.1</b> Modern data journalism</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#installations"><i class="fa fa-check"></i><b>1.2</b> Installations</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.3</b> About this book</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-well-cover"><i class="fa fa-check"></i><b>1.4</b> What we’ll cover</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="public-records.html"><a href="public-records.html"><i class="fa fa-check"></i><b>2</b> Public records</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="public-records.html"><a href="public-records.html#federal-law"><i class="fa fa-check"></i><b>2.1</b> Federal law</a></li>
+<li class="chapter" data-level="2.2" data-path="public-records.html"><a href="public-records.html#state-law"><i class="fa fa-check"></i><b>2.2</b> State law</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics.html"><a href="r-basics.html#about-libraries"><i class="fa fa-check"></i><b>3.1</b> About libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html"><i class="fa fa-check"></i><b>4</b> Data journalism in the age of replication</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#the-stylebook"><i class="fa fa-check"></i><b>4.1</b> The stylebook</a></li>
+<li class="chapter" data-level="4.2" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#replication"><i class="fa fa-check"></i><b>4.2</b> Replication</a></li>
+<li class="chapter" data-level="4.3" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#goodbye-excel"><i class="fa fa-check"></i><b>4.3</b> Goodbye Excel?</a></li>
+<li class="chapter" data-level="4.4" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#receptivity-is-high"><i class="fa fa-check"></i><b>4.4</b> “Receptivity … is high”</a></li>
+<li class="chapter" data-level="4.5" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#replication-in-notebooks"><i class="fa fa-check"></i><b>4.5</b> Replication in notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>5</b> Data, structures and types</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-mental-picture"><i class="fa fa-check"></i><b>5.1</b> A Mental Picture</a></li>
+<li class="chapter" data-level="5.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>5.2</b> Types</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>6</b> Aggregates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="aggregates.html"><a href="aggregates.html#libraries"><i class="fa fa-check"></i><b>6.1</b> Libraries</a></li>
+<li class="chapter" data-level="6.2" data-path="aggregates.html"><a href="aggregates.html#importing-data"><i class="fa fa-check"></i><b>6.2</b> Importing data</a></li>
+<li class="chapter" data-level="6.3" data-path="aggregates.html"><a href="aggregates.html#group-by-and-count"><i class="fa fa-check"></i><b>6.3</b> Group by and count</a></li>
+<li class="chapter" data-level="6.4" data-path="aggregates.html"><a href="aggregates.html#other-summarization-methods-summing-mean-median-min-and-max"><i class="fa fa-check"></i><b>6.4</b> Other summarization methods: summing, mean, median, min and max</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>7</b> Mutating data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mutating-data.html"><a href="mutating-data.html#another-use-of-mutate"><i class="fa fa-check"></i><b>7.1</b> Another use of mutate</a></li>
+<li class="chapter" data-level="7.2" data-path="mutating-data.html"><a href="mutating-data.html#a-more-powerful-use"><i class="fa fa-check"></i><b>7.2</b> A more powerful use</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="working-with-dates.html"><a href="working-with-dates.html"><i class="fa fa-check"></i><b>8</b> Working with dates</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="working-with-dates.html"><a href="working-with-dates.html#the-hard-way"><i class="fa fa-check"></i><b>8.1</b> The hard way</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>9</b> Filters and selections</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#combining-filters"><i class="fa fa-check"></i><b>9.1</b> Combining filters</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html"><i class="fa fa-check"></i><b>10</b> Data Cleaning Part I: Data smells</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#wrong-type"><i class="fa fa-check"></i><b>10.1</b> Wrong Type</a></li>
+<li class="chapter" data-level="10.2" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#missing-data"><i class="fa fa-check"></i><b>10.2</b> Missing Data</a></li>
+<li class="chapter" data-level="10.3" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#gaps-in-data"><i class="fa fa-check"></i><b>10.3</b> Gaps in data</a></li>
+<li class="chapter" data-level="10.4" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#supicious-outliers"><i class="fa fa-check"></i><b>10.4</b> Supicious Outliers</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html"><i class="fa fa-check"></i><b>11</b> Data Cleaning Part II: Janitor</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#cleaning-headers"><i class="fa fa-check"></i><b>11.1</b> Cleaning headers</a></li>
+<li class="chapter" data-level="11.2" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#changing-data-types"><i class="fa fa-check"></i><b>11.2</b> Changing data types</a></li>
+<li class="chapter" data-level="11.3" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#duplicates"><i class="fa fa-check"></i><b>11.3</b> Duplicates</a></li>
+<li class="chapter" data-level="11.4" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#cleaning-strings"><i class="fa fa-check"></i><b>11.4</b> Cleaning strings</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html"><i class="fa fa-check"></i><b>12</b> Data Cleaning Part III: Open Refine</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html#refinr-open-refine-in-r"><i class="fa fa-check"></i><b>12.1</b> Refinr, Open Refine in R</a></li>
+<li class="chapter" data-level="12.2" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html#manually-cleaning-data-with-open-refine"><i class="fa fa-check"></i><b>12.2</b> Manually cleaning data with Open Refine</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html"><i class="fa fa-check"></i><b>13</b> Cleaning Data Part IV: PDFs</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#easy-does-it"><i class="fa fa-check"></i><b>13.1</b> Easy does it</a></li>
+<li class="chapter" data-level="13.2" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#when-it-looks-good-but-needs-a-little-fixing"><i class="fa fa-check"></i><b>13.2</b> When it looks good, but needs a little fixing</a></li>
+<li class="chapter" data-level="13.3" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#cleaning-up-the-data-in-r"><i class="fa fa-check"></i><b>13.3</b> Cleaning up the data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="combining-and-joining.html"><a href="combining-and-joining.html"><i class="fa fa-check"></i><b>14</b> Combining and joining</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="combining-and-joining.html"><a href="combining-and-joining.html#combining-data-stacking"><i class="fa fa-check"></i><b>14.1</b> Combining data (stacking)</a></li>
+<li class="chapter" data-level="14.2" data-path="combining-and-joining.html"><a href="combining-and-joining.html#joining-data"><i class="fa fa-check"></i><b>14.2</b> Joining data</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="scraping-data-with-rvest.html"><a href="scraping-data-with-rvest.html"><i class="fa fa-check"></i><b>15</b> Scraping data with Rvest</a></li>
+<li class="chapter" data-level="16" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>16</b> Advanced rvest</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#using-for-loops"><i class="fa fa-check"></i><b>16.1</b> Using for loops</a></li>
+<li class="chapter" data-level="16.2" data-path="advanced-rvest.html"><a href="advanced-rvest.html#looping-and-rvest"><i class="fa fa-check"></i><b>16.2</b> Looping and rvest</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html"><i class="fa fa-check"></i><b>17</b> Intro to APIs: The Census</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#the-acs"><i class="fa fa-check"></i><b>17.1</b> The ACS</a></li>
+<li class="chapter" data-level="17.2" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#wide-results"><i class="fa fa-check"></i><b>17.2</b> “Wide” Results</a></li>
+<li class="chapter" data-level="17.3" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#sorting-results"><i class="fa fa-check"></i><b>17.3</b> Sorting Results</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html"><i class="fa fa-check"></i><b>18</b> Visualizing your data for reporting</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html#bar-charts"><i class="fa fa-check"></i><b>18.1</b> Bar charts</a></li>
+<li class="chapter" data-level="18.2" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html#line-charts"><i class="fa fa-check"></i><b>18.2</b> Line charts</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html"><i class="fa fa-check"></i><b>19</b> Visualizing your data for publication</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html#datawrapper"><i class="fa fa-check"></i><b>19.1</b> Datawrapper</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html#making-a-map"><i class="fa fa-check"></i><b>19.1.1</b> Making a Map</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="geographic-data-basics.html"><a href="geographic-data-basics.html"><i class="fa fa-check"></i><b>20</b> Geographic data basics</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="geographic-data-basics.html"><a href="geographic-data-basics.html#importing-and-viewing-data"><i class="fa fa-check"></i><b>20.1</b> Importing and viewing data</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="geographic-analysis.html"><a href="geographic-analysis.html"><i class="fa fa-check"></i><b>21</b> Geographic analysis</a></li>
+<li class="chapter" data-level="22" data-path="automating-analysis.html"><a href="automating-analysis.html"><i class="fa fa-check"></i><b>22</b> Automating analysis</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="automating-analysis.html"><a href="automating-analysis.html#automating-downloads-and-imports"><i class="fa fa-check"></i><b>22.1</b> Automating downloads and imports</a></li>
+<li class="chapter" data-level="22.2" data-path="automating-analysis.html"><a href="automating-analysis.html#exploring-the-data"><i class="fa fa-check"></i><b>22.2</b> Exploring the data</a></li>
+<li class="chapter" data-level="22.3" data-path="automating-analysis.html"><a href="automating-analysis.html#analysis"><i class="fa fa-check"></i><b>22.3</b> Analysis</a></li>
+<li class="chapter" data-level="22.4" data-path="automating-analysis.html"><a href="automating-analysis.html#making-updating-graphics"><i class="fa fa-check"></i><b>22.4</b> Making updating graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="automating-geographic-analysis.html"><a href="automating-geographic-analysis.html"><i class="fa fa-check"></i><b>23</b> Automating geographic analysis</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="automating-geographic-analysis.html"><a href="automating-geographic-analysis.html#mapping-continuously"><i class="fa fa-check"></i><b>23.1</b> Mapping continuously</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="basic-stats-linear-regression-and-the-t-test.html"><a href="basic-stats-linear-regression-and-the-t-test.html"><i class="fa fa-check"></i><b>24</b> Basic Stats: Linear Regression and The T-Test</a></li>
+<li class="chapter" data-level="25" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>25</b> Linear Regression</a></li>
+<li class="chapter" data-level="26" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>26</b> T-tests</a></li>
+<li class="chapter" data-level="27" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html"><i class="fa fa-check"></i><b>27</b> An intro to text analysis</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html#going-beyond-a-single-word"><i class="fa fa-check"></i><b>27.1</b> Going beyond a single word</a></li>
+<li class="chapter" data-level="27.2" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>27.2</b> Sentiment Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html"><i class="fa fa-check"></i><b>28</b> Writing with numbers</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#how-to-write-about-numbers-without-overwhelming-with-numbers."><i class="fa fa-check"></i><b>28.1</b> How to write about numbers without overwhelming with numbers.</a></li>
+<li class="chapter" data-level="28.2" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#when-exact-numbers-matter"><i class="fa fa-check"></i><b>28.2</b> When exact numbers matter</a></li>
+<li class="chapter" data-level="28.3" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#an-example"><i class="fa fa-check"></i><b>28.3</b> An example</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html"><i class="fa fa-check"></i><b>29</b> Ethics in data journalism</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#problems"><i class="fa fa-check"></i><b>29.1</b> Problems</a></li>
+<li class="chapter" data-level="29.2" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#the-googlebot"><i class="fa fa-check"></i><b>29.2</b> The Googlebot</a></li>
+<li class="chapter" data-level="29.3" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#data-lifetimes"><i class="fa fa-check"></i><b>29.3</b> Data Lifetimes</a></li>
+<li class="chapter" data-level="29.4" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#you-are-a-data-provider"><i class="fa fa-check"></i><b>29.4</b> You Are a Data Provider</a></li>
+<li class="chapter" data-level="29.5" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#ethical-data"><i class="fa fa-check"></i><b>29.5</b> Ethical Data</a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="using-github.html"><a href="using-github.html"><i class="fa fa-check"></i><b>30</b> Using GitHub</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="using-github.html"><a href="using-github.html#how-it-works"><i class="fa fa-check"></i><b>30.1</b> How It Works</a></li>
+<li class="chapter" data-level="30.2" data-path="using-github.html"><a href="using-github.html#getting-started"><i class="fa fa-check"></i><b>30.2</b> Getting Started</a></li>
+<li class="chapter" data-level="30.3" data-path="using-github.html"><a href="using-github.html#advanced-use"><i class="fa fa-check"></i><b>30.3</b> Advanced Use</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Journalism with R and the Tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-cleaning-part-i-data-smells" class="section level1" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Data Cleaning Part I: Data smells</h1>
+<p>Any time you are given a dataset from anyone, you should immediately be suspicious. Is this data what I think it is? Does it include what I expect? Is there anything I need to know about it? Will it produce the information I expect?</p>
+<p>One of the first things you should do is give it the smell test.</p>
+<p>Failure to give data the smell test <a href="https://source.opennews.org/en-US/learning/handling-data-about-race-and-ethnicity/">can lead you to miss stories and get your butt kicked on a competitive story</a>.</p>
+<p>With data smells, we’re trying to find common mistakes in data. <a href="https://github.com/nikeiubel/data-smells/wiki/Ensuring-Accuracy-in-Data-Journalism">For more on data smells, read the GitHub wiki post that started it all</a>. Some common data smells are:</p>
+<ul>
+<li>Missing data or missing values</li>
+<li>Gaps in data</li>
+<li>Wrong type of data</li>
+<li>Outliers</li>
+<li>Sharp curves</li>
+<li>Conflicting information within a dataset</li>
+<li>Conflicting information across datasets</li>
+<li>Wrongly derived data</li>
+<li>Internal inconsistency</li>
+<li>External inconsistency</li>
+<li>Wrong spatial data</li>
+<li>Unusable data, including non-standard abbreviations, ambiguous data, extraneous data, inconsistent data</li>
+</ul>
+<p>Not all of these data smells are detectable in code. You may have to ask people about the data. You may have to compare it to another dataset yourself. Does the agency that uses the data produce reports from the data? Does your analysis match those reports? That will expose wrongly derived data, or wrong units, or mistakes you made with inclusion or exclusion.</p>
+<p>But with several of these data smells, we can do them first, before we do anything else.</p>
+<p>We’re going to examine three here as they apply to the PPP loan data we’ve been working with: wrong type, missing data and gaps in data.</p>
+<div id="wrong-type" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Wrong Type</h2>
+<p>First, let’s look at <strong>Wrong Type Of Data</strong>.</p>
+<p>We can sniff that out by looking at the output of <code>readr</code>.</p>
+<p>Let’s load the tidyverse.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="data-cleaning-part-i-data-smells.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove scientific notation</span></span>
+<span id="cb85-2"><a href="data-cleaning-part-i-data-smells.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>)</span>
+<span id="cb85-3"><a href="data-cleaning-part-i-data-smells.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the tidyverse</span></span>
+<span id="cb85-4"><a href="data-cleaning-part-i-data-smells.html#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>Then let’s load the Maryland slice of PPP loan data we’ve used previously.</p>
+<p>This time, we’re going to load the data in a CSV format, which stands for comma separated values and is essentially a fancy structured text file. Each column in the csv is separated – “delimited” – by a comma from the next column. The file has a “.gz” extension on the end because it’s zipped up to keep the file sizes smaller.</p>
+<p>We’re also going to introduce a new argument to our function that reads in the data, read_csv(), called “guess_max.” As R reads in the csv file, it will attempt to make some calls on what “data type” to assign to each field: number, character, date, and so on. The “guess_max” argument says: look at the values in the whatever number of rows we specify before deciding which data type to assign. In this case, we’ll pick 10.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="data-cleaning-part-i-data-smells.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb86-2"><a href="data-cleaning-part-i-data-smells.html#cb86-2" aria-hidden="true" tabindex="-1"></a>ppp_maryland_loans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/ppp_loan_data/processed/md/ppp_loans_md.csv.zip&quot;</span>, <span class="at">guess_max=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_character(),
+##   id = col_double(),
+##   amount = col_double(),
+##   naics_code = col_double(),
+##   non_profit = col_logical(),
+##   jobs_retained = col_double(),
+##   date_approved = col_date(format = &quot;&quot;),
+##   loan_range_sort_key = col_logical(),
+##   previous_loan_range = col_logical(),
+##   previous_name = col_logical(),
+##   loan_number = col_double(),
+##   sba_office_code = col_double(),
+##   term = col_double(),
+##   sba_guaranty_percentage = col_double(),
+##   initial_approval_amount = col_double(),
+##   current_approval_amount = col_double(),
+##   undisbursed_amount = col_double(),
+##   franchise_name = col_logical(),
+##   servicing_lender_location_id = col_double(),
+##   utilities_proceed = col_double(),
+##   payroll_proceed = col_double()
+##   # ... with 13 more columns
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<pre><code>## Warning: 15708 parsing failures.
+## row            col           expected                                                          actual                                                   file
+##  21 franchise_name 1/0/T/F/TRUE/FALSE ZIPS Dry Cleaners                                               &#39;data/ppp_loan_data/processed/md/ppp_loans_md.csv.zip&#39;
+## 126 franchise_name 1/0/T/F/TRUE/FALSE Quiznos                                                         &#39;data/ppp_loan_data/processed/md/ppp_loans_md.csv.zip&#39;
+## 375 franchise_name 1/0/T/F/TRUE/FALSE Nissan North America, Inc. - Dealer Sales and Service Agreement &#39;data/ppp_loan_data/processed/md/ppp_loans_md.csv.zip&#39;
+## 400 franchise_name 1/0/T/F/TRUE/FALSE Hampton Inn &amp; Suites                                            &#39;data/ppp_loan_data/processed/md/ppp_loans_md.csv.zip&#39;
+## 405 franchise_name 1/0/T/F/TRUE/FALSE Express Employment Professional                                 &#39;data/ppp_loan_data/processed/md/ppp_loans_md.csv.zip&#39;
+## ... .............. .................. ............................................................... ......................................................
+## See problems(...) for more details.</code></pre>
+<p>Pay attention to the red warning that signals “one or more parsing issues.” It advises us to run the problems() function to see what went wrong. Let’s do that.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="data-cleaning-part-i-data-smells.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(ppp_maryland_loans)</span></code></pre></div>
+<pre><code>## # A tibble: 15,708 x 5
+##      row col       expected    actual                     file                  
+##    &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;                      &lt;chr&gt;                 
+##  1    21 franchis… 1/0/T/F/TR… ZIPS Dry Cleaners          &#39;data/ppp_loan_data/p…
+##  2   126 franchis… 1/0/T/F/TR… Quiznos                    &#39;data/ppp_loan_data/p…
+##  3   375 franchis… 1/0/T/F/TR… Nissan North America, Inc… &#39;data/ppp_loan_data/p…
+##  4   400 franchis… 1/0/T/F/TR… Hampton Inn &amp; Suites       &#39;data/ppp_loan_data/p…
+##  5   405 franchis… 1/0/T/F/TR… Express Employment Profes… &#39;data/ppp_loan_data/p…
+##  6   417 franchis… 1/0/T/F/TR… Mason&#39;s Lobster            &#39;data/ppp_loan_data/p…
+##  7   480 franchis… 1/0/T/F/TR… Smoothie King              &#39;data/ppp_loan_data/p…
+##  8   510 franchis… 1/0/T/F/TR… Restore Hyper Wellness + … &#39;data/ppp_loan_data/p…
+##  9   554 franchis… 1/0/T/F/TR… Quiznos                    &#39;data/ppp_loan_data/p…
+## 10   652 franchis… 1/0/T/F/TR… Structural Elements        &#39;data/ppp_loan_data/p…
+## # … with 15,698 more rows</code></pre>
+<p>It produces a table of all the parsing problems. It has 15,708 rows, which means we have that many problems. In almost every case here, the <code>readr</code> library has guessed that a given column was of a “logical” data type – True or False. It did it based on very limited information – only 1,000 rows. So, when it hit a value that looked like a date, or a character string, it didn’t know what to do. So it just didn’t read in that value correctly.</p>
+<p>The easy way to fix this is to set the guess_max argument higher. It will take a little longer to load, but we’ll use every single row in the data set to guess the column type – 195,865</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="data-cleaning-part-i-data-smells.html#cb91-1" aria-hidden="true" tabindex="-1"></a>ppp_maryland_loans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/ppp_loan_data/processed/md/ppp_loans_md.csv.zip&quot;</span>, <span class="at">guess_max=</span><span class="dv">195865</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_character(),
+##   id = col_double(),
+##   amount = col_double(),
+##   naics_code = col_double(),
+##   non_profit = col_logical(),
+##   jobs_retained = col_double(),
+##   date_approved = col_date(format = &quot;&quot;),
+##   loan_range_sort_key = col_logical(),
+##   previous_loan_range = col_logical(),
+##   previous_name = col_logical(),
+##   loan_number = col_double(),
+##   sba_office_code = col_double(),
+##   term = col_double(),
+##   sba_guaranty_percentage = col_double(),
+##   initial_approval_amount = col_double(),
+##   current_approval_amount = col_double(),
+##   undisbursed_amount = col_double(),
+##   servicing_lender_location_id = col_double(),
+##   utilities_proceed = col_double(),
+##   payroll_proceed = col_double(),
+##   mortgage_interest_proceed = col_double()
+##   # ... with 11 more columns
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<p>This time, we got no parsing failures. And if we examine the data types <code>readr</code> assigned to each column using glimpse(), they generally make sense.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="data-cleaning-part-i-data-smells.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ppp_maryland_loans)</span></code></pre></div>
+<pre><code>## Rows: 195,865
+## Columns: 63
+## $ id                             &lt;dbl&gt; 99443772, 99444241, 99445051, 99445208,…
+## $ name                           &lt;chr&gt; &quot;TARBIYAH ACADEMY INC&quot;, &quot;J &amp;AMP; M DRYW…
+## $ slug                           &lt;chr&gt; &quot;tarbiyah-academy-inc-8387378410&quot;, &quot;j-a…
+## $ amount                         &lt;dbl&gt; 149000.0, 146000.0, 140400.0, 139527.0,…
+## $ state                          &lt;chr&gt; &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD…
+## $ address                        &lt;chr&gt; &quot;6785 Business Pkwy Ste 108&quot;, &quot;10413 Fo…
+## $ city                           &lt;chr&gt; &quot;Elkridge&quot;, &quot;Union Bridge&quot;, &quot;PHOENIX&quot;, …
+## $ zip                            &lt;chr&gt; &quot;21075-6353&quot;, &quot;21791&quot;, &quot;21131-2229&quot;, &quot;2…
+## $ naics_code                     &lt;dbl&gt; 611110, 238310, 623110, 311920, 561730,…
+## $ business_type                  &lt;chr&gt; &quot;Corporation&quot;, &quot;Subchapter S Corporatio…
+## $ race                           &lt;chr&gt; &quot;Asian&quot;, &quot;Unanswered&quot;, &quot;Unanswered&quot;, &quot;U…
+## $ gender                         &lt;chr&gt; &quot;Male Owned&quot;, &quot;Unanswered&quot;, &quot;Unanswered…
+## $ veteran                        &lt;chr&gt; &quot;Non-Veteran&quot;, &quot;Unanswered&quot;, &quot;Unanswere…
+## $ non_profit                     &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ jobs_retained                  &lt;dbl&gt; 25, 6, 18, 23, 15, 25, 14, 11, 24, 5, 1…
+## $ date_approved                  &lt;date&gt; 2021-02-13, 2020-05-01, 2020-04-28, 20…
+## $ lender                         &lt;chr&gt; &quot;Bank of America, National Association&quot;…
+## $ congressional_district         &lt;chr&gt; &quot;MD-02&quot;, &quot;MD-08&quot;, &quot;MD-01&quot;, &quot;MD-08&quot;, &quot;MD…
+## $ loan_range_sort_key            &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ previous_loan_range            &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ previous_name                  &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ loan_number                    &lt;dbl&gt; 8387378410, 7763877705, 1414477305, 806…
+## $ sba_office_code                &lt;dbl&gt; 373, 373, 373, 353, 373, 373, 373, 373,…
+## $ processing_method              &lt;chr&gt; &quot;PPS&quot;, &quot;PPP&quot;, &quot;PPP&quot;, &quot;PPP&quot;, &quot;PPS&quot;, &quot;PPP…
+## $ loan_status                    &lt;chr&gt; &quot;Exemption 4&quot;, &quot;Exemption 4&quot;, &quot;Paid in …
+## $ term                           &lt;dbl&gt; 60, 24, 24, 24, 24, 24, 60, 60, 24, 60,…
+## $ sba_guaranty_percentage        &lt;dbl&gt; 100, 100, 100, 100, 100, 100, 100, 100,…
+## $ initial_approval_amount        &lt;dbl&gt; 149000.0, 146000.0, 140400.0, 139527.0,…
+## $ current_approval_amount        &lt;dbl&gt; 149000.0, 146000.0, 140400.0, 139527.0,…
+## $ undisbursed_amount             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ franchise_name                 &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ servicing_lender_location_id   &lt;dbl&gt; 9551, 44449, 124055, 46391, 434059, 304…
+## $ servicing_lender_name          &lt;chr&gt; &quot;Bank of America, National Association&quot;…
+## $ servicing_lender_address       &lt;chr&gt; &quot;100 N Tryon St, Ste 170&quot;, &quot;222 Delawar…
+## $ servicing_lender_city          &lt;chr&gt; &quot;CHARLOTTE&quot;, &quot;WILMINGTON&quot;, &quot;ROCKVILLE&quot;,…
+## $ servicing_lender_state         &lt;chr&gt; &quot;NC&quot;, &quot;DE&quot;, &quot;MD&quot;, &quot;NY&quot;, &quot;VA&quot;, &quot;MD&quot;, &quot;NY…
+## $ servicing_lender_zip           &lt;chr&gt; &quot;28202-4024&quot;, &quot;19801-1621&quot;, &quot;20850-6238…
+## $ rural_urban_indicator          &lt;chr&gt; &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;R&quot;, &quot;R&quot;, &quot;R&quot;, &quot;U&quot;,…
+## $ hubzone_indicator              &lt;chr&gt; &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;N&quot;,…
+## $ business_age_description       &lt;chr&gt; &quot;Existing or more than 2 years old&quot;, &quot;U…
+## $ project_city                   &lt;chr&gt; &quot;Elkridge&quot;, &quot;Union Bridge&quot;, &quot;PHOENIX&quot;, …
+## $ project_county_name            &lt;chr&gt; &quot;HOWARD&quot;, &quot;CARROLL&quot;, &quot;BALTIMORE&quot;, &quot;MONT…
+## $ project_state                  &lt;chr&gt; &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD…
+## $ project_zip                    &lt;chr&gt; &quot;21075-6353&quot;, &quot;21791-0001&quot;, &quot;21131-2229…
+## $ utilities_proceed              &lt;dbl&gt; 1, NA, NA, 3926, 1, NA, 1, NA, NA, NA, …
+## $ payroll_proceed                &lt;dbl&gt; 148997.0, 146000.0, 140400.0, 88000.0, …
+## $ mortgage_interest_proceed      &lt;dbl&gt; NA, NA, NA, 0, NA, NA, NA, NA, NA, NA, …
+## $ rent_proceed                   &lt;dbl&gt; NA, NA, NA, 42062, NA, NA, NA, NA, NA, …
+## $ refinance_eidl_proceed         &lt;dbl&gt; NA, NA, NA, 0, NA, NA, NA, NA, NA, NA, …
+## $ health_care_proceed            &lt;dbl&gt; NA, NA, NA, 5539, NA, NA, NA, NA, NA, N…
+## $ debt_interest_proceed          &lt;dbl&gt; NA, NA, NA, 0, NA, NA, NA, NA, NA, NA, …
+## $ originating_lender_city        &lt;chr&gt; &quot;CHARLOTTE&quot;, &quot;WILMINGTON&quot;, &quot;ROCKVILLE&quot;,…
+## $ originating_lender_state       &lt;chr&gt; &quot;NC&quot;, &quot;DE&quot;, &quot;MD&quot;, &quot;NY&quot;, &quot;VA&quot;, &quot;MD&quot;, &quot;VA…
+## $ loan_status_date               &lt;date&gt; NA, NA, 2021-05-12, 2021-01-22, NA, 20…
+## $ originating_lender_location_id &lt;dbl&gt; 9551, 44449, 124055, 46391, 434059, 304…
+## $ old_slug                       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ lmi_indicator                  &lt;chr&gt; &quot;N&quot;, &quot;Y&quot;, &quot;N&quot;, &quot;Y&quot;, &quot;N&quot;, &quot;Y&quot;, &quot;N&quot;, &quot;N&quot;,…
+## $ unmatched_original             &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ unmatched_updated              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ previous_jobs_reported         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ ethnicity                      &lt;chr&gt; &quot;Not Hispanic or Latino&quot;, &quot;Unknown/NotS…
+## $ forgiveness_amount             &lt;dbl&gt; NA, NA, 141554.40, 140486.49, NA, 13427…
+## $ forgiveness_date               &lt;date&gt; NA, NA, 2021-02-25, 2020-12-30, NA, 20…</code></pre>
+<p>Things that should be characters – like state, city, name – are characters (chr). Things that should be numbers (dbl) – like amount – are numbers. Date columns – like date_approved – are stored as dates.</p>
+<p>There are some minor problem. The id column is a good example. It read in as a number (dbl), which makes sense, because it really is just a string of numbers. But we’d never need to do math on these values; it wouldn’t make sense to add two ids together, for example. So it is probably best stored as a character. The opposite would be more problematic. If something that should be stored as a number we want to do math on was stored as a character, we couldn’t actually use it to do math.</p>
+<p>We can fix that pretty easily, by overwriting the column while changing the data type, using mutate()</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="data-cleaning-part-i-data-smells.html#cb95-1" aria-hidden="true" tabindex="-1"></a>ppp_maryland_loans <span class="ot">&lt;-</span> ppp_maryland_loans <span class="sc">%&gt;%</span></span>
+<span id="cb95-2"><a href="data-cleaning-part-i-data-smells.html#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">as.character</span>(id))</span></code></pre></div>
+<p>When we glimpse() the dataframe again, it’s been changed</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="data-cleaning-part-i-data-smells.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ppp_maryland_loans)</span></code></pre></div>
+<pre><code>## Rows: 195,865
+## Columns: 63
+## $ id                             &lt;chr&gt; &quot;99443772&quot;, &quot;99444241&quot;, &quot;99445051&quot;, &quot;99…
+## $ name                           &lt;chr&gt; &quot;TARBIYAH ACADEMY INC&quot;, &quot;J &amp;AMP; M DRYW…
+## $ slug                           &lt;chr&gt; &quot;tarbiyah-academy-inc-8387378410&quot;, &quot;j-a…
+## $ amount                         &lt;dbl&gt; 149000.0, 146000.0, 140400.0, 139527.0,…
+## $ state                          &lt;chr&gt; &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD…
+## $ address                        &lt;chr&gt; &quot;6785 Business Pkwy Ste 108&quot;, &quot;10413 Fo…
+## $ city                           &lt;chr&gt; &quot;Elkridge&quot;, &quot;Union Bridge&quot;, &quot;PHOENIX&quot;, …
+## $ zip                            &lt;chr&gt; &quot;21075-6353&quot;, &quot;21791&quot;, &quot;21131-2229&quot;, &quot;2…
+## $ naics_code                     &lt;dbl&gt; 611110, 238310, 623110, 311920, 561730,…
+## $ business_type                  &lt;chr&gt; &quot;Corporation&quot;, &quot;Subchapter S Corporatio…
+## $ race                           &lt;chr&gt; &quot;Asian&quot;, &quot;Unanswered&quot;, &quot;Unanswered&quot;, &quot;U…
+## $ gender                         &lt;chr&gt; &quot;Male Owned&quot;, &quot;Unanswered&quot;, &quot;Unanswered…
+## $ veteran                        &lt;chr&gt; &quot;Non-Veteran&quot;, &quot;Unanswered&quot;, &quot;Unanswere…
+## $ non_profit                     &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ jobs_retained                  &lt;dbl&gt; 25, 6, 18, 23, 15, 25, 14, 11, 24, 5, 1…
+## $ date_approved                  &lt;date&gt; 2021-02-13, 2020-05-01, 2020-04-28, 20…
+## $ lender                         &lt;chr&gt; &quot;Bank of America, National Association&quot;…
+## $ congressional_district         &lt;chr&gt; &quot;MD-02&quot;, &quot;MD-08&quot;, &quot;MD-01&quot;, &quot;MD-08&quot;, &quot;MD…
+## $ loan_range_sort_key            &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ previous_loan_range            &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ previous_name                  &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ loan_number                    &lt;dbl&gt; 8387378410, 7763877705, 1414477305, 806…
+## $ sba_office_code                &lt;dbl&gt; 373, 373, 373, 353, 373, 373, 373, 373,…
+## $ processing_method              &lt;chr&gt; &quot;PPS&quot;, &quot;PPP&quot;, &quot;PPP&quot;, &quot;PPP&quot;, &quot;PPS&quot;, &quot;PPP…
+## $ loan_status                    &lt;chr&gt; &quot;Exemption 4&quot;, &quot;Exemption 4&quot;, &quot;Paid in …
+## $ term                           &lt;dbl&gt; 60, 24, 24, 24, 24, 24, 60, 60, 24, 60,…
+## $ sba_guaranty_percentage        &lt;dbl&gt; 100, 100, 100, 100, 100, 100, 100, 100,…
+## $ initial_approval_amount        &lt;dbl&gt; 149000.0, 146000.0, 140400.0, 139527.0,…
+## $ current_approval_amount        &lt;dbl&gt; 149000.0, 146000.0, 140400.0, 139527.0,…
+## $ undisbursed_amount             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ franchise_name                 &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ servicing_lender_location_id   &lt;dbl&gt; 9551, 44449, 124055, 46391, 434059, 304…
+## $ servicing_lender_name          &lt;chr&gt; &quot;Bank of America, National Association&quot;…
+## $ servicing_lender_address       &lt;chr&gt; &quot;100 N Tryon St, Ste 170&quot;, &quot;222 Delawar…
+## $ servicing_lender_city          &lt;chr&gt; &quot;CHARLOTTE&quot;, &quot;WILMINGTON&quot;, &quot;ROCKVILLE&quot;,…
+## $ servicing_lender_state         &lt;chr&gt; &quot;NC&quot;, &quot;DE&quot;, &quot;MD&quot;, &quot;NY&quot;, &quot;VA&quot;, &quot;MD&quot;, &quot;NY…
+## $ servicing_lender_zip           &lt;chr&gt; &quot;28202-4024&quot;, &quot;19801-1621&quot;, &quot;20850-6238…
+## $ rural_urban_indicator          &lt;chr&gt; &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;R&quot;, &quot;R&quot;, &quot;R&quot;, &quot;U&quot;,…
+## $ hubzone_indicator              &lt;chr&gt; &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;N&quot;,…
+## $ business_age_description       &lt;chr&gt; &quot;Existing or more than 2 years old&quot;, &quot;U…
+## $ project_city                   &lt;chr&gt; &quot;Elkridge&quot;, &quot;Union Bridge&quot;, &quot;PHOENIX&quot;, …
+## $ project_county_name            &lt;chr&gt; &quot;HOWARD&quot;, &quot;CARROLL&quot;, &quot;BALTIMORE&quot;, &quot;MONT…
+## $ project_state                  &lt;chr&gt; &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD&quot;, &quot;MD…
+## $ project_zip                    &lt;chr&gt; &quot;21075-6353&quot;, &quot;21791-0001&quot;, &quot;21131-2229…
+## $ utilities_proceed              &lt;dbl&gt; 1, NA, NA, 3926, 1, NA, 1, NA, NA, NA, …
+## $ payroll_proceed                &lt;dbl&gt; 148997.0, 146000.0, 140400.0, 88000.0, …
+## $ mortgage_interest_proceed      &lt;dbl&gt; NA, NA, NA, 0, NA, NA, NA, NA, NA, NA, …
+## $ rent_proceed                   &lt;dbl&gt; NA, NA, NA, 42062, NA, NA, NA, NA, NA, …
+## $ refinance_eidl_proceed         &lt;dbl&gt; NA, NA, NA, 0, NA, NA, NA, NA, NA, NA, …
+## $ health_care_proceed            &lt;dbl&gt; NA, NA, NA, 5539, NA, NA, NA, NA, NA, N…
+## $ debt_interest_proceed          &lt;dbl&gt; NA, NA, NA, 0, NA, NA, NA, NA, NA, NA, …
+## $ originating_lender_city        &lt;chr&gt; &quot;CHARLOTTE&quot;, &quot;WILMINGTON&quot;, &quot;ROCKVILLE&quot;,…
+## $ originating_lender_state       &lt;chr&gt; &quot;NC&quot;, &quot;DE&quot;, &quot;MD&quot;, &quot;NY&quot;, &quot;VA&quot;, &quot;MD&quot;, &quot;VA…
+## $ loan_status_date               &lt;date&gt; NA, NA, 2021-05-12, 2021-01-22, NA, 20…
+## $ originating_lender_location_id &lt;dbl&gt; 9551, 44449, 124055, 46391, 434059, 304…
+## $ old_slug                       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ lmi_indicator                  &lt;chr&gt; &quot;N&quot;, &quot;Y&quot;, &quot;N&quot;, &quot;Y&quot;, &quot;N&quot;, &quot;Y&quot;, &quot;N&quot;, &quot;N&quot;,…
+## $ unmatched_original             &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ unmatched_updated              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ previous_jobs_reported         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ ethnicity                      &lt;chr&gt; &quot;Not Hispanic or Latino&quot;, &quot;Unknown/NotS…
+## $ forgiveness_amount             &lt;dbl&gt; NA, NA, 141554.40, 140486.49, NA, 13427…
+## $ forgiveness_date               &lt;date&gt; NA, NA, 2021-02-25, 2020-12-30, NA, 20…</code></pre>
+</div>
+<div id="missing-data" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Missing Data</h2>
+<p>The second smell we can find in code is <strong>missing data</strong>.</p>
+<p>We can do that by grouping and counting columns. In addition to identifying the presence of NA values, this method will also give us a sense of the distribution of values in those columns.</p>
+<p>Let’s start with the “franchise” column. The following code groups by the franchise name column, counts the number in each group, and then sorts from highest to lowest.</p>
+<p>There are 192,959 NA values in this column. This makes sense. Not every business will be a franchisee of a larger company like Subway or Dunkin’. In this case, the presence of so many NAs isn’t really concerning.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="data-cleaning-part-i-data-smells.html#cb98-1" aria-hidden="true" tabindex="-1"></a>ppp_maryland_loans <span class="sc">%&gt;%</span> </span>
+<span id="cb98-2"><a href="data-cleaning-part-i-data-smells.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(franchise_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb98-3"><a href="data-cleaning-part-i-data-smells.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb98-4"><a href="data-cleaning-part-i-data-smells.html#cb98-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count=</span><span class="fu">n</span>()</span>
+<span id="cb98-5"><a href="data-cleaning-part-i-data-smells.html#cb98-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb98-6"><a href="data-cleaning-part-i-data-smells.html#cb98-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
+<pre><code>## # A tibble: 582 x 2
+##    franchise_name                                        count
+##    &lt;chr&gt;                                                 &lt;int&gt;
+##  1 &lt;NA&gt;                                                 192959
+##  2 Subway                                                  275
+##  3 7-Eleven, Inc - Individual Store Franchise Agreement    127
+##  4 Dunkin&#39; Donuts                                          109
+##  5 IHOP                                                     53
+##  6 Jiffy Lube                                               51
+##  7 ZIPS Dry Cleaners                                        48
+##  8 Holiday Inn Express (License Agreement)                  44
+##  9 Dunkin&#39; Donut/Baskin-Robbins Co-Brand                    42
+## 10 Popeyes Louisiana Kitchen                                41
+## # … with 572 more rows</code></pre>
+<p>Now let’s try the “forgiveness_amount” column, which represents the amount of the loan that was forgiven, or not required to be paid back. In this case, there are 135,073 NA values. The rest have different dollar amounts.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="data-cleaning-part-i-data-smells.html#cb100-1" aria-hidden="true" tabindex="-1"></a>ppp_maryland_loans <span class="sc">%&gt;%</span> </span>
+<span id="cb100-2"><a href="data-cleaning-part-i-data-smells.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(forgiveness_amount) <span class="sc">%&gt;%</span> </span>
+<span id="cb100-3"><a href="data-cleaning-part-i-data-smells.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb100-4"><a href="data-cleaning-part-i-data-smells.html#cb100-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count=</span><span class="fu">n</span>()</span>
+<span id="cb100-5"><a href="data-cleaning-part-i-data-smells.html#cb100-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb100-6"><a href="data-cleaning-part-i-data-smells.html#cb100-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
+<pre><code>## # A tibble: 58,637 x 2
+##    forgiveness_amount  count
+##                 &lt;dbl&gt;  &lt;int&gt;
+##  1                NA  135073
+##  2             20977.     15
+##  3             21011.     14
+##  4             21009.     13
+##  5             21025.     11
+##  6             21003.     10
+##  7             21010.     10
+##  8             20985.      9
+##  9             20970.      8
+## 10             20972.      8
+## # … with 58,627 more rows</code></pre>
+<p>Do the 135,073 NAs represent loans that weren’t forgiven?</p>
+<p>Do they represent loans that might have been forgiven, but the data is simply missing the amount of money?</p>
+<p>We could check the documentation, which isn’t particularly helpful. It only says the column represents “forgiveness amount.”</p>
+<p>We could check the “forgiveness_date” column, to see how many NAs it has: 135,703, the same number as the number of NAs in “forgiveness_amount.”</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="data-cleaning-part-i-data-smells.html#cb102-1" aria-hidden="true" tabindex="-1"></a>ppp_maryland_loans <span class="sc">%&gt;%</span> </span>
+<span id="cb102-2"><a href="data-cleaning-part-i-data-smells.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(forgiveness_date) <span class="sc">%&gt;%</span> </span>
+<span id="cb102-3"><a href="data-cleaning-part-i-data-smells.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb102-4"><a href="data-cleaning-part-i-data-smells.html#cb102-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count=</span><span class="fu">n</span>()</span>
+<span id="cb102-5"><a href="data-cleaning-part-i-data-smells.html#cb102-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb102-6"><a href="data-cleaning-part-i-data-smells.html#cb102-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(forgiveness_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb102-7"><a href="data-cleaning-part-i-data-smells.html#cb102-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##   forgiveness_date  count
+##   &lt;date&gt;            &lt;int&gt;
+## 1 NA               135073</code></pre>
+<p>We can group by forgiveness_amount and forgiveness_date to determine whether one is NA when the other is NA. Because this grouping has 135,073 rows, too, we know this to be the case.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="data-cleaning-part-i-data-smells.html#cb104-1" aria-hidden="true" tabindex="-1"></a>ppp_maryland_loans <span class="sc">%&gt;%</span></span>
+<span id="cb104-2"><a href="data-cleaning-part-i-data-smells.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(forgiveness_amount, forgiveness_date) <span class="sc">%&gt;%</span></span>
+<span id="cb104-3"><a href="data-cleaning-part-i-data-smells.html#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb104-4"><a href="data-cleaning-part-i-data-smells.html#cb104-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count=</span><span class="fu">n</span>()</span>
+<span id="cb104-5"><a href="data-cleaning-part-i-data-smells.html#cb104-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb104-6"><a href="data-cleaning-part-i-data-smells.html#cb104-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(forgiveness_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb104-7"><a href="data-cleaning-part-i-data-smells.html#cb104-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;forgiveness_amount&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 1 x 3
+## # Groups:   forgiveness_amount [1]
+##   forgiveness_amount forgiveness_date  count
+##                &lt;dbl&gt; &lt;date&gt;            &lt;int&gt;
+## 1                 NA NA               135073</code></pre>
+<p>Before we decide to base a publishable finding on this column, we should call the custodian of the data to confirm our hypothesis of NA values in these columns, that they represent loans that have not been forgiven.</p>
+</div>
+<div id="gaps-in-data" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Gaps in data</h2>
+<p>Let’s now look at <strong>gaps in data</strong>. It’s been my experience that gaps in data often have to do with time, so let’s first look at “date_approved,” so we can see if there’s any missing months, or huge differences in the number of loans by month. Let’s start with Date. If we’re going to work with dates, we should have <code>lubridate</code> handy for <code>floor_date</code>.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="data-cleaning-part-i-data-smells.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
+<p>The <code>floor_date</code> function will allow us to group by month, instead of a single day.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="data-cleaning-part-i-data-smells.html#cb108-1" aria-hidden="true" tabindex="-1"></a>ppp_maryland_loans <span class="sc">%&gt;%</span> </span>
+<span id="cb108-2"><a href="data-cleaning-part-i-data-smells.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month_year_approved =</span> <span class="fu">floor_date</span>(date_approved, <span class="st">&quot;month&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb108-3"><a href="data-cleaning-part-i-data-smells.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month_year_approved) <span class="sc">%&gt;%</span> </span>
+<span id="cb108-4"><a href="data-cleaning-part-i-data-smells.html#cb108-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summarise</span>(</span>
+<span id="cb108-5"><a href="data-cleaning-part-i-data-smells.html#cb108-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">count=</span><span class="fu">n</span>()</span>
+<span id="cb108-6"><a href="data-cleaning-part-i-data-smells.html#cb108-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb108-7"><a href="data-cleaning-part-i-data-smells.html#cb108-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(month_year_approved)</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 2
+##    month_year_approved count
+##    &lt;date&gt;              &lt;int&gt;
+##  1 2020-04-01          45040
+##  2 2020-05-01          27057
+##  3 2020-06-01           7569
+##  4 2020-07-01           4021
+##  5 2020-08-01           1862
+##  6 2021-01-01          14153
+##  7 2021-02-01          19734
+##  8 2021-03-01          23939
+##  9 2021-04-01          31282
+## 10 2021-05-01          21150
+## 11 2021-06-01             58</code></pre>
+<p>So, our data starts in April 2020, the month that has more loans – 45,040 – than any other month. That makes sense, as the program launched at the start of the pandemic, in April 2020. The number of loans declines each month through August 2020, as the initial round of the program worked through the initial funding allocation.</p>
+<p>Then, there are no loans until January 2021. Does the four-month gap in loans in this dataset represent a problem? Are we missing a bunch of records?</p>
+<p>Probably not. The program was reauthorized a few times. For example, it expired in August 2020, before being reauthorized with new loans being given in January 2021.</p>
+<p>It’s good to be aware of all gaps in data, but they don’t always represent a problem.</p>
+</div>
+<div id="supicious-outliers" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> Supicious Outliers</h2>
+<p>Any time you are going to focus on a column for analysis, you should check for suspicious values. Are there any unusually large values or unusually small values? Are there any values that should not exist in the data?</p>
+<p>Let’s consider the loan amount column from our Maryland PPP data, and find the largest (max) and smallest (min) amount.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="data-cleaning-part-i-data-smells.html#cb110-1" aria-hidden="true" tabindex="-1"></a>ppp_maryland_loans <span class="sc">%&gt;%</span> </span>
+<span id="cb110-2"><a href="data-cleaning-part-i-data-smells.html#cb110-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">max_amount =</span> <span class="fu">max</span>(amount),</span>
+<span id="cb110-3"><a href="data-cleaning-part-i-data-smells.html#cb110-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_amount=</span> <span class="fu">min</span>(amount))</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##   max_amount min_amount
+##        &lt;dbl&gt;      &lt;dbl&gt;
+## 1   10000000          6</code></pre>
+<p>The largest amount is $10 million which is the maximum size of a loan under the program. If the max amount was larger than $10 million, that would be suspicious. Similarly, if the smallest amount was a negative number, that would also raise an eyebrow. What about $6? That does seem a little odd. Why would someone take out a loan for that amount of money?</p>
+<p>Let’s take a look at the full record set for any loan less than $100.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="data-cleaning-part-i-data-smells.html#cb112-1" aria-hidden="true" tabindex="-1"></a>ppp_maryland_loans <span class="sc">%&gt;%</span> </span>
+<span id="cb112-2"><a href="data-cleaning-part-i-data-smells.html#cb112-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(amount <span class="sc">&lt;</span> <span class="dv">100</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 63
+##   id     name   slug   amount state address city  zip   naics_code business_type
+##   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;        
+## 1 99620… GETGF… getgf…      6 MD    7101 R… BALT… 2121…     453220 Limited  Lia…
+## 2 99620… LEGAC… legac…     78 MD    4201 N… BOWIE 2071…         NA Partnership  
+## # … with 53 more variables: race &lt;chr&gt;, gender &lt;chr&gt;, veteran &lt;chr&gt;,
+## #   non_profit &lt;lgl&gt;, jobs_retained &lt;dbl&gt;, date_approved &lt;date&gt;, lender &lt;chr&gt;,
+## #   congressional_district &lt;chr&gt;, loan_range_sort_key &lt;lgl&gt;,
+## #   previous_loan_range &lt;lgl&gt;, previous_name &lt;lgl&gt;, loan_number &lt;dbl&gt;,
+## #   sba_office_code &lt;dbl&gt;, processing_method &lt;chr&gt;, loan_status &lt;chr&gt;,
+## #   term &lt;dbl&gt;, sba_guaranty_percentage &lt;dbl&gt;, initial_approval_amount &lt;dbl&gt;,
+## #   current_approval_amount &lt;dbl&gt;, undisbursed_amount &lt;dbl&gt;,
+## #   franchise_name &lt;chr&gt;, servicing_lender_location_id &lt;dbl&gt;,
+## #   servicing_lender_name &lt;chr&gt;, servicing_lender_address &lt;chr&gt;,
+## #   servicing_lender_city &lt;chr&gt;, servicing_lender_state &lt;chr&gt;,
+## #   servicing_lender_zip &lt;chr&gt;, rural_urban_indicator &lt;chr&gt;,
+## #   hubzone_indicator &lt;chr&gt;, business_age_description &lt;chr&gt;,
+## #   project_city &lt;chr&gt;, project_county_name &lt;chr&gt;, project_state &lt;chr&gt;,
+## #   project_zip &lt;chr&gt;, utilities_proceed &lt;dbl&gt;, payroll_proceed &lt;dbl&gt;,
+## #   mortgage_interest_proceed &lt;dbl&gt;, rent_proceed &lt;dbl&gt;,
+## #   refinance_eidl_proceed &lt;dbl&gt;, health_care_proceed &lt;dbl&gt;,
+## #   debt_interest_proceed &lt;dbl&gt;, originating_lender_city &lt;chr&gt;,
+## #   originating_lender_state &lt;chr&gt;, loan_status_date &lt;date&gt;,
+## #   originating_lender_location_id &lt;dbl&gt;, old_slug &lt;chr&gt;, lmi_indicator &lt;chr&gt;,
+## #   unmatched_original &lt;lgl&gt;, unmatched_updated &lt;lgl&gt;,
+## #   previous_jobs_reported &lt;lgl&gt;, ethnicity &lt;chr&gt;, forgiveness_amount &lt;dbl&gt;,
+## #   forgiveness_date &lt;date&gt;</code></pre>
+<p>We have two businesses, “GETGFTD LLC” and “LEGACY SPINE AND PAIN LLC” that both got very small loans of $6 and $78. Scan through the columns. Let’s check for internal consistency. There are other columns in the data that have related information: initial_approval_amount, current_approval_amount and payroll_proceed. Let’s select just those columns</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="data-cleaning-part-i-data-smells.html#cb114-1" aria-hidden="true" tabindex="-1"></a>ppp_maryland_loans <span class="sc">%&gt;%</span> </span>
+<span id="cb114-2"><a href="data-cleaning-part-i-data-smells.html#cb114-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(amount <span class="sc">&lt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb114-3"><a href="data-cleaning-part-i-data-smells.html#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, amount, initial_approval_amount, current_approval_amount, payroll_proceed)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 5
+##   name            amount initial_approval_a… current_approval_a… payroll_proceed
+##   &lt;chr&gt;            &lt;dbl&gt;               &lt;dbl&gt;               &lt;dbl&gt;           &lt;dbl&gt;
+## 1 GETGFTD LLC          6                   6                   6               6
+## 2 LEGACY SPINE A…     78                  78                  78              78</code></pre>
+<p>Those are all the same value, so at least this number is internally consistent. But is it correct? Did someone mistype it when entering the data?</p>
+<p>A call to the bank – Bank of America in both cases – or the companies could help resolve this mystery. Or a call to the SBA – the owner of the data – to ask about small values generally may help us understand if small values like this are suspicious or not.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="filters-and-selections.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-cleaning-part-ii-janitor.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-datasmells.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["datajournalism.pdf", "datajournalism.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

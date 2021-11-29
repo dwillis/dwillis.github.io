@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 27 An intro to text analysis | Data Journalism with R and the Tidyverse</title>
+  <meta name="description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 27 An intro to text analysis | Data Journalism with R and the Tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 27 An intro to text analysis | Data Journalism with R and the Tidyverse" />
+  
+  <meta name="twitter:description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  
+
+<meta name="author" content="Matt Waite (original author); updated by Derek Willis and Sean Mussenden" />
+
+
+<meta name="date" content="2021-11-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="t-tests.html"/>
+<link rel="next" href="writing-with-numbers.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160712129-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160712129-1');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="http://smussenden.github.io/coursefiles/data_journalism_book/">Data Journalism With R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#modern-data-journalism"><i class="fa fa-check"></i><b>1.1</b> Modern data journalism</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#installations"><i class="fa fa-check"></i><b>1.2</b> Installations</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.3</b> About this book</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-well-cover"><i class="fa fa-check"></i><b>1.4</b> What we’ll cover</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="public-records.html"><a href="public-records.html"><i class="fa fa-check"></i><b>2</b> Public records</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="public-records.html"><a href="public-records.html#federal-law"><i class="fa fa-check"></i><b>2.1</b> Federal law</a></li>
+<li class="chapter" data-level="2.2" data-path="public-records.html"><a href="public-records.html#state-law"><i class="fa fa-check"></i><b>2.2</b> State law</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics.html"><a href="r-basics.html#about-libraries"><i class="fa fa-check"></i><b>3.1</b> About libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html"><i class="fa fa-check"></i><b>4</b> Data journalism in the age of replication</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#the-stylebook"><i class="fa fa-check"></i><b>4.1</b> The stylebook</a></li>
+<li class="chapter" data-level="4.2" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#replication"><i class="fa fa-check"></i><b>4.2</b> Replication</a></li>
+<li class="chapter" data-level="4.3" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#goodbye-excel"><i class="fa fa-check"></i><b>4.3</b> Goodbye Excel?</a></li>
+<li class="chapter" data-level="4.4" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#receptivity-is-high"><i class="fa fa-check"></i><b>4.4</b> “Receptivity … is high”</a></li>
+<li class="chapter" data-level="4.5" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#replication-in-notebooks"><i class="fa fa-check"></i><b>4.5</b> Replication in notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>5</b> Data, structures and types</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-mental-picture"><i class="fa fa-check"></i><b>5.1</b> A Mental Picture</a></li>
+<li class="chapter" data-level="5.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>5.2</b> Types</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>6</b> Aggregates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="aggregates.html"><a href="aggregates.html#libraries"><i class="fa fa-check"></i><b>6.1</b> Libraries</a></li>
+<li class="chapter" data-level="6.2" data-path="aggregates.html"><a href="aggregates.html#importing-data"><i class="fa fa-check"></i><b>6.2</b> Importing data</a></li>
+<li class="chapter" data-level="6.3" data-path="aggregates.html"><a href="aggregates.html#group-by-and-count"><i class="fa fa-check"></i><b>6.3</b> Group by and count</a></li>
+<li class="chapter" data-level="6.4" data-path="aggregates.html"><a href="aggregates.html#other-summarization-methods-summing-mean-median-min-and-max"><i class="fa fa-check"></i><b>6.4</b> Other summarization methods: summing, mean, median, min and max</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>7</b> Mutating data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mutating-data.html"><a href="mutating-data.html#another-use-of-mutate"><i class="fa fa-check"></i><b>7.1</b> Another use of mutate</a></li>
+<li class="chapter" data-level="7.2" data-path="mutating-data.html"><a href="mutating-data.html#a-more-powerful-use"><i class="fa fa-check"></i><b>7.2</b> A more powerful use</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="working-with-dates.html"><a href="working-with-dates.html"><i class="fa fa-check"></i><b>8</b> Working with dates</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="working-with-dates.html"><a href="working-with-dates.html#the-hard-way"><i class="fa fa-check"></i><b>8.1</b> The hard way</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>9</b> Filters and selections</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#combining-filters"><i class="fa fa-check"></i><b>9.1</b> Combining filters</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html"><i class="fa fa-check"></i><b>10</b> Data Cleaning Part I: Data smells</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#wrong-type"><i class="fa fa-check"></i><b>10.1</b> Wrong Type</a></li>
+<li class="chapter" data-level="10.2" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#missing-data"><i class="fa fa-check"></i><b>10.2</b> Missing Data</a></li>
+<li class="chapter" data-level="10.3" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#gaps-in-data"><i class="fa fa-check"></i><b>10.3</b> Gaps in data</a></li>
+<li class="chapter" data-level="10.4" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#supicious-outliers"><i class="fa fa-check"></i><b>10.4</b> Supicious Outliers</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html"><i class="fa fa-check"></i><b>11</b> Data Cleaning Part II: Janitor</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#cleaning-headers"><i class="fa fa-check"></i><b>11.1</b> Cleaning headers</a></li>
+<li class="chapter" data-level="11.2" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#changing-data-types"><i class="fa fa-check"></i><b>11.2</b> Changing data types</a></li>
+<li class="chapter" data-level="11.3" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#duplicates"><i class="fa fa-check"></i><b>11.3</b> Duplicates</a></li>
+<li class="chapter" data-level="11.4" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#cleaning-strings"><i class="fa fa-check"></i><b>11.4</b> Cleaning strings</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html"><i class="fa fa-check"></i><b>12</b> Data Cleaning Part III: Open Refine</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html#refinr-open-refine-in-r"><i class="fa fa-check"></i><b>12.1</b> Refinr, Open Refine in R</a></li>
+<li class="chapter" data-level="12.2" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html#manually-cleaning-data-with-open-refine"><i class="fa fa-check"></i><b>12.2</b> Manually cleaning data with Open Refine</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html"><i class="fa fa-check"></i><b>13</b> Cleaning Data Part IV: PDFs</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#easy-does-it"><i class="fa fa-check"></i><b>13.1</b> Easy does it</a></li>
+<li class="chapter" data-level="13.2" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#when-it-looks-good-but-needs-a-little-fixing"><i class="fa fa-check"></i><b>13.2</b> When it looks good, but needs a little fixing</a></li>
+<li class="chapter" data-level="13.3" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#cleaning-up-the-data-in-r"><i class="fa fa-check"></i><b>13.3</b> Cleaning up the data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="combining-and-joining.html"><a href="combining-and-joining.html"><i class="fa fa-check"></i><b>14</b> Combining and joining</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="combining-and-joining.html"><a href="combining-and-joining.html#combining-data-stacking"><i class="fa fa-check"></i><b>14.1</b> Combining data (stacking)</a></li>
+<li class="chapter" data-level="14.2" data-path="combining-and-joining.html"><a href="combining-and-joining.html#joining-data"><i class="fa fa-check"></i><b>14.2</b> Joining data</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="scraping-data-with-rvest.html"><a href="scraping-data-with-rvest.html"><i class="fa fa-check"></i><b>15</b> Scraping data with Rvest</a></li>
+<li class="chapter" data-level="16" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>16</b> Advanced rvest</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#using-for-loops"><i class="fa fa-check"></i><b>16.1</b> Using for loops</a></li>
+<li class="chapter" data-level="16.2" data-path="advanced-rvest.html"><a href="advanced-rvest.html#looping-and-rvest"><i class="fa fa-check"></i><b>16.2</b> Looping and rvest</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html"><i class="fa fa-check"></i><b>17</b> Intro to APIs: The Census</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#the-acs"><i class="fa fa-check"></i><b>17.1</b> The ACS</a></li>
+<li class="chapter" data-level="17.2" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#wide-results"><i class="fa fa-check"></i><b>17.2</b> “Wide” Results</a></li>
+<li class="chapter" data-level="17.3" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#sorting-results"><i class="fa fa-check"></i><b>17.3</b> Sorting Results</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html"><i class="fa fa-check"></i><b>18</b> Visualizing your data for reporting</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html#bar-charts"><i class="fa fa-check"></i><b>18.1</b> Bar charts</a></li>
+<li class="chapter" data-level="18.2" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html#line-charts"><i class="fa fa-check"></i><b>18.2</b> Line charts</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html"><i class="fa fa-check"></i><b>19</b> Visualizing your data for publication</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html#datawrapper"><i class="fa fa-check"></i><b>19.1</b> Datawrapper</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html#making-a-map"><i class="fa fa-check"></i><b>19.1.1</b> Making a Map</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="geographic-data-basics.html"><a href="geographic-data-basics.html"><i class="fa fa-check"></i><b>20</b> Geographic data basics</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="geographic-data-basics.html"><a href="geographic-data-basics.html#importing-and-viewing-data"><i class="fa fa-check"></i><b>20.1</b> Importing and viewing data</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="geographic-analysis.html"><a href="geographic-analysis.html"><i class="fa fa-check"></i><b>21</b> Geographic analysis</a></li>
+<li class="chapter" data-level="22" data-path="automating-analysis.html"><a href="automating-analysis.html"><i class="fa fa-check"></i><b>22</b> Automating analysis</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="automating-analysis.html"><a href="automating-analysis.html#automating-downloads-and-imports"><i class="fa fa-check"></i><b>22.1</b> Automating downloads and imports</a></li>
+<li class="chapter" data-level="22.2" data-path="automating-analysis.html"><a href="automating-analysis.html#exploring-the-data"><i class="fa fa-check"></i><b>22.2</b> Exploring the data</a></li>
+<li class="chapter" data-level="22.3" data-path="automating-analysis.html"><a href="automating-analysis.html#analysis"><i class="fa fa-check"></i><b>22.3</b> Analysis</a></li>
+<li class="chapter" data-level="22.4" data-path="automating-analysis.html"><a href="automating-analysis.html#making-updating-graphics"><i class="fa fa-check"></i><b>22.4</b> Making updating graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="automating-geographic-analysis.html"><a href="automating-geographic-analysis.html"><i class="fa fa-check"></i><b>23</b> Automating geographic analysis</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="automating-geographic-analysis.html"><a href="automating-geographic-analysis.html#mapping-continuously"><i class="fa fa-check"></i><b>23.1</b> Mapping continuously</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="basic-stats-linear-regression-and-the-t-test.html"><a href="basic-stats-linear-regression-and-the-t-test.html"><i class="fa fa-check"></i><b>24</b> Basic Stats: Linear Regression and The T-Test</a></li>
+<li class="chapter" data-level="25" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>25</b> Linear Regression</a></li>
+<li class="chapter" data-level="26" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>26</b> T-tests</a></li>
+<li class="chapter" data-level="27" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html"><i class="fa fa-check"></i><b>27</b> An intro to text analysis</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html#going-beyond-a-single-word"><i class="fa fa-check"></i><b>27.1</b> Going beyond a single word</a></li>
+<li class="chapter" data-level="27.2" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>27.2</b> Sentiment Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html"><i class="fa fa-check"></i><b>28</b> Writing with numbers</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#how-to-write-about-numbers-without-overwhelming-with-numbers."><i class="fa fa-check"></i><b>28.1</b> How to write about numbers without overwhelming with numbers.</a></li>
+<li class="chapter" data-level="28.2" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#when-exact-numbers-matter"><i class="fa fa-check"></i><b>28.2</b> When exact numbers matter</a></li>
+<li class="chapter" data-level="28.3" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#an-example"><i class="fa fa-check"></i><b>28.3</b> An example</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html"><i class="fa fa-check"></i><b>29</b> Ethics in data journalism</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#problems"><i class="fa fa-check"></i><b>29.1</b> Problems</a></li>
+<li class="chapter" data-level="29.2" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#the-googlebot"><i class="fa fa-check"></i><b>29.2</b> The Googlebot</a></li>
+<li class="chapter" data-level="29.3" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#data-lifetimes"><i class="fa fa-check"></i><b>29.3</b> Data Lifetimes</a></li>
+<li class="chapter" data-level="29.4" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#you-are-a-data-provider"><i class="fa fa-check"></i><b>29.4</b> You Are a Data Provider</a></li>
+<li class="chapter" data-level="29.5" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#ethical-data"><i class="fa fa-check"></i><b>29.5</b> Ethical Data</a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="using-github.html"><a href="using-github.html"><i class="fa fa-check"></i><b>30</b> Using GitHub</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="using-github.html"><a href="using-github.html#how-it-works"><i class="fa fa-check"></i><b>30.1</b> How It Works</a></li>
+<li class="chapter" data-level="30.2" data-path="using-github.html"><a href="using-github.html#getting-started"><i class="fa fa-check"></i><b>30.2</b> Getting Started</a></li>
+<li class="chapter" data-level="30.3" data-path="using-github.html"><a href="using-github.html#advanced-use"><i class="fa fa-check"></i><b>30.3</b> Advanced Use</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Journalism with R and the Tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="an-intro-to-text-analysis" class="section level1" number="27">
+<h1><span class="header-section-number">Chapter 27</span> An intro to text analysis</h1>
+<p>Throughout this course, we’ve been focused on finding information in structured data. We’ve learned a lot of techniques to do that, and we’ve learned how the creative mixing and matching of those skills can find new insights.</p>
+<p>What happens when the insights are in unstructured data? Like a block of text?</p>
+<p>Turning unstructured text into data to analyze is a whole course in and of itself – and one worth taking if you’ve got the credit hours – but some simple stuff is in the grasp of basic data analysis.</p>
+<p>To do this, we’ll need a new library – <a href="https://cran.r-project.org/web/packages/tidytext/vignettes/tidytext.html">tidytext</a>, which you can guess by the name plays very nicely with the tidyverse. So install it with <code>install.packages("tidytext")</code> and we’ll get rolling.</p>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="an-intro-to-text-analysis.html#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb488-2"><a href="an-intro-to-text-analysis.html#cb488-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb488-3"><a href="an-intro-to-text-analysis.html#cb488-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb488-4"><a href="an-intro-to-text-analysis.html#cb488-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
+<p>Here’s the question we’re going to go after: How did federal politicians talk about the coronavirus pandemic on Twitter?</p>
+<p>To answer this question, we’ll use a dataset of tweets posted by federal politicians from both campaign and official accounts that mentioned either “COVID” or “coronavirus” beginning on Feb. 1, 2020. This dataset doesn’t include retweets, only original tweets. Let’s read in this data and examine it:</p>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="an-intro-to-text-analysis.html#cb489-1" aria-hidden="true" tabindex="-1"></a>covid_tweets <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&#39;data/covid_tweets.rds&#39;</span>)</span></code></pre></div>
+<p>We can see what it looks like with head:</p>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="an-intro-to-text-analysis.html#cb490-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(covid_tweets)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 12
+##        id user_name  content     created             branch state district title
+##     &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;
+## 1 1.46e18 RepCharli… &quot;What are … 2021-11-24 21:53:05 H      FL    13       Hous…
+## 2 1.46e18 swan4cong… &quot;Joe Biden… 2021-11-24 21:42:53 H      GA    10       Hous…
+## 3 1.46e18 TonyVargas &quot;This than… 2021-11-24 21:32:43 H      NE    02       Hous…
+## 4 1.46e18 RepGregSt… &quot;I wonder … 2021-11-24 21:16:48 H      FL    17       Hous…
+## 5 1.46e18 Squires20… &quot;Don’t for… 2021-11-24 20:36:53 H      TX    22       Hous…
+## 6 1.46e18 RepDerekK… &quot;90% of Am… 2021-11-24 20:33:39 H      WA    06       Hous…
+## # … with 4 more variables: first_name &lt;chr&gt;, last_name &lt;chr&gt;, gender &lt;chr&gt;,
+## #   party &lt;chr&gt;</code></pre>
+<p>What we want to do is to make the <code>content</code> column easier to analyze. Let’s say we want to find out the most commonly used words. We’ll probably want to remove URLs from the text of the tweets since they aren’t actual words. Let’s use mutate to make that happen:</p>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="an-intro-to-text-analysis.html#cb492-1" aria-hidden="true" tabindex="-1"></a>covid_tweets <span class="ot">&lt;-</span> covid_tweets <span class="sc">%&gt;%</span></span>
+<span id="cb492-2"><a href="an-intro-to-text-analysis.html#cb492-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">content =</span> <span class="fu">gsub</span>(<span class="st">&quot;http.*&quot;</span>,<span class="st">&quot;&quot;</span>, content))</span></code></pre></div>
+<p>If you are trying to create a list of unique words, R will treat differences in capitalization as unique and also will include punctuation by default, even using its <code>unique</code> function:</p>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="an-intro-to-text-analysis.html#cb493-1" aria-hidden="true" tabindex="-1"></a>a_list_of_words <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Dog&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;,&quot;</span>)</span>
+<span id="cb493-2"><a href="an-intro-to-text-analysis.html#cb493-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(a_list_of_words)</span></code></pre></div>
+<pre><code>## [1] &quot;Dog&quot; &quot;dog&quot; &quot;cat&quot; &quot;,&quot;</code></pre>
+<p>Fortunately, this is a solved problem with tidytext, which has a function called <code>unnest_tokens</code> that will convert the text to lowercase and remove all punctuation. The way that <code>unnest_tokens</code> works is that we tell it what we want to call the field we’re creating with this breaking apart, then we tell it what we’re breaking apart – what field has all the text in it. For us, that’s the <code>content</code> column:</p>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="an-intro-to-text-analysis.html#cb495-1" aria-hidden="true" tabindex="-1"></a>unique_words <span class="ot">&lt;-</span> covid_tweets <span class="sc">%&gt;%</span> <span class="fu">select</span>(content) <span class="sc">%&gt;%</span></span>
+<span id="cb495-2"><a href="an-intro-to-text-analysis.html#cb495-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, content)</span>
+<span id="cb495-3"><a href="an-intro-to-text-analysis.html#cb495-3" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(unique_words)</span></code></pre></div>
+<p>Now we can look at the top words in this dataset. Let’s limit ourselves to making a plot of the top 25 words:</p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="an-intro-to-text-analysis.html#cb496-1" aria-hidden="true" tabindex="-1"></a>unique_words <span class="sc">%&gt;%</span></span>
+<span id="cb496-2"><a href="an-intro-to-text-analysis.html#cb496-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb496-3"><a href="an-intro-to-text-analysis.html#cb496-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb496-4"><a href="an-intro-to-text-analysis.html#cb496-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">%&gt;%</span></span>
+<span id="cb496-5"><a href="an-intro-to-text-analysis.html#cb496-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> word, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb496-6"><a href="an-intro-to-text-analysis.html#cb496-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb496-7"><a href="an-intro-to-text-analysis.html#cb496-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb496-8"><a href="an-intro-to-text-analysis.html#cb496-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb496-9"><a href="an-intro-to-text-analysis.html#cb496-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Count&quot;</span>,</span>
+<span id="cb496-10"><a href="an-intro-to-text-analysis.html#cb496-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">&quot;Unique words&quot;</span>,</span>
+<span id="cb496-11"><a href="an-intro-to-text-analysis.html#cb496-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">&quot;Count of unique words found in tweets&quot;</span>)</span></code></pre></div>
+<pre><code>## Selecting by n</code></pre>
+<p><img src="datajournalism_files/figure-html/unnamed-chunk-298-1.png" width="672" /></p>
+<p>Well, that’s a bit underwhelming - a lot of very common (and short) words. This also is a solved problem in working with text data, and words like “a” and “the” are known as “stop words.” In most cases you’ll want to remove them from your analysis since they are so common. Tidytext provides a dataframe of them:</p>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="an-intro-to-text-analysis.html#cb498-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;stop_words&quot;</span>)</span></code></pre></div>
+<p>Then we’re going to use a function we haven’t used yet called an <code>anti_join</code>, which filters out any matches. So we’ll <code>anti_join</code> the stop words and get a list of words that aren’t stop words.</p>
+<p>From there, we can get a simple word frequency by just grouping them together and counting them. We can borrow the percent code from above to get a percent of the words our top 10 words represent.</p>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="an-intro-to-text-analysis.html#cb499-1" aria-hidden="true" tabindex="-1"></a>unique_words <span class="sc">%&gt;%</span></span>
+<span id="cb499-2"><a href="an-intro-to-text-analysis.html#cb499-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words) <span class="sc">%&gt;%</span></span>
+<span id="cb499-3"><a href="an-intro-to-text-analysis.html#cb499-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb499-4"><a href="an-intro-to-text-analysis.html#cb499-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb499-5"><a href="an-intro-to-text-analysis.html#cb499-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb499-6"><a href="an-intro-to-text-analysis.html#cb499-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<pre><code>## Selecting by percent</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    word            n percent
+##    &lt;chr&gt;       &lt;int&gt;   &lt;dbl&gt;
+##  1 covid       78694   2.91 
+##  2 19          51817   1.91 
+##  3 covid19     44862   1.66 
+##  4 amp         43735   1.62 
+##  5 coronavirus 35713   1.32 
+##  6 health      20832   0.769
+##  7 pandemic    20494   0.757
+##  8 relief      17576   0.649
+##  9 people      14046   0.519
+## 10 vaccine     12707   0.469</code></pre>
+<p>Those seem like more relevant unique words. Now, here’s where we can start to do more interesting and meaningful analysis. Let’s create two dataframes of unique words based on time: one for all of 2020 and the other for all of 2021:</p>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="an-intro-to-text-analysis.html#cb503-1" aria-hidden="true" tabindex="-1"></a>unique_words_2020 <span class="ot">&lt;-</span> covid_tweets <span class="sc">%&gt;%</span></span>
+<span id="cb503-2"><a href="an-intro-to-text-analysis.html#cb503-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(created <span class="sc">&lt;</span> <span class="st">&#39;2021-01-01&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb503-3"><a href="an-intro-to-text-analysis.html#cb503-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(content) <span class="sc">%&gt;%</span></span>
+<span id="cb503-4"><a href="an-intro-to-text-analysis.html#cb503-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, content)</span>
+<span id="cb503-5"><a href="an-intro-to-text-analysis.html#cb503-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb503-6"><a href="an-intro-to-text-analysis.html#cb503-6" aria-hidden="true" tabindex="-1"></a>unique_words_2021 <span class="ot">&lt;-</span> covid_tweets <span class="sc">%&gt;%</span></span>
+<span id="cb503-7"><a href="an-intro-to-text-analysis.html#cb503-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(created <span class="sc">&gt;=</span> <span class="st">&#39;2021-01-01&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb503-8"><a href="an-intro-to-text-analysis.html#cb503-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(content) <span class="sc">%&gt;%</span></span>
+<span id="cb503-9"><a href="an-intro-to-text-analysis.html#cb503-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, content)</span></code></pre></div>
+<p>Then we can create top 10 lists for both of them and compare:</p>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="an-intro-to-text-analysis.html#cb504-1" aria-hidden="true" tabindex="-1"></a>unique_words_2020 <span class="sc">%&gt;%</span></span>
+<span id="cb504-2"><a href="an-intro-to-text-analysis.html#cb504-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words) <span class="sc">%&gt;%</span></span>
+<span id="cb504-3"><a href="an-intro-to-text-analysis.html#cb504-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb504-4"><a href="an-intro-to-text-analysis.html#cb504-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb504-5"><a href="an-intro-to-text-analysis.html#cb504-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb504-6"><a href="an-intro-to-text-analysis.html#cb504-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<pre><code>## Selecting by percent</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    word            n percent
+##    &lt;chr&gt;       &lt;int&gt;   &lt;dbl&gt;
+##  1 covid       47028   2.33 
+##  2 covid19     36636   1.81 
+##  3 19          34373   1.70 
+##  4 coronavirus 34338   1.70 
+##  5 amp         33559   1.66 
+##  6 health      16697   0.826
+##  7 pandemic    14957   0.740
+##  8 relief      12672   0.627
+##  9 people      10619   0.525
+## 10 crisis       9125   0.451</code></pre>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="an-intro-to-text-analysis.html#cb508-1" aria-hidden="true" tabindex="-1"></a>unique_words_2021 <span class="sc">%&gt;%</span></span>
+<span id="cb508-2"><a href="an-intro-to-text-analysis.html#cb508-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words) <span class="sc">%&gt;%</span></span>
+<span id="cb508-3"><a href="an-intro-to-text-analysis.html#cb508-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb508-4"><a href="an-intro-to-text-analysis.html#cb508-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb508-5"><a href="an-intro-to-text-analysis.html#cb508-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb508-6"><a href="an-intro-to-text-analysis.html#cb508-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;word&quot;
+## Selecting by percent</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    word         n percent
+##    &lt;chr&gt;    &lt;int&gt;   &lt;dbl&gt;
+##  1 covid    31666   4.61 
+##  2 19       17444   2.54 
+##  3 amp      10176   1.48 
+##  4 vaccine   8982   1.31 
+##  5 covid19   8226   1.20 
+##  6 pandemic  5537   0.807
+##  7 relief    4904   0.715
+##  8 health    4135   0.603
+##  9 vaccines  3516   0.512
+## 10 people    3427   0.499</code></pre>
+<p>In the 2021 top 10 list, “vaccine” and its variations are much more prominent, which makes sense, while “testing” drops out of the top 10 compared to 2020.</p>
+<div id="going-beyond-a-single-word" class="section level2" number="27.1">
+<h2><span class="header-section-number">27.1</span> Going beyond a single word</h2>
+<p>The next step in text analysis is using <code>ngrams</code>. An <code>ngram</code> is any combination of words that you specify. Two word ngrams are called bigrams (bi-grams). Three would be trigrams. And so forth.</p>
+<p>The code to make ngrams is similar to what we did above, but involves some more twists.</p>
+<p>So this block is is going to do the following:</p>
+<ol style="list-style-type: decimal">
+<li>Use the covid_tweets data we created above, and filter for pre-2021 tweets.</li>
+<li>Unnest the tokens again, but instead we’re going to create a field called bigram, break apart summary, but we’re going to specify the tokens in this case are ngrams of 2.</li>
+<li>We’re going to make things easier to read and split bigrams into word1 and word2.</li>
+<li>We’re going to filter out stopwords again, but this time we’re going to do it in both word1 and word2 using a slightly different filtering method.</li>
+<li>Because of some weirdness in calculating the percentage, we’re going to put bigram back together again, now that the stop words are gone.</li>
+<li>We’ll then group by, count and create a percent just like we did above.</li>
+<li>We’ll then use top_n to give us the top 10 bigrams.</li>
+</ol>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="an-intro-to-text-analysis.html#cb511-1" aria-hidden="true" tabindex="-1"></a>covid_tweets <span class="sc">%&gt;%</span></span>
+<span id="cb511-2"><a href="an-intro-to-text-analysis.html#cb511-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(created <span class="sc">&lt;</span> <span class="st">&#39;2021-01-01&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb511-3"><a href="an-intro-to-text-analysis.html#cb511-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, content, <span class="at">token =</span> <span class="st">&quot;ngrams&quot;</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb511-4"><a href="an-intro-to-text-analysis.html#cb511-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">&quot;word1&quot;</span>, <span class="st">&quot;word2&quot;</span>), <span class="at">sep =</span> <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb511-5"><a href="an-intro-to-text-analysis.html#cb511-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb511-6"><a href="an-intro-to-text-analysis.html#cb511-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb511-7"><a href="an-intro-to-text-analysis.html#cb511-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bigram =</span> <span class="fu">paste</span>(word1, word2, <span class="at">sep=</span><span class="st">&quot; &quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb511-8"><a href="an-intro-to-text-analysis.html#cb511-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bigram) <span class="sc">%&gt;%</span></span>
+<span id="cb511-9"><a href="an-intro-to-text-analysis.html#cb511-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb511-10"><a href="an-intro-to-text-analysis.html#cb511-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb511-11"><a href="an-intro-to-text-analysis.html#cb511-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## Selecting by percent</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    bigram                   n percent
+##    &lt;chr&gt;                &lt;int&gt;   &lt;dbl&gt;
+##  1 covid 19             32302   3.52 
+##  2 health care           4388   0.478
+##  3 public health         3908   0.426
+##  4 covid19 pandemic      3206   0.349
+##  5 town hall             3014   0.328
+##  6 coronavirus pandemic  2915   0.318
+##  7 19 pandemic           2670   0.291
+##  8 covid relief          2246   0.245
+##  9 relief package        2062   0.225
+## 10 covid ー              1832   0.200</code></pre>
+<p>And we already have a different, more nuanced result. Health was among the top single words, and we can see that “health care” and “public health” are among the top 2-word phrases. What about after 2021?</p>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="an-intro-to-text-analysis.html#cb514-1" aria-hidden="true" tabindex="-1"></a>covid_tweets <span class="sc">%&gt;%</span></span>
+<span id="cb514-2"><a href="an-intro-to-text-analysis.html#cb514-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(created <span class="sc">&gt;=</span> <span class="st">&#39;2021-01-01&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb514-3"><a href="an-intro-to-text-analysis.html#cb514-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, content, <span class="at">token =</span> <span class="st">&quot;ngrams&quot;</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb514-4"><a href="an-intro-to-text-analysis.html#cb514-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">&quot;word1&quot;</span>, <span class="st">&quot;word2&quot;</span>), <span class="at">sep =</span> <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb514-5"><a href="an-intro-to-text-analysis.html#cb514-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb514-6"><a href="an-intro-to-text-analysis.html#cb514-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb514-7"><a href="an-intro-to-text-analysis.html#cb514-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bigram =</span> <span class="fu">paste</span>(word1, word2, <span class="at">sep=</span><span class="st">&quot; &quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb514-8"><a href="an-intro-to-text-analysis.html#cb514-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bigram) <span class="sc">%&gt;%</span></span>
+<span id="cb514-9"><a href="an-intro-to-text-analysis.html#cb514-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb514-10"><a href="an-intro-to-text-analysis.html#cb514-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb514-11"><a href="an-intro-to-text-analysis.html#cb514-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## Selecting by percent</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    bigram               n percent
+##    &lt;chr&gt;            &lt;int&gt;   &lt;dbl&gt;
+##  1 covid 19         17357   5.35 
+##  2 19 vaccine        2638   0.814
+##  3 covid relief      2159   0.666
+##  4 19 pandemic       1495   0.461
+##  5 covid19 vaccine   1227   0.379
+##  6 covid vaccine     1099   0.339
+##  7 health care        908   0.280
+##  8 covid19 pandemic   872   0.269
+##  9 public health      860   0.265
+## 10 19 relief          805   0.248</code></pre>
+<p>While “covid 19” is still the leading phrase, vaccine-related phrases dominate the top 10, and “public health” and “health care” have slipped down the list.</p>
+<p>So far, we’ve only looked at the entire set of tweets, not any characteristics of who posted them. Would these lists be any different for Democrats and Republicans? To find out, we just need to add to our filter.</p>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="an-intro-to-text-analysis.html#cb517-1" aria-hidden="true" tabindex="-1"></a>covid_tweets <span class="sc">%&gt;%</span></span>
+<span id="cb517-2"><a href="an-intro-to-text-analysis.html#cb517-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(created <span class="sc">&lt;</span> <span class="st">&#39;2021-01-01&#39;</span>, party <span class="sc">==</span> <span class="st">&#39;D&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb517-3"><a href="an-intro-to-text-analysis.html#cb517-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, content, <span class="at">token =</span> <span class="st">&quot;ngrams&quot;</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb517-4"><a href="an-intro-to-text-analysis.html#cb517-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">&quot;word1&quot;</span>, <span class="st">&quot;word2&quot;</span>), <span class="at">sep =</span> <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb517-5"><a href="an-intro-to-text-analysis.html#cb517-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb517-6"><a href="an-intro-to-text-analysis.html#cb517-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb517-7"><a href="an-intro-to-text-analysis.html#cb517-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bigram =</span> <span class="fu">paste</span>(word1, word2, <span class="at">sep=</span><span class="st">&quot; &quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb517-8"><a href="an-intro-to-text-analysis.html#cb517-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bigram) <span class="sc">%&gt;%</span></span>
+<span id="cb517-9"><a href="an-intro-to-text-analysis.html#cb517-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb517-10"><a href="an-intro-to-text-analysis.html#cb517-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb517-11"><a href="an-intro-to-text-analysis.html#cb517-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## Selecting by percent</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    bigram                   n percent
+##    &lt;chr&gt;                &lt;int&gt;   &lt;dbl&gt;
+##  1 covid 19             22182   3.57 
+##  2 health care           3398   0.547
+##  3 public health         3314   0.534
+##  4 town hall             2481   0.400
+##  5 covid19 pandemic      2426   0.391
+##  6 19 pandemic           1923   0.310
+##  7 coronavirus pandemic  1903   0.307
+##  8 covid relief          1525   0.246
+##  9 relief package        1478   0.238
+## 10 social distancing     1373   0.221</code></pre>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="an-intro-to-text-analysis.html#cb520-1" aria-hidden="true" tabindex="-1"></a>covid_tweets <span class="sc">%&gt;%</span></span>
+<span id="cb520-2"><a href="an-intro-to-text-analysis.html#cb520-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(created <span class="sc">&lt;</span> <span class="st">&#39;2021-01-01&#39;</span>, party <span class="sc">==</span> <span class="st">&#39;R&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb520-3"><a href="an-intro-to-text-analysis.html#cb520-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, content, <span class="at">token =</span> <span class="st">&quot;ngrams&quot;</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb520-4"><a href="an-intro-to-text-analysis.html#cb520-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">&quot;word1&quot;</span>, <span class="st">&quot;word2&quot;</span>), <span class="at">sep =</span> <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb520-5"><a href="an-intro-to-text-analysis.html#cb520-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb520-6"><a href="an-intro-to-text-analysis.html#cb520-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb520-7"><a href="an-intro-to-text-analysis.html#cb520-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bigram =</span> <span class="fu">paste</span>(word1, word2, <span class="at">sep=</span><span class="st">&quot; &quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb520-8"><a href="an-intro-to-text-analysis.html#cb520-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bigram) <span class="sc">%&gt;%</span></span>
+<span id="cb520-9"><a href="an-intro-to-text-analysis.html#cb520-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb520-10"><a href="an-intro-to-text-analysis.html#cb520-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb520-11"><a href="an-intro-to-text-analysis.html#cb520-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## Selecting by percent</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    bigram                   n percent
+##    &lt;chr&gt;                &lt;int&gt;   &lt;dbl&gt;
+##  1 covid 19              9901   3.45 
+##  2 coronavirus pandemic   966   0.336
+##  3 health care            943   0.328
+##  4 ー 19                  782   0.272
+##  5 covid ー               782   0.272
+##  6 covid19 pandemic       769   0.268
+##  7 cares act              759   0.264
+##  8 19 pandemic            733   0.255
+##  9 american people        711   0.248
+## 10 covid relief           703   0.245</code></pre>
+<p>Now we can begin to see some differences between the parties. We also could do the same for different kinds of accounts: the <code>title</code> column represents the role of the account, and if it includes “Candidate” then the tweet is from a campaign account. Let’s compare House of Representatives’ official and campaign tweets during 2020:</p>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="an-intro-to-text-analysis.html#cb523-1" aria-hidden="true" tabindex="-1"></a>covid_tweets <span class="sc">%&gt;%</span></span>
+<span id="cb523-2"><a href="an-intro-to-text-analysis.html#cb523-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(created <span class="sc">&lt;</span> <span class="st">&#39;2021-01-01&#39;</span>, title <span class="sc">==</span> <span class="st">&#39;House Representative&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb523-3"><a href="an-intro-to-text-analysis.html#cb523-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, content, <span class="at">token =</span> <span class="st">&quot;ngrams&quot;</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb523-4"><a href="an-intro-to-text-analysis.html#cb523-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">&quot;word1&quot;</span>, <span class="st">&quot;word2&quot;</span>), <span class="at">sep =</span> <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb523-5"><a href="an-intro-to-text-analysis.html#cb523-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb523-6"><a href="an-intro-to-text-analysis.html#cb523-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb523-7"><a href="an-intro-to-text-analysis.html#cb523-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bigram =</span> <span class="fu">paste</span>(word1, word2, <span class="at">sep=</span><span class="st">&quot; &quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb523-8"><a href="an-intro-to-text-analysis.html#cb523-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bigram) <span class="sc">%&gt;%</span></span>
+<span id="cb523-9"><a href="an-intro-to-text-analysis.html#cb523-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb523-10"><a href="an-intro-to-text-analysis.html#cb523-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb523-11"><a href="an-intro-to-text-analysis.html#cb523-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## Selecting by percent</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    bigram                   n percent
+##    &lt;chr&gt;                &lt;int&gt;   &lt;dbl&gt;
+##  1 covid 19             15796   3.53 
+##  2 town hall             2265   0.507
+##  3 health care           2093   0.468
+##  4 public health         2033   0.455
+##  5 covid19 pandemic      1851   0.414
+##  6 19 pandemic           1522   0.341
+##  7 coronavirus pandemic  1457   0.326
+##  8 covid relief          1108   0.248
+##  9 telephone town        1051   0.235
+## 10 relief package        1010   0.226</code></pre>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="an-intro-to-text-analysis.html#cb526-1" aria-hidden="true" tabindex="-1"></a>covid_tweets <span class="sc">%&gt;%</span></span>
+<span id="cb526-2"><a href="an-intro-to-text-analysis.html#cb526-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(created <span class="sc">&lt;</span> <span class="st">&#39;2021-01-01&#39;</span>, title <span class="sc">==</span> <span class="st">&#39;House Candidate&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb526-3"><a href="an-intro-to-text-analysis.html#cb526-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, content, <span class="at">token =</span> <span class="st">&quot;ngrams&quot;</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb526-4"><a href="an-intro-to-text-analysis.html#cb526-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">&quot;word1&quot;</span>, <span class="st">&quot;word2&quot;</span>), <span class="at">sep =</span> <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb526-5"><a href="an-intro-to-text-analysis.html#cb526-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb526-6"><a href="an-intro-to-text-analysis.html#cb526-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb526-7"><a href="an-intro-to-text-analysis.html#cb526-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bigram =</span> <span class="fu">paste</span>(word1, word2, <span class="at">sep=</span><span class="st">&quot; &quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb526-8"><a href="an-intro-to-text-analysis.html#cb526-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bigram) <span class="sc">%&gt;%</span></span>
+<span id="cb526-9"><a href="an-intro-to-text-analysis.html#cb526-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb526-10"><a href="an-intro-to-text-analysis.html#cb526-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb526-11"><a href="an-intro-to-text-analysis.html#cb526-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## Selecting by percent</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    bigram                   n percent
+##    &lt;chr&gt;                &lt;int&gt;   &lt;dbl&gt;
+##  1 covid 19              8378   3.38 
+##  2 public health          778   0.314
+##  3 covid ー               722   0.291
+##  4 ー 19                  721   0.291
+##  5 health care            721   0.291
+##  6 19 pandemic            519   0.209
+##  7 social distancing      518   0.209
+##  8 coronavirus pandemic   512   0.207
+##  9 town hall              482   0.195
+## 10 covid relief           458   0.185</code></pre>
+<p>There are some differences here, too, but also some potential challenges to doing an analysis. For one, there are variations of words like “vaccine” that could probably be standardized - maybe using OpenRefine - that would give us cleaner results. There might be some words among our list of stop words that actually are meaningful in this context.</p>
+</div>
+<div id="sentiment-analysis" class="section level2" number="27.2">
+<h2><span class="header-section-number">27.2</span> Sentiment Analysis</h2>
+<p>Another popular use of text analysis is to measure the sentiment of a word - whether it expresses a positive or negative idea - and tidytext has built-in tools to make that possible. We use word counts like we’ve already calculated and bring in a dataframe of words (called a lexicon) along with their sentiments using a function called <code>get_sentiments</code>. The most common dataframe is called “bing” which has nothing to do with the Microsoft search engine. Let’s load it:</p>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="an-intro-to-text-analysis.html#cb529-1" aria-hidden="true" tabindex="-1"></a>bing <span class="ot">&lt;-</span> <span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)</span>
+<span id="cb529-2"><a href="an-intro-to-text-analysis.html#cb529-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb529-3"><a href="an-intro-to-text-analysis.html#cb529-3" aria-hidden="true" tabindex="-1"></a>bing_word_counts_2020 <span class="ot">&lt;-</span> unique_words_2020 <span class="sc">%&gt;%</span></span>
+<span id="cb529-4"><a href="an-intro-to-text-analysis.html#cb529-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(bing) <span class="sc">%&gt;%</span></span>
+<span id="cb529-5"><a href="an-intro-to-text-analysis.html#cb529-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="an-intro-to-text-analysis.html#cb531-1" aria-hidden="true" tabindex="-1"></a>bing_word_counts_2021 <span class="ot">&lt;-</span> unique_words_2021 <span class="sc">%&gt;%</span></span>
+<span id="cb531-2"><a href="an-intro-to-text-analysis.html#cb531-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(bing) <span class="sc">%&gt;%</span></span>
+<span id="cb531-3"><a href="an-intro-to-text-analysis.html#cb531-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="an-intro-to-text-analysis.html#cb533-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(bing_word_counts_2020)</span>
+<span id="cb533-2"><a href="an-intro-to-text-analysis.html#cb533-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(bing_word_counts_2021)</span></code></pre></div>
+<p>Gauging the sentiment of a word can be heavily dependent on the context, and as with other types of text analysis sometimes larger patterns are more meaningful than individual results. But the potential with text analysis is vast: knowing what words and phrases that public officials employ can be a way to evaluate their priorities, cohesiveness and tactics for persuading voters and their colleagues. And those words and phrases are data.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="t-tests.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="writing-with-numbers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/24-textanalysis.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["datajournalism.pdf", "datajournalism.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

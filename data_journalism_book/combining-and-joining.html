@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 14 Combining and joining | Data Journalism with R and the Tidyverse</title>
+  <meta name="description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 14 Combining and joining | Data Journalism with R and the Tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 14 Combining and joining | Data Journalism with R and the Tidyverse" />
+  
+  <meta name="twitter:description" content="This is a book built on a very opinionated philosophy for journalism students doing data journalism in R with replicable methods." />
+  
+
+<meta name="author" content="Matt Waite (original author); updated by Derek Willis and Sean Mussenden" />
+
+
+<meta name="date" content="2021-11-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="cleaning-data-part-iv-pdfs.html"/>
+<link rel="next" href="scraping-data-with-rvest.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160712129-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160712129-1');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="http://smussenden.github.io/coursefiles/data_journalism_book/">Data Journalism With R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#modern-data-journalism"><i class="fa fa-check"></i><b>1.1</b> Modern data journalism</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#installations"><i class="fa fa-check"></i><b>1.2</b> Installations</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#about-this-book"><i class="fa fa-check"></i><b>1.3</b> About this book</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-well-cover"><i class="fa fa-check"></i><b>1.4</b> What we’ll cover</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="public-records.html"><a href="public-records.html"><i class="fa fa-check"></i><b>2</b> Public records</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="public-records.html"><a href="public-records.html#federal-law"><i class="fa fa-check"></i><b>2.1</b> Federal law</a></li>
+<li class="chapter" data-level="2.2" data-path="public-records.html"><a href="public-records.html#state-law"><i class="fa fa-check"></i><b>2.2</b> State law</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics.html"><a href="r-basics.html#about-libraries"><i class="fa fa-check"></i><b>3.1</b> About libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html"><i class="fa fa-check"></i><b>4</b> Data journalism in the age of replication</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#the-stylebook"><i class="fa fa-check"></i><b>4.1</b> The stylebook</a></li>
+<li class="chapter" data-level="4.2" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#replication"><i class="fa fa-check"></i><b>4.2</b> Replication</a></li>
+<li class="chapter" data-level="4.3" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#goodbye-excel"><i class="fa fa-check"></i><b>4.3</b> Goodbye Excel?</a></li>
+<li class="chapter" data-level="4.4" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#receptivity-is-high"><i class="fa fa-check"></i><b>4.4</b> “Receptivity … is high”</a></li>
+<li class="chapter" data-level="4.5" data-path="data-journalism-in-the-age-of-replication.html"><a href="data-journalism-in-the-age-of-replication.html#replication-in-notebooks"><i class="fa fa-check"></i><b>4.5</b> Replication in notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html"><i class="fa fa-check"></i><b>5</b> Data, structures and types</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#a-mental-picture"><i class="fa fa-check"></i><b>5.1</b> A Mental Picture</a></li>
+<li class="chapter" data-level="5.2" data-path="data-structures-and-types.html"><a href="data-structures-and-types.html#types"><i class="fa fa-check"></i><b>5.2</b> Types</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="aggregates.html"><a href="aggregates.html"><i class="fa fa-check"></i><b>6</b> Aggregates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="aggregates.html"><a href="aggregates.html#libraries"><i class="fa fa-check"></i><b>6.1</b> Libraries</a></li>
+<li class="chapter" data-level="6.2" data-path="aggregates.html"><a href="aggregates.html#importing-data"><i class="fa fa-check"></i><b>6.2</b> Importing data</a></li>
+<li class="chapter" data-level="6.3" data-path="aggregates.html"><a href="aggregates.html#group-by-and-count"><i class="fa fa-check"></i><b>6.3</b> Group by and count</a></li>
+<li class="chapter" data-level="6.4" data-path="aggregates.html"><a href="aggregates.html#other-summarization-methods-summing-mean-median-min-and-max"><i class="fa fa-check"></i><b>6.4</b> Other summarization methods: summing, mean, median, min and max</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mutating-data.html"><a href="mutating-data.html"><i class="fa fa-check"></i><b>7</b> Mutating data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mutating-data.html"><a href="mutating-data.html#another-use-of-mutate"><i class="fa fa-check"></i><b>7.1</b> Another use of mutate</a></li>
+<li class="chapter" data-level="7.2" data-path="mutating-data.html"><a href="mutating-data.html#a-more-powerful-use"><i class="fa fa-check"></i><b>7.2</b> A more powerful use</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="working-with-dates.html"><a href="working-with-dates.html"><i class="fa fa-check"></i><b>8</b> Working with dates</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="working-with-dates.html"><a href="working-with-dates.html#the-hard-way"><i class="fa fa-check"></i><b>8.1</b> The hard way</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="filters-and-selections.html"><a href="filters-and-selections.html"><i class="fa fa-check"></i><b>9</b> Filters and selections</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="filters-and-selections.html"><a href="filters-and-selections.html#combining-filters"><i class="fa fa-check"></i><b>9.1</b> Combining filters</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html"><i class="fa fa-check"></i><b>10</b> Data Cleaning Part I: Data smells</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#wrong-type"><i class="fa fa-check"></i><b>10.1</b> Wrong Type</a></li>
+<li class="chapter" data-level="10.2" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#missing-data"><i class="fa fa-check"></i><b>10.2</b> Missing Data</a></li>
+<li class="chapter" data-level="10.3" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#gaps-in-data"><i class="fa fa-check"></i><b>10.3</b> Gaps in data</a></li>
+<li class="chapter" data-level="10.4" data-path="data-cleaning-part-i-data-smells.html"><a href="data-cleaning-part-i-data-smells.html#supicious-outliers"><i class="fa fa-check"></i><b>10.4</b> Supicious Outliers</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html"><i class="fa fa-check"></i><b>11</b> Data Cleaning Part II: Janitor</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#cleaning-headers"><i class="fa fa-check"></i><b>11.1</b> Cleaning headers</a></li>
+<li class="chapter" data-level="11.2" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#changing-data-types"><i class="fa fa-check"></i><b>11.2</b> Changing data types</a></li>
+<li class="chapter" data-level="11.3" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#duplicates"><i class="fa fa-check"></i><b>11.3</b> Duplicates</a></li>
+<li class="chapter" data-level="11.4" data-path="data-cleaning-part-ii-janitor.html"><a href="data-cleaning-part-ii-janitor.html#cleaning-strings"><i class="fa fa-check"></i><b>11.4</b> Cleaning strings</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html"><i class="fa fa-check"></i><b>12</b> Data Cleaning Part III: Open Refine</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html#refinr-open-refine-in-r"><i class="fa fa-check"></i><b>12.1</b> Refinr, Open Refine in R</a></li>
+<li class="chapter" data-level="12.2" data-path="data-cleaning-part-iii-open-refine.html"><a href="data-cleaning-part-iii-open-refine.html#manually-cleaning-data-with-open-refine"><i class="fa fa-check"></i><b>12.2</b> Manually cleaning data with Open Refine</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html"><i class="fa fa-check"></i><b>13</b> Cleaning Data Part IV: PDFs</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#easy-does-it"><i class="fa fa-check"></i><b>13.1</b> Easy does it</a></li>
+<li class="chapter" data-level="13.2" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#when-it-looks-good-but-needs-a-little-fixing"><i class="fa fa-check"></i><b>13.2</b> When it looks good, but needs a little fixing</a></li>
+<li class="chapter" data-level="13.3" data-path="cleaning-data-part-iv-pdfs.html"><a href="cleaning-data-part-iv-pdfs.html#cleaning-up-the-data-in-r"><i class="fa fa-check"></i><b>13.3</b> Cleaning up the data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="combining-and-joining.html"><a href="combining-and-joining.html"><i class="fa fa-check"></i><b>14</b> Combining and joining</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="combining-and-joining.html"><a href="combining-and-joining.html#combining-data-stacking"><i class="fa fa-check"></i><b>14.1</b> Combining data (stacking)</a></li>
+<li class="chapter" data-level="14.2" data-path="combining-and-joining.html"><a href="combining-and-joining.html#joining-data"><i class="fa fa-check"></i><b>14.2</b> Joining data</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="scraping-data-with-rvest.html"><a href="scraping-data-with-rvest.html"><i class="fa fa-check"></i><b>15</b> Scraping data with Rvest</a></li>
+<li class="chapter" data-level="16" data-path="advanced-rvest.html"><a href="advanced-rvest.html"><i class="fa fa-check"></i><b>16</b> Advanced rvest</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="advanced-rvest.html"><a href="advanced-rvest.html#using-for-loops"><i class="fa fa-check"></i><b>16.1</b> Using for loops</a></li>
+<li class="chapter" data-level="16.2" data-path="advanced-rvest.html"><a href="advanced-rvest.html#looping-and-rvest"><i class="fa fa-check"></i><b>16.2</b> Looping and rvest</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html"><i class="fa fa-check"></i><b>17</b> Intro to APIs: The Census</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#the-acs"><i class="fa fa-check"></i><b>17.1</b> The ACS</a></li>
+<li class="chapter" data-level="17.2" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#wide-results"><i class="fa fa-check"></i><b>17.2</b> “Wide” Results</a></li>
+<li class="chapter" data-level="17.3" data-path="intro-to-apis-the-census.html"><a href="intro-to-apis-the-census.html#sorting-results"><i class="fa fa-check"></i><b>17.3</b> Sorting Results</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html"><i class="fa fa-check"></i><b>18</b> Visualizing your data for reporting</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html#bar-charts"><i class="fa fa-check"></i><b>18.1</b> Bar charts</a></li>
+<li class="chapter" data-level="18.2" data-path="visualizing-your-data-for-reporting.html"><a href="visualizing-your-data-for-reporting.html#line-charts"><i class="fa fa-check"></i><b>18.2</b> Line charts</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html"><i class="fa fa-check"></i><b>19</b> Visualizing your data for publication</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html#datawrapper"><i class="fa fa-check"></i><b>19.1</b> Datawrapper</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="visualizing-your-data-for-publication.html"><a href="visualizing-your-data-for-publication.html#making-a-map"><i class="fa fa-check"></i><b>19.1.1</b> Making a Map</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="geographic-data-basics.html"><a href="geographic-data-basics.html"><i class="fa fa-check"></i><b>20</b> Geographic data basics</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="geographic-data-basics.html"><a href="geographic-data-basics.html#importing-and-viewing-data"><i class="fa fa-check"></i><b>20.1</b> Importing and viewing data</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="geographic-analysis.html"><a href="geographic-analysis.html"><i class="fa fa-check"></i><b>21</b> Geographic analysis</a></li>
+<li class="chapter" data-level="22" data-path="automating-analysis.html"><a href="automating-analysis.html"><i class="fa fa-check"></i><b>22</b> Automating analysis</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="automating-analysis.html"><a href="automating-analysis.html#automating-downloads-and-imports"><i class="fa fa-check"></i><b>22.1</b> Automating downloads and imports</a></li>
+<li class="chapter" data-level="22.2" data-path="automating-analysis.html"><a href="automating-analysis.html#exploring-the-data"><i class="fa fa-check"></i><b>22.2</b> Exploring the data</a></li>
+<li class="chapter" data-level="22.3" data-path="automating-analysis.html"><a href="automating-analysis.html#analysis"><i class="fa fa-check"></i><b>22.3</b> Analysis</a></li>
+<li class="chapter" data-level="22.4" data-path="automating-analysis.html"><a href="automating-analysis.html#making-updating-graphics"><i class="fa fa-check"></i><b>22.4</b> Making updating graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="automating-geographic-analysis.html"><a href="automating-geographic-analysis.html"><i class="fa fa-check"></i><b>23</b> Automating geographic analysis</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="automating-geographic-analysis.html"><a href="automating-geographic-analysis.html#mapping-continuously"><i class="fa fa-check"></i><b>23.1</b> Mapping continuously</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="basic-stats-linear-regression-and-the-t-test.html"><a href="basic-stats-linear-regression-and-the-t-test.html"><i class="fa fa-check"></i><b>24</b> Basic Stats: Linear Regression and The T-Test</a></li>
+<li class="chapter" data-level="25" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>25</b> Linear Regression</a></li>
+<li class="chapter" data-level="26" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>26</b> T-tests</a></li>
+<li class="chapter" data-level="27" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html"><i class="fa fa-check"></i><b>27</b> An intro to text analysis</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html#going-beyond-a-single-word"><i class="fa fa-check"></i><b>27.1</b> Going beyond a single word</a></li>
+<li class="chapter" data-level="27.2" data-path="an-intro-to-text-analysis.html"><a href="an-intro-to-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>27.2</b> Sentiment Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html"><i class="fa fa-check"></i><b>28</b> Writing with numbers</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#how-to-write-about-numbers-without-overwhelming-with-numbers."><i class="fa fa-check"></i><b>28.1</b> How to write about numbers without overwhelming with numbers.</a></li>
+<li class="chapter" data-level="28.2" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#when-exact-numbers-matter"><i class="fa fa-check"></i><b>28.2</b> When exact numbers matter</a></li>
+<li class="chapter" data-level="28.3" data-path="writing-with-numbers.html"><a href="writing-with-numbers.html#an-example"><i class="fa fa-check"></i><b>28.3</b> An example</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html"><i class="fa fa-check"></i><b>29</b> Ethics in data journalism</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#problems"><i class="fa fa-check"></i><b>29.1</b> Problems</a></li>
+<li class="chapter" data-level="29.2" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#the-googlebot"><i class="fa fa-check"></i><b>29.2</b> The Googlebot</a></li>
+<li class="chapter" data-level="29.3" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#data-lifetimes"><i class="fa fa-check"></i><b>29.3</b> Data Lifetimes</a></li>
+<li class="chapter" data-level="29.4" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#you-are-a-data-provider"><i class="fa fa-check"></i><b>29.4</b> You Are a Data Provider</a></li>
+<li class="chapter" data-level="29.5" data-path="ethics-in-data-journalism.html"><a href="ethics-in-data-journalism.html#ethical-data"><i class="fa fa-check"></i><b>29.5</b> Ethical Data</a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="using-github.html"><a href="using-github.html"><i class="fa fa-check"></i><b>30</b> Using GitHub</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="using-github.html"><a href="using-github.html#how-it-works"><i class="fa fa-check"></i><b>30.1</b> How It Works</a></li>
+<li class="chapter" data-level="30.2" data-path="using-github.html"><a href="using-github.html#getting-started"><i class="fa fa-check"></i><b>30.2</b> Getting Started</a></li>
+<li class="chapter" data-level="30.3" data-path="using-github.html"><a href="using-github.html#advanced-use"><i class="fa fa-check"></i><b>30.3</b> Advanced Use</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Journalism with R and the Tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="combining-and-joining" class="section level1" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Combining and joining</h1>
+<p>Often, as data journalists, we’re looking at data across time or at data stored in multiple tables. And to do that, we need to often need to merge that data together.</p>
+<p>Depending on what we have, we may just need to stack data on top of each other to make new data. If we have 2019 data and 2018 data and we want that to be one file, we stack them. If we have a dataset of cows in counties and a dataset of populations in county, we’re going to join those two together on the county – the common element.</p>
+<p>Let’s explore.</p>
+<div id="combining-data-stacking" class="section level2" number="14.1">
+<h2><span class="header-section-number">14.1</span> Combining data (stacking)</h2>
+<p>Let’s say that we have county population estimates for three different years - <a href="https://umd.box.com/s/vsuyt7v1gtb2u0aerliv5eixfmzfgt17">2010</a>, <a href="https://umd.box.com/s/2qijnwfygsrfin9d2o1krhzw5o8vza30">2015</a> and <a href="https://umd.box.com/s/uqkeaabkvs4ge0l10j3w3sa76q3z1v16">2020</a> - in three different files. They have the same record layout and the same number of counties. We can combine them into a single dataframe.</p>
+<p>Let’s do what we need to import them properly. I’ve merged it all into one step for each of the three datasets.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="combining-and-joining.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="combining-and-joining.html#cb177-1" aria-hidden="true" tabindex="-1"></a>popestimate_2010 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/popestimate_2010.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   SUMLEV = col_double(),
+##   REGION = col_double(),
+##   DIVISION = col_double(),
+##   STATE = col_double(),
+##   COUNTY = col_double(),
+##   STNAME = col_character(),
+##   CTYNAME = col_character(),
+##   YEAR = col_double(),
+##   POPESTIMATE = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="combining-and-joining.html#cb179-1" aria-hidden="true" tabindex="-1"></a>popestimate_2015 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/popestimate_2015.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   SUMLEV = col_double(),
+##   REGION = col_double(),
+##   DIVISION = col_double(),
+##   STATE = col_double(),
+##   COUNTY = col_double(),
+##   STNAME = col_character(),
+##   CTYNAME = col_character(),
+##   YEAR = col_double(),
+##   POPESTIMATE = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="combining-and-joining.html#cb181-1" aria-hidden="true" tabindex="-1"></a>popestimate_2020 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/popestimate_2020.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   SUMLEV = col_double(),
+##   REGION = col_double(),
+##   DIVISION = col_double(),
+##   STATE = col_double(),
+##   COUNTY = col_double(),
+##   STNAME = col_character(),
+##   CTYNAME = col_character(),
+##   YEAR = col_double(),
+##   POPESTIMATE = col_double()
+## )</code></pre>
+<p>All three of these datasets have the same number of columns, all with the same names, so if we want to merge them together to compare them over time, we need to stack them together. The verb here, in R, is <code>bind_rows</code>. You tell the function what you want to combine and it does it, assuming that you’ve got column names in common containing identically formatted data.</p>
+<p>Since we have three dataframes, we’re going to need to pass them as a list, meaning they’ll be enclosed inside the <code>list</code> function.</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="combining-and-joining.html#cb183-1" aria-hidden="true" tabindex="-1"></a>estimates <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">list</span>(popestimate_2010, popestimate_2015, popestimate_2020))</span></code></pre></div>
+<p>And boom, like that, we have 9,852 rows of data together instead of three dataframes. There are plenty of uses for <code>bind_rows</code>: any regularly updated data that comes in the same format like crime reports or award recipients or player game statistics.</p>
+</div>
+<div id="joining-data" class="section level2" number="14.2">
+<h2><span class="header-section-number">14.2</span> Joining data</h2>
+<p>More difficult is when you have two separate tables that are connected by a common element or elements.</p>
+<p>Let’s start by reading in the Maryland PPP loan applications data:</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="combining-and-joining.html#cb184-1" aria-hidden="true" tabindex="-1"></a>maryland_ppp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/ppp_applications_md.csv&#39;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_character(),
+##   id = col_double(),
+##   amount = col_double(),
+##   naics_code = col_double(),
+##   non_profit = col_logical(),
+##   jobs_retained = col_double(),
+##   date_approved = col_datetime(format = &quot;&quot;),
+##   loan_number = col_double(),
+##   sba_office_code = col_double(),
+##   term = col_double(),
+##   sba_guaranty_percentage = col_double(),
+##   initial_approval_amount = col_double(),
+##   current_approval_amount = col_double(),
+##   undisbursed_amount = col_double(),
+##   servicing_lender_location_id = col_double(),
+##   utilities_proceed = col_double(),
+##   payroll_proceed = col_double(),
+##   mortgage_interest_proceed = col_double(),
+##   rent_proceed = col_double(),
+##   refinance_eidl_proceed = col_double(),
+##   health_care_proceed = col_double()
+##   # ... with 5 more columns
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<p>One of the columns we have is called <code>naics_code</code>, which is a six-digit number used by the federal government “in classifying business establishments for the purpose of collecting, analyzing, and publishing statistical data related to the U.S. business economy.” More details at <a href="https://www.census.gov/naics/">the official NAICS site</a>.</p>
+<p>But unless you have a particular interest in memorizing what those more than 1,000 codes actually mean, the codes themselves don’t help you understand what type of business any individual applicant has. Luckily, we can merge that information into our data using a join.</p>
+<p>Using a <a href="https://umd.box.com/s/thou3merdzwzbdimbvd06zkax1zndcsk">CSV file of the 2017 NAICS codes</a>, let’s read the file into R:</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="combining-and-joining.html#cb186-1" aria-hidden="true" tabindex="-1"></a>naics_codes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/naics_codes.csv&#39;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   naics_code = col_double(),
+##   title = col_character()
+## )</code></pre>
+<p>To put the Maryland applications and NAICS codes together, we need to use something called a join. There are different kinds of joins. It’s better if you think of two tables sitting next to each other. A <code>left_join</code> takes all the records from the left table and only the records that match in the right one. A <code>right_join</code> does the same thing. An <code>inner_join</code> takes only the records where they are equal. There’s one other join – a <code>full_join</code> which returns all rows of both, regardless of if there’s a match – but I’ve never once had a use for a full join.</p>
+<p>In the best-case scenario, the two tables we want to join share a common column. In this case, both of our tables have a column called <code>naics_code</code> that has the same characteristics: both are six-digit numbers.</p>
+<p>We can do this join multiple ways and get a similar result. We can put the Maryland file on the left and the NAICS codes on the right and use a left join to get them all together. And we use <code>by=</code> to join by the correct column. And to avoid rendering hundreds of rows of data, I’m going to count the rows at the end. The reason I’m going this is important: <strong>Rule 1 in joining data is having an idea of what you are expecting to get</strong>. So with a left join with applications on the left, I have 195,869 applications, so I expect to get 195,869 rows when I’m done.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="combining-and-joining.html#cb188-1" aria-hidden="true" tabindex="-1"></a>maryland_ppp <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(naics_codes, <span class="at">by=</span><span class="st">&quot;naics_code&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, naics_code, title) <span class="sc">%&gt;%</span> <span class="fu">nrow</span>()</span></code></pre></div>
+<pre><code>## [1] 195869</code></pre>
+<p>Remove the nrow and run it again for yourself. By default, <code>dplyr</code> will do a “natural” join, where it’ll match all the matching columns in both tables. So if we take out the by, it’ll use all the common columns between the tables. That may not be right in every instance but let’s try it. If it works, we should get 195,869 rows.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="combining-and-joining.html#cb190-1" aria-hidden="true" tabindex="-1"></a>maryland_ppp <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(naics_codes) <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, naics_code, title)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;naics_code&quot;</code></pre>
+<pre><code>## # A tibble: 195,869 x 3
+##    name                       naics_code title                                  
+##    &lt;chr&gt;                           &lt;dbl&gt; &lt;chr&gt;                                  
+##  1 BAYWOOD HOTELS INC.            721110 Hotels (except Casino Hotels) and Mote…
+##  2 PARTNERS ELECTRIC SERVICE…     238210 Electrical Contractors and Other Wirin…
+##  3 RP3 LLC                        541810 Advertising Agencies                   
+##  4 SUSHI KO CHEVY CHASE LLC.      722511 Full-Service Restaurants               
+##  5 VILLAGE ACADEMY OF MARYLA…     611110 Elementary and Secondary Schools       
+##  6 GOSHEN HOUSE TRADING LLC       721199 All Other Traveler Accommodation       
+##  7 WEAVER BOAT WORKS              336612 Boat Building                          
+##  8 BOBS OVERHEAD DOOR REPAIR…     238290 Other Building Equipment Contractors   
+##  9 PARENTS FOR MONTESSORI ED…     611110 Elementary and Secondary Schools       
+## 10 HARVEST PRINCE FREDERICK …     722511 Full-Service Restaurants               
+## # … with 195,859 more rows</code></pre>
+<p>Since we only have one column in common between the two tables, the join only used that column. And we got the same answer. If we had more columns in common, you could see in your results columns with .X after them - that’s a sign of duplicative columns between two tables, and you may decide you don’t need both moving forward.</p>
+<p>Let’s save our joined data to a new dataframe, but this time let’s remove the select function so we don’t limit the columns to just three.</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="combining-and-joining.html#cb193-1" aria-hidden="true" tabindex="-1"></a>maryland_ppp_with_naics <span class="ot">&lt;-</span> maryland_ppp <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(naics_codes)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;naics_code&quot;</code></pre>
+<p>Now, with our joined data, we can answer questions in a more useful way. But joins can do even more than just provide lookups; they can bring in additional data to enable you to ask more sophisticated questions.</p>
+<p>Let’s try adding zip code demographic data to the mix. Using <a href="https://umd.box.com/s/2xsq2rpkmg4ct3a77vt8j5bu4vu1z0tf">a file from the state’s data catalog</a>, we can read it into R:</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="combining-and-joining.html#cb195-1" aria-hidden="true" tabindex="-1"></a>maryland_zcta <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/maryland_zcta.csv&#39;</span>)</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_double(),
+##   FIRST_CLAS = col_character(),
+##   FIRST_MTFC = col_character(),
+##   FIRST_FUNC = col_character(),
+##   REPORT_2_P = col_character(),
+##   REPORT_9_P = col_character()
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<p>You’ll want to keep open the <a href="https://geodata.md.gov/imap/rest/services/Demographics/MD_CensusData/FeatureServer/1">data documentation</a> that hosts the data, because the field names are abbreviations.</p>
+<p>Note that this file describes Zip Code Tabulation Areas, which are very similar to but not always identical to zip codes (there’s a <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html">good explanation from the Census Bureau</a>). Bottom line: “In most instances the ZCTA code is the same as the ZIP Code for an area.”</p>
+<p>Again, we can use a <code>left_join</code> to make our demographic data available. This time we’ll need to specify the two fields to join because they do not have identical names. We’ll use <code>zip</code> from our PPP data and <code>ZCTA5N</code> from the demographic data:</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="combining-and-joining.html#cb197-1" aria-hidden="true" tabindex="-1"></a>maryland_ppp_with_naics_and_demographics <span class="ot">&lt;-</span> maryland_ppp_with_naics <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(maryland_zcta, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;zip&quot;</span><span class="ot">=</span><span class="st">&quot;ZCTA5N&quot;</span>))</span></code></pre></div>
+<pre><code>## Error: Can&#39;t join on `x$zip` x `y$zip` because of incompatible types.
+## ℹ `x$zip` is of type &lt;character&gt;&gt;.
+## ℹ `y$zip` is of type &lt;double&gt;&gt;.</code></pre>
+<p>You probably got an error when running that:</p>
+<p>Error: Can’t join on <code>x$zip</code> x <code>y$zip</code> because of incompatible types.
+ℹ <code>x$zip</code> is of type <character>&gt;.
+ℹ <code>y$zip</code> is of type <double>&gt;</p>
+<p>Let’s unpack this: R is saying it can’t join those two columns because one of them is a character column and the other is a double (number) column. When joining, <em>the two columns need to have the same data type</em>.</p>
+<p>We can fix that using our pal <code>mutate</code>. Let’s change the ZCTA data to be a character, since zip codes aren’t really useful as numbers (nobody needs to know the average zip code value).</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="combining-and-joining.html#cb199-1" aria-hidden="true" tabindex="-1"></a>maryland_zcta <span class="ot">&lt;-</span> maryland_zcta <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(ZCTA5N, as.character))</span></code></pre></div>
+<p>Now we can re-run the join:</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="combining-and-joining.html#cb200-1" aria-hidden="true" tabindex="-1"></a>maryland_ppp_with_naics_and_demographics <span class="ot">&lt;-</span> maryland_ppp_with_naics <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(maryland_zcta, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;zip&quot;</span><span class="ot">=</span><span class="st">&quot;ZCTA5N&quot;</span>))</span>
+<span id="cb200-2"><a href="combining-and-joining.html#cb200-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-3"><a href="combining-and-joining.html#cb200-3" aria-hidden="true" tabindex="-1"></a>maryland_ppp_with_naics_and_demographics</span></code></pre></div>
+<pre><code>## # A tibble: 195,869 x 95
+##         id name  amount state address city  zip   naics_code business_type race 
+##      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;
+##  1  9.38e7 BAYW… 2   e6 MD    9130 G… Colu… 2104…     721110 Corporation   Unan…
+##  2  9.38e7 PART… 1.09e6 MD    4857 W… Lanh… 2070…     238210 Corporation   Unan…
+##  3  9.38e7 RP3 … 7.88e5 MD    7250 W… Beth… 2081…     541810 Limited  Lia… Unan…
+##  4  9.38e7 SUSH… 6.56e5 MD    5455 W… Chev… 2081…     722511 Limited  Lia… Unan…
+##  5  9.38e7 VILL… 4.70e5 MD    8601 A… Capi… 2074…     611110 Limited  Lia… Unan…
+##  6  9.38e7 GOSH… 3.46e5 MD    4310 P… Bren… 2072…     721199 Limited  Lia… Blac…
+##  7  9.38e7 WEAV… 3.31e5 MD    389 De… Trac… 2077…     336612 Corporation   Unan…
+##  8  9.38e7 BOBS… 3.18e5 MD    100 Ey… Essex 2122…     238290 Corporation   Unan…
+##  9  9.38e7 PARE… 2.84e5 MD    1641 W… Anna… 2140…     611110 Non-Profit O… Unan…
+## 10  9.38e7 HARV… 2.42e5 MD    680 Pr… Prin… 2067…     722511 Limited  Lia… Asian
+## # … with 195,859 more rows, and 85 more variables: gender &lt;chr&gt;, veteran &lt;chr&gt;,
+## #   non_profit &lt;lgl&gt;, jobs_retained &lt;dbl&gt;, date_approved &lt;dttm&gt;, lender &lt;chr&gt;,
+## #   congressional_district &lt;chr&gt;, loan_number &lt;dbl&gt;, sba_office_code &lt;dbl&gt;,
+## #   processing_method &lt;chr&gt;, loan_status &lt;chr&gt;, term &lt;dbl&gt;,
+## #   sba_guaranty_percentage &lt;dbl&gt;, initial_approval_amount &lt;dbl&gt;,
+## #   current_approval_amount &lt;dbl&gt;, undisbursed_amount &lt;dbl&gt;,
+## #   franchise_name &lt;chr&gt;, servicing_lender_location_id &lt;dbl&gt;,
+## #   servicing_lender_name &lt;chr&gt;, servicing_lender_address &lt;chr&gt;,
+## #   servicing_lender_city &lt;chr&gt;, servicing_lender_state &lt;chr&gt;,
+## #   servicing_lender_zip &lt;chr&gt;, rural_urban_indicator &lt;chr&gt;,
+## #   hubzone_indicator &lt;chr&gt;, business_age_description &lt;chr&gt;,
+## #   project_city &lt;chr&gt;, project_county_name &lt;chr&gt;, project_state &lt;chr&gt;,
+## #   project_zip &lt;chr&gt;, utilities_proceed &lt;dbl&gt;, payroll_proceed &lt;dbl&gt;,
+## #   mortgage_interest_proceed &lt;dbl&gt;, rent_proceed &lt;dbl&gt;,
+## #   refinance_eidl_proceed &lt;dbl&gt;, health_care_proceed &lt;dbl&gt;,
+## #   debt_interest_proceed &lt;dbl&gt;, originating_lender_city &lt;chr&gt;,
+## #   originating_lender_state &lt;chr&gt;, loan_status_date &lt;date&gt;,
+## #   originating_lender_location_id &lt;dbl&gt;, lmi_indicator &lt;chr&gt;, ethnicity &lt;chr&gt;,
+## #   forgiveness_amount &lt;dbl&gt;, forgiveness_date &lt;date&gt;, title &lt;chr&gt;,
+## #   OBJECTID_1 &lt;dbl&gt;, ZCTA5CE10 &lt;dbl&gt;, FIRST_STAT &lt;dbl&gt;, FIRST_GEOI &lt;dbl&gt;,
+## #   FIRST_CLAS &lt;chr&gt;, FIRST_MTFC &lt;chr&gt;, FIRST_FUNC &lt;chr&gt;, STATE &lt;dbl&gt;,
+## #   AREALAND &lt;dbl&gt;, AREAWATR &lt;dbl&gt;, POP100 &lt;dbl&gt;, HU100 &lt;dbl&gt;, NHW &lt;dbl&gt;,
+## #   NHB &lt;dbl&gt;, NHAI &lt;dbl&gt;, NHA &lt;dbl&gt;, NHNH &lt;dbl&gt;, NHO &lt;dbl&gt;, NHT &lt;dbl&gt;,
+## #   HISP &lt;dbl&gt;, PNHW &lt;dbl&gt;, PNHB &lt;dbl&gt;, PNHAI &lt;dbl&gt;, PNHA &lt;dbl&gt;, PNHNH &lt;dbl&gt;,
+## #   PNHO &lt;dbl&gt;, PNHT &lt;dbl&gt;, PHISP &lt;dbl&gt;, POP65_ &lt;dbl&gt;, PCTPOP65_ &lt;dbl&gt;,
+## #   MEDAGE &lt;dbl&gt;, VACNS &lt;dbl&gt;, PVACNS &lt;dbl&gt;, PHOWN &lt;dbl&gt;, PWOMORT &lt;dbl&gt;,
+## #   PRENT &lt;dbl&gt;, PLT18SP &lt;dbl&gt;, REPORT_2_P &lt;chr&gt;, REPORT_9_P &lt;chr&gt;</code></pre>
+<p>Now, if you use the tiny black right arrows to see what’s in those demographic columns, you’ll see … a lot of NAs. What’s going on there? Are there zip codes in the PPP data that aren’t in the ZCTA data? If you go back using the left arrows, you can see that the PPP zip codes often are zip+4, and we’re using the ZCTA5N field to join, which is a 5-character field. But not all of the PPP codes are zip+4. So we’ll need to use <code>mutate</code> once more to give us a PPP zip field that is exactly 5 characters. Let’s do this on the original <code>maryland</code> dataframe so we can then do the join using our new <code>zip5</code> field:</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="combining-and-joining.html#cb202-1" aria-hidden="true" tabindex="-1"></a>maryland_ppp_with_naics <span class="ot">&lt;-</span> maryland_ppp_with_naics <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">zip5 =</span> <span class="fu">str_sub</span>(zip, <span class="dv">1</span>, <span class="dv">5</span>))</span>
+<span id="cb202-2"><a href="combining-and-joining.html#cb202-2" aria-hidden="true" tabindex="-1"></a>maryland_ppp_with_naics_and_demographics <span class="ot">&lt;-</span> maryland_ppp_with_naics <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(maryland_zcta, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;zip5&quot;</span><span class="ot">=</span><span class="st">&quot;ZCTA5N&quot;</span>))</span></code></pre></div>
+<p>Now we’ve got PPP data and demographic data by zip code. That means we can draw from both datasets in asking our questions. For example, we could see the mean and median loan amount in zip codes with different demographic characteristics. Let’s start with zip codes that have more than 50 percent non-Hispanic Black population.</p>
+<p>We get this by using filter followed by summarize. In this case, we want PNHB &gt; 50:</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="combining-and-joining.html#cb203-1" aria-hidden="true" tabindex="-1"></a>maryland_ppp_with_naics_and_demographics <span class="sc">%&gt;%</span></span>
+<span id="cb203-2"><a href="combining-and-joining.html#cb203-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(PNHB <span class="sc">&gt;</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb203-3"><a href="combining-and-joining.html#cb203-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb203-4"><a href="combining-and-joining.html#cb203-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb203-5"><a href="combining-and-joining.html#cb203-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avgamount =</span> <span class="fu">mean</span>(amount),</span>
+<span id="cb203-6"><a href="combining-and-joining.html#cb203-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">medamount =</span> <span class="fu">median</span>(amount))</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##   count avgamount medamount
+##   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 44032    53836.     20000</code></pre>
+<p>According to our query, there were 44,032 loans approved in zip codes with more than 50 percent non-Hispanic Black population, and the average amount was $53,836 and the median amount was $20,000.</p>
+<p>Let’s change that to zip codes with more than 50 percent non-Hispanic white population:</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="combining-and-joining.html#cb205-1" aria-hidden="true" tabindex="-1"></a>maryland_ppp_with_naics_and_demographics <span class="sc">%&gt;%</span></span>
+<span id="cb205-2"><a href="combining-and-joining.html#cb205-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(PNHW <span class="sc">&gt;</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb205-3"><a href="combining-and-joining.html#cb205-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb205-4"><a href="combining-and-joining.html#cb205-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb205-5"><a href="combining-and-joining.html#cb205-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avgamount =</span> <span class="fu">mean</span>(amount),</span>
+<span id="cb205-6"><a href="combining-and-joining.html#cb205-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">medamount =</span> <span class="fu">median</span>(amount))</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##    count avgamount medamount
+##    &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 113937    88140.     20833</code></pre>
+<p>And we get a greater number of loans with a higher average and median amount. But that’s not the end of the story, or of our questions. We’ll need to ask more.</p>
+<p>Let’s break this down one more step. What if we added <code>rural_urban_indicator</code> – if the loan recipient is located in a rural or urban area – as a group_by. Does that change anything for the previous queries?</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="combining-and-joining.html#cb207-1" aria-hidden="true" tabindex="-1"></a>maryland_ppp_with_naics_and_demographics <span class="sc">%&gt;%</span></span>
+<span id="cb207-2"><a href="combining-and-joining.html#cb207-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(PNHB <span class="sc">&gt;</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb207-3"><a href="combining-and-joining.html#cb207-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rural_urban_indicator) <span class="sc">%&gt;%</span></span>
+<span id="cb207-4"><a href="combining-and-joining.html#cb207-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb207-5"><a href="combining-and-joining.html#cb207-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb207-6"><a href="combining-and-joining.html#cb207-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">avgamount =</span> <span class="fu">mean</span>(amount),</span>
+<span id="cb207-7"><a href="combining-and-joining.html#cb207-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">medamount =</span> <span class="fu">median</span>(amount))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 4
+##   rural_urban_indicator count avgamount medamount
+##   &lt;chr&gt;                 &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 R                       148    44329.     19621
+## 2 U                     43884    53869.     20000</code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="combining-and-joining.html#cb209-1" aria-hidden="true" tabindex="-1"></a>maryland_ppp_with_naics_and_demographics <span class="sc">%&gt;%</span></span>
+<span id="cb209-2"><a href="combining-and-joining.html#cb209-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(PNHW <span class="sc">&gt;</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb209-3"><a href="combining-and-joining.html#cb209-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rural_urban_indicator) <span class="sc">%&gt;%</span></span>
+<span id="cb209-4"><a href="combining-and-joining.html#cb209-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb209-5"><a href="combining-and-joining.html#cb209-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb209-6"><a href="combining-and-joining.html#cb209-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">avgamount =</span> <span class="fu">mean</span>(amount),</span>
+<span id="cb209-7"><a href="combining-and-joining.html#cb209-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">medamount =</span> <span class="fu">median</span>(amount))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 4
+##   rural_urban_indicator count avgamount medamount
+##   &lt;chr&gt;                 &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 R                     18337    73694.     20833
+## 2 U                     95600    90911.     20833</code></pre>
+<p>In both cases, urban applicants got more approvals for higher average and median amounts, and the gap between majority-white zip codes and majority-Black zip codes was larger for urban applicants than for rural ones.</p>
+<p>Joining datasets allows you to expand the range and sophistication of questions you’re able to ask. It is one of the most powerful tools in a journalist’s toolkit.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cleaning-data-part-iv-pdfs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="scraping-data-with-rvest.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/13-merging.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["datajournalism.pdf", "datajournalism.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
