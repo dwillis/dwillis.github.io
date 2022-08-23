@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.646">
+<meta name="generator" content="quarto-1.0.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -98,7 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -426,7 +426,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -&gt; `...25`</code></pre>
 </div>
 </div>
-<p>Now we can inspect the data we imported. What does it look like? To do that, we use <code>head(nbaplayers)</code> to show the headers and <strong>the first six rows of data</strong>. If we wanted to see them all, we could just simply enter <code>mountainlions</code> and run it.</p>
+<p>Now we can inspect the data we imported. What does it look like? To do that, we use <code>head(nbaplayers)</code> to show the headers and <strong>the first six rows of data</strong>. If we wanted to see them all, we could just simply enter <code>nbaplayers</code> and run it.</p>
 <p>To get the number of records in our dataset, we run <code>nrow(nbaplayers)</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nbaplayers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -443,7 +443,8 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 # … with 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;,
 #   `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, ...20 &lt;lgl&gt;,
 #   OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;,
-#   DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
+#   DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;
+# ℹ Use `colnames()` to see all variable names</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -534,7 +535,8 @@ argument.</code></pre>
  8 LAC   SG        9
  9 POR   SF        9
 10 SAS   SG        9
-# … with 151 more rows</code></pre>
+# … with 151 more rows
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
 </div>
 </div>
 <p>So wait, what team is TOT?</p>
@@ -593,7 +595,8 @@ argument.</code></pre>
 # … with 802 more rows, and 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;,
 #   `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;,
 #   ...20 &lt;lgl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;,
-#   OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
+#   OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;
+# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
 </div>
 </div>
 <p>The player with the most minutes on the floor is a small forward. So that means there’s Mikal Bridges rolling up 2,854 minutes in a season, and then there’s Boston sensation Justin Jackson. Never heard of Justin Jackson? Might be because he logged two minutes in one game this season.</p>
@@ -638,6 +641,21 @@ argument.</code></pre>
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
