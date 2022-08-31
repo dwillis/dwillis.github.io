@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.646">
+<meta name="generator" content="quarto-1.0.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sports Data Analysis and Visualization - 5&nbsp; Mutating data</title>
+<title>Data Journalism with R and the Tidyverse - 16&nbsp; Mutating data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -88,7 +88,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./filtering.html" rel="next">
+<link href="./workingwithdates.html" rel="next">
 <link href="./aggregates.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -98,7 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -124,12 +124,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <body class="nav-sidebar floating">
 
-
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Mutating data</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mutating data</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -142,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Sports Data Analysis and Visualization</a> 
+      <a href="./">Data Journalism with R and the Tidyverse</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -154,192 +153,162 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Throwing cold water on hot takes</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The very basics</span></a>
+  <a href="./start-story.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Learn a new way to read</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data, structures and types</span></a>
+  <a href="./start-math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Newsroom math</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./aggregates.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregates</span></a>
+  <a href="./start-data-def.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Defining “Data”</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mutating.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Mutating data</span></a>
+  <a href="./xl-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./filtering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Filters and selections</span></a>
+  <a href="./xl-refresher.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An Excel Refresher</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./transforming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></a>
+  <a href="./xl-filter-sort.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sorting and filtering to find stories</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./significancetests.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance tests</span></a>
+  <a href="./xl-formulas.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Formulas in Google Sheets</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./correlations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations and regression</span></a>
+  <a href="./xl-practice-noc.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Practice exercise</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multipleregression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multiple regression</span></a>
+  <a href="./ethics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./residuals.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Residuals</span></a>
+  <a href="./publicrecords.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Public records</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./zscores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Z-scores</span></a>
+  <a href="./github.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using GitHub</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clustering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Clustering</span></a>
+  <a href="./r-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">R Basics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./simulations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Simulations</span></a>
+  <a href="./replication.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./barcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Intro to ggplot with bar charts</span></a>
+  <a href="./aggregates.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Aggregates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stackedbars.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Stacked bar charts</span></a>
+  <a href="./mutating.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mutating data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./circularbarcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Circular bar plots</span></a>
+  <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Working with dates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./wafflecharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Waffle charts</span></a>
+  <a href="./filters.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Filters and selections</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stepcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Step charts</span></a>
+  <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dumbbellcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dumbbell and lollipop charts</span></a>
+  <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scatterplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Scatterplots</span></a>
+  <a href="./open-refine.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bubblecharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Bubble charts</span></a>
+  <a href="./pdfs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./beeswarmplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Beeswarm plots</span></a>
+  <a href="./merging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Combining and joining</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bumpcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Bump charts</span></a>
+  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tables</span></a>
+  <a href="./census.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./facetwraps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Facet wraps</span></a>
+  <a href="./visualizing-for-reporting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cowplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Arranging multiple plots together</span></a>
+  <a href="./visualizing-for-publication.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./encirclingpoints.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Encircling points on a scatterplot</span></a>
+  <a href="./geographic-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Geographic data basics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./textcleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Text cleaning</span></a>
+  <a href="./geographicanalysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Geographic analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./headlines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Headlines</span></a>
+  <a href="./textanalysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">An intro to text analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./annotations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Annotations</span></a>
+  <a href="./basicstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./finishingtouches.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Finishing touches</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./rtweet.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Writing with numbers</span></a>
   </div>
 </li>
     </ul>
@@ -351,7 +320,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#a-more-complex-example" id="toc-a-more-complex-example" class="nav-link active" data-scroll-target="#a-more-complex-example"> <span class="header-section-number">5.1</span> A more complex example</a></li>
+  <li><a href="#another-use-of-mutate" id="toc-another-use-of-mutate" class="nav-link active" data-scroll-target="#another-use-of-mutate"> <span class="header-section-number">16.1</span> Another use of mutate</a></li>
+  <li><a href="#a-more-powerful-use" id="toc-a-more-powerful-use" class="nav-link" data-scroll-target="#a-more-powerful-use"> <span class="header-section-number">16.2</span> A more powerful use</a></li>
   </ul>
 </nav>
     </div>
@@ -360,7 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Mutating data</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mutating data</span></h1>
 </div>
 
 
@@ -374,174 +344,230 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>One of the most common data analysis techniques is to look at change over time. The most common way of comparing change over time is through percent change. The math behind calculating percent change is very simple, and you should know it off the top of your head. The easy way to remember it is:</p>
-<p><code>(new - old) / old</code></p>
-<p>Or new minus old divided by old. Your new number minus the old number, the result of which is divided by the old number. To do that in R, we can use <code>dplyr</code> and <code>mutate</code> to calculate new metrics in a new field using existing fields of data.</p>
+<p>Often the data you have will prompt questions that it doesn’t immediately answer. The PPP loan applications include a total amount column but also columns for different categories the money would be used for: payroll, utilities, rent, etc. Amounts are great, but comparing absolute numbers to each other is only useful if you have a very small number. We need percentages!</p>
+<p>To do that in R, we can use <code>dplyr</code> and <code>mutate</code> to calculate new metrics in a new field using existing fields of data. That’s the essence of <code>mutate</code> - using the data you have to answer a new question.</p>
 <p>So first we’ll import the tidyverse so we can read in our data and begin to work with it.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now you’ll need a common and simple dataset of total attendance at NCAA football games over the last few seasons.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sportsdatafiles/attendance.csv">
-  <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
-</a></p></pre>
-<p>You’ll import it something like this.</p>
+<p>Now we’ll import a dataset of county-level election results from Maryland’s 2018 primary that is in the data folder in this chapter’s pre-lab directory. We’ll use this to explore ways to create new information from existing data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/attendance.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>primary_18 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/maryland_primary_2018.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 149 Columns: 9
+<pre><code>Rows: 1778 Columns: 15
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (2): Institution, Conference
-dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
+chr  (7): election_type, result_type, office, district, name_raw, party, jur...
+dbl  (6): votes, year, election_day, absentee, provisional, second_absentee
+lgl  (1): special
+dttm (1): end_date
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>If you want to see the first six rows – handy to take a peek at your data – you can use the function <code>head</code>.</p>
+<p>First, let’s add a column called <code>percent_election_day</code> for the percentage of votes that were cast on election day for each candidate result in a county. The code to calculate a percentage is pretty simple. Remember, with <code>summarize</code>, we used <code>n()</code> to count things. With <code>mutate</code>, we use very similar syntax to calculate a new value – a new column of data – using other values in our dataset.</p>
+<p>If we look at what we got when we imported the data, you’ll see there’s <code>election_day</code> as the numerator, and we’ll use <code>votes</code> as the denominator. We can simply things by only selecting a few columns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(attendance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>primary_18 <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(office, district, name_raw, party, jurisdiction, election_day, votes) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">percent_election_day =</span> election_day<span class="sc">/</span>votes</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 9
-  Institution     Conference    `2013` `2014` `2015` `2016` `2017` `2018` `2019`
-  &lt;chr&gt;           &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 Air Force       MWC           228562 168967 156158 177519 174924 166205 162505
-2 Akron           MAC           107101  55019 108588  62021 117416  92575 107752
-3 Alabama         SEC           710538 710736 707786 712747 712053 710931 707817
-4 Appalachian St. FBS Independ… 149366     NA     NA     NA     NA     NA     NA
-5 Appalachian St. Sun Belt          NA 138995 128755 156916 154722 131716 166640
-6 Arizona         Pac-12        285713 354973 308355 338017 255791 318051 237194</code></pre>
+<pre><code># A tibble: 1,778 × 8
+   office                  district name_raw party juris…¹ elect…² votes perce…³
+   &lt;chr&gt;                   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+ 1 Governor / Lt. Governor &lt;NA&gt;     Rushern… DEM   Allega…     324   413   0.785
+ 2 Governor / Lt. Governor &lt;NA&gt;     Ralph J… DEM   Allega…     106   122   0.869
+ 3 Governor / Lt. Governor &lt;NA&gt;     Ben Jea… DEM   Allega…     979  1170   0.837
+ 4 Governor / Lt. Governor &lt;NA&gt;     James H… DEM   Allega…      99   106   0.934
+ 5 Governor / Lt. Governor &lt;NA&gt;     Valerie… DEM   Allega…     118   159   0.742
+ 6 Governor / Lt. Governor &lt;NA&gt;     Rich Ma… DEM   Allega…     133   169   0.787
+ 7 Governor / Lt. Governor &lt;NA&gt;     Alec Ro… DEM   Allega…     175   218   0.803
+ 8 Governor / Lt. Governor &lt;NA&gt;     Jim Shea DEM   Allega…     239   284   0.842
+ 9 Governor / Lt. Governor &lt;NA&gt;     Krish O… DEM   Allega…     364   462   0.788
+10 Comptroller             &lt;NA&gt;     Peter F… DEM   Allega…    2518  3077   0.818
+# … with 1,768 more rows, and abbreviated variable names ¹​jurisdiction,
+#   ²​election_day, ³​percent_election_day</code></pre>
 </div>
 </div>
-<p>The code to calculate percent change is pretty simple. Remember, with <code>summarize</code>, we used <code>n()</code> to count things. With <code>mutate</code>, we use very similar syntax to calculate a new value using other values in our dataset. So in this case, we’re trying to do (new-old)/old, but we’re doing it with fields. If we look at what we got when we did <code>head</code>, you’ll see there’s `2018` as the new data, and we’ll use `2017` as the old data. So we’re looking at one year. Then, to help us, we’ll use arrange again to sort it, so we get the fastest growing school over one year.</p>
+<p>Now we’ve got our <code>percent_election_day</code> column. But what do you see right away? Do those numbers look like we expect them to? No.&nbsp;They’re a decimal expressed as a percentage. So let’s fix that by multiplying by 100.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> (<span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>primary_18 <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(office, district, name_raw, party, jurisdiction, election_day, votes) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">percent_election_day =</span> (election_day<span class="sc">/</span>votes)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 149 × 10
-   Institution     Conference   `2013` `2014` `2015` `2016` `2017` `2018` `2019`
-   &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Air Force       MWC          228562 168967 156158 177519 174924 166205 162505
- 2 Akron           MAC          107101  55019 108588  62021 117416  92575 107752
- 3 Alabama         SEC          710538 710736 707786 712747 712053 710931 707817
- 4 Appalachian St. FBS Indepen… 149366     NA     NA     NA     NA     NA     NA
- 5 Appalachian St. Sun Belt         NA 138995 128755 156916 154722 131716 166640
- 6 Arizona         Pac-12       285713 354973 308355 338017 255791 318051 237194
- 7 Arizona St.     Pac-12       501509 343073 368985 286417 359660 291091 344161
- 8 Arkansas        SEC          431174 399124 471279 487067 442569 367748 356517
- 9 Arkansas St.    Sun Belt     149477 149163 138043 136200 119538 119001 124017
-10 Army West Point FBS Indepen… 169781 171310 185946 163267 185543 190156 185935
-# … with 139 more rows, and 1 more variable: change &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<p>What do we see right away? Do those numbers look like we expect them to? No.&nbsp;They’re a decimal expressed as a percentage. So let’s fix that by multiplying by 100.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> ((<span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span>)<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 149 × 10
-   Institution     Conference   `2013` `2014` `2015` `2016` `2017` `2018` `2019`
-   &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Air Force       MWC          228562 168967 156158 177519 174924 166205 162505
- 2 Akron           MAC          107101  55019 108588  62021 117416  92575 107752
- 3 Alabama         SEC          710538 710736 707786 712747 712053 710931 707817
- 4 Appalachian St. FBS Indepen… 149366     NA     NA     NA     NA     NA     NA
- 5 Appalachian St. Sun Belt         NA 138995 128755 156916 154722 131716 166640
- 6 Arizona         Pac-12       285713 354973 308355 338017 255791 318051 237194
- 7 Arizona St.     Pac-12       501509 343073 368985 286417 359660 291091 344161
- 8 Arkansas        SEC          431174 399124 471279 487067 442569 367748 356517
- 9 Arkansas St.    Sun Belt     149477 149163 138043 136200 119538 119001 124017
-10 Army West Point FBS Indepen… 169781 171310 185946 163267 185543 190156 185935
-# … with 139 more rows, and 1 more variable: change &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 1,778 × 8
+   office                  district name_raw party juris…¹ elect…² votes perce…³
+   &lt;chr&gt;                   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+ 1 Governor / Lt. Governor &lt;NA&gt;     Rushern… DEM   Allega…     324   413    78.5
+ 2 Governor / Lt. Governor &lt;NA&gt;     Ralph J… DEM   Allega…     106   122    86.9
+ 3 Governor / Lt. Governor &lt;NA&gt;     Ben Jea… DEM   Allega…     979  1170    83.7
+ 4 Governor / Lt. Governor &lt;NA&gt;     James H… DEM   Allega…      99   106    93.4
+ 5 Governor / Lt. Governor &lt;NA&gt;     Valerie… DEM   Allega…     118   159    74.2
+ 6 Governor / Lt. Governor &lt;NA&gt;     Rich Ma… DEM   Allega…     133   169    78.7
+ 7 Governor / Lt. Governor &lt;NA&gt;     Alec Ro… DEM   Allega…     175   218    80.3
+ 8 Governor / Lt. Governor &lt;NA&gt;     Jim Shea DEM   Allega…     239   284    84.2
+ 9 Governor / Lt. Governor &lt;NA&gt;     Krish O… DEM   Allega…     364   462    78.8
+10 Comptroller             &lt;NA&gt;     Peter F… DEM   Allega…    2518  3077    81.8
+# … with 1,768 more rows, and abbreviated variable names ¹​jurisdiction,
+#   ²​election_day, ³​percent_election_day</code></pre>
 </div>
 </div>
 <p>Now, does this ordering do anything for us? No.&nbsp;Let’s fix that with arrange.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> ((<span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span>)<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(change))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>primary_18 <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(office, district, name_raw, party, jurisdiction, election_day, votes) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">percent_election_day =</span> (election_day<span class="sc">/</span>votes)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)  <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(percent_election_day))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 149 × 10
-   Institution    Conference    `2013` `2014` `2015` `2016` `2017` `2018` `2019`
-   &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Kansas         Big 12        265187 204462 190972 154969 186490 116544 237122
- 2 Coastal Caro.  Sun Belt          NA     NA     NA     NA  89754  53173  90112
- 3 La.-Monroe     Sun Belt       85177  90540  58659  67057  49640  71048 100367
- 4 Virginia       ACC           370234 275243 302994 239576 275788 238232 335040
- 5 Louisiana Tech C-USA          93332 100272 125863 102059 142626  87623 122631
- 6 North Carolina ACC           360500 328000 347500 301500 350500 218111 303000
- 7 Fla. Atlantic  C-USA          72758  70608 105703  60437 151580 102308 140857
- 8 Texas St.      Sun Belt      108371 123589 108998 108717 104680  78689 102840
- 9 New Mexico St. FBS Independ… 112347     NA     NA     NA     NA  68529  89523
-10 San Jose St.   MWC            98174  75340  91869  92515  85235  71276  92374
-# … with 139 more rows, and 1 more variable: change &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 1,778 × 8
+   office                    distr…¹ name_…² party juris…³ elect…⁴ votes perce…⁵
+   &lt;chr&gt;                     &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+ 1 U.S. Senator              &lt;NA&gt;    Erik J… DEM   Garrett       8     8   100  
+ 2 U.S. Senator              &lt;NA&gt;    Albert… REP   Allega…      69    71    97.2
+ 3 House of Delegates        01A     James … REP   Allega…     140   148    94.6
+ 4 Governor / Lt. Governor   &lt;NA&gt;    James … DEM   Allega…      99   106    93.4
+ 5 House of Delegates        38C     Jim Sh… REP   Wicomi…      23    25    92  
+ 6 House of Delegates        01A     Wendel… REP   Allega…     947  1031    91.9
+ 7 U.S. Senator              &lt;NA&gt;    Richar… DEM   Garrett      11    12    91.7
+ 8 U.S. Senator              &lt;NA&gt;    Christ… REP   Allega…     863   948    91.0
+ 9 U.S. Senator              &lt;NA&gt;    Marcia… DEM   Allega…     113   125    90.4
+10 Representative in Congre… 06      Christ… DEM   Allega…      37    41    90.2
+# … with 1,768 more rows, and abbreviated variable names ¹​district, ²​name_raw,
+#   ³​jurisdiction, ⁴​election_day, ⁵​percent_election_day</code></pre>
 </div>
 </div>
-<p>So who had the most growth in 2019 compared to the year before? Kansas.</p>
-<section id="a-more-complex-example" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="a-more-complex-example"><span class="header-section-number">5.1</span> A more complex example</h2>
-<p>There’s metric in basketball that’s easy to understand – shooting percentage. It’s the number of shots made divided by the number of shots attempted. Simple, right? Except it’s a little too simple. Because what about three point shooters? They tend to be more vailable because the three point shot is worth more. What about players who get to the line? In shooting percentage, free throws are nowhere to be found.</p>
-<p>Basketball nerds, because of these weaknesses, have created a new metric called <a href="https://en.wikipedia.org/wiki/True_shooting_percentage">True Shooting Percentage</a>. True shooting percentage takes into account all aspects of a players shooting to determine who the real shooters are.</p>
-<p>Using <code>dplyr</code> and <code>mutate</code>, we can calculate true shooting percentage. So let’s look at a new dataset, one of every college basketball player’s season stats in 2021-22 season. It’s a dataset of 5,688 players, and we’ve got 59 variables – one of them is True Shooting Percentage, but we’re going to ignore that.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://mattwaite.github.io/sportsdatafiles/players22.csv">
-  <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
-</a></p></pre>
-<p>Import it like this:</p>
+<p>So now we have results ordered by <code>percent_election_day</code> with the highest percentage first. To see the lowest percentage first, we can reverse that <code>arrange</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/players22.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>primary_18 <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(office, district, name_raw, party, jurisdiction, election_day, votes) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">percent_election_day =</span> (election_day<span class="sc">/</span>votes)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)  <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(percent_election_day)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,778 × 8
+   office                    distr…¹ name_…² party juris…³ elect…⁴ votes perce…⁵
+   &lt;chr&gt;                     &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+ 1 Governor / Lt. Governor   &lt;NA&gt;    Valeri… DEM   Talbot       38    89    42.7
+ 2 Governor / Lt. Governor   &lt;NA&gt;    Rich M… DEM   Talbot       84   192    43.8
+ 3 Governor / Lt. Governor   &lt;NA&gt;    Rich M… DEM   Kent         40    85    47.1
+ 4 Governor / Lt. Governor   &lt;NA&gt;    Rich M… DEM   Garrett      32    67    47.8
+ 5 Governor / Lt. Governor   &lt;NA&gt;    Jim Sh… DEM   Talbot      168   345    48.7
+ 6 U.S. Senator              &lt;NA&gt;    Blaine… REP   Talbot       41    84    48.8
+ 7 House of Delegates        43      Urcill… DEM   Baltim…     550  1122    49.0
+ 8 Governor / Lt. Governor   &lt;NA&gt;    Rusher… DEM   Talbot      286   577    49.6
+ 9 House of Delegates        21      Mary A… DEM   Anne A…     407   816    49.9
+10 Representative in Congre… 06      Christ… DEM   Garrett       3     6    50  
+# … with 1,768 more rows, and abbreviated variable names ¹​district, ²​name_raw,
+#   ³​jurisdiction, ⁴​election_day, ⁵​percent_election_day</code></pre>
+</div>
+</div>
+<p>Only a handful of candidates got less than 50 percent of their total votes in a county on election day. What a difference a pandemic makes.</p>
+<section id="another-use-of-mutate" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="another-use-of-mutate"><span class="header-section-number">16.1</span> Another use of mutate</h2>
+<p>Mutate is also useful for standardizing data - for example, making different spellings of, say, cities into a single one.</p>
+<p>Let’s load some campaign contribution data - in this case Maryland donors to Republican committees via WinRed’s online platform earlier this year - and take a look at the <code>city</code> column in our data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>maryland_cities <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/winred_md_cities.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 5688 Columns: 59
+<pre><code>Rows: 408 Columns: 3
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (10): Team, Player, Class, Pos, Height, Hometown, High School, Summary, ...
-dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
+chr (1): city
+dbl (2): count, sum
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>The basic true shooting percentage formula is <code>(Points / (2*(FieldGoalAttempts + (.44 * FreeThrowAttempts)))) * 100</code>. Let’s talk that through. Points divided by a lot. It’s really field goal attempts plus 44 percent of the free throw attempts. Why? Because that’s about what a free throw is worth, compared to other ways to score. After adding those things together, you double it. And after you divide points by that number, you multiply the whole lot by 100.</p>
-<p>In our data, we need to be able to find the fields so we can complete the formula. To do that, one way is to use the Environment tab in R Studio. In the Environment tab is a listing of all the data you’ve imported, and if you click the triangle next to it, it’ll list all the field names, giving you a bit of information about each one.</p>
+<p>You’ll notice that there’s a mix of styles: “Baltimore” and “BALTIMORE” for example. R will think those are two different cities, and that will mean that any aggregates we create based on city won’t be accurate.</p>
+<p>So how can we fix that? Mutate - it’s not just for math! And a function called <code>str_to_upper</code> that will convert a character column into all uppercase. Now we can say exactly how many donations came from Baltimore (I mean, of course, BALTIMORE).</p>
 <div class="cell">
-<div class="cell-output-display">
-<p><img src="images/environment.png" class="img-fluid" width="653"></p>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>standardized_maryland_cities <span class="ot">&lt;-</span> maryland_cities <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper_city =</span> <span class="fu">str_to_upper</span>(city)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>So what does True Shooting Percentage look like in code?</p>
-<p>Let’s think about this differently. Who had the best true shooting season last year?</p>
+<p>There are lots of potential uses for standardization - addresses, zip codes, anything that can be misspelled or abbreviated.</p>
+</section>
+<section id="a-more-powerful-use" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="a-more-powerful-use"><span class="header-section-number">16.2</span> A more powerful use</h2>
+<p>Mutate is even more useful when combined with some additional functions. Let’s focus on individual contributions from Maryland donors via WinRed; we’d like to group their donations by amount into one of four categories:</p>
+<ol type="1">
+<li>Under $100</li>
+<li>$101-$499</li>
+<li>$500-$2,900</li>
+<li>More than $2,901</li>
+</ol>
+<p>Mutate can make that happen by creating a new column and putting in a category value <em>based on the amount</em> of each record. First, let’s load the individual contributions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>maryland_winred <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/winred_md_q2_2022.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 54247 Columns: 24
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (13): linenumber, fec_committee_id, tran_id, flag_orgind, last_name, fi...
+dbl   (4): zip, amount, aggregate_amount, cycle
+lgl   (6): org_name, middle_name, prefix, suffix, prigen, memo_code
+date  (1): date
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(maryland_winred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5,688 × 60
-   Team    Player   `#` Class Pos   Height Weight Hometown `High School` Summary
-   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;  
- 1 Washin… Noah …    32 JR    G     6-3       185 Seattle… Garfield HS   0.6 Pt…
- 2 Troy T… DJ Ro…    34 FR    G     6-1       160 Monroev… Oakman HS     1.0 Pt…
- 3 Syracu… Arthu…    33 SO    G     6-3       185 Walling… Sheehan HS    0.8 Pt…
- 4 Stony … Prest…    12 &lt;NA&gt;  G     6-4       205 Syracus… Jamesville-D… 3.0 Pt…
- 5 USC Tr… Amar …    55 SR    G     5-7       150 Long Be… Fremont HS    3.0 Pt…
- 6 South … Ford …    44 JR    G     6-3       183 Charlot… United Faith… 3.0 Pt…
- 7 UNC Gr… Jevon…    15 &lt;NA&gt;  G     6-3       170 Durham,… &lt;NA&gt;          1.0 Pt…
- 8 New Me… Safi …     2 &lt;NA&gt;  G     5-11      165 Las Cru… &lt;NA&gt;          3.0 Pt…
- 9 New Me… Camer…    20 &lt;NA&gt;  G     6-1       165 Kirtlan… Kirtland HS   0.8 Pt…
-10 Mercer… John …    15 SO    F     6-6       210 Atlanta… Marist School 1.5 Pt…
-# … with 5,678 more rows, and 50 more variables: Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;,
-#   MP &lt;dbl&gt;, FG &lt;dbl&gt;, FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;,
-#   `2P%` &lt;dbl&gt;, `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;,
-#   `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;,
-#   BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;,
-#   `TS%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;, FTr &lt;dbl&gt;, PProd &lt;dbl&gt;,
-#   `ORB%` &lt;dbl&gt;, `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, …</code></pre>
+<pre><code># A tibble: 6 × 24
+  linenu…¹ fec_c…² tran_id flag_…³ org_n…⁴ last_…⁵ first…⁶ middl…⁷ prefix suffix
+  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;lgl&gt;  &lt;lgl&gt; 
+1 SA11AI   C00694… A9EF36… IND     NA      Hansher Beth    NA      NA     NA    
+2 SA11AI   C00694… A64BB5… IND     NA      Leishm… Alexan… NA      NA     NA    
+3 SA11AI   C00694… A5835B… IND     NA      Bode    John    NA      NA     NA    
+4 SA11AI   C00694… AE3AF0… IND     NA      Gallag… Daniel  NA      NA     NA    
+5 SA11AI   C00694… AC5569… IND     NA      Bode    Denise  NA      NA     NA    
+6 SA11AI   C00694… A2B1EB… IND     NA      Kaplan  Joel    NA      NA     NA    
+# … with 14 more variables: address_one &lt;chr&gt;, address_two &lt;chr&gt;, city &lt;chr&gt;,
+#   state &lt;chr&gt;, zip &lt;dbl&gt;, prigen &lt;lgl&gt;, date &lt;date&gt;, amount &lt;dbl&gt;,
+#   aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;, occupation &lt;chr&gt;, memo_code &lt;lgl&gt;,
+#   memo_text &lt;chr&gt;, cycle &lt;dbl&gt;, and abbreviated variable names ¹​linenumber,
+#   ²​fec_committee_id, ³​flag_orgind, ⁴​org_name, ⁵​last_name, ⁶​first_name,
+#   ⁷​middle_name</code></pre>
 </div>
 </div>
-<p>You’ll be forgiven if you did not hear about USC’s shooting sensation Amar Ross. He played in one game, took one shot and actually hit it. It happened to be a three pointer, which is one more three pointer than I’ve hit in college basketball. So props to him. Does that mean he had the best true shooting season in college basketball in the 2021-22 season?</p>
-<p>Not hardly.</p>
-<p>We’ll talk about how to narrow the pile and filter out data in the next chapter.</p>
+<p>Now that we’ve gotten a look, we can use <code>case_when</code> to give our new category column a value using some standard numeric logic:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>maryland_winred_categories <span class="ot">&lt;-</span> maryland_winred <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">amount_category =</span> <span class="fu">case_when</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        amount <span class="sc">&lt;</span> <span class="dv">100</span> <span class="sc">~</span> <span class="st">"Less than $100"</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        amount <span class="sc">&gt;=</span> <span class="dv">100</span> <span class="sc">&amp;</span> amount <span class="sc">&lt;=</span> <span class="dv">500</span> <span class="sc">~</span> <span class="st">"Between $100 and $500"</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        amount <span class="sc">&gt;</span> <span class="dv">500</span> <span class="sc">&amp;</span> amount <span class="sc">&lt;=</span> <span class="dv">2900</span> <span class="sc">~</span> <span class="st">"Between $501 and $2900"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        amount <span class="sc">&gt;</span> <span class="dv">2900</span> <span class="sc">~</span> <span class="st">"More than $2,900"</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can then use our new <code>amount_category</code> column in group_by statements to make summarizing easier:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>maryland_winred_categories <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(amount_category) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_amount =</span> <span class="fu">sum</span>(amount)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_amount))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  amount_category        total_amount
+  &lt;chr&gt;                         &lt;dbl&gt;
+1 Less than $100              868922.
+2 Between $100 and $500       454152.
+3 Between $501 and $2900      433948.
+4 More than $2,900            132467.</code></pre>
+</div>
+</div>
+<p>The largest category - by far - in dollar amount is the sub-$100 category, which makes sense for an online fundraising platform. Big little money.</p>
+<p>Mutate is there to make your data more useful and to make it easier for you to ask more and better questions of it.</p>
 
 
 </section>
@@ -549,6 +575,21 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -629,12 +670,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./aggregates.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregates</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Aggregates</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./filtering.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Filters and selections</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./workingwithdates.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Working with dates</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
