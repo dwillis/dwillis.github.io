@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Journalism with R and the Tidyverse - 15&nbsp; Aggregates</title>
+<title>Sports Data Analysis and Visualization - 4&nbsp; Aggregates</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -89,7 +89,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./mutating.html" rel="next">
-<link href="./replication.html" rel="prev">
+<link href="./data.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,11 +124,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <body class="nav-sidebar floating">
 
+
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Aggregates</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregates</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -141,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Data Journalism with R and the Tidyverse</a> 
+      <a href="./">Sports Data Analysis and Visualization</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -153,162 +154,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Throwing cold water on hot takes</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./start-story.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Learn a new way to read</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The very basics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./start-math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Newsroom math</span></a>
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data, structures and types</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./start-data-def.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Defining “Data”</span></a>
+  <a href="./aggregates.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./xl-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="./mutating.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Mutating data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./xl-refresher.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An Excel Refresher</span></a>
+  <a href="./filtering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Filters and selections</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./xl-filter-sort.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sorting and filtering to find stories</span></a>
+  <a href="./transforming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./xl-formulas.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Formulas in Google Sheets</span></a>
+  <a href="./significancetests.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance tests</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./xl-practice-noc.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Practice exercise</span></a>
+  <a href="./correlations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations and regression</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ethics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></a>
+  <a href="./multipleregression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multiple regression</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./publicrecords.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Public records</span></a>
+  <a href="./residuals.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Residuals</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./github.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using GitHub</span></a>
+  <a href="./zscores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Z-scores</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">R Basics</span></a>
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Clustering</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./replication.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></a>
+  <a href="./simulations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Simulations</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./aggregates.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Aggregates</span></a>
+  <a href="./barcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Intro to ggplot with bar charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mutating.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mutating data</span></a>
+  <a href="./stackedbars.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Stacked bar charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Working with dates</span></a>
+  <a href="./circularbarcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Circular bar plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./filters.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Filters and selections</span></a>
+  <a href="./wafflecharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Waffle charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></a>
+  <a href="./stepcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Step charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></a>
+  <a href="./dumbbellcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dumbbell and lollipop charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./open-refine.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></a>
+  <a href="./scatterplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Scatterplots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pdfs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></a>
+  <a href="./bubblecharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Bubble charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./merging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Combining and joining</span></a>
+  <a href="./beeswarmplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Beeswarm plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></a>
+  <a href="./bumpcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Bump charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./census.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></a>
+  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tables</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualizing-for-reporting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></a>
+  <a href="./facetwraps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Facet wraps</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualizing-for-publication.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></a>
+  <a href="./cowplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Arranging multiple plots together</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./geographic-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Geographic data basics</span></a>
+  <a href="./encirclingpoints.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Encircling points on a scatterplot</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./geographicanalysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Geographic analysis</span></a>
+  <a href="./textcleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Text cleaning</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./textanalysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">An intro to text analysis</span></a>
+  <a href="./headlines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Headlines</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./basicstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></a>
+  <a href="./annotations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Annotations</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Writing with numbers</span></a>
+  <a href="./finishingtouches.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Finishing touches</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -320,10 +346,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"> <span class="header-section-number">15.1</span> Libraries</a></li>
-  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data"> <span class="header-section-number">15.2</span> Importing data</a></li>
-  <li><a href="#group-by-and-count" id="toc-group-by-and-count" class="nav-link" data-scroll-target="#group-by-and-count"> <span class="header-section-number">15.3</span> Group by and count</a></li>
-  <li><a href="#other-summarization-methods-summing-mean-median-min-and-max" id="toc-other-summarization-methods-summing-mean-median-min-and-max" class="nav-link" data-scroll-target="#other-summarization-methods-summing-mean-median-min-and-max"> <span class="header-section-number">15.4</span> Other summarization methods: summing, mean, median, min and max</a></li>
+  <li><a href="#basic-data-analysis-group-by-and-count" id="toc-basic-data-analysis-group-by-and-count" class="nav-link active" data-scroll-target="#basic-data-analysis-group-by-and-count"> <span class="header-section-number">4.1</span> Basic data analysis: Group By and Count</a></li>
+  <li><a href="#other-aggregates-mean-and-median" id="toc-other-aggregates-mean-and-median" class="nav-link" data-scroll-target="#other-aggregates-mean-and-median"> <span class="header-section-number">4.2</span> Other aggregates: Mean and median</a></li>
+  <li><a href="#even-more-aggregates" id="toc-even-more-aggregates" class="nav-link" data-scroll-target="#even-more-aggregates"> <span class="header-section-number">4.3</span> Even more aggregates</a></li>
   </ul>
 </nav>
     </div>
@@ -332,7 +357,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Aggregates</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregates</span></h1>
 </div>
 
 
@@ -346,339 +371,261 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="libraries" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="libraries"><span class="header-section-number">15.1</span> Libraries</h2>
 <p>R is a statistical programming language that is purpose built for data analysis.</p>
-<p>Base R does a lot, but there are a mountain of external libraries that do things to make R better/easier/more fully featured. We already installed the tidyverse – or you should have if you followed the instructions for the last assignment – which isn’t exactly a library, but a collection of libraries. Together, they make up the Tidyverse. Individually, they are extraordinarily useful for what they do. We can load them all at once using the tidyverse name, or we can load them individually. Let’s start with individually.</p>
-<p>The two libraries we are going to need for this assignment are <code>readr</code> and <code>dplyr</code>. The library <code>readr</code> reads different types of data in. For this assignment, we’re going to read in csv data or Comma Separated Values data. That’s data that has a comma between each column of data.</p>
+<p>Base R does a lot, but there are a mountain of external libraries that do things to make R better/easier/more fully featured. We already installed the tidyverse – or you should have if you followed the instructions for the last assignment – which isn’t exactly a library, but a collection of libraries. Together, they make up the tidyverse. Individually, they are extraordinarily useful for what they do. We can load them all at once using the tidyverse name, or we can load them individually. Let’s start with individually.</p>
+<p>The two libraries we are going to need for this assignment are <code>readr</code> and <code>dplyr</code>. The library <code>readr</code> reads different types of data in as a dataframe. For this assignment, we’re going to read in csv data or Comma Separated Values data. That’s data that has a comma between each column of data.</p>
 <p>Then we’re going to use <code>dplyr</code> to analyze it.</p>
-<p>To use a library, you need to import it. Good practice – one I’m going to insist on – is that you put all your library steps at the top of your notebooks.</p>
+<p>To use a library, you need to import it. Good practice – one I’m going to insist on – is that you put all your library steps at the top of your notebook.</p>
 <p>That code looks like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To load them both, you need to do this:</p>
+<p>To load them both, you need to run that code twice:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-</div>
-<p>But, because those two libraries – and several others that we’re going to use over the course of this class – are so commonly used, there’s a shortcut to loading all of the libraries we’ll need:</p>
+<p>You can keep doing that for as many libraries as you need. I’ve seen notebooks with 10 or more library imports.</p>
+<p>But the tidyverse has a neat little trick. We can load most of the libraries we’ll need for the whole semester with one line:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You can keep doing that for as many libraries as you need.</p>
-</section>
-<section id="importing-data" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="importing-data"><span class="header-section-number">15.2</span> Importing data</h2>
-<p>The first thing we need to do is get some data to work with. We do that by reading it in. In our case, we’re going to read a datatable from an “rds” file, which is a format for storing data with R. Later in the course, we’ll more frequently work with a format called a CSV. A CSV is a stripped down version of a spreadsheet you might open in a program like Excel, in which each column is separated by a comma. RDS files are less common when getting data from other people. But reading in CSVs is less foolproof than reading in rds files, so for now we’ll work with rds.</p>
-<p>The rds file we’re going to read in contains individual campaign contributions from Maryland donors via WinRed, an online fundraising platform used by conservatives. We’ll be working with a slice of the data from earlier this year.</p>
-<p>So step 1 is to import the data. The code to import the data looks like this:</p>
-<p><code>maryland_winred_contributions &lt;- read_rds("maryland_winred.rds")</code></p>
+<p><strong>From now on, if that’s not the first line of your notebook, you’re probably doing it wrong.</strong></p>
+<section id="basic-data-analysis-group-by-and-count" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="basic-data-analysis-group-by-and-count"><span class="header-section-number">4.1</span> Basic data analysis: Group By and Count</h2>
+<p>The first thing we need to do is get some data to work with. We do that by reading it in. In our case, we’re going to read data from a csv file – a comma-separated values file.</p>
+<p>The CSV file we’re going to read from is a <a href="https://www.basketball-reference.com/leagues/NBA_2022_advanced.html">Basketball Reference</a> page of advanced metrics for NBA players this past season. The Sports Reference sites are a godsend of data, a trove of stuff, and we’re going to use it a lot in this class.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sportsdatafiles/nbaadvancedplayers2122.csv">
+  <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
+</a></p></pre>
+<p>So step 2, after setting up our libraries, is most often going to be importing data. In order to analyze data, we need data, so it stands to reason that this would be something we’d do very early.</p>
+<p>The code looks <em>something</em> like this, but hold off copying it just yet:</p>
+<p><code>nbaplayers &lt;- read_csv("~/SportsData/nbaadvancedplayers2122.csv")</code></p>
 <p>Let’s unpack that.</p>
-<p>The first part – <strong>maryland_winred_contributions</strong> – is the name of a variable.</p>
-<p>A <strong>variable</strong> is just a name that we’ll use to refer to some more complex thing. In this case, the more complex thing is the data we’re importing into R that will be stored as a <strong>dataframe</strong>, which is one way R stores data.</p>
-<p>We can call this variable whatever we want. The variable name doesn’t matter, technically. We could use any word. You could use your first name, if you like. Generally, though, we want to give variables names that are descriptive of the thing they refer to. Which is why we’re calling this one <strong>maryland_winred_contributions</strong>. Variable names, by convention are one word all lower case (or two or more words connected by an underscore). You can end a variable with a number, but you can’t start one with a number.</p>
-<p>The <code>&lt;-</code> bit, you’ll recall from the basics, is the <strong>variable assignment operator</strong>. It’s how we know we’re assigning something to a word. Think of the arrow as saying “Take everything on the right of this arrow and stuff it into the thing on the left.” So we’re creating an empty vessel called <strong>maryland_winred_contributions</strong> and stuffing all this data into it.</p>
-<p><strong>read_rds()</strong> is a function, one that only works when we’ve loaded the tidyverse. A <strong>function</strong> is a little bit of computer code that takes in information and follows a series of pre-determined steps and spits it back out. A recipe to make pizza is a kind of function. We might call it <strong>make_pizza()</strong>.</p>
-<p>The function does one thing. It takes a preset collection of ingredients – flour, water, oil, cheese, tomato, salt – and passes them through each step outlined in a recipe, in order. Things like: mix flour and water and oil, knead, let it sit, roll it out, put tomato sauce and cheese on it, bake it in an oven, then take it out.</p>
-<p>The output of our <strong>make pizza()</strong> function is a finished pie.</p>
-<p>We’ll make use of a lot of pre-written functions from the tidyverse and other packages, and even write some of our own. Back to this line of code:</p>
-<p><code>maryland_winred_contributions &lt;- read_rds("maryland_winred.rds")</code></p>
-<p>Inside of the <strong>read_rds()</strong> function, we’ve put the name of the file we want to load. Things we put inside of function, to customize what the function does, are called <strong>arguments</strong>.</p>
-<p>The easiest thing to do, if you are confused about how to find your data, is to put your data in the same folder as as your notebook (you’ll have to save that notebook first). If you do that, then you just need to put the name of the file in there (maryland_winred.rds). If you put your data in a folder called “data” that sits next to your data notebook, your function would instead look like this:</p>
+<p>The first part – nbaplayers – is the name of your variable. A variable is just a name of a thing that stores stuff. In this case, our variable is a data frame, which is R’s way of storing data (technically it’s a tibble, which is the tidyverse way of storing data, but the differences aren’t important and people use them interchangeably). <strong>We can call this whatever we want.</strong> I always want to name data frames after what is in it. In this case, we’re going to import a dataset of NBA players. Variable names, by convention are one word all lower case. You can end a variable with a number, but you can’t start one with a number.</p>
+<p>The &lt;- bit is the variable assignment operator. It’s how we know we’re assigning something to a word. Think of the arrow as saying “Take everything on the right of this arrow and stuff it into the thing on the left.” So we’re creating an empty vessel called <code>nbaplayers</code> and stuffing all this data into it.</p>
+<p>The <code>read_csv</code> bits are pretty obvious, except for one thing. What happens in the quote marks is the path to the data. In there, I have to tell R where it will find the data. The easiest thing to do, if you are confused about how to find your data, is to put your data in the same folder as as your notebook (you’ll have to save that notebook first). If you do that, then you just need to put the name of the file in there (nbaadvancedplayers2122.csv). In my case, in my home directory (that’s the <code>~</code> part), there is a folder called SportsData that has the file called nbaadvancedplayers2122.csv in it. Some people – insane people – leave the data in their downloads folder. The data path then would be <code>~/Downloads/nameofthedatafilehere.csv</code> on PC or Mac.</p>
+<p><strong>What you put in there will be different from mine</strong>. So your first task is to import the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>maryland_winred_contributions <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/maryland_winred.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>In this data set, each row represents an individual contribution to a federal political committee, typically a candidate’s campaign account.</p>
-<p>After loading the data, it’s a good idea to get a sense of its shape. What does it look like? There are several ways we can examine it.</p>
-<p>By looking in the R Studio environment window, we can see the number of rows (called “obs.”, which is short for observations), and the number of columns(called variables). We can double click on the dataframe name in the environment window, and explore it like a spreadsheet.</p>
-<p>There are several useful functions for getting a sense of the dataset right in our markdown document.</p>
-<p>If we run <code>glimpse(maryland_winred_contributions)</code>, it will give us a list of the columns, the data type for each column and and the first few values for each column.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(maryland_winred_contributions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 54,247
-Columns: 24
-$ linenumber       &lt;chr&gt; "SA11AI", "SA11AI", "SA11AI", "SA11AI", "SA11AI", "SA…
-$ fec_committee_id &lt;chr&gt; "C00694323", "C00694323", "C00694323", "C00694323", "…
-$ tran_id          &lt;chr&gt; "A9EF36684A71C4FF097A", "A64BB5021801F42B386B", "A583…
-$ flag_orgind      &lt;chr&gt; "IND", "IND", "IND", "IND", "IND", "IND", "IND", "IND…
-$ org_name         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ last_name        &lt;chr&gt; "Hansher", "Leishman", "Bode", "Gallagher", "Bode", "…
-$ first_name       &lt;chr&gt; "Beth", "Alexander", "John", "Daniel", "Denise", "Joe…
-$ middle_name      &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ prefix           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ suffix           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ address_one      &lt;chr&gt; "7205 Arrowood Rd", "1021 Gadsden Ave", "29389 Catalp…
-$ address_two      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ city             &lt;chr&gt; "Bethesda", "Silver Spring", "Easton", "Towson", "Eas…
-$ state            &lt;chr&gt; "MD", "MD", "MD", "MD", "MD", "MD", "MD", "MD", "MD",…
-$ zip              &lt;dbl&gt; 20817, 20905, 21601, 21204, 21601, 20815, 21502, 2081…
-$ prigen           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ date             &lt;date&gt; 2022-06-01, 2022-05-25, 2022-06-16, 2022-04-05, 2022…
-$ amount           &lt;dbl&gt; 5800.00, 5800.00, 5800.00, 5800.00, 5800.00, 5800.00,…
-$ aggregate_amount &lt;dbl&gt; 5800.00, 22300.00, 11600.00, 17900.00, 17650.00, 1450…
-$ employer         &lt;chr&gt; "INFORMATION REQUESTED", "RIVER", "CORN REFINERS ASSO…
-$ occupation       &lt;chr&gt; "HOMEMAKER", "CEO", "ASSOCIATION EXECUTIVE", "CLO", "…
-$ memo_code        &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ memo_text        &lt;chr&gt; "Earmarked for BLAKE MASTERS FOR SENATE (C00784165)",…
-$ cycle            &lt;dbl&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022,…</code></pre>
-</div>
-</div>
-<p>If we type <code>head(maryland_winred_contributions)</code>, it will print out the columns and the first six rows of data.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(maryland_winred_contributions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 24
-  linenu…¹ fec_c…² tran_id flag_…³ org_n…⁴ last_…⁵ first…⁶ middl…⁷ prefix suffix
-  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;lgl&gt;  &lt;lgl&gt; 
-1 SA11AI   C00694… A9EF36… IND     NA      Hansher Beth    NA      NA     NA    
-2 SA11AI   C00694… A64BB5… IND     NA      Leishm… Alexan… NA      NA     NA    
-3 SA11AI   C00694… A5835B… IND     NA      Bode    John    NA      NA     NA    
-4 SA11AI   C00694… AE3AF0… IND     NA      Gallag… Daniel  NA      NA     NA    
-5 SA11AI   C00694… AC5569… IND     NA      Bode    Denise  NA      NA     NA    
-6 SA11AI   C00694… A2B1EB… IND     NA      Kaplan  Joel    NA      NA     NA    
-# … with 14 more variables: address_one &lt;chr&gt;, address_two &lt;chr&gt;, city &lt;chr&gt;,
-#   state &lt;chr&gt;, zip &lt;dbl&gt;, prigen &lt;lgl&gt;, date &lt;date&gt;, amount &lt;dbl&gt;,
-#   aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;, occupation &lt;chr&gt;, memo_code &lt;lgl&gt;,
-#   memo_text &lt;chr&gt;, cycle &lt;dbl&gt;, and abbreviated variable names ¹​linenumber,
-#   ²​fec_committee_id, ³​flag_orgind, ⁴​org_name, ⁵​last_name, ⁶​first_name,
-#   ⁷​middle_name</code></pre>
-</div>
-</div>
-<p>We can also click on the data name in the R Studio environment window to explore it interactively.</p>
-</section>
-<section id="group-by-and-count" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="group-by-and-count"><span class="header-section-number">15.3</span> Group by and count</h2>
-<p>So what if we wanted to know how many contributions went to each recipient?</p>
-<p>To do that by hand, we’d have to take each of the 54,247 individual rows (or observations or records) and sort them into a pile. We’d put them in groups – one for each recipient – and then count them.</p>
-<p><code>dplyr</code> has a group by function in it that does just this. A massive amount of data analysis involves grouping like things together and then doing simple things like counting them, or averaging them together. So it’s a good place to start.</p>
-<p>So to do this, we’ll take our dataset and we’ll introduce a new operator: <code>%&gt;%</code>. The best way to read that operator, in my opinion, is to interpret that as “and then do this.”</p>
-<p>We’re going to establish a pattern that will come up again and again throughout this book: <code>data %&gt;% function</code>. In English: take your data set and then do this specific action to it.</p>
-<p>The first step of every analysis starts with the data being used. Then we apply functions to the data.</p>
-<p>In our case, the pattern that you’ll use many, many times is: <code>data %&gt;% group_by(COLUMN NAME) %&gt;% summarize(VARIABLE NAME = AGGREGATE FUNCTION(COLUMN NAME))</code></p>
-<p>In our dataset, the column with recipient information is called “memo_text”</p>
-<p>Here’s the code to count the number of contributions to each recipient:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>maryland_winred_contributions <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(memo_text) <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count_contribs =</span> <span class="fu">n</span>()</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 519 × 2
-   memo_text                                           count_contribs
-   &lt;chr&gt;                                                        &lt;int&gt;
- 1 Earmarked for ABRAHAM LINCOLN PAC (C00631051)                    3
- 2 Earmarked for ADRIAN SMITH FOR CONGRESS (C00412890)              2
- 3 Earmarked for AL FOR MONTANA (C00783381)                         1
- 4 Earmarked for ALAMO PAC (C00387464)                              1
- 5 Earmarked for ALAN SIMS FOR CONGRESS (C00784975)                 2
- 6 Earmarked for ALASKANS FOR DAN SULLIVAN (C00570994)              5
- 7 Earmarked for ALASKANS FOR NICK BEGICH (C00792341)               1
- 8 Earmarked for ALEK FOR OREGON (C00715854)                      121
- 9 Earmarked for ALEX FOR CONGRESS (C00771279)                      3
-10 Earmarked for ALLCORN FOR COLORADO (C00798983)                   2
-# … with 509 more rows</code></pre>
-</div>
-</div>
-<p>So let’s walk through that.</p>
-<p>We start with our dataset – <code>maryland_winred_contributions</code> – and then we tell it to group the data by a given field in the data. In this case, we wanted to group together all the recipients, signified by the field name <code>memo_text</code>, which you could get from using the glimpse() function. After we group the data, we need to count them up.</p>
-<p>In dplyr, we use the <code>summarize()</code> function, <a href="http://dplyr.tidyverse.org/reference/summarise.html">which can do alot more than just count things</a>.</p>
-<p>Inside the parentheses in summarize, we set up the summaries we want. In this case, we just want a count of the number of loans for each county grouping. The line of code <code>count_contribs = n(),</code> says create a new field, called <code>count_contribs</code> and set it equal to <code>n()</code>. <code>n()</code> is a function that counts the number of rows or records in each group. Why the letter n? The letter n is a common symbol used to denote a count of something. The number of things (or rows or observations or records) in a dataset? Statisticians call it n.&nbsp;There are n number of contributions in this dataset.</p>
-<p>When we run that, we get a list of recipients with a count next to them. But it’s not in any order.</p>
-<p>So we’ll add another “and then do this” symbol – %&gt;% – and use a new function called <code>arrange()</code>. Arrange does what you think it does – it arranges data in order. By default, it’s in ascending order – smallest to largest. But if we want to know the county with the most loans, we need to sort it in descending order. That looks like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>maryland_winred_contributions <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(memo_text) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count_contribs =</span> <span class="fu">n</span>()</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count_contribs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 519 × 2
-   memo_text                                                          count_co…¹
-   &lt;chr&gt;                                                                   &lt;int&gt;
- 1 Earmarked for SAVE AMERICA JOINT FUNDRAISING COMMITTEE (C00770941)       7809
- 2 Earmarked for NRSC (C00027466)                                           6497
- 3 Earmarked for REPUBLICAN NATIONAL COMMITTEE (C00003418)                  4268
- 4 Earmarked for NRCC (C00075820)                                           3945
- 5 Earmarked for TEAM SCALISE (C00750521)                                   2477
- 6 Earmarked for KEVIN MCCARTHY FOR CONGRESS (C00420935)                    1461
- 7 Earmarked for MARCO RUBIO FOR SENATE (C00620518)                         1326
- 8 Earmarked for RON JOHNSON FOR SENATE, INC. (C00482984)                    974
- 9 Earmarked for JOHN KENNEDY FOR US (C00608398)                             955
-10 Earmarked for TIM SCOTT FOR SENATE (C00540302)                            915
-# … with 509 more rows, and abbreviated variable name ¹​count_contribs</code></pre>
-</div>
-</div>
-<p>The Save America Joint Fundraising Committee has 7,809 contributions, more than any other recipient.</p>
-<p>We can, if we want, group by more than one thing.</p>
-<p>The WinRed data contains a column detailing the date of the contribution: “date”.</p>
-<p>We can group by “memo_text” and “date” to see how many contributions occurred on every date to every recipient. We’ll sort by recipient and then date</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>maryland_winred_contributions <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(memo_text, date) <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count_contribs =</span> <span class="fu">n</span>()</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(memo_text, date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/nbaadvancedplayers2122.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'memo_text'. You can override using the
-`.groups` argument.</code></pre>
+<pre><code>New names:
+Rows: 812 Columns: 29
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: "," chr
+(3): Player, Pos, Tm dbl (24): Rk, Age, G, MP, PER, TS%, 3PAr, FTr, ORB%, DRB%,
+TRB%, AST%, STL%,... lgl (2): ...20, ...25
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...20`
+• `` -&gt; `...25`</code></pre>
+</div>
+</div>
+<p>Now we can inspect the data we imported. What does it look like? To do that, we use <code>head(nbaplayers)</code> to show the headers and <strong>the first six rows of data</strong>. If we wanted to see them all, we could just simply enter <code>nbaplayers</code> and run it.</p>
+<p>To get the number of records in our dataset, we run <code>nrow(nbaplayers)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nbaplayers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 29
+     Rk Player     Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
+  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1     1 Precious … C        22 TOR      73  1725  12.7 0.503  0.259 0.217    8.7
+2     2 Steven Ad… C        28 MEM      76  1999  17.6 0.56   0.003 0.518   17.9
+3     3 Bam Adeba… C        24 MIA      56  1825  21.8 0.608  0.008 0.466    8.7
+4     4 Santi Ald… PF       21 MEM      32   360  10.2 0.452  0.364 0.242    9.4
+5     5 LaMarcus … C        36 BRK      47  1050  19.6 0.604  0.1   0.223    7.8
+6     6 Nickeil A… SG       23 TOT      65  1466  10.5 0.475  0.497 0.16     2.7
+# … with 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;,
+#   `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, ...20 &lt;lgl&gt;,
+#   OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;,
+#   DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(nbaplayers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 812</code></pre>
+</div>
+</div>
+<p>Another way to look at nrow – we have 812 players from this season in our dataset.</p>
+<p>What if we wanted to know how many players there were by position? To do that by hand, we’d have to take each of the 651 records and sort them into a pile. We’d put them in groups and then count them.</p>
+<p><code>dplyr</code> has a <strong>group by</strong> function in it that does just this. A massive amount of data analysis involves grouping like things together at some point. So it’s a good place to start.</p>
+<p>So to do this, we’ll take our dataset and we’ll introduce a new operator: %&gt;%. The best way to read that operator, in my opinion, is to interpret that as “and then do this.”</p>
+<p>After we group them together, we need to count them. We do that first by saying we want to summarize our data (a count is a part of a summary). To get a summary, we have to tell it what we want. So in this case, we want a count. To get that, let’s create a thing called total and set it equal to n(), which is <code>dplyr</code>s way of counting something.</p>
+<p>Here’s the code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Pos) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">total =</span> <span class="fu">n</span>()</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 2
+   Pos   total
+   &lt;chr&gt; &lt;int&gt;
+ 1 C       130
+ 2 C-PF      2
+ 3 PF      152
+ 4 PF-SF     1
+ 5 PG      156
+ 6 PG-SG     1
+ 7 SF      157
+ 8 SF-SG     5
+ 9 SG      199
+10 SG-PG     4
+11 SG-SF     5</code></pre>
+</div>
+</div>
+<p>So let’s walk through that. We start with our dataset – <code>nbaplayers</code> – and then we tell it to group the data by a given field in the data which we get by looking at either the output of <code>head</code> or you can look in the environment where you’ll see <code>nbaplayers</code>.</p>
+<p>In this case, we wanted to group together positions, signified by the field name Pos. After we group the data, we need to count them up. In dplyr, we use <code>summarize</code> <a href="http://dplyr.tidyverse.org/reference/summarise.html">which can do more than just count things</a>. Inside the parentheses in summarize, we set up the summaries we want. In this case, we just want a count of the positions: <code>total = n(),</code> says create a new field, called <code>total</code> and set it equal to <code>n()</code>, which might look weird, but it’s common in stats. The number of things in a dataset? Statisticians call in n.&nbsp;There are n number of players in this dataset. So <code>n()</code> is a function that counts the number of things there are.</p>
+<p>And when we run that, we get a list of positions with a count next to them. But it’s not in any order. So we’ll add another And Then Do This %&gt;% and use <code>arrange</code>. Arrange does what you think it does – it arranges data in order. By default, it’s in ascending order – smallest to largest. But if we want to know the county with the most mountain lion sightings, we need to sort it in descending order. That looks like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Pos) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">total =</span> <span class="fu">n</span>()</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 2
+   Pos   total
+   &lt;chr&gt; &lt;int&gt;
+ 1 SG      199
+ 2 SF      157
+ 3 PG      156
+ 4 PF      152
+ 5 C       130
+ 6 SF-SG     5
+ 7 SG-SF     5
+ 8 SG-PG     4
+ 9 C-PF      2
+10 PF-SF     1
+11 PG-SG     1</code></pre>
+</div>
+</div>
+<p>So the most common position in the NBA? Shooting guard, followed by small forward (although it’s close between SF and point guard).</p>
+<p>We can, if we want, group by more than one thing. Which team has the most of a single position? To do that, we can group by the team – called Tm in the data – and position, or Pos in the data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Tm, Pos) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">total =</span> <span class="fu">n</span>()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Tm'. You can override using the `.groups`
+argument.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 9,194 × 3
-# Groups:   memo_text [519]
-   memo_text                                           date       count_contribs
-   &lt;chr&gt;                                               &lt;date&gt;              &lt;int&gt;
- 1 Earmarked for ABRAHAM LINCOLN PAC (C00631051)       2022-06-27              1
- 2 Earmarked for ABRAHAM LINCOLN PAC (C00631051)       2022-06-28              1
- 3 Earmarked for ABRAHAM LINCOLN PAC (C00631051)       2022-06-30              1
- 4 Earmarked for ADRIAN SMITH FOR CONGRESS (C00412890) 2022-04-01              1
- 5 Earmarked for ADRIAN SMITH FOR CONGRESS (C00412890) 2022-06-27              1
- 6 Earmarked for AL FOR MONTANA (C00783381)            2022-06-04              1
- 7 Earmarked for ALAMO PAC (C00387464)                 2022-05-16              1
- 8 Earmarked for ALAN SIMS FOR CONGRESS (C00784975)    2022-04-23              1
- 9 Earmarked for ALAN SIMS FOR CONGRESS (C00784975)    2022-05-23              1
-10 Earmarked for ALASKANS FOR DAN SULLIVAN (C00570994) 2022-04-22              1
-# … with 9,184 more rows</code></pre>
+<pre><code># A tibble: 161 × 3
+# Groups:   Tm [31]
+   Tm    Pos   total
+   &lt;chr&gt; &lt;chr&gt; &lt;int&gt;
+ 1 TOT   PF       18
+ 2 TOT   SG       18
+ 3 TOT   PG       17
+ 4 TOT   SF       14
+ 5 TOT   C        12
+ 6 BOS   SG        9
+ 7 DAL   PG        9
+ 8 LAC   SG        9
+ 9 POR   SF        9
+10 SAS   SG        9
+# … with 151 more rows</code></pre>
 </div>
 </div>
+<p>So wait, what team is TOT?</p>
+<p>Valuable lesson: whoever collects the data has opinions on how to solve problems. In this case, Basketball Reference, when a player get’s traded, records stats for the player’s first team, their second team, and a combined season total for a team called TOT, meaning Total. Is there a team abbreviated TOT? No.&nbsp;So ignore them here.</p>
+<p>Boston has 8 shooting guards. Dallas has 9 point guards? You can learn a bit about how a team is assembled by looking at these simple counts.</p>
 </section>
-<section id="other-summarization-methods-summing-mean-median-min-and-max" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="other-summarization-methods-summing-mean-median-min-and-max"><span class="header-section-number">15.4</span> Other summarization methods: summing, mean, median, min and max</h2>
-<p>In the last example, we grouped like records together and counted them, but there’s so much more we can to summarize each group.</p>
-<p>Let’s say we wanted to know the total dollar amount of contributions to each recipient? For that, we could use the <code>sum()</code> function to add up all of the loan values in the column “amount”. We put the column we want to total – “amount” – inside the sum() function <code>sum(amount)</code>. Note that we can simply add a new summarize function here, keeping our count_contribs field in our output table.</p>
+<section id="other-aggregates-mean-and-median" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="other-aggregates-mean-and-median"><span class="header-section-number">4.2</span> Other aggregates: Mean and median</h2>
+<p>In the last example, we grouped some data together and counted it up, but there’s so much more you can do. You can do multiple measures in a single step as well.</p>
+<p>Sticking with our NBA player data, we can calculate any number of measures inside summarize. Here, we’ll use R’s built in mean and median functions to calculate … well, you get the idea.</p>
+<p>Let’s look just a the number of minutes each position gets.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>maryland_winred_contributions <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(memo_text) <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count_contribs =</span> <span class="fu">n</span>(),</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_amount =</span> <span class="fu">sum</span>(amount)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_amount))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Pos) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_minutes =</span> <span class="fu">mean</span>(MP),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_minutes =</span> <span class="fu">median</span>(MP)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 519 × 3
-   memo_text                                                     count…¹ total…²
-   &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
- 1 Earmarked for SAVE AMERICA JOINT FUNDRAISING COMMITTEE (C007…    7809 220155.
- 2 Earmarked for NRSC (C00027466)                                   6497 149673.
- 3 Earmarked for NRCC (C00075820)                                   3945 118658.
- 4 Earmarked for REPUBLICAN NATIONAL COMMITTEE (C00003418)          4268 111955.
- 5 Earmarked for NICOLEE AMBROSE FOR CONGRESS (C00812891)            150  67980.
- 6 Earmarked for TEAM SCALISE (C00750521)                           2477  51709.
- 7 Earmarked for PARROTT FOR CONGRESS (C00691931)                    346  45243.
- 8 Earmarked for MARCO RUBIO FOR SENATE (C00620518)                 1326  43279.
- 9 Earmarked for KEVIN MCCARTHY FOR CONGRESS (C00420935)            1461  29612.
-10 Earmarked for RON JOHNSON FOR SENATE, INC. (C00482984)            974  29611.
-# … with 509 more rows, and abbreviated variable names ¹​count_contribs,
-#   ²​total_amount</code></pre>
+<pre><code># A tibble: 11 × 4
+   Pos   count mean_minutes median_minutes
+   &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;          &lt;dbl&gt;
+ 1 C       130         835.           616 
+ 2 C-PF      2        1506.          1506.
+ 3 PF      152         842.           502.
+ 4 PF-SF     1        1940           1940 
+ 5 PG      156         815.           543 
+ 6 PG-SG     1        2419           2419 
+ 7 SF      157         775.           491 
+ 8 SF-SG     5        1074.           935 
+ 9 SG      199         821.           665 
+10 SG-PG     4        1350.          1340.
+11 SG-SF     5         654.           434 </code></pre>
 </div>
 </div>
-<p>We can also calculate the average amount for each recipient – the mean – and the amount that sits at the midpoint of our data – the median.</p>
+<p>So there’s 812 players in the data. Let’s look at shooting guards. The average shooting guard plays 820 minutes and the median is 665 minutes.</p>
+<p>Why?</p>
+<p>Let’s let sort help us.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>maryland_winred_contributions <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(memo_text) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(MP))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 812 × 29
+      Rk Player    Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
+   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1    66 Mikal Br… SF       25 PHO      82  2854  14.4 0.627  0.364 0.183    2.9
+ 2    67 Miles Br… PF       23 CHO      80  2837  17.9 0.593  0.383 0.274    3.3
+ 3   134 DeMar De… PF       32 CHI      76  2743  23.1 0.59   0.093 0.386    2.3
+ 4   526 Jayson T… SF       23 BOS      76  2731  21.8 0.578  0.416 0.3      3.5
+ 5    47 Saddiq B… SF       22 DET      82  2704  14   0.529  0.537 0.224    4.1
+ 6   214 Tyrese H… SG-PG    21 TOT      77  2695  18.2 0.595  0.428 0.209    2.5
+ 7   576 Russell … PG       33 LAL      78  2678  15   0.512  0.215 0.324    4.4
+ 8   602 Trae You… PG       23 ATL      76  2652  25.4 0.603  0.395 0.358    2.1
+ 9   358 Tyrese M… PG       21 PHI      75  2650  16.2 0.594  0.311 0.247    1.1
+10   168 Dorian F… PF       28 DAL      80  2644  12.5 0.604  0.629 0.12     5.1
+# … with 802 more rows, and 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;,
+#   `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;,
+#   ...20 &lt;lgl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;,
+#   OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>The player with the most minutes on the floor is a small forward. So that means there’s Mikal Bridges rolling up 2,854 minutes in a season, and then there’s Boston sensation Justin Jackson. Never heard of Justin Jackson? Might be because he logged two minutes in one game this season.</p>
+<p>That’s a huge difference.</p>
+<p>So when choosing a measure of the middle, you have to ask yourself – could I have extremes? Because a median won’t be sensitive to extremes. It will be the point at which half the numbers are above and half are below. The average or mean will be a measure of the middle, but if you have a bunch of pine riders and then one ironman superstar, the average will be wildly skewed.</p>
+</section>
+<section id="even-more-aggregates" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="even-more-aggregates"><span class="header-section-number">4.3</span> Even more aggregates</h2>
+<p>There’s a ton of things we can do in summarize – we’ll work with more of them as the course progresses – but here’s a few other questions you can ask.</p>
+<p>Which position in the NBA plays the most minutes? And what is the highest and lowest minute total for that position? And how wide is the spread between minutes? We can find that with <code>sum</code> to add up the minutes to get the total minutes, <code>min</code> to find the minimum minutes, <code>max</code> to find the maximum minutes and <code>sd</code> to find the standard deviation in the numbers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Pos) <span class="sc">%&gt;%</span> </span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count_contribs =</span> <span class="fu">n</span>(),</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_amount =</span> <span class="fu">sum</span>(amount),</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_amount =</span> <span class="fu">mean</span>(amount),</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_amount =</span> <span class="fu">median</span>(amount)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count_contribs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">total =</span> <span class="fu">sum</span>(MP), </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avgminutes =</span> <span class="fu">mean</span>(MP), </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">minminutes =</span> <span class="fu">min</span>(MP),</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">maxminutes =</span> <span class="fu">max</span>(MP),</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">stdev =</span> <span class="fu">sd</span>(MP)) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 519 × 5
-   memo_text                                     count…¹ total…² mean_…³ media…⁴
-   &lt;chr&gt;                                           &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1 Earmarked for SAVE AMERICA JOINT FUNDRAISING…    7809 220155.    28.2    20  
- 2 Earmarked for NRSC (C00027466)                   6497 149673.    23.0    12.5
- 3 Earmarked for REPUBLICAN NATIONAL COMMITTEE …    4268 111955.    26.2    18  
- 4 Earmarked for NRCC (C00075820)                   3945 118658.    30.1    25  
- 5 Earmarked for TEAM SCALISE (C00750521)           2477  51709.    20.9    10  
- 6 Earmarked for KEVIN MCCARTHY FOR CONGRESS (C…    1461  29612.    20.3    10  
- 7 Earmarked for MARCO RUBIO FOR SENATE (C00620…    1326  43279.    32.6    20.2
- 8 Earmarked for RON JOHNSON FOR SENATE, INC. (…     974  29611.    30.4    25  
- 9 Earmarked for JOHN KENNEDY FOR US (C00608398)     955  26433.    27.7    15  
-10 Earmarked for TIM SCOTT FOR SENATE (C0054030…     915  29095.    31.8    10  
-# … with 509 more rows, and abbreviated variable names ¹​count_contribs,
-#   ²​total_amount, ³​mean_amount, ⁴​median_amount</code></pre>
+<pre><code># A tibble: 11 × 6
+   Pos    total avgminutes minminutes maxminutes stdev
+   &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
+ 1 SG    163361       821.          1       2499  766.
+ 2 PF    127917       842.          1       2837  793.
+ 3 PG    127159       815.          1       2678  801.
+ 4 SF    121695       775.          2       2854  779.
+ 5 C     108505       835.          2       2476  721.
+ 6 SG-PG   5401      1350.         25       2695 1163.
+ 7 SF-SG   5371      1074.        212       2057  709.
+ 8 SG-SF   3272       654.        104       1791  697.
+ 9 C-PF    3013      1506.        877       2136  890.
+10 PG-SG   2419      2419        2419       2419   NA 
+11 PF-SF   1940      1940        1940       1940   NA </code></pre>
 </div>
 </div>
-<p>We see something interesting here. The mean contribution amount is higher than the median amount in most cases, but the difference isn’t huge. In some cases the mean gets skewed by larger amounts. Examining both the median – which is less sensitive to extreme values – and the mean – which is more sensitive to extreme values – gives you a clearer picture of the composition of the data.</p>
-<p>What about the highest and lowest amounts for each recipient? For that, we can use the <code>min()</code> and <code>max()</code> functions.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>maryland_winred_contributions <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(memo_text) <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count_contribs =</span> <span class="fu">n</span>(),</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_amount =</span> <span class="fu">sum</span>(amount),</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_amount =</span> <span class="fu">mean</span>(amount),</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_amount =</span> <span class="fu">median</span>(amount),</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_amount =</span> <span class="fu">min</span>(amount),</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_amount =</span> <span class="fu">max</span>(amount)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(max_amount))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 519 × 7
-   memo_text                     count…¹ total…² mean_…³ media…⁴ min_a…⁵ max_a…⁶
-   &lt;chr&gt;                           &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1 Earmarked for ALASKANS FOR D…       5   7304   1461.      500    1       5800
- 2 Earmarked for AMAL FOR CONGR…      30  10442.   348.       25    1       5800
- 3 Earmarked for BLAKE MASTERS …      24   6780    282.       25   10       5800
- 4 Earmarked for FRIENDS OF MIK…     358  17711.    49.5      10    0.5     5800
- 5 Earmarked for FRIENDS OF TOD…      75  14833.   198.        5    0.2     5800
- 6 Earmarked for GALLUCH FOR CO…       1   5800   5800      5800 5800       5800
- 7 Earmarked for KELLY FOR ALAS…      54   7900    146.       25    5       5800
- 8 Earmarked for LAWLER FOR CON…       1   5800   5800      5800 5800       5800
- 9 Earmarked for LAXALT FOR SEN…     334  26920.    80.6      25    0.77    5800
-10 Earmarked for MCHENRY FOR CO…       3   6800   2267.      500  500       5800
-# … with 509 more rows, and abbreviated variable names ¹​count_contribs,
-#   ²​total_amount, ³​mean_amount, ⁴​median_amount, ⁵​min_amount, ⁶​max_amount</code></pre>
-</div>
-</div>
-<p>From this, we can see that some committees focus on small-dollar donors while others ask for (and get) larger amounts. This pattern isn’t random: campaigns make choices about how they will raise money.</p>
-<p>It would be interesting to see what the largest donation was. To do that, we could simply take our original data set and sort it from highest to lowest on the amount.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>maryland_winred_contributions <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(amount))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 54,247 × 24
-   linen…¹ fec_c…² tran_id flag_…³ org_n…⁴ last_…⁵ first…⁶ middl…⁷ prefix suffix
-   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;lgl&gt;  &lt;lgl&gt; 
- 1 SA11AI  C00694… A9EF36… IND     NA      Hansher Beth    NA      NA     NA    
- 2 SA11AI  C00694… A64BB5… IND     NA      Leishm… Alexan… NA      NA     NA    
- 3 SA11AI  C00694… A5835B… IND     NA      Bode    John    NA      NA     NA    
- 4 SA11AI  C00694… AE3AF0… IND     NA      Gallag… Daniel  NA      NA     NA    
- 5 SA11AI  C00694… AC5569… IND     NA      Bode    Denise  NA      NA     NA    
- 6 SA11AI  C00694… A2B1EB… IND     NA      Kaplan  Joel    NA      NA     NA    
- 7 SA11AI  C00694… A2D9CC… IND     NA      Freas   Dustin  NA      NA     NA    
- 8 SA11AI  C00694… A8F4D9… IND     NA      Monahan Tom     NA      NA     NA    
- 9 SA11AI  C00694… A3E262… IND     NA      powers  rick    NA      NA     NA    
-10 SA11AI  C00694… AD5034… IND     NA      JonesL… Brien   NA      NA     NA    
-# … with 54,237 more rows, 14 more variables: address_one &lt;chr&gt;,
-#   address_two &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;dbl&gt;, prigen &lt;lgl&gt;,
-#   date &lt;date&gt;, amount &lt;dbl&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_code &lt;lgl&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;, and
-#   abbreviated variable names ¹​linenumber, ²​fec_committee_id, ³​flag_orgind,
-#   ⁴​org_name, ⁵​last_name, ⁶​first_name, ⁷​middle_name</code></pre>
-</div>
-</div>
-<p>Lots of $5,800 contributions, which probably seems like a weirdly specific number. And it is! That’s the maximum contribution an individual can give for both a primary and a general election.</p>
+<p>So again, no surprise, shooting guards spend the most minutes on the floor in the NBA. They average 820 minutes, but we noted why that’s trouble. The minimum is a one-minute wonder, max is some team failing at load management, and the standard deviation is a measure of how spread out the data is. In this case, not the highest spread among positions, but pretty high. So you know you’ve got some huge minutes players and a bunch of bench players.</p>
 
 
 </section>
@@ -780,13 +727,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./replication.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span>
+      <a href="./data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data, structures and types</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./mutating.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mutating data</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Mutating data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

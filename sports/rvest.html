@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Journalism with R and the Tidyverse - 24&nbsp; Scraping data with Rvest</title>
+<title>Sports Data Analysis and Visualization - 33&nbsp; Intro to rvest</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -88,8 +88,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./census.html" rel="next">
-<link href="./merging.html" rel="prev">
+<link href="./advancedrvest.html" rel="next">
+<link href="./finishingtouches.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,11 +124,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <body class="nav-sidebar floating">
 
+
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Intro to rvest</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -141,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Data Journalism with R and the Tidyverse</a> 
+      <a href="./">Sports Data Analysis and Visualization</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -153,162 +154,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Throwing cold water on hot takes</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./start-story.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Learn a new way to read</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The very basics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./start-math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Newsroom math</span></a>
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data, structures and types</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./start-data-def.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Defining “Data”</span></a>
+  <a href="./aggregates.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./xl-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="./mutating.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Mutating data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./xl-refresher.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An Excel Refresher</span></a>
+  <a href="./filtering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Filters and selections</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./xl-filter-sort.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sorting and filtering to find stories</span></a>
+  <a href="./transforming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./xl-formulas.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Formulas in Google Sheets</span></a>
+  <a href="./significancetests.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance tests</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./xl-practice-noc.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Practice exercise</span></a>
+  <a href="./correlations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations and regression</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ethics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></a>
+  <a href="./multipleregression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multiple regression</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./publicrecords.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Public records</span></a>
+  <a href="./residuals.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Residuals</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./github.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using GitHub</span></a>
+  <a href="./zscores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Z-scores</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">R Basics</span></a>
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Clustering</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./replication.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></a>
+  <a href="./simulations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Simulations</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./aggregates.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Aggregates</span></a>
+  <a href="./barcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Intro to ggplot with bar charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mutating.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mutating data</span></a>
+  <a href="./stackedbars.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Stacked bar charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Working with dates</span></a>
+  <a href="./circularbarcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Circular bar plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./filters.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Filters and selections</span></a>
+  <a href="./wafflecharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Waffle charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></a>
+  <a href="./stepcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Step charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></a>
+  <a href="./dumbbellcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dumbbell and lollipop charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./open-refine.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></a>
+  <a href="./scatterplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Scatterplots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pdfs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></a>
+  <a href="./bubblecharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Bubble charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./merging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Combining and joining</span></a>
+  <a href="./beeswarmplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Beeswarm plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rvest.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></a>
+  <a href="./bumpcharts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Bump charts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./census.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></a>
+  <a href="./tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tables</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualizing-for-reporting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></a>
+  <a href="./facetwraps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Facet wraps</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualizing-for-publication.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></a>
+  <a href="./cowplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Arranging multiple plots together</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./geographic-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Geographic data basics</span></a>
+  <a href="./encirclingpoints.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Encircling points on a scatterplot</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./geographicanalysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Geographic analysis</span></a>
+  <a href="./textcleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Text cleaning</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./textanalysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">An intro to text analysis</span></a>
+  <a href="./headlines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Headlines</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./basicstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></a>
+  <a href="./annotations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Annotations</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Writing with numbers</span></a>
+  <a href="./finishingtouches.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Finishing touches</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rvest.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -316,14 +342,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#a-slightly-more-complicated-example" id="toc-a-slightly-more-complicated-example" class="nav-link active" data-scroll-target="#a-slightly-more-complicated-example"> <span class="header-section-number">33.1</span> A slightly more complicated example</a></li>
+  <li><a href="#an-even-more-complicated-example" id="toc-an-even-more-complicated-example" class="nav-link" data-scroll-target="#an-even-more-complicated-example"> <span class="header-section-number">33.2</span> An even more complicated example</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Intro to rvest</span></h1>
 </div>
 
 
@@ -337,196 +370,178 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Sometimes, governments put data online on a page or in a searchable database. And when you ask them for a copy of the data underneath the website, they say no.</p>
-<p>Why? Because they have a website. That’s it. That’s their reason. They say they don’t have to give you the data because they’ve already given you the data, never mind that they haven’t given to you in a form you can actually load into R with ease.</p>
-<p>Lucky for us, there’s a way for us to write code to get data even when an agency hasn’t made it easy: webscraping.</p>
-<p>One of the most powerful tools you can learn as a data journalist is how to scrape data from the web. Scraping is the process of programming a computer to act like a human that opens a web browser, goes to a website, ingests the HTML from that website into R and turns it into data.</p>
-<p>The degree of difficulty here goes from “Easy” to “So Hard You Want To Throw Your Laptop Out A Window.” And the curve between the two can be steep. You can learn how to scrape “Easy” in a day. The hard ones take a little more time, but it’s often well worth the effort because it lets you get stories you couldn’t get without it.</p>
-<p>In this chapter, we’ll show you an easy one. And in the next chapter, we’ll so you a moderately harder one.</p>
-<p>Let’s start easy.</p>
-<p>We’re going to use a library called <code>rvest</code>, which you can install it the same way we’ve done all installs: go to the console and <code>install.packages("rvest")</code>.</p>
-<p>Like so many R package names, rvest is a bad pun. You’re supposed to read it to sound like “harvest”, as in “harvesting” information from a website the same way you’d harvest crops in a field.</p>
-<p>We’ll load these packages first:</p>
+<p>All the way back in Chapter 2, we used Google Sheets and importHTML to get our own data out of a website. For me, that’s a lot of pointing and clicking and copying and pasting. R has a library that can automate the harvesting of data from HTML on the internet. It’s called <code>rvest</code>.</p>
+<p>Let’s grab <a href="http://www.cfbstats.com/2021/leader/national/team/offense/split01/category09/sort01.html">a simple, basic HTML table from College Football Stats</a>. There’s nothing particularly strange about this table – it’s simply formatted and easy to scrape.</p>
+<p>First we’ll need some libraries. We’re going to use a library called <code>rvest</code>, which you can get by running <code>install.packages('rvest')</code> in the console.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>For this example, we’re going to work on loading a simple table of data from the Maryland State Board of Elections. This is a table of unofficial election results from the July Republican gubernatorial primary election.</p>
-<p>Let’s suppose we can’t find a table like that for download, but we do see a version on the SBOE website at this URL: <a href="https://elections.maryland.gov/elections/2022/primary_results/gen_detail_results_2022_1_1_Republican.html">https://elections.maryland.gov/elections/2022/primary_results/gen_detail_results_2022_1_1_Republican.html</a>.</p>
+<p>The rvest package has functions that make fetching, reading and parsing HTML simple. The first thing we need to do is specify a url that we’re going to scrape.</p>
 <div class="cell">
-<div class="cell-output-display">
-<p><img src="images/rvest1.png" class="img-fluid"></p>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>scoringoffenseurl <span class="ot">&lt;-</span> <span class="st">"http://www.cfbstats.com/2021/leader/national/team/offense/split01/category09/sort01.html"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>We could get this table into R with the following manual steps: highlighting the text, copying it into Excel, saving it as a csv, and reading it into R. Or, we could write a few lines of webscraping code to have R do that for us!</p>
-<p>In this simple example, it’s probably faster to do it manually than have R do it for us. And this table is unlikely to change much in the future.</p>
-<p>Why would we ever write code to grab a single table? There’s several reasons:</p>
-<ol type="1">
-<li>Our methods are transparent. If a colleague wants to run our code from scratch to factcheck our work, they don’t need to repeat the manual steps, which are harder to document than writing code.</li>
-<li>Let’s suppose we wanted to grab the same table every day, to monitor for changes (like, say, a table on a health department website that has COVID case numbers that update every day). Writing a script once, and pressing a single button every day is going to be much more efficient than doing this manually every day.</li>
-<li>If we’re doing it manually, we’re more likely to make a mistake, like maybe failing to copy every row from the whole table.</li>
-<li>It’s good practice to prepare us to do more complex scraping jobs. As we’ll see in the next chapter, if we ever want to grab the same table from hundreds of pages, writing code is much faster and easier than going to a hundred different pages ourselves and downloading data.</li>
-</ol>
-<p>So, to scrape, the first thing we need to do is start with the URL. Let’s store it as an object called naics_url.</p>
+<p>Now, the most difficult part of scraping data from any website is knowing what exact HTML tag you need to grab. In this case, we want a <code>&lt;table&gt;</code> tag that has all of our data table in it. But how do you tell R which one that is? Well, it’s easy, once you know what to do. But it’s not simple. So I’ve made a short video to show you how to find it.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kYkSE3zWa9Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>When you have simple tables, the code is very simple. You create a variable to receive the data, then pass it the url, read the html that was fetched, find the node you need using your XPath value you just copied and you tell rvest that it’s a table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sboe_url <span class="ot">&lt;-</span> <span class="st">"https://elections.maryland.gov/elections/2022/primary_results/gen_detail_results_2022_1_1_Republican.html"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>scoringoffense <span class="ot">&lt;-</span> scoringoffenseurl <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">'//*[@id="content"]/div[2]/table'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>When we go to the web page, we can see a nicely-designed page that contains our information.</p>
-<p>But what we really care about, for our purposes, is the html code that creates that page.</p>
-<p>In our web browser, if we right-click anywhere on the page and select “view source” from the popup menu, we can see the source code. Or you can just copy this into Google Chrome: view-source:https://elections.maryland.gov/elections/2022/primary_results/gen_detail_results_2022_1_1_Republican.html.</p>
-<p>Here’s a picture of what some of the source code looks like.</p>
+<p>What we get from this is … not a dataframe. It’s a list with one element in it, which just so happens to be our dataframe. When you get this, the solution is simple: just overwrite the variable you created with the first list element.</p>
 <div class="cell">
-<div class="cell-output-display">
-<p><img src="images/rvest2.png" class="img-fluid"></p>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>scoringoffense <span class="ot">&lt;-</span> scoringoffense[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>We’ll use those HTML tags – things like <code>&lt;table&gt;</code> and <code>&lt;tr&gt;</code> – to grab the info we need.</p>
-<p>Okay, step 1.</p>
-<p>Let’s write a bit of code to tell R to go to the URL for the page and ingest all of that HTML code. In the code below, we’re starting with our URL and using the read_html() function from rvest to ingest all of the page html, storing it as an object called naics_industry.</p>
+<p>And what do we have?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the html</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> sboe_url <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>()</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># display the html below</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(scoringoffense)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{html_document}
-&lt;html lang="en"&gt;
-[1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
-[2] &lt;body&gt;\n      &lt;div class="container"&gt;\n      &lt;div class="skipNav"&gt;\n      ...</code></pre>
+<pre><code># A tibble: 6 × 10
+     `` Name                 G    TD    FG `1XP` `2XP` Safety Points `Points/G`
+  &lt;int&gt; &lt;chr&gt;            &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt;
+1     1 Ohio State          13    76    20    76     0      1    594       45.7
+2     2 Western Kentucky    14    79    23    72     2      0    619       44.2
+3     3 Pittsburgh          14    76    17    71     0      1    580       41.4
+4     4 Wake Forest         14    72    23    65     4      0    574       41  
+5     5 Coastal Carolina    13    72     9    65     2      2    532       40.9
+6     6 Alabama             15    75    23    71     4      0    598       39.9</code></pre>
 </div>
 </div>
-<p>If you’re running this code in R Studio, in our environment window at right, you’ll see results as a “list of 2”.</p>
-<p>This is not a dataframe, it’s a different type of data structure a “nested list.”</p>
-<p>If we click on the name “results” in our environment window, we can see that it’s pulled in the html and shown us the general page structure. Nested within the <code>&lt;html&gt;</code> tag is the <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code>, the two fundamental sections of most web pages. We’re going to pull information out of the <code>&lt;body&gt;</code> tag in a bit.</p>
+<p>We have data, ready for analysis.</p>
+<section id="a-slightly-more-complicated-example" class="level2" data-number="33.1">
+<h2 data-number="33.1" class="anchored" data-anchor-id="a-slightly-more-complicated-example"><span class="header-section-number">33.1</span> A slightly more complicated example</h2>
+<p>What if we want more than one year in our dataframe?</p>
+<p>This is a common problem. What if we want to look at every scoring offense going back several years? The website has them going back to 2009. How can we combine them?</p>
+<p>First, we should note, that the data does not have anything in it to indicate what year it comes from. So we’re going to have to add that. And we’re going to have to figure out a way to stack two dataframes on top of each other.</p>
+<p>So let’s grab 2020.</p>
 <div class="cell">
-<div class="cell-output-display">
-<p><img src="images/rvest3.png" class="img-fluid"></p>
-</div>
-</div>
-<p>Now, our task is to just pull out the section of the html that contains the information we need.</p>
-<p>But which part do we need from that mess of html code? To figure that out, we can go back to the page in a web browser like chrome, and use built in developer tools to “inspect” the html code underlying the page.</p>
-<p>On the page, find the data we want to grab – “Table 2. NAICS Sectors” - and right click on the word “Sector” in the column header of the table. That will bring up a dropdown menu. Select “Inspect”, which will pop up a window called the “element inspector” that shows us where different elements on the page are located, what html tags created those elements, and other info.</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="images/rvest4.png" class="img-fluid"></p>
-</div>
-</div>
-<p>The entire table that we want of results is actually contained inside an html <code>&lt;table&gt;</code>. It has a <code>&lt;tbody&gt;</code> that contains one row <code>&lt;tr&gt;</code> per county.</p>
-<p>Because it’s inside of a table, and not some other kind of element (like a <code>&lt;div&gt;</code>), rvest has a special function for easily extracting and converting html tables, called html_table(). This function extracts all the html tables on the page, but this page only has one so we’re good.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the html and extract all the tables</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> sboe_url <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># show the dataframe</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
-# A tibble: 25 × 5
-   Jurisdiction     Dan Cox and Gordana Schifanelli\r\…¹ Robin…² Kelly…³ Joe W…⁴
-   &lt;chr&gt;            &lt;chr&gt;                                &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1 Allegany         4,469                                399     2,259   99     
- 2 Anne Arundel     18,039                               711     18,581  513    
- 3 Baltimore City   1,771                                168     2,010   156    
- 4 Baltimore County 18,129                               842     18,247  649    
- 5 Calvert          6,081                                335     3,628   186    
- 6 Caroline         2,533                                49      1,409   39     
- 7 Carroll          10,462                               404     9,997   268    
- 8 Cecil            4,998                                203     3,487   128    
- 9 Charles          3,473                                176     1,709   127    
-10 Dorchester       2,475                                75      916     42     
-# … with 15 more rows, and abbreviated variable names
-#   ¹​`Dan Cox and Gordana Schifanelli\r\n\r\n\r\nRepublican`,
-#   ²​`Robin Ficker and LeRoy F. Yegge, Jr.\r\n\r\n\r\nRepublican`,
-#   ³​`Kelly Schulz and Jeff Woolford\r\n\r\n\r\nRepublican`,
-#   ⁴​`Joe Werner and Minh Thanh Luong\r\n\r\n\r\nRepublican`</code></pre>
-</div>
-</div>
-<p>In the environment window at right, look at results Note that it’s now a “list of 1”.</p>
-<p>This gets a little complicated, but what you’re seeing here is a nested list that contains one data frame – also called tibbles – one for each table that exists on the web page we scraped.</p>
-<p>So, all we need to do now is to store that single dataframe as an object. We can do that with this code, which says “keep only the second dataframe from our nested list.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in all html from table, store all tables on page as nested list of dataframes.</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> sboe_url <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Just keep the first dataframe in our list</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>scoringoffenseurl20 <span class="ot">&lt;-</span> <span class="st">"http://www.cfbstats.com/2020/leader/national/team/offense/split01/category09/sort01.html"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>scoringoffense20 <span class="ot">&lt;-</span> scoringoffenseurl20 <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">'//*[@id="content"]/div[2]/table'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> results[[<span class="dv">1</span>]]</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># show the dataframe</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 25 × 5
-   Jurisdiction     Dan Cox and Gordana Schifanelli\r\…¹ Robin…² Kelly…³ Joe W…⁴
-   &lt;chr&gt;            &lt;chr&gt;                                &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1 Allegany         4,469                                399     2,259   99     
- 2 Anne Arundel     18,039                               711     18,581  513    
- 3 Baltimore City   1,771                                168     2,010   156    
- 4 Baltimore County 18,129                               842     18,247  649    
- 5 Calvert          6,081                                335     3,628   186    
- 6 Caroline         2,533                                49      1,409   39     
- 7 Carroll          10,462                               404     9,997   268    
- 8 Cecil            4,998                                203     3,487   128    
- 9 Charles          3,473                                176     1,709   127    
-10 Dorchester       2,475                                75      916     42     
-# … with 15 more rows, and abbreviated variable names
-#   ¹​`Dan Cox and Gordana Schifanelli\r\n\r\n\r\nRepublican`,
-#   ²​`Robin Ficker and LeRoy F. Yegge, Jr.\r\n\r\n\r\nRepublican`,
-#   ³​`Kelly Schulz and Jeff Woolford\r\n\r\n\r\nRepublican`,
-#   ⁴​`Joe Werner and Minh Thanh Luong\r\n\r\n\r\nRepublican`</code></pre>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>scoringoffense20 <span class="ot">&lt;-</span> scoringoffense20[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>We now have a proper dataframe, albeit with some lengthy column headers.</p>
-<p>From here, we can do a little cleaning. First we’ll use clean_names() to lower the column names. Then use rename() to replace the candidate column names with simpler versions. We can just use the column positions instead of writing out the full names, which is nice.</p>
-<p>Then let’s use slice() to remove the last row – row number 25 – which contains totals and percentages that we don’t need. Finally, we’ll make sure the vote tallies are numbers using mutate and <code>gsub()</code>, which we use to replace all the commas with nothing.</p>
+<p>First, how are we going to know, in the data, which year our data is from? We can use mutate.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in all html from table, get the HTML table.</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> sboe_url <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize column headers, remove last row</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> results[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">cox =</span> <span class="dv">2</span>, <span class="at">ficker =</span> <span class="dv">3</span>, <span class="at">schulz =</span> <span class="dv">4</span>, <span class="at">werner =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cox =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>,<span class="st">""</span>, cox))) <span class="sc">%&gt;%</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ficker =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>,<span class="st">""</span>, ficker))) <span class="sc">%&gt;%</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">schulz =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>,<span class="st">""</span>, schulz))) <span class="sc">%&gt;%</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">werner =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>,<span class="st">""</span>, werner)))</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># show the dataframe</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>scoringoffense20 <span class="ot">&lt;-</span> scoringoffense <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2020</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in initialize(...): attempt to use zero-length variable name</code></pre>
+</div>
+</div>
+<p>Uh oh. Error. What does it say? It’s … not clear, but a hint is that our first column doesn’t have a name. Each column must be named. If you look at our data in the environment tab in the upper right corner, you’ll see that indeed, the first column has no name. It’s the FBS rank of each team. So we can fix that and mutate in the same step. We’ll do that using <code>rename</code> and since the field doesn’t have a name to rename it, we’ll use a position argument. We’ll say rename column 1 as Rank.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>scoringoffense21 <span class="ot">&lt;-</span> scoringoffense <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Rank =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2021</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>scoringoffense20 <span class="ot">&lt;-</span> scoringoffense20 <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Rank =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2020</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And now, to combine the two tables together length-wise – we need to make long data – we’ll use a dpylr function called <code>bind_rows</code>. The good thing is bind_rows is simple.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(scoringoffense21, scoringoffense20)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note in the environment tab we now have a data frame called combined that has 257 observations – which just so happens to be what 127 from 2020 and 130 from 2021 add up to.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 24 × 5
-   jurisdiction       cox ficker schulz werner
-   &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Allegany          4469    399   2259     99
- 2 Anne Arundel     18039    711  18581    513
- 3 Baltimore City    1771    168   2010    156
- 4 Baltimore County 18129    842  18247    649
- 5 Calvert           6081    335   3628    186
- 6 Caroline          2533     49   1409     39
- 7 Carroll          10462    404   9997    268
- 8 Cecil             4998    203   3487    128
- 9 Charles           3473    176   1709    127
-10 Dorchester        2475     75    916     42
-# … with 14 more rows</code></pre>
+<pre><code># A tibble: 6 × 11
+   Rank Name               G    TD    FG `1XP` `2XP` Safety Points Point…¹  YEAR
+  &lt;int&gt; &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1     1 Ohio State        13    76    20    76     0      1    594    45.7  2021
+2     2 Western Kentu…    14    79    23    72     2      0    619    44.2  2021
+3     3 Pittsburgh        14    76    17    71     0      1    580    41.4  2021
+4     4 Wake Forest       14    72    23    65     4      0    574    41    2021
+5     5 Coastal Carol…    13    72     9    65     2      2    532    40.9  2021
+6     6 Alabama           15    75    23    71     4      0    598    39.9  2021
+# … with abbreviated variable name ¹​`Points/G`</code></pre>
 </div>
 </div>
-<p>And there we go. We now have a nice tidy dataframe of Maryland GOP gubernatorial primary results that we could ask some questions of.</p>
+</section>
+<section id="an-even-more-complicated-example" class="level2" data-number="33.2">
+<h2 data-number="33.2" class="anchored" data-anchor-id="an-even-more-complicated-example"><span class="header-section-number">33.2</span> An even more complicated example</h2>
+<p>What do you do when the table has non-standard headers?</p>
+<p>Unfortunately, non-standard means there’s no one way to do it – it’s going to depend on the table and the headers. But here’s one idea: Don’t try to make it work.</p>
+<p>I’ll explain.</p>
+<p>Let’s try to get <a href="https://www.sports-reference.com/cbb/seasons/2022-school-stats.html">season team stats from Sports Reference</a>. If you look at that page, you’ll see the problem right away – the headers span two rows, and they repeat. That’s going to be all kinds of no good. You can’t import that. Dataframes must have names all in one row. If you have two-line headers, you have a problem you have to fix before you can do anything else with it.</p>
+<p>First we’ll grab the page.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.sports-reference.com/cbb/seasons/2022-school-stats.html"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, similar to our example above, we’ll read the html, use XPath to find the table, and then read that table with a directive passed to it setting the header to FALSE. That tells rvest that there isn’t a header row. Just import it as data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> url <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">'//*[@id="basic_school_stats"]'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>(<span class="at">header=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What we get back is a list of one element (similar to above). So let’s pop it out into a data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And we’ll take a look at what we have.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 38
+  X1    X2     X3    X4    X5    X6    X7    X8    X9    X10   X11   X12   X13  
+  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt; &lt;chr&gt;
+1 ""    ""     Over… Over… Over… Over… Over… Over… NA    Conf. Conf. NA    Home 
+2 "Rk"  "Scho… G     W     L     W-L%  SRS   SOS   NA    W     L     NA    W    
+3 "1"   "Abil… 36    25    11    .694  2.25  -2.09 NA    11    7     NA    14   
+4 "2"   "Air … 29    11    18    .379  -5.67 1.33  NA    4     13    NA    7    
+5 "3"   "Akro… 34    24    10    .706  0.91  -3.93 NA    14    6     NA    12   
+6 "4"   "Alab… 30    12    18    .400  -14.… -8.86 NA    10    8     NA    7    
+# … with 25 more variables: X14 &lt;chr&gt;, X15 &lt;lgl&gt;, X16 &lt;chr&gt;, X17 &lt;chr&gt;,
+#   X18 &lt;lgl&gt;, X19 &lt;chr&gt;, X20 &lt;chr&gt;, X21 &lt;lgl&gt;, X22 &lt;chr&gt;, X23 &lt;chr&gt;,
+#   X24 &lt;chr&gt;, X25 &lt;chr&gt;, X26 &lt;chr&gt;, X27 &lt;chr&gt;, X28 &lt;chr&gt;, X29 &lt;chr&gt;,
+#   X30 &lt;chr&gt;, X31 &lt;chr&gt;, X32 &lt;chr&gt;, X33 &lt;chr&gt;, X34 &lt;chr&gt;, X35 &lt;chr&gt;,
+#   X36 &lt;chr&gt;, X37 &lt;chr&gt;, X38 &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>So, that’s not ideal. We have headers and data mixed together, and our columns are named X1 to X38. Also note: They’re all character fields. Because the headers are interspersed with data, it all gets called character data. So we’ve got to first rename each field.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Rank=</span>X1, <span class="at">School=</span>X2, <span class="at">Games=</span>X3, <span class="at">OverallWins=</span>X4, <span class="at">OverallLosses=</span>X5, <span class="at">WinPct=</span>X6, <span class="at">OverallSRS=</span>X7, <span class="at">OverallSOS=</span>X8, <span class="at">Blank1=</span>X9, <span class="at">ConferenceWins=</span>X10, <span class="at">ConferenceLosses=</span>X11, <span class="at">Blank2=</span>X12, <span class="at">HomeWins=</span>X13, <span class="at">HomeLosses=</span>X14, <span class="at">Blank3=</span>X15, <span class="at">AwayWins=</span>X16, <span class="at">AwayLosses=</span>X17, <span class="at">Blank4=</span>X18, <span class="at">ForPoints=</span>X19, <span class="at">OppPoints=</span>X20, <span class="at">Blank5=</span>X21, <span class="at">Minutes=</span>X22, <span class="at">FieldGoalsMade=</span>X23, <span class="at">FieldGoalsAttempted=</span>X24, <span class="at">FieldGoalPCT=</span>X25, <span class="at">ThreePointMade=</span>X26, <span class="at">ThreePointAttempts=</span>X27, <span class="at">ThreePointPct=</span>X28, <span class="at">FreeThrowsMade=</span>X29, <span class="at">FreeThrowsAttempted=</span>X30, <span class="at">FreeThrowPCT=</span>X31, <span class="at">OffensiveRebounds=</span>X32, <span class="at">TotalRebounds=</span>X33, <span class="at">Assists=</span>X34, <span class="at">Steals=</span>X35, <span class="at">Blocks=</span>X36, <span class="at">Turnovers=</span>X37, <span class="at">PersonalFouls=</span>X38)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we have to get rid of those headers interspersed in the data. We can do that with filter that say keep all the stuff that isn’t this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Rank <span class="sc">!=</span> <span class="st">"Rk"</span> <span class="sc">&amp;</span> Games <span class="sc">!=</span> <span class="st">"Overall"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And finally, we need to change the file type of all the fields that need it. We’re going to use a clever little trick, which goes like this: We’re going to use <code>mutate_at</code>, which means mutate these fields. The pattern for <code>mutate_at</code> is <code>mutate_at</code> these variables and do this thing to them. But instead of specifying which of 38 variables we’re going to mutate, we’re going to specify the one we don’t want to change, which is the name of the school. And we just want to convert them to numeric, which is simple. Here’s what it looks like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="sc">-</span>School), as.numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>One last thing: Who needs columns called Blank1, Blank2, Blank3, etc?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"Blank"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And just like that, we have a method for getting up to the minute season stats for every team in Division I.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 33
+   Rank School      Games Overa…¹ Overa…² WinPct Overa…³ Overa…⁴ Confe…⁵ Confe…⁶
+  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1     1 Abilene Ch…    36      25      11  0.694    2.25   -2.09      11       7
+2     2 Air Force      29      11      18  0.379   -5.67    1.33       4      13
+3     3 Akron&nbsp;NCAA     34      24      10  0.706    0.91   -3.93      14       6
+4     4 Alabama A&amp;M    30      12      18  0.4    -14.4    -8.86      10       8
+5     5 UAB&nbsp;NCAA       35      27       8  0.771   10.9    -0.14      14       4
+6     6 Alabama St…    31      10      21  0.323  -12.0    -5.45       8      10
+# … with 23 more variables: HomeWins &lt;dbl&gt;, HomeLosses &lt;dbl&gt;, AwayWins &lt;dbl&gt;,
+#   AwayLosses &lt;dbl&gt;, ForPoints &lt;dbl&gt;, OppPoints &lt;dbl&gt;, Minutes &lt;dbl&gt;,
+#   FieldGoalsMade &lt;dbl&gt;, FieldGoalsAttempted &lt;dbl&gt;, FieldGoalPCT &lt;dbl&gt;,
+#   ThreePointMade &lt;dbl&gt;, ThreePointAttempts &lt;dbl&gt;, ThreePointPct &lt;dbl&gt;,
+#   FreeThrowsMade &lt;dbl&gt;, FreeThrowsAttempted &lt;dbl&gt;, FreeThrowPCT &lt;dbl&gt;,
+#   OffensiveRebounds &lt;dbl&gt;, TotalRebounds &lt;dbl&gt;, Assists &lt;dbl&gt;, Steals &lt;dbl&gt;,
+#   Blocks &lt;dbl&gt;, Turnovers &lt;dbl&gt;, PersonalFouls &lt;dbl&gt;, and abbreviated …</code></pre>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -625,13 +640,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./merging.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Combining and joining</span></span>
+      <a href="./finishingtouches.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Finishing touches</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./census.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./advancedrvest.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Advanced rvest</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
