@@ -373,7 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Can we put some numbers behind that? Can we prove it or not?</p>
 <p>This is what we’re going to start to answer. And we’ll do it with correlations and regressions.</p>
 <p>First, we need data from the 2022 women’s college soccer season.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://raw.githubusercontent.com/dwillis/NCAAWomensSoccerData/main/data/ncaa_womens_soccer_matchstats_2021.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://raw.githubusercontent.com/dwillis/NCAAWomensSoccerData/main/data/ncaa_womens_soccer_matchstats_2022.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Then load the tidyverse.</p>
@@ -382,14 +382,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Now import the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ncaa_womens_soccer_matchstats_2021.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ncaa_womens_soccer_matchstats_2022.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 6368 Columns: 53
+<pre><code>Rows: 2442 Columns: 53
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr   (6): team, opponent, home_away, outcome, goalie_min_plyd, defensive_go...
-dbl  (46): team_score, opponent_score, overtime, games, goals, assists, sh_a...
+chr   (4): team, opponent, home_away, outcome
+dbl  (45): team_score, opponent_score, games, goals, assists, sh_att, so_g, ...
+lgl   (1): overtime
 date  (1): date
+time  (2): goalie_min_plyd, defensive_goalie_min_plyd
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -399,7 +401,7 @@ date  (1): date
 <p>In our case, we want to know how much does a team’s fouls influence the number of goals they score in a season? How much difference can we explain in goals with fouls?</p>
 <p>We’re going to use two different methods here and they’re closely related. Correlations – specifically the Pearson Correlation Coefficient – is a measure of how related two numbers are in a linear fashion. In other words – if our X value goes up one, what happens to Y? If it also goes up 1, that’s a perfect correlation. X goes up 1, Y goes up 1. Every time. Correlation coefficients are a number between 0 and 1, with zero being no correlation and 1 being perfect correlation <strong>if our data is linear</strong>. We’ll soon go over scatterplots to visually determine if our data is linear, but for now, we have a hypothesis: More fouls are bad. Fouls hurt. So if a team gets lots of them, they should have worse outcomes than teams that get few of them. That is an argument for a linear relationship between them.</p>
 <p>But is there one?</p>
-<p>We’re going create a new dataframe called newcorrelations that takes our data that we imported and adds a column called <code>differential</code> because we don’t have separate offense and defense penalties, and then we’ll use correlations to see how related those two things are.</p>
+<p>We’re going create a new dataframe called newcorrelations that takes our data that we imported and adds a column called <code>differential</code> which is the difference between <code>goals</code> and <code>defensive_goals</code>, and then we’ll use correlations to see how related those two things are.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="ot">&lt;-</span> correlations <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -413,7 +415,7 @@ date  (1): date
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1      0.0154</code></pre>
+1      0.0254</code></pre>
 </div>
 </div>
 <p>So on a scale of -1 to 1, where 0 means there’s no relationship at all and 1 or -1 means a perfect relationship, fouls and whether or not the team scores more goals than it gives up are at 0.02543571. You could say they’re 2.5 percent related toward the positive – more fouls, the higher your differential. Another way to say it? They’re 97.5 percent not related.</p>
@@ -425,7 +427,7 @@ date  (1): date
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1     -0.0615</code></pre>
+1     -0.0651</code></pre>
 </div>
 </div>
 <p>So wait, what does this all mean?</p>
@@ -444,16 +446,16 @@ lm(formula = differential ~ fouls, data = newcorrelations)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--15.0243  -1.0628  -0.0435   1.0046  14.9950 
+-10.9841  -1.1060  -0.0538   1.0159  10.9636 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -0.062428   0.078024  -0.800    0.424
-fouls        0.009633   0.007836   1.229    0.219
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -0.10303    0.13403  -0.769    0.442
+fouls        0.01742    0.01386   1.257    0.209
 
-Residual standard error: 2.326 on 6366 degrees of freedom
-Multiple R-squared:  0.0002373, Adjusted R-squared:  8.027e-05 
-F-statistic: 1.511 on 1 and 6366 DF,  p-value: 0.219</code></pre>
+Residual standard error: 2.474 on 2440 degrees of freedom
+Multiple R-squared:  0.000647,  Adjusted R-squared:  0.0002374 
+F-statistic:  1.58 on 1 and 2440 DF,  p-value: 0.2089</code></pre>
 </div>
 </div>
 <p>There’s three things we need here:</p>
@@ -481,7 +483,7 @@ F-statistic: 1.511 on 1 and 6366 DF,  p-value: 0.219</code></pre>
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1       0.599</code></pre>
+1       0.639</code></pre>
 </div>
 </div>
 <p>Answer: 63 percent. Not a perfect relationship, but pretty good. But how meaningful is that relationship and how predictive is it?</p>
@@ -494,19 +496,19 @@ Call:
 lm(formula = differential ~ so_g, data = newcorrelations)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--12.7426  -1.0373   0.1157   1.3097   8.5038 
+    Min      1Q  Median      3Q     Max 
+-9.0733 -1.0733  0.2329  1.2329  7.2688 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -2.257432   0.044825  -50.36   &lt;2e-16 ***
-so_g         0.380592   0.006376   59.69   &lt;2e-16 ***
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -2.35010    0.07011  -33.52   &lt;2e-16 ***
+so_g         0.42345    0.01032   41.03   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.863 on 6366 degrees of freedom
-Multiple R-squared:  0.3588,    Adjusted R-squared:  0.3587 
-F-statistic:  3563 on 1 and 6366 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 1.904 on 2440 degrees of freedom
+Multiple R-squared:  0.4083,    Adjusted R-squared:  0.408 
+F-statistic:  1683 on 1 and 2440 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>First we check p-value. See that e-16? That means scientific notation. That means our number is 2.2 times 10 to the -16 power. So -.000000000000000022. That’s sixteen zeros between the decimal and 22. Is that less than .05? Uh, yeah. So this is really, really, really not random. But anyone who has watched a game of soccer knows this is true. It makes intuitive sense.</p>
