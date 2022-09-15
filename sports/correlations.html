@@ -373,7 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Can we put some numbers behind that? Can we prove it or not?</p>
 <p>This is what we’re going to start to answer. And we’ll do it with correlations and regressions.</p>
 <p>First, we need data from the 2022 women’s college soccer season.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://raw.githubusercontent.com/dwillis/NCAAWomensSoccerData/main/data/ncaa_womens_soccer_matchstats_2022.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://raw.githubusercontent.com/dwillis/NCAAWomensSoccerData/main/data/ncaa_womens_soccer_matchstats_2021.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Then load the tidyverse.</p>
@@ -382,16 +382,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Now import the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ncaa_womens_soccer_matchstats_2022.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ncaa_womens_soccer_matchstats_2021.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 2442 Columns: 53
+<pre><code>Rows: 6368 Columns: 53
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr   (4): team, opponent, home_away, outcome
-dbl  (45): team_score, opponent_score, games, goals, assists, sh_att, so_g, ...
-lgl   (1): overtime
+chr   (6): team, opponent, home_away, outcome, goalie_min_plyd, defensive_go...
+dbl  (46): team_score, opponent_score, overtime, games, goals, assists, sh_a...
 date  (1): date
-time  (2): goalie_min_plyd, defensive_goalie_min_plyd
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -415,10 +413,10 @@ time  (2): goalie_min_plyd, defensive_goalie_min_plyd
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1      0.0254</code></pre>
+1      0.0154</code></pre>
 </div>
 </div>
-<p>So on a scale of -1 to 1, where 0 means there’s no relationship at all and 1 or -1 means a perfect relationship, penalty yards and whether or not the team scores more points than it give up are at 0.02543571. You could say they’re 2.5 percent related toward the positive – more penalties, the higher your differential. Another way to say it? They’re 97.5 percent not related.</p>
+<p>So on a scale of -1 to 1, where 0 means there’s no relationship at all and 1 or -1 means a perfect relationship, fouls and whether or not the team scores more goals than it gives up are at 0.02543571. You could say they’re 2.5 percent related toward the positive – more fouls, the higher your differential. Another way to say it? They’re 97.5 percent not related.</p>
 <p>What about the number of yellow cards instead of fouls? Do more aggressive defensive teams also score more?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">%&gt;%</span> </span>
@@ -427,13 +425,13 @@ time  (2): goalie_min_plyd, defensive_goalie_min_plyd
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1     -0.0651</code></pre>
+1     -0.0615</code></pre>
 </div>
 </div>
 <p>So wait, what does this all mean?</p>
-<p>It means that when you look at every game in college soccer, the number of goals and yellow cards have a negative impact on the score difference between your team and the other team. But the relationship is barely anything at all. Like 93+ percent plus not related. So neither penalties nor yellow cards have much of any relationship with the difference in goal-scoring.</p>
+<p>It means that when you look at every game in college soccer, the number of goals and yellow cards have a negative impact on the score difference between your team and the other team. But the relationship is barely anything at all. Like 93+ percent plus not related. So neither fouls nor yellow cards have much of any relationship with the difference in goal-scoring.</p>
 <p>Normally, at this point, you’d quit while you were ahead. A correlation coefficient that shows there’s no relationship between two things means stop. It’s pointless to go on. But let’s put this fully to rest.</p>
-<p>Enter regression. Regression is how we try to fit our data into a line that explains the relationship the best. Regressions will help us predict things as well – if we have a team that has so many penalties, what kind of point differential could we expect? So regressions are about prediction, correlations are about description. Correlations describe a relationship. Regressions help us predict what that relationship means and what it might look like in the real world. Specifically, it tells us how much of the change in a dependent variable can be explained by the independent variable.</p>
+<p>Enter regression. Regression is how we try to fit our data into a line that explains the relationship the best. Regressions will help us predict things as well – if we have a team that has so many fouls, what kind of point differential could we expect? So regressions are about prediction, correlations are about description. Correlations describe a relationship. Regressions help us predict what that relationship means and what it might look like in the real world. Specifically, it tells us how much of the change in a dependent variable can be explained by the independent variable.</p>
 <p>Another thing regressions do is give us some other tools to evaluate if the relationship is real or not.</p>
 <p>Here’s an example of using linear modeling to look at fouls. Think of the <code>~</code> character as saying “is predicted by”. The output looks like a lot, but what we need is a small part of it.</p>
 <div class="cell">
@@ -446,16 +444,16 @@ lm(formula = differential ~ fouls, data = newcorrelations)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--10.9841  -1.1060  -0.0538   1.0159  10.9636 
+-15.0243  -1.0628  -0.0435   1.0046  14.9950 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -0.10303    0.13403  -0.769    0.442
-fouls        0.01742    0.01386   1.257    0.209
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -0.062428   0.078024  -0.800    0.424
+fouls        0.009633   0.007836   1.229    0.219
 
-Residual standard error: 2.474 on 2440 degrees of freedom
-Multiple R-squared:  0.000647,  Adjusted R-squared:  0.0002374 
-F-statistic:  1.58 on 1 and 2440 DF,  p-value: 0.2089</code></pre>
+Residual standard error: 2.326 on 6366 degrees of freedom
+Multiple R-squared:  0.0002373, Adjusted R-squared:  8.027e-05 
+F-statistic: 1.511 on 1 and 6366 DF,  p-value: 0.219</code></pre>
 </div>
 </div>
 <p>There’s three things we need here:</p>
@@ -465,7 +463,7 @@ F-statistic:  1.58 on 1 and 2440 DF,  p-value: 0.2089</code></pre>
 <li>The third thing we can look at, and we only bother if the first two are meaningful, is the coefficients. In the middle, you can see the (Intercept) is -0.10303 and the fouls coefficient is 0.01742 Remember high school algebra? Remember learning the equation of a line? Remember swearing that learning <code>y=mx+b</code> is stupid because you’ll never need it again? Surprise. It’s useful again. In this case, we could try to predict a team’s score differential in a game – will they score more than they give up – by using <code>y=mx+b</code>. In this case, y is the aggregate score, m is 0.01742 and b is -0.10303 So we would multiply a teams total fouls by 0.01742 and then add -0.10303 to it. The result would tell you what the total aggregate score in the game would be, according to our model. Chance that you’re even close with this? About .08 percent. In other words, you’ve got a 99.92 percent chance of being completely wrong. Did I say we should quit? Yeah.</li>
 </ol>
 <p>So fouls are totally meaningless to the outcome of a game.</p>
-<p>You can see the problem in a graph. On the X axis is penalty yards, on the y is aggregate score. If these elements had a strong relationship, we’d see a clear pattern moving from right to left, sloping down. On the left would be the teams with few penalties and a positive point differential. On right would be teams with high penalty yards and negative point differentials. Do you see that below?</p>
+<p>You can see the problem in a graph. On the X axis is fouls, on the y is point differential. If these elements had a strong relationship, we’d see a clear pattern moving from right to left, sloping down. On the left would be the teams with few fouls and a positive point differential. On right would be teams with high fouls and negative point differentials. Do you see that below?</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="correlations_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
@@ -483,7 +481,7 @@ F-statistic:  1.58 on 1 and 2440 DF,  p-value: 0.2089</code></pre>
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1       0.639</code></pre>
+1       0.599</code></pre>
 </div>
 </div>
 <p>Answer: 63 percent. Not a perfect relationship, but pretty good. But how meaningful is that relationship and how predictive is it?</p>
@@ -496,19 +494,19 @@ Call:
 lm(formula = differential ~ so_g, data = newcorrelations)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--9.0733 -1.0733  0.2329  1.2329  7.2688 
+     Min       1Q   Median       3Q      Max 
+-12.7426  -1.0373   0.1157   1.3097   8.5038 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -2.35010    0.07011  -33.52   &lt;2e-16 ***
-so_g         0.42345    0.01032   41.03   &lt;2e-16 ***
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -2.257432   0.044825  -50.36   &lt;2e-16 ***
+so_g         0.380592   0.006376   59.69   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.904 on 2440 degrees of freedom
-Multiple R-squared:  0.4083,    Adjusted R-squared:  0.408 
-F-statistic:  1683 on 1 and 2440 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 1.863 on 6366 degrees of freedom
+Multiple R-squared:  0.3588,    Adjusted R-squared:  0.3587 
+F-statistic:  3563 on 1 and 6366 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>First we check p-value. See that e-16? That means scientific notation. That means our number is 2.2 times 10 to the -16 power. So -.000000000000000022. That’s sixteen zeros between the decimal and 22. Is that less than .05? Uh, yeah. So this is really, really, really not random. But anyone who has watched a game of soccer knows this is true. It makes intuitive sense.</p>
