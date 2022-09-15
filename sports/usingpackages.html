@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.646">
+<meta name="generator" content="quarto-1.0.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sports Data Analysis and Visualization - 38&nbsp; Using packages to get data</title>
+<title>Sports Data Analysis and Visualization - 37&nbsp; Using packages to get data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -97,7 +97,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Using packages to get data</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -313,32 +313,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rtweet.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></a>
+  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
+  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -350,8 +345,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#using-cfbfastr-as-a-cautionary-tale" id="toc-using-cfbfastr-as-a-cautionary-tale" class="nav-link active" data-scroll-target="#using-cfbfastr-as-a-cautionary-tale"> <span class="header-section-number">38.1</span> Using cfbfastR as a cautionary tale</a></li>
-  <li><a href="#another-example" id="toc-another-example" class="nav-link" data-scroll-target="#another-example"> <span class="header-section-number">38.2</span> Another example</a></li>
+  <li><a href="#using-cfbfastr-as-a-cautionary-tale" id="toc-using-cfbfastr-as-a-cautionary-tale" class="nav-link active" data-scroll-target="#using-cfbfastr-as-a-cautionary-tale"> <span class="header-section-number">37.1</span> Using cfbfastR as a cautionary tale</a></li>
+  <li><a href="#another-example" id="toc-another-example" class="nav-link" data-scroll-target="#another-example"> <span class="header-section-number">37.2</span> Another example</a></li>
   </ul>
 </nav>
     </div>
@@ -360,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Using packages to get data</span></h1>
 </div>
 
 
@@ -388,8 +383,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Not part of the SportsDataverse, but in the same neighborhood, is <a href="https://www.nflfastr.com/">nflfastR</a>, which can provide NFL play-by-play data.</p>
 <p>Because they’re all under development, not all of them can be installed with just a simple <code>install.packages("something")</code>. Some require a little work, some require API keys.</p>
 <p>The main issue for you is to read the documentation carefully.</p>
-<section id="using-cfbfastr-as-a-cautionary-tale" class="level2" data-number="38.1">
-<h2 data-number="38.1" class="anchored" data-anchor-id="using-cfbfastr-as-a-cautionary-tale"><span class="header-section-number">38.1</span> Using cfbfastR as a cautionary tale</h2>
+<section id="using-cfbfastr-as-a-cautionary-tale" class="level2" data-number="37.1">
+<h2 data-number="37.1" class="anchored" data-anchor-id="using-cfbfastr-as-a-cautionary-tale"><span class="header-section-number">37.1</span> Using cfbfastR as a cautionary tale</h2>
 <p>cfbfastR presents us a good view into the promise and peril of libraries like this.</p>
 <p><a href="https://cfbfastr.sportsdataverse.org/">First, to make this work, follow the installation instructions</a> and then follow how to get an API key from College Football Data and how to add that to your environment. But maybe wait to do that until you read the whole section.</p>
 <p>After installations, we can load it up.</p>
@@ -398,8 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cfbfastR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You might be thinking, “Oh wow, I can get play by play data for college football. Let’s look at what are the five most heartbreaking plays of last year’s Maryland season.” Because what better way to determine doom than by looking at the steepest drop-off in win probability, which is included in the data.</p>
-<p>Great idea. Let’s do it.</p>
-<p>The first thing to do is <a href="https://saiemgilani.github.io/cfbfastR/reference/cfbd_pbp_data.html">read the documentation</a>. You’ll see that you can request data for each week. For example, here’s week 2, which is actually Maryland’s third game (the week 0 game is lumped in with week 1).</p>
+<p>Great idea. Let’s do it. You’ll need to make sure that your API key has been added to your environment.</p>
+<p>The first thing to do is <a href="https://cfbfastr.sportsdataverse.org/">read the documentation</a>. You’ll see that you can request data for each week. For example, here’s week 2, which is actually Maryland’s third game (the week 0 game is lumped in with week 1).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>maryland <span class="ot">&lt;-</span> <span class="fu">cfbd_pbp_data</span>(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> <span class="dv">2021</span>,</span>
@@ -409,7 +404,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">epa_wpa =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>• 12:12:53 | Start processing of 1 game...</code></pre>
+<pre><code>• 14:39:00 | Start processing of 1 game...</code></pre>
 </div>
 </div>
 <p>There’s not an easy way to get all of a single team’s games. A way to do it that’s not very pretty but it works is like this:</p>
@@ -452,7 +447,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>── play-by-play data from CollegeFootballData.com ──────────── cfbfastR 1.9.0 ──</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ Data updated: 2022-07-19 12:12:55 EDT</code></pre>
+<pre><code>ℹ Data updated: 2022-09-04 14:39:04 EDT</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 5
@@ -467,8 +462,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>The most heartbreaking play of the season? A third quarter run for no yards against Penn State Next up: A lot of other plays against Penn State.</p>
 </section>
-<section id="another-example" class="level2" data-number="38.2">
-<h2 data-number="38.2" class="anchored" data-anchor-id="another-example"><span class="header-section-number">38.2</span> Another example</h2>
+<section id="another-example" class="level2" data-number="37.2">
+<h2 data-number="37.2" class="anchored" data-anchor-id="another-example"><span class="header-section-number">37.2</span> Another example</h2>
 <p>The wehoop package is mature enough to have a version on CRAN, so you can install it the usual way with <code>install.packages("wehoop")</code>. Another helpful library to install is progressr with <code>install.packages("progressr")</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wehoop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -481,7 +476,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With progressr, you’ll see a progress bar in the console, which lets you know that your command is still working, since some of these requests take minutes to complete. Player box scores is quicker – five seasons was a matter of seconds.</p>
-<p>If you look at the wbb_player_box data we now have, we have each player in each game over each season – more than 300,000 records. Finding out who Nebraska’s top 10 single-season scoring leaders are is a matter of grouping, summing and filtering.</p>
+<p>If you look at the wbb_player_box data we now have, we have each player in each game over each season – more than 300,000 records. Finding out who Maryland’s top 10 single-season scoring leaders are is a matter of grouping, summing and filtering.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>wbb_player_box <span class="sc">%&gt;%</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team_short_display_name <span class="sc">==</span> <span class="st">"Maryland"</span>) <span class="sc">%&gt;%</span> </span>
@@ -491,19 +486,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>, <span class="at">wt=</span>totalPoints)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 3
+<pre><code># A tibble: 11 × 3
    athlete_display_name season totalPoints
    &lt;chr&gt;                 &lt;int&gt;       &lt;dbl&gt;
- 1 Kaila Charles          2018         586
- 2 Angel Reese            2022         567
- 3 Kaila Charles          2019         542
- 4 Ashley Owusu           2021         476
- 5 Kaila Charles          2020         456
- 6 Diamond Miller         2021         448
- 7 Taylor Mikesell        2019         426
- 8 Stephanie Jones        2019         408
- 9 Ashley Owusu           2020         383
-10 Shakira Austin         2020         383</code></pre>
+ 1 Kaila Charles          2018         610
+ 2 Angel Reese            2022         569
+ 3 Kaila Charles          2019         557
+ 4 Ashley Owusu           2021         518
+ 5 Diamond Miller         2021         501
+ 6 Taylor Mikesell        2019         448
+ 7 Kaila Charles          2020         433
+ 8 Stephanie Jones        2019         425
+ 9 Ashley Owusu           2022         385
+10 Chloe Bibby            2021         382
+11 Chloe Bibby            2022         382</code></pre>
 </div>
 </div>
 <p>This just in: Kaila Charles is good at basketball.</p>
@@ -514,6 +510,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -594,7 +605,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./checklist.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Project Checklist</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

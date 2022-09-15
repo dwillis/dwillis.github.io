@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.646">
+<meta name="generator" content="quarto-1.0.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -98,7 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -314,32 +314,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rtweet.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></a>
+  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
+  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -414,26 +409,26 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
 6 Arizona         Pac-12        285713 354973 308355 338017 255791 318051 237194</code></pre>
 </div>
 </div>
-<p>The code to calculate percent change is pretty simple. Remember, with <code>summarize</code>, we used <code>n()</code> to count things. With <code>mutate</code>, we use very similar syntax to calculate a new value using other values in our dataset. So in this case, we’re trying to do (new-old)/old, but we’re doing it with fields. If we look at what we got when we did <code>head</code>, you’ll see there’s `2018` as the new data, and we’ll use `2017` as the old data. So we’re looking at one year. Then, to help us, we’ll use arrange again to sort it, so we get the fastest growing school over one year.</p>
+<p>The code to calculate percent change is pretty simple. Remember, with <code>summarize</code>, we used <code>n()</code> to count things. With <code>mutate</code>, we use very similar syntax to calculate a new value using other values in our dataset. So in this case, we’re trying to do (new-old)/old, but we’re doing it with fields. If we look at what we got when we did <code>head</code>, you’ll see there’s `2019` as the new data, and we’ll use `2018` as the old data. So we’re looking at one year. Then, to help us, we’ll use arrange again to sort it, so we get the fastest growing school over one year.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> (<span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 149 × 10
-   Institution     Conference   `2013` `2014` `2015` `2016` `2017` `2018` `2019`
-   &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Air Force       MWC          228562 168967 156158 177519 174924 166205 162505
- 2 Akron           MAC          107101  55019 108588  62021 117416  92575 107752
- 3 Alabama         SEC          710538 710736 707786 712747 712053 710931 707817
- 4 Appalachian St. FBS Indepen… 149366     NA     NA     NA     NA     NA     NA
- 5 Appalachian St. Sun Belt         NA 138995 128755 156916 154722 131716 166640
- 6 Arizona         Pac-12       285713 354973 308355 338017 255791 318051 237194
- 7 Arizona St.     Pac-12       501509 343073 368985 286417 359660 291091 344161
- 8 Arkansas        SEC          431174 399124 471279 487067 442569 367748 356517
- 9 Arkansas St.    Sun Belt     149477 149163 138043 136200 119538 119001 124017
-10 Army West Point FBS Indepen… 169781 171310 185946 163267 185543 190156 185935
-# … with 139 more rows, and 1 more variable: change &lt;dbl&gt;</code></pre>
+   Institution Confe…¹ `2013` `2014` `2015` `2016` `2017` `2018` `2019`   change
+   &lt;chr&gt;       &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Air Force   MWC     228562 168967 156158 177519 174924 166205 162505 -0.0223 
+ 2 Akron       MAC     107101  55019 108588  62021 117416  92575 107752  0.164  
+ 3 Alabama     SEC     710538 710736 707786 712747 712053 710931 707817 -0.00438
+ 4 Appalachia… FBS In… 149366     NA     NA     NA     NA     NA     NA NA      
+ 5 Appalachia… Sun Be…     NA 138995 128755 156916 154722 131716 166640  0.265  
+ 6 Arizona     Pac-12  285713 354973 308355 338017 255791 318051 237194 -0.254  
+ 7 Arizona St. Pac-12  501509 343073 368985 286417 359660 291091 344161  0.182  
+ 8 Arkansas    SEC     431174 399124 471279 487067 442569 367748 356517 -0.0305 
+ 9 Arkansas S… Sun Be… 149477 149163 138043 136200 119538 119001 124017  0.0422 
+10 Army West … FBS In… 169781 171310 185946 163267 185543 190156 185935 -0.0222 
+# … with 139 more rows, and abbreviated variable name ¹​Conference</code></pre>
 </div>
 </div>
 <p>What do we see right away? Do those numbers look like we expect them to? No.&nbsp;They’re a decimal expressed as a percentage. So let’s fix that by multiplying by 100.</p>
@@ -443,19 +438,19 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 149 × 10
-   Institution     Conference   `2013` `2014` `2015` `2016` `2017` `2018` `2019`
-   &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Air Force       MWC          228562 168967 156158 177519 174924 166205 162505
- 2 Akron           MAC          107101  55019 108588  62021 117416  92575 107752
- 3 Alabama         SEC          710538 710736 707786 712747 712053 710931 707817
- 4 Appalachian St. FBS Indepen… 149366     NA     NA     NA     NA     NA     NA
- 5 Appalachian St. Sun Belt         NA 138995 128755 156916 154722 131716 166640
- 6 Arizona         Pac-12       285713 354973 308355 338017 255791 318051 237194
- 7 Arizona St.     Pac-12       501509 343073 368985 286417 359660 291091 344161
- 8 Arkansas        SEC          431174 399124 471279 487067 442569 367748 356517
- 9 Arkansas St.    Sun Belt     149477 149163 138043 136200 119538 119001 124017
-10 Army West Point FBS Indepen… 169781 171310 185946 163267 185543 190156 185935
-# … with 139 more rows, and 1 more variable: change &lt;dbl&gt;</code></pre>
+   Institution  Confe…¹ `2013` `2014` `2015` `2016` `2017` `2018` `2019`  change
+   &lt;chr&gt;        &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+ 1 Air Force    MWC     228562 168967 156158 177519 174924 166205 162505  -2.23 
+ 2 Akron        MAC     107101  55019 108588  62021 117416  92575 107752  16.4  
+ 3 Alabama      SEC     710538 710736 707786 712747 712053 710931 707817  -0.438
+ 4 Appalachian… FBS In… 149366     NA     NA     NA     NA     NA     NA  NA    
+ 5 Appalachian… Sun Be…     NA 138995 128755 156916 154722 131716 166640  26.5  
+ 6 Arizona      Pac-12  285713 354973 308355 338017 255791 318051 237194 -25.4  
+ 7 Arizona St.  Pac-12  501509 343073 368985 286417 359660 291091 344161  18.2  
+ 8 Arkansas     SEC     431174 399124 471279 487067 442569 367748 356517  -3.05 
+ 9 Arkansas St. Sun Be… 149477 149163 138043 136200 119538 119001 124017   4.22 
+10 Army West P… FBS In… 169781 171310 185946 163267 185543 190156 185935  -2.22 
+# … with 139 more rows, and abbreviated variable name ¹​Conference</code></pre>
 </div>
 </div>
 <p>Now, does this ordering do anything for us? No.&nbsp;Let’s fix that with arrange.</p>
@@ -465,19 +460,19 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(change))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 149 × 10
-   Institution    Conference    `2013` `2014` `2015` `2016` `2017` `2018` `2019`
-   &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Kansas         Big 12        265187 204462 190972 154969 186490 116544 237122
- 2 Coastal Caro.  Sun Belt          NA     NA     NA     NA  89754  53173  90112
- 3 La.-Monroe     Sun Belt       85177  90540  58659  67057  49640  71048 100367
- 4 Virginia       ACC           370234 275243 302994 239576 275788 238232 335040
- 5 Louisiana Tech C-USA          93332 100272 125863 102059 142626  87623 122631
- 6 North Carolina ACC           360500 328000 347500 301500 350500 218111 303000
- 7 Fla. Atlantic  C-USA          72758  70608 105703  60437 151580 102308 140857
- 8 Texas St.      Sun Belt      108371 123589 108998 108717 104680  78689 102840
- 9 New Mexico St. FBS Independ… 112347     NA     NA     NA     NA  68529  89523
-10 San Jose St.   MWC            98174  75340  91869  92515  85235  71276  92374
-# … with 139 more rows, and 1 more variable: change &lt;dbl&gt;</code></pre>
+   Institution   Confe…¹ `2013` `2014` `2015` `2016` `2017` `2018` `2019` change
+   &lt;chr&gt;         &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 Kansas        Big 12  265187 204462 190972 154969 186490 116544 237122  103. 
+ 2 Coastal Caro. Sun Be…     NA     NA     NA     NA  89754  53173  90112   69.5
+ 3 La.-Monroe    Sun Be…  85177  90540  58659  67057  49640  71048 100367   41.3
+ 4 Virginia      ACC     370234 275243 302994 239576 275788 238232 335040   40.6
+ 5 Louisiana Te… C-USA    93332 100272 125863 102059 142626  87623 122631   40.0
+ 6 North Caroli… ACC     360500 328000 347500 301500 350500 218111 303000   38.9
+ 7 Fla. Atlantic C-USA    72758  70608 105703  60437 151580 102308 140857   37.7
+ 8 Texas St.     Sun Be… 108371 123589 108998 108717 104680  78689 102840   30.7
+ 9 New Mexico S… FBS In… 112347     NA     NA     NA     NA  68529  89523   30.6
+10 San Jose St.  MWC      98174  75340  91869  92515  85235  71276  92374   29.6
+# … with 139 more rows, and abbreviated variable name ¹​Conference</code></pre>
 </div>
 </div>
 <p>So who had the most growth in 2019 compared to the year before? Kansas.</p>
@@ -518,25 +513,25 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5,688 × 60
-   Team    Player   `#` Class Pos   Height Weight Hometown `High School` Summary
-   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;  
- 1 Washin… Noah …    32 JR    G     6-3       185 Seattle… Garfield HS   0.6 Pt…
- 2 Troy T… DJ Ro…    34 FR    G     6-1       160 Monroev… Oakman HS     1.0 Pt…
- 3 Syracu… Arthu…    33 SO    G     6-3       185 Walling… Sheehan HS    0.8 Pt…
- 4 Stony … Prest…    12 &lt;NA&gt;  G     6-4       205 Syracus… Jamesville-D… 3.0 Pt…
- 5 USC Tr… Amar …    55 SR    G     5-7       150 Long Be… Fremont HS    3.0 Pt…
- 6 South … Ford …    44 JR    G     6-3       183 Charlot… United Faith… 3.0 Pt…
- 7 UNC Gr… Jevon…    15 &lt;NA&gt;  G     6-3       170 Durham,… &lt;NA&gt;          1.0 Pt…
- 8 New Me… Safi …     2 &lt;NA&gt;  G     5-11      165 Las Cru… &lt;NA&gt;          3.0 Pt…
- 9 New Me… Camer…    20 &lt;NA&gt;  G     6-1       165 Kirtlan… Kirtland HS   0.8 Pt…
-10 Mercer… John …    15 SO    F     6-6       210 Atlanta… Marist School 1.5 Pt…
-# … with 5,678 more rows, and 50 more variables: Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;,
-#   MP &lt;dbl&gt;, FG &lt;dbl&gt;, FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;,
-#   `2P%` &lt;dbl&gt;, `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;,
-#   `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;,
-#   BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;,
-#   `TS%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;, FTr &lt;dbl&gt;, PProd &lt;dbl&gt;,
-#   `ORB%` &lt;dbl&gt;, `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, …</code></pre>
+   Team     Player   `#` Class Pos   Height Weight Homet…¹ High …² Summary  Rk.x
+   &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;
+ 1 Washing… Noah …    32 JR    G     6-3       185 Seattl… Garfie… 0.6 Pt…    13
+ 2 Troy Tr… DJ Ro…    34 FR    G     6-1       160 Monroe… Oakman… 1.0 Pt…    17
+ 3 Syracus… Arthu…    33 SO    G     6-3       185 Wallin… Sheeha… 0.8 Pt…    13
+ 4 Stony B… Prest…    12 &lt;NA&gt;  G     6-4       205 Syracu… Jamesv… 3.0 Pt…    14
+ 5 USC Tro… Amar …    55 SR    G     5-7       150 Long B… Fremon… 3.0 Pt…    13
+ 6 South C… Ford …    44 JR    G     6-3       183 Charlo… United… 3.0 Pt…    16
+ 7 UNC Gre… Jevon…    15 &lt;NA&gt;  G     6-3       170 Durham… &lt;NA&gt;    1.0 Pt…    13
+ 8 New Mex… Safi …     2 &lt;NA&gt;  G     5-11      165 Las Cr… &lt;NA&gt;    3.0 Pt…    15
+ 9 New Mex… Camer…    20 &lt;NA&gt;  G     6-1       165 Kirtla… Kirtla… 0.8 Pt…    15
+10 Mercer … John …    15 SO    F     6-6       210 Atlant… Marist… 1.5 Pt…    14
+# … with 5,678 more rows, 49 more variables: G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;,
+#   FG &lt;dbl&gt;, FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;,
+#   `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;,
+#   ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;,
+#   TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, `TS%` &lt;dbl&gt;,
+#   `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;, FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, `ORB%` &lt;dbl&gt;,
+#   `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
 <p>You’ll be forgiven if you did not hear about USC’s shooting sensation Amar Ross. He played in one game, took one shot and actually hit it. It happened to be a three pointer, which is one more three pointer than I’ve hit in college basketball. So props to him. Does that mean he had the best true shooting season in college basketball in the 2021-22 season?</p>
@@ -549,6 +544,21 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.646">
+<meta name="generator" content="quarto-1.0.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -98,7 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -314,32 +314,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rtweet.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></a>
+  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
+  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -533,25 +528,25 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5,688 × 60
-   Team    Player   `#` Class Pos   Height Weight Hometown `High School` Summary
-   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;  
- 1 Washin… Noah …    32 JR    G     6-3       185 Seattle… Garfield HS   0.6 Pt…
- 2 Troy T… DJ Ro…    34 FR    G     6-1       160 Monroev… Oakman HS     1.0 Pt…
- 3 Syracu… Arthu…    33 SO    G     6-3       185 Walling… Sheehan HS    0.8 Pt…
- 4 Stony … Prest…    12 &lt;NA&gt;  G     6-4       205 Syracus… Jamesville-D… 3.0 Pt…
- 5 USC Tr… Amar …    55 SR    G     5-7       150 Long Be… Fremont HS    3.0 Pt…
- 6 South … Ford …    44 JR    G     6-3       183 Charlot… United Faith… 3.0 Pt…
- 7 UNC Gr… Jevon…    15 &lt;NA&gt;  G     6-3       170 Durham,… &lt;NA&gt;          1.0 Pt…
- 8 New Me… Safi …     2 &lt;NA&gt;  G     5-11      165 Las Cru… &lt;NA&gt;          3.0 Pt…
- 9 New Me… Camer…    20 &lt;NA&gt;  G     6-1       165 Kirtlan… Kirtland HS   0.8 Pt…
-10 Mercer… John …    15 SO    F     6-6       210 Atlanta… Marist School 1.5 Pt…
-# … with 5,678 more rows, and 50 more variables: Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;,
-#   MP &lt;dbl&gt;, FG &lt;dbl&gt;, FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;,
-#   `2P%` &lt;dbl&gt;, `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;,
-#   `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;,
-#   BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;,
-#   `TS%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;, FTr &lt;dbl&gt;, PProd &lt;dbl&gt;,
-#   `ORB%` &lt;dbl&gt;, `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, …</code></pre>
+   Team     Player   `#` Class Pos   Height Weight Homet…¹ High …² Summary  Rk.x
+   &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;
+ 1 Washing… Noah …    32 JR    G     6-3       185 Seattl… Garfie… 0.6 Pt…    13
+ 2 Troy Tr… DJ Ro…    34 FR    G     6-1       160 Monroe… Oakman… 1.0 Pt…    17
+ 3 Syracus… Arthu…    33 SO    G     6-3       185 Wallin… Sheeha… 0.8 Pt…    13
+ 4 Stony B… Prest…    12 &lt;NA&gt;  G     6-4       205 Syracu… Jamesv… 3.0 Pt…    14
+ 5 USC Tro… Amar …    55 SR    G     5-7       150 Long B… Fremon… 3.0 Pt…    13
+ 6 South C… Ford …    44 JR    G     6-3       183 Charlo… United… 3.0 Pt…    16
+ 7 UNC Gre… Jevon…    15 &lt;NA&gt;  G     6-3       170 Durham… &lt;NA&gt;    1.0 Pt…    13
+ 8 New Mex… Safi …     2 &lt;NA&gt;  G     5-11      165 Las Cr… &lt;NA&gt;    3.0 Pt…    15
+ 9 New Mex… Camer…    20 &lt;NA&gt;  G     6-1       165 Kirtla… Kirtla… 0.8 Pt…    15
+10 Mercer … John …    15 SO    F     6-6       210 Atlant… Marist… 1.5 Pt…    14
+# … with 5,678 more rows, 49 more variables: G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;,
+#   FG &lt;dbl&gt;, FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;,
+#   `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;,
+#   ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;,
+#   TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, `TS%` &lt;dbl&gt;,
+#   `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;, FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, `ORB%` &lt;dbl&gt;,
+#   `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
 <p>In that season, USC’s Amar Ross is your One Shot One Three True Shooting champion.</p>
@@ -563,25 +558,25 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP <span class="sc">&gt;</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3,776 × 60
-   Team    Player   `#` Class Pos   Height Weight Hometown `High School` Summary
-   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;  
- 1 VMI Ke… Coope…    15 FR    G     6-5       185 Frisco,… Wakeland HS   4.3 Pt…
- 2 Samfor… Quinn…    13 SO    G     6-5       195 Johns C… Mount Pigsah… 2.8 Pt…
- 3 Detroi… Kyle …     2 SO    G     6-0       180 Detroit… Cass Tech HS  1.0 Pt…
- 4 Pitt P… Danie…     4 SR    F     6-7       220 Bladens… Bladensburg … 3.3 Pt…
- 5 Hofstr… Jarro…     2 SR    F     6-8       220 Crescen… Cushing Acad… 4.2 Pt…
- 6 Cornel… Kelle…    15 SO    F     6-7       190 Plano, … Prestonwood … 8.6 Pt…
- 7 New Me… Virsh…    12 JR    G     6-2       165 Milwauk… Hillcrest Ac… 4.9 Pt…
- 8 Bowlin… Isaac…    12 JR    G     6-4       185 Bowling… Bowling Gree… 2.6 Pt…
- 9 Prince… Max J…    40 SR    G     6-3       195 High Po… Woodberry Fo… 3.1 Pt…
-10 Duke B… Mark …    15 SO    C     7-0       243 Virgini… IMG Academy   11.0 P…
-# … with 3,766 more rows, and 50 more variables: Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;,
-#   MP &lt;dbl&gt;, FG &lt;dbl&gt;, FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;,
-#   `2P%` &lt;dbl&gt;, `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;,
-#   `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;,
-#   BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;,
-#   `TS%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;, FTr &lt;dbl&gt;, PProd &lt;dbl&gt;,
-#   `ORB%` &lt;dbl&gt;, `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, …</code></pre>
+   Team     Player   `#` Class Pos   Height Weight Homet…¹ High …² Summary  Rk.x
+   &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;
+ 1 VMI Key… Coope…    15 FR    G     6-5       185 Frisco… Wakela… 4.3 Pt…     8
+ 2 Samford… Quinn…    13 SO    G     6-5       195 Johns … Mount … 2.8 Pt…     9
+ 3 Detroit… Kyle …     2 SO    G     6-0       180 Detroi… Cass T… 1.0 Pt…    11
+ 4 Pitt Pa… Danie…     4 SR    F     6-7       220 Bladen… Bladen… 3.3 Pt…     9
+ 5 Hofstra… Jarro…     2 SR    F     6-8       220 Cresce… Cushin… 4.2 Pt…     8
+ 6 Cornell… Kelle…    15 SO    F     6-7       190 Plano,… Presto… 8.6 Pt…     4
+ 7 New Mex… Virsh…    12 JR    G     6-2       165 Milwau… Hillcr… 4.9 Pt…    11
+ 8 Bowling… Isaac…    12 JR    G     6-4       185 Bowlin… Bowlin… 2.6 Pt…    13
+ 9 Princet… Max J…    40 SR    G     6-3       195 High P… Woodbe… 3.1 Pt…     7
+10 Duke Bl… Mark …    15 SO    C     7-0       243 Virgin… IMG Ac… 11.0 P…     4
+# … with 3,766 more rows, 49 more variables: G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;,
+#   FG &lt;dbl&gt;, FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;,
+#   `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;,
+#   ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;,
+#   TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, `TS%` &lt;dbl&gt;,
+#   `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;, FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, `ORB%` &lt;dbl&gt;,
+#   `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
 <p>Now you get VMI’s Cooper Sisco, who played in 15 games and was on the floor for 119 minutes. So he played regularly, but not a lot. But in that time, he only attempted 38 shots, and made 63 percent of them. In other words, when he shot, he probably scored. He just rarely shot.</p>
@@ -620,6 +615,21 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

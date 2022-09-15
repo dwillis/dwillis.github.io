@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.646">
+<meta name="generator" content="quarto-1.0.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sports Data Analysis and Visualization - 34&nbsp; Intro to rvest</title>
+<title>Sports Data Analysis and Visualization - 33&nbsp; Intro to rvest</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -89,7 +89,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./advancedrvest.html" rel="next">
-<link href="./rtweet.html" rel="prev">
+<link href="./finishingtouches.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -98,7 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -129,7 +129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Intro to rvest</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -314,32 +314,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rtweet.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></a>
+  <a href="./rvest.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rvest.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a>
+  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -351,8 +346,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#a-slightly-more-complicated-example" id="toc-a-slightly-more-complicated-example" class="nav-link active" data-scroll-target="#a-slightly-more-complicated-example"> <span class="header-section-number">34.1</span> A slightly more complicated example</a></li>
-  <li><a href="#an-even-more-complicated-example" id="toc-an-even-more-complicated-example" class="nav-link" data-scroll-target="#an-even-more-complicated-example"> <span class="header-section-number">34.2</span> An even more complicated example</a></li>
+  <li><a href="#a-slightly-more-complicated-example" id="toc-a-slightly-more-complicated-example" class="nav-link active" data-scroll-target="#a-slightly-more-complicated-example"> <span class="header-section-number">33.1</span> A slightly more complicated example</a></li>
+  <li><a href="#an-even-more-complicated-example" id="toc-an-even-more-complicated-example" class="nav-link" data-scroll-target="#an-even-more-complicated-example"> <span class="header-section-number">33.2</span> An even more complicated example</a></li>
   </ul>
 </nav>
     </div>
@@ -361,7 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Intro to rvest</span></h1>
 </div>
 
 
@@ -416,8 +411,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>We have data, ready for analysis.</p>
-<section id="a-slightly-more-complicated-example" class="level2" data-number="34.1">
-<h2 data-number="34.1" class="anchored" data-anchor-id="a-slightly-more-complicated-example"><span class="header-section-number">34.1</span> A slightly more complicated example</h2>
+<section id="a-slightly-more-complicated-example" class="level2" data-number="33.1">
+<h2 data-number="33.1" class="anchored" data-anchor-id="a-slightly-more-complicated-example"><span class="header-section-number">33.1</span> A slightly more complicated example</h2>
 <p>What if we want more than one year in our dataframe?</p>
 <p>This is a common problem. What if we want to look at every scoring offense going back several years? The website has them going back to 2009. How can we combine them?</p>
 <p>First, we should note, that the data does not have anything in it to indicate what year it comes from. So we’re going to have to add that. And we’re going to have to figure out a way to stack two dataframes on top of each other.</p>
@@ -453,19 +448,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
-   Rank Name            G    TD    FG `1XP` `2XP` Safety Points `Points/G`  YEAR
-  &lt;int&gt; &lt;chr&gt;       &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt;
-1     1 Ohio State     13    76    20    76     0      1    594       45.7  2021
-2     2 Western Ke…    14    79    23    72     2      0    619       44.2  2021
-3     3 Pittsburgh     14    76    17    71     0      1    580       41.4  2021
-4     4 Wake Forest    14    72    23    65     4      0    574       41    2021
-5     5 Coastal Ca…    13    72     9    65     2      2    532       40.9  2021
-6     6 Alabama        15    75    23    71     4      0    598       39.9  2021</code></pre>
+   Rank Name               G    TD    FG `1XP` `2XP` Safety Points Point…¹  YEAR
+  &lt;int&gt; &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1     1 Ohio State        13    76    20    76     0      1    594    45.7  2021
+2     2 Western Kentu…    14    79    23    72     2      0    619    44.2  2021
+3     3 Pittsburgh        14    76    17    71     0      1    580    41.4  2021
+4     4 Wake Forest       14    72    23    65     4      0    574    41    2021
+5     5 Coastal Carol…    13    72     9    65     2      2    532    40.9  2021
+6     6 Alabama           15    75    23    71     4      0    598    39.9  2021
+# … with abbreviated variable name ¹​`Points/G`</code></pre>
 </div>
 </div>
 </section>
-<section id="an-even-more-complicated-example" class="level2" data-number="34.2">
-<h2 data-number="34.2" class="anchored" data-anchor-id="an-even-more-complicated-example"><span class="header-section-number">34.2</span> An even more complicated example</h2>
+<section id="an-even-more-complicated-example" class="level2" data-number="33.2">
+<h2 data-number="33.2" class="anchored" data-anchor-id="an-even-more-complicated-example"><span class="header-section-number">33.2</span> An even more complicated example</h2>
 <p>What do you do when the table has non-standard headers?</p>
 <p>Unfortunately, non-standard means there’s no one way to do it – it’s going to depend on the table and the headers. But here’s one idea: Don’t try to make it work.</p>
 <p>I’ll explain.</p>
@@ -526,21 +522,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 33
-   Rank School      Games OverallWins OverallLosses WinPct OverallSRS OverallSOS
-  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-1     1 Abilene Ch…    36          25            11  0.694       2.25      -2.09
-2     2 Air Force      29          11            18  0.379      -5.67       1.33
-3     3 Akron&nbsp;NCAA     34          24            10  0.706       0.91      -3.93
-4     4 Alabama A&amp;M    30          12            18  0.4       -14.4       -8.86
-5     5 UAB&nbsp;NCAA       35          27             8  0.771      10.9       -0.14
-6     6 Alabama St…    31          10            21  0.323     -12.0       -5.45
-# … with 25 more variables: ConferenceWins &lt;dbl&gt;, ConferenceLosses &lt;dbl&gt;,
-#   HomeWins &lt;dbl&gt;, HomeLosses &lt;dbl&gt;, AwayWins &lt;dbl&gt;, AwayLosses &lt;dbl&gt;,
-#   ForPoints &lt;dbl&gt;, OppPoints &lt;dbl&gt;, Minutes &lt;dbl&gt;, FieldGoalsMade &lt;dbl&gt;,
-#   FieldGoalsAttempted &lt;dbl&gt;, FieldGoalPCT &lt;dbl&gt;, ThreePointMade &lt;dbl&gt;,
-#   ThreePointAttempts &lt;dbl&gt;, ThreePointPct &lt;dbl&gt;, FreeThrowsMade &lt;dbl&gt;,
-#   FreeThrowsAttempted &lt;dbl&gt;, FreeThrowPCT &lt;dbl&gt;, OffensiveRebounds &lt;dbl&gt;,
-#   TotalRebounds &lt;dbl&gt;, Assists &lt;dbl&gt;, Steals &lt;dbl&gt;, Blocks &lt;dbl&gt;, …</code></pre>
+   Rank School      Games Overa…¹ Overa…² WinPct Overa…³ Overa…⁴ Confe…⁵ Confe…⁶
+  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1     1 Abilene Ch…    36      25      11  0.694    2.25   -2.09      11       7
+2     2 Air Force      29      11      18  0.379   -5.67    1.33       4      13
+3     3 Akron&nbsp;NCAA     34      24      10  0.706    0.91   -3.93      14       6
+4     4 Alabama A&amp;M    30      12      18  0.4    -14.4    -8.86      10       8
+5     5 UAB&nbsp;NCAA       35      27       8  0.771   10.9    -0.14      14       4
+6     6 Alabama St…    31      10      21  0.323  -12.0    -5.45       8      10
+# … with 23 more variables: HomeWins &lt;dbl&gt;, HomeLosses &lt;dbl&gt;, AwayWins &lt;dbl&gt;,
+#   AwayLosses &lt;dbl&gt;, ForPoints &lt;dbl&gt;, OppPoints &lt;dbl&gt;, Minutes &lt;dbl&gt;,
+#   FieldGoalsMade &lt;dbl&gt;, FieldGoalsAttempted &lt;dbl&gt;, FieldGoalPCT &lt;dbl&gt;,
+#   ThreePointMade &lt;dbl&gt;, ThreePointAttempts &lt;dbl&gt;, ThreePointPct &lt;dbl&gt;,
+#   FreeThrowsMade &lt;dbl&gt;, FreeThrowsAttempted &lt;dbl&gt;, FreeThrowPCT &lt;dbl&gt;,
+#   OffensiveRebounds &lt;dbl&gt;, TotalRebounds &lt;dbl&gt;, Assists &lt;dbl&gt;, Steals &lt;dbl&gt;,
+#   Blocks &lt;dbl&gt;, Turnovers &lt;dbl&gt;, PersonalFouls &lt;dbl&gt;, and abbreviated …</code></pre>
 </div>
 </div>
 
@@ -550,6 +546,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -629,13 +640,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./rtweet.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Rtweet and Text Analysis</span></span>
+      <a href="./finishingtouches.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Finishing touches</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./advancedrvest.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Advanced rvest</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
