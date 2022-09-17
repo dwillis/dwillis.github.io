@@ -364,8 +364,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>Last chapter, we looked at correlations and linear regression to predict how one element of a game would predict the score. But we know that a single variable, in all but the rarest instances, is not going to be that predictive. We need more than one. Enter multiple regression. Multiple regression lets us add – wait for it – multiple predictors to our equation to help us get a better fit to reality.</p>
-<p>That presents it’s own problems. So let’s get set up. The dataset we’ll use is all college football games between 2011 and 2021.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sportsdatafiles/footballlogs1121.csv">
+<p>That presents it’s own problems. So let’s get set up. The dataset we’ll use is all men’s college basketball games between 2015 and 2021.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sportsdatafiles/cbblogs1521.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>We need the tidyverse.</p>
@@ -374,89 +374,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>And the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/footballlogs1121.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cbblogs1521.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 17292 Columns: 55
+<pre><code>Rows: 64866 Columns: 48
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr   (8): HomeAway, Opponent, Result, TeamFull, TeamURL, Outcome, Team, Con...
-dbl  (46): Game, PassingCmp, PassingAtt, PassingPct, PassingYds, PassingTD, ...
+chr   (8): Season, TeamFull, Opponent, HomeAway, W_L, URL, Conference, Team
+dbl  (39): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
 date  (1): Date
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>One way to show how successful a footballl team was for a game is to show the differential between the team’s score and the opponent’s score. Score a lot more than the opponent = good, score a lot less than the opponent = bad. And, relatively speaking, the more the better. So let’s create that differential. Let’s also get our net yardage stat back. And because we’ll need it later, let’s add the turnover margin.</p>
+<p>One way to show how successful a basketball team was for a game is to show the differential between the team’s score and the opponent’s score. Score a lot more than the opponent = good, score a lot less than the opponent = bad. And, relatively speaking, the more the better. So let’s create that differential. Let’s add in net rebounds. And because we’ll need it later, let’s add the turnover margin.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Differential =</span> TeamScore <span class="sc">-</span> OpponentScore, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">NetYards =</span> OffensiveYards <span class="sc">-</span> DefYards, </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">TurnoverMargin =</span> DefTotalTurnovers <span class="sc">-</span> TotalTurnovers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">NetRebounds =</span> TeamTotalRebounds <span class="sc">-</span> OpponentTotalRebounds,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">TurnoverMargin =</span> TeamTurnovers <span class="sc">-</span> OpponentTurnovers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The linear model code we used before is pretty straight forward. Its <code>field</code> is predicted by <code>field</code>. Here’s a simple linear model that looks at predicting a team’s point differential by looking at their net yards.</p>
+<p>The linear model code we used before is pretty straight forward. Its <code>field</code> is predicted by <code>field</code>. Here’s a simple linear model that looks at predicting a team’s point differential by looking at their net turnovers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>yards <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetYards, <span class="at">data=</span>logs)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(yards)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rebounds <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetRebounds, <span class="at">data=</span>logs)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rebounds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = Differential ~ NetYards, data = logs)
+lm(formula = Differential ~ NetRebounds, data = logs)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--52.107  -8.719   0.008   8.740  64.517 
+-58.671  -8.575  -0.246   8.186  95.090 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 0.4860213  0.0995105   4.884 1.05e-06 ***
-NetYards    0.1048648  0.0005579 187.950  &lt; 2e-16 ***
+(Intercept) -0.041897   0.050740  -0.826    0.409    
+NetRebounds  1.047914   0.005269 198.880   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 13.05 on 17290 degrees of freedom
-Multiple R-squared:  0.6714,    Adjusted R-squared:  0.6714 
-F-statistic: 3.533e+04 on 1 and 17290 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 12.92 on 64861 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.3788,    Adjusted R-squared:  0.3788 
+F-statistic: 3.955e+04 on 1 and 64861 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Remember: There’s a lot here, but only some of it we care about. What is the Adjusted R-squared value? What’s the p-value and is it less than .05? In this case, we can predict 67 percent of the difference in differential with the net yardage in the game.</p>
-<p>To add more predictors to this mix, we merely add them. But it’s not that simple, as you’ll see in a moment. So first, let’s look at adding how well the other team shot to our prediction model:</p>
+<p>Remember: There’s a lot here, but only some of it we care about. What is the Adjusted R-squared value? What’s the p-value and is it less than .05? In this case, we can predict 37 percent of the difference in differential with the net rebounds in the game.</p>
+<p>To add more predictors to this mix, we merely add them. But it’s not that simple, as you’ll see in a moment. So first, let’s look at adding turnover margin to our prediction model:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetYards <span class="sc">+</span> TurnoverMargin, <span class="at">data=</span>logs)</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetRebounds <span class="sc">+</span> TurnoverMargin, <span class="at">data=</span>logs)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = Differential ~ NetYards + TurnoverMargin, data = logs)
+lm(formula = Differential ~ NetRebounds + TurnoverMargin, data = logs)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--40.235  -7.027  -0.013   6.979  40.690 
+-45.840  -6.924  -0.065   6.861  49.158 
 
 Coefficients:
                 Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    0.4575074  0.0804069    5.69 1.29e-08 ***
-NetYards       0.0968307  0.0004585  211.17  &lt; 2e-16 ***
-TurnoverMargin 4.1683996  0.0434749   95.88  &lt; 2e-16 ***
+(Intercept)    -0.084705   0.040531   -2.09   0.0366 *  
+NetRebounds     1.186572   0.004271  277.85   &lt;2e-16 ***
+TurnoverMargin -1.537096   0.008014 -191.81   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 10.55 on 17289 degrees of freedom
-Multiple R-squared:  0.7855,    Adjusted R-squared:  0.7854 
-F-statistic: 3.165e+04 on 2 and 17289 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 10.32 on 64860 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.6036,    Adjusted R-squared:  0.6036 
+F-statistic: 4.939e+04 on 2 and 64860 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>First things first: What is the adjusted R-squared?</p>
 <p>Second: what is the p-value and is it less than .05?</p>
-<p>Third: Compare the residual standard error. We went from 13.05 to 10.55. The meaning of this is both really opaque and also simple – by adding data, we reduced the amount of error in our model. Residual standard error is the total distance between what our model would predict and what we actually have in the data. So lots of residual error means the distance between reality and our model is wider. So the width of our predictive range in this example shrank while we improved the amount of the difference we could predict. That’s good, and not always going to be the case.</p>
-<p>One of the more difficult things to understand about multiple regression is the issue of multicollinearity. What that means is that there is significant correlation overlap between two variables – the two are related to each other as well as to the target output – and all you are doing by adding both of them is adding error with no real value to the R-squared. In pure statistics, we don’t want any multicollinearity at all. Violating that assumption limits the applicability of what you are doing. So if we have some multicollinearity, it limits our scope of application to college football We can’t say this will work for every football league and level everywhere. What we need to do is see how correlated each value is to each other and throw out ones that are highly co-correlated.</p>
+<p>Third: Compare the residual standard error. We went from 12.92 to 10.32. The meaning of this is both really opaque and also simple – by adding data, we reduced the amount of error in our model. Residual standard error is the total distance between what our model would predict and what we actually have in the data. So lots of residual error means the distance between reality and our model is wider. So the width of our predictive range in this example shrank while we improved the amount of the difference we could predict. That’s good, and not always going to be the case.</p>
+<p>One of the more difficult things to understand about multiple regression is the issue of multicollinearity. What that means is that there is significant correlation overlap between two variables – the two are related to each other as well as to the target output – and all you are doing by adding both of them is adding error with no real value to the R-squared. In pure statistics, we don’t want any multicollinearity at all. Violating that assumption limits the applicability of what you are doing. So if we have some multicollinearity, it limits our scope of application to college basketball. We can’t say this will work for every basketball league and level everywhere. What we need to do is see how correlated each value is to each other and throw out ones that are highly co-correlated.</p>
 <p>So to find those, we have to create a correlation matrix that shows us how each value is correlated to our outcome variable, but also with each other. We can do that in the <code>Hmisc</code> library. We install that in the console with <code>install.packages("Hmisc")</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can pass in every numeric value to the Hmisc library and get a correlation matrix out of it, but since we have a large number of values – and many of them character values – we should strip that down and reorder them. So that’s what I’m doing here. I’m saying give me differential first, and then columns 9-24, and then 26-41. Why the skip? There’s a blank column in the middle of the data – a remnant of the scraper I used.</p>
+<p>We can pass in every numeric value to the Hmisc library and get a correlation matrix out of it, but since we have a large number of values – and many of them character values – we should strip that down and reorder them. So that’s what I’m doing here. I’m saying give me all the columns with numeric values, except for Game, and then show me the differential, net yards, turnover margin and then everything else.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>simplelogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Game) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Differential, NetYards, TurnoverMargin, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>simplelogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> <span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Game) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Differential, NetRebounds, TurnoverMargin, TeamFGPCT, TeamTotalRebounds, OpponentFGPCT, OpponentTotalRebounds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Before we proceed, what we’re looking to do is follow the Differential column down, looking for correlation values near 1 or -1. Correlations go from -1, meaning perfect negative correlation, to 0, meaning no correlation, to 1, meaning perfect positive correlation. So we’re looking for numbers near 1 or -1 for their predictive value. BUT: We then need to see if that value is also highly correlated with something else. If it is, we have a decision to make.</p>
 <p>We get our correlation matrix like this:</p>
@@ -465,685 +467,127 @@ F-statistic: 3.165e+04 on 2 and 17289 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cormatrix<span class="sc">$</span>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                  Differential      NetYards TurnoverMargin  PassingCmp
-Differential       1.000000000  0.8193828921   0.4817945770  0.03189462
-NetYards           0.819382892  1.0000000000   0.1827366085  0.19252541
-TurnoverMargin     0.481794577  0.1827366085   1.0000000000 -0.09175875
-PassingCmp         0.031894624  0.1925254141  -0.0917587501  1.00000000
-PassingAtt        -0.193442062 -0.0049667607  -0.1936605946  0.88648831
-PassingPct         0.421075099  0.4188826017   0.1576394821  0.50400102
-PassingYds         0.227177556  0.3686946063  -0.0240542864  0.80496816
-PassingTD          0.417455037  0.3783621756   0.1485348608  0.42204275
-RushingAtt         0.360084341  0.4113849934   0.1948121211 -0.37237558
-RushingYds         0.526916142  0.5496832583   0.1969216415 -0.32927065
-RushingAvg         0.492266420  0.4883165539   0.1519580167 -0.19682596
-RushingTD          0.574259900  0.4728966272   0.2595773700 -0.13523979
-OffensivePlays     0.146569146  0.3819300224  -0.0090676305  0.52992916
-OffensiveYards     0.590401997  0.7226189364   0.1323695404  0.39827882
-OffenseAvg         0.613383438  0.6276006878   0.1647698240  0.15090319
-FirstDownPass      0.180925552  0.3312579689  -0.0504852346  0.85716796
-FirstDownRush      0.458727555  0.5118168604   0.1444863057 -0.24743530
-FirstDownPen      -0.007005960 -0.0154904647  -0.0214868561  0.15697290
-FirstDownTotal     0.467114203  0.6166218760   0.0621309761  0.48968064
-Penalties         -0.017903020  0.0629558958   0.0220774418  0.13324395
-PenaltyYds         0.017976255  0.0936503621   0.0369986640  0.12165628
-Fumbles           -0.144093284 -0.0039235362  -0.4498550354  0.01770088
-Interceptions     -0.344934680 -0.1810303806  -0.5692218839  0.10080226
-TotalTurnovers    -0.351038748 -0.1373891488  -0.7178479005  0.08663908
-TeamScore          0.782606647  0.6393768057   0.3764111701  0.18352285
-OpponentScore     -0.771137655 -0.6337773800  -0.3721890594  0.13757141
-DefPassingCmp     -0.065742099 -0.2227085150   0.0830207421  0.08175611
-DefPassingAtt      0.146932784 -0.0372530270   0.1818797344  0.07447128
-DefPassingPct     -0.417676595 -0.4175332244  -0.1545546756  0.03666536
-DefPassingYds     -0.260766014 -0.3997275463   0.0161196496  0.12429306
-DefPassingTD      -0.420538390 -0.3811614512  -0.1489762764  0.11354670
-DefRushingAtt     -0.359935377 -0.4112852507  -0.1936519381 -0.03730603
-DefRushingYds     -0.521570963 -0.5459501938  -0.1954755564  0.02040017
-DefRushingAvg     -0.485805999 -0.4858354617  -0.1483786567  0.05240827
-DefRushingTD      -0.559507533 -0.4627406315  -0.2559686416  0.06040706
-DefPlays          -0.189246870 -0.4186160157  -0.0003833353  0.03882538
-DefYards          -0.600164346 -0.7304094425  -0.1331557581  0.11544576
-DefAvg            -0.619937584 -0.6395737484  -0.1627010959  0.10958795
-DefFirstDownPass  -0.220163264 -0.3670968244   0.0417268437  0.08909292
-DefFirstDownRush  -0.457149808 -0.5122150780  -0.1445511124 -0.01820746
-DefFirstDownPen   -0.019271882 -0.0076547605   0.0153281866  0.04632885
-DefFirstDownTotal -0.488417807 -0.6333804763  -0.0671511075  0.06281285
-DefPenalties       0.014623485 -0.0646154470  -0.0285450973  0.09448494
-DefPenaltyYds     -0.030490097 -0.1030785810  -0.0461476661  0.10596327
-DefFumbles         0.150496494  0.0056786733   0.4556786879 -0.03908465
-DefInterceptions   0.329298137  0.1638159826   0.5735436517 -0.02745430
-DefTotalTurnovers  0.343625559  0.1261236571   0.7238818567 -0.04583947
-Season            -0.002329276 -0.0002658874  -0.0024626416 -0.02166584
-                    PassingAtt  PassingPct   PassingYds    PassingTD
-Differential      -0.193442062  0.42107510  0.227177556  0.417455037
-NetYards          -0.004966761  0.41888260  0.368694606  0.378362176
-TurnoverMargin    -0.193660595  0.15763948 -0.024054286  0.148534861
-PassingCmp         0.886488307  0.50400102  0.804968162  0.422042746
-PassingAtt         1.000000000  0.09074926  0.686220278  0.272639292
-PassingPct         0.090749256  1.00000000  0.472396660  0.395288884
-PassingYds         0.686220278  0.47239666  1.000000000  0.629186441
-PassingTD          0.272639292  0.39528888  0.629186441  1.000000000
-RushingAtt        -0.465919608  0.02877704 -0.266608219 -0.063945811
-RushingYds        -0.449195199  0.10059964 -0.200978776  0.064570560
-RushingAvg        -0.303951321  0.13318824 -0.081793664  0.150467838
-RushingTD         -0.291698729  0.23913489  0.011304129 -0.031201217
-OffensivePlays     0.554656082  0.11707716  0.430565144  0.210542694
-OffensiveYards     0.209585627  0.46010357  0.655231285  0.559573124
-OffenseAvg        -0.082221057  0.47844207  0.508182385  0.525988785
-FirstDownPass      0.746732132  0.46597133  0.883486913  0.522232057
-FirstDownRush     -0.365598980  0.11963800 -0.163256243  0.063106189
-FirstDownPen       0.196840044 -0.01381127  0.127403081  0.098810995
-FirstDownTotal     0.330730783  0.42853261  0.563779868  0.454840678
-Penalties          0.140105050  0.03501704  0.151175790  0.078755685
-PenaltyYds         0.115616209  0.05431583  0.150611131  0.097490407
-Fumbles            0.029239617 -0.02167409  0.007841798 -0.050135883
-Interceptions      0.255037596 -0.23418785  0.018702145 -0.114332815
-TotalTurnovers     0.209047464 -0.18857914  0.019052148 -0.117907381
-TeamScore         -0.033843974  0.44742008  0.434199508  0.619316744
-OpponentScore      0.269387727 -0.20415294  0.087052720 -0.022649539
-DefPassingCmp      0.081485598  0.02232557  0.123262380  0.093446247
-DefPassingAtt      0.056831463  0.05555851  0.142346274  0.145556240
-DefPassingPct      0.075098401 -0.06938596 -0.003313337 -0.080533635
-DefPassingYds      0.153613111 -0.02272677  0.149956095  0.075617981
-DefPassingTD       0.171507531 -0.08180103  0.097791600  0.035225215
-DefRushingAtt      0.081269071 -0.21235606 -0.035782304 -0.053997404
-DefRushingYds      0.120955351 -0.17661659 -0.008032971 -0.072979224
-DefRushingAvg      0.117202023 -0.11076568  0.011275532 -0.065824127
-DefRushingTD       0.152662666 -0.15166734  0.025210808 -0.036809023
-DefPlays           0.131518193 -0.14240113  0.107196169  0.093450443
-DefYards           0.214262231 -0.15039186  0.114874460  0.006392178
-DefAvg             0.175971717 -0.10417445  0.063801224 -0.059323525
-DefFirstDownPass   0.106872461 -0.01142328  0.118827164  0.066226915
-DefFirstDownRush   0.063486766 -0.15235069 -0.032599487 -0.070851943
-DefFirstDownPen    0.044050302  0.02493714  0.076353807  0.069465654
-DefFirstDownTotal  0.132485214 -0.10963615  0.081154910  0.014349146
-DefPenalties       0.140114524 -0.04378656  0.088499677  0.083509714
-DefPenaltyYds      0.160393719 -0.05548118  0.089222557  0.083371921
-DefFumbles        -0.033278931 -0.01783199 -0.034307069  0.045014429
-DefInterceptions  -0.065866611  0.06814516  0.008803248  0.089880441
-DefTotalTurnovers -0.070790063  0.03938345 -0.015643722  0.096341451
-Season            -0.044569600  0.03441817 -0.002043618  0.005530594
-                     RushingAtt   RushingYds   RushingAvg    RushingTD
-Differential       0.3600843413  0.526916142  0.492266420  0.574259900
-NetYards           0.4113849934  0.549683258  0.488316554  0.472896627
-TurnoverMargin     0.1948121211  0.196921642  0.151958017  0.259577370
-PassingCmp        -0.3723755771 -0.329270655 -0.196825964 -0.135239789
-PassingAtt        -0.4659196079 -0.449195199 -0.303951321 -0.291698729
-PassingPct         0.0287770440  0.100599643  0.133188244  0.239134887
-PassingYds        -0.2666082192 -0.200978776 -0.081793664  0.011304129
-PassingTD         -0.0639458109  0.064570560  0.150467838 -0.031201217
-RushingAtt         1.0000000000  0.734451160  0.359268430  0.487221774
-RushingYds         0.7344511599  1.000000000  0.870643178  0.693492595
-RushingAvg         0.3592684303  0.870643178  1.000000000  0.605350783
-RushingTD          0.4872217737  0.693492595  0.605350783  1.000000000
-OffensivePlays     0.4778214889  0.244706865  0.036088200  0.168578221
-OffensiveYards     0.3503709147  0.608326684  0.605137446  0.543954967
-OffenseAvg         0.1289887560  0.571949319  0.706441295  0.540829592
-FirstDownPass     -0.2375102814 -0.196027729 -0.092364268 -0.002406688
-FirstDownRush      0.7866599010  0.868590123  0.658177887  0.594571946
-FirstDownPen       0.0008338221 -0.068987653 -0.086346687 -0.001505311
-FirstDownTotal     0.4021363502  0.473908999  0.390784825  0.432732948
-Penalties         -0.0295906413 -0.007742277  0.014989213 -0.030169808
-PenaltyYds        -0.0044491950  0.032786220  0.054811472  0.007213099
-Fumbles            0.0233874281 -0.028423220 -0.057642544 -0.057209329
-Interceptions     -0.1918796053 -0.215213881 -0.173136020 -0.228300636
-TotalTurnovers    -0.1276259014 -0.178854625 -0.166606579 -0.207408413
-TeamScore          0.3372226409  0.568490689  0.558746580  0.695927224
-OpponentScore     -0.2209965073 -0.246653066 -0.202165421 -0.190721866
-DefPassingCmp     -0.0462627427  0.003976984  0.036355945  0.040521518
-DefPassingAtt      0.0706050627  0.099958346  0.095927982  0.127410365
-DefPassingPct     -0.2139918944 -0.177404538 -0.110892137 -0.151258656
-DefPassingYds     -0.0476853142 -0.027340837 -0.007310635  0.001450072
-DefPassingTD      -0.0601789437 -0.079466211 -0.071195691 -0.048242502
-DefRushingAtt     -0.4089510299 -0.277883613 -0.119605853 -0.193211571
-DefRushingYds     -0.2803086384 -0.228518367 -0.135774141 -0.196286215
-DefRushingAvg     -0.1235463027 -0.138076523 -0.112418632 -0.152858227
-DefRushingTD      -0.1903718594 -0.190803430 -0.145696279 -0.154120678
-DefPlays          -0.3100509301 -0.159402466 -0.016421599 -0.053706387
-DefYards          -0.2480158637 -0.192894387 -0.107406482 -0.145587083
-DefAvg            -0.1169558858 -0.146495863 -0.128555148 -0.155348792
-DefFirstDownPass  -0.0891812140 -0.044011457 -0.003968513 -0.009878681
-DefFirstDownRush  -0.3183100274 -0.224225490 -0.104891596 -0.173320384
-DefFirstDownPen   -0.0482601703 -0.003641089  0.030648349  0.012958001
-DefFirstDownTotal -0.3024445686 -0.193719536 -0.072661179 -0.127437469
-DefPenalties      -0.0397578728 -0.066436558 -0.060610647  0.003208587
-DefPenaltyYds     -0.0561434614 -0.090035419 -0.082525547 -0.023753105
-DefFumbles         0.0748597567  0.026263167 -0.006248163  0.082361214
-DefInterceptions   0.1399910698  0.118238785  0.076314786  0.152075032
-DefTotalTurnovers  0.1531303753  0.105391169  0.052994374  0.167021957
-Season            -0.0286039328 -0.004708464  0.018330491 -0.001251312
-                  OffensivePlays OffensiveYards  OffenseAvg FirstDownPass
-Differential        0.1465691460    0.590401997  0.61338344   0.180925552
-NetYards            0.3819300224    0.722618936  0.62760069   0.331257969
-TurnoverMargin     -0.0090676305    0.132369540  0.16476982  -0.050485235
-PassingCmp          0.5299291629    0.398278819  0.15090319   0.857167955
-PassingAtt          0.5546560820    0.209585627 -0.08222106   0.746732132
-PassingPct          0.1170771610    0.460103565  0.47844207   0.465971332
-PassingYds          0.4305651443    0.655231285  0.50818239   0.883486913
-PassingTD           0.2105426937    0.559573124  0.52598878   0.522232057
-RushingAtt          0.4778214889    0.350370915  0.12898876  -0.237510281
-RushingYds          0.2447068650    0.608326684  0.57194932  -0.196027729
-RushingAvg          0.0360882003    0.605137446  0.70644129  -0.092364268
-RushingTD           0.1685782208    0.543954967  0.54082959  -0.002406688
-OffensivePlays      1.0000000000    0.537560956  0.03967020   0.518004676
-OffensiveYards      0.5375609564    1.000000000  0.85280533   0.564648261
-OffenseAvg          0.0396701997    0.852805326  1.00000000   0.351771450
-FirstDownPass       0.5180046757    0.564648261  0.35177145   1.000000000
-FirstDownRush       0.3767976651    0.537551693  0.40782894  -0.177747002
-FirstDownPen        0.1962070566    0.050023611 -0.05328605   0.128819985
-FirstDownTotal      0.7065134901    0.822246337  0.54463477   0.634690773
-Penalties           0.1112697482    0.116514902  0.06726852   0.094623213
-PenaltyYds          0.1105998934    0.147311501  0.10503342   0.094561833
-Fumbles             0.0510223428   -0.015565376 -0.05062981  -0.002406073
-Interceptions       0.0727604625   -0.150812253 -0.21868037   0.049907591
-TotalTurnovers      0.0875247613   -0.122489744 -0.19594487   0.035597616
-TeamScore           0.2835194051    0.790195841  0.76040029   0.351870113
-OpponentScore       0.0596261325   -0.119678084 -0.18626714   0.075538370
-DefPassingCmp       0.0373940890    0.102936400  0.09485008   0.088842935
-DefPassingAtt       0.1228183894    0.192415847  0.15031629   0.096502631
-DefPassingPct      -0.1267207052   -0.139518292 -0.09303100   0.007691644
-DefPassingYds       0.1076645693    0.100412988  0.04634719   0.120755788
-DefPassingTD        0.1136813184    0.017951152 -0.05401244   0.091108258
-DefRushingAtt      -0.3038881650   -0.243285184 -0.10681048  -0.078728053
-DefRushingYds      -0.1435139876   -0.182733479 -0.13540190  -0.023937131
-DefRushingAvg       0.0001737604   -0.097345267 -0.12011271   0.016364020
-DefRushingTD       -0.0274595797   -0.126714363 -0.14011879   0.015981874
-DefPlays           -0.1609964490   -0.036073009  0.04911052   0.022099214
-DefYards           -0.0205111475   -0.055679659 -0.06387431   0.079444979
-DefAvg              0.0647173673   -0.061281375 -0.11871438   0.073314749
-DefFirstDownPass    0.0222382198    0.062335972  0.05371647   0.091669749
-DefFirstDownRush   -0.2363048466   -0.199327221 -0.09836444  -0.046765573
-DefFirstDownPen    -0.0016500561    0.059055413  0.06909101   0.054021601
-DefFirstDownTotal  -0.1528834681   -0.083636196 -0.01572435   0.042036284
-DefPenalties        0.1017180239    0.020470653 -0.03262961   0.073496362
-DefPenaltyYds       0.1064424321    0.002857766 -0.05656204   0.076997130
-DefFumbles          0.0373577815   -0.007543036 -0.02658401  -0.044389124
-DefInterceptions    0.0662533371    0.098313987  0.07964313  -0.011275396
-DefTotalTurnovers   0.0737213597    0.068598981  0.04230882  -0.037182652
-Season             -0.0711474936   -0.005286773  0.03920997  -0.017213258
-                  FirstDownRush  FirstDownPen FirstDownTotal    Penalties
-Differential       0.4587275549 -0.0070059601   0.4671142034 -0.017903020
-NetYards           0.5118168604 -0.0154904647   0.6166218760  0.062955896
-TurnoverMargin     0.1444863057 -0.0214868561   0.0621309761  0.022077442
-PassingCmp        -0.2474352953  0.1569728980   0.4896806443  0.133243949
-PassingAtt        -0.3655989801  0.1968400438   0.3307307829  0.140105050
-PassingPct         0.1196380018 -0.0138112671   0.4285326060  0.035017037
-PassingYds        -0.1632562426  0.1274030815   0.5637798680  0.151175790
-PassingTD          0.0631061892  0.0988109951   0.4548406779  0.078755685
-RushingAtt         0.7866599010  0.0008338221   0.4021363502 -0.029590641
-RushingYds         0.8685901225 -0.0689876530   0.4739089986 -0.007742277
-RushingAvg         0.6581778868 -0.0863466872   0.3907848252  0.014989213
-RushingTD          0.5945719459 -0.0015053106   0.4327329482 -0.030169808
-OffensivePlays     0.3767976651  0.1962070566   0.7065134901  0.111269748
-OffensiveYards     0.5375516932  0.0500236111   0.8222463375  0.116514902
-OffenseAvg         0.4078289419 -0.0532860472   0.5446347746  0.067268520
-FirstDownPass     -0.1777470018  0.1288199853   0.6346907730  0.094623213
-FirstDownRush      1.0000000000 -0.0644575126   0.5781427575 -0.038754051
-FirstDownPen      -0.0644575126  1.0000000000   0.2736798978  0.129344343
-FirstDownTotal     0.5781427575  0.2736798978   1.0000000000  0.070788193
-Penalties         -0.0387540514  0.1293443431   0.0707881929  1.000000000
-PenaltyYds        -0.0033090010  0.1300378785   0.0970509324  0.902829237
-Fumbles           -0.0138953108 -0.0017378205  -0.0113985746 -0.003266748
-Interceptions     -0.1808243429  0.0270078656  -0.0877659342  0.028163149
-TotalTurnovers    -0.1437506809  0.0189792176  -0.0728124801  0.018840723
-TeamScore          0.4890655439  0.0680319223   0.6340050291  0.041498010
-OpponentScore     -0.2207230222  0.0805886349  -0.0856684865  0.070576634
-DefPassingCmp     -0.0344067943  0.0486347366   0.0520405278  0.099823324
-DefPassingAtt      0.0431212196  0.0442460281   0.1126625808  0.144271744
-DefPassingPct     -0.1542580711  0.0328592747  -0.0983380215 -0.036100979
-DefPassingYds     -0.0510138720  0.0824907680   0.0711591224  0.094302865
-DefPassingTD      -0.0748223833  0.0784393803   0.0314529663  0.087646045
-DefRushingAtt     -0.3160553041 -0.0438033149  -0.3007572661 -0.040971492
-DefRushingYds     -0.2233740347  0.0070967276  -0.1813288384 -0.069317517
-DefRushingAvg     -0.1068187536  0.0424931339  -0.0583656854 -0.062420100
-DefRushingTD      -0.1668375949  0.0302555426  -0.1034632197  0.004355500
-DefPlays          -0.2509114803  0.0029767857  -0.1681078047  0.104277549
-DefYards          -0.2081311198  0.0718022160  -0.0782111605  0.024191887
-DefAvg            -0.1092241576  0.0840351763  -0.0070382665 -0.028334770
-DefFirstDownPass  -0.0665512008  0.0591695441   0.0286098677  0.078247923
-DefFirstDownRush  -0.2284698051 -0.0135859963  -0.2136267203 -0.078203416
-DefFirstDownPen   -0.0235836018  0.0676167199   0.0334158092  0.547778561
-DefFirstDownTotal -0.2243099072  0.0441982586  -0.1245484452  0.127662433
-DefPenalties      -0.0763456747  0.5443248528   0.1255374004  0.184220592
-DefPenaltyYds     -0.0981877995  0.6607288539   0.1391194637  0.187784680
-DefFumbles         0.0036192814 -0.0222634761  -0.0344597905  0.014221867
-DefInterceptions   0.0837185725  0.0031988196   0.0526327383  0.055046719
-DefTotalTurnovers  0.0649203964 -0.0120310687   0.0170179179  0.050357718
-Season            -0.0003574311  0.0658170522  -0.0001756986  0.032140649
-                    PenaltyYds      Fumbles Interceptions TotalTurnovers
-Differential       0.017976255 -0.144093284  -0.344934680   -0.351038748
-NetYards           0.093650362 -0.003923536  -0.181030381   -0.137389149
-TurnoverMargin     0.036998664 -0.449855035  -0.569221884   -0.717847900
-PassingCmp         0.121656283  0.017700875   0.100802257    0.086639084
-PassingAtt         0.115616209  0.029239617   0.255037596    0.209047464
-PassingPct         0.054315829 -0.021674094  -0.234187853   -0.188579144
-PassingYds         0.150611131  0.007841798   0.018702145    0.019052148
-PassingTD          0.097490407 -0.050135883  -0.114332815   -0.117907381
-RushingAtt        -0.004449195  0.023387428  -0.191879605   -0.127625901
-RushingYds         0.032786220 -0.028423220  -0.215213881   -0.178854625
-RushingAvg         0.054811472 -0.057642544  -0.173136020   -0.166606579
-RushingTD          0.007213099 -0.057209329  -0.228300636   -0.207408413
-OffensivePlays     0.110599893  0.051022343   0.072760463    0.087524761
-OffensiveYards     0.147311501 -0.015565376  -0.150812253   -0.122489744
-OffenseAvg         0.105033416 -0.050629809  -0.218680373   -0.195944865
-FirstDownPass      0.094561833 -0.002406073   0.049907591    0.035597616
-FirstDownRush     -0.003309001 -0.013895311  -0.180824343   -0.143750681
-FirstDownPen       0.130037879 -0.001737821   0.027007866    0.018979218
-FirstDownTotal     0.097050932 -0.011398575  -0.087765934   -0.072812480
-Penalties          0.902829237 -0.003266748   0.028163149    0.018840723
-PenaltyYds         1.000000000 -0.012630902   0.016778227    0.004243593
-Fumbles           -0.012630902  1.000000000   0.018972477    0.667472431
-Interceptions      0.016778227  0.018972477   1.000000000    0.757164086
-TotalTurnovers     0.004243593  0.667472431   0.757164086    1.000000000
-TeamScore          0.080950037 -0.092240194  -0.274800918   -0.264927507
-OpponentScore      0.054539982  0.132110601   0.261029056    0.280719683
-DefPassingCmp      0.110025970 -0.037507728  -0.016726110   -0.036962467
-DefPassingAtt      0.160577291 -0.028688053  -0.056806282   -0.061050652
-DefPassingPct     -0.043625494 -0.022528499   0.077221775    0.042786712
-DefPassingYds      0.094811538 -0.033907392   0.023092463   -0.004954594
-DefPassingTD       0.090155476  0.040095597   0.099723139    0.100466810
-DefRushingAtt     -0.055326346  0.073573856   0.143056836    0.154613148
-DefRushingYds     -0.088465239  0.023567107   0.125528901    0.108887368
-DefRushingAvg     -0.079535197 -0.009735953   0.084689469    0.056706358
-DefRushingTD      -0.016717598  0.077755272   0.159387853    0.169507873
-DefPlays           0.107034241  0.040011704   0.076787249    0.083330069
-DefYards           0.010285882 -0.009712671   0.112468308    0.077417161
-DefAvg            -0.047198014 -0.031188217   0.094090856    0.049691577
-DefFirstDownPass   0.080864763 -0.044846058   0.002583476   -0.027375736
-DefFirstDownRush  -0.095197482  0.002481689   0.090616330    0.069109586
-DefFirstDownPen    0.659406009 -0.019707902   0.008669650   -0.006419123
-DefFirstDownTotal  0.142990772 -0.034572761   0.066996246    0.027308850
-DefPenalties       0.187837432  0.019046107   0.054887750    0.053322298
-DefPenaltyYds      0.192157556  0.020885214   0.067362991    0.063815032
-DefFumbles         0.015171119  0.028222683  -0.010522821    0.010602007
-DefInterceptions   0.063522621 -0.003324980  -0.080038973   -0.061782861
-DefTotalTurnovers  0.057307989  0.015797080  -0.066642101   -0.039312041
-Season             0.041380515 -0.091613051  -0.046325016   -0.094356100
-                     TeamScore OpponentScore DefPassingCmp DefPassingAtt
-Differential       0.782606647 -0.7711376548  -0.065742099   0.146932784
-NetYards           0.639376806 -0.6337773800  -0.222708515  -0.037253027
-TurnoverMargin     0.376411170 -0.3721890594   0.083020742   0.181879734
-PassingCmp         0.183522847  0.1375714078   0.081756108   0.074471280
-PassingAtt        -0.033843974  0.2693877275   0.081485598   0.056831463
-PassingPct         0.447420085 -0.2041529357   0.022325574   0.055558508
-PassingYds         0.434199508  0.0870527203   0.123262380   0.142346274
-PassingTD          0.619316744 -0.0226495389   0.093446247   0.145556240
-RushingAtt         0.337222641 -0.2209965073  -0.046262743   0.070605063
-RushingYds         0.568490689 -0.2466530664   0.003976984   0.099958346
-RushingAvg         0.558746580 -0.2021654206   0.036355945   0.095927982
-RushingTD          0.695927224 -0.1907218665   0.040521518   0.127410365
-OffensivePlays     0.283519405  0.0596261325   0.037394089   0.122818389
-OffensiveYards     0.790195841 -0.1196780843   0.102936400   0.192415847
-OffenseAvg         0.760400294 -0.1862671392   0.094850078   0.150316289
-FirstDownPass      0.351870113  0.0755383695   0.088842935   0.096502631
-FirstDownRush      0.489065544 -0.2207230222  -0.034406794   0.043121220
-FirstDownPen       0.068031922  0.0805886349   0.048634737   0.044246028
-FirstDownTotal     0.634005029 -0.0856684865   0.052040528   0.112662581
-Penalties          0.041498010  0.0705766343   0.099823324   0.144271744
-PenaltyYds         0.080950037  0.0545399820   0.110025970   0.160577291
-Fumbles           -0.092240194  0.1321106008  -0.037507728  -0.028688053
-Interceptions     -0.274800918  0.2610290560  -0.016726110  -0.056806282
-TotalTurnovers    -0.264927507  0.2807196825  -0.036962467  -0.061050652
-TeamScore          1.000000000 -0.2071608155   0.109054508   0.232810162
-OpponentScore     -0.207160815  1.0000000000   0.214849738   0.007192626
-DefPassingCmp      0.109054508  0.2148497376   1.000000000   0.889169550
-DefPassingAtt      0.232810162  0.0071926256   0.889169550   1.000000000
-DefPassingPct     -0.203561294  0.4482036746   0.524263816   0.121178071
-DefPassingYds      0.052809184  0.4638127943   0.809833235   0.696006663
-DefPassingTD      -0.029821238  0.6303918795   0.431879339   0.289172942
-DefRushingAtt     -0.219556636  0.3411033576  -0.360875046  -0.455926255
-DefRushingYds     -0.247861743  0.5661708581  -0.306845464  -0.424151942
-DefRushingAvg     -0.204993156  0.5538078889  -0.174207785  -0.276195127
-DefRushingTD      -0.185557564  0.6895100944  -0.110193768  -0.260234894
-DefPlays           0.025805738  0.3238005855   0.542068467   0.563145905
-DefYards          -0.142747354  0.7971871550   0.423393858   0.243931898
-DefAvg            -0.203285692  0.7663467449   0.188706076  -0.035596062
-DefFirstDownPass   0.038455283  0.3853239116   0.857692613   0.751320448
-DefFirstDownRush  -0.223859546  0.4894785676  -0.221569780  -0.337360680
-DefFirstDownPen    0.061182898  0.0928602425   0.166804480   0.202043383
-DefFirstDownTotal -0.115520917  0.6494188757   0.508437577   0.356660496
-DefPenalties       0.066070970  0.0445916607   0.129895425   0.138446185
-DefPenaltyYds      0.042702194  0.0915892334   0.122383691   0.117249826
-DefFumbles         0.141278302 -0.0920205611   0.016440817   0.027710829
-DefInterceptions   0.249097965 -0.2627429407   0.096162025   0.244286780
-DefTotalTurnovers  0.277708094 -0.2559984593   0.082526971   0.200544151
-Season            -0.002772666  0.0008248417  -0.018540089  -0.042521400
-                  DefPassingPct DefPassingYds DefPassingTD DefRushingAtt
-Differential       -0.417676595  -0.260766014 -0.420538390 -0.3599353770
-NetYards           -0.417533224  -0.399727546 -0.381161451 -0.4112852507
-TurnoverMargin     -0.154554676   0.016119650 -0.148976276 -0.1936519381
-PassingCmp          0.036665358   0.124293059  0.113546697 -0.0373060319
-PassingAtt          0.075098401   0.153613111  0.171507531  0.0812690709
-PassingPct         -0.069385960  -0.022726766 -0.081801027 -0.2123560581
-PassingYds         -0.003313337   0.149956095  0.097791600 -0.0357823042
-PassingTD          -0.080533635   0.075617981  0.035225215 -0.0539974042
-RushingAtt         -0.213991894  -0.047685314 -0.060178944 -0.4089510299
-RushingYds         -0.177404538  -0.027340837 -0.079466211 -0.2778836134
-RushingAvg         -0.110892137  -0.007310635 -0.071195691 -0.1196058529
-RushingTD          -0.151258656   0.001450072 -0.048242502 -0.1932115706
-OffensivePlays     -0.126720705   0.107664569  0.113681318 -0.3038881650
-OffensiveYards     -0.139518292   0.100412988  0.017951152 -0.2432851839
-OffenseAvg         -0.093030997   0.046347193 -0.054012439 -0.1068104821
-FirstDownPass       0.007691644   0.120755788  0.091108258 -0.0787280528
-FirstDownRush      -0.154258071  -0.051013872 -0.074822383 -0.3160553041
-FirstDownPen        0.032859275   0.082490768  0.078439380 -0.0438033149
-FirstDownTotal     -0.098338021   0.071159122  0.031452966 -0.3007572661
-Penalties          -0.036100979   0.094302865  0.087646045 -0.0409714917
-PenaltyYds         -0.043625494   0.094811538  0.090155476 -0.0553263459
-Fumbles            -0.022528499  -0.033907392  0.040095597  0.0735738560
-Interceptions       0.077221775   0.023092463  0.099723139  0.1430568358
-TotalTurnovers      0.042786712  -0.004954594  0.100466810  0.1546131484
-TeamScore          -0.203561294   0.052809184 -0.029821238 -0.2195566362
-OpponentScore       0.448203675   0.463812794  0.630391880  0.3411033576
-DefPassingCmp       0.524263816   0.809833235  0.431879339 -0.3608750459
-DefPassingAtt       0.121178071   0.696006663  0.289172942 -0.4559262549
-DefPassingPct       1.000000000   0.485640919  0.396712529  0.0270470082
-DefPassingYds       0.485640919   1.000000000  0.635168968 -0.2450718636
-DefPassingTD        0.396712529   0.635168968  1.000000000 -0.0519968871
-DefRushingAtt       0.027047008  -0.245071864 -0.051996887  1.0000000000
-DefRushingYds       0.098898952  -0.173227043  0.075275024  0.7372773767
-DefRushingAvg       0.131138863  -0.058336875  0.155945194  0.3685807935
-DefRushingTD        0.235599068   0.037077048 -0.017146078  0.4850629636
-DefPlays            0.144680188   0.459040923  0.236980179  0.4787196637
-DefYards            0.465276672   0.676589899  0.568293505  0.3536814657
-DefAvg              0.482353624   0.536790215  0.535776930  0.1443238711
-DefFirstDownPass    0.480900639   0.888664032  0.533631013 -0.2171565936
-DefFirstDownRush    0.121155689  -0.131706218  0.076073487  0.7867025315
-DefFirstDownPen     0.003820705   0.140363190  0.112734839  0.0035156804
-DefFirstDownTotal   0.437970783   0.588446490  0.469188344  0.4006276517
-DefPenalties        0.034805644   0.148218718  0.078087345 -0.0289769270
-DefPenaltyYds       0.057035973   0.153240799  0.101887901 -0.0002624621
-DefFumbles         -0.021573479   0.006122048 -0.051995314  0.0241542687
-DefInterceptions   -0.221344974   0.019078257 -0.107800922 -0.1877947529
-DefTotalTurnovers  -0.179426252   0.018225936 -0.114258347 -0.1247212469
-Season              0.039348192  -0.001115403  0.009035752 -0.0302753145
-                  DefRushingYds DefRushingAvg DefRushingTD      DefPlays
-Differential       -0.521570963 -0.4858059992  -0.55950753 -0.1892468699
-NetYards           -0.545950194 -0.4858354617  -0.46274063 -0.4186160157
-TurnoverMargin     -0.195475556 -0.1483786567  -0.25596864 -0.0003833353
-PassingCmp          0.020400167  0.0524082686   0.06040706  0.0388253781
-PassingAtt          0.120955351  0.1172020227   0.15266267  0.1315181930
-PassingPct         -0.176616590 -0.1107656838  -0.15166734 -0.1424011276
-PassingYds         -0.008032971  0.0112755317   0.02521081  0.1071961685
-PassingTD          -0.072979224 -0.0658241267  -0.03680902  0.0934504428
-RushingAtt         -0.280308638 -0.1235463027  -0.19037186 -0.3100509301
-RushingYds         -0.228518367 -0.1380765232  -0.19080343 -0.1594024655
-RushingAvg         -0.135774141 -0.1124186325  -0.14569628 -0.0164215986
-RushingTD          -0.196286215 -0.1528582274  -0.15412068 -0.0537063869
-OffensivePlays     -0.143513988  0.0001737604  -0.02745958 -0.1609964490
-OffensiveYards     -0.182733479 -0.0973452671  -0.12671436 -0.0360730089
-OffenseAvg         -0.135401903 -0.1201127138  -0.14011879  0.0491105176
-FirstDownPass      -0.023937131  0.0163640197   0.01598187  0.0220992137
-FirstDownRush      -0.223374035 -0.1068187536  -0.16683759 -0.2509114803
-FirstDownPen        0.007096728  0.0424931339   0.03025554  0.0029767857
-FirstDownTotal     -0.181328838 -0.0583656854  -0.10346322 -0.1681078047
-Penalties          -0.069317517 -0.0624201004   0.00435550  0.1042775488
-PenaltyYds         -0.088465239 -0.0795351966  -0.01671760  0.1070342410
-Fumbles             0.023567107 -0.0097359530   0.07775527  0.0400117044
-Interceptions       0.125528901  0.0846894689   0.15938785  0.0767872489
-TotalTurnovers      0.108887368  0.0567063584   0.16950787  0.0833300691
-TeamScore          -0.247861743 -0.2049931560  -0.18555756  0.0258057383
-OpponentScore       0.566170858  0.5538078889   0.68951009  0.3238005855
-DefPassingCmp      -0.306845464 -0.1742077853  -0.11019377  0.5420684671
-DefPassingAtt      -0.424151942 -0.2761951274  -0.26023489  0.5631459054
-DefPassingPct       0.098898952  0.1311388631   0.23559907  0.1446801883
-DefPassingYds      -0.173227043 -0.0583368755   0.03707705  0.4590409235
-DefPassingTD        0.075275024  0.1559451940  -0.01714608  0.2369801788
-DefRushingAtt       0.737277377  0.3685807935   0.48506296  0.4787196637
-DefRushingYds       1.000000000  0.8728276975   0.68653666  0.2661328663
-DefRushingAvg       0.872827698  1.0000000000   0.59912628  0.0697715849
-DefRushingTD        0.686536655  0.5991262808   1.00000000  0.1936563469
-DefPlays            0.266132866  0.0697715849   0.19365635  1.0000000000
-DefYards            0.608024020  0.6056805614   0.54318625  0.5690131366
-DefAvg              0.575893588  0.7029090219   0.53951828  0.0989574665
-DefFirstDownPass   -0.166549093 -0.0651290247   0.02530950  0.5395244090
-DefFirstDownRush    0.868130797  0.6622995127   0.58676834  0.3976390150
-DefFirstDownPen    -0.058501149 -0.0724607031   0.01421475  0.2025721800
-DefFirstDownTotal   0.478659827  0.4023743432   0.43690670  0.7238038053
-DefPenalties       -0.007920018  0.0148168905  -0.02579004  0.1096674930
-DefPenaltyYds       0.037696089  0.0593782862   0.01579238  0.1154187184
-DefFumbles         -0.027539861 -0.0548817072  -0.05382363  0.0497622508
-DefInterceptions   -0.207119041 -0.1621560599  -0.22012697  0.0666170352
-DefTotalTurnovers  -0.172652188 -0.1567592350  -0.19940138  0.0820286905
-Season             -0.005270541  0.0171753556   0.00203257 -0.0700555324
-                      DefYards       DefAvg DefFirstDownPass DefFirstDownRush
-Differential      -0.600164346 -0.619937584     -0.220163264    -0.4571498075
-NetYards          -0.730409443 -0.639573748     -0.367096824    -0.5122150780
-TurnoverMargin    -0.133155758 -0.162701096      0.041726844    -0.1445511124
-PassingCmp         0.115445761  0.109587949      0.089092921    -0.0182074572
-PassingAtt         0.214262231  0.175971717      0.106872461     0.0634867657
-PassingPct        -0.150391858 -0.104174452     -0.011423276    -0.1523506906
-PassingYds         0.114874460  0.063801224      0.118827164    -0.0325994868
-PassingTD          0.006392178 -0.059323525      0.066226915    -0.0708519426
-RushingAtt        -0.248015864 -0.116955886     -0.089181214    -0.3183100274
-RushingYds        -0.192894387 -0.146495863     -0.044011457    -0.2242254902
-RushingAvg        -0.107406482 -0.128555148     -0.003968513    -0.1048915955
-RushingTD         -0.145587083 -0.155348792     -0.009878681    -0.1733203836
-OffensivePlays    -0.020511147  0.064717367      0.022238220    -0.2363048466
-OffensiveYards    -0.055679659 -0.061281375      0.062335972    -0.1993272215
-OffenseAvg        -0.063874308 -0.118714381      0.053716468    -0.0983644383
-FirstDownPass      0.079444979  0.073314749      0.091669749    -0.0467655734
-FirstDownRush     -0.208131120 -0.109224158     -0.066551201    -0.2284698051
-FirstDownPen       0.071802216  0.084035176      0.059169544    -0.0135859963
-FirstDownTotal    -0.078211160 -0.007038267      0.028609868    -0.2136267203
-Penalties          0.024191887 -0.028334770      0.078247923    -0.0782034163
-PenaltyYds         0.010285882 -0.047198014      0.080864763    -0.0951974818
-Fumbles           -0.009712671 -0.031188217     -0.044846058     0.0024816890
-Interceptions      0.112468308  0.094090856      0.002583476     0.0906163296
-TotalTurnovers     0.077417161  0.049691577     -0.027375736     0.0691095861
-TeamScore         -0.142747354 -0.203285692      0.038455283    -0.2238595459
-OpponentScore      0.797187155  0.766346745      0.385323912     0.4894785676
-DefPassingCmp      0.423393858  0.188706076      0.857692613    -0.2215697799
-DefPassingAtt      0.243931898 -0.035596062      0.751320448    -0.3373606803
-DefPassingPct      0.465276672  0.482353624      0.480900639     0.1211556887
-DefPassingYds      0.676589899  0.536790215      0.888664032    -0.1317062177
-DefPassingTD       0.568293505  0.535776930      0.533631013     0.0760734873
-DefRushingAtt      0.353681466  0.144323871     -0.217156594     0.7867025315
-DefRushingYds      0.608024020  0.575893588     -0.166549093     0.8681307972
-DefRushingAvg      0.605680561  0.702909022     -0.065129025     0.6622995127
-DefRushingTD       0.543186252  0.539518281      0.025309501     0.5867683446
-DefPlays           0.569013137  0.098957466      0.539524409     0.3976390150
-DefYards           1.000000000  0.863432564      0.591834233     0.5429004217
-DefAvg             0.863432564  1.000000000      0.390449700     0.4190103381
-DefFirstDownPass   0.591834233  0.390449700      1.000000000    -0.1437868206
-DefFirstDownRush   0.542900422  0.419010338     -0.143786821     1.0000000000
-DefFirstDownPen    0.069408365 -0.030643088      0.139316480    -0.0530593626
-DefFirstDownTotal  0.832226265  0.573548214      0.656129992     0.5834812190
-DefPenalties       0.113558402  0.068145987      0.092600853    -0.0386169884
-DefPenaltyYds      0.151712216  0.112328207      0.098773293     0.0015978502
-DefFumbles        -0.015655527 -0.049744979     -0.001905308    -0.0130664543
-DefInterceptions  -0.139476214 -0.203408513      0.045479791    -0.1746156397
-DefTotalTurnovers -0.114393675 -0.184266567      0.032759858    -0.1389816404
-Season            -0.004839722  0.039367726     -0.016589707    -0.0009425108
-                  DefFirstDownPen DefFirstDownTotal DefPenalties DefPenaltyYds
-Differential         -0.019271882      -0.488417807  0.014623485 -0.0304900973
-NetYards             -0.007654761      -0.633380476 -0.064615447 -0.1030785810
-TurnoverMargin        0.015328187      -0.067151108 -0.028545097 -0.0461476661
-PassingCmp            0.046328848       0.062812851  0.094484942  0.1059632679
-PassingAtt            0.044050302       0.132485214  0.140114524  0.1603937193
-PassingPct            0.024937144      -0.109636154 -0.043786555 -0.0554811829
-PassingYds            0.076353807       0.081154910  0.088499677  0.0892225570
-PassingTD             0.069465654       0.014349146  0.083509714  0.0833719205
-RushingAtt           -0.048260170      -0.302444569 -0.039757873 -0.0561434614
-RushingYds           -0.003641089      -0.193719536 -0.066436558 -0.0900354185
-RushingAvg            0.030648349      -0.072661179 -0.060610647 -0.0825255475
-RushingTD             0.012958001      -0.127437469  0.003208587 -0.0237531054
-OffensivePlays       -0.001650056      -0.152883468  0.101718024  0.1064424321
-OffensiveYards        0.059055413      -0.083636196  0.020470653  0.0028577656
-OffenseAvg            0.069091014      -0.015724349 -0.032629606 -0.0565620426
-FirstDownPass         0.054021601       0.042036284  0.073496362  0.0769971298
-FirstDownRush        -0.023583602      -0.224309907 -0.076345675 -0.0981877995
-FirstDownPen          0.067616720       0.044198259  0.544324853  0.6607288539
-FirstDownTotal        0.033415809      -0.124548445  0.125537400  0.1391194637
-Penalties             0.547778561       0.127662433  0.184220592  0.1877846801
-PenaltyYds            0.659406009       0.142990772  0.187837432  0.1921575565
-Fumbles              -0.019707902      -0.034572761  0.019046107  0.0208852137
-Interceptions         0.008669650       0.066996246  0.054887750  0.0673629913
-TotalTurnovers       -0.006419123       0.027308850  0.053322298  0.0638150323
-TeamScore             0.061182898      -0.115520917  0.066070970  0.0427021938
-OpponentScore         0.092860242       0.649418876  0.044591661  0.0915892334
-DefPassingCmp         0.166804480       0.508437577  0.129895425  0.1223836907
-DefPassingAtt         0.202043383       0.356660496  0.138446185  0.1172498257
-DefPassingPct         0.003820705       0.437970783  0.034805644  0.0570359731
-DefPassingYds         0.140363190       0.588446490  0.148218718  0.1532407989
-DefPassingTD          0.112734839       0.469188344  0.078087345  0.1018879012
-DefRushingAtt         0.003515680       0.400627652 -0.028976927 -0.0002624621
-DefRushingYds        -0.058501149       0.478659827 -0.007920018  0.0376960885
-DefRushingAvg        -0.072460703       0.402374343  0.014816890  0.0593782862
-DefRushingTD          0.014214751       0.436906703 -0.025790035  0.0157923804
-DefPlays              0.202572180       0.723803805  0.109667493  0.1154187184
-DefYards              0.069408365       0.832226265  0.113558402  0.1517122162
-DefAvg               -0.030643088       0.573548214  0.068145987  0.1123282066
-DefFirstDownPass      0.139316480       0.656129992  0.092600853  0.0987732932
-DefFirstDownRush     -0.053059363       0.583481219 -0.038616988  0.0015978502
-DefFirstDownPen       1.000000000       0.286129797  0.128239445  0.1301074980
-DefFirstDownTotal     0.286129797       1.000000000  0.068601081  0.1022128964
-DefPenalties          0.128239445       0.068601081  1.000000000  0.9002742132
-DefPenaltyYds         0.130107498       0.102212896  0.900274213  1.0000000000
-DefFumbles           -0.003582233      -0.010683524 -0.006850053 -0.0161501279
-DefInterceptions      0.024027115      -0.083477752  0.021819923  0.0099909789
-DefTotalTurnovers     0.015638654      -0.069316535  0.011872019 -0.0029940736
-Season                0.068661759       0.000468085  0.029931261  0.0388464539
-                    DefFumbles DefInterceptions DefTotalTurnovers        Season
-Differential       0.150496494      0.329298137       0.343625559 -0.0023292757
-NetYards           0.005678673      0.163815983       0.126123657 -0.0002658874
-TurnoverMargin     0.455678688      0.573543652       0.723881857 -0.0024626416
-PassingCmp        -0.039084655     -0.027454297      -0.045839474 -0.0216658388
-PassingAtt        -0.033278931     -0.065866611      -0.070790063 -0.0445696003
-PassingPct        -0.017831990      0.068145163       0.039383451  0.0344181671
-PassingYds        -0.034307069      0.008803248      -0.015643722 -0.0020436177
-PassingTD          0.045014429      0.089880441       0.096341451  0.0055305937
-RushingAtt         0.074859757      0.139991070       0.153130375 -0.0286039328
-RushingYds         0.026263167      0.118238785       0.105391169 -0.0047084641
-RushingAvg        -0.006248163      0.076314786       0.052994374  0.0183304913
-RushingTD          0.082361214      0.152075032       0.167021957 -0.0012513115
-OffensivePlays     0.037357782      0.066253337       0.073721360 -0.0711474936
-OffensiveYards    -0.007543036      0.098313987       0.068598981 -0.0052867729
-OffenseAvg        -0.026584005      0.079643130       0.042308820  0.0392099715
-FirstDownPass     -0.044389124     -0.011275396      -0.037182652 -0.0172132576
-FirstDownRush      0.003619281      0.083718572       0.064920396 -0.0003574311
-FirstDownPen      -0.022263476      0.003198820      -0.012031069  0.0658170522
-FirstDownTotal    -0.034459790      0.052632738       0.017017918 -0.0001756986
-Penalties          0.014221867      0.055046719       0.050357718  0.0321406487
-PenaltyYds         0.015171119      0.063522621       0.057307989  0.0413805146
-Fumbles            0.028222683     -0.003324980       0.015797080 -0.0916130514
-Interceptions     -0.010522821     -0.080038973      -0.066642101 -0.0463250158
-TotalTurnovers     0.010602007     -0.061782861      -0.039312041 -0.0943560996
-TeamScore          0.141278302      0.249097965       0.277708094 -0.0027726660
-OpponentScore     -0.092020561     -0.262742941      -0.255998459  0.0008248417
-DefPassingCmp      0.016440817      0.096162025       0.082526971 -0.0185400889
-DefPassingAtt      0.027710829      0.244286780       0.200544151 -0.0425214004
-DefPassingPct     -0.021573479     -0.221344974      -0.179426252  0.0393481920
-DefPassingYds      0.006122048      0.019078257       0.018225936 -0.0011154025
-DefPassingTD      -0.051995314     -0.107800922      -0.114258347  0.0090357515
-DefRushingAtt      0.024154269     -0.187794753      -0.124721247 -0.0302753145
-DefRushingYds     -0.027539861     -0.207119041      -0.172652188 -0.0052705412
-DefRushingAvg     -0.054881707     -0.162156060      -0.156759235  0.0171753556
-DefRushingTD      -0.053823632     -0.220126972      -0.199401378  0.0020325702
-DefPlays           0.049762251      0.066617035       0.082028691 -0.0700555324
-DefYards          -0.015655527     -0.139476214      -0.114393675 -0.0048397221
-DefAvg            -0.049744979     -0.203408513      -0.184266567  0.0393677257
-DefFirstDownPass  -0.001905308      0.045479791       0.032759858 -0.0165897071
-DefFirstDownRush  -0.013066454     -0.174615640      -0.138981640 -0.0009425108
-DefFirstDownPen   -0.003582233      0.024027115       0.015638654  0.0686617594
-DefFirstDownTotal -0.010683524     -0.083477752      -0.069316535  0.0004680850
-DefPenalties      -0.006850053      0.021819923       0.011872019  0.0299312611
-DefPenaltyYds     -0.016150128      0.009990979      -0.002994074  0.0388464539
-DefFumbles         1.000000000      0.022387771       0.664523186 -0.0926405371
-DefInterceptions   0.022387771      1.000000000       0.761957546 -0.0495394191
-DefTotalTurnovers  0.664523186      0.761957546       1.000000000 -0.0970400378
-Season            -0.092640537     -0.049539419      -0.097040038  1.0000000000</code></pre>
+<pre><code>                      Differential NetRebounds TurnoverMargin   TeamFGPCT
+Differential             1.0000000   0.6154762    -0.36313453  0.60493356
+NetRebounds              0.6154762   1.0000000     0.16927497  0.36357754
+TurnoverMargin          -0.3631345   0.1692750     1.00000000 -0.02058449
+TeamFGPCT                0.6049336   0.3635775    -0.02058449  1.00000000
+TeamTotalRebounds        0.4764896   0.7421430     0.10642123  0.02240707
+OpponentFGPCT           -0.6138758  -0.3708848     0.02081388 -0.11465126
+OpponentTotalRebounds   -0.4191181  -0.7144122    -0.14098194 -0.51804869
+                      TeamTotalRebounds OpponentFGPCT OpponentTotalRebounds
+Differential                 0.47648956   -0.61387581           -0.41911809
+NetRebounds                  0.74214304   -0.37088485           -0.71441225
+TurnoverMargin               0.10642123    0.02081388           -0.14098194
+TeamFGPCT                    0.02240707   -0.11465126           -0.51804869
+TeamTotalRebounds            1.00000000   -0.53901039           -0.06121130
+OpponentFGPCT               -0.53901039    1.00000000           -0.01039878
+OpponentTotalRebounds       -0.06121130   -0.01039878            1.00000000</code></pre>
 </div>
 </div>
-<p>Notice right away – NetYards is highly correlated. But NetYards’s also highly correlated with RushingYards, OffensiveYards and DefYards. And that makes sense: those things all feed into NetYards. Including all of these measures would be pointless – they would add error without adding much in the way of predictive power.</p>
+<p>Notice right away – NetRebounds is highly correlated. But NetRebounds is also highly correlated with TeamTotalRebounds. And that makes sense: TeamTotalRebounds feeds into NetRebounds. Including both of these measures would be pointless – they would add error without adding much in the way of predictive power.</p>
 <blockquote class="blockquote">
-<p><strong>Your turn</strong>: What else do you see? What other values have predictive power and aren’t co-correlated?</p>
+<p><strong>Your turn</strong>: What else do you see? What other values have predictive power and aren’t co-correlated? Add or remove some of the columns above and re-run the correlation matrix.</p>
 </blockquote>
-<p>We can add more just by simply adding them. Let’s add the average yard per play for both offense and defense. They’re correlated to NetYards, but not as much as you might expect.</p>
+<p>We can add more just by simply adding them. Let’s add the average FG PCT for both the team and opponent. They’re correlated to Differential, but not as much as you might expect.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetYards <span class="sc">+</span> TurnoverMargin <span class="sc">+</span> DefAvg <span class="sc">+</span> OffenseAvg, <span class="at">data=</span>logs)</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetRebounds <span class="sc">+</span> TurnoverMargin <span class="sc">+</span> TeamFGPCT <span class="sc">+</span> OpponentFGPCT, <span class="at">data=</span>logs)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = Differential ~ NetYards + TurnoverMargin + DefAvg + 
-    OffenseAvg, data = logs)
+lm(formula = Differential ~ NetRebounds + TurnoverMargin + TeamFGPCT + 
+    OpponentFGPCT, data = logs)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--38.262  -6.258  -0.008   6.236  37.513 
+-29.793  -3.688  -0.020   3.675  37.778 
 
 Coefficients:
-                 Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     0.5826970  0.4081448   1.428    0.153    
-NetYards        0.0551813  0.0007608  72.535   &lt;2e-16 ***
-TurnoverMargin  3.8548574  0.0392644  98.177   &lt;2e-16 ***
-DefAvg         -3.8991399  0.0698008 -55.861   &lt;2e-16 ***
-OffenseAvg      3.8612863  0.0688997  56.042   &lt;2e-16 ***
+                 Estimate Std. Error  t value Pr(&gt;|t|)    
+(Intercept)      0.301244   0.191960    1.569    0.117    
+NetRebounds      0.649125   0.002632  246.660   &lt;2e-16 ***
+TurnoverMargin  -1.311687   0.004301 -304.967   &lt;2e-16 ***
+TeamFGPCT       90.498143   0.313094  289.045   &lt;2e-16 ***
+OpponentFGPCT  -91.184871   0.311306 -292.911   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.452 on 17286 degrees of freedom
-  (1 observation deleted due to missingness)
-Multiple R-squared:  0.8277,    Adjusted R-squared:  0.8277 
-F-statistic: 2.076e+04 on 4 and 17286 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 5.493 on 64858 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.8877,    Adjusted R-squared:  0.8877 
+F-statistic: 1.282e+05 on 4 and 64858 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Go down the list:</p>
 <p>What is the Adjusted R-squared now? What is the p-value and is it less than .05? What is the Residual standard error?</p>
 <p>The final thing we can do with this is predict things. Look at our coefficients table. See the Estimates? We can build a formula from that, same as we did with linear regressions.</p>
-<p>How does this apply in the real world? Let’s pretend for a minute that you are Mike Locksley, and you have a mess on your hands. Your job is to win conference titles. To do that, we need to know what attributes of a team should we emphasize. We can do that by looking at what previous Big Ten conference champions looked like.</p>
+<p>How does this apply in the real world? Let’s pretend for a minute that you are Kevin Willard, and you want to win conference titles. To do that, we need to know what attributes of a team we should emphasize. We can do that by looking at what previous Big Ten conference champions looked like.</p>
 <p>So if our goal is to predict a conference champion team, we need to know what those teams did. Here’s the regular season conference champions in this dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Ohio State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2021</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Ohio State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2020</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Ohio State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2019</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Ohio State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2018</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Michigan"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2020-2021'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Wisconsin"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2019-2020'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Michigan State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2018-2019'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Michigan State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2017-2018'</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetYards =</span> <span class="fu">mean</span>(NetYards),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetRebounds =</span> <span class="fu">mean</span>(NetRebounds),</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanTurnoverMargin =</span> <span class="fu">mean</span>(TurnoverMargin),</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanDefAvg =</span> <span class="fu">mean</span>(DefAvg),</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanOffenseAvg =</span> <span class="fu">mean</span>(OffenseAvg)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanTeamFGPCT =</span> <span class="fu">mean</span>(TeamFGPCT),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanOpponentFGPCT =</span> <span class="fu">mean</span>(OpponentFGPCT)</span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
-  meanNetYards meanTurnoverMargin meanDefAvg meanOffenseAvg
-         &lt;dbl&gt;              &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
-1         194.              0.688       5.15           7.28</code></pre>
+  meanNetRebounds meanTurnoverMargin meanTeamFGPCT meanOpponentFGPCT
+            &lt;dbl&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
+1            2.45             -0.218         0.450             0.404</code></pre>
 </div>
 </div>
 <p>Now it’s just plug and chug.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.0551813</span><span class="sc">*</span><span class="fl">193.5833</span> ) <span class="sc">+</span> (<span class="fl">3.8548574</span><span class="sc">*</span><span class="fl">0.6875</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">3.8991399</span><span class="sc">*</span><span class="fl">5.145833</span>   ) <span class="sc">+</span> (<span class="fl">3.8612863</span><span class="sc">*</span><span class="fl">7.28125</span>) <span class="sc">+</span> <span class="fl">0.5826970</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (netrebounds estimate * meanNetRebounds) + (turnover margin estimate * meanTurnoverMargin) + (TeamFGPCT estimate * meanTeamFGPCT) + (OpponentFGPCT estimate * meanOpponentFGPCT) + Intercept</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.649125</span><span class="sc">*</span><span class="fl">2.454545</span>  ) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">1.311687</span><span class="sc">*-</span><span class="fl">0.2181818</span>) <span class="sc">+</span> (<span class="fl">90.498143</span><span class="sc">*</span><span class="fl">0.4503455</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">91.184871</span><span class="sc">*</span><span class="fl">0.4040182</span>) <span class="sc">+</span> <span class="fl">0.301244</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 21.96576</code></pre>
+<pre><code>[1] 6.095821</code></pre>
 </div>
 </div>
-<p>So a team with those numbers is going to average scoring 21 more points per game than their opponent. Sound like Ohio State in the last three years?</p>
-<p>How does that compare to Maryland for last season?</p>
+<p>So a team with those numbers is going to average scoring 6 more points per game than their opponent. Not a ton, but hey, the Big Ten has been a competitive conference lately.</p>
+<p>How does that compare to Maryland in 2020-21 season?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    Team <span class="sc">==</span> <span class="st">"Maryland"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="dv">2021</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    Team <span class="sc">==</span> <span class="st">"Maryland"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2020-2021'</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetYards =</span> <span class="fu">mean</span>(NetYards),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetRebounds =</span> <span class="fu">mean</span>(NetRebounds),</span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanTurnoverMargin =</span> <span class="fu">mean</span>(TurnoverMargin),</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanDefAvg =</span> <span class="fu">mean</span>(DefAvg),</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanOffenseAvg =</span> <span class="fu">mean</span>(OffenseAvg)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanTeamFGPCT =</span> <span class="fu">mean</span>(TeamFGPCT),</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanOpponentFGPCT =</span> <span class="fu">mean</span>(OpponentFGPCT)</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
-  meanNetYards meanTurnoverMargin meanDefAvg meanOffenseAvg
-         &lt;dbl&gt;              &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
-1         39.3             -0.538       5.67           6.24</code></pre>
+  meanNetRebounds meanTurnoverMargin meanTeamFGPCT meanOpponentFGPCT
+            &lt;dbl&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
+1          -0.724              0.379         0.458             0.409</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.0551813</span><span class="sc">*</span><span class="fl">39.30769</span> ) <span class="sc">+</span> (<span class="fl">3.8548574</span><span class="sc">*-</span><span class="fl">0.5384615</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">3.8991399</span><span class="sc">*</span>.<span class="dv">669231</span>    ) <span class="sc">+</span> (<span class="fl">3.8612863</span><span class="sc">*</span><span class="fl">6.238462</span>) <span class="sc">+</span> <span class="fl">0.5826970</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.649125</span><span class="sc">*-</span><span class="fl">0.7241379</span>    ) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">1.311687</span><span class="sc">*-</span><span class="fl">0.3793103</span>) <span class="sc">+</span> (<span class="fl">90.498143</span><span class="sc">*</span><span class="fl">0.4577586</span>   ) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">91.184871</span><span class="sc">*</span><span class="fl">0.4085172</span>) <span class="sc">+</span> <span class="fl">0.301244</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 22.15512</code></pre>
+<pre><code>[1] 4.504439</code></pre>
 </div>
 </div>
-<p>By this model, it predicted we would average outscoring our opponents by 22 points over the season! The reality? We were outscored by 8.4 on average.</p>
+<p>By this model, it predicted we would average outscoring our opponents by 4.5 points over that season. The reality?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">filter</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>         Team <span class="sc">==</span> <span class="st">"Maryland"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2020-2021'</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">avg_score =</span> <span class="fu">mean</span>(TeamScore), <span class="at">avg_opp =</span> <span class="fu">mean</span>(OpponentScore))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  avg_score avg_opp
+      &lt;dbl&gt;   &lt;dbl&gt;
+1      68.8    65.0</code></pre>
+</div>
+</div>
+<p>We outscored them by about 3.8 points on average, so this looks like a pretty solid model, although there could be better ones. What would you change?</p>
 
 
 
