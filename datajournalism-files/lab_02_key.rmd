@@ -25,7 +25,7 @@ library(lubridate)
 Let's keep working with the slice of WinRed contribution data from West Virginia.  
 
 ```{r}
-wv_winred_contribs <- read_rds("data/lab_02.rds")
+wv_winred_contribs <- read_rds("~/code/datajournalism-elections/labs/lab_02/data/lab_02.rds")
 ```
 
 ## Examine Data
@@ -60,11 +60,7 @@ A2. The Rev. Dr. John Almond of Beckley made at least 293 contributions of less 
 ```{r}
 wv_winred_contribs %>%
   filter(amount < 10) %>% 
-  group_by(last_name, first_name, address_one, city) %>%
-  summarise(
-    total = n()
-  ) %>%
-  arrange(desc(total))
+  select(last_name, first_name, address_one, city, amount)
 ```
 
 Q3. What questions do the results of Q2 raise in your mind? How could you use the data to explore them?
