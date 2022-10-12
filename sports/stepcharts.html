@@ -369,11 +369,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>Step charts are <strong>a method of showing progress</strong> toward something. They combine showing change over time – <strong>cumulative change over time</strong> – with magnitude. They’re good at inviting comparison.</p>
-<p>There’s great examples out there. First is the Washignton Post looking at <a href="https://www.washingtonpost.com/graphics/sports/lebron-james-michael-jordan-nba-scoring-list/?utm_term=.481074150849">Lebron passing Jordan’s career point total</a>. Another is John Burn-Murdoch’s work at the Financial Times (which is paywalled) about soccer stars. <a href="http://johnburnmurdoch.github.io/projects/goal-lines/CL/">Here’s an example of his work outside the paywall</a>.</p>
+<p>There’s great examples out there. First is the Washington Post looking at <a href="https://www.washingtonpost.com/graphics/sports/lebron-james-michael-jordan-nba-scoring-list/?utm_term=.481074150849">Lebron passing Jordan’s career point total</a>. Another is John Burn-Murdoch’s work at the Financial Times (which is paywalled) about soccer stars. <a href="http://johnburnmurdoch.github.io/projects/goal-lines/CL/">Here’s an example of his work outside the paywall</a>.</p>
 <p>To replicate this, we need cumulative data – data that is the running total of data at a given point. So think of it this way – Maryland scores 50 points in a basketball game and then 50 more the next, their cumulative total at two games is 100 points.</p>
 <p>Step charts can be used for all kinds of things – showing how a player’s career has evolved over time, how a team fares over a season, or franchise history. Let’s walk through an example.</p>
-<p>Let’s look at Fred Hoiberg’s team last season.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/logs21.csv">
+<p>Let’s look at Maryland’s women basketball team last season.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/wbb_game_logs_2022.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>We’ll need the tidyverse.</p>
@@ -382,14 +382,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>And we need to load our logs data we just downloaded.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/logs21.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wbb_game_logs_2022.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 8229 Columns: 48
+<pre><code>Rows: 30438 Columns: 110
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr   (8): Season, TeamFull, Opponent, HomeAway, W_L, URL, Conference, Team
-dbl  (39): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
-date  (1): Date
+chr    (7): away_team_name, home_team_name, league, season_type, neutral_sit...
+dbl  (101): end_year, neutral_site, ncaa_game_id, win, mp, pts, fgm, fga, fg...
+date   (1): date
+time   (1): gametime_east
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -399,48 +400,48 @@ date  (1): Date
 <p>The first thing we’re going to do is calculate that differential. Then, we’ll group it by the team. After that, we’re going to summarize using a new function called <code>cumsum</code> or cumulative sum – the sum for each game as we go forward. So game 1’s cumsum is the differential of that game. Game 2’s cumsum is Game 1 + Game 2. Game 3 is Game 1 + 2 + 3 and so on.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>difflogs <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Differential =</span> TeamScore <span class="sc">-</span> OpponentScore) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Differential =</span> pts <span class="sc">-</span> opp_pts) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(team) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CumDiff =</span> <span class="fu">cumsum</span>(Differential))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now that we have the cumulative sum for each, let’s filter it down to just Big Ten teams.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bigdiff <span class="ot">&lt;-</span> difflogs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">"Big Ten"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bigdiff <span class="ot">&lt;-</span> difflogs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(conference <span class="sc">==</span> <span class="st">"Big Ten"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The step chart is it’s own geom, so we can employ it just like we have the others. It works almost exactly the same as a line chart, but it uses the cumulative sum instead of a regular value and, as the name implies, creates a step like shape to the line instead of a curve.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_step</span>(<span class="at">data=</span>bigdiff, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_step</span>(<span class="at">data=</span>bigdiff, <span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>team))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="stepcharts_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Let’s try a different element of the aesthetic: color, but this time inside the aesthetic. Last time, we did the color outside. When you put it inside, you pass it a column name and ggplot will color each line based on what thing that is, and it will create a legend that labels each line that thing.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_step</span>(<span class="at">data=</span>bigdiff, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team, <span class="at">color=</span>Team))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_step</span>(<span class="at">data=</span>bigdiff, <span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>team, <span class="at">color=</span>team))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="stepcharts_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>From this, we can see a handful of teams in the Big Ten had negative point differentials last season. But which is which? And which one is Maryland? Too many colors and it’s too hard to tell. How to sort that out? Let’s add some helpers beyond layering.</p>
-<p>Let’s look at the top team plus Maryland.</p>
+<p>Let’s look at Maryland, plus another team: Purdue.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>umd <span class="ot">&lt;-</span> bigdiff <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Maryland"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>il <span class="ot">&lt;-</span> bigdiff <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Illinois"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>umd <span class="ot">&lt;-</span> bigdiff <span class="sc">%&gt;%</span> <span class="fu">filter</span>(team <span class="sc">==</span> <span class="st">"Maryland"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pu <span class="ot">&lt;-</span> bigdiff <span class="sc">%&gt;%</span> <span class="fu">filter</span>(team <span class="sc">==</span> <span class="st">"Purdue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s introduce a couple of new things here. First, note when I take the color OUT of the aesthetic, the legend disappears.</p>
 <p>The second thing I’m going to add is the annotation layer. In this case, I am adding a text annotation layer, and I can specify where by adding in a x and a y value where I want to put it. This takes some finesse. After that, I’m going to add labels and a theme.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">data=</span>bigdiff, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"light grey"</span>) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">data=</span>umd, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">data=</span>il, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"orange"</span>) <span class="sc">+</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x=</span>(<span class="fu">as.Date</span>(<span class="st">"2021-02-10"</span>)), <span class="at">y=</span><span class="sc">-</span><span class="dv">70</span>, <span class="at">label=</span><span class="st">"Maryland"</span>) <span class="sc">+</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x=</span>(<span class="fu">as.Date</span>(<span class="st">"2021-03-01"</span>)), <span class="at">y=</span><span class="dv">330</span>, <span class="at">label=</span><span class="st">"Illinois"</span>) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">data=</span>bigdiff, <span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>team), <span class="at">color=</span><span class="st">"light grey"</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">data=</span>umd, <span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>team), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">data=</span>pu, <span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y=</span>CumDiff, <span class="at">group=</span>team), <span class="at">color=</span><span class="st">"gold"</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x=</span>(<span class="fu">as.Date</span>(<span class="st">"2021-11-10"</span>)), <span class="at">y=</span><span class="dv">70</span>, <span class="at">label=</span><span class="st">"Purdue"</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x=</span>(<span class="fu">as.Date</span>(<span class="st">"2022-02-01"</span>)), <span class="at">y=</span><span class="dv">330</span>, <span class="at">label=</span><span class="st">"Maryland"</span>) <span class="sc">+</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="st">"Date"</span>, </span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="st">"Cumulative Point Differential"</span>, </span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"Maryland's late charge"</span>, </span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle=</span><span class="st">"The Terps started solidly but didn't gain much until late in the season."</span>, </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"Ups and Downs for Maryland, Purdue Steadier"</span>, </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle=</span><span class="st">"The Terps had some big swings in point differential in an inconsistent season."</span>, </span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">"Source: Sports-Reference.com | By Derek Willis"</span>) <span class="sc">+</span></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
