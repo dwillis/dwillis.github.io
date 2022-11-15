@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.101.0" />
+
+
+<title>Are College Teams Passing More on First Down? - Sports Data Blog</title>
+<meta property="og:title" content="Are College Teams Passing More on First Down? - Sports Data Blog">
+
+
+  <link href='https://dwillis.github.io/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/dwillis">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/derekwillis">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">5 min read</span>
+    
+
+    <h1 class="article-title">Are College Teams Passing More on First Down?</h1>
+
+    
+    <span class="article-date">2022-11-10</span>
+    
+
+    <div class="article-content">
+      
+
+
+<pre class="r"><code>library(tidyverse)
+library(cfbfastR)
+
+tictoc::tic()
+pbp &lt;- data.frame()
+seasons &lt;- 2014:cfbfastR:::most_recent_cfb_season()
+progressr::with_progress({
+
+  pbp &lt;- cfbfastR::load_cfb_pbp(seasons)
+})
+tictoc::toc()</code></pre>
+<pre><code>## 43.313 sec elapsed</code></pre>
+<p>Most college football teams run more often on first down than they pass. Unless your coach is Mike Leach or you play for Indiana this year, that is.</p>
+<p>Leach, the current coach at Mississippi State and inventor of the prolific “Air Raid” offense, has long favored passing over the ground game, but most teams don’t play that way. In the Big Ten, the number of first-down passing plays has hovered around four in 10 until the recently. This season it’s currently at one in three. The Hoosiers, who started out the season with three straight wins before losing their last seven games, are the exception: they pass about half the time on first down.</p>
+<p>The Big Ten has long had a reputation as a run-first conference, so I wanted to see if that had changed at all when it comes to play choice on first downs. Using play-by-play data from cfbfastR, I isolated all first down plays by season and team since 2014, and then did the same for all first-down pass plays. I’m specifically including plays with penalties, since the intent of the play-call is what I’m interested in, not whether the play succeeded. To start with, I’ll look at all teams, not just the Big Ten.</p>
+<pre class="r"><code>first_down_plays &lt;- pbp %&gt;% 
+  filter(down == 1) %&gt;% 
+  group_by(season, pos_team) %&gt;% 
+  summarise(all_plays = n())</code></pre>
+<pre class="r"><code>first_down_pass_plays &lt;- pbp %&gt;%
+  filter(pass == 1, down == 1) %&gt;%
+  group_by(season, pos_team) %&gt;%
+  summarise(pass_plays = n())</code></pre>
+<p>Let’s take those two dataframes of all first-down plays and first-down pass plays, calculate a percentage and see what we have.</p>
+<pre class="r"><code>combined_plays &lt;- first_down_plays %&gt;% 
+  inner_join(first_down_pass_plays, by=c(&quot;season&quot;, &quot;pos_team&quot;)) %&gt;% 
+  mutate(pass_pct = pass_plays/all_plays*100)
+
+summary(combined_plays)</code></pre>
+<pre><code>##      season       pos_team           all_plays        pass_plays   
+##  Min.   :2014   Length:2116        Min.   :   1.0   Min.   :  1.0  
+##  1st Qu.:2016   Class :character   1st Qu.:  47.0   1st Qu.: 17.0  
+##  Median :2018   Mode  :character   Median : 320.0   Median :102.0  
+##  Mean   :2018                      Mean   : 283.2   Mean   : 94.1  
+##  3rd Qu.:2021                      3rd Qu.: 382.0   3rd Qu.:151.0  
+##  Max.   :2022                      Max.   :1344.0   Max.   :375.0  
+##  NA&#39;s   :198                                                       
+##     pass_pct       
+##  Min.   :  0.6757  
+##  1st Qu.: 29.3279  
+##  Median : 37.8907  
+##  Mean   : 36.8880  
+##  3rd Qu.: 46.0944  
+##  Max.   :100.0000  
+## </code></pre>
+<p>Leach-coached teams represent four of the top 10 with the highest first-down passing percentages. Just looking at this dataframe there are some outliers to deal with: in particular, there are some teams with very low pass percentages and some with 100%. Both are possible, but more important is removing teams with a very small number of total first-down plays. Could Maine really have run 57 first-down plays in the 2019 season? Let’s try limiting our data to teams that have run at least 100 total plays (which seems safely conservative).</p>
+<pre class="r"><code>combined_plays &lt;- combined_plays %&gt;% filter(all_plays &gt;= 100)</code></pre>
+<p>Now I’ll make a line chart of these results, grouping by team:</p>
+<pre class="r"><code>ggplot() + 
+  geom_line(data=combined_plays, aes(x=season, y=pass_pct, group=pos_team))</code></pre>
+<pre><code>## Warning: Removed 151 row(s) containing missing values (geom_path).</code></pre>
+<p><img src="https://dwillis.github.io/2022/11/10/are-college-teams-passing-more-on-first-down/index_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+Well. If there’s any kind of pattern here beyond the traditional hairball, it might be that the first-down pass play percentage has gone down slightly over time. Let’s see if I can confirm that at all:</p>
+<pre class="r"><code>first_down_plays_by_season &lt;- pbp %&gt;% 
+  filter(down == 1) %&gt;% 
+  group_by(season) %&gt;% 
+  summarise(all_plays = n())
+
+first_down_pass_plays_by_season &lt;- pbp %&gt;%
+  filter(pass == 1, down == 1) %&gt;%
+  group_by(season) %&gt;%
+  summarise(pass_plays = n())
+
+combined_plays_by_season &lt;- first_down_plays_by_season %&gt;% 
+  inner_join(first_down_pass_plays_by_season, by=&quot;season&quot;) %&gt;% 
+  mutate(pass_pct = pass_plays/all_plays*100)
+
+View(combined_plays_by_season)</code></pre>
+<p>I’m not super excited about the number of first-down plays that have no <code>season</code> value, but for those plays that have a season, the trend is somewhat downwards in the past two seasons, although it’s possible that’s because we have more data for more recent seasons. I’m not confident enough in this data to say that what I’m seeing is an actual decline.</p>
+<p>Next, I’ll move to looking at Big Ten teams.</p>
+<pre class="r"><code>first_down_plays_big_ten &lt;- pbp %&gt;% 
+  filter(down == 1, offense_conference == &#39;Big Ten&#39;) %&gt;% 
+  group_by(season, pos_team) %&gt;% 
+  summarise(all_plays = n())
+
+first_down_pass_plays_big_ten &lt;- pbp %&gt;%
+  filter(pass == 1, down == 1, offense_conference == &#39;Big Ten&#39;) %&gt;%
+  group_by(season, pos_team) %&gt;%
+  summarise(pass_plays = n())
+
+combined_plays_big_ten &lt;- first_down_plays_big_ten %&gt;% 
+  inner_join(first_down_pass_plays_big_ten, by=c(&quot;season&quot;, &quot;pos_team&quot;)) %&gt;% 
+  mutate(pass_pct = pass_plays/all_plays*100)</code></pre>
+<p>I’d like to get a sense of each team’s first-down play-calling tendencies, so I’ll use facet_wrap to generate individual charts.</p>
+<pre class="r"><code>ggplot() + 
+  geom_line(data=combined_plays_big_ten, aes(x=season, y=pass_pct, group=pos_team)) +
+  facet_wrap(~pos_team)</code></pre>
+<pre><code>## Warning: Removed 14 row(s) containing missing values (geom_path).</code></pre>
+<p><img src="https://dwillis.github.io/2022/11/10/are-college-teams-passing-more-on-first-down/index_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+Indiana’s jump this season is immediately evidence, as are declines for Illinois, Purdue, Rutgers and Penn State. Let’s add an average from the Big Ten schools, using just the plays we have seasons for:</p>
+<pre class="r"><code>all_first_down_plays_big_ten &lt;- pbp %&gt;% 
+  filter(down == 1, offense_conference == &#39;Big Ten&#39;, !is.na(season)) %&gt;% 
+  summarise(all_plays = n())
+
+all_first_down_pass_plays_big_ten &lt;- pbp %&gt;%
+  filter(pass == 1, down == 1, offense_conference == &#39;Big Ten&#39;, !is.na(season)) %&gt;%
+  summarise(pass_plays = n())
+
+average &lt;- all_first_down_pass_plays_big_ten$pass_plays/all_first_down_plays_big_ten$all_plays * 100
+
+ggplot() + 
+  geom_hline(yintercept=average, color=&quot;blue&quot;) + 
+  geom_line(data=combined_plays_big_ten, aes(x=season, y=pass_pct, group=pos_team)) +
+  facet_wrap(~pos_team)</code></pre>
+<pre><code>## Warning: Removed 14 row(s) containing missing values (geom_path).</code></pre>
+<p><img src="https://dwillis.github.io/2022/11/10/are-college-teams-passing-more-on-first-down/index_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+Now we can see the consistent run-first schools: Wisconsin, Minnesota, Iowa and Rutgers. We also can see that Maryland, after dramatically increasing its first-down pass plays between 2018 and 2020, has come back closer to the conference average.</p>
+<p>But Indiana stands alone this season. What about historically?</p>
+<pre class="r"><code>combined_plays %&gt;% 
+  arrange(desc(pass_pct)) %&gt;% 
+  head(50)</code></pre>
+<pre><code>## # A tibble: 50 × 5
+## # Groups:   season [8]
+##    season pos_team          all_plays pass_plays pass_pct
+##     &lt;dbl&gt; &lt;chr&gt;                 &lt;int&gt;      &lt;int&gt;    &lt;dbl&gt;
+##  1   2020 Mississippi State       272        225     82.7
+##  2   2019 Washington State        412        316     76.7
+##  3   2014 Akron                   333        254     76.3
+##  4   2014 Miami                   205        155     75.6
+##  5   2014 Washington State        452        338     74.8
+##  6   2015 Washington State        409        284     69.4
+##  7   2015 Illinois                301        209     69.4
+##  8   2017 Washington State        410        279     68.0
+##  9   2016 California              390        263     67.4
+## 10   2018 Washington State        367        241     65.7
+## # … with 40 more rows</code></pre>
+<p>Removing teams with fewer than 100 total first-down plays makes Leach-coached offenses even more prominent on this list - six of the top 10 are his - and Illinois’ 2015 team now gets in the first ten as well. By historical standards, IU is still pretty far from the mark. By Big Ten standards, they are fun-and-gunning it this season.</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

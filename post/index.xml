@@ -6,7 +6,17 @@
     <description>Recent content in Posts on Sports Data Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://dwillis.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://dwillis.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Are College Teams Passing More on First Down?</title>
+      <link>https://dwillis.github.io/2022/11/10/are-college-teams-passing-more-on-first-down/</link>
+      <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://dwillis.github.io/2022/11/10/are-college-teams-passing-more-on-first-down/</guid>
+      <description>library(tidyverse) library(cfbfastR) tictoc::tic() pbp &amp;lt;- data.frame() seasons &amp;lt;- 2014:cfbfastR:::most_recent_cfb_season() progressr::with_progress({ pbp &amp;lt;- cfbfastR::load_cfb_pbp(seasons) }) tictoc::toc() ## 43.313 sec elapsed Most college football teams run more often on first down than they pass. Unless your coach is Mike Leach or you play for Indiana this year, that is.
+Leach, the current coach at Mississippi State and inventor of the prolific “Air Raid” offense, has long favored passing over the ground game, but most teams don’t play that way.</description>
+    </item>
+    
     <item>
       <title>The Best and Worst Red Zone Teams in the NFL</title>
       <link>https://dwillis.github.io/2022/11/03/the-best-and-worst-red-zone-teams-in-the-nfl/</link>
