@@ -1,1 +1,5 @@
 .DS_Store
+.Rproj.user
+/.quarto/
+/_site/
+thescoop.Rproj
