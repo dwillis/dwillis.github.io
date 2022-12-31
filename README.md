@@ -1,2 +1,0 @@
-# dwillis.github.io
-Coursefiles
