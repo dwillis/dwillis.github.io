@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Derek Willis">
+<meta name="dcterms.date" content="2023-01-04">
+<meta name="description" content="How WVU, GitHub Actions &amp; Datasette Produce Good Questions">
+
+<title>Derek Willis - What is Happening in Morgantown?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<script src="../../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<link href="../../../../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../../../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<meta name="twitter:title" content="Derek Willis - What is Happening in Morgantown?">
+<meta name="twitter:description" content="How WVU, GitHub Actions &amp; Datasette Produce Good Questions">
+<meta name="twitter:creator" content="@derekwillis">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../../images/dwillis.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../../../../index.html">
+    <span class="navbar-title">Derek Willis</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../../../blog.xml"><i class="bi bi-rss" role="img" aria-label="feed">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">What is Happening in Morgantown?</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title d-none d-lg-block">What is Happening in Morgantown?</h1>
+                  <div>
+        <div class="description">
+          How WVU, GitHub Actions &amp; Datasette Produce Good Questions
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Derek Willis </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 4, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://twitter.com/derekwillis" title="" class="sidebar-tool px-1"><i class="bi bi-twitter"></i></a>
+    <a href="https://newsie.social/@derekwillis" title="" class="sidebar-tool px-1"><i class="bi bi-mastodon"></i></a>
+    <a href="https://github.com/dwillis" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../about" class="sidebar-item-text sidebar-link">About</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../now" class="sidebar-item-text sidebar-link">Now</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../then" class="sidebar-item-text sidebar-link">Then</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../help" class="sidebar-item-text sidebar-link">Ways I Can Help</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../thefix" class="sidebar-item-text sidebar-link">The Fix</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../blog.html" class="sidebar-item-text sidebar-link">Blog</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../teaching" class="sidebar-item-text sidebar-link">Teaching</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>When <a href="https://mountainstatespotlight.org/author/ken-ward/">Ken Ward Jr.</a> and I got to teach an investigative reporting class at West Virginia University in the fall of 2019, one of the regular assignments we had was to give students some state government report to read and ask them to generate newsworthy questions from it.</p>
+<p>This exercise started out pretty rough. Even though questions are the backbone of journalism, there aren’t many journalism classes that assign them specifically. Usually the assignment is to write a story based on an event or interviews, and the assumption is that in doing that students will come up with relevant and interesting questions. But if you’re not covering a beat or an expert on a topic, investigative story ideas don’t just appear from thin air. They almost always derive from good questions.</p>
+<p>At first, the questions we got were ok; often they were definitional, which makes sense since we were introducing new subjects and findings nearly every week. “What does X mean?” or “Why is Y important?” These aren’t bad questions, but they also indicate an introductory level of understanding of the subject. For a lot of journalism assignments, including investigative work, that’s a necessary step. The problem was that many of them focused on things that weren’t the most important thing.</p>
+<p>Here’s an example: one of the reports we had students read was from the West Virginia Board of Registered Nurses (see a more recent example <a href="https://www.wvlegislature.gov/legisdocs/reports/agency/R02_FY_2022_15836.pdf">here</a>) showing, among other things, the number of registered nurses by county and specialty. The table looks like this:</p>
+<p><img src="wv_nurses.png" class="img-fluid"> The specialties are listed across the top, each letter corresponding to a value like “Cardiology” or “Pediatrics”. The letter “J” stands for “Maternal-Obstetrics”. Most of the questions we got were ones such as “Why do Cabell, Kanawha and Monongalia have so many more nurses?” which has a quick answer - they have more people living there. Look at the data longer, though, and you start to ask other, better questions, like: “How many WV counties have literally zero maternal/OBGYN nurses living there?” More than half the state’s counties have none, although there are maternal nurses living in other states who work in West Virginia. Or “What’s it like to be the only maternal health nurse in the whole county?” These are better questions that could lead to great stories.</p>
+<p>In order to make this exercise more relevant to our WVU students, we looked at <a href="https://police.wvu.edu/clery-act/campus-safety/crime-log">campus police incident reports</a>. The information is not exactly in a useful format; it requires that people visit the site repeatedly and also “scrolls off” earlier reports after 90 days or so. In other words, a perfect candidate for scraping. So that’s what I did, <a href="https://github.com/dwillis/wvu-projects/tree/master/crime-log">writing some Python code to grab the latest reports</a> and then using GitHub Actions to automate that process every day. The result is <a href="https://github.com/dwillis/wvu-projects/blob/master/crime-log/crime_log.csv">a CSV file</a> with more than 13,000 rows.</p>
+<p>Not many of us want to look at huge CSV files a lot, which is why we have other software to help us do that. The best software for this purpose is one that allows, even encourages, users to ask questions of the data. That’s what <a href="https://datasette.io/">Datasette</a> is great at. So after updating the CSV file with the latest WVU crime incident reports, I have GitHub Actions build out <a href="https://wvu-crime-log.fly.dev/wvu/crimelog">a Datasette instance</a> to display it.</p>
+<p>That brings me back to the title of this post: What is happening in Morgantown? Seems like a pretty basic question, but where it comes from is asking other questions of this data, and specifically grouping by and counting the number of reports. I start by grouping the reports by year (I’ve been collecting this data since the fall of 2019, so that year doesn’t have full data). Looking at <a href="https://wvu-crime-log.fly.dev/wvu/crimelog?_facet=year">those yearly totals</a>, you can see 2020 stand out, which, given COVID, seems logical.</p>
+<p>I’ve been looking at this data since 2019, and when you do that you start to get an idea of what the ebb and flow of it <em>should</em> look like. So when you see rare events, your brain might notice them. But that’s not the only way to find out if something has changed. Throughout the pandemic we heard a lot about students’ mental health struggles. Does that show up at all in campus police incidents? At the most extreme end we could look at references to suicide. It turns out that there are several incident titles that contain the word “suicide”, so let’s look at those.</p>
+<p>One of Datasette’s key features is to allow you to execute arbitrary SQL statements, such as performing wildcard searches. Here are <a href="https://wvu-crime-log.fly.dev/wvu/crimelog?_facet=year&amp;title__contains=SUICIDE&amp;_sort_desc=datetime">the results of searching for where <code>title</code> contains “SUICIDE”, grouped by year</a>. There were nearly twice as many reports of attempted or threatened suicide recorded by WVU police in 2022 than in 2021. Nearly twice as many.</p>
+<p>Which leads to these questions: what is happening in Morgantown? Is there an actual increase in suicidal behavior? Is this better reporting by police? An increased awareness of suicide leading to more willingness to report it? Something else entirely? I hope that someone in Morgantown is asking them.</p>
+<p>A less extreme but very common incident on and around college campuses is a violation of alcohol laws. In West Virginia, these are known as “ABCC Violations”. Focusing on those, once again grouping by year, we can see that <a href="https://wvu-crime-log.fly.dev/wvu/crimelog?_facet=year&amp;_sort_desc=datetime&amp;_facet=title&amp;title=ABCC+VIOLATION&amp;_facet=outcome">there were more violations reported in 2021 than in 2022</a>. Interesting, perhaps, but let’s bring in report outcomes - the disposition of each incident. The two most common outcomes are “Clear by Citation” and “Clear by Warning”. If we drill down into the first, we can see a huge change between 2021 and 2022: the number of ABCC violations that ended in citations <a href="https://wvu-crime-log.fly.dev/wvu/crimelog?_facet=year&amp;_sort_desc=datetime&amp;_facet=title&amp;title=ABCC+VIOLATION&amp;_facet=outcome&amp;outcome=Clear+by+Citation">dropped to just 31 last year, compared to 136 the previous year</a>. Warnings, meanwhile, <a href="https://wvu-crime-log.fly.dev/wvu/crimelog?_facet=year&amp;_sort_desc=datetime&amp;_facet=title&amp;title=ABCC+VIOLATION&amp;_facet=outcome&amp;outcome=Clear+by+Warning">were higher in 2022</a>. What changed? Was this an announced policy?</p>
+<p>Good data exploration might provide some answers, but at a minimum it should produce more questions. Some of those might turn out to be pretty good stories.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© Copyright 2022 Derek Willis. Published using Quarto.</div>   
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -10,7 +10,37 @@
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
 <generator>quarto-1.2.269</generator>
-<lastBuildDate>Sat, 31 Dec 2022 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 04 Jan 2023 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>What is Happening in Morgantown?</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2023/01/04/what-is-happening-in-morgantown/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>When <a href="https://mountainstatespotlight.org/author/ken-ward/">Ken Ward Jr.</a> and I got to teach an investigative reporting class at West Virginia University in the fall of 2019, one of the regular assignments we had was to give students some state government report to read and ask them to generate newsworthy questions from it.</p>
+<p>This exercise started out pretty rough. Even though questions are the backbone of journalism, there aren’t many journalism classes that assign them specifically. Usually the assignment is to write a story based on an event or interviews, and the assumption is that in doing that students will come up with relevant and interesting questions. But if you’re not covering a beat or an expert on a topic, investigative story ideas don’t just appear from thin air. They almost always derive from good questions.</p>
+<p>At first, the questions we got were ok; often they were definitional, which makes sense since we were introducing new subjects and findings nearly every week. “What does X mean?” or “Why is Y important?” These aren’t bad questions, but they also indicate an introductory level of understanding of the subject. For a lot of journalism assignments, including investigative work, that’s a necessary step. The problem was that many of them focused on things that weren’t the most important thing.</p>
+<p>Here’s an example: one of the reports we had students read was from the West Virginia Board of Registered Nurses (see a more recent example <a href="https://www.wvlegislature.gov/legisdocs/reports/agency/R02_FY_2022_15836.pdf">here</a>) showing, among other things, the number of registered nurses by county and specialty. The table looks like this:</p>
+<p><img src="https://www.thescoop.org/archives/2023/01/04/what-is-happening-in-morgantown/wv_nurses.png" class="img-fluid"> The specialties are listed across the top, each letter corresponding to a value like “Cardiology” or “Pediatrics”. The letter “J” stands for “Maternal-Obstetrics”. Most of the questions we got were ones such as “Why do Cabell, Kanawha and Monongalia have so many more nurses?” which has a quick answer - they have more people living there. Look at the data longer, though, and you start to ask other, better questions, like: “How many WV counties have literally zero maternal/OBGYN nurses living there?” More than half the state’s counties have none, although there are maternal nurses living in other states who work in West Virginia. Or “What’s it like to be the only maternal health nurse in the whole county?” These are better questions that could lead to great stories.</p>
+<p>In order to make this exercise more relevant to our WVU students, we looked at <a href="https://police.wvu.edu/clery-act/campus-safety/crime-log">campus police incident reports</a>. The information is not exactly in a useful format; it requires that people visit the site repeatedly and also “scrolls off” earlier reports after 90 days or so. In other words, a perfect candidate for scraping. So that’s what I did, <a href="https://github.com/dwillis/wvu-projects/tree/master/crime-log">writing some Python code to grab the latest reports</a> and then using GitHub Actions to automate that process every day. The result is <a href="https://github.com/dwillis/wvu-projects/blob/master/crime-log/crime_log.csv">a CSV file</a> with more than 13,000 rows.</p>
+<p>Not many of us want to look at huge CSV files a lot, which is why we have other software to help us do that. The best software for this purpose is one that allows, even encourages, users to ask questions of the data. That’s what <a href="https://datasette.io/">Datasette</a> is great at. So after updating the CSV file with the latest WVU crime incident reports, I have GitHub Actions build out <a href="https://wvu-crime-log.fly.dev/wvu/crimelog">a Datasette instance</a> to display it.</p>
+<p>That brings me back to the title of this post: What is happening in Morgantown? Seems like a pretty basic question, but where it comes from is asking other questions of this data, and specifically grouping by and counting the number of reports. I start by grouping the reports by year (I’ve been collecting this data since the fall of 2019, so that year doesn’t have full data). Looking at <a href="https://wvu-crime-log.fly.dev/wvu/crimelog?_facet=year">those yearly totals</a>, you can see 2020 stand out, which, given COVID, seems logical.</p>
+<p>I’ve been looking at this data since 2019, and when you do that you start to get an idea of what the ebb and flow of it <em>should</em> look like. So when you see rare events, your brain might notice them. But that’s not the only way to find out if something has changed. Throughout the pandemic we heard a lot about students’ mental health struggles. Does that show up at all in campus police incidents? At the most extreme end we could look at references to suicide. It turns out that there are several incident titles that contain the word “suicide”, so let’s look at those.</p>
+<p>One of Datasette’s key features is to allow you to execute arbitrary SQL statements, such as performing wildcard searches. Here are <a href="https://wvu-crime-log.fly.dev/wvu/crimelog?_facet=year&amp;title__contains=SUICIDE&amp;_sort_desc=datetime">the results of searching for where <code>title</code> contains “SUICIDE”, grouped by year</a>. There were nearly twice as many reports of attempted or threatened suicide recorded by WVU police in 2022 than in 2021. Nearly twice as many.</p>
+<p>Which leads to these questions: what is happening in Morgantown? Is there an actual increase in suicidal behavior? Is this better reporting by police? An increased awareness of suicide leading to more willingness to report it? Something else entirely? I hope that someone in Morgantown is asking them.</p>
+<p>A less extreme but very common incident on and around college campuses is a violation of alcohol laws. In West Virginia, these are known as “ABCC Violations”. Focusing on those, once again grouping by year, we can see that <a href="https://wvu-crime-log.fly.dev/wvu/crimelog?_facet=year&amp;_sort_desc=datetime&amp;_facet=title&amp;title=ABCC+VIOLATION&amp;_facet=outcome">there were more violations reported in 2021 than in 2022</a>. Interesting, perhaps, but let’s bring in report outcomes - the disposition of each incident. The two most common outcomes are “Clear by Citation” and “Clear by Warning”. If we drill down into the first, we can see a huge change between 2021 and 2022: the number of ABCC violations that ended in citations <a href="https://wvu-crime-log.fly.dev/wvu/crimelog?_facet=year&amp;_sort_desc=datetime&amp;_facet=title&amp;title=ABCC+VIOLATION&amp;_facet=outcome&amp;outcome=Clear+by+Citation">dropped to just 31 last year, compared to 136 the previous year</a>. Warnings, meanwhile, <a href="https://wvu-crime-log.fly.dev/wvu/crimelog?_facet=year&amp;_sort_desc=datetime&amp;_facet=title&amp;title=ABCC+VIOLATION&amp;_facet=outcome&amp;outcome=Clear+by+Warning">were higher in 2022</a>. What changed? Was this an announced policy?</p>
+<p>Good data exploration might provide some answers, but at a minimum it should produce more questions. Some of those might turn out to be pretty good stories.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2023/01/04/what-is-happening-in-morgantown/index.html</guid>
+  <pubDate>Wed, 04 Jan 2023 05:00:00 GMT</pubDate>
+  <media:content url="https://www.thescoop.org/archives/2023/01/04/what-is-happening-in-morgantown/wv_nurses.png" medium="image" type="image/png" height="87" width="144"/>
+</item>
 <item>
   <title>Welcome Back</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -694,28 +724,6 @@ Mission of Burma, “Academy Fight Song”</p>
  ]]></description>
   <guid>https://www.thescoop.org/archives/2013/04/28/academy-fight-song/index.html</guid>
   <pubDate>Sun, 28 Apr 2013 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>The Itemizer</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2013/04/24/the-itemizer/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Here’s a little secret about me: I love campaign finance data.</p>
-<p>Ok, so that’s <a href="https://twitter.com/campfinmoments">no secret at all</a>, and it’s probably unhealthy in some respects. But let’s face it, campaign finance data provides a rich source of information for stories, blog posts and tweets, in rough descending order of size and scope. There’s one thing that has always bugged me about how we reference campaign finance data online: the best that most of us can do when we link to a campaign filing is to link to a particular page, whether that’s <a href="http://query.nictusa.com/cgi-bin/dcdev/forms/C00271312/868832/sa/ALL">a list of contributors</a> or <a href="http://query.nictusa.com/cgi-bin/dcdev/forms/C00452144/868805/">a summary page</a>. Yet often we’re referencing a single transaction or line-item.</p>
-<p>I started to think more about this after listening to <a href="http://ji2013.sched.org/event/2b8aa8249e92fce2f81c3a3ceccf68df?iframe=no&amp;w=680&amp;sidebar=no&amp;bg=no#.UXh_ClvWEbo">David Cohn talk about Circa at the Journalism Interactive conference</a> in February. <a href="http://cir.ca/about/">Circa</a> “is creating the first born-on-mobile news experience, delivering it in a format native to mobile devices, with an experience intuitive to mobile users,” and part of that means breaking down what we think of as stories into their essential components. Those usually are statements or facts of some kind that can readers into a larger story. This “atomization” of news, <a href="http://www.slideshare.net/JIConf/circa-message">as David called it in his presentation</a>, focuses tightly on the core elements of a story.</p>
-<p>For people who work with data and love to cite it in stories, this is a good idea. It got me thinking about how we could do that for campaign finance data, where transactions are the smallest particle. What I’ve come up with, with the assistance of Aaron Bycoffe, is <a href="http://itemizer.herokuapp.com/">The Itemizer</a>, a simple app that takes itemized records from Federal Election Commission filings and allows you to link to them. If you want to specifically reference the $1,000 that the Society of American Florists PAC gave to Nydia Velazquez, <a href="http://itemizer.herokuapp.com/filing/868832/schedule/sa#VN89J1EW3Y1">now you can</a>.</p>
-<p>When I say simple, <a href="https://github.com/dwillis/itemizer">I mean it</a>. It’s a Rails 3.2 app, but it could just as easily be implemented in Sinatra, given how small it is. The anchor links are based on the transaction IDs from the filings, so there’s no need to invent unique hashes or anything. Thanks to the <a href="http://nytimes.github.io/campaign_cash/">Campaign Cash</a> and <a href="http://nytimes.github.io/Fech/">Fech</a> Ruby gems, the page loads today’s filings and then constructs links to receipts and expenditures (other schedules are coming). Nothing is stored in a database - Campaign Cash pulls in the day’s filings from <a href="http://developer.nytimes.com/docs/campaign_finance_api/">The New York Times Campaign Finance API</a> and Fech processes individual filings on the fly. Although the default is to today’s filings, if you know the filing number, you can plug it and the schedule into the URL and it’ll just work.</p>
-<p>Although it was relatively simple to build and deploy (thanks, Heroku!), I don’t expect the FEC to do something like this anytime soon, although I’d be happy if they did. More certainty, tighter focus, more direct references – these are good things for journalism. If you have ideas on improving The Itemizer, please join in. Or better yet, build one for a similar data set that you work with so even more people can benefit.</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2013/04/24/the-itemizer/index.html</guid>
-  <pubDate>Wed, 24 Apr 2013 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
