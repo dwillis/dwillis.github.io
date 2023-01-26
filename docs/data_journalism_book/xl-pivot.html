@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>xl-pivot</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="xl-pivot_files/libs/clipboard/clipboard.min.js"></script>
+<script src="xl-pivot_files/libs/quarto-html/quarto.js"></script>
+<script src="xl-pivot_files/libs/quarto-html/popper.min.js"></script>
+<script src="xl-pivot_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="xl-pivot_files/libs/quarto-html/anchor.min.js"></script>
+<link href="xl-pivot_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="xl-pivot_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="xl-pivot_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="xl-pivot_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="xl-pivot_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="xl-pivot" class="level1">
+<h1>Grouping with pivot tables</h1>
+<p>To get totals for out of state contributions to Maryland’s 2022 gubernatorial primary candidates, Stephen Neukam downloaded data from the State Board of Elections for Wes Moore and other candidates. Make a copy of <a href="https://docs.google.com/spreadsheets/d/1MRpGN-9mJGKZIvKbiCVayKWUNVi75eYxTCcpQapTVjs/edit?usp=sharing">this Google Sheet</a> so we can work with that data.</p>
+<p><a href="https://cnsmaryland.org/2022/03/03/millions-in-out-of-state-donations-help-fuel-high-profile-maryland-democratic-governor-candidates/">Neukam’s story</a> is about out-of-state contributions:</p>
+<blockquote class="blockquote">
+<p>Moore, a U.S. Army veteran and bestselling author, built a campaign war chest that included over $2.3 million in out-of-state contributions. Tom Perez, a former leader of the Democratic National Committee, raised nearly $1.7 million in donations from outside Maryland.</p>
+<p>John B. King, former secretary of Education under President Barack Obama, raised $2.2 million in campaign funding last year. Only 11%, just under $240,000, came from Maryland donors. King raised over $534,000 in New York alone.</p>
+</blockquote>
+<p>Summarizing a list of items in a spreadsheet is done using pivot tables. In other languages, it’s considered “aggregating” or “grouping and summarizing”. Think of pivot tables and grouping as answering the questions, “How many?” and “How much?”. They are particularly powerful when your question also has the words “the most” or the “the least” or “of each”. Some examples:</p>
+<ul>
+<li>Which <em>Zip Code</em> had <em>the most</em> crimes?</li>
+<li>What <em>month</em> had <em>the least</em> total rainfall?</li>
+<li><em>How much</em> did <em>each candidate</em> raise last quarter?</li>
+<li>In playing cards, <em>how many</em> of <em>each suit</em> do I have in my hand?</li>
+<li>On average, are <em>Merrill students</em> <em>taller or shorter</em> than in other schools?</li>
+</ul>
+<section id="confusing-grouping-with-sorting-or-arranging" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="confusing-grouping-with-sorting-or-arranging">Confusing grouping with sorting or arranging</h3>
+<p>Many reporters confuse this summarization with “sorting”. One reason is that this is how we express the concept in plain language: “I want to sort Skittles by color”.</p>
+<p>But in data analysis, sorting and and grouping are very different things. <em>Sorting</em> involves shuffling a table’s rows into some order based on the values in a column. In other languages, this is called <em>arranging</em> or <em>ordering</em>, much clearer concepts. <em>Grouping</em>, which is what pivot tables do, is a path to aggregating and computing summary statistics such as a count (the number of items), sum (how much they add up to), or average for category. It means “make piles and compute statistics for each one.”</p>
+</section>
+<section id="when-to-use-filter-vs.-pivot-tables" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="when-to-use-filter-vs.-pivot-tables">When to use filter vs.&nbsp;pivot tables</h3>
+<p>Something that trips up beginners is a desire to see details and totals at the same time, which is more difficult than it sounds.</p>
+<p>A filter is used to <em>display</em> your selected items as a list. You’ll get to see all of the detail and every column. As a convenience, Excel shows you how many items are in that filtered list. That’s great when you want to just look at them, or get more information about them. For instance, if you had a list of crimes by ZIP code, you might just want to see the list in your neighborhood – where, exactly, were they? When did they happen? Was it at night or the morning? What crimes happened on which blocks?</p>
+<p>A pivot table is used when you <em>just want to see summaries</em> – does my ZIP code have more crime than others? Are robberies more common than car theft in my Zip code, and how does that compare to others?</p>
+<p>In practice, you’ll go back and forth between summary and detail. They’re both important, just different.</p>
+</section>
+<section id="tutorial" class="level2">
+<h2 class="anchored" data-anchor-id="tutorial">Tutorial</h2>
+<section id="setting-up-the-pivot-table" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="setting-up-the-pivot-table">Setting up the pivot table</h3>
+<p>Start with your cursor somewhere in your data , and choose <em>Insert</em>, then <em>Pivot table</em>. Then hit the <em>Create</em> button.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sheets-pivot-insert.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">insert menu</figcaption><p></p>
+</figure>
+</div>
+<p>If all goes well, it will look like your data disappeared. It didn’t – you’re just on a new page. Here’s what it looks like:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sheets-pivot-pivotscreen.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">pivot menu</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="counting-or-how-many" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="counting-or-how-many">Counting , or “how many”?</h3>
+<p>The section on the right gives you an outline of what to do. The section on the left will get filled in as you make your pivot table. If you want to see the number of contributions by state, drag the state column into the “Rows” area, then drag something that’s always filled out into the Values area (<code>candidate</code> is a safe one in this data).</p>
+<p><img src="images/sheets-pivot-success.png" class="img-fluid" style="width:100.0%"> ### More variables {.unnumbered}</p>
+<p>Suppose you’d like to see the number of contributions by candidate, with the candidates across the top and the <code>state</code> down the sides. Drag the <code>candidate</code> variable into the column area . Sorting can get hinky on pivot tables, but in this case it will work to put the largest number on top. This won’t work with percentages – it still sorts by the underlying number.</p>
+<p><img src="images/sheets-pivot-twovariables.png" class="img-fluid" style="width:100.0%"></p>
+</section>
+<section id="even-more-variables" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="even-more-variables">Even more variables</h3>
+<p>Say you wanted to see each candidate’s total number of contributions by month and state.</p>
+<p>This isn’t always easy to organize. It means you’d need to have a pivot table with TWO columns down the side, and one across the top. Here’s my attempt at getting there:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sheets-pivot-badsort.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">badsort</figcaption><p></p>
+</figure>
+</div>
+<p>This is after some fiddling with the formats, and I still can’t sort properly. We can’t sort by the combination of month and state.</p>
+<p>Your choices here are limited: Copy and paste the values of the pivot table into a new sheet and sort there, or create a new variable by concatenating the name of the month and state into one column.</p>
+</section>
+</section>
+<section id="faq" class="level2">
+<h2 class="anchored" data-anchor-id="faq">FAQ</h2>
+<section id="everything-disappeared" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="everything-disappeared">Everything disappeared!</h3>
+<p>If you select something outside of that pivot table on the left, the menu on the right disappears. Select something in the pivot table area and it will likely come back.</p>
+</section>
+<section id="i-have-too-many-columns" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="i-have-too-many-columns">I have too many columns</h3>
+<p>If you want two sets of statistics – say, number of contributions and percent of contributions – across the top, it can get very wide and confusing very quickly. One alternative is to change it into more of a vertical rectangle by dragging the “Values” element from the columns to the rows on the right. (This only shows up when you have two calculations being made.)</p>
+</section>
+<section id="things-arent-adding-up" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="things-arent-adding-up">Things aren’t adding up</h3>
+<p>You have to be super careful about which column you use to Count things – it has to always be filled out (there can’t be any blanks). Go through the filters and find one that doesn’t have (Blanks) at the bottom to be sure.</p>
+</section>
+<section id="its-a-crazy-number" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="its-a-crazy-number">Its a crazy number!</h3>
+<p>You might have dragged a numeric column into the “Values” area. Check to see if it says “Count” or “Sum”. Change it to “Count” if it has something else on it, unless you wanted to add up that column.</p>
+</section>
+<section id="this-is-so-frustrating---i-cant-get-what-i-want" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="this-is-so-frustrating---i-cant-get-what-i-want">This is so frustrating - I can’t get what I want</h3>
+<p>Right? It’s time to go to a programming language!</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
