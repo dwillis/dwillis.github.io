@@ -1,0 +1,47 @@
+---
+title: Teaching Journalism with ChatGPT
+description: Why I want students to enagage with AI services
+date: 2023-02-11
+author: "Derek Willis"
+format:
+  html:
+    df-print: paged
+    toc: true
+engine: knitr
+---
+
+*You'll want to read Jeremy Littau's piece titled "[Who's Afraid of ChatGPT?](https://jeremylittau.substack.com/p/whos-afraid-of-chatgpt)" for a more foundational view on this topic.*
+
+At first glance, the idea that one of my students could take an assignment from my Data Journalism class - say, summarizing data using R and the Tidyverse - and ask an AI chatbot to provide the answer (or something that gets close to it) should be slightly terrifying.
+
+Need to know the proper syntax for creating a dumbbell chart using ggplot? What about the code to scrape tabular data from a government website? Ask your online pal.
+
+What's my job, exactly?
+
+I tell people that I teach data journalism skills to students, and that's true. But the real story is, inevitably, more complicated. One time during a classroom exercise involving actual data, a student asked whether the answer she got was "correct", knowing that the data was missing some values and structured in a way that made answering the question difficult.
+
+"What is truth?" I half-jokingly replied.
+
+If you use ChatGPT and similar services, at some point you'll probably end up with the same reaction.
+
+So yes, I do teach R and Python and SQL, but there are other people who teach those subjects who know more about them than I do. We have entire departments filled with smart people who study how to use these tools and who use them far more extensively than I do. I teach about tools *for journalism*, and that's where the emphasis needs to be.
+
+Those tools make it possible to do more rigorous journalism, to go from the anecdotal to the systematic. But they do not do these things by themselves. Good journalism adds context, identifies and explains priorities and significance. Teaching data journalism isn't just, to borrow a phrase from [Amanda Cox](https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2012.00605.x): "Here's some data; hope you find something interesting!" We start with a question and ask more, refining our inquiry based on what we discover. We analyze and describe. If AI tools can help with that process, I want my students to know how.
+
+My policy, at least for now, is this: I want my students to use ChatGPT and other AI services to help them solve specific problems, and I want to know about it when they do. Here's what I put in my syllabi:
+
+> The basic rule is: if you use it, you must disclose that you did so in that assignment's submission, and include any prompts you provided to the tool. Sources matter.
+
+If I'm asking students to find some meaning in data, maybe a pattern or outlier that's newsworthy, and they have an idea of how to do that but spend an hour struggling to get the precise syntax correct, that's probably not going to be a great learning experience. Some of them might be energized by the challenge, I suppose, but is that the point? If they can find assistance in finishing a task so they can actually answer the question, that's the important part to me.
+
+There are always ways to misuse tools and risks involved in any process that provides efficiency at the expense of step-by-step work. That's not new, but AI can make the risks greater because there's an implied authority that we bestow (a whole other, if related, problem). AI systems are and will be problematic and potentially harmful, like any human-designed system. We are still early in figuring out the harms. That's an argument for engaging them as journalists, not for shying away.
+
+If this seems like soft-headed mollycoddling, I would submit to you that the many hours I spent trying to wrangle data from electronic PDFs before [Tabula](https://tabula.technology/) came along were not exactly instructive. I learned that there are dozens of ways to lock data inside a PDF prison. It makes for a slightly funny story at conferences, but I would have done better things with my time - maybe better stories - had I had a better tool.
+
+The bit about disclosing the prompts is key for journalism students. One of my hobbyhorses is that we don't do a good enough job of teaching student journalists how to ask good questions. Partly that's because we focus a lot of attention on the final product, typically a story, and partly it's because it's both easier and consistent to have students complete the same kinds of assignments. We also overestimate the quality of our ideas a lot, and don't interrogate them as much as we should.
+
+I want to know what my students are asking from ChatGPT and other AI products, not just because the prompts and the answers are related, but because precise questions are more likely to yield specific answers. I'd like to know if my students are getting better at asking questions.
+
+If my students can learn to use AI systems with creativity, curiosity and skepticism, they're going to be better journalists. If they can ask better questions and have more experience and confidence in evaluating the results, they're going to be better journalists.
+
+What's my job, exactly? I teach data journalism skills to students. If I end up spending more time developing that questioning skill, I suspect that's going to make a bigger difference in the long run.

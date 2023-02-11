@@ -10,7 +10,43 @@
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
 <generator>quarto-1.2.269</generator>
-<lastBuildDate>Wed, 04 Jan 2023 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 11 Feb 2023 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Teaching Journalism with ChatGPT</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2023/02/11/teaching-journalism-with-chatgpt/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><em>You’ll want to read Jeremy Littau’s piece titled “<a href="https://jeremylittau.substack.com/p/whos-afraid-of-chatgpt">Who’s Afraid of ChatGPT?</a>” for a more foundational view on this topic.</em></p>
+<p>At first glance, the idea that one of my students could take an assignment from my Data Journalism class - say, summarizing data using R and the Tidyverse - and ask an AI chatbot to provide the answer (or something that gets close to it) should be slightly terrifying.</p>
+<p>Need to know the proper syntax for creating a dumbbell chart using ggplot? What about the code to scrape tabular data from a government website? Ask your online pal.</p>
+<p>What’s my job, exactly?</p>
+<p>I tell people that I teach data journalism skills to students, and that’s true. But the real story is, inevitably, more complicated. One time during a classroom exercise involving actual data, a student asked whether the answer she got was “correct”, knowing that the data was missing some values and structured in a way that made answering the question difficult.</p>
+<p>“What is truth?” I half-jokingly replied.</p>
+<p>If you use ChatGPT and similar services, at some point you’ll probably end up with the same reaction.</p>
+<p>So yes, I do teach R and Python and SQL, but there are other people who teach those subjects who know more about them than I do. We have entire departments filled with smart people who study how to use these tools and who use them far more extensively than I do. I teach about tools <em>for journalism</em>, and that’s where the emphasis needs to be.</p>
+<p>Those tools make it possible to do more rigorous journalism, to go from the anecdotal to the systematic. But they do not do these things by themselves. Good journalism adds context, identifies and explains priorities and significance. Teaching data journalism isn’t just, to borrow a phrase from <a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2012.00605.x">Amanda Cox</a>: “Here’s some data; hope you find something interesting!” We start with a question and ask more, refining our inquiry based on what we discover. We analyze and describe. If AI tools can help with that process, I want my students to know how.</p>
+<p>My policy, at least for now, is this: I want my students to use ChatGPT and other AI services to help them solve specific problems, and I want to know about it when they do. Here’s what I put in my syllabi:</p>
+<blockquote class="blockquote">
+<p>The basic rule is: if you use it, you must disclose that you did so in that assignment’s submission, and include any prompts you provided to the tool. Sources matter.</p>
+</blockquote>
+<p>If I’m asking students to find some meaning in data, maybe a pattern or outlier that’s newsworthy, and they have an idea of how to do that but spend an hour struggling to get the precise syntax correct, that’s probably not going to be a great learning experience. Some of them might be energized by the challenge, I suppose, but is that the point? If they can find assistance in finishing a task so they can actually answer the question, that’s the important part to me.</p>
+<p>There are always ways to misuse tools and risks involved in any process that provides efficiency at the expense of step-by-step work. That’s not new, but AI can make the risks greater because there’s an implied authority that we bestow (a whole other, if related, problem). AI systems are and will be problematic and potentially harmful, like any human-designed system. We are still early in figuring out the harms. That’s an argument for engaging them as journalists, not for shying away.</p>
+<p>If this seems like soft-headed mollycoddling, I would submit to you that the many hours I spent trying to wrangle data from electronic PDFs before <a href="https://tabula.technology/">Tabula</a> came along were not exactly instructive. I learned that there are dozens of ways to lock data inside a PDF prison. It makes for a slightly funny story at conferences, but I would have done better things with my time - maybe better stories - had I had a better tool.</p>
+<p>The bit about disclosing the prompts is key for journalism students. One of my hobbyhorses is that we don’t do a good enough job of teaching student journalists how to ask good questions. Partly that’s because we focus a lot of attention on the final product, typically a story, and partly it’s because it’s both easier and consistent to have students complete the same kinds of assignments. We also overestimate the quality of our ideas a lot, and don’t interrogate them as much as we should.</p>
+<p>I want to know what my students are asking from ChatGPT and other AI products, not just because the prompts and the answers are related, but because precise questions are more likely to yield specific answers. I’d like to know if my students are getting better at asking questions.</p>
+<p>If my students can learn to use AI systems with creativity, curiosity and skepticism, they’re going to be better journalists. If they can ask better questions and have more experience and confidence in evaluating the results, they’re going to be better journalists.</p>
+<p>What’s my job, exactly? I teach data journalism skills to students. If I end up spending more time developing that questioning skill, I suspect that’s going to make a bigger difference in the long run.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2023/02/11/teaching-journalism-with-chatgpt/index.html</guid>
+  <pubDate>Sat, 11 Feb 2023 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>What is Happening in Morgantown?</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -667,63 +703,6 @@
  ]]></description>
   <guid>https://www.thescoop.org/archives/2013/05/21/what-they-say-about-us/index.html</guid>
   <pubDate>Tue, 21 May 2013 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Academy Fight Song</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2013/04/28/academy-fight-song/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p><em>What’s that I hear</em><br>
-<em>The sound of marching feet</em><br>
-<em>It has a strange allure</em><br>
-<em>Has a strange allure</em><br>
-Mission of Burma, “Academy Fight Song”</p>
-<p><em>Disclaimer: I am the son and son-in-law of retired tenured university professors, and have taught data reporting skills for about 10 years at the undergraduate and graduate levels. I love teaching. I have my issues with “education”.</em></p>
-<p><a href="http://mindymcadams.com/tojou/2013/journalism-curriculum-and-the-hands-in-the-air-approach/">This post on journalism curriculum</a> by University of Florida journalism professor Mindy McAdams deserves to be widely read. Not just because it attempts to deal with a growing problem in a responsible manner, but because it is honest about the situation:</p>
-<blockquote class="blockquote">
-<p>Students deserve better. Regardless of what they think journalism is when they tick the box to become a journalism major (and regardless of whether they’re paying Ivy League prices or in-state tuition at a public university), they deserve to be taught skills, techniques, and ways of thinking that will carry them through the challenging times at hand and ahead. They deserve to have every teacher — tenured, adjunct or freshly pressed Ph.D.&nbsp;— looking at what’s new, what’s happening today, now (what happened in and around Boston last week, for example, as seen in the mainstream news and in social media) and incorporating new methods for reporting, for storytelling, and for engaging the audience into all of their classes.</p>
-</blockquote>
-<p>Mindy has been teaching her students this semester about coding for journalism, and has a blog where she has described her experiences and posted her <a href="http://mindymcadams.com/tojou/2013/code-for-journalism-students-presentations/">presentations</a>. Here’s a wacky question: why isn’t this stuff (blog posts, presentations, videos) on a ufl.edu site? Maybe it makes no difference at all to students, but why wouldn’t the UF Journalism school want to be all over this stuff?</p>
-<p>Mindy’s post is a response to <a href="http://www.poynter.org/latest-news/the-next-journalism/210196/why-we-need-a-better-conversation-about-the-future-of-journalism-education/">an earlier one on Poynter</a> by Tom Rosenstiel in which he argues that journalism education was, in fact, experimenting in the kinds of ways that are needed for the future of the profession. He cites, among others, <a href="http://www.niemanlab.org/2012/09/robert-hernandez-reboot-journalism-school-take-control-of-your-education-instead/">Robert Hernandez</a> at USC and <a href="http://journalism.missouri.edu/staff/esther-thorson/">Esther Thorson</a> at Missouri as doing important work in the frontiers of journalism.</p>
-<p>Fair enough, although I’d argue that rather than “barely scratching the surface”, Rosenstiel probably couldn’t generate a list of people doing innovative work in academia that was all that much longer than what he published. Katie Zhu, who is pursuing a double major in computer science and journalism at Northwestern, writes that she has had one professor – at <em>Medill</em> – who she can honestly describe as a person who “<a href="https://medium.com/i-m-h-o/b8d43e4c204d">get[s] it</a>.” Think about that. Here we have a bright, talented and ambitious student who wants to put herself at the forefront of journalism education and has to do it by herself at one of the elite journalism schools in the country. As Katie says:</p>
-<blockquote class="blockquote">
-<p>Let’s re-architect the distribution requirements so we can get rid of this notion that journalism and engineering (and the sciences) are at odds with each other. Because journalism needs to move forward.</p>
-</blockquote>
-<p>The unspoken part there is that, if this keeps happening to enough people (and there will be more), journalism will move forward <a href="http://forjournalism.com/">without journalism education</a>, or worse, talented would-be journalists will seek to work in other professions. Katie has a job lined up at Twitter.</p>
-<section id="anti-intellectualisms-roots" class="level3">
-<h3 class="anchored" data-anchor-id="anti-intellectualisms-roots">Anti-Intellectualism’s Roots</h3>
-<p>Part of the problem is that some of these technical areas and concepts are alien to many faculty, and part of it is that it’s sometimes hard to attract experts from the profession to full-time academic work. Part of it is that curriculum change is insanely harder than it should be, and that accreditation is so super important – to other academics, at least. Part of it is the tenure system, which results in disproportionate power within departments, power worth fighting to protect. And part of it is also that the academy has done a pretty terrible job of selling whatever <em>academic</em> products it creates, as well as pulling from the best the rest of the university has to offer.</p>
-<p>For this, some blame (but only some) can be apportioned to the audience. As Rosenstiel writes:</p>
-<blockquote class="blockquote">
-<p>For years, journalism was marred by an ugly streak of anti-intellectualism — the denial of theory, the exaltation of craft, the repudiation [sic] professional identity, ignorance of scholarship. One byproduct of the crisis in journalism is that anti-intellectualism is giving way to something better at schools where practitioners and scholars work together to create a new curriculum.</p>
-</blockquote>
-<p>A fair point, but it goes a bit too far for me. For one thing, this anti-intellectualism that Rosenstiel identifies - surely that hasn’t been helped along by educators who tolerated and even encouraged the fiction that journalists “don’t need to know math” to do their work? As prevalent as that sentiment is in newsrooms, would it have become such a staple of journalism if there had been broad pushback from journalism schools? It’s fairly telling that <a href="https://math.temple.edu/~paulos/">John Allen Paulos’ website</a> is on the math.temple.edu server, because it sure as hell wouldn’t be found on a journalism school’s site (<em>to be clear: this isn’t a shot at Temple specifically, but at the academy generally. Temple has actually even <a href="http://sites.temple.edu/andrewmendelson/2011/09/temple-journalism-%E2%80%93-a-trajectory-of-curricular-innovation/">changed its curriculum</a>.</em>). The very fact that journalism schools have been looking outside their walls to address the industry’s current problems says an awful lot about how pervasive this anti-intellectualism really is, and what its sources really are.</p>
-<p>Want more evidence? Let’s talk about this professor of practice thing. Or maybe these “general manager”-type positions in collegiate newsrooms (I have at least two friends, both former journalists, who are in these types of positions at prominent journalism schools). People: these are teachers, just as surely as any PhD on the faculty. Yes, it might be easier from a bureaucratic standpoint to get a “professor of practice” into the department, but I’m willing to bet a decent chunk of change that in the eyes of too many “real” professors, these people are not in a similar line of work or are doing it the wrong way. The people who have tried hard to get new ideas into the J-school are (mostly) dedicated and good people who see what is on the horizon. The people who resist are (mostly) dedicated and good people who have too much power and independence to give it up without a fight. This would be one hell of a good story, if only most journalism students were permitted to write about it.</p>
-<p>A case in point: a few years ago I was invited to come to Northwestern for a week to speak to Medill faculty and students about the kinds of work we were doing, and to hold training sessions on basic data reporting concepts for the faculty. That I was there at all was hugely encouraging to me, and I met a number of faculty who, although inexperienced in this area, were excited about learning. And then I learned the catch: the training sessions were optional, because why would it be otherwise?. I struggle even now to imagine any journalism course in which the professor should remain ignorant of basic digital reporting knowledge. Great message for the faculty, let alone the students.</p>
-</section>
-<section id="its-academic" class="level3">
-<h3 class="anchored" data-anchor-id="its-academic">It’s Academic</h3>
-<p>The professional ignorance of scholarship thing, though, is certainly right from the perspective of someone who has worked in newsrooms since 1995 and has taught college classes for most of the past 10 years. I don’t read many academic journals, nor do I attend <a href="http://www.aejmc.org/">AEJMC</a> - go ahead, Google it - or other journalism education conferences, and I don’t know many professionals who do. Far worse is the fact that I would find it hard to read those papers anyway, since most of them are unavailable online without a subscription of some kind. Sure, we’ve been ignorant of scholarship. But I’m not sure that scholars have done what is truly necessary to improve the relationship between trade and education.</p>
-<p>About a year ago I was involved in a brief Twitter episode <a href="http://thescoop.org/archives/2012/05/13/lost-in-the-weeds/">involving a draft academic paper that mentioned Fech</a>. Whatever my issues with the paper itself, there is a crazier undercurrent: one of its authors <a href="https://twitter.com/nikkiusher/status/201721394898280449">didn’t know that it was posted on the Web</a>, and as I learned, there was little chance that anyone outside academic circles would ever <em>see</em> the final paper. The authors very kindly sent me a revised version, but of course I can’t share that with you, and neither can they, legally. Which <a href="http://www.youtube.com/watch?v=J1sYN0PuRs4">makes no sense at all</a>. Academic authors are literally only publishing for themselves and their colleagues, and we can’t understand why the industry is so separated from the academy?</p>
-<p>Of course the Internet is trying to undercut this closed system. There’s <a href="http://academia.edu/">academia.edu</a>, which as near as I can figure is like a Napster for journal (and other) articles, and it looks to me as if professors post their articles there even if they technically don’t have permission to do so. It would be funny if it weren’t sad, or if the news business wasn’t facing some pretty severe challenges. The kind of challenges that universities might be able to shed some light on through <a href="http://streamer.ist.rit.edu/~journo/classes/">smartly designed experiments</a> and <a href="http://www.niemanlab.org/tag/ethnographic-research/">research</a>. I’d be interested in reading more about those kinds of things directly rather than looking at <a href="http://cindyroyal.com/research.html">pages like this</a> and wishing there were more links.</p>
-</section>
-<section id="the-hard-part" class="level3">
-<h3 class="anchored" data-anchor-id="the-hard-part">The Hard Part</h3>
-<p>The gap between journalism and journalism education seems pretty big, although I think it’s hard to measure. Chalk at least some of that up to the peculiarities of both the profession and of academics in general, but there’s one factor that looms large: most other fields of study are not facing such a fundamental upheaval. It seems like this would be a pretty good time for there to be tighter collaboration between the industry and those who study it, or at least a reshaping of what those studies look like. But where to start?</p>
-<p>Changing accreditation and tenure practices would be dramatic, but it’s hard to imagine either being done, both within journalism schools and across the academy more broadly. Even though I’ve never heard any journalism school graduate say that accreditation was any factor whatsoever in her decision to enroll, who wants to remove their name from <a href="http://www2.ku.edu/~acejmc/STUDENT/PROGLIST.SHTML">the list</a>? If one university (or department) changes its tenure practices, surely its competitors would use that against it when recruiting faculty.</p>
-<p>Some prominent journalism grant-making organizations <a href="http://www.knightfoundation.org/press-room/other/open-letter-americas-university-presidents/">have urged the adoption of the teaching hospital method</a>, which makes some sense, although I’m not certain that the faculty exists to actually fulfill that mission at most schools, and perhaps it shouldn’t, given the mission of performing and publishing research, too. As much as I enjoy being an adjunct, a too-heavy reliance on such teachers is a bad thing for students. I know that my students don’t get my absolute best effort, owing to my day job, and I also am not a contributor to the academic life of the university beyond the class I teach.</p>
-<p>Two things seem slightly more achievable to me, although every school is different: more flexibility in curriculum requirements, and more accessible scholarship. One starts to address the concerns of students like Katie and professors like Mindy. The other might start to repair the breach between the academy and the industry that serves neither well.</p>
-
-
-</section>
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2013/04/28/academy-fight-song/index.html</guid>
-  <pubDate>Sun, 28 Apr 2013 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
