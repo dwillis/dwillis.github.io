@@ -1,7 +1,7 @@
 ---
-title: "lab_04"
-author: "derek willis"
-date: "8/24/2021"
+title: "lab_05"
+author: "Derek Willis"
+date: "2023-01-10"
 output: html_document
 ---
 
@@ -9,7 +9,18 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## About this lab
+
+To complete this lab, you need to: \* run existing code as directed (look for **Task**). \* modify existing code as directed (look for **Task**). \* write code in empty codeblocks provided to answer questions included (look for **Q**). \* write out the answer in the form of a complete sentence in the space given (look for **A**).
+
+When you are finished, commit changes and push to your personal GitHub repo, then submit the URL to this document on ELMS.
+
 ## Load libraries and establish settings
+
+You'll need to load three packages for this: the tidyverse, lubridate and janitor.
+
+**Task** load these three packages.
+
 ```{r}
 # Turn off scientific notation
 options(scipen=999)
@@ -17,132 +28,87 @@ options(scipen=999)
 # Load the tidyverse. If you have not installed the tidyverse already, remove the # from the next line and run it first.  
 # install.packages('tidyverse')
 library(tidyverse)
+library(janitor)
+library(lubridate)
+
 ```
+
+For this lab, we want to investigate spending by Maryland state and local candidates during the current election. For example, we could ask how much money have candidates and committees spent on advertising on Facebook? Which vendors received the most money for media expenses? We have the data, but it's messy - names of payees are spelled differently and capitalized differently - and we need to clean it up. We'll use a combination of RStudio and OpenRefine to do that.
+
+The basic process here is to start in RStudio, export data so that we can use OpenRefine to clean it up, and then bring it back into RStudio to finish our analysis.
 
 ## Load Data
 
-Let's keep working with Maryland loan applications contained in the PPP data.
+You'll need to load one data set, a CSV file of Maryland campaign expenditures located in the data folder called "maryland_expenses.csv"
+
+**Task** Create a codeblock below, then read the data in and assign it to an appropriate variable name. You'll want to clean up the column names and make sure that any date columns are actually date datatypes.
 
 ```{r}
-maryland_ppp <- read_rds('lab_04.rds')
-```
+# Load the Maryland expenditures data table
+md_expenses <- read_csv('data/maryland_expenses.csv') %>% clean_names()
 
-To answer the questions below, you'll need to join both the NAICS code data and the ZCTA demographic data from the book chapter. There's a particular set of steps you'll need to perform to make that work properly.
-
-First, let's load the NAICS code data:
-
-```{r}
-naics_codes <- read_csv('data/naics_codes.csv')
-```
-
-Next join the two and then create a 5-character `zip5` column that we can use to join to the ZCTA data:
-
-```{r}
-maryland_ppp_with_naics <- maryland_ppp %>% left_join(naics_codes)
-maryland_ppp_with_naics <- maryland_ppp_with_naics %>% mutate(zip5 = str_sub(zip, 1, 5))
-```
-
-Let's add the [Zip Code Tabulation Area dataset](https://umd.box.com/s/2xsq2rpkmg4ct3a77vt8j5bu4vu1z0tf). Remember that we'll need to make the `ZCTA5N` column a character column, not a numeric one:
-
-```{r}
-maryland_zcta <- read_csv('data/maryland_zcta.csv')
-maryland_zcta <- maryland_zcta %>% mutate(across(ZCTA5N, as.character))
-```
-
-Now we can join the PPP data to the ZCTA data:
-
-```{r}
-maryland_ppp_with_naics_and_demographics <- maryland_ppp_with_naics %>% left_join(maryland_zcta, by=c("zip5"="ZCTA5N"))
+md_expenses <- md_expenses %>% mutate(expenditure_date = mdy(expenditure_date))
 ```
 
 ## Answer questions
 
-Q1. What are the top industries (using the NAICS title) for PPP applications in Maryland?
-A1. Taxi services, with 7,363 applications, followed by beauty salons and restaurants.
+**Q1.** You've been assigned to write about Maryland political committees' use of Facebook advertising. There's a category column in the data that has values for different kinds of spending. One of them is "Media". Write code to isolate Media expenses where the name of the payee is not NA. Then, using `write_csv`, make a CSV file in your data folder. Using OpenRefine, create a project using that CSV file, create a copy of the `payee_name` column called `payee_clean` and then standardize it, focusing on the payees that appear most often. Pay particular attention to variations of Facebook, bearing in mind that it changed its name last year: https://about.fb.com/news/2021/10/facebook-company-is-now-meta/), but also clean up variations of the most common payees.
+
+Then, when you are done standardizing `payee_clean`, export it as a new CSV file to your data folder, *giving it a different name* and read it back into RStudio as a new dataframe.
+
+Then, using that `payee_clean` column, write code to find all of the spending where Facebook is the payee and calculate the total amount of spending for each committee and present the results showing the committee that spent the most first.
+
+**A1.**
 
 ```{r}
-maryland_ppp_with_naics_and_demographics %>%
-  group_by(title) %>%
-  summarise(
-    count=n()
-  ) %>%
-  arrange(desc(count))
+media_expenses <- md_expenses %>% filter(expense_category == 'Media') %>% filter(!is.na(payee_name))
+
+write_csv(media_expenses, "data/media_expenses.csv")
+
+# Clean up work in OpenRefine
+
+# read the cleaned CSV 
+media_expenses_cleaned <- read_csv("data/media-expenses-cleaned.csv")
+
+# calculate top Facebook spenders
+media_expenses_cleaned %>% 
+  filter(payee_clean == 'Facebook') %>% 
+  group_by(committee_name) %>% 
+  summarise(total_amount = sum(amount)) %>% 
+  arrange(desc(total_amount))
+
 ```
 
-Q2. What are the top industries (using the NAICS title) for PPP applications in Maryland with amounts of more than $150,000?
-A2. Restaurants, with 1,488 applications, followed by physicians and plumbing/HVAC contractors.
+**Q2.** Let's do some research on the top committees from question 1. Look up the top 10 spenders: if they are candidate committees, what offices were they running for? If they were not candidates, what issues do they seem to care about? Write some sentences answering those questions, then go the Facebook ad library (https://www.facebook.com/ads/library/?active_status=all&ad_type=political_and_issue_ads&country=US&sort_data\[direction\]=desc&sort_data\[mode\]=relevancy_monthly_grouped&media_type=all) and look for ads from the top spender. What do you notice about those ads?
+
+**A2.** The top ten are mostly, but not entirely, candidates for governor in the 2022 primary election. Billy Boniface is a candidate for Harford County executive, for example. The top spender is the campaign of Ashwani Jain, a Democratic gubernatorial candidate who lost in the primary. His Facebook ads were taken down by the platform because they did not comply with disclaimer rules (who paid for this ad).
+
+**Q3.** Given the list of top spenders in A1 and the primary results for governor (https://elections.maryland.gov/elections/2022/primary_results/gen_results_2022_1.html), who is missing from that Q1 list? Did those campaigns run Facebook ads? Who are the biggest recipients of media expenses by the Democratic primary winner for governor (HINT: that person has two committees)?
+
+**A3.** Both Wes Moore & Dan Cox's campaigns are missing from the list of top Facebook spenders. Moore definitely has run Facebook ads, but Cox appears to have only run a small amount, which seems unusual. Moore's campaign (both primary and general committees) has paid more than \$6.1 million to SKDK, a Democratic consulting firm that handles all kinds of campaign activities, including advertising. We don't see direct payments to Facebook because it's likely that SKDK is making those buys rather than the campaign itself.
 
 ```{r}
-maryland_ppp_with_naics_and_demographics %>%
-  filter(amount > 150000) %>%
-  group_by(title) %>%
-  summarise(
-    count=n()
-  ) %>%
-  arrange(desc(count))
+
+media_expenses_cleaned %>% 
+  filter(committee_name == 'Moore  Wes For Maryland' | committee_name == 'Moore Miller For Maryland Slate') %>% 
+  group_by(payee_clean) %>% 
+  summarise(total_amount = sum(amount)) %>% 
+  arrange(desc(total_amount))
+
 ```
 
-Q3. Which Maryland zip code with at least 20 percent non-Hispanic Asian population had the largest sum of PPP loans? Also show the number (count) of loans.
-A3. 20850 (Rockville) was by far the leader, with $474,525,058 in loans.
+**Q4.** The media expense data you cleaned also has a standardized purpose column. Write code to generate a list of the committees with the total amount of spending on online advertising. How does this list compare to the one from Q1 about top Facebook spenders? Of the top 5 committees who spent the most on Facebook ads from Q1, are there any that appear to have spent *all* of their online advertising dollars on Facebook?
+
+**A4.** This list has larger amounts for total online ad spending, and a varied list of top committees, including Calvin Ball (Howard County exec candidate) and the House Democratic Caucus. Ashwani Jain, the top committee on the Facebook spending list, appears to have spent all of its online advertising dollars on Facebook.
 
 ```{r}
-maryland_ppp_with_naics_and_demographics %>%
-  filter(PNHA >= 20) %>%
-  group_by(zip5) %>%
-  summarize(
-    sum = sum(amount),
-    count = n()
-  ) %>%
-  arrange(desc(sum))
+media_expenses_cleaned %>% 
+  filter(expense_purpose == 'Online Advertising') %>% 
+  group_by(committee_name) %>% 
+  summarise(total_amount = sum(amount)) %>% 
+  arrange(desc(total_amount))
 ```
 
-Q4. Which Maryland zip code had the largest sum of loans where the reported race of the applicant was "Asian", and what is the percentage of non-Hispanic Asian population in that zip code? Also show the number (count) of loans.
-A4: 20850, which has $28,994,798 in loans to applicants listing "Asian" and 23.5 percent of its population is Asian.
+**Q5** You've been asked to summarize your findings about spending on Facebook by Maryland political candidates. How much do we know and what don't we know? What's the best story idea you've found here?
 
-```{r}
-maryland_ppp_with_naics_and_demographics %>%
-  filter(race == 'Asian') %>%
-  group_by(zip5, PNHA) %>%
-  summarize(
-    sum = sum(amount),
-    count = n()
-  ) %>%
-  arrange(desc(sum))
-```
-
-Q5. What might explain why 20850 has a significant Asian population (23.5%) and only 240 of the 3,186 loans (7.5%) are to Asian applicants?
-A5. A major factor likely is that the `race` column in the PPP data is rarely filled out, which means there could be many more loans to Asian applicants that are not easily identified in the data, especially when applicants often use business names, not individual names. There also could be additional reasons, such as a lack of formal banking relationships or issues with outreach that may have resulted in fewer applications. This is one reason it's useful to combine the PPP data with demographic data.
-
-Q6. Check to see if any Maryland zip codes that have loans where the PPP data lists the applicant as being Asian BUT are located in a zip code that does not appear to have Asian population according to the ZCTA data. Take a look at these zip codes - what could explain this?
-A6. Yes! There are three zip codes, with 21031 having 6 loans worth $6.8 million in total. Let's look at that zip code using [the handy Census Reporter site](https://censusreporter.org/profiles/86000US21031-21031/). This zip code appears to have _no population at all_, which at first seems weird, but remember that population is based on where people _live_. A quick check of Google Maps shows [21031 to be a commercial area](https://www.google.com/maps/place/Hunt+Valley,+MD+21031/@39.4849896,-76.6652558,3300m/data=!3m2!1e3!4b1!4m5!3m4!1s0x89c81265c9fb1935:0x8d4cd6bbb903a99a!8m2!3d39.4894521!4d-76.6614853). The lesson here is that while population data can be very useful, it has its limitations in that it represents people, not businesses.
-
-```{r}
-maryland_ppp_with_naics_and_demographics %>%
-  filter(race == 'Asian' & PNHA == 0) %>%
-  group_by(zip5, PNHA) %>%
-  summarize(
-    sum = sum(amount),
-    count = n()
-  ) %>%
-  arrange(desc(sum))
-```
-
-Q7. How many industries have exactly one loan in the data (hint: you can filter _after_ using `summarise` to create a count). From a newsworthiness standpoint, which of these is most worthy of further exploration, and why?
-A7. There are 44.
-
-```{r}
-lone_loans <- maryland_ppp_with_naics_and_demographics %>%
-  group_by(naics_code, title) %>%
-  summarize(
-    count = n()
-  ) %>%
-  filter(count==1)
-```
-
-My favorites:
-
-```{r}
-View(maryland_ppp_with_naics_and_demographics %>% filter(naics_code==921140))
-View(maryland_ppp_with_naics_and_demographics %>% filter(naics_code==521110))
-View(maryland_ppp_with_naics_and_demographics %>% filter(naics_code==221113))
-```
+**A5**
