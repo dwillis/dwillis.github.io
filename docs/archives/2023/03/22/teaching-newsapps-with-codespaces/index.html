@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Derek Willis">
+<meta name="dcterms.date" content="2023-03-22">
+<meta name="description" content="How to spend less time on setup and level the playing field">
+
+<title>Derek Willis - Teaching News Apps with Codespaces</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<script src="../../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<link href="../../../../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../../../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<meta name="twitter:title" content="Derek Willis - Teaching News Apps with Codespaces">
+<meta name="twitter:description" content="How to spend less time on setup and level the playing field">
+<meta name="twitter:creator" content="@derekwillis">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../../images/dwillis.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../../../../index.html">
+    <span class="navbar-title">Derek Willis</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../../../blog.xml"><i class="bi bi-rss" role="img" aria-label="feed">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Teaching News Apps with Codespaces</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title d-none d-lg-block">Teaching News Apps with Codespaces</h1>
+                  <div>
+        <div class="description">
+          How to spend less time on setup and level the playing field
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Derek Willis </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 22, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://twitter.com/derekwillis" title="" class="sidebar-tool px-1"><i class="bi bi-twitter"></i></a>
+    <a href="https://newsie.social/@derekwillis" title="" class="sidebar-tool px-1"><i class="bi bi-mastodon"></i></a>
+    <a href="https://github.com/dwillis" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../about" class="sidebar-item-text sidebar-link">About</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../now" class="sidebar-item-text sidebar-link">Now</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../then" class="sidebar-item-text sidebar-link">Then</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../help" class="sidebar-item-text sidebar-link">Ways I Can Help</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../thefix" class="sidebar-item-text sidebar-link">The Fix</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../blog.html" class="sidebar-item-text sidebar-link">Blog</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../teaching" class="sidebar-item-text sidebar-link">Teaching</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>The first version of my News Application Development class at Maryland got off to a rough start.</p>
+<p>Not because of the students; I had seven intrepid undergraduates and grad students take the leap into a class that we previously hadn’t offered and I had never taught. They were up for it, if not exactly certain what actually was going to happen in our class. As this was the first brand-new class that I had developed at Maryland, I wasn’t totally certain, either.</p>
+<p>What I did know was that I wanted students to spend a lot of time on the command line working in Python to acquire public data and build things from it. To do that, I had to make sure that each of them would be able to do similar work on their own laptops, which meant an early session of class was titled “Install Party!”.</p>
+<p>Friends, it was not a party. Or maybe it started out as one and then, well, <a href="https://www.youtube.com/watch?v=jJ9H-uT64Wo">the Slickee Boys can take it from here</a>.</p>
+<p>I am, for better or worse, an Apple computer person and have been for awhile. Our college has both PCs and Macs, although students mostly have access to the latter if they need to use a computer other than their own. But really, students have been taught since high school (maybe before) to just use their own computers. Pandemic restrictions only reinforced that. More to the point, they are taught specific programs and <a href="https://www.thescoop.org/archives/2013/10/01/the-natives-arent-restless-enough/">mostly not encouraged to explore the limits of the machine that plays a big role in their lives</a>. To a certain extent, that’s not a bad thing to do; the software we use to teach data journalism, RStudio, is itself mostly a GUI experience.</p>
+<p>For many of my students, installing languages and libraries was a new and uncomfortable experience. That’s not the hard part; students are mostly interested in new things. The hard part is the lack of consistency across their laptops. They not only ran into problems installing and setting up Python, they ran into <em>different</em> problems. Some of them were platform-related: we had a couple of Windows users. Most of the Mac users had never before installed XCode or its command-line tools and didn’t understand the purpose or know what to expect. The Windows users had it worst; I had forgotten most of what I used to know about doing web development work in that environment.</p>
+<p>For the most part, we figured it out eventually. But that cost us both time and, I’m sure, some level of enthusiasm. Who wants to start out a new thing by flailing around for awhile? One student ended up installing a Linux subsystem to make things easier, which definitely resolved a lot of problems but is not something I’d realistically be able to insist upon. One of the lowest points was not being able to understand why something wasn’t working for a student when it was on my laptop. “Works for me” is a statement of failure for teachers.</p>
+<p>This technical tax also has some more pernicious effects. Some number of students show up at the University of Maryland armed with a solid ChromeBook, which is what they were told they would need in high school. I can understand why; it’s a basic laptop that teenagers can use on common tasks that doesn’t cost a ton of money. School districts can and do provide them. But let’s be honest here: showing up to journalism school with a ChromeBook is like bringing a knife to a gun fight: there are many things you can do, but your range of options (and ultimately, effectiveness) are limited. And let’s be even more honest: the same students who are showing up with ChromeBooks most likely are those who cannot afford more expensive hardware. Don’t think for a moment that they can’t look around the classroom and see that situation, and wonder how they’re going to keep up.</p>
+<p>There’s a larger argument to be made about colleges providing students with options for getting the equipment they need to take the classes they want and to succeed in them, but here’s my stop-gap solution. This semester’s News Apps class had no install party, even with twice as many students. There has been very little class time spent on making sure that things are configured properly. We all use <a href="https://github.com/features/codespaces">GitHub’s Codespaces</a>.</p>
+<p>I will try not to turn this into a lovesong to this product, but honestly it has solved many of the problems that I encountered last year. More importantly, it has solved a lot of my students’ problems in the sense that they can focus the bulk of their time trying to learn how to do things as opposed to how to prepare to do things. Codespaces is a virtual machine in a browser that gives you a terminal, the ability to install, configure and run most things you’d need to for web development and related tasks, including running web servers so you can see the results of your work. As it’s a GitHub joint, it works off repositories and is already setup so that users can push and pull their work. I’ve even gotten RStudio to run using the RStudio Server version. And it’s not just a terminal; they get a code editor and a file manager, so they aren’t left staring at a shell wondering what this even is.</p>
+<p><img src="rstudio_codespaces.png" class="img-fluid"></p>
+<p>Here’s how it works: educators can get access to Codespaces for their students - up to 180 hours a month, which so far has been more than sufficient to the task - by setting up a GitHub Classroom account for your course. You use GitHub Classroom to create assignments; when students accept them, a repository is created in a GitHub organization you setup.</p>
+<p>You can customize the virtual machine that students get, with the default being a typical Linux distribution, and you can have it come with certain packages already installed. For the purposes of working in Python, the default setup gets you access to <code>pip</code>, <code>pipx</code>, <code>pipenv</code> and probably other package managers.</p>
+<p>When I spoke about how our class is using Codespaces at <a href="https://www.ire.org/training/conferences/nicar-2023/">NICAR</a> a few weeks ago, it was to a room full of educators for whom the benefits are pretty clear: everybody can work from the same setup, you can control the environment and even run students’ code in a Codespace of your own. It’s definitely handy for instructors.</p>
+<p>But more and more, I see this as much an equity issue. Codespaces doesn’t guarantee a good outcome - you can still write terrible code or neglect to install required libraries. But, relatively-speaking, equality of opportunity? That’s a big deal for journalism students who mostly have never written software. Some students come into classes like this already convinced that they aren’t good at this work, and setup problems - especially when others don’t have them - only reinforce that idea. Let’s not do that. Old-timers like me can wax nostalgic about how difficult things used to be and all the hoops we had to jump through to make even basic stuff work. That’s good material for a NICAR dinner. Our students deserve better, and we can provide it.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© Copyright 2022 Derek Willis. Published using Quarto.</div>   
+  </div>
+</footer>
+
+
+
+</body></html>
