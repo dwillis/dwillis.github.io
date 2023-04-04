@@ -1,7 +1,7 @@
 ---
 title: "lab_07"
 author: "derek willis"
-date: "10/21/2022"
+date: "2023-03-28"
 output: html_document
 ---
 
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## You will need
 
-* A Census API key
+-   A Census API key
 
 ## Load libraries and establish settings
 
@@ -35,90 +35,72 @@ You'll need your Census API Key:
 **Task** set your API Key if you haven't already
 
 ```{r echo=FALSE}
-census_api_key("YOUR API KEY", overwrite=TRUE)
+census_api_key("102c0c72d8f8eb880608f9dacb53fdf9100f8ba0", install=TRUE)
 ```
 
 ## Load and view ACS variables
 
-You'll also need to load the list of American Community Survey variables from the 2020 5-year estimates so you can identify the codes you need:
+You'll also need to load the list of American Community Survey variables from the 2021 5-year estimates so you can identify the codes you need:
 
-**Task** load the variables from the 2020 5-year ACS and save them to a dataframe
+**Task** load the variables from the 2021 5-year ACS (which is called "acs5") and save them to a dataframe
 
 ```{r}
-v20 <- load_variables(2020, "acs5", cache=TRUE)
+v21 <- load_variables(2021, "acs5", cache=TRUE)
 ```
 
 ## Answer questions
 
-**Q1** What is the Maryland jurisdiction with the lowest median age, according to the ACS 2020 5-year estimates? You will need to find the variable for median age first.
-**A1** Baltimore City, with an estimated median age of 35.5 years and a margin of error of 0.2 years.
+**Q1** What is the Maryland jurisdiction with the lowest median age, according to the ACS 2021 5-year estimates? You will need to find the variable for median age first. 
+**A1** Baltimore City, with an estimated median age of 35.7 years and a margin of error of 0.1 years.
 
 ```{r}
-md_median_age <- get_acs(geography='county', variables=c(median_age='B01002_001'), state='MD', year=2020)
+md_median_age <- get_acs(geography='county', variables=c(median_age='B01002_001'), state='MD', year=2021)
 arrange(md_median_age, estimate)
 ```
 
-**Q2** Which Maryland counties have a median age of at least 50? You can use the dataframe you just made to answer this, but you must write code to display only those counties with a median age of at least 50.
+**Q2** Which Maryland counties have a median age of at least 50? You can use the dataframe you just made to answer this, but you must write code to display only those counties with a median age of at least 50. 
 **A2** Talbot and Worcester counties
 
 ```{r}
 md_median_age %>% filter(estimate >= 50)
 ```
 
-**Q3** We're interested in knowing which Maryland counties have the highest percentage of 5-17 year-olds who speak Spanish at home and *also* speak English fluently. Start with the code you wrote for Q1 and alter it to show the total population of 5-17 year-olds by county. Then create a second dataframe to show the number of 5-17 year-olds by county living in homes where Spanish is spoken but who speak English "very well" according to the ACS. To do this, you will need to find the ACS variables that represent those subjects. HINT: the phrase "very well" shows up in multiple variables - you want the one that doesn't include other factors like citizenship. 
+**Q3** We're interested in knowing more about Montgomery County zip codes where overdose calls are coming from and the demographic characteristics they possess. In particular, we want to calculate a rate of calls per 1,000 population. To do this, you'll need to:
 
-For each dataframe, rename the `estimate` column to a meaningful name you've given the ACS variable, remove the `variable` columns in each using select and then join them on GEOID and NAME. Then you can add a column to calculate the percentage of the total 5-17 population that speaks Spanish at home.
+1. Load the Montgomery County 911 overdose calls data.
+2. Create a new dataframe with the total number of calls for each zip code.
+3. Find the ACS variable pertaining to the total 18 and up population (there are several choices here; you want the simplest one).
+4. Get from the ACS data from all Maryland zip codes using that variable.
+5. Join the ACS data to the Montgomery County zip code totals dataframe and rename the estimate column to a meaningful name you've given the ACS variable.
+6. Add a column to the joined dataframe that calculates a rate of calls per 1,000 population.
 
-Which county has the highest percentage of 5-17 year-olds who speak Spanish at home and also speak English very well?
+Which zip code has the highest rate of calls? Which has the lowest?
 
-**A3** Prince George's County, with 19%, or nearly one in five.
-
-```{r}
-speak_spanish_5_17 <- get_acs(geography='county', variables=c(speak_spanish_5_17='B16004_005'), state='MD', year=2020) %>%
-   rename('speak_spanish_5_17'='estimate') %>%
-   select(-variable)
-md_population_5_17 <- get_acs(geography='county', variables=c(total_pop_5_17='B16004_002'), state='MD', year =2020) %>%
-   rename('total_pop_5_17'='estimate') %>%
-   select(-variable)
-
-combined_5_17 <- speak_spanish_5_17 %>%
-  inner_join(md_population_5_17, by=c('GEOID', 'NAME')) %>%
-  mutate(pct_of_total = (speak_spanish_5_17/total_pop_5_17)*100) %>%
-  arrange(desc(pct_of_total))
-```
-
-**Q4** Given the counties with the largest percentage of 5-17 year-olds that speak Spanish at home, which county stands out to you in the data as different from the others? How would you describe the top 5 counties? How would you describe Garrett County's numbers?
-
-**A4** Talbot County stands out - it has a tiny population compared to Prince George's and Montgomery but as many as 10 percent of its 5-17 year-olds speak Spanish at home and speak English very well. The top 5 are a combination of the largest jurisdictions (except Baltimore city and County) and some very small ones. We may not be able to accurately describe the percentage for Garrett County, given the margin of error, but it seems very, very small.
-
-**Q5** Pennsylvanians are currently requesting and submitting mail ballots for the November election. You'd like to know more about the people who live in the areas sending in mail ballots. Read in the `zip_totals.csv` file in the data folder containing the number of returned mail ballots per zip code. Then create a dataframe of Pennsylvania ZCTAs that include the following variables from the 2019 ACS: total population and median income. You will need to add `output = "wide"` to the get_acs function so that you get columns for those two variables' estimates and margins of error.
-
-Join the ZCTA dataframe to the zip totals dataframe and calculate a per capita rate for mail ballots per 100 population in each ZCTA, and write code to answer the following questions?
-
-* Which zip code *that has returned at least 100 mail ballots* has the highest per capita rate? 
-* Where is that zip code and what does Census Reporter say about its demographics? 
-* For zip codes with a per capita rate of at least 10 returned ballots per 100 people, how many have median incomes of at least $100,000? 
-* How many have median incomes less than the state figure of $68,957? 
-* What's the most interesting one from this last result?
-
-**A5** Zip code 19436 has the highest per capita rate of any with 100+ returned mail ballots. It is in Gwynedd and has a much older population (median age of 75). There are 4 zip codes that have return rates of 10+ per 100 people and median incomes of $100k or more: two in Eastern PA (18950 & 18977) and two in Western PA (15142	& 15655). There are 18 with median incomes less than the state figure, and 15921 is super interesting - it has a return rate of 35 per 100 people and is a tiny area in Cambria County. It's possible that a quarter or more of the population has returned mail ballots already. What's going on there? 
+**A3** 20877 is the highest, 20707 is the lowest.
 
 ```{r}
-zip_totals <- read_csv("data/pa_zip_totals.csv")
+montgomery_911_calls <- read_csv("data/montgomery_2022_overdoses.csv") %>% mutate(zip = as.character(zip))
 
-pa_zips <- get_acs(geography = 'zcta', state = 'PA', variables= c(total_pop = 'B01003_001', median_income='B19013_001'), year=2019, output = "wide")
+montco_totals <- montgomery_911_calls %>% group_by(zip) %>% summarize(calls = n()) %>% arrange(desc(calls))
 
-pa_zips_with_ballots <- zip_totals %>% inner_join(pa_zips, by=c("zip"="GEOID")) %>% mutate(ballots_per_100 = (count/total_popE)*100)
+md_zcta_population <- get_acs(geography="zcta", variables = "B09021_001", state='MD', year=2019)
 
+montco_zip_with_population <- montco_totals %>% inner_join(md_zcta_population, by=c('zip' = 'GEOID')) %>% rename(population = estimate)
+
+montco_zip_with_population <- montco_zip_with_population %>% mutate(rate_per_1k = (calls/population)*1000) %>% arrange(desc(rate_per_1k))
 ```
 
-Questions
+**Q4** Using [CensusReporter.org](https://censusreporter.org/), examine the zip codes with the highest and lowest rates and compare and contrast their demographic profiles. Is there a story here?
+
+**A4** 
+
+**Q5** Go back to your joined dataframe from Q3 and add two more columns representing the minimum and maximum populations based on the estimate and margin of error, then calculate per capita rates for each. Do you get the same two zip codes for the highest and lowest as you did before? Does that give you more or less confidence in your answers to Q3?
+
+**A5** They are the same, which should give us more confidence that they are the highest and lowest rates by zip code.
 
 ```{r}
-pa_zips_with_ballots %>% filter(count >= 100) %>% arrange(desc(ballots_per_100))
-
-pa_zips_with_ballots %>% filter(ballots_per_100 >= 10, median_incomeE >= 100000) %>% arrange(desc(ballots_per_100))
-
-pa_zips_with_ballots %>% filter(ballots_per_100 >= 10, median_incomeE < 68957) %>% arrange(desc(ballots_per_100))
-
+montco_zip_with_population <- montco_zip_with_population %>% 
+  mutate(population_min = population-moe, population_max = population+moe) %>% 
+  mutate(rate_per_1k_min = (calls/population_min)*1000, rate_per_1k_max = (calls/population_max)*1000)
 ```
+
