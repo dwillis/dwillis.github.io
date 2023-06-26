@@ -1,0 +1,92 @@
+### Summarizing Data
+
+This week you'll be working with the same UMD course data from last week, summarizing it in ways that resemble pivot tables from Week 5.
+
+First we need to load the tidyverse so we can use it:
+
+**Task** Run the code block
+
+```{r}
+library(tidyverse)
+```
+
+Next we need data. Same process as last week.
+
+**Task** Run the code block below and look at the result. Make sure it looks like rows and columns.
+
+```{r}
+courses <- read_csv("https://dwillis.github.io/jour405/courses.csv")
+
+View(courses)
+```
+
+Using R and the tidyverse library, we can now do some of the things we've done with Excel and pivot tables. Let's start with counting the number of courses in the Fall 2023 term (which is `202308`) by department. Here's the code to do that, with explanations for each line:
+
+**Task** Run the following codeblock. Which department has the most courses and where does Journalism rank on the list? (5 pts)
+**Answer** 
+
+```{r}
+# start with our courses dataframe and then...
+courses %>% 
+  # filter so that we're only working with rows where the term is 202308, the Fall 2023 semester, and then...
+  filter(term == 202308) %>% 
+  # group_by(department) tells R that we want to see a single result for each department - essentially it creates a bucket for all of the courses in that dept.
+  # you can group by a single column or multiple columns, just like in a pivot table.
+  group_by(department) %>% 
+  # summarize is where we have R do some math, like counting, calculating a mean or a sum total. In this case, we're creating a column for each 
+  # department called `courses` and using a function called `n()`, which counts up the number of courses.
+  summarize(courses = n()) %>% 
+  # finally, we arrange our result in descending order, so that the department with the highest number of courses appears first.
+  arrange(desc(courses))
+```
+
+Let's do a more specific question. How many departments have offered courses with "Climate" in the title and at least one seat in all of our data? In this case, we don't want to filter on a specific term - we want all the terms we have in the data - and we want to do the equivalent of a "contains" filter in Excel, where the word `Climate` appears anywhere in the course title. Then we'll group by department and count the courses.
+
+**Task** Run the following code block. Which department has offered the most? (5 points)
+**Answer** 
+
+```{r}
+courses %>% 
+  filter(str_detect(title, "Climate")) %>% 
+  group_by(department) %>% 
+  summarize(courses = n()) %>% 
+  arrange(desc(courses))
+```
+
+**Task** Look at the results - all of them! Of the departments listed, which one is the most interesting to you, and why? (5 points)
+**Answer** 
+
+Next, we want to look at which course has the most seats listed in the Fall 2023 semester. For this question, I'll give you a template for the code and you must replace some placeholder text with the appropriate values. Remember, the goal is to use the above examples to make the code work _in the context of this question_.
+
+**Task** Replace the text `REPLACE` with the actual values you'll need to answer the question, using the above example as a reference (10 points). What is the top course, and how many total seats does it have? (5 points)
+**Answer** 
+
+```{r}
+courses %>% 
+  filter(term == REPLACE) %>% 
+  group_by(id, title) %>% 
+  # sum() adds up numbers to get a total
+  summarize(total_seats = sum(REPLACE)) %>% 
+  arrange(desc(REPLACE))
+```
+
+Finally, let's take a look at the column in the data called `syllabus_count`. That's the number of syllabi posted on Testudo for each class. We can do a quick histogram of the number of syllabi using the tidyverse's chartmaker, which is called `ggplot`. I'll describe that code below:
+
+**Task** Run the following code block and describe the results in a sentence or two. What stands out?
+**Answer** 
+
+```{r}
+# create a new ggplot using the courses dataframe.
+# aes(syllabus_count) means that what we want to see - called the aesthetic - is the syllabus_count column.
+ggplot(courses, aes(syllabus_count)) +
+  # geom_histogram builds a histogram and we're setting the width of each bin to 1 to make the data clearer.
+  geom_histogram(binwidth=1)
+```
+
+**Task** If you were assigned to write a story about the practice of posting syllabi on Testudo, what would your lead sentence be, based on this data? (5 points)
+**Answer** 
+
+**Task** What's the most meaningful statistic you could calculate for a department about the posting of syllabi? You don't have to know how to do it, but I want to know what you think would most help readers/viewers understand this information. (5 points)
+**Answer** 
+
+When you are finished, save this notebook with the following name: LASTNAME_summaries.rmd, replacing LASTNAME with your last name, and upload it to ELMS.
