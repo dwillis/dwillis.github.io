@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -374,11 +379,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>When looking at a linear model of your data, there’s a measure you need to be aware of called residuals. The residual is the distance between what the model predicted and what the real outcome is. Take our model at the end of the correlation and regression chapter. Our model predicted Maryland’s women soccer should have outscored Temple by 1.0375 goals last month. The match was a 1-1 draw. So our residual is -1.0375.</p>
+<p>When looking at a linear model of your data, there’s a measure you need to be aware of called residuals. The residual is the distance between what the model predicted and what the real outcome is. Take our model at the end of the correlation and regression chapter. Our model predicted Maryland’s women soccer should have outscored Temple by 1.0375 goals a year ago. The match was a 1-1 draw. So our residual is -1.0375.</p>
 <p>Residuals can tell you several things, but most important is if a linear model the right model for your data. If the residuals appear to be random, then a linear model is appropriate. If they have a pattern, it means something else is going on in your data and a linear model isn’t appropriate.</p>
 <p>Residuals can also tell you who is underperforming and overperforming the model. And the more robust the model – the better your r-squared value is – the more meaningful that label of under or overperforming is.</p>
 <p>Let’s go back to our model for college basketball. For our predictor, let’s use Net FG Percentage - the difference between the two teams’ shooting success.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/cbblogs1521.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/cbblogs1523.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Then load the tidyverse.</p>
@@ -386,9 +391,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cbblogs1521.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cbblogs1523.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 64866 Columns: 48
+<pre><code>Rows: 87636 Columns: 48
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr   (8): Season, TeamFull, Opponent, HomeAway, W_L, URL, Conference, Team
@@ -414,31 +419,32 @@ lm(formula = differential ~ FGPctMargin, data = residualmodel)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--51.388  -6.170  -0.212   5.905  68.751 
+-51.168  -6.194  -0.229   5.866  68.675 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   0.09515    0.03718   2.559   0.0105 *  
-FGPctMargin 120.11570    0.33371 359.940   &lt;2e-16 ***
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.2642     0.0321   8.229   &lt;2e-16 ***
+FGPctMargin 121.7403     0.2885 422.029   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.47 on 64861 degrees of freedom
-  (3 observations deleted due to missingness)
-Multiple R-squared:  0.6664,    Adjusted R-squared:  0.6664 
-F-statistic: 1.296e+05 on 1 and 64861 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 9.499 on 87569 degrees of freedom
+  (65 observations deleted due to missingness)
+Multiple R-squared:  0.6704,    Adjusted R-squared:  0.6704 
+F-statistic: 1.781e+05 on 1 and 87569 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>We’ve seen this output before, but let’s review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has underperformed the model by 51 points (!), and a team has overperformed it by 68 points (!!). The median residual, where half are above and half are below, is just slightly below the fit line. Close here is good.</p>
-<p>Next: Look at the Adjusted R-squared value. What that says is that 66 percent of a team’s scoring differential can be predicted by their FG percentage margin.</p>
+<p>Next: Look at the Adjusted R-squared value. What that says is that 67 percent of a team’s scoring differential can be predicted by their FG percentage margin.</p>
 <p>Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05, we can say that our correlation didn’t happen at random. And, in this case, it REALLY didn’t happen at random. But if you know a little bit about basketball, it doesn’t surprise you that the more you shoot better than your opponent, the more you win by. It’s an intuitive result.</p>
 <p>What we want to do now is look at those residuals. We want to add them to our individual game records. We can do that by creating two new fields – predicted and residuals – to our dataframe like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="ot">&lt;-</span> residualmodel <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">predicted =</span> <span class="fu">predict</span>(fit), <span class="at">residuals =</span> <span class="fu">residuals</span>(fit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `mutate()`:
-! Problem while computing `predicted = predict(fit)`.
-✖ `predicted` must be size 64866 or 1, not 64863.</code></pre>
+ℹ In argument: `predicted = predict(fit)`.
+Caused by error:
+! `predicted` must be size 87636 or 1, not 87571.</code></pre>
 </div>
 </div>
 <p>Uh, oh. What’s going on here? When you get a message like this, where R is complaining about the size of the data, it most likely means that your model is using some columns that have NA values. In this case, the number of columns looks small - perhaps 3 - so let’s just get rid of those rows by using the calculated columns from our model:</p>
@@ -453,21 +459,20 @@ F-statistic: 1.296e+05 on 1 and 64861 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">'Big Ten'</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, Team, Opponent, W_L, differential, FGPctMargin, predicted, residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2,037 × 8
-   Date       Team         Opponent       W_L   diffe…¹ FGPctM…² predi…³ resid…⁴
-   &lt;date&gt;     &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1 2020-12-15 Northwestern Quincy         W          52  0.089     10.8     41.2
- 2 2020-11-25 Nebraska     McNeese State  W          47  0.118     14.3     32.7
- 3 2020-11-25 Illinois     North Carolin… W          62  0.243     29.3     32.7
- 4 2017-11-22 Illinois     Augustana (IL) W          34  0.0140     1.78    32.2
- 5 2017-12-13 Illinois     Longwood       W          47  0.126     15.2     31.8
- 6 2017-11-10 Illinois     Southern       W          47  0.135     16.3     30.7
- 7 2017-12-11 Northwestern Chicago State  W          65  0.291     35.0     30.0
- 8 2018-11-08 Northwestern New Orleans    W          30  0.00900    1.18    28.8
- 9 2020-01-21 Maryland     Northwestern   W          11 -0.148    -17.7     28.7
-10 2019-11-16 Purdue       Chicago State  W          44  0.133     16.1     27.9
-# … with 2,027 more rows, and abbreviated variable names ¹​differential,
-#   ²​FGPctMargin, ³​predicted, ⁴​residuals</code></pre>
+<pre><code># A tibble: 2,457 × 8
+   Date       Team   Opponent W_L   differential FGPctMargin predicted residuals
+   &lt;date&gt;     &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+ 1 2020-12-15 North… Quincy   W               52      0.089      11.1       40.9
+ 2 2020-11-25 Nebra… McNeese… W               47      0.118      14.6       32.4
+ 3 2020-11-25 Illin… North C… W               62      0.243      29.8       32.2
+ 4 2017-11-22 Illin… Augusta… W               34      0.0140      1.97      32.0
+ 5 2017-12-13 Illin… Longwood W               47      0.126      15.6       31.4
+ 6 2017-11-10 Illin… Southern W               47      0.135      16.7       30.3
+ 7 2021-11-22 Iowa   Western… W               48      0.147      18.2       29.8
+ 8 2017-12-11 North… Chicago… W               65      0.291      35.7       29.3
+ 9 2020-01-21 Maryl… Northwe… W               11     -0.148     -17.8       28.8
+10 2021-11-16 Iowa   North C… W               17     -0.098     -11.7       28.7
+# ℹ 2,447 more rows</code></pre>
 </div>
 </div>
 <p>So looking at this table, what you see here are the teams who scored more than their FG percentage margin would indicate. One of them should jump off the page at you.</p>
@@ -482,7 +487,7 @@ F-statistic: 1.296e+05 on 1 and 64861 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Another way to view your residuals is by connecting the predicted value with the actual value.</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula 'y ~ x'</code></pre>
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="residuals_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
@@ -509,28 +514,28 @@ lm(formula = differential ~ TotalFouls, data = fouls)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--94.254 -10.285  -1.254   9.776 102.838 
+-94.883 -10.525  -1.313   9.616 107.402 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  1.176653   0.327499   3.593 0.000327 ***
-TotalFouls  -0.030745   0.008802  -3.493 0.000478 ***
+(Intercept)  3.022093   0.278311   10.86   &lt;2e-16 ***
+TotalFouls  -0.071301   0.007625   -9.35   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 16.39 on 64861 degrees of freedom
-  (3 observations deleted due to missingness)
-Multiple R-squared:  0.0001881, Adjusted R-squared:  0.0001726 
-F-statistic:  12.2 on 1 and 64861 DF,  p-value: 0.0004783</code></pre>
+Residual standard error: 16.54 on 87569 degrees of freedom
+  (65 observations deleted due to missingness)
+Multiple R-squared:  0.0009974, Adjusted R-squared:  0.000986 
+F-statistic: 87.43 on 1 and 87569 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>So from top to bottom:</p>
 <ul>
-<li>Our min and max go from -94 to positive 102</li>
-<li>Our adjusted R-squared is … 0.0001726 Not much at all.</li>
-<li>Our p-value is … 0.0004783, which is less than than .05, so that’s something.</li>
+<li>Our min and max go from -94 to positive 107</li>
+<li>Our adjusted R-squared is … 0.000986. Not much at all.</li>
+<li>Our p-value is … is less than than .05, so that’s something.</li>
 </ul>
-<p>So what we can say about this model is that it’s statistically significant, but doesn’t really explain much. It’s not meaningless, but on its own the total number of fouls doesn’t go very far in explaining the point differential. Normally, we’d stop right here – why bother going forward with a predictive model that isn’t terribly predictive? But let’s do it anyway. Oh, and see that “(3 observations deleted due to missingness)” bit? That means we need to lose some incomplete data again.</p>
+<p>So what we can say about this model is that it’s statistically significant, but doesn’t really explain much. It’s not meaningless, but on its own the total number of fouls doesn’t go very far in explaining the point differential. Normally, we’d stop right here – why bother going forward with a predictive model that isn’t terribly predictive? But let’s do it anyway. Oh, and see that “(65 observations deleted due to missingness)” bit? That means we need to lose some incomplete data again.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fouls <span class="ot">&lt;-</span> fouls <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(TotalFouls))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>fouls<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(pfit)</span>
@@ -539,24 +544,23 @@ F-statistic:  12.2 on 1 and 64861 DF,  p-value: 0.0004783</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fouls <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Team, Opponent, W_L, TeamScore, OpponentScore, TotalFouls, residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 64,863 × 7
-   Team                      Opponent      W_L   TeamS…¹ Oppon…² Total…³ resid…⁴
-   &lt;chr&gt;                     &lt;chr&gt;         &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1 McNeese State             Dallas Chris… W         140      37      33   103. 
- 2 Appalachian State         Toccoa Falls  W         135      34      35   101. 
- 3 Grambling                 Ecclesia      W         147      52      20    94.4
- 4 Utah                      Mississippi … W         143      49      30    93.7
- 5 Merrimack                 Lesley        W         110      16      21    93.5
- 6 Lamar                     Howard Payne  W         121      32      35    88.9
- 7 Georgia Southern          Carver Colle… W         139      51      38    88.0
- 8 Youngstown State          Franciscan    W         134      46      35    87.9
- 9 Maryland-Baltimore County Valley Forge  W         134      46      34    87.9
-10 Tennessee-Martin          Champion Chr… W         115      29      28    85.7
-# … with 64,853 more rows, and abbreviated variable names ¹​TeamScore,
-#   ²​OpponentScore, ³​TotalFouls, ⁴​residuals</code></pre>
+<pre><code># A tibble: 87,571 × 7
+   Team              Opponent W_L   TeamScore OpponentScore TotalFouls residuals
+   &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Bryant            Thomas … W           147            39         34     107. 
+ 2 McNeese State     Dallas … W           140            37         33     102. 
+ 3 Appalachian State Toccoa … W           135            34         35     100. 
+ 4 James Madison     Carlow   W           135            40         29      94.0
+ 5 Grambling         Ecclesia W           147            52         20      93.4
+ 6 Utah              Mississ… W           143            49         30      93.1
+ 7 Merrimack         Lesley   W           110            16         21      92.5
+ 8 Lamar             Howard … W           121            32         35      88.5
+ 9 Georgia Southern  Carver … W           139            51         38      87.7
+10 Youngstown State  Francis… W           134            46         35      87.5
+# ℹ 87,561 more rows</code></pre>
 </div>
 </div>
-<p>First, note all of the biggest misses here are all blowout games. The worst games of the season, the worst being McNeese State vs.&nbsp;Dallas Christian. The model missed that differential by … 102 points. The margin of victory? 103 points. In other words, this model is not great! But let’s look at it anyway.</p>
+<p>First, note all of the biggest misses here are all blowout games. The worst games of the season, the worst being Bryant vs.&nbsp;Thomas. The model missed that differential by … 107 points. The margin of victory? 108 points. In other words, this model is not great! But let’s look at it anyway.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="residuals_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
@@ -566,7 +570,7 @@ F-statistic:  12.2 on 1 and 64861 DF,  p-value: 0.0004783</code></pre>
 <p>Here’s the segment plot of residuals – you’ll see some really long lines. That’s a bad sign. Another bad sign? A flat fit line. It means there’s no relationship between these two things. Which we already know.</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula 'y ~ x'</code></pre>
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="residuals_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>

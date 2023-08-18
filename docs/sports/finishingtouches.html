@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -410,7 +415,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Here’s the data we’ll use:</p>
+<p>Here’s the data we’ll use: college football team scoring from 2009-2018.</p>
 <pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/scoringoffense.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p><p><a href="https://dwillis.github.io/sports-data-files/totaloffense.csv">
@@ -633,7 +638,7 @@ dbl (8): G, Rush Yards, Pass Yards, Plays, Total Yards, Yards/Play, Yards/G,...
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>   il<span class="sc">/</span><span class="dv">10</span>, </span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>   <span class="at">rows =</span> <span class="dv">2</span>, </span>
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>   <span class="at">xlab=</span><span class="st">"Illinois</span><span class="sc">\n</span><span class="st">1 square = 10 yards"</span>, </span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>   <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"white"</span>)) <span class="sc">+</span> </span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>   <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"orange"</span>, <span class="st">"blue"</span>, <span class="st">"white"</span>)) <span class="sc">+</span> </span>
 <span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">caption=</span><span class="st">"Source: NCAA | Graphic by Derek Willis"</span>)</span>
 <span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">

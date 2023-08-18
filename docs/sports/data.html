@@ -266,17 +266,22 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -345,9 +350,9 @@ ul.task-list{list-style: none;}
 <section id="a-simple-way-to-get-data" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="a-simple-way-to-get-data"><span class="header-section-number">3.3</span> A simple way to get data</h2>
 <p>One good thing about sports is that there’s lots of interest in it. And that means there’s outlets that put sports data on the internet. Now I’m going to show you a trick to getting it easily.</p>
-<p>The site sports-reference.com takes NCAA (and other league) stats and puts them online. For instance, <a href="https://www.sports-reference.com/cbb/schools/maryland/2022-gamelogs.html">here’s their page on Maryland’s men’s basketball’s game logs</a>, which you should open now.</p>
-<p>Now, in a new tab, log into Google Docs/Drive and open a new spreadsheet. In the first cell of the first row, copy and paste this formula in:</p>
-<pre><code>=IMPORTHTML("https://www.sports-reference.com/cbb/schools/maryland/2022-gamelogs.html", "table", 1)</code></pre>
+<p>The site sports-reference.com takes NCAA (and other league) stats and puts them online. For instance, <a href="https://www.sports-reference.com/cbb/schools/maryland/men/2023-gamelogs.html">here’s their page on Maryland’s men’s basketball’s game logs</a>, which you should open now.</p>
+<p>Now, in a new tab, log into Google Docs/Drive and open a new spreadsheet (type <code>sheet.new</code> in the url bar). In the first cell of the first row, copy and paste this formula in:</p>
+<pre><code>=IMPORTHTML("https://www.sports-reference.com/cbb/schools/maryland/2023-gamelogs.html", "table", 1)</code></pre>
 <p>If it worked right, you’ve got the data from that page in a spreadsheet.</p>
 </section>
 <section id="cleaning-the-data" class="level2" data-number="3.4">

@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -399,31 +404,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="basic-data-analysis-group-by-and-count" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="basic-data-analysis-group-by-and-count"><span class="header-section-number">4.1</span> Basic data analysis: Group By and Count</h2>
 <p>The first thing we need to do is get some data to work with. We do that by reading it in. In our case, we’re going to read data from a csv file – a comma-separated values file.</p>
-<p>The CSV file we’re going to read from is a <a href="https://www.basketball-reference.com/leagues/NBA_2022_advanced.html">Basketball Reference</a> page of advanced metrics for NBA players this past season. The Sports Reference sites are a godsend of data, a trove of stuff, and we’re going to use it a lot in this class.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/nbaadvancedplayers2122.csv">
+<p>The CSV file we’re going to read from is a <a href="https://www.basketball-reference.com/leagues/NBA_2023_advanced.html">Basketball Reference</a> page of advanced metrics for NBA players this past season. The Sports Reference sites are a godsend of data, a trove of stuff, and we’re going to use it a lot in this class.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/nbaadvancedplayers2223.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>So step 2, after setting up our libraries, is most often going to be importing data. In order to analyze data, we need data, so it stands to reason that this would be something we’d do very early.</p>
 <p>The code looks <em>something</em> like this, but hold off copying it just yet:</p>
-<p><code>nbaplayers &lt;- read_csv("~/SportsData/nbaadvancedplayers2122.csv")</code></p>
+<p><code>nbaplayers &lt;- read_csv("~/SportsData/nbaadvancedplayers2223.csv")</code></p>
 <p>Let’s unpack that.</p>
 <p>The first part – nbaplayers – is the name of your variable. A variable is just a name of a thing that stores stuff. In this case, our variable is a data frame, which is R’s way of storing data (technically it’s a tibble, which is the tidyverse way of storing data, but the differences aren’t important and people use them interchangeably). <strong>We can call this whatever we want.</strong> I always want to name data frames after what is in it. In this case, we’re going to import a dataset of NBA players. Variable names, by convention are one word all lower case. You can end a variable with a number, but you can’t start one with a number.</p>
 <p>The &lt;- bit is the variable assignment operator. It’s how we know we’re assigning something to a word. Think of the arrow as saying “Take everything on the right of this arrow and stuff it into the thing on the left.” So we’re creating an empty vessel called <code>nbaplayers</code> and stuffing all this data into it.</p>
 <p>The <code>read_csv</code> bits are pretty obvious, except for one thing. What happens in the quote marks is the path to the data. In there, I have to tell R where it will find the data. The easiest thing to do, if you are confused about how to find your data, is to put your data in the same folder as as your notebook (you’ll have to save that notebook first). If you do that, then you just need to put the name of the file in there (nbaadvancedplayers2122.csv). In my case, in my home directory (that’s the <code>~</code> part), there is a folder called SportsData that has the file called nbaadvancedplayers2122.csv in it. Some people – insane people – leave the data in their downloads folder. The data path then would be <code>~/Downloads/nameofthedatafilehere.csv</code> on PC or Mac.</p>
 <p><strong>What you put in there will be different from mine</strong>. So your first task is to import the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/nbaadvancedplayers2122.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/nbaadvancedplayers2223.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>New names:
-Rows: 812 Columns: 29
-── Column specification
-──────────────────────────────────────────────────────── Delimiter: "," chr
-(3): Player, Pos, Tm dbl (24): Rk, Age, G, MP, PER, TS%, 3PAr, FTr, ORB%, DRB%,
-TRB%, AST%, STL%,... lgl (2): ...20, ...25
-ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
-Specify the column types or set `show_col_types = FALSE` to quiet this message.
-• `` -&gt; `...20`
-• `` -&gt; `...25`</code></pre>
+<pre><code>Rows: 679 Columns: 27
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (3): Player, Pos, Tm
+dbl (24): Rk, Age, G, MP, PER, TS%, 3PAr, FTr, ORB%, DRB%, TRB%, AST%, STL%,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
 <p>Now we can inspect the data we imported. What does it look like? To do that, we use <code>head(nbaplayers)</code> to show the headers and <strong>the first six rows of data</strong>. If we wanted to see them all, we could just simply enter <code>nbaplayers</code> and run it.</p>
@@ -431,28 +434,27 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nbaplayers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 29
+<pre><code># A tibble: 6 × 27
      Rk Player     Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-1     1 Precious … C        22 TOR      73  1725  12.7 0.503  0.259 0.217    8.7
-2     2 Steven Ad… C        28 MEM      76  1999  17.6 0.56   0.003 0.518   17.9
-3     3 Bam Adeba… C        24 MIA      56  1825  21.8 0.608  0.008 0.466    8.7
-4     4 Santi Ald… PF       21 MEM      32   360  10.2 0.452  0.364 0.242    9.4
-5     5 LaMarcus … C        36 BRK      47  1050  19.6 0.604  0.1   0.223    7.8
-6     6 Nickeil A… SG       23 TOT      65  1466  10.5 0.475  0.497 0.16     2.7
-# … with 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;,
-#   `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, ...20 &lt;lgl&gt;,
-#   OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;,
-#   DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
+1     1 Precious … C        23 TOR      55  1140  15.2 0.554  0.267 0.307    9.3
+2     2 Steven Ad… C        29 MEM      42  1133  17.5 0.564  0.004 0.49    20.1
+3     3 Bam Adeba… C        25 MIA      75  2598  20.1 0.592  0.011 0.361    8  
+4     4 Ochai Agb… SG       22 UTA      59  1209   9.5 0.561  0.591 0.179    3.9
+5     5 Santi Ald… PF       22 MEM      77  1682  13.9 0.591  0.507 0.274    5.4
+6     6 Nickeil A… SG       24 TOT      59   884  11.6 0.565  0.539 0.203    1.9
+# ℹ 15 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;,
+#   `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;,
+#   `WS/48` &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(nbaplayers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 812</code></pre>
+<pre><code>[1] 679</code></pre>
 </div>
 </div>
-<p>Another way to look at nrow – we have 812 players from this season in our dataset.</p>
+<p>Another way to look at nrow – we have 679 players from this season in our dataset.</p>
 <p>What if we wanted to know how many players there were by position? To do that by hand, we’d have to take each of the 651 records and sort them into a pile. We’d put them in groups and then count them.</p>
 <p><code>dplyr</code> has a <strong>group by</strong> function in it that does just this. A massive amount of data analysis involves grouping like things together at some point. So it’s a good place to start.</p>
 <p>So to do this, we’ll take our dataset and we’ll introduce a new operator: %&gt;%. The best way to read that operator, in my opinion, is to interpret that as “and then do this.”</p>
@@ -468,17 +470,17 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <pre><code># A tibble: 11 × 2
    Pos   total
    &lt;chr&gt; &lt;int&gt;
- 1 C       130
- 2 C-PF      2
- 3 PF      152
+ 1 C       139
+ 2 PF      121
+ 3 PF-C      1
  4 PF-SF     1
- 5 PG      156
- 6 PG-SG     1
- 7 SF      157
- 8 SF-SG     5
- 9 SG      199
-10 SG-PG     4
-11 SG-SF     5</code></pre>
+ 5 PG      115
+ 6 PG-SG     2
+ 7 SF      133
+ 8 SF-PF     1
+ 9 SF-SG     2
+10 SG      162
+11 SG-PG     2</code></pre>
 </div>
 </div>
 <p>So let’s walk through that. We start with our dataset – <code>nbaplayers</code> – and then we tell it to group the data by a given field in the data which we get by looking at either the output of <code>head</code> or you can look in the environment where you’ll see <code>nbaplayers</code>.</p>
@@ -494,20 +496,20 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <pre><code># A tibble: 11 × 2
    Pos   total
    &lt;chr&gt; &lt;int&gt;
- 1 SG      199
- 2 SF      157
- 3 PG      156
- 4 PF      152
- 5 C       130
- 6 SF-SG     5
- 7 SG-SF     5
- 8 SG-PG     4
- 9 C-PF      2
+ 1 SG      162
+ 2 C       139
+ 3 SF      133
+ 4 PF      121
+ 5 PG      115
+ 6 PG-SG     2
+ 7 SF-SG     2
+ 8 SG-PG     2
+ 9 PF-C      1
 10 PF-SF     1
-11 PG-SG     1</code></pre>
+11 SF-PF     1</code></pre>
 </div>
 </div>
-<p>So the most common position in the NBA? Shooting guard, followed by small forward (although it’s close between SF and point guard).</p>
+<p>So the most common position in the NBA? Shooting guard, followed by center (although it’s close between C and small forward).</p>
 <p>We can, if we want, group by more than one thing. Which team has the most of a single position? To do that, we can group by the team – called Tm in the data – and position, or Pos in the data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="sc">%&gt;%</span></span>
@@ -524,22 +526,22 @@ argument.</code></pre>
 # Groups:   Tm [31]
    Tm    Pos   total
    &lt;chr&gt; &lt;chr&gt; &lt;int&gt;
- 1 TOT   PF       18
- 2 TOT   SG       18
- 3 TOT   PG       17
- 4 TOT   SF       14
- 5 TOT   C        12
- 6 BOS   SG        9
- 7 DAL   PG        9
- 8 LAC   SG        9
- 9 POR   SF        9
-10 SAS   SG        9
-# … with 151 more rows</code></pre>
+ 1 TOT   C        15
+ 2 TOT   SG       15
+ 3 TOT   SF       13
+ 4 TOT   PG       10
+ 5 TOT   PF        8
+ 6 BRK   SG        7
+ 7 DAL   SG        7
+ 8 LAL   SG        7
+ 9 MIN   SG        7
+10 POR   SG        7
+# ℹ 151 more rows</code></pre>
 </div>
 </div>
 <p>So wait, what team is TOT?</p>
 <p>Valuable lesson: whoever collects the data has opinions on how to solve problems. In this case, Basketball Reference, when a player get’s traded, records stats for the player’s first team, their second team, and a combined season total for a team called TOT, meaning Total. Is there a team abbreviated TOT? No.&nbsp;So ignore them here.</p>
-<p>Boston has 8 shooting guards. Dallas has 9 point guards? You can learn a bit about how a team is assembled by looking at these simple counts.</p>
+<p>Brooklyn has 7 shooting guards. So does Dallas. You can learn a bit about how a team is assembled by looking at these simple counts.</p>
 </section>
 <section id="other-aggregates-mean-and-median" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="other-aggregates-mean-and-median"><span class="header-section-number">4.2</span> Other aggregates: Mean and median</h2>
@@ -558,45 +560,45 @@ argument.</code></pre>
 <pre><code># A tibble: 11 × 4
    Pos   count mean_minutes median_minutes
    &lt;chr&gt; &lt;int&gt;        &lt;dbl&gt;          &lt;dbl&gt;
- 1 C       130         835.           616 
- 2 C-PF      2        1506.          1506.
- 3 PF      152         842.           502.
- 4 PF-SF     1        1940           1940 
- 5 PG      156         815.           543 
- 6 PG-SG     1        2419           2419 
- 7 SF      157         775.           491 
- 8 SF-SG     5        1074.           935 
- 9 SG      199         821.           665 
-10 SG-PG     4        1350.          1340.
-11 SG-SF     5         654.           434 </code></pre>
+ 1 C       139         872.           622 
+ 2 PF      121        1038.           891 
+ 3 PF-C      1         806            806 
+ 4 PF-SF     1         687            687 
+ 5 PG      115        1026.           854 
+ 6 PG-SG     2        1538.          1538.
+ 7 SF      133        1017.           750 
+ 8 SF-PF     1         952            952 
+ 9 SF-SG     2        2082.          2082.
+10 SG      162         952.           756.
+11 SG-PG     2        2270.          2270.</code></pre>
 </div>
 </div>
-<p>So there’s 812 players in the data. Let’s look at shooting guards. The average shooting guard plays 820 minutes and the median is 665 minutes.</p>
+<p>So there’s 679 players in the data. Let’s look at centers. The average center plays 872 minutes and the median is 622 minutes.</p>
 <p>Why?</p>
 <p>Let’s let sort help us.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nbaplayers <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(MP))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 812 × 29
+<pre><code># A tibble: 679 × 27
       Rk Player    Pos     Age Tm        G    MP   PER `TS%` `3PAr`   FTr `ORB%`
    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
- 1    66 Mikal Br… SF       25 PHO      82  2854  14.4 0.627  0.364 0.183    2.9
- 2    67 Miles Br… PF       23 CHO      80  2837  17.9 0.593  0.383 0.274    3.3
- 3   134 DeMar De… PF       32 CHI      76  2743  23.1 0.59   0.093 0.386    2.3
- 4   526 Jayson T… SF       23 BOS      76  2731  21.8 0.578  0.416 0.3      3.5
- 5    47 Saddiq B… SF       22 DET      82  2704  14   0.529  0.537 0.224    4.1
- 6   214 Tyrese H… SG-PG    21 TOT      77  2695  18.2 0.595  0.428 0.209    2.5
- 7   576 Russell … PG       33 LAL      78  2678  15   0.512  0.215 0.324    4.4
- 8   602 Trae You… PG       23 ATL      76  2652  25.4 0.603  0.395 0.358    2.1
- 9   358 Tyrese M… PG       21 PHI      75  2650  16.2 0.594  0.311 0.247    1.1
-10   168 Dorian F… PF       28 DAL      80  2644  12.5 0.604  0.629 0.12     5.1
-# … with 802 more rows, and 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;,
-#   `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;,
-#   ...20 &lt;lgl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;,
-#   OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
+ 1    58 Mikal Br… SF-SG    26 TOT      83  2963  16.8 0.587  0.349 0.279    2.9
+ 2   140 Anthony … SG       21 MIN      79  2842  17.4 0.564  0.375 0.274    1.9
+ 3   283 Zach LaV… SG       27 CHI      77  2768  19   0.607  0.392 0.308    1.7
+ 4   489 Nikola V… C        32 CHI      82  2746  19.1 0.594  0.302 0.138    6.7
+ 5   405 Julius R… PF       28 NYK      77  2737  20.3 0.581  0.444 0.371    5.6
+ 6   428 Domantas… C        26 SAC      79  2736  23.5 0.668  0.088 0.467   10.6
+ 7   465 Jayson T… SF       24 BOS      74  2732  23.7 0.607  0.44  0.399    3.2
+ 8   123 Spencer … SG-PG    29 TOT      79  2725  16   0.573  0.467 0.314    1.2
+ 9   339 Evan Mob… PF       21 CLE      79  2715  17.9 0.591  0.108 0.321    8.1
+10   351 Dejounte… SG       26 ATL      74  2693  17   0.54   0.293 0.144    2.1
+# ℹ 669 more rows
+# ℹ 15 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;,
+#   `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;,
+#   `WS/48` &lt;dbl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>The player with the most minutes on the floor is a small forward. So that means there’s Mikal Bridges rolling up 2,854 minutes in a season, and then there’s Boston sensation Justin Jackson. Never heard of Justin Jackson? Might be because he logged two minutes in one game this season.</p>
+<p>The player with the most minutes on the floor is a small forward. So that means there’s Mikal Bridges rolling up 2,963 minutes in a season, and then there’s Philly sensation Michael Foster Jr.&nbsp;Never heard of Michael Foster Jr.? Might be because he logged a single minute in one game this season.</p>
 <p>That’s a huge difference.</p>
 <p>So when choosing a measure of the middle, you have to ask yourself – could I have extremes? Because a median won’t be sensitive to extremes. It will be the point at which half the numbers are above and half are below. The average or mean will be a measure of the middle, but if you have a bunch of pine riders and then one ironman superstar, the average will be wildly skewed.</p>
 </section>
@@ -617,20 +619,20 @@ argument.</code></pre>
 <pre><code># A tibble: 11 × 6
    Pos    total avgminutes minminutes maxminutes stdev
    &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
- 1 SG    163361       821.          1       2499  766.
- 2 PF    127917       842.          1       2837  793.
- 3 PG    127159       815.          1       2678  801.
- 4 SF    121695       775.          2       2854  779.
- 5 C     108505       835.          2       2476  721.
- 6 SG-PG   5401      1350.         25       2695 1163.
- 7 SF-SG   5371      1074.        212       2057  709.
- 8 SG-SF   3272       654.        104       1791  697.
- 9 C-PF    3013      1506.        877       2136  890.
-10 PG-SG   2419      2419        2419       2419   NA 
-11 PF-SF   1940      1940        1940       1940   NA </code></pre>
+ 1 SG    154184       952.          2       2842  806.
+ 2 SF    135216      1017.          6       2732  856.
+ 3 PF    125592      1038.          1       2737  786.
+ 4 C     121242       872.          6       2746  737.
+ 5 PG    117964      1026.          5       2541  793.
+ 6 SG-PG   4541      2270.       1816       2725  643.
+ 7 SF-SG   4163      2082.       1200       2963 1247.
+ 8 PG-SG   3075      1538.        834       2241  995.
+ 9 SF-PF    952       952         952        952   NA 
+10 PF-C     806       806         806        806   NA 
+11 PF-SF    687       687         687        687   NA </code></pre>
 </div>
 </div>
-<p>So again, no surprise, shooting guards spend the most minutes on the floor in the NBA. They average 820 minutes, but we noted why that’s trouble. The minimum is a one-minute wonder, max is some team failing at load management, and the standard deviation is a measure of how spread out the data is. In this case, not the highest spread among positions, but pretty high. So you know you’ve got some huge minutes players and a bunch of bench players.</p>
+<p>So again, no surprise, shooting guards spend the most minutes on the floor in the NBA. They average 951 minutes, but we noted why that’s trouble. The minimum is a one-minute wonder, max is some team failing at load management, and the standard deviation is a measure of how spread out the data is. In this case, not the highest spread among positions, but pretty high. So you know you’ve got some huge minutes players and a bunch of bench players.</p>
 
 
 </section>

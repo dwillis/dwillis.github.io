@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -376,17 +381,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbump)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s use the 2020-21 college football playoff rankings:</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/cfbranking.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/cfbranking22.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rankings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cfbranking.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rankings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cfbranking22.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 125 Columns: 4
+<pre><code>Rows: 60 Columns: 3
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (2): Team, ShortTeam
-dbl (2): Rank, Week
+chr (1): Team
+dbl (2): Week, Rank
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -396,28 +401,25 @@ dbl (2): Rank, Week
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rankings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 4
-   Rank  Week Team    ShortTeam
-  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    
-1     1    17 Alabama Ala.     
-2     1    16 Alabama Ala.     
-3     1    15 Alabama Ala.     
-4     1    14 Alabama Ala.     
-5     1    13 Alabama Ala.     
-6    22    13 Auburn  Aub.     </code></pre>
+<pre><code># A tibble: 6 × 3
+   Week  Rank Team      
+  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     
+1    15     1 Georgia   
+2    15     2 Michigan  
+3    15     3 TCU       
+4    15     4 Ohio State
+5    15     5 Alabama   
+6    15     6 Tennessee </code></pre>
 </div>
 </div>
-<p>So Alabama was ranked in the first (yawn), followed by Clemson (double yawn), Ohio State and so on. Our data is in the form we need it to be. Now we can make a bump chart. We’ll start simple.</p>
+<p>So Georgia was ranked in the first (yawn), followed by Michigan (double yawn), TCU (hey now!), Ohio State and so on. Our data is in the form we need it to be. Now we can make a bump chart. We’ll start simple.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bump</span>(</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>rankings, <span class="fu">aes</span>(<span class="at">x=</span>Week, <span class="at">y=</span>Rank, <span class="at">color=</span>Team))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in f(...): 'StatBump' needs at least two observations per group
-
-Warning in f(...): 'StatBump' needs at least two observations per group
-
-Warning in f(...): 'StatBump' needs at least two observations per group</code></pre>
+<pre><code>Warning in compute_group(...): 'StatBump' needs at least two observations per
+group</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="bumpcharts_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
@@ -426,7 +428,7 @@ Warning in f(...): 'StatBump' needs at least two observations per group</code></
 <p>Well, it’s a start.</p>
 <p>The warning that you’re seeing is that there’s three teams last season who made one appearance on the college football playoff rankings and disappeared. Some fans would bite your arm off for that. Alas. We should eliminate them and thin up our chart a little. Let’s just take teams that finished in the top 10. We’re going to use a neat filter trick for this that you learned earlier using %in%.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>top10 <span class="ot">&lt;-</span> rankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="dv">17</span> <span class="sc">&amp;</span> Rank <span class="sc">&lt;=</span> <span class="dv">10</span>)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>top10 <span class="ot">&lt;-</span> rankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="dv">15</span> <span class="sc">&amp;</span> Rank <span class="sc">&lt;=</span> <span class="dv">10</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>newrankings <span class="ot">&lt;-</span> rankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">%in%</span> top10<span class="sc">$</span>Team)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -464,7 +466,7 @@ Warning in f(...): 'StatBump' needs at least two observations per group</code></
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bump</span>(<span class="at">data=</span>newrankings, <span class="fu">aes</span>(<span class="at">x=</span>Week, <span class="at">y=</span>Rank, <span class="at">color=</span>Team)) <span class="sc">+</span> </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>newrankings, <span class="fu">aes</span>(<span class="at">x=</span>Week, <span class="at">y=</span>Rank, <span class="at">color=</span>Team), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9E1B32"</span>,<span class="st">"#E00122"</span>, <span class="st">"#F56600"</span>, <span class="st">"#0021A5"</span>, <span class="st">"#BA0C2F"</span>, <span class="st">"#F1BE48"</span>,<span class="st">"#C99700"</span>, <span class="st">"#bb0000"</span>, <span class="st">"#841617"</span>, <span class="st">"#500000"</span>)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9E1B32"</span>,<span class="st">"#F56600"</span>, <span class="st">"#BA0C2F"</span>, <span class="st">"#0021A5"</span>, <span class="st">"#ffcb05"</span>, <span class="st">"#BB0000"</span>, <span class="st">"#4d1979"</span>,<span class="st">"#FF8200"</span>, <span class="st">"#990000"</span>, <span class="st">"#CC0000"</span>)) <span class="sc">+</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="bumpcharts_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
@@ -477,7 +479,7 @@ Warning in f(...): 'StatBump' needs at least two observations per group</code></
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>newrankings, <span class="fu">aes</span>(<span class="at">x=</span>Week, <span class="at">y=</span>Rank, <span class="at">color=</span>Team), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span>   </span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">min</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">-</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> Team), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">max</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">+</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> Team), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9E1B32"</span>,<span class="st">"#E00122"</span>, <span class="st">"#F56600"</span>, <span class="st">"#0021A5"</span>, <span class="st">"#BA0C2F"</span>, <span class="st">"#F1BE48"</span>,<span class="st">"#C99700"</span>, <span class="st">"#bb0000"</span>, <span class="st">"#841617"</span>, <span class="st">"#500000"</span>)) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9E1B32"</span>,<span class="st">"#F56600"</span>, <span class="st">"#BA0C2F"</span>, <span class="st">"#0021A5"</span>, <span class="st">"#ffcb05"</span>, <span class="st">"#BB0000"</span>, <span class="st">"#4d1979"</span>,<span class="st">"#FF8200"</span>, <span class="st">"#990000"</span>, <span class="st">"#CC0000"</span>)) <span class="sc">+</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="bumpcharts_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
@@ -488,15 +490,15 @@ Warning in f(...): 'StatBump' needs at least two observations per group</code></
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bump</span>(<span class="at">data=</span>newrankings, <span class="fu">aes</span>(<span class="at">x=</span>Week, <span class="at">y=</span>Rank, <span class="at">color=</span>Team)) <span class="sc">+</span> </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>newrankings, <span class="fu">aes</span>(<span class="at">x=</span>Week, <span class="at">y=</span>Rank, <span class="at">color=</span>Team), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span>   </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">min</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">-</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> ShortTeam), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">max</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">+</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> ShortTeam), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Was COVID college football boring?"</span>, <span class="at">subtitle=</span><span class="st">"There was no drama at the top. None. So, yes?"</span>, <span class="at">y=</span> <span class="st">"Rank"</span>, <span class="at">x =</span> <span class="st">"Week"</span>) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">min</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">-</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> Team), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">max</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">+</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> Team), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Last year's top ten was anything but boring"</span>, <span class="at">subtitle=</span><span class="st">""</span>, <span class="at">y=</span> <span class="st">"Rank"</span>, <span class="at">x =</span> <span class="st">"Week"</span>) <span class="sc">+</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9E1B32"</span>,<span class="st">"#E00122"</span>, <span class="st">"#F56600"</span>, <span class="st">"#0021A5"</span>, <span class="st">"#BA0C2F"</span>, <span class="st">"#F1BE48"</span>,<span class="st">"#C99700"</span>, <span class="st">"#bb0000"</span>, <span class="st">"#841617"</span>, <span class="st">"#500000"</span>)) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9E1B32"</span>,<span class="st">"#F56600"</span>, <span class="st">"#BA0C2F"</span>, <span class="st">"#0021A5"</span>, <span class="st">"#ffcb05"</span>, <span class="st">"#BB0000"</span>, <span class="st">"#4d1979"</span>,<span class="st">"#FF8200"</span>, <span class="st">"#990000"</span>, <span class="st">"#CC0000"</span>)) <span class="sc">+</span></span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="bumpcharts_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
@@ -507,9 +509,9 @@ Warning in f(...): 'StatBump' needs at least two observations per group</code></
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bump</span>(<span class="at">data=</span>newrankings, <span class="fu">aes</span>(<span class="at">x=</span>Week, <span class="at">y=</span>Rank, <span class="at">color=</span>Team)) <span class="sc">+</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>newrankings, <span class="fu">aes</span>(<span class="at">x=</span>Week, <span class="at">y=</span>Rank, <span class="at">color=</span>Team), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span>   </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">min</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">-</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> ShortTeam), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">max</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">+</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> ShortTeam), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Was COVID college football boring?"</span>, <span class="at">subtitle=</span><span class="st">"There was no drama at the top. None. So, yes?"</span>, <span class="at">y=</span> <span class="st">"Rank"</span>, <span class="at">x =</span> <span class="st">"Week"</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">min</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">-</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> Team), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">max</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">+</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> Team), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Last year's top ten was anything but boring"</span>, <span class="at">subtitle=</span><span class="st">""</span>, <span class="at">y=</span> <span class="st">"Rank"</span>, <span class="at">x =</span> <span class="st">"Week"</span>) <span class="sc">+</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
@@ -519,7 +521,7 @@ Warning in f(...): 'StatBump' needs at least two observations per group</code></
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9E1B32"</span>,<span class="st">"#E00122"</span>, <span class="st">"#F56600"</span>, <span class="st">"#0021A5"</span>, <span class="st">"#BA0C2F"</span>, <span class="st">"#F1BE48"</span>,<span class="st">"#C99700"</span>, <span class="st">"#bb0000"</span>, <span class="st">"#841617"</span>, <span class="st">"#500000"</span>)) <span class="sc">+</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9E1B32"</span>,<span class="st">"#F56600"</span>, <span class="st">"#BA0C2F"</span>, <span class="st">"#0021A5"</span>, <span class="st">"#ffcb05"</span>, <span class="st">"#BB0000"</span>, <span class="st">"#4d1979"</span>,<span class="st">"#FF8200"</span>, <span class="st">"#990000"</span>, <span class="st">"#CC0000"</span>)) <span class="sc">+</span></span>
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="bumpcharts_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
@@ -531,9 +533,9 @@ Warning in f(...): 'StatBump' needs at least two observations per group</code></
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bump</span>(<span class="at">data=</span>newrankings, <span class="fu">aes</span>(<span class="at">x=</span>Week, <span class="at">y=</span>Rank, <span class="at">color=</span>Team)) <span class="sc">+</span> </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>newrankings, <span class="fu">aes</span>(<span class="at">x=</span>Week, <span class="at">y=</span>Rank, <span class="at">color=</span>Team), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span>   </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">min</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">-</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> ShortTeam), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">max</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">+</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> ShortTeam), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Was COVID college football boring?"</span>, <span class="at">subtitle=</span><span class="st">"There was no drama at the top. None. So, yes?"</span>, <span class="at">y=</span> <span class="st">"Rank"</span>, <span class="at">x =</span> <span class="st">"Week"</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">min</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">-</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> Team), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> newrankings <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Week <span class="sc">==</span> <span class="fu">max</span>(Week)), <span class="fu">aes</span>(<span class="at">x =</span> Week <span class="sc">+</span> .<span class="dv">2</span>, <span class="at">y=</span>Rank, <span class="at">label =</span> Team), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Last year's top ten was anything but boring"</span>, <span class="at">subtitle=</span><span class="st">""</span>, <span class="at">y=</span> <span class="st">"Rank"</span>, <span class="at">x =</span> <span class="st">"Week"</span>) <span class="sc">+</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
@@ -543,7 +545,7 @@ Warning in f(...): 'StatBump' needs at least two observations per group</code></
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9E1B32"</span>,<span class="st">"#E00122"</span>, <span class="st">"#F56600"</span>, <span class="st">"#0021A5"</span>, <span class="st">"#BA0C2F"</span>, <span class="st">"#F1BE48"</span>,<span class="st">"#C99700"</span>, <span class="st">"#bb0000"</span>, <span class="st">"#841617"</span>, <span class="st">"#500000"</span>)) <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9E1B32"</span>,<span class="st">"#F56600"</span>, <span class="st">"#BA0C2F"</span>, <span class="st">"#0021A5"</span>, <span class="st">"#ffcb05"</span>, <span class="st">"#BB0000"</span>, <span class="st">"#4d1979"</span>,<span class="st">"#FF8200"</span>, <span class="st">"#990000"</span>, <span class="st">"#CC0000"</span>)) <span class="sc">+</span></span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span>,<span class="dv">16</span>,<span class="dv">17</span>)) <span class="sc">+</span> </span>
 <span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">

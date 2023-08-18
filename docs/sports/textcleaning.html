@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -417,10 +422,10 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 4     4 "Nickeil … SG       21 NOP      41   501   7.6 0.441  0.515 0.123    1.7
 5     5 "Grayson … SG       24 MEM      30   498  11.4 0.577  0.517 0.199    1.1
 6     6 "Jarrett … C        21 BRK      64  1647  20.3 0.658  0.012 0.574   12.5
-# … with 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;,
-#   `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, ...20 &lt;lgl&gt;,
-#   OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;,
-#   DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
+# ℹ 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;,
+#   `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, ...20 &lt;lgl&gt;, OWS &lt;dbl&gt;,
+#   DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;,
+#   BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>You can see that every players name is their name, then two backslashes, then some version of their name that must have meaning to Sports Reference, but not to us. So we need to get rid of that.</p>
@@ -442,10 +447,10 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 4     4 Nickeil A… SG       21 NOP      41   501   7.6 0.441  0.515 0.123    1.7
 5     5 Grayson A… SG       24 MEM      30   498  11.4 0.577  0.517 0.199    1.1
 6     6 Jarrett A… C        21 BRK      64  1647  20.3 0.658  0.012 0.574   12.5
-# … with 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;,
-#   `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, ...20 &lt;lgl&gt;,
-#   OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;,
-#   DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
+# ℹ 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;,
+#   `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, ...20 &lt;lgl&gt;, OWS &lt;dbl&gt;,
+#   DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;,
+#   BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Just like that, the trash is gone.</p>
@@ -475,15 +480,14 @@ dbl (4): Rank, S, Kills, Per Set
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kills)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 9
-   Rank Player                      Cl    Ht    Pos       S Kills Per S…¹ Season
-  &lt;dbl&gt; &lt;chr&gt;                       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
-1     1 Lindsey Ruddins, UC Santa … So.   6-2   OH       90   526    5.84 2017-…
-2     2 Pilar Victoria, Arkansas (… Sr.   5-11  OH      116   634    5.47 2017-…
-3     3 Laura Milos, Oral Roberts … Sr.   5-10  OH      106   560    5.28 2017-…
-4     4 Carlyle Nusbaum, Lipscomb … Jr.   5-10  OH      100   522    5.22 2017-…
-5     5 Veronica Jones-Perry, BYU … Jr.   6-0   OH      118   569    4.82 2017-…
-6     6 Torrey Van Winden, Cal Pol… So.   6-3   OH      101   477    4.72 2017-…
-# … with abbreviated variable name ¹​`Per Set`</code></pre>
+   Rank Player                    Cl    Ht    Pos       S Kills `Per Set` Season
+  &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+1     1 Lindsey Ruddins, UC Sant… So.   6-2   OH       90   526      5.84 2017-…
+2     2 Pilar Victoria, Arkansas… Sr.   5-11  OH      116   634      5.47 2017-…
+3     3 Laura Milos, Oral Robert… Sr.   5-10  OH      106   560      5.28 2017-…
+4     4 Carlyle Nusbaum, Lipscom… Jr.   5-10  OH      100   522      5.22 2017-…
+5     5 Veronica Jones-Perry, BY… Jr.   6-0   OH      118   569      4.82 2017-…
+6     6 Torrey Van Winden, Cal P… So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 </div>
 </div>
 <p>First things first, Player isn’t just player, it’s player, school and conference, all in one. And Ht is a character field – and in feet and inches.</p>
@@ -494,15 +498,14 @@ dbl (4): Rank, S, Kills, Per Set
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">%&gt;%</span> <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"Player"</span>, <span class="st">"School"</span>), <span class="at">sep=</span><span class="st">","</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 10
-   Rank Player               School Cl    Ht    Pos       S Kills Per S…¹ Season
-  &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
-1     1 Lindsey Ruddins      " UC … So.   6-2   OH       90   526    5.84 2017-…
-2     2 Pilar Victoria       " Ark… Sr.   5-11  OH      116   634    5.47 2017-…
-3     3 Laura Milos          " Ora… Sr.   5-10  OH      106   560    5.28 2017-…
-4     4 Carlyle Nusbaum      " Lip… Jr.   5-10  OH      100   522    5.22 2017-…
-5     5 Veronica Jones-Perry " BYU… Jr.   6-0   OH      118   569    4.82 2017-…
-6     6 Torrey Van Winden    " Cal… So.   6-3   OH      101   477    4.72 2017-…
-# … with abbreviated variable name ¹​`Per Set`</code></pre>
+   Rank Player             School Cl    Ht    Pos       S Kills `Per Set` Season
+  &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+1     1 Lindsey Ruddins    " UC … So.   6-2   OH       90   526      5.84 2017-…
+2     2 Pilar Victoria     " Ark… Sr.   5-11  OH      116   634      5.47 2017-…
+3     3 Laura Milos        " Ora… Sr.   5-10  OH      106   560      5.28 2017-…
+4     4 Carlyle Nusbaum    " Lip… Jr.   5-10  OH      100   522      5.22 2017-…
+5     5 Veronica Jones-Pe… " BYU… Jr.   6-0   OH      118   569      4.82 2017-…
+6     6 Torrey Van Winden  " Cal… So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 </div>
 </div>
 <p>Good start.</p>
@@ -517,15 +520,14 @@ dbl (4): Rank, S, Kills, Per Set
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
-   Rank Player       School Confe…¹ Cl    Ht    Pos       S Kills Per S…² Season
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
-1     1 Lindsey Rud… " UC … Big We… So.   6-2   OH       90   526    5.84 2017-…
-2     2 Pilar Victo… " Ark… SEC)    Sr.   5-11  OH      116   634    5.47 2017-…
-3     3 Laura Milos  " Ora… Summit… Sr.   5-10  OH      106   560    5.28 2017-…
-4     4 Carlyle Nus… " Lip… ASUN)   Jr.   5-10  OH      100   522    5.22 2017-…
-5     5 Veronica Jo… " BYU… WCC)    Jr.   6-0   OH      118   569    4.82 2017-…
-6     6 Torrey Van … " Cal… Big We… So.   6-3   OH      101   477    4.72 2017-…
-# … with abbreviated variable names ¹​Conference, ²​`Per Set`</code></pre>
+   Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+1     1 Lindse… " UC … Big West)  So.   6-2   OH       90   526      5.84 2017-…
+2     2 Pilar … " Ark… SEC)       Sr.   5-11  OH      116   634      5.47 2017-…
+3     3 Laura … " Ora… Summit Le… Sr.   5-10  OH      106   560      5.28 2017-…
+4     4 Carlyl… " Lip… ASUN)      Jr.   5-10  OH      100   522      5.22 2017-…
+5     5 Veroni… " BYU… WCC)       Jr.   6-0   OH      118   569      4.82 2017-…
+6     6 Torrey… " Cal… Big West)  So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 </div>
 </div>
 <p>Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they’re in Florida, New York and Pennsylvania respectively. Well, we can fix that with some gsub and we’ll use a switch called <code>fixed</code>, which when set to TRUE it means this literal string, no special characters.</p>
@@ -539,15 +541,14 @@ dbl (4): Rank, S, Kills, Per Set
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
-   Rank Player       School Confe…¹ Cl    Ht    Pos       S Kills Per S…² Season
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
-1     1 Lindsey Rud… " UC … Big We… So.   6-2   OH       90   526    5.84 2017-…
-2     2 Pilar Victo… " Ark… SEC)    Sr.   5-11  OH      116   634    5.47 2017-…
-3     3 Laura Milos  " Ora… Summit… Sr.   5-10  OH      106   560    5.28 2017-…
-4     4 Carlyle Nus… " Lip… ASUN)   Jr.   5-10  OH      100   522    5.22 2017-…
-5     5 Veronica Jo… " BYU… WCC)    Jr.   6-0   OH      118   569    4.82 2017-…
-6     6 Torrey Van … " Cal… Big We… So.   6-3   OH      101   477    4.72 2017-…
-# … with abbreviated variable names ¹​Conference, ²​`Per Set`</code></pre>
+   Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+1     1 Lindse… " UC … Big West)  So.   6-2   OH       90   526      5.84 2017-…
+2     2 Pilar … " Ark… SEC)       Sr.   5-11  OH      116   634      5.47 2017-…
+3     3 Laura … " Ora… Summit Le… Sr.   5-10  OH      106   560      5.28 2017-…
+4     4 Carlyl… " Lip… ASUN)      Jr.   5-10  OH      100   522      5.22 2017-…
+5     5 Veroni… " BYU… WCC)       Jr.   6-0   OH      118   569      4.82 2017-…
+6     6 Torrey… " Cal… Big West)  So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 </div>
 </div>
 <p>One last thing: see the trailing paren?</p>
@@ -562,15 +563,14 @@ dbl (4): Rank, S, Kills, Per Set
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
-   Rank Player       School Confe…¹ Cl    Ht    Pos       S Kills Per S…² Season
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
-1     1 Lindsey Rud… " UC … Big We… So.   6-2   OH       90   526    5.84 2017-…
-2     2 Pilar Victo… " Ark… SEC     Sr.   5-11  OH      116   634    5.47 2017-…
-3     3 Laura Milos  " Ora… Summit… Sr.   5-10  OH      106   560    5.28 2017-…
-4     4 Carlyle Nus… " Lip… ASUN    Jr.   5-10  OH      100   522    5.22 2017-…
-5     5 Veronica Jo… " BYU… WCC     Jr.   6-0   OH      118   569    4.82 2017-…
-6     6 Torrey Van … " Cal… Big We… So.   6-3   OH      101   477    4.72 2017-…
-# … with abbreviated variable names ¹​Conference, ²​`Per Set`</code></pre>
+   Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+1     1 Lindse… " UC … Big West   So.   6-2   OH       90   526      5.84 2017-…
+2     2 Pilar … " Ark… SEC        Sr.   5-11  OH      116   634      5.47 2017-…
+3     3 Laura … " Ora… Summit Le… Sr.   5-10  OH      106   560      5.28 2017-…
+4     4 Carlyl… " Lip… ASUN       Jr.   5-10  OH      100   522      5.22 2017-…
+5     5 Veroni… " BYU… WCC        Jr.   6-0   OH      118   569      4.82 2017-…
+6     6 Torrey… " Cal… Big West   So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 </div>
 </div>
 <p>Looking good, no errors.</p>
@@ -589,16 +589,15 @@ dbl (4): Rank, S, Kills, Per Set
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 12
-   Rank Player       School Confe…¹ Cl     Feet Inches Pos       S Kills Per S…²
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-1     1 Lindsey Rud… " UC … Big We… So.       6      2 OH       90   526    5.84
-2     2 Pilar Victo… " Ark… SEC     Sr.       5     11 OH      116   634    5.47
-3     3 Laura Milos  " Ora… Summit… Sr.       5     10 OH      106   560    5.28
-4     4 Carlyle Nus… " Lip… ASUN    Jr.       5     10 OH      100   522    5.22
-5     5 Veronica Jo… " BYU… WCC     Jr.       6      0 OH      118   569    4.82
-6     6 Torrey Van … " Cal… Big We… So.       6      3 OH      101   477    4.72
-# … with 1 more variable: Season &lt;chr&gt;, and abbreviated variable names
-#   ¹​Conference, ²​`Per Set`</code></pre>
+   Rank Player  School Conference Cl     Feet Inches Pos       S Kills `Per Set`
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+1     1 Lindse… " UC … Big West   So.       6      2 OH       90   526      5.84
+2     2 Pilar … " Ark… SEC        Sr.       5     11 OH      116   634      5.47
+3     3 Laura … " Ora… Summit Le… Sr.       5     10 OH      106   560      5.28
+4     4 Carlyl… " Lip… ASUN       Jr.       5     10 OH      100   522      5.22
+5     5 Veroni… " BYU… WCC        Jr.       6      0 OH      118   569      4.82
+6     6 Torrey… " Cal… Big West   So.       6      3 OH      101   477      4.72
+# ℹ 1 more variable: Season &lt;chr&gt;</code></pre>
 </div>
 </div>
 <p>But how do we turn that into a height? Math!</p>
@@ -616,16 +615,15 @@ dbl (4): Rank, S, Kills, Per Set
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 13
-   Rank Player       School Confe…¹ Cl     Feet Inches Pos       S Kills Per S…²
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-1     1 Lindsey Rud… " UC … Big We… So.       6      2 OH       90   526    5.84
-2     2 Pilar Victo… " Ark… SEC     Sr.       5     11 OH      116   634    5.47
-3     3 Laura Milos  " Ora… Summit… Sr.       5     10 OH      106   560    5.28
-4     4 Carlyle Nus… " Lip… ASUN    Jr.       5     10 OH      100   522    5.22
-5     5 Veronica Jo… " BYU… WCC     Jr.       6      0 OH      118   569    4.82
-6     6 Torrey Van … " Cal… Big We… So.       6      3 OH      101   477    4.72
-# … with 2 more variables: Season &lt;chr&gt;, Height &lt;dbl&gt;, and abbreviated variable
-#   names ¹​Conference, ²​`Per Set`</code></pre>
+   Rank Player  School Conference Cl     Feet Inches Pos       S Kills `Per Set`
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+1     1 Lindse… " UC … Big West   So.       6      2 OH       90   526      5.84
+2     2 Pilar … " Ark… SEC        Sr.       5     11 OH      116   634      5.47
+3     3 Laura … " Ora… Summit Le… Sr.       5     10 OH      106   560      5.28
+4     4 Carlyl… " Lip… ASUN       Jr.       5     10 OH      100   522      5.22
+5     5 Veroni… " BYU… WCC        Jr.       6      0 OH      118   569      4.82
+6     6 Torrey… " Cal… Big West   So.       6      3 OH      101   477      4.72
+# ℹ 2 more variables: Season &lt;chr&gt;, Height &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>And now, in 10 lines of code, using separate, mutate and gsub, we’ve turned the mess that is the NCAA’s data into actually useful data we can analyze.</p>

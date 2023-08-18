@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -384,18 +389,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggalt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s say we want to highlight the top scorers in women’s college basketball. So let’s use our player data.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/wbb_players_2022.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://raw.githubusercontent.com/dwillis/hhs-snapshots/main/data/player_totals_20230417.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>And while we’re loading it, let’s filter out anyone who hasn’t played.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wbb_players_2022.csv"</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(mp <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/dwillis/hhs-snapshots/main/data/player_totals_20230417.csv"</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(mp <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 4781 Columns: 174
+<pre><code>Rows: 15321 Columns: 182
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr  (23): position, team, ncaa_conference, player, fg_pct, fg2m_pct, fg3m_p...
-dbl (151): end_year, ncaa_id, win, loss, gp, gs, ga, win_pct, mp, sec, sec_t...
+chr   (5): full_name, hhs_player_id_text, rollup, source, hhs_player_id
+dbl (176): win, loss, gp, gs, ga, win_pct, mp, sec, sec_total, pts, fgm, fga...
+lgl   (1): opp_ppsa
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -452,7 +458,7 @@ dbl (151): end_year, ncaa_id, win, loss, gp, gs, ga, win_pct, mp, sec, sec_t...
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>players, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>pts), <span class="at">color=</span><span class="st">"grey"</span>) <span class="sc">+</span> </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>topscorers, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>pts), <span class="at">color=</span><span class="st">"black"</span>) <span class="sc">+</span> </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>topscorers, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>pts, <span class="at">label=</span>player), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>topscorers, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>pts, <span class="at">label=</span>full_name), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust=</span><span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_encircle</span>(<span class="at">data=</span>topscorers, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>pts), <span class="at">s_shape=</span>.<span class="dv">5</span>, <span class="at">expand=</span>.<span class="dv">03</span>, <span class="at">colour=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="encirclingpoints_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
@@ -464,8 +470,8 @@ dbl (151): end_year, ncaa_id, win, loss, gp, gs, ga, win_pct, mp, sec, sec_t...
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>players, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>pts), <span class="at">color=</span><span class="st">"grey"</span>) <span class="sc">+</span> </span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>topscorers, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>pts), <span class="at">color=</span><span class="st">"black"</span>) <span class="sc">+</span> </span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_encircle</span>(<span class="at">data=</span>topscorers, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>pts), <span class="at">s_shape=</span>.<span class="dv">5</span>, <span class="at">expand=</span>.<span class="dv">03</span>, <span class="at">colour=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">725</span>, <span class="at">y=</span><span class="dv">700</span>, <span class="at">label=</span><span class="st">"Top scorers"</span>)) <span class="sc">+</span> </span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Four top scorers are Wooden Award candidates"</span>, <span class="at">subtitle=</span><span class="st">"Big scorers Caitlin Clark, NaLyssa Smith, Ayoka Lee and Aneesah Morrow among 15 finalists"</span>, <span class="at">x=</span><span class="st">"Minutes"</span>, <span class="at">y=</span><span class="st">"Points"</span>) <span class="sc">+</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">750</span>, <span class="at">y=</span><span class="dv">800</span>, <span class="at">label=</span><span class="st">"Top scorers"</span>)) <span class="sc">+</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Top scorers are Wooden Award candidates"</span>, <span class="at">subtitle=</span><span class="st">"Big scorers Maddy Siegrist, Caitlin Clark, Angel Reese and Aneesah Morrow among 15 finalists"</span>, <span class="at">x=</span><span class="st">"Minutes"</span>, <span class="at">y=</span><span class="st">"Points"</span>) <span class="sc">+</span> </span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
@@ -481,27 +487,41 @@ dbl (151): end_year, ncaa_id, win, loss, gp, gs, ga, win_pct, mp, sec, sec_t...
 <h2 data-number="29.1" class="anchored" data-anchor-id="a-different-more-local-example"><span class="header-section-number">29.1</span> A different, more local example</h2>
 <p>You can use circling outside of the top of something. It’s a bit obvious that the previous dots were top scorers. What about when they aren’t at the top?</p>
 <p>Works the same way – use layering and color smartly and tell the story with all your tools.</p>
-<p>Let’s grab the top three point attempt takers on the Maryland roster. As of now, only one will be coming back.</p>
+<p>Let’s grab the top three point attempt takers on the 2022-23 Maryland roster. As of now, only one will be coming back.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mdtop <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span> <span class="fu">filter</span>(team <span class="sc">==</span> <span class="st">"Maryland"</span>) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">3</span>, fg3a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>players23 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/players23.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 5681 Columns: 59
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (10): Team, Player, Class, Pos, Height, Hometown, High School, Summary, ...
+dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mdtop <span class="ot">&lt;-</span> players23 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Maryland Terrapins"</span>) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">3</span>, <span class="st">`</span><span class="at">3PA</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And just like above, we can plug in our players geom, our mdtop dataframe into another geom, then encircle that dataframe. Slap some headlines and annotations on it and here’s what we get:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>players, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>fg3a), <span class="at">color=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>mdtop, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>fg3a), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> <span class="fu">geom_encircle</span>(<span class="at">data=</span>mdtop, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>fg3a), <span class="at">s_shape=</span>.<span class="dv">02</span>, <span class="at">expand=</span>.<span class="dv">18</span>, <span class="at">colour=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">400</span>, <span class="at">y=</span><span class="dv">100</span>, <span class="at">label=</span><span class="st">"Maryland's top three shooters"</span>)) <span class="sc">+</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"The Big Three?"</span>, <span class="at">subtitle=</span><span class="st">"Maryland's top three point shooters not among the leaders in college basketball "</span>, <span class="at">x=</span><span class="st">"Minutes"</span>, <span class="at">y=</span><span class="st">"Three point attempts"</span>) <span class="sc">+</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>players23, <span class="fu">aes</span>(<span class="at">x=</span>MP, <span class="at">y=</span><span class="st">`</span><span class="at">3PA</span><span class="st">`</span>), <span class="at">color=</span><span class="st">"grey"</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data=</span>mdtop, <span class="fu">aes</span>(<span class="at">x=</span>MP, <span class="at">y=</span><span class="st">`</span><span class="at">3PA</span><span class="st">`</span>), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> <span class="fu">geom_encircle</span>(<span class="at">data=</span>mdtop, <span class="fu">aes</span>(<span class="at">x=</span>MP, <span class="at">y=</span><span class="st">`</span><span class="at">3PA</span><span class="st">`</span>), <span class="at">s_shape=</span>.<span class="dv">02</span>, <span class="at">expand=</span>.<span class="dv">18</span>, <span class="at">colour=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">400</span>, <span class="at">y=</span><span class="dv">200</span>, <span class="at">label=</span><span class="st">"Maryland's top three shooters"</span>)) <span class="sc">+</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"The Big Three?"</span>, <span class="at">subtitle=</span><span class="st">"Maryland's top three point shooters not among the leaders in college basketball "</span>, <span class="at">x=</span><span class="st">"Minutes"</span>, <span class="at">y=</span><span class="st">"Three point attempts"</span>) <span class="sc">+</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 578 rows containing missing values (`geom_point()`).</code></pre>
+</div>
 <div class="cell-output-display">
 <p><img src="encirclingpoints_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>From the top, Maryland’s dots are Katie Benzan, Chloe Bibby and … Shyanne Sellers, the true freshman.</p>
+<p>From the top, Maryland’s dots are Donald Carey, Donta Scott and Jahmir Young. The last two return this season.</p>
 
 
 </section>

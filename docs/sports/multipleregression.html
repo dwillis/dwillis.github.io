@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -369,8 +374,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>Last chapter, we looked at correlations and linear regression to predict how one element of a game would predict the score. But we know that a single variable, in all but the rarest instances, is not going to be that predictive. We need more than one. Enter multiple regression. Multiple regression lets us add – wait for it – multiple predictors to our equation to help us get a better fit to reality.</p>
-<p>That presents it’s own problems. So let’s get set up. The dataset we’ll use is all men’s college basketball games between 2015 and 2021.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/cbblogs1521.csv">
+<p>That presents it’s own problems. So let’s get set up. The dataset we’ll use is all men’s college basketball games between 2015 and 2023.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/cbblogs1523.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>We need the tidyverse.</p>
@@ -379,9 +384,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>And the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cbblogs1521.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cbblogs1523.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 64866 Columns: 48
+<pre><code>Rows: 87636 Columns: 48
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr   (8): Season, TeamFull, Opponent, HomeAway, W_L, URL, Conference, Team
@@ -410,19 +415,19 @@ lm(formula = Differential ~ NetRebounds, data = logs)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--58.671  -8.575  -0.246   8.186  95.090 
+-58.788  -8.510  -0.273   8.143  94.865 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.041897   0.050740  -0.826    0.409    
-NetRebounds  1.047914   0.005269 198.880   &lt;2e-16 ***
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 0.203890   0.043766   4.659 3.19e-06 ***
+NetRebounds 1.069361   0.004542 235.458  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 12.92 on 64861 degrees of freedom
-  (3 observations deleted due to missingness)
-Multiple R-squared:  0.3788,    Adjusted R-squared:  0.3788 
-F-statistic: 3.955e+04 on 1 and 64861 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 12.95 on 87569 degrees of freedom
+  (65 observations deleted due to missingness)
+Multiple R-squared:  0.3877,    Adjusted R-squared:  0.3877 
+F-statistic: 5.544e+04 on 1 and 87569 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Remember: There’s a lot here, but only some of it we care about. What is the Adjusted R-squared value? What’s the p-value and is it less than .05? In this case, we can predict 37 percent of the difference in differential with the net rebounds in the game.</p>
@@ -437,25 +442,25 @@ lm(formula = Differential ~ NetRebounds + TurnoverMargin, data = logs)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--45.840  -6.924  -0.065   6.861  49.158 
+-45.897  -6.897  -0.055   6.844  48.675 
 
 Coefficients:
-                Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    -0.084705   0.040531   -2.09   0.0366 *  
-NetRebounds     1.186572   0.004271  277.85   &lt;2e-16 ***
-TurnoverMargin -1.537096   0.008014 -191.81   &lt;2e-16 ***
+                Estimate Std. Error  t value Pr(&gt;|t|)    
+(Intercept)     0.048156   0.034777    1.385    0.166    
+NetRebounds     1.199879   0.003654  328.379   &lt;2e-16 ***
+TurnoverMargin -1.549226   0.006848 -226.220   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 10.32 on 64860 degrees of freedom
-  (3 observations deleted due to missingness)
-Multiple R-squared:  0.6036,    Adjusted R-squared:  0.6036 
-F-statistic: 4.939e+04 on 2 and 64860 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 10.29 on 87568 degrees of freedom
+  (65 observations deleted due to missingness)
+Multiple R-squared:  0.6135,    Adjusted R-squared:  0.6135 
+F-statistic: 6.951e+04 on 2 and 87568 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>First things first: What is the adjusted R-squared?</p>
 <p>Second: what is the p-value and is it less than .05?</p>
-<p>Third: Compare the residual standard error. We went from 12.92 to 10.32. The meaning of this is both really opaque and also simple – by adding data, we reduced the amount of error in our model. Residual standard error is the total distance between what our model would predict and what we actually have in the data. So lots of residual error means the distance between reality and our model is wider. So the width of our predictive range in this example shrank while we improved the amount of the difference we could predict. That’s good, and not always going to be the case.</p>
+<p>Third: Compare the residual standard error. We went from 12.93 to 10.3. The meaning of this is both really opaque and also simple – by adding data, we reduced the amount of error in our model. Residual standard error is the total distance between what our model would predict and what we actually have in the data. So lots of residual error means the distance between reality and our model is wider. So the width of our predictive range in this example shrank while we improved the amount of the difference we could predict. That’s good, and not always going to be the case.</p>
 <p>One of the more difficult things to understand about multiple regression is the issue of multicollinearity. What that means is that there is significant correlation overlap between two variables – the two are related to each other as well as to the target output – and all you are doing by adding both of them is adding error with no real value to the R-squared. In pure statistics, we don’t want any multicollinearity at all. Violating that assumption limits the applicability of what you are doing. So if we have some multicollinearity, it limits our scope of application to college basketball. We can’t say this will work for every basketball league and level everywhere. What we need to do is see how correlated each value is to each other and throw out ones that are highly co-correlated.</p>
 <p>So to find those, we have to create a correlation matrix that shows us how each value is correlated to our outcome variable, but also with each other. We can do that in the <code>Hmisc</code> library. We install that in the console with <code>install.packages("Hmisc")</code></p>
 <div class="cell">
@@ -473,21 +478,21 @@ F-statistic: 4.939e+04 on 2 and 64860 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cormatrix<span class="sc">$</span>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                      Differential NetRebounds TurnoverMargin   TeamFGPCT
-Differential             1.0000000   0.6154762    -0.36313453  0.60493356
-NetRebounds              0.6154762   1.0000000     0.16927497  0.36357754
-TurnoverMargin          -0.3631345   0.1692750     1.00000000 -0.02058449
-TeamFGPCT                0.6049336   0.3635775    -0.02058449  1.00000000
-TeamTotalRebounds        0.4764896   0.7421430     0.10642123  0.02240707
-OpponentFGPCT           -0.6138758  -0.3708848     0.02081388 -0.11465126
-OpponentTotalRebounds   -0.4191181  -0.7144122    -0.14098194 -0.51804869
+Differential             1.0000000   0.6226320    -0.37097056  0.60630384
+NetRebounds              0.6226320   1.0000000     0.15789804  0.36790201
+TurnoverMargin          -0.3709706   0.1578980     1.00000000 -0.02878368
+TeamFGPCT                0.6063038   0.3679020    -0.02878368  1.00000000
+TeamTotalRebounds        0.4840308   0.7461674     0.09823357  0.02326768
+OpponentFGPCT           -0.6151180  -0.3764254     0.02972048 -0.11270667
+OpponentTotalRebounds   -0.4262180  -0.7170570    -0.13372617 -0.52694704
                       TeamTotalRebounds OpponentFGPCT OpponentTotalRebounds
-Differential                 0.47648956   -0.61387581           -0.41911809
-NetRebounds                  0.74214304   -0.37088485           -0.71441225
-TurnoverMargin               0.10642123    0.02081388           -0.14098194
-TeamFGPCT                    0.02240707   -0.11465126           -0.51804869
-TeamTotalRebounds            1.00000000   -0.53901039           -0.06121130
-OpponentFGPCT               -0.53901039    1.00000000           -0.01039878
-OpponentTotalRebounds       -0.06121130   -0.01039878            1.00000000</code></pre>
+Differential                 0.48403081  -0.615118021          -0.426217993
+NetRebounds                  0.74616742  -0.376425449          -0.717057036
+TurnoverMargin               0.09823357   0.029720481          -0.133726171
+TeamFGPCT                    0.02326768  -0.112706673          -0.526947039
+TeamTotalRebounds            1.00000000  -0.546748903          -0.071001372
+OpponentFGPCT               -0.54674890   1.000000000          -0.008436211
+OpponentTotalRebounds       -0.07100137  -0.008436211           1.000000000</code></pre>
 </div>
 </div>
 <p>Notice right away – NetRebounds is highly correlated. But NetRebounds is also highly correlated with TeamTotalRebounds. And that makes sense: TeamTotalRebounds feeds into NetRebounds. Including both of these measures would be pointless – they would add error without adding much in the way of predictive power.</p>
@@ -506,22 +511,22 @@ lm(formula = Differential ~ NetRebounds + TurnoverMargin + TeamFGPCT +
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--29.793  -3.688  -0.020   3.675  37.778 
+-29.563  -3.675  -0.025   3.657  37.555 
 
 Coefficients:
                  Estimate Std. Error  t value Pr(&gt;|t|)    
-(Intercept)      0.301244   0.191960    1.569    0.117    
-NetRebounds      0.649125   0.002632  246.660   &lt;2e-16 ***
-TurnoverMargin  -1.311687   0.004301 -304.967   &lt;2e-16 ***
-TeamFGPCT       90.498143   0.313094  289.045   &lt;2e-16 ***
-OpponentFGPCT  -91.184871   0.311306 -292.911   &lt;2e-16 ***
+(Intercept)      0.287665   0.165045    1.743   0.0813 .  
+NetRebounds      0.654800   0.002270  288.511   &lt;2e-16 ***
+TurnoverMargin  -1.310579   0.003689 -355.253   &lt;2e-16 ***
+TeamFGPCT       90.805990   0.269904  336.438   &lt;2e-16 ***
+OpponentFGPCT  -91.351310   0.268740 -339.925   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 5.493 on 64858 degrees of freedom
-  (3 observations deleted due to missingness)
-Multiple R-squared:  0.8877,    Adjusted R-squared:  0.8877 
-F-statistic: 1.282e+05 on 4 and 64858 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 5.488 on 87566 degrees of freedom
+  (65 observations deleted due to missingness)
+Multiple R-squared:   0.89, Adjusted R-squared:   0.89 
+F-statistic: 1.771e+05 on 4 and 87566 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Go down the list:</p>
@@ -531,7 +536,7 @@ F-statistic: 1.282e+05 on 4 and 64858 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>So if our goal is to predict a conference champion team, we need to know what those teams did. Here’s the regular season conference champions in this dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Michigan"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2020-2021'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Wisconsin"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2019-2020'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Michigan State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2018-2019'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Michigan State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2017-2018'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Michigan"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2020-2021'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Wisconsin"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2019-2020'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Michigan State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2018-2019'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Michigan State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2017-2018'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">'Illinois'</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2021-2022'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">'Purdue'</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2022-2023'</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetRebounds =</span> <span class="fu">mean</span>(NetRebounds),</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanTurnoverMargin =</span> <span class="fu">mean</span>(TurnoverMargin),</span>
@@ -542,23 +547,23 @@ F-statistic: 1.282e+05 on 4 and 64858 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code># A tibble: 1 × 4
   meanNetRebounds meanTurnoverMargin meanTeamFGPCT meanOpponentFGPCT
             &lt;dbl&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
-1            2.45             -0.218         0.450             0.404</code></pre>
+1            6.05              0.633         0.454             0.411</code></pre>
 </div>
 </div>
 <p>Now it’s just plug and chug.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (netrebounds estimate * meanNetRebounds) + (turnover margin estimate * meanTurnoverMargin) + (TeamFGPCT estimate * meanTeamFGPCT) + (OpponentFGPCT estimate * meanOpponentFGPCT) + Intercept</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.649125</span><span class="sc">*</span><span class="fl">2.454545</span>  ) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">1.311687</span><span class="sc">*-</span><span class="fl">0.2181818</span>) <span class="sc">+</span> (<span class="fl">90.498143</span><span class="sc">*</span><span class="fl">0.4503455</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">91.184871</span><span class="sc">*</span><span class="fl">0.4040182</span>) <span class="sc">+</span> <span class="fl">0.301244</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.654800</span><span class="sc">*</span><span class="fl">6.05</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">1.310579</span><span class="sc">*</span><span class="fl">0.6333333</span>) <span class="sc">+</span> (<span class="fl">90.805990</span><span class="sc">*</span><span class="fl">0.4543167</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">91.351310</span><span class="sc">*</span><span class="fl">0.4107167</span>) <span class="sc">+</span> <span class="fl">0.287665</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6.095821</code></pre>
+<pre><code>[1] 7.154341</code></pre>
 </div>
 </div>
-<p>So a team with those numbers is going to average scoring 6 more points per game than their opponent. Not a ton, but hey, the Big Ten has been a competitive conference lately.</p>
-<p>How does that compare to Maryland in 2020-21 season?</p>
+<p>So a team with those numbers is going to average scoring 7 more points per game than their opponent. Not a ton, but hey, the Big Ten has been a competitive conference lately.</p>
+<p>How does that compare to Maryland in 2022-23 season?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    Team <span class="sc">==</span> <span class="st">"Maryland"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2020-2021'</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    Team <span class="sc">==</span> <span class="st">"Maryland"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2022-2023'</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetRebounds =</span> <span class="fu">mean</span>(NetRebounds),</span>
@@ -570,29 +575,29 @@ F-statistic: 1.282e+05 on 4 and 64858 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code># A tibble: 1 × 4
   meanNetRebounds meanTurnoverMargin meanTeamFGPCT meanOpponentFGPCT
             &lt;dbl&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
-1          -0.724              0.379         0.458             0.409</code></pre>
+1            1.69             -0.914         0.452             0.428</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.649125</span><span class="sc">*-</span><span class="fl">0.7241379</span>    ) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">1.311687</span><span class="sc">*-</span><span class="fl">0.3793103</span>) <span class="sc">+</span> (<span class="fl">90.498143</span><span class="sc">*</span><span class="fl">0.4577586</span>   ) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">91.184871</span><span class="sc">*</span><span class="fl">0.4085172</span>) <span class="sc">+</span> <span class="fl">0.301244</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.654800</span><span class="sc">*</span><span class="fl">1.685714</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">1.310579</span><span class="sc">*</span><span class="fl">0.9142857</span>) <span class="sc">+</span> (<span class="fl">90.805990</span><span class="sc">*</span><span class="fl">0.4517714</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">91.351310</span><span class="sc">*</span><span class="fl">0.428</span>) <span class="sc">+</span> <span class="fl">0.287665</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.504439</code></pre>
+<pre><code>[1] 2.118415</code></pre>
 </div>
 </div>
-<p>By this model, it predicted we would average outscoring our opponents by 4.5 points over that season. The reality?</p>
+<p>By this model, it predicted we would average outscoring our opponents by 2.1 points over that season. The reality?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">%&gt;%</span> </span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">filter</span>(</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>         Team <span class="sc">==</span> <span class="st">"Maryland"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2020-2021'</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>         Team <span class="sc">==</span> <span class="st">"Maryland"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2022-2023'</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">avg_score =</span> <span class="fu">mean</span>(TeamScore), <span class="at">avg_opp =</span> <span class="fu">mean</span>(OpponentScore))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   avg_score avg_opp
       &lt;dbl&gt;   &lt;dbl&gt;
-1      68.8    65.0</code></pre>
+1      69.7    63.5</code></pre>
 </div>
 </div>
-<p>We outscored them by about 3.8 points on average, so this looks like a pretty solid model, although there could be better ones. What would you change?</p>
+<p>We outscored them by about 6 points on average, so maybe this isn’t the best model, or suggests that perhaps Maryland found a way to be successful outside of these parameters. What would you change?</p>
 
 
 

@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -390,11 +395,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/attendance.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 149 Columns: 9
+<pre><code>Rows: 149 Columns: 12
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (2): Institution, Conference
-dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
+chr  (2): Institution, Conference
+dbl (10): 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -403,7 +408,7 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>attendance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 149 × 9
+<pre><code># A tibble: 149 × 12
    Institution     Conference   `2013` `2014` `2015` `2016` `2017` `2018` `2019`
    &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
  1 Air Force       MWC          228562 168967 156158 177519 174924 166205 162505
@@ -416,7 +421,8 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
  8 Arkansas        SEC          431174 399124 471279 487067 442569 367748 356517
  9 Arkansas St.    Sun Belt     149477 149163 138043 136200 119538 119001 124017
 10 Army West Point FBS Indepen… 169781 171310 185946 163267 185543 190156 185935
-# … with 139 more rows</code></pre>
+# ℹ 139 more rows
+# ℹ 3 more variables: `2020` &lt;dbl&gt;, `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>So as you can see, each row represents a school, and then each column represents a year. This is great for calculating the percent change – we can subtract a column from a column and divide by that column. But later, when we want to chart each school’s attendance over the years, we have to have each row be one team for one year. Maryland in 2013, then Maryland in 2014, and Maryland in 2015 and so on.</p>
@@ -424,7 +430,7 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"20"</span>), <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Attendance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,043 × 4
+<pre><code># A tibble: 1,490 × 4
    Institution Conference Year  Attendance
    &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;
  1 Air Force   MWC        2013      228562
@@ -434,13 +440,13 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
  5 Air Force   MWC        2017      174924
  6 Air Force   MWC        2018      166205
  7 Air Force   MWC        2019      162505
- 8 Akron       MAC        2013      107101
- 9 Akron       MAC        2014       55019
-10 Akron       MAC        2015      108588
-# … with 1,033 more rows</code></pre>
+ 8 Air Force   MWC        2020        5600
+ 9 Air Force   MWC        2021      136984
+10 Air Force   MWC        2022      188482
+# ℹ 1,480 more rows</code></pre>
 </div>
 </div>
-<p>We’ve gone from 149 rows to more than 1,000, but that’s expected when we have 7 years for each team.</p>
+<p>We’ve gone from 149 rows to more than 1,000, but that’s expected when we have 10 years for each team.</p>
 <section id="making-long-data-wide" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="making-long-data-wide"><span class="header-section-number">7.1</span> Making long data wide</h2>
 <p>We can reverse this process using <code>pivot_wider</code>, which makes long data wide.</p>
@@ -452,7 +458,7 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>longdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,043 × 4
+<pre><code># A tibble: 1,490 × 4
    Institution Conference Year  Attendance
    &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;
  1 Air Force   MWC        2013      228562
@@ -462,17 +468,17 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
  5 Air Force   MWC        2017      174924
  6 Air Force   MWC        2018      166205
  7 Air Force   MWC        2019      162505
- 8 Akron       MAC        2013      107101
- 9 Akron       MAC        2014       55019
-10 Akron       MAC        2015      108588
-# … with 1,033 more rows</code></pre>
+ 8 Air Force   MWC        2020        5600
+ 9 Air Force   MWC        2021      136984
+10 Air Force   MWC        2022      188482
+# ℹ 1,480 more rows</code></pre>
 </div>
 </div>
 <p>To <code>pivot_wider</code>, we just need to say where our column names are coming from – the Year – and where the data under it should come from – Attendance.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>longdata <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Year, <span class="at">values_from =</span> Attendance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 149 × 9
+<pre><code># A tibble: 149 × 12
    Institution     Conference   `2013` `2014` `2015` `2016` `2017` `2018` `2019`
    &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
  1 Air Force       MWC          228562 168967 156158 177519 174924 166205 162505
@@ -485,7 +491,8 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
  8 Arkansas        SEC          431174 399124 471279 487067 442569 367748 356517
  9 Arkansas St.    Sun Belt     149477 149163 138043 136200 119538 119001 124017
 10 Army West Point FBS Indepen… 169781 171310 185946 163267 185543 190156 185935
-# … with 139 more rows</code></pre>
+# ℹ 139 more rows
+# ℹ 3 more variables: `2020` &lt;dbl&gt;, `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>And just like that, we’re back.</p>
@@ -503,7 +510,7 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(maryland, <span class="fu">aes</span>(<span class="at">x=</span>Year, <span class="at">y=</span>Attendance, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span> </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Attendance"</span>, <span class="at">title=</span><span class="st">"A Steady Decline After 2015"</span>, <span class="at">subtitle=</span><span class="st">"But hope appears on the horizon in 2019."</span>, <span class="at">caption=</span><span class="st">"Source: NCAA | By Derek Willis"</span>, <span class="at">color =</span> <span class="st">"Outcome"</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Attendance"</span>, <span class="at">title=</span><span class="st">"Ups and Downs, But Mostly Downs"</span>, <span class="at">subtitle=</span><span class="st">"A short-lived rebound after the pandemic didn't stick."</span>, <span class="at">caption=</span><span class="st">"Source: NCAA | By Derek Willis"</span>, <span class="at">color =</span> <span class="st">"Outcome"</span>) <span class="sc">+</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.18">
+<meta name="generator" content="quarto-0.9.646">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -98,7 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -372,8 +377,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Sometimes, the best way to show your data is with a table – simple rows and columns. It allows a reader to compare whatever they want to compare a little easier than a graph where you’ve chosen what to highlight. The folks that made R Studio and the tidyverse have a neat package called <code>gt</code>.</p>
 <p>For this assignment, we’ll need <code>gt</code> so go over to the console and run:</p>
 <pre><code>install.packages("gt")</code></pre>
-<p>So what does all of these libraries do? Let’s gather a few and use data of every men’s basketball game between 2015-2022.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://dwillis.github.io/sportsdatafiles/cbblogs1522.csv">
+<p>So what does all of these libraries do? Let’s gather a few and use data of every men’s basketball game between 2015-2023.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="http://dwillis.github.io/sportsdatafiles/cbblogs1523.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Load libraries.</p>
@@ -383,9 +388,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>And the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cbblogs1522.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cbblogs1523.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 75641 Columns: 48
+<pre><code>Rows: 87636 Columns: 48
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr   (8): Season, TeamFull, Opponent, HomeAway, W_L, URL, Conference, Team
@@ -398,21 +403,22 @@ date  (1): Date
 </div>
 <p>Let’s ask this question: which college basketball team saw the greatest decrease in three point attempts per game between last season as a percentage of shots? The simplest way to calculate that is by percent change.</p>
 <p>We’ve got a little work to do, putting together ideas we’ve used before. What we need to end up with is some data that looks like this:</p>
-<p><code>Team | 2020-2021 season threes | 2021-2022 season threes | pct change</code></p>
+<p><code>Team | 2021-2022 season threes | 2022-2023 season threes | pct change</code></p>
 <p>To get that, we’ll need to do some filtering to get the right seasons, some grouping and summarizing to get the right number, some pivoting to get it organized correctly so we can mutate the percent change.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Season <span class="sc">==</span> <span class="st">"2020-2021"</span> <span class="sc">|</span> Season <span class="sc">==</span> <span class="st">"2021-2022"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team, Conference, Season) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Season <span class="sc">==</span> <span class="st">"2021-2022"</span> <span class="sc">|</span> Season <span class="sc">==</span> <span class="st">"2022-2023"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Team, Season) <span class="sc">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total3PA =</span> <span class="fu">sum</span>(Team3PA)) <span class="sc">%&gt;%</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from=</span>Season, <span class="at">values_from =</span> Total3PA) <span class="sc">%&gt;%</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PercentChange =</span> (<span class="st">`</span><span class="at">2021-2022</span><span class="st">`</span><span class="sc">-</span><span class="st">`</span><span class="at">2020-2021</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2020-2021</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(PercentChange) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="co"># just want a top 10 list, but can't use top_n!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">2022-2023</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PercentChange =</span> (<span class="st">`</span><span class="at">2022-2023</span><span class="st">`</span><span class="sc">-</span><span class="st">`</span><span class="at">2021-2022</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2021-2022</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(PercentChange) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="co"># just want a top 10 list, but can't use top_n!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'Team', 'Conference'. You can override
-using the `.groups` argument.</code></pre>
+<pre><code>`summarise()` has grouped output by 'Team'. You can override using the
+`.groups` argument.</code></pre>
 </div>
 </div>
 <p>We’ve output tables to the screen a thousand times in this class with <code>head</code>, but <code>gt</code> makes them look decent with very little code.</p>
@@ -420,12 +426,12 @@ using the `.groups` argument.</code></pre>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="dyakkcwezu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bnjxxsihmy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#dyakkcwezu .gt_table {
+#bnjxxsihmy .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -450,7 +456,7 @@ using the `.groups` argument.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#dyakkcwezu .gt_heading {
+#bnjxxsihmy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -462,7 +468,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dyakkcwezu .gt_title {
+#bnjxxsihmy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -474,7 +480,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-width: 0;
 }
 
-#dyakkcwezu .gt_subtitle {
+#bnjxxsihmy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -486,13 +492,13 @@ using the `.groups` argument.</code></pre>
   border-top-width: 0;
 }
 
-#dyakkcwezu .gt_bottom_border {
+#bnjxxsihmy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dyakkcwezu .gt_col_headings {
+#bnjxxsihmy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -507,7 +513,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dyakkcwezu .gt_col_heading {
+#bnjxxsihmy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -527,7 +533,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#dyakkcwezu .gt_column_spanner_outer {
+#bnjxxsihmy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -539,15 +545,15 @@ using the `.groups` argument.</code></pre>
   padding-right: 4px;
 }
 
-#dyakkcwezu .gt_column_spanner_outer:first-child {
+#bnjxxsihmy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dyakkcwezu .gt_column_spanner_outer:last-child {
+#bnjxxsihmy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dyakkcwezu .gt_column_spanner {
+#bnjxxsihmy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -559,7 +565,7 @@ using the `.groups` argument.</code></pre>
   width: 100%;
 }
 
-#dyakkcwezu .gt_group_heading {
+#bnjxxsihmy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -584,7 +590,7 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#dyakkcwezu .gt_empty_group_heading {
+#bnjxxsihmy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -599,15 +605,15 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#dyakkcwezu .gt_from_md > :first-child {
+#bnjxxsihmy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dyakkcwezu .gt_from_md > :last-child {
+#bnjxxsihmy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dyakkcwezu .gt_row {
+#bnjxxsihmy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -626,7 +632,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#dyakkcwezu .gt_stub {
+#bnjxxsihmy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -639,7 +645,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#dyakkcwezu .gt_stub_row_group {
+#bnjxxsihmy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -653,11 +659,11 @@ using the `.groups` argument.</code></pre>
   vertical-align: top;
 }
 
-#dyakkcwezu .gt_row_group_first td {
+#bnjxxsihmy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dyakkcwezu .gt_summary_row {
+#bnjxxsihmy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -667,16 +673,16 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#dyakkcwezu .gt_first_summary_row {
+#bnjxxsihmy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dyakkcwezu .gt_first_summary_row.thick {
+#bnjxxsihmy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dyakkcwezu .gt_last_summary_row {
+#bnjxxsihmy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -686,7 +692,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#dyakkcwezu .gt_grand_summary_row {
+#bnjxxsihmy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -696,7 +702,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#dyakkcwezu .gt_first_grand_summary_row {
+#bnjxxsihmy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -706,11 +712,11 @@ using the `.groups` argument.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#dyakkcwezu .gt_striped {
+#bnjxxsihmy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dyakkcwezu .gt_table_body {
+#bnjxxsihmy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -719,7 +725,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#dyakkcwezu .gt_footnotes {
+#bnjxxsihmy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -733,7 +739,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dyakkcwezu .gt_footnote {
+#bnjxxsihmy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -742,7 +748,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#dyakkcwezu .gt_sourcenotes {
+#bnjxxsihmy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -756,7 +762,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dyakkcwezu .gt_sourcenote {
+#bnjxxsihmy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -764,129 +770,125 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#dyakkcwezu .gt_left {
+#bnjxxsihmy .gt_left {
   text-align: left;
 }
 
-#dyakkcwezu .gt_center {
+#bnjxxsihmy .gt_center {
   text-align: center;
 }
 
-#dyakkcwezu .gt_right {
+#bnjxxsihmy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dyakkcwezu .gt_font_normal {
+#bnjxxsihmy .gt_font_normal {
   font-weight: normal;
 }
 
-#dyakkcwezu .gt_font_bold {
+#bnjxxsihmy .gt_font_bold {
   font-weight: bold;
 }
 
-#dyakkcwezu .gt_font_italic {
+#bnjxxsihmy .gt_font_italic {
   font-style: italic;
 }
 
-#dyakkcwezu .gt_super {
+#bnjxxsihmy .gt_super {
   font-size: 65%;
 }
 
-#dyakkcwezu .gt_footnote_marks {
+#bnjxxsihmy .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#bnjxxsihmy .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#dyakkcwezu .gt_asterisk {
+#bnjxxsihmy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dyakkcwezu .gt_indent_1 {
-  text-indent: 5px;
+#bnjxxsihmy .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#dyakkcwezu .gt_indent_2 {
-  text-indent: 10px;
+#bnjxxsihmy .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#dyakkcwezu .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#dyakkcwezu .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#dyakkcwezu .gt_indent_5 {
-  text-indent: 25px;
+#bnjxxsihmy .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Team</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Conference</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2020-2021</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2021-2022</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">PercentChange</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Team</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2021-2022</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2022-2023</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">PercentChange</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Toledo</td>
-<td class="gt_row gt_left">MAC</td>
-<td class="gt_row gt_right">817</td>
-<td class="gt_row gt_right">605</td>
-<td class="gt_row gt_right">-0.25948592</td></tr>
-    <tr><td class="gt_row gt_left">San Diego State</td>
-<td class="gt_row gt_left">MWC</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">477</td>
-<td class="gt_row gt_right">-0.21931260</td></tr>
-    <tr><td class="gt_row gt_left">Minnesota</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">730</td>
-<td class="gt_row gt_right">617</td>
-<td class="gt_row gt_right">-0.15479452</td></tr>
-    <tr><td class="gt_row gt_left">South Alabama</td>
-<td class="gt_row gt_left">Sun Belt</td>
-<td class="gt_row gt_right">707</td>
-<td class="gt_row gt_right">598</td>
-<td class="gt_row gt_right">-0.15417256</td></tr>
-    <tr><td class="gt_row gt_left">Cal State Bakersfield</td>
-<td class="gt_row gt_left">Big West</td>
-<td class="gt_row gt_right">414</td>
-<td class="gt_row gt_right">352</td>
-<td class="gt_row gt_right">-0.14975845</td></tr>
-    <tr><td class="gt_row gt_left">Creighton</td>
-<td class="gt_row gt_left">Big East</td>
-<td class="gt_row gt_right">742</td>
+    <tr><td class="gt_row gt_left">Long Island University</td>
+<td class="gt_row gt_right">758</td>
+<td class="gt_row gt_right">420</td>
+<td class="gt_row gt_right">-0.4459103</td></tr>
+    <tr><td class="gt_row gt_left">Denver</td>
+<td class="gt_row gt_right">631</td>
+<td class="gt_row gt_right">442</td>
+<td class="gt_row gt_right">-0.2995246</td></tr>
+    <tr><td class="gt_row gt_left">Mississippi Valley State</td>
 <td class="gt_row gt_right">652</td>
-<td class="gt_row gt_right">-0.12129380</td></tr>
-    <tr><td class="gt_row gt_left">Colorado</td>
-<td class="gt_row gt_left">Pac-12</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">539</td>
-<td class="gt_row gt_right">-0.11783961</td></tr>
-    <tr><td class="gt_row gt_left">Virginia</td>
-<td class="gt_row gt_left">ACC</td>
-<td class="gt_row gt_right">535</td>
-<td class="gt_row gt_right">480</td>
-<td class="gt_row gt_right">-0.10280374</td></tr>
-    <tr><td class="gt_row gt_left">Virginia Commonwealth</td>
-<td class="gt_row gt_left">A-10</td>
-<td class="gt_row gt_right">510</td>
-<td class="gt_row gt_right">462</td>
-<td class="gt_row gt_right">-0.09411765</td></tr>
-    <tr><td class="gt_row gt_left">Wisconsin</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">689</td>
-<td class="gt_row gt_right">633</td>
-<td class="gt_row gt_right">-0.08127721</td></tr>
+<td class="gt_row gt_right">464</td>
+<td class="gt_row gt_right">-0.2883436</td></tr>
+    <tr><td class="gt_row gt_left">Massachusetts</td>
+<td class="gt_row gt_right">770</td>
+<td class="gt_row gt_right">555</td>
+<td class="gt_row gt_right">-0.2792208</td></tr>
+    <tr><td class="gt_row gt_left">Incarnate Word</td>
+<td class="gt_row gt_right">772</td>
+<td class="gt_row gt_right">557</td>
+<td class="gt_row gt_right">-0.2784974</td></tr>
+    <tr><td class="gt_row gt_left">Syracuse</td>
+<td class="gt_row gt_right">736</td>
+<td class="gt_row gt_right">547</td>
+<td class="gt_row gt_right">-0.2567935</td></tr>
+    <tr><td class="gt_row gt_left">The Citadel</td>
+<td class="gt_row gt_right">938</td>
+<td class="gt_row gt_right">702</td>
+<td class="gt_row gt_right">-0.2515991</td></tr>
+    <tr><td class="gt_row gt_left">Mercer</td>
+<td class="gt_row gt_right">764</td>
+<td class="gt_row gt_right">586</td>
+<td class="gt_row gt_right">-0.2329843</td></tr>
+    <tr><td class="gt_row gt_left">Monmouth</td>
+<td class="gt_row gt_right">597</td>
+<td class="gt_row gt_right">466</td>
+<td class="gt_row gt_right">-0.2194305</td></tr>
+    <tr><td class="gt_row gt_left">Florida International</td>
+<td class="gt_row gt_right">852</td>
+<td class="gt_row gt_right">671</td>
+<td class="gt_row gt_right">-0.2124413</td></tr>
   </tbody>
   
   
@@ -894,7 +896,7 @@ using the `.groups` argument.</code></pre>
 </div>
 </div>
 </div>
-<p>So there you have it. Toledo changed their team so much they took 25 percent fewer threes in 2021-22 from the season before. Where did Maryland come out? We ranked 21st in college basketball in terms of fewer threes from the season before.</p>
+<p>So there you have it. Long Island changed their team so much they took 44 percent fewer threes in 2022-23 from the season before. Where did Maryland come out? We ranked pretty low in college basketball in terms of fewer threes from the season before, because the Terps actually took 61 more.</p>
 <p><code>gt</code> has a mountain of customization options. The good news is that it works in a very familiar pattern. We’ll start with fixing headers. What we have isn’t bad, but PercentChange isn’t good either. Let’s fix that.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
@@ -904,12 +906,12 @@ using the `.groups` argument.</code></pre>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="ggfeyqzsix" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rxhydszjlg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ggfeyqzsix .gt_table {
+#rxhydszjlg .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -934,7 +936,7 @@ using the `.groups` argument.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#ggfeyqzsix .gt_heading {
+#rxhydszjlg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -946,7 +948,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ggfeyqzsix .gt_title {
+#rxhydszjlg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -958,7 +960,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-width: 0;
 }
 
-#ggfeyqzsix .gt_subtitle {
+#rxhydszjlg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -970,13 +972,13 @@ using the `.groups` argument.</code></pre>
   border-top-width: 0;
 }
 
-#ggfeyqzsix .gt_bottom_border {
+#rxhydszjlg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ggfeyqzsix .gt_col_headings {
+#rxhydszjlg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -991,7 +993,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ggfeyqzsix .gt_col_heading {
+#rxhydszjlg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1011,7 +1013,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#ggfeyqzsix .gt_column_spanner_outer {
+#rxhydszjlg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1023,15 +1025,15 @@ using the `.groups` argument.</code></pre>
   padding-right: 4px;
 }
 
-#ggfeyqzsix .gt_column_spanner_outer:first-child {
+#rxhydszjlg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ggfeyqzsix .gt_column_spanner_outer:last-child {
+#rxhydszjlg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ggfeyqzsix .gt_column_spanner {
+#rxhydszjlg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1043,7 +1045,7 @@ using the `.groups` argument.</code></pre>
   width: 100%;
 }
 
-#ggfeyqzsix .gt_group_heading {
+#rxhydszjlg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1068,7 +1070,7 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#ggfeyqzsix .gt_empty_group_heading {
+#rxhydszjlg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1083,15 +1085,15 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#ggfeyqzsix .gt_from_md > :first-child {
+#rxhydszjlg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ggfeyqzsix .gt_from_md > :last-child {
+#rxhydszjlg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ggfeyqzsix .gt_row {
+#rxhydszjlg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1110,7 +1112,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#ggfeyqzsix .gt_stub {
+#rxhydszjlg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1123,7 +1125,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#ggfeyqzsix .gt_stub_row_group {
+#rxhydszjlg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1137,11 +1139,11 @@ using the `.groups` argument.</code></pre>
   vertical-align: top;
 }
 
-#ggfeyqzsix .gt_row_group_first td {
+#rxhydszjlg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ggfeyqzsix .gt_summary_row {
+#rxhydszjlg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1151,16 +1153,16 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#ggfeyqzsix .gt_first_summary_row {
+#rxhydszjlg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ggfeyqzsix .gt_first_summary_row.thick {
+#rxhydszjlg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ggfeyqzsix .gt_last_summary_row {
+#rxhydszjlg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1170,7 +1172,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ggfeyqzsix .gt_grand_summary_row {
+#rxhydszjlg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1180,7 +1182,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#ggfeyqzsix .gt_first_grand_summary_row {
+#rxhydszjlg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1190,11 +1192,11 @@ using the `.groups` argument.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#ggfeyqzsix .gt_striped {
+#rxhydszjlg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ggfeyqzsix .gt_table_body {
+#rxhydszjlg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1203,7 +1205,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ggfeyqzsix .gt_footnotes {
+#rxhydszjlg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1217,7 +1219,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ggfeyqzsix .gt_footnote {
+#rxhydszjlg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1226,7 +1228,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#ggfeyqzsix .gt_sourcenotes {
+#rxhydszjlg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1240,7 +1242,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ggfeyqzsix .gt_sourcenote {
+#rxhydszjlg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1248,129 +1250,125 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#ggfeyqzsix .gt_left {
+#rxhydszjlg .gt_left {
   text-align: left;
 }
 
-#ggfeyqzsix .gt_center {
+#rxhydszjlg .gt_center {
   text-align: center;
 }
 
-#ggfeyqzsix .gt_right {
+#rxhydszjlg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ggfeyqzsix .gt_font_normal {
+#rxhydszjlg .gt_font_normal {
   font-weight: normal;
 }
 
-#ggfeyqzsix .gt_font_bold {
+#rxhydszjlg .gt_font_bold {
   font-weight: bold;
 }
 
-#ggfeyqzsix .gt_font_italic {
+#rxhydszjlg .gt_font_italic {
   font-style: italic;
 }
 
-#ggfeyqzsix .gt_super {
+#rxhydszjlg .gt_super {
   font-size: 65%;
 }
 
-#ggfeyqzsix .gt_footnote_marks {
+#rxhydszjlg .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#rxhydszjlg .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#ggfeyqzsix .gt_asterisk {
+#rxhydszjlg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ggfeyqzsix .gt_indent_1 {
-  text-indent: 5px;
+#rxhydszjlg .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#ggfeyqzsix .gt_indent_2 {
-  text-indent: 10px;
+#rxhydszjlg .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#ggfeyqzsix .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#ggfeyqzsix .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#ggfeyqzsix .gt_indent_5 {
-  text-indent: 25px;
+#rxhydszjlg .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Team</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Conference</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2020-2021</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2021-2022</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Percent Change</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Team</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2021-2022</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2022-2023</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Percent Change</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Toledo</td>
-<td class="gt_row gt_left">MAC</td>
-<td class="gt_row gt_right">817</td>
-<td class="gt_row gt_right">605</td>
-<td class="gt_row gt_right">-0.25948592</td></tr>
-    <tr><td class="gt_row gt_left">San Diego State</td>
-<td class="gt_row gt_left">MWC</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">477</td>
-<td class="gt_row gt_right">-0.21931260</td></tr>
-    <tr><td class="gt_row gt_left">Minnesota</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">730</td>
-<td class="gt_row gt_right">617</td>
-<td class="gt_row gt_right">-0.15479452</td></tr>
-    <tr><td class="gt_row gt_left">South Alabama</td>
-<td class="gt_row gt_left">Sun Belt</td>
-<td class="gt_row gt_right">707</td>
-<td class="gt_row gt_right">598</td>
-<td class="gt_row gt_right">-0.15417256</td></tr>
-    <tr><td class="gt_row gt_left">Cal State Bakersfield</td>
-<td class="gt_row gt_left">Big West</td>
-<td class="gt_row gt_right">414</td>
-<td class="gt_row gt_right">352</td>
-<td class="gt_row gt_right">-0.14975845</td></tr>
-    <tr><td class="gt_row gt_left">Creighton</td>
-<td class="gt_row gt_left">Big East</td>
-<td class="gt_row gt_right">742</td>
+    <tr><td class="gt_row gt_left">Long Island University</td>
+<td class="gt_row gt_right">758</td>
+<td class="gt_row gt_right">420</td>
+<td class="gt_row gt_right">-0.4459103</td></tr>
+    <tr><td class="gt_row gt_left">Denver</td>
+<td class="gt_row gt_right">631</td>
+<td class="gt_row gt_right">442</td>
+<td class="gt_row gt_right">-0.2995246</td></tr>
+    <tr><td class="gt_row gt_left">Mississippi Valley State</td>
 <td class="gt_row gt_right">652</td>
-<td class="gt_row gt_right">-0.12129380</td></tr>
-    <tr><td class="gt_row gt_left">Colorado</td>
-<td class="gt_row gt_left">Pac-12</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">539</td>
-<td class="gt_row gt_right">-0.11783961</td></tr>
-    <tr><td class="gt_row gt_left">Virginia</td>
-<td class="gt_row gt_left">ACC</td>
-<td class="gt_row gt_right">535</td>
-<td class="gt_row gt_right">480</td>
-<td class="gt_row gt_right">-0.10280374</td></tr>
-    <tr><td class="gt_row gt_left">Virginia Commonwealth</td>
-<td class="gt_row gt_left">A-10</td>
-<td class="gt_row gt_right">510</td>
-<td class="gt_row gt_right">462</td>
-<td class="gt_row gt_right">-0.09411765</td></tr>
-    <tr><td class="gt_row gt_left">Wisconsin</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">689</td>
-<td class="gt_row gt_right">633</td>
-<td class="gt_row gt_right">-0.08127721</td></tr>
+<td class="gt_row gt_right">464</td>
+<td class="gt_row gt_right">-0.2883436</td></tr>
+    <tr><td class="gt_row gt_left">Massachusetts</td>
+<td class="gt_row gt_right">770</td>
+<td class="gt_row gt_right">555</td>
+<td class="gt_row gt_right">-0.2792208</td></tr>
+    <tr><td class="gt_row gt_left">Incarnate Word</td>
+<td class="gt_row gt_right">772</td>
+<td class="gt_row gt_right">557</td>
+<td class="gt_row gt_right">-0.2784974</td></tr>
+    <tr><td class="gt_row gt_left">Syracuse</td>
+<td class="gt_row gt_right">736</td>
+<td class="gt_row gt_right">547</td>
+<td class="gt_row gt_right">-0.2567935</td></tr>
+    <tr><td class="gt_row gt_left">The Citadel</td>
+<td class="gt_row gt_right">938</td>
+<td class="gt_row gt_right">702</td>
+<td class="gt_row gt_right">-0.2515991</td></tr>
+    <tr><td class="gt_row gt_left">Mercer</td>
+<td class="gt_row gt_right">764</td>
+<td class="gt_row gt_right">586</td>
+<td class="gt_row gt_right">-0.2329843</td></tr>
+    <tr><td class="gt_row gt_left">Monmouth</td>
+<td class="gt_row gt_right">597</td>
+<td class="gt_row gt_right">466</td>
+<td class="gt_row gt_right">-0.2194305</td></tr>
+    <tr><td class="gt_row gt_left">Florida International</td>
+<td class="gt_row gt_right">852</td>
+<td class="gt_row gt_right">671</td>
+<td class="gt_row gt_right">-0.2124413</td></tr>
   </tbody>
   
   
@@ -1388,16 +1386,16 @@ using the `.groups` argument.</code></pre>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Did Maryland Shoot Fewer Threes in 2021-22?"</span>,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Yes, but it wasn't a big change. These 10 teams completely changed their offenses."</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"No, the Terps shot more. But these 10 teams completely changed their offenses."</span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="kpoayiqcyu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mzvisdzahu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kpoayiqcyu .gt_table {
+#mzvisdzahu .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1422,7 +1420,7 @@ using the `.groups` argument.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#kpoayiqcyu .gt_heading {
+#mzvisdzahu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1434,7 +1432,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kpoayiqcyu .gt_title {
+#mzvisdzahu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1446,7 +1444,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-width: 0;
 }
 
-#kpoayiqcyu .gt_subtitle {
+#mzvisdzahu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1458,13 +1456,13 @@ using the `.groups` argument.</code></pre>
   border-top-width: 0;
 }
 
-#kpoayiqcyu .gt_bottom_border {
+#mzvisdzahu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kpoayiqcyu .gt_col_headings {
+#mzvisdzahu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1479,7 +1477,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kpoayiqcyu .gt_col_heading {
+#mzvisdzahu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1499,7 +1497,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#kpoayiqcyu .gt_column_spanner_outer {
+#mzvisdzahu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1511,15 +1509,15 @@ using the `.groups` argument.</code></pre>
   padding-right: 4px;
 }
 
-#kpoayiqcyu .gt_column_spanner_outer:first-child {
+#mzvisdzahu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kpoayiqcyu .gt_column_spanner_outer:last-child {
+#mzvisdzahu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kpoayiqcyu .gt_column_spanner {
+#mzvisdzahu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1531,7 +1529,7 @@ using the `.groups` argument.</code></pre>
   width: 100%;
 }
 
-#kpoayiqcyu .gt_group_heading {
+#mzvisdzahu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1556,7 +1554,7 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#kpoayiqcyu .gt_empty_group_heading {
+#mzvisdzahu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1571,15 +1569,15 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#kpoayiqcyu .gt_from_md > :first-child {
+#mzvisdzahu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kpoayiqcyu .gt_from_md > :last-child {
+#mzvisdzahu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kpoayiqcyu .gt_row {
+#mzvisdzahu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1598,7 +1596,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#kpoayiqcyu .gt_stub {
+#mzvisdzahu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1611,7 +1609,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#kpoayiqcyu .gt_stub_row_group {
+#mzvisdzahu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1625,11 +1623,11 @@ using the `.groups` argument.</code></pre>
   vertical-align: top;
 }
 
-#kpoayiqcyu .gt_row_group_first td {
+#mzvisdzahu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kpoayiqcyu .gt_summary_row {
+#mzvisdzahu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1639,16 +1637,16 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#kpoayiqcyu .gt_first_summary_row {
+#mzvisdzahu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kpoayiqcyu .gt_first_summary_row.thick {
+#mzvisdzahu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kpoayiqcyu .gt_last_summary_row {
+#mzvisdzahu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1658,7 +1656,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#kpoayiqcyu .gt_grand_summary_row {
+#mzvisdzahu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1668,7 +1666,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#kpoayiqcyu .gt_first_grand_summary_row {
+#mzvisdzahu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1678,11 +1676,11 @@ using the `.groups` argument.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#kpoayiqcyu .gt_striped {
+#mzvisdzahu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kpoayiqcyu .gt_table_body {
+#mzvisdzahu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1691,7 +1689,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#kpoayiqcyu .gt_footnotes {
+#mzvisdzahu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1705,7 +1703,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kpoayiqcyu .gt_footnote {
+#mzvisdzahu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1714,7 +1712,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#kpoayiqcyu .gt_sourcenotes {
+#mzvisdzahu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1728,7 +1726,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kpoayiqcyu .gt_sourcenote {
+#mzvisdzahu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1736,136 +1734,132 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#kpoayiqcyu .gt_left {
+#mzvisdzahu .gt_left {
   text-align: left;
 }
 
-#kpoayiqcyu .gt_center {
+#mzvisdzahu .gt_center {
   text-align: center;
 }
 
-#kpoayiqcyu .gt_right {
+#mzvisdzahu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kpoayiqcyu .gt_font_normal {
+#mzvisdzahu .gt_font_normal {
   font-weight: normal;
 }
 
-#kpoayiqcyu .gt_font_bold {
+#mzvisdzahu .gt_font_bold {
   font-weight: bold;
 }
 
-#kpoayiqcyu .gt_font_italic {
+#mzvisdzahu .gt_font_italic {
   font-style: italic;
 }
 
-#kpoayiqcyu .gt_super {
+#mzvisdzahu .gt_super {
   font-size: 65%;
 }
 
-#kpoayiqcyu .gt_footnote_marks {
+#mzvisdzahu .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#mzvisdzahu .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#kpoayiqcyu .gt_asterisk {
+#mzvisdzahu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kpoayiqcyu .gt_indent_1 {
-  text-indent: 5px;
+#mzvisdzahu .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#kpoayiqcyu .gt_indent_2 {
-  text-indent: 10px;
+#mzvisdzahu .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#kpoayiqcyu .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#kpoayiqcyu .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#kpoayiqcyu .gt_indent_5 {
-  text-indent: 25px;
+#mzvisdzahu .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <td colspan="5" class="gt_heading gt_title gt_font_normal" style="">Did Maryland Shoot Fewer Threes in 2021-22?</td>
+      <th colspan="4" class="gt_heading gt_title gt_font_normal" style="">Did Maryland Shoot Fewer Threes in 2021-22?</th>
     </tr>
     <tr>
-      <td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Yes, but it wasn't a big change. These 10 teams completely changed their offenses.</td>
+      <th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">No, the Terps shot more. But these 10 teams completely changed their offenses.</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Team</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Conference</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2020-2021</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2021-2022</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Percent Change</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Team</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2021-2022</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2022-2023</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Percent Change</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Toledo</td>
-<td class="gt_row gt_left">MAC</td>
-<td class="gt_row gt_right">817</td>
-<td class="gt_row gt_right">605</td>
-<td class="gt_row gt_right">-0.25948592</td></tr>
-    <tr><td class="gt_row gt_left">San Diego State</td>
-<td class="gt_row gt_left">MWC</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">477</td>
-<td class="gt_row gt_right">-0.21931260</td></tr>
-    <tr><td class="gt_row gt_left">Minnesota</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">730</td>
-<td class="gt_row gt_right">617</td>
-<td class="gt_row gt_right">-0.15479452</td></tr>
-    <tr><td class="gt_row gt_left">South Alabama</td>
-<td class="gt_row gt_left">Sun Belt</td>
-<td class="gt_row gt_right">707</td>
-<td class="gt_row gt_right">598</td>
-<td class="gt_row gt_right">-0.15417256</td></tr>
-    <tr><td class="gt_row gt_left">Cal State Bakersfield</td>
-<td class="gt_row gt_left">Big West</td>
-<td class="gt_row gt_right">414</td>
-<td class="gt_row gt_right">352</td>
-<td class="gt_row gt_right">-0.14975845</td></tr>
-    <tr><td class="gt_row gt_left">Creighton</td>
-<td class="gt_row gt_left">Big East</td>
-<td class="gt_row gt_right">742</td>
+    <tr><td class="gt_row gt_left">Long Island University</td>
+<td class="gt_row gt_right">758</td>
+<td class="gt_row gt_right">420</td>
+<td class="gt_row gt_right">-0.4459103</td></tr>
+    <tr><td class="gt_row gt_left">Denver</td>
+<td class="gt_row gt_right">631</td>
+<td class="gt_row gt_right">442</td>
+<td class="gt_row gt_right">-0.2995246</td></tr>
+    <tr><td class="gt_row gt_left">Mississippi Valley State</td>
 <td class="gt_row gt_right">652</td>
-<td class="gt_row gt_right">-0.12129380</td></tr>
-    <tr><td class="gt_row gt_left">Colorado</td>
-<td class="gt_row gt_left">Pac-12</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">539</td>
-<td class="gt_row gt_right">-0.11783961</td></tr>
-    <tr><td class="gt_row gt_left">Virginia</td>
-<td class="gt_row gt_left">ACC</td>
-<td class="gt_row gt_right">535</td>
-<td class="gt_row gt_right">480</td>
-<td class="gt_row gt_right">-0.10280374</td></tr>
-    <tr><td class="gt_row gt_left">Virginia Commonwealth</td>
-<td class="gt_row gt_left">A-10</td>
-<td class="gt_row gt_right">510</td>
-<td class="gt_row gt_right">462</td>
-<td class="gt_row gt_right">-0.09411765</td></tr>
-    <tr><td class="gt_row gt_left">Wisconsin</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">689</td>
-<td class="gt_row gt_right">633</td>
-<td class="gt_row gt_right">-0.08127721</td></tr>
+<td class="gt_row gt_right">464</td>
+<td class="gt_row gt_right">-0.2883436</td></tr>
+    <tr><td class="gt_row gt_left">Massachusetts</td>
+<td class="gt_row gt_right">770</td>
+<td class="gt_row gt_right">555</td>
+<td class="gt_row gt_right">-0.2792208</td></tr>
+    <tr><td class="gt_row gt_left">Incarnate Word</td>
+<td class="gt_row gt_right">772</td>
+<td class="gt_row gt_right">557</td>
+<td class="gt_row gt_right">-0.2784974</td></tr>
+    <tr><td class="gt_row gt_left">Syracuse</td>
+<td class="gt_row gt_right">736</td>
+<td class="gt_row gt_right">547</td>
+<td class="gt_row gt_right">-0.2567935</td></tr>
+    <tr><td class="gt_row gt_left">The Citadel</td>
+<td class="gt_row gt_right">938</td>
+<td class="gt_row gt_right">702</td>
+<td class="gt_row gt_right">-0.2515991</td></tr>
+    <tr><td class="gt_row gt_left">Mercer</td>
+<td class="gt_row gt_right">764</td>
+<td class="gt_row gt_right">586</td>
+<td class="gt_row gt_right">-0.2329843</td></tr>
+    <tr><td class="gt_row gt_left">Monmouth</td>
+<td class="gt_row gt_right">597</td>
+<td class="gt_row gt_right">466</td>
+<td class="gt_row gt_right">-0.2194305</td></tr>
+    <tr><td class="gt_row gt_left">Florida International</td>
+<td class="gt_row gt_right">852</td>
+<td class="gt_row gt_right">671</td>
+<td class="gt_row gt_right">-0.2124413</td></tr>
   </tbody>
   
   
@@ -1882,19 +1876,19 @@ using the `.groups` argument.</code></pre>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Did Maryland Shoot Fewer Threes in 2021-22?"</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Yes, but it wasn't a big change. These 10 teams completely changed their offenses."</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"No, the Terps shot more. But these 10 teams completely changed their offenses."</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="tybunmgkkv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fjuptexdya" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#tybunmgkkv .gt_table {
+#fjuptexdya .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1919,7 +1913,7 @@ using the `.groups` argument.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#tybunmgkkv .gt_heading {
+#fjuptexdya .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1931,7 +1925,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tybunmgkkv .gt_title {
+#fjuptexdya .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1943,7 +1937,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-width: 0;
 }
 
-#tybunmgkkv .gt_subtitle {
+#fjuptexdya .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1955,13 +1949,13 @@ using the `.groups` argument.</code></pre>
   border-top-width: 0;
 }
 
-#tybunmgkkv .gt_bottom_border {
+#fjuptexdya .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tybunmgkkv .gt_col_headings {
+#fjuptexdya .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1976,7 +1970,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tybunmgkkv .gt_col_heading {
+#fjuptexdya .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1996,7 +1990,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#tybunmgkkv .gt_column_spanner_outer {
+#fjuptexdya .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2008,15 +2002,15 @@ using the `.groups` argument.</code></pre>
   padding-right: 4px;
 }
 
-#tybunmgkkv .gt_column_spanner_outer:first-child {
+#fjuptexdya .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tybunmgkkv .gt_column_spanner_outer:last-child {
+#fjuptexdya .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tybunmgkkv .gt_column_spanner {
+#fjuptexdya .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2028,7 +2022,7 @@ using the `.groups` argument.</code></pre>
   width: 100%;
 }
 
-#tybunmgkkv .gt_group_heading {
+#fjuptexdya .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2053,7 +2047,7 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#tybunmgkkv .gt_empty_group_heading {
+#fjuptexdya .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2068,15 +2062,15 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#tybunmgkkv .gt_from_md > :first-child {
+#fjuptexdya .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tybunmgkkv .gt_from_md > :last-child {
+#fjuptexdya .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tybunmgkkv .gt_row {
+#fjuptexdya .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2095,7 +2089,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#tybunmgkkv .gt_stub {
+#fjuptexdya .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2108,7 +2102,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#tybunmgkkv .gt_stub_row_group {
+#fjuptexdya .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2122,11 +2116,11 @@ using the `.groups` argument.</code></pre>
   vertical-align: top;
 }
 
-#tybunmgkkv .gt_row_group_first td {
+#fjuptexdya .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tybunmgkkv .gt_summary_row {
+#fjuptexdya .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2136,16 +2130,16 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#tybunmgkkv .gt_first_summary_row {
+#fjuptexdya .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tybunmgkkv .gt_first_summary_row.thick {
+#fjuptexdya .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tybunmgkkv .gt_last_summary_row {
+#fjuptexdya .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2155,7 +2149,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tybunmgkkv .gt_grand_summary_row {
+#fjuptexdya .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2165,7 +2159,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#tybunmgkkv .gt_first_grand_summary_row {
+#fjuptexdya .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2175,11 +2169,11 @@ using the `.groups` argument.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#tybunmgkkv .gt_striped {
+#fjuptexdya .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tybunmgkkv .gt_table_body {
+#fjuptexdya .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2188,7 +2182,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tybunmgkkv .gt_footnotes {
+#fjuptexdya .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2202,7 +2196,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tybunmgkkv .gt_footnote {
+#fjuptexdya .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2211,7 +2205,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#tybunmgkkv .gt_sourcenotes {
+#fjuptexdya .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2225,7 +2219,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tybunmgkkv .gt_sourcenote {
+#fjuptexdya .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2233,136 +2227,132 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#tybunmgkkv .gt_left {
+#fjuptexdya .gt_left {
   text-align: left;
 }
 
-#tybunmgkkv .gt_center {
+#fjuptexdya .gt_center {
   text-align: center;
 }
 
-#tybunmgkkv .gt_right {
+#fjuptexdya .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tybunmgkkv .gt_font_normal {
+#fjuptexdya .gt_font_normal {
   font-weight: normal;
 }
 
-#tybunmgkkv .gt_font_bold {
+#fjuptexdya .gt_font_bold {
   font-weight: bold;
 }
 
-#tybunmgkkv .gt_font_italic {
+#fjuptexdya .gt_font_italic {
   font-style: italic;
 }
 
-#tybunmgkkv .gt_super {
+#fjuptexdya .gt_super {
   font-size: 65%;
 }
 
-#tybunmgkkv .gt_footnote_marks {
+#fjuptexdya .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#fjuptexdya .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#tybunmgkkv .gt_asterisk {
+#fjuptexdya .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tybunmgkkv .gt_indent_1 {
-  text-indent: 5px;
+#fjuptexdya .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#tybunmgkkv .gt_indent_2 {
-  text-indent: 10px;
+#fjuptexdya .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#tybunmgkkv .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#tybunmgkkv .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#tybunmgkkv .gt_indent_5 {
-  text-indent: 25px;
+#fjuptexdya .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <td colspan="5" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</td>
+      <th colspan="4" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</th>
     </tr>
     <tr>
-      <td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Yes, but it wasn't a big change. These 10 teams completely changed their offenses.</td>
+      <th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">No, the Terps shot more. But these 10 teams completely changed their offenses.</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Team</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Conference</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2020-2021</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2021-2022</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Percent Change</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Team</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2021-2022</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2022-2023</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Percent Change</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Toledo</td>
-<td class="gt_row gt_left">MAC</td>
-<td class="gt_row gt_right">817</td>
-<td class="gt_row gt_right">605</td>
-<td class="gt_row gt_right">-0.25948592</td></tr>
-    <tr><td class="gt_row gt_left">San Diego State</td>
-<td class="gt_row gt_left">MWC</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">477</td>
-<td class="gt_row gt_right">-0.21931260</td></tr>
-    <tr><td class="gt_row gt_left">Minnesota</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">730</td>
-<td class="gt_row gt_right">617</td>
-<td class="gt_row gt_right">-0.15479452</td></tr>
-    <tr><td class="gt_row gt_left">South Alabama</td>
-<td class="gt_row gt_left">Sun Belt</td>
-<td class="gt_row gt_right">707</td>
-<td class="gt_row gt_right">598</td>
-<td class="gt_row gt_right">-0.15417256</td></tr>
-    <tr><td class="gt_row gt_left">Cal State Bakersfield</td>
-<td class="gt_row gt_left">Big West</td>
-<td class="gt_row gt_right">414</td>
-<td class="gt_row gt_right">352</td>
-<td class="gt_row gt_right">-0.14975845</td></tr>
-    <tr><td class="gt_row gt_left">Creighton</td>
-<td class="gt_row gt_left">Big East</td>
-<td class="gt_row gt_right">742</td>
+    <tr><td class="gt_row gt_left">Long Island University</td>
+<td class="gt_row gt_right">758</td>
+<td class="gt_row gt_right">420</td>
+<td class="gt_row gt_right">-0.4459103</td></tr>
+    <tr><td class="gt_row gt_left">Denver</td>
+<td class="gt_row gt_right">631</td>
+<td class="gt_row gt_right">442</td>
+<td class="gt_row gt_right">-0.2995246</td></tr>
+    <tr><td class="gt_row gt_left">Mississippi Valley State</td>
 <td class="gt_row gt_right">652</td>
-<td class="gt_row gt_right">-0.12129380</td></tr>
-    <tr><td class="gt_row gt_left">Colorado</td>
-<td class="gt_row gt_left">Pac-12</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">539</td>
-<td class="gt_row gt_right">-0.11783961</td></tr>
-    <tr><td class="gt_row gt_left">Virginia</td>
-<td class="gt_row gt_left">ACC</td>
-<td class="gt_row gt_right">535</td>
-<td class="gt_row gt_right">480</td>
-<td class="gt_row gt_right">-0.10280374</td></tr>
-    <tr><td class="gt_row gt_left">Virginia Commonwealth</td>
-<td class="gt_row gt_left">A-10</td>
-<td class="gt_row gt_right">510</td>
-<td class="gt_row gt_right">462</td>
-<td class="gt_row gt_right">-0.09411765</td></tr>
-    <tr><td class="gt_row gt_left">Wisconsin</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">689</td>
-<td class="gt_row gt_right">633</td>
-<td class="gt_row gt_right">-0.08127721</td></tr>
+<td class="gt_row gt_right">464</td>
+<td class="gt_row gt_right">-0.2883436</td></tr>
+    <tr><td class="gt_row gt_left">Massachusetts</td>
+<td class="gt_row gt_right">770</td>
+<td class="gt_row gt_right">555</td>
+<td class="gt_row gt_right">-0.2792208</td></tr>
+    <tr><td class="gt_row gt_left">Incarnate Word</td>
+<td class="gt_row gt_right">772</td>
+<td class="gt_row gt_right">557</td>
+<td class="gt_row gt_right">-0.2784974</td></tr>
+    <tr><td class="gt_row gt_left">Syracuse</td>
+<td class="gt_row gt_right">736</td>
+<td class="gt_row gt_right">547</td>
+<td class="gt_row gt_right">-0.2567935</td></tr>
+    <tr><td class="gt_row gt_left">The Citadel</td>
+<td class="gt_row gt_right">938</td>
+<td class="gt_row gt_right">702</td>
+<td class="gt_row gt_right">-0.2515991</td></tr>
+    <tr><td class="gt_row gt_left">Mercer</td>
+<td class="gt_row gt_right">764</td>
+<td class="gt_row gt_right">586</td>
+<td class="gt_row gt_right">-0.2329843</td></tr>
+    <tr><td class="gt_row gt_left">Monmouth</td>
+<td class="gt_row gt_right">597</td>
+<td class="gt_row gt_right">466</td>
+<td class="gt_row gt_right">-0.2194305</td></tr>
+    <tr><td class="gt_row gt_left">Florida International</td>
+<td class="gt_row gt_right">852</td>
+<td class="gt_row gt_right">671</td>
+<td class="gt_row gt_right">-0.2124413</td></tr>
   </tbody>
   
   
@@ -2379,7 +2369,7 @@ using the `.groups` argument.</code></pre>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Did Maryland Shoot Fewer Threes in 2021-22?"</span>,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Yes, but it wasn't a big change. These 10 teams completely changed their offenses."</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"No, the Terps shot more. But these 10 teams completely changed their offenses."</span></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
@@ -2389,12 +2379,12 @@ using the `.groups` argument.</code></pre>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="kaaschmqbe" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="titeernxne" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kaaschmqbe .gt_table {
+#titeernxne .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2419,7 +2409,7 @@ using the `.groups` argument.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#kaaschmqbe .gt_heading {
+#titeernxne .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2431,7 +2421,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kaaschmqbe .gt_title {
+#titeernxne .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2443,7 +2433,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-width: 0;
 }
 
-#kaaschmqbe .gt_subtitle {
+#titeernxne .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2455,13 +2445,13 @@ using the `.groups` argument.</code></pre>
   border-top-width: 0;
 }
 
-#kaaschmqbe .gt_bottom_border {
+#titeernxne .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kaaschmqbe .gt_col_headings {
+#titeernxne .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2476,7 +2466,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kaaschmqbe .gt_col_heading {
+#titeernxne .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2496,7 +2486,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#kaaschmqbe .gt_column_spanner_outer {
+#titeernxne .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2508,15 +2498,15 @@ using the `.groups` argument.</code></pre>
   padding-right: 4px;
 }
 
-#kaaschmqbe .gt_column_spanner_outer:first-child {
+#titeernxne .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kaaschmqbe .gt_column_spanner_outer:last-child {
+#titeernxne .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kaaschmqbe .gt_column_spanner {
+#titeernxne .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2528,7 +2518,7 @@ using the `.groups` argument.</code></pre>
   width: 100%;
 }
 
-#kaaschmqbe .gt_group_heading {
+#titeernxne .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2553,7 +2543,7 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#kaaschmqbe .gt_empty_group_heading {
+#titeernxne .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2568,15 +2558,15 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#kaaschmqbe .gt_from_md > :first-child {
+#titeernxne .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kaaschmqbe .gt_from_md > :last-child {
+#titeernxne .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kaaschmqbe .gt_row {
+#titeernxne .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2595,7 +2585,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#kaaschmqbe .gt_stub {
+#titeernxne .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2608,7 +2598,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#kaaschmqbe .gt_stub_row_group {
+#titeernxne .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2622,11 +2612,11 @@ using the `.groups` argument.</code></pre>
   vertical-align: top;
 }
 
-#kaaschmqbe .gt_row_group_first td {
+#titeernxne .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kaaschmqbe .gt_summary_row {
+#titeernxne .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2636,16 +2626,16 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#kaaschmqbe .gt_first_summary_row {
+#titeernxne .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kaaschmqbe .gt_first_summary_row.thick {
+#titeernxne .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kaaschmqbe .gt_last_summary_row {
+#titeernxne .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2655,7 +2645,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#kaaschmqbe .gt_grand_summary_row {
+#titeernxne .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2665,7 +2655,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#kaaschmqbe .gt_first_grand_summary_row {
+#titeernxne .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2675,11 +2665,11 @@ using the `.groups` argument.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#kaaschmqbe .gt_striped {
+#titeernxne .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kaaschmqbe .gt_table_body {
+#titeernxne .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2688,7 +2678,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#kaaschmqbe .gt_footnotes {
+#titeernxne .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2702,7 +2692,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kaaschmqbe .gt_footnote {
+#titeernxne .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2711,7 +2701,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#kaaschmqbe .gt_sourcenotes {
+#titeernxne .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2725,7 +2715,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kaaschmqbe .gt_sourcenote {
+#titeernxne .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2733,136 +2723,132 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#kaaschmqbe .gt_left {
+#titeernxne .gt_left {
   text-align: left;
 }
 
-#kaaschmqbe .gt_center {
+#titeernxne .gt_center {
   text-align: center;
 }
 
-#kaaschmqbe .gt_right {
+#titeernxne .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kaaschmqbe .gt_font_normal {
+#titeernxne .gt_font_normal {
   font-weight: normal;
 }
 
-#kaaschmqbe .gt_font_bold {
+#titeernxne .gt_font_bold {
   font-weight: bold;
 }
 
-#kaaschmqbe .gt_font_italic {
+#titeernxne .gt_font_italic {
   font-style: italic;
 }
 
-#kaaschmqbe .gt_super {
+#titeernxne .gt_super {
   font-size: 65%;
 }
 
-#kaaschmqbe .gt_footnote_marks {
+#titeernxne .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#titeernxne .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#kaaschmqbe .gt_asterisk {
+#titeernxne .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kaaschmqbe .gt_indent_1 {
-  text-indent: 5px;
+#titeernxne .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#kaaschmqbe .gt_indent_2 {
-  text-indent: 10px;
+#titeernxne .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#kaaschmqbe .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#kaaschmqbe .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#kaaschmqbe .gt_indent_5 {
-  text-indent: 25px;
+#titeernxne .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <td colspan="5" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</td>
+      <th colspan="4" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</th>
     </tr>
     <tr>
-      <td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">Yes, but it wasn't a big change. These 10 teams completely changed their offenses.</td>
+      <th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">No, the Terps shot more. But these 10 teams completely changed their offenses.</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Team</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Conference</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2020-2021</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2021-2022</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Percent Change</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Team</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2021-2022</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2022-2023</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Percent Change</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Toledo</td>
-<td class="gt_row gt_left">MAC</td>
-<td class="gt_row gt_right">817</td>
-<td class="gt_row gt_right">605</td>
-<td class="gt_row gt_right">-0.25948592</td></tr>
-    <tr><td class="gt_row gt_left">San Diego State</td>
-<td class="gt_row gt_left">MWC</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">477</td>
-<td class="gt_row gt_right">-0.21931260</td></tr>
-    <tr><td class="gt_row gt_left">Minnesota</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">730</td>
-<td class="gt_row gt_right">617</td>
-<td class="gt_row gt_right">-0.15479452</td></tr>
-    <tr><td class="gt_row gt_left">South Alabama</td>
-<td class="gt_row gt_left">Sun Belt</td>
-<td class="gt_row gt_right">707</td>
-<td class="gt_row gt_right">598</td>
-<td class="gt_row gt_right">-0.15417256</td></tr>
-    <tr><td class="gt_row gt_left">Cal State Bakersfield</td>
-<td class="gt_row gt_left">Big West</td>
-<td class="gt_row gt_right">414</td>
-<td class="gt_row gt_right">352</td>
-<td class="gt_row gt_right">-0.14975845</td></tr>
-    <tr><td class="gt_row gt_left">Creighton</td>
-<td class="gt_row gt_left">Big East</td>
-<td class="gt_row gt_right">742</td>
+    <tr><td class="gt_row gt_left">Long Island University</td>
+<td class="gt_row gt_right">758</td>
+<td class="gt_row gt_right">420</td>
+<td class="gt_row gt_right">-0.4459103</td></tr>
+    <tr><td class="gt_row gt_left">Denver</td>
+<td class="gt_row gt_right">631</td>
+<td class="gt_row gt_right">442</td>
+<td class="gt_row gt_right">-0.2995246</td></tr>
+    <tr><td class="gt_row gt_left">Mississippi Valley State</td>
 <td class="gt_row gt_right">652</td>
-<td class="gt_row gt_right">-0.12129380</td></tr>
-    <tr><td class="gt_row gt_left">Colorado</td>
-<td class="gt_row gt_left">Pac-12</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">539</td>
-<td class="gt_row gt_right">-0.11783961</td></tr>
-    <tr><td class="gt_row gt_left">Virginia</td>
-<td class="gt_row gt_left">ACC</td>
-<td class="gt_row gt_right">535</td>
-<td class="gt_row gt_right">480</td>
-<td class="gt_row gt_right">-0.10280374</td></tr>
-    <tr><td class="gt_row gt_left">Virginia Commonwealth</td>
-<td class="gt_row gt_left">A-10</td>
-<td class="gt_row gt_right">510</td>
-<td class="gt_row gt_right">462</td>
-<td class="gt_row gt_right">-0.09411765</td></tr>
-    <tr><td class="gt_row gt_left">Wisconsin</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">689</td>
-<td class="gt_row gt_right">633</td>
-<td class="gt_row gt_right">-0.08127721</td></tr>
+<td class="gt_row gt_right">464</td>
+<td class="gt_row gt_right">-0.2883436</td></tr>
+    <tr><td class="gt_row gt_left">Massachusetts</td>
+<td class="gt_row gt_right">770</td>
+<td class="gt_row gt_right">555</td>
+<td class="gt_row gt_right">-0.2792208</td></tr>
+    <tr><td class="gt_row gt_left">Incarnate Word</td>
+<td class="gt_row gt_right">772</td>
+<td class="gt_row gt_right">557</td>
+<td class="gt_row gt_right">-0.2784974</td></tr>
+    <tr><td class="gt_row gt_left">Syracuse</td>
+<td class="gt_row gt_right">736</td>
+<td class="gt_row gt_right">547</td>
+<td class="gt_row gt_right">-0.2567935</td></tr>
+    <tr><td class="gt_row gt_left">The Citadel</td>
+<td class="gt_row gt_right">938</td>
+<td class="gt_row gt_right">702</td>
+<td class="gt_row gt_right">-0.2515991</td></tr>
+    <tr><td class="gt_row gt_left">Mercer</td>
+<td class="gt_row gt_right">764</td>
+<td class="gt_row gt_right">586</td>
+<td class="gt_row gt_right">-0.2329843</td></tr>
+    <tr><td class="gt_row gt_left">Monmouth</td>
+<td class="gt_row gt_right">597</td>
+<td class="gt_row gt_right">466</td>
+<td class="gt_row gt_right">-0.2194305</td></tr>
+    <tr><td class="gt_row gt_left">Florida International</td>
+<td class="gt_row gt_right">852</td>
+<td class="gt_row gt_right">671</td>
+<td class="gt_row gt_right">-0.2124413</td></tr>
   </tbody>
   
   
@@ -2879,7 +2865,7 @@ using the `.groups` argument.</code></pre>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Did Maryland Shoot Fewer Threes in 2021-22?"</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Yes, but it wasn't a big change. These 10 teams completely changed their offenses."</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"No, the Terps shot more. But these 10 teams completely changed their offenses."</span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
@@ -2892,12 +2878,12 @@ using the `.groups` argument.</code></pre>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="zethquesly" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fqibrhxjfl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#zethquesly .gt_table {
+#fqibrhxjfl .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2922,7 +2908,7 @@ using the `.groups` argument.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#zethquesly .gt_heading {
+#fqibrhxjfl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2934,7 +2920,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#zethquesly .gt_title {
+#fqibrhxjfl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2946,7 +2932,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-width: 0;
 }
 
-#zethquesly .gt_subtitle {
+#fqibrhxjfl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2958,13 +2944,13 @@ using the `.groups` argument.</code></pre>
   border-top-width: 0;
 }
 
-#zethquesly .gt_bottom_border {
+#fqibrhxjfl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zethquesly .gt_col_headings {
+#fqibrhxjfl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2979,7 +2965,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#zethquesly .gt_col_heading {
+#fqibrhxjfl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2999,7 +2985,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#zethquesly .gt_column_spanner_outer {
+#fqibrhxjfl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3011,15 +2997,15 @@ using the `.groups` argument.</code></pre>
   padding-right: 4px;
 }
 
-#zethquesly .gt_column_spanner_outer:first-child {
+#fqibrhxjfl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zethquesly .gt_column_spanner_outer:last-child {
+#fqibrhxjfl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zethquesly .gt_column_spanner {
+#fqibrhxjfl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3031,7 +3017,7 @@ using the `.groups` argument.</code></pre>
   width: 100%;
 }
 
-#zethquesly .gt_group_heading {
+#fqibrhxjfl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3056,7 +3042,7 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#zethquesly .gt_empty_group_heading {
+#fqibrhxjfl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3071,15 +3057,15 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#zethquesly .gt_from_md > :first-child {
+#fqibrhxjfl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zethquesly .gt_from_md > :last-child {
+#fqibrhxjfl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zethquesly .gt_row {
+#fqibrhxjfl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3098,7 +3084,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#zethquesly .gt_stub {
+#fqibrhxjfl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3111,7 +3097,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#zethquesly .gt_stub_row_group {
+#fqibrhxjfl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3125,11 +3111,11 @@ using the `.groups` argument.</code></pre>
   vertical-align: top;
 }
 
-#zethquesly .gt_row_group_first td {
+#fqibrhxjfl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zethquesly .gt_summary_row {
+#fqibrhxjfl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3139,16 +3125,16 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#zethquesly .gt_first_summary_row {
+#fqibrhxjfl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zethquesly .gt_first_summary_row.thick {
+#fqibrhxjfl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zethquesly .gt_last_summary_row {
+#fqibrhxjfl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3158,7 +3144,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#zethquesly .gt_grand_summary_row {
+#fqibrhxjfl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3168,7 +3154,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#zethquesly .gt_first_grand_summary_row {
+#fqibrhxjfl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3178,11 +3164,11 @@ using the `.groups` argument.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#zethquesly .gt_striped {
+#fqibrhxjfl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zethquesly .gt_table_body {
+#fqibrhxjfl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3191,7 +3177,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#zethquesly .gt_footnotes {
+#fqibrhxjfl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3205,7 +3191,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#zethquesly .gt_footnote {
+#fqibrhxjfl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3214,7 +3200,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#zethquesly .gt_sourcenotes {
+#fqibrhxjfl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3228,7 +3214,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#zethquesly .gt_sourcenote {
+#fqibrhxjfl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3236,140 +3222,136 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#zethquesly .gt_left {
+#fqibrhxjfl .gt_left {
   text-align: left;
 }
 
-#zethquesly .gt_center {
+#fqibrhxjfl .gt_center {
   text-align: center;
 }
 
-#zethquesly .gt_right {
+#fqibrhxjfl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zethquesly .gt_font_normal {
+#fqibrhxjfl .gt_font_normal {
   font-weight: normal;
 }
 
-#zethquesly .gt_font_bold {
+#fqibrhxjfl .gt_font_bold {
   font-weight: bold;
 }
 
-#zethquesly .gt_font_italic {
+#fqibrhxjfl .gt_font_italic {
   font-style: italic;
 }
 
-#zethquesly .gt_super {
+#fqibrhxjfl .gt_super {
   font-size: 65%;
 }
 
-#zethquesly .gt_footnote_marks {
+#fqibrhxjfl .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#fqibrhxjfl .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#zethquesly .gt_asterisk {
+#fqibrhxjfl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zethquesly .gt_indent_1 {
-  text-indent: 5px;
+#fqibrhxjfl .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#zethquesly .gt_indent_2 {
-  text-indent: 10px;
+#fqibrhxjfl .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#zethquesly .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#zethquesly .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#zethquesly .gt_indent_5 {
-  text-indent: 25px;
+#fqibrhxjfl .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <td colspan="5" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</td>
+      <th colspan="4" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</th>
     </tr>
     <tr>
-      <td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">Yes, but it wasn't a big change. These 10 teams completely changed their offenses.</td>
+      <th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">No, the Terps shot more. But these 10 teams completely changed their offenses.</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Team</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Conference</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2020-2021</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">2021-2022</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Percent Change</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Team</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2021-2022</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2022-2023</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Percent Change</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Toledo</td>
-<td class="gt_row gt_left">MAC</td>
-<td class="gt_row gt_right">817</td>
-<td class="gt_row gt_right">605</td>
-<td class="gt_row gt_right">-0.25948592</td></tr>
-    <tr><td class="gt_row gt_left">San Diego State</td>
-<td class="gt_row gt_left">MWC</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">477</td>
-<td class="gt_row gt_right">-0.21931260</td></tr>
-    <tr><td class="gt_row gt_left">Minnesota</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">730</td>
-<td class="gt_row gt_right">617</td>
-<td class="gt_row gt_right">-0.15479452</td></tr>
-    <tr><td class="gt_row gt_left">South Alabama</td>
-<td class="gt_row gt_left">Sun Belt</td>
-<td class="gt_row gt_right">707</td>
-<td class="gt_row gt_right">598</td>
-<td class="gt_row gt_right">-0.15417256</td></tr>
-    <tr><td class="gt_row gt_left">Cal State Bakersfield</td>
-<td class="gt_row gt_left">Big West</td>
-<td class="gt_row gt_right">414</td>
-<td class="gt_row gt_right">352</td>
-<td class="gt_row gt_right">-0.14975845</td></tr>
-    <tr><td class="gt_row gt_left">Creighton</td>
-<td class="gt_row gt_left">Big East</td>
-<td class="gt_row gt_right">742</td>
+    <tr><td class="gt_row gt_left">Long Island University</td>
+<td class="gt_row gt_right">758</td>
+<td class="gt_row gt_right">420</td>
+<td class="gt_row gt_right">-0.4459103</td></tr>
+    <tr><td class="gt_row gt_left">Denver</td>
+<td class="gt_row gt_right">631</td>
+<td class="gt_row gt_right">442</td>
+<td class="gt_row gt_right">-0.2995246</td></tr>
+    <tr><td class="gt_row gt_left">Mississippi Valley State</td>
 <td class="gt_row gt_right">652</td>
-<td class="gt_row gt_right">-0.12129380</td></tr>
-    <tr><td class="gt_row gt_left">Colorado</td>
-<td class="gt_row gt_left">Pac-12</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">539</td>
-<td class="gt_row gt_right">-0.11783961</td></tr>
-    <tr><td class="gt_row gt_left">Virginia</td>
-<td class="gt_row gt_left">ACC</td>
-<td class="gt_row gt_right">535</td>
-<td class="gt_row gt_right">480</td>
-<td class="gt_row gt_right">-0.10280374</td></tr>
-    <tr><td class="gt_row gt_left">Virginia Commonwealth</td>
-<td class="gt_row gt_left">A-10</td>
-<td class="gt_row gt_right">510</td>
-<td class="gt_row gt_right">462</td>
-<td class="gt_row gt_right">-0.09411765</td></tr>
-    <tr><td class="gt_row gt_left">Wisconsin</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">689</td>
-<td class="gt_row gt_right">633</td>
-<td class="gt_row gt_right">-0.08127721</td></tr>
+<td class="gt_row gt_right">464</td>
+<td class="gt_row gt_right">-0.2883436</td></tr>
+    <tr><td class="gt_row gt_left">Massachusetts</td>
+<td class="gt_row gt_right">770</td>
+<td class="gt_row gt_right">555</td>
+<td class="gt_row gt_right">-0.2792208</td></tr>
+    <tr><td class="gt_row gt_left">Incarnate Word</td>
+<td class="gt_row gt_right">772</td>
+<td class="gt_row gt_right">557</td>
+<td class="gt_row gt_right">-0.2784974</td></tr>
+    <tr><td class="gt_row gt_left">Syracuse</td>
+<td class="gt_row gt_right">736</td>
+<td class="gt_row gt_right">547</td>
+<td class="gt_row gt_right">-0.2567935</td></tr>
+    <tr><td class="gt_row gt_left">The Citadel</td>
+<td class="gt_row gt_right">938</td>
+<td class="gt_row gt_right">702</td>
+<td class="gt_row gt_right">-0.2515991</td></tr>
+    <tr><td class="gt_row gt_left">Mercer</td>
+<td class="gt_row gt_right">764</td>
+<td class="gt_row gt_right">586</td>
+<td class="gt_row gt_right">-0.2329843</td></tr>
+    <tr><td class="gt_row gt_left">Monmouth</td>
+<td class="gt_row gt_right">597</td>
+<td class="gt_row gt_right">466</td>
+<td class="gt_row gt_right">-0.2194305</td></tr>
+    <tr><td class="gt_row gt_left">Florida International</td>
+<td class="gt_row gt_right">852</td>
+<td class="gt_row gt_right">671</td>
+<td class="gt_row gt_right">-0.2124413</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
-      <td class="gt_sourcenote" colspan="5"><strong>By:</strong> Derek Willis  |  <strong>Source:</strong> <a href="https://www.sports-reference.com/cbb/seasons/">Sports Reference</a></td>
+      <td class="gt_sourcenote" colspan="4"><strong>By:</strong> Derek Willis  |  <strong>Source:</strong> <a href="https://www.sports-reference.com/cbb/seasons/">Sports Reference</a></td>
     </tr>
   </tfoot>
   
@@ -3386,7 +3368,7 @@ using the `.groups` argument.</code></pre>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Did Maryland Shoot Fewer Threes in 2021-22?"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Yes, but it wasn't a big change. These 10 teams completely changed their offenses."</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"No, the Terps shot more. But these 10 teams completely changed their offenses."</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
@@ -3408,12 +3390,12 @@ using the `.groups` argument.</code></pre>
 <span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>   ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="lopaushowu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rzzaxvdxvp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#lopaushowu .gt_table {
+#rzzaxvdxvp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3438,7 +3420,7 @@ using the `.groups` argument.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#lopaushowu .gt_heading {
+#rzzaxvdxvp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3450,7 +3432,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lopaushowu .gt_title {
+#rzzaxvdxvp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3462,7 +3444,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-width: 0;
 }
 
-#lopaushowu .gt_subtitle {
+#rzzaxvdxvp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3474,13 +3456,13 @@ using the `.groups` argument.</code></pre>
   border-top-width: 0;
 }
 
-#lopaushowu .gt_bottom_border {
+#rzzaxvdxvp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lopaushowu .gt_col_headings {
+#rzzaxvdxvp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3495,7 +3477,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lopaushowu .gt_col_heading {
+#rzzaxvdxvp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3515,7 +3497,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#lopaushowu .gt_column_spanner_outer {
+#rzzaxvdxvp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3527,15 +3509,15 @@ using the `.groups` argument.</code></pre>
   padding-right: 4px;
 }
 
-#lopaushowu .gt_column_spanner_outer:first-child {
+#rzzaxvdxvp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lopaushowu .gt_column_spanner_outer:last-child {
+#rzzaxvdxvp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lopaushowu .gt_column_spanner {
+#rzzaxvdxvp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3547,7 +3529,7 @@ using the `.groups` argument.</code></pre>
   width: 100%;
 }
 
-#lopaushowu .gt_group_heading {
+#rzzaxvdxvp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3572,7 +3554,7 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#lopaushowu .gt_empty_group_heading {
+#rzzaxvdxvp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3587,15 +3569,15 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#lopaushowu .gt_from_md > :first-child {
+#rzzaxvdxvp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lopaushowu .gt_from_md > :last-child {
+#rzzaxvdxvp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lopaushowu .gt_row {
+#rzzaxvdxvp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3614,7 +3596,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#lopaushowu .gt_stub {
+#rzzaxvdxvp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3627,7 +3609,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#lopaushowu .gt_stub_row_group {
+#rzzaxvdxvp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3641,11 +3623,11 @@ using the `.groups` argument.</code></pre>
   vertical-align: top;
 }
 
-#lopaushowu .gt_row_group_first td {
+#rzzaxvdxvp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lopaushowu .gt_summary_row {
+#rzzaxvdxvp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3655,16 +3637,16 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#lopaushowu .gt_first_summary_row {
+#rzzaxvdxvp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lopaushowu .gt_first_summary_row.thick {
+#rzzaxvdxvp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lopaushowu .gt_last_summary_row {
+#rzzaxvdxvp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3674,7 +3656,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lopaushowu .gt_grand_summary_row {
+#rzzaxvdxvp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3684,7 +3666,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#lopaushowu .gt_first_grand_summary_row {
+#rzzaxvdxvp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3694,11 +3676,11 @@ using the `.groups` argument.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#lopaushowu .gt_striped {
+#rzzaxvdxvp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lopaushowu .gt_table_body {
+#rzzaxvdxvp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3707,7 +3689,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lopaushowu .gt_footnotes {
+#rzzaxvdxvp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3721,7 +3703,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lopaushowu .gt_footnote {
+#rzzaxvdxvp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3730,7 +3712,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#lopaushowu .gt_sourcenotes {
+#rzzaxvdxvp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3744,7 +3726,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lopaushowu .gt_sourcenote {
+#rzzaxvdxvp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3752,140 +3734,136 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#lopaushowu .gt_left {
+#rzzaxvdxvp .gt_left {
   text-align: left;
 }
 
-#lopaushowu .gt_center {
+#rzzaxvdxvp .gt_center {
   text-align: center;
 }
 
-#lopaushowu .gt_right {
+#rzzaxvdxvp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lopaushowu .gt_font_normal {
+#rzzaxvdxvp .gt_font_normal {
   font-weight: normal;
 }
 
-#lopaushowu .gt_font_bold {
+#rzzaxvdxvp .gt_font_bold {
   font-weight: bold;
 }
 
-#lopaushowu .gt_font_italic {
+#rzzaxvdxvp .gt_font_italic {
   font-style: italic;
 }
 
-#lopaushowu .gt_super {
+#rzzaxvdxvp .gt_super {
   font-size: 65%;
 }
 
-#lopaushowu .gt_footnote_marks {
+#rzzaxvdxvp .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#rzzaxvdxvp .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#lopaushowu .gt_asterisk {
+#rzzaxvdxvp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lopaushowu .gt_indent_1 {
-  text-indent: 5px;
+#rzzaxvdxvp .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#lopaushowu .gt_indent_2 {
-  text-indent: 10px;
+#rzzaxvdxvp .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#lopaushowu .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#lopaushowu .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#lopaushowu .gt_indent_5 {
-  text-indent: 25px;
+#rzzaxvdxvp .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <td colspan="5" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</td>
+      <th colspan="4" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</th>
     </tr>
     <tr>
-      <td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">Yes, but it wasn't a big change. These 10 teams completely changed their offenses.</td>
+      <th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">No, the Terps shot more. But these 10 teams completely changed their offenses.</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Team</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Conference</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">2020-2021</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">2021-2022</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Percent Change</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">Team</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">2021-2022</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">2022-2023</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">Percent Change</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Toledo</td>
-<td class="gt_row gt_left">MAC</td>
-<td class="gt_row gt_right">817</td>
-<td class="gt_row gt_right">605</td>
-<td class="gt_row gt_right">-0.25948592</td></tr>
-    <tr><td class="gt_row gt_left">San Diego State</td>
-<td class="gt_row gt_left">MWC</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">477</td>
-<td class="gt_row gt_right">-0.21931260</td></tr>
-    <tr><td class="gt_row gt_left">Minnesota</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">730</td>
-<td class="gt_row gt_right">617</td>
-<td class="gt_row gt_right">-0.15479452</td></tr>
-    <tr><td class="gt_row gt_left">South Alabama</td>
-<td class="gt_row gt_left">Sun Belt</td>
-<td class="gt_row gt_right">707</td>
-<td class="gt_row gt_right">598</td>
-<td class="gt_row gt_right">-0.15417256</td></tr>
-    <tr><td class="gt_row gt_left">Cal State Bakersfield</td>
-<td class="gt_row gt_left">Big West</td>
-<td class="gt_row gt_right">414</td>
-<td class="gt_row gt_right">352</td>
-<td class="gt_row gt_right">-0.14975845</td></tr>
-    <tr><td class="gt_row gt_left">Creighton</td>
-<td class="gt_row gt_left">Big East</td>
-<td class="gt_row gt_right">742</td>
+    <tr><td class="gt_row gt_left">Long Island University</td>
+<td class="gt_row gt_right">758</td>
+<td class="gt_row gt_right">420</td>
+<td class="gt_row gt_right">-0.4459103</td></tr>
+    <tr><td class="gt_row gt_left">Denver</td>
+<td class="gt_row gt_right">631</td>
+<td class="gt_row gt_right">442</td>
+<td class="gt_row gt_right">-0.2995246</td></tr>
+    <tr><td class="gt_row gt_left">Mississippi Valley State</td>
 <td class="gt_row gt_right">652</td>
-<td class="gt_row gt_right">-0.12129380</td></tr>
-    <tr><td class="gt_row gt_left">Colorado</td>
-<td class="gt_row gt_left">Pac-12</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">539</td>
-<td class="gt_row gt_right">-0.11783961</td></tr>
-    <tr><td class="gt_row gt_left">Virginia</td>
-<td class="gt_row gt_left">ACC</td>
-<td class="gt_row gt_right">535</td>
-<td class="gt_row gt_right">480</td>
-<td class="gt_row gt_right">-0.10280374</td></tr>
-    <tr><td class="gt_row gt_left">Virginia Commonwealth</td>
-<td class="gt_row gt_left">A-10</td>
-<td class="gt_row gt_right">510</td>
-<td class="gt_row gt_right">462</td>
-<td class="gt_row gt_right">-0.09411765</td></tr>
-    <tr><td class="gt_row gt_left">Wisconsin</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">689</td>
-<td class="gt_row gt_right">633</td>
-<td class="gt_row gt_right">-0.08127721</td></tr>
+<td class="gt_row gt_right">464</td>
+<td class="gt_row gt_right">-0.2883436</td></tr>
+    <tr><td class="gt_row gt_left">Massachusetts</td>
+<td class="gt_row gt_right">770</td>
+<td class="gt_row gt_right">555</td>
+<td class="gt_row gt_right">-0.2792208</td></tr>
+    <tr><td class="gt_row gt_left">Incarnate Word</td>
+<td class="gt_row gt_right">772</td>
+<td class="gt_row gt_right">557</td>
+<td class="gt_row gt_right">-0.2784974</td></tr>
+    <tr><td class="gt_row gt_left">Syracuse</td>
+<td class="gt_row gt_right">736</td>
+<td class="gt_row gt_right">547</td>
+<td class="gt_row gt_right">-0.2567935</td></tr>
+    <tr><td class="gt_row gt_left">The Citadel</td>
+<td class="gt_row gt_right">938</td>
+<td class="gt_row gt_right">702</td>
+<td class="gt_row gt_right">-0.2515991</td></tr>
+    <tr><td class="gt_row gt_left">Mercer</td>
+<td class="gt_row gt_right">764</td>
+<td class="gt_row gt_right">586</td>
+<td class="gt_row gt_right">-0.2329843</td></tr>
+    <tr><td class="gt_row gt_left">Monmouth</td>
+<td class="gt_row gt_right">597</td>
+<td class="gt_row gt_right">466</td>
+<td class="gt_row gt_right">-0.2194305</td></tr>
+    <tr><td class="gt_row gt_left">Florida International</td>
+<td class="gt_row gt_right">852</td>
+<td class="gt_row gt_right">671</td>
+<td class="gt_row gt_right">-0.2124413</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
-      <td class="gt_sourcenote" colspan="5"><strong>By:</strong> Derek Willis  |  <strong>Source:</strong> <a href="https://www.sports-reference.com/cbb/seasons/">Sports Reference</a></td>
+      <td class="gt_sourcenote" colspan="4"><strong>By:</strong> Derek Willis  |  <strong>Source:</strong> <a href="https://www.sports-reference.com/cbb/seasons/">Sports Reference</a></td>
     </tr>
   </tfoot>
   
@@ -3902,7 +3880,7 @@ using the `.groups` argument.</code></pre>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Did Maryland Shoot Fewer Threes in 2021-22?"</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Yes, but it wasn't a big change. These 10 teams completely changed their offenses."</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"No, the Terps shot more. But these 10 teams completely changed their offenses."</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"**By:** Derek Willis  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)"</span>)</span>
@@ -3926,12 +3904,12 @@ using the `.groups` argument.</code></pre>
 <span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="floogylkjo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="erqtjwgyvt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#floogylkjo .gt_table {
+#erqtjwgyvt .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3956,7 +3934,7 @@ using the `.groups` argument.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#floogylkjo .gt_heading {
+#erqtjwgyvt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3968,7 +3946,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#floogylkjo .gt_title {
+#erqtjwgyvt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3980,7 +3958,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-width: 0;
 }
 
-#floogylkjo .gt_subtitle {
+#erqtjwgyvt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3992,13 +3970,13 @@ using the `.groups` argument.</code></pre>
   border-top-width: 0;
 }
 
-#floogylkjo .gt_bottom_border {
+#erqtjwgyvt .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#floogylkjo .gt_col_headings {
+#erqtjwgyvt .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4013,7 +3991,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#floogylkjo .gt_col_heading {
+#erqtjwgyvt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4033,7 +4011,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#floogylkjo .gt_column_spanner_outer {
+#erqtjwgyvt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4045,15 +4023,15 @@ using the `.groups` argument.</code></pre>
   padding-right: 4px;
 }
 
-#floogylkjo .gt_column_spanner_outer:first-child {
+#erqtjwgyvt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#floogylkjo .gt_column_spanner_outer:last-child {
+#erqtjwgyvt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#floogylkjo .gt_column_spanner {
+#erqtjwgyvt .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4065,7 +4043,7 @@ using the `.groups` argument.</code></pre>
   width: 100%;
 }
 
-#floogylkjo .gt_group_heading {
+#erqtjwgyvt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4090,7 +4068,7 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#floogylkjo .gt_empty_group_heading {
+#erqtjwgyvt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4105,15 +4083,15 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#floogylkjo .gt_from_md > :first-child {
+#erqtjwgyvt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#floogylkjo .gt_from_md > :last-child {
+#erqtjwgyvt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#floogylkjo .gt_row {
+#erqtjwgyvt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4132,7 +4110,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#floogylkjo .gt_stub {
+#erqtjwgyvt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4145,7 +4123,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#floogylkjo .gt_stub_row_group {
+#erqtjwgyvt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4159,11 +4137,11 @@ using the `.groups` argument.</code></pre>
   vertical-align: top;
 }
 
-#floogylkjo .gt_row_group_first td {
+#erqtjwgyvt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#floogylkjo .gt_summary_row {
+#erqtjwgyvt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4173,16 +4151,16 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#floogylkjo .gt_first_summary_row {
+#erqtjwgyvt .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-#floogylkjo .gt_first_summary_row.thick {
+#erqtjwgyvt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#floogylkjo .gt_last_summary_row {
+#erqtjwgyvt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4192,7 +4170,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#floogylkjo .gt_grand_summary_row {
+#erqtjwgyvt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4202,7 +4180,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#floogylkjo .gt_first_grand_summary_row {
+#erqtjwgyvt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4212,11 +4190,11 @@ using the `.groups` argument.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#floogylkjo .gt_striped {
+#erqtjwgyvt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#floogylkjo .gt_table_body {
+#erqtjwgyvt .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4225,7 +4203,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#floogylkjo .gt_footnotes {
+#erqtjwgyvt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4239,7 +4217,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#floogylkjo .gt_footnote {
+#erqtjwgyvt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -4248,7 +4226,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#floogylkjo .gt_sourcenotes {
+#erqtjwgyvt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4262,7 +4240,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#floogylkjo .gt_sourcenote {
+#erqtjwgyvt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4270,140 +4248,136 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#floogylkjo .gt_left {
+#erqtjwgyvt .gt_left {
   text-align: left;
 }
 
-#floogylkjo .gt_center {
+#erqtjwgyvt .gt_center {
   text-align: center;
 }
 
-#floogylkjo .gt_right {
+#erqtjwgyvt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#floogylkjo .gt_font_normal {
+#erqtjwgyvt .gt_font_normal {
   font-weight: normal;
 }
 
-#floogylkjo .gt_font_bold {
+#erqtjwgyvt .gt_font_bold {
   font-weight: bold;
 }
 
-#floogylkjo .gt_font_italic {
+#erqtjwgyvt .gt_font_italic {
   font-style: italic;
 }
 
-#floogylkjo .gt_super {
+#erqtjwgyvt .gt_super {
   font-size: 65%;
 }
 
-#floogylkjo .gt_footnote_marks {
+#erqtjwgyvt .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#erqtjwgyvt .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#floogylkjo .gt_asterisk {
+#erqtjwgyvt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#floogylkjo .gt_indent_1 {
-  text-indent: 5px;
+#erqtjwgyvt .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#floogylkjo .gt_indent_2 {
-  text-indent: 10px;
+#erqtjwgyvt .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#floogylkjo .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#floogylkjo .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#floogylkjo .gt_indent_5 {
-  text-indent: 25px;
+#erqtjwgyvt .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <td colspan="5" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</td>
+      <th colspan="4" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</th>
     </tr>
     <tr>
-      <td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">Yes, but it wasn't a big change. These 10 teams completely changed their offenses.</td>
+      <th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">No, the Terps shot more. But these 10 teams completely changed their offenses.</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Team</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Conference</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">2020-2021</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">2021-2022</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Percent Change</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">Team</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">2021-2022</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">2022-2023</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">Percent Change</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Toledo</td>
-<td class="gt_row gt_left">MAC</td>
-<td class="gt_row gt_right">817</td>
-<td class="gt_row gt_right">605</td>
-<td class="gt_row gt_right">-0.25948592</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">San Diego State</td>
-<td class="gt_row gt_left gt_striped">MWC</td>
-<td class="gt_row gt_right gt_striped">611</td>
-<td class="gt_row gt_right gt_striped">477</td>
-<td class="gt_row gt_right gt_striped">-0.21931260</td></tr>
-    <tr><td class="gt_row gt_left">Minnesota</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">730</td>
-<td class="gt_row gt_right">617</td>
-<td class="gt_row gt_right">-0.15479452</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">South Alabama</td>
-<td class="gt_row gt_left gt_striped">Sun Belt</td>
-<td class="gt_row gt_right gt_striped">707</td>
-<td class="gt_row gt_right gt_striped">598</td>
-<td class="gt_row gt_right gt_striped">-0.15417256</td></tr>
-    <tr><td class="gt_row gt_left">Cal State Bakersfield</td>
-<td class="gt_row gt_left">Big West</td>
-<td class="gt_row gt_right">414</td>
-<td class="gt_row gt_right">352</td>
-<td class="gt_row gt_right">-0.14975845</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">Creighton</td>
-<td class="gt_row gt_left gt_striped">Big East</td>
-<td class="gt_row gt_right gt_striped">742</td>
-<td class="gt_row gt_right gt_striped">652</td>
-<td class="gt_row gt_right gt_striped">-0.12129380</td></tr>
-    <tr><td class="gt_row gt_left">Colorado</td>
-<td class="gt_row gt_left">Pac-12</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">539</td>
-<td class="gt_row gt_right">-0.11783961</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">Virginia</td>
-<td class="gt_row gt_left gt_striped">ACC</td>
-<td class="gt_row gt_right gt_striped">535</td>
-<td class="gt_row gt_right gt_striped">480</td>
-<td class="gt_row gt_right gt_striped">-0.10280374</td></tr>
-    <tr><td class="gt_row gt_left">Virginia Commonwealth</td>
-<td class="gt_row gt_left">A-10</td>
-<td class="gt_row gt_right">510</td>
-<td class="gt_row gt_right">462</td>
-<td class="gt_row gt_right">-0.09411765</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">Wisconsin</td>
-<td class="gt_row gt_left gt_striped">Big Ten</td>
-<td class="gt_row gt_right gt_striped">689</td>
-<td class="gt_row gt_right gt_striped">633</td>
-<td class="gt_row gt_right gt_striped">-0.08127721</td></tr>
+    <tr><td class="gt_row gt_left">Long Island University</td>
+<td class="gt_row gt_right">758</td>
+<td class="gt_row gt_right">420</td>
+<td class="gt_row gt_right">-0.4459103</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Denver</td>
+<td class="gt_row gt_right gt_striped">631</td>
+<td class="gt_row gt_right gt_striped">442</td>
+<td class="gt_row gt_right gt_striped">-0.2995246</td></tr>
+    <tr><td class="gt_row gt_left">Mississippi Valley State</td>
+<td class="gt_row gt_right">652</td>
+<td class="gt_row gt_right">464</td>
+<td class="gt_row gt_right">-0.2883436</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Massachusetts</td>
+<td class="gt_row gt_right gt_striped">770</td>
+<td class="gt_row gt_right gt_striped">555</td>
+<td class="gt_row gt_right gt_striped">-0.2792208</td></tr>
+    <tr><td class="gt_row gt_left">Incarnate Word</td>
+<td class="gt_row gt_right">772</td>
+<td class="gt_row gt_right">557</td>
+<td class="gt_row gt_right">-0.2784974</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Syracuse</td>
+<td class="gt_row gt_right gt_striped">736</td>
+<td class="gt_row gt_right gt_striped">547</td>
+<td class="gt_row gt_right gt_striped">-0.2567935</td></tr>
+    <tr><td class="gt_row gt_left">The Citadel</td>
+<td class="gt_row gt_right">938</td>
+<td class="gt_row gt_right">702</td>
+<td class="gt_row gt_right">-0.2515991</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Mercer</td>
+<td class="gt_row gt_right gt_striped">764</td>
+<td class="gt_row gt_right gt_striped">586</td>
+<td class="gt_row gt_right gt_striped">-0.2329843</td></tr>
+    <tr><td class="gt_row gt_left">Monmouth</td>
+<td class="gt_row gt_right">597</td>
+<td class="gt_row gt_right">466</td>
+<td class="gt_row gt_right">-0.2194305</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Florida International</td>
+<td class="gt_row gt_right gt_striped">852</td>
+<td class="gt_row gt_right gt_striped">671</td>
+<td class="gt_row gt_right gt_striped">-0.2124413</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
-      <td class="gt_sourcenote" colspan="5"><strong>By:</strong> Derek Willis  |  <strong>Source:</strong> <a href="https://www.sports-reference.com/cbb/seasons/">Sports Reference</a></td>
+      <td class="gt_sourcenote" colspan="4"><strong>By:</strong> Derek Willis  |  <strong>Source:</strong> <a href="https://www.sports-reference.com/cbb/seasons/">Sports Reference</a></td>
     </tr>
   </tfoot>
   
@@ -4420,7 +4394,7 @@ using the `.groups` argument.</code></pre>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Did Maryland Shoot Fewer Threes in 2021-22?"</span>,</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Yes, but it wasn't a big change. These 10 teams completely changed their offenses."</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"No, the Terps shot more. But these 10 teams completely changed their offenses."</span></span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"**By:** Derek Willis  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)"</span>)</span>
@@ -4448,12 +4422,12 @@ using the `.groups` argument.</code></pre>
 <span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="xklaklpubt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hwvqibfzne" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#xklaklpubt .gt_table {
+#hwvqibfzne .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -4478,7 +4452,7 @@ using the `.groups` argument.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#xklaklpubt .gt_heading {
+#hwvqibfzne .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4490,7 +4464,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xklaklpubt .gt_title {
+#hwvqibfzne .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4502,7 +4476,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-width: 0;
 }
 
-#xklaklpubt .gt_subtitle {
+#hwvqibfzne .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4514,13 +4488,13 @@ using the `.groups` argument.</code></pre>
   border-top-width: 0;
 }
 
-#xklaklpubt .gt_bottom_border {
+#hwvqibfzne .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xklaklpubt .gt_col_headings {
+#hwvqibfzne .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4535,7 +4509,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xklaklpubt .gt_col_heading {
+#hwvqibfzne .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4555,7 +4529,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#xklaklpubt .gt_column_spanner_outer {
+#hwvqibfzne .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4567,15 +4541,15 @@ using the `.groups` argument.</code></pre>
   padding-right: 4px;
 }
 
-#xklaklpubt .gt_column_spanner_outer:first-child {
+#hwvqibfzne .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xklaklpubt .gt_column_spanner_outer:last-child {
+#hwvqibfzne .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xklaklpubt .gt_column_spanner {
+#hwvqibfzne .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4587,7 +4561,7 @@ using the `.groups` argument.</code></pre>
   width: 100%;
 }
 
-#xklaklpubt .gt_group_heading {
+#hwvqibfzne .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4612,7 +4586,7 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#xklaklpubt .gt_empty_group_heading {
+#hwvqibfzne .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4627,15 +4601,15 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#xklaklpubt .gt_from_md > :first-child {
+#hwvqibfzne .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xklaklpubt .gt_from_md > :last-child {
+#hwvqibfzne .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xklaklpubt .gt_row {
+#hwvqibfzne .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4654,7 +4628,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#xklaklpubt .gt_stub {
+#hwvqibfzne .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4667,7 +4641,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#xklaklpubt .gt_stub_row_group {
+#hwvqibfzne .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4681,11 +4655,11 @@ using the `.groups` argument.</code></pre>
   vertical-align: top;
 }
 
-#xklaklpubt .gt_row_group_first td {
+#hwvqibfzne .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xklaklpubt .gt_summary_row {
+#hwvqibfzne .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4695,16 +4669,16 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#xklaklpubt .gt_first_summary_row {
+#hwvqibfzne .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-#xklaklpubt .gt_first_summary_row.thick {
+#hwvqibfzne .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xklaklpubt .gt_last_summary_row {
+#hwvqibfzne .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4714,7 +4688,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xklaklpubt .gt_grand_summary_row {
+#hwvqibfzne .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4724,7 +4698,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#xklaklpubt .gt_first_grand_summary_row {
+#hwvqibfzne .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4734,11 +4708,11 @@ using the `.groups` argument.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#xklaklpubt .gt_striped {
+#hwvqibfzne .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xklaklpubt .gt_table_body {
+#hwvqibfzne .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4747,7 +4721,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xklaklpubt .gt_footnotes {
+#hwvqibfzne .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4761,7 +4735,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xklaklpubt .gt_footnote {
+#hwvqibfzne .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -4770,7 +4744,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#xklaklpubt .gt_sourcenotes {
+#hwvqibfzne .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4784,7 +4758,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xklaklpubt .gt_sourcenote {
+#hwvqibfzne .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4792,140 +4766,136 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#xklaklpubt .gt_left {
+#hwvqibfzne .gt_left {
   text-align: left;
 }
 
-#xklaklpubt .gt_center {
+#hwvqibfzne .gt_center {
   text-align: center;
 }
 
-#xklaklpubt .gt_right {
+#hwvqibfzne .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xklaklpubt .gt_font_normal {
+#hwvqibfzne .gt_font_normal {
   font-weight: normal;
 }
 
-#xklaklpubt .gt_font_bold {
+#hwvqibfzne .gt_font_bold {
   font-weight: bold;
 }
 
-#xklaklpubt .gt_font_italic {
+#hwvqibfzne .gt_font_italic {
   font-style: italic;
 }
 
-#xklaklpubt .gt_super {
+#hwvqibfzne .gt_super {
   font-size: 65%;
 }
 
-#xklaklpubt .gt_footnote_marks {
+#hwvqibfzne .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#hwvqibfzne .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#xklaklpubt .gt_asterisk {
+#hwvqibfzne .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xklaklpubt .gt_indent_1 {
-  text-indent: 5px;
+#hwvqibfzne .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#xklaklpubt .gt_indent_2 {
-  text-indent: 10px;
+#hwvqibfzne .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#xklaklpubt .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#xklaklpubt .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#xklaklpubt .gt_indent_5 {
-  text-indent: 25px;
+#hwvqibfzne .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <td colspan="5" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</td>
+      <th colspan="4" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</th>
     </tr>
     <tr>
-      <td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">Yes, but it wasn't a big change. These 10 teams completely changed their offenses.</td>
+      <th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">No, the Terps shot more. But these 10 teams completely changed their offenses.</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Team</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Conference</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">2020-2021</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">2021-2022</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Percent Change</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">Team</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">2021-2022</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">2022-2023</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">Percent Change</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Toledo</td>
-<td class="gt_row gt_left">MAC</td>
-<td class="gt_row gt_right">817</td>
-<td class="gt_row gt_right">605</td>
-<td class="gt_row gt_right">−25.9%</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">San Diego State</td>
-<td class="gt_row gt_left gt_striped">MWC</td>
-<td class="gt_row gt_right gt_striped">611</td>
-<td class="gt_row gt_right gt_striped">477</td>
-<td class="gt_row gt_right gt_striped">−21.9%</td></tr>
-    <tr><td class="gt_row gt_left">Minnesota</td>
-<td class="gt_row gt_left">Big Ten</td>
-<td class="gt_row gt_right">730</td>
-<td class="gt_row gt_right">617</td>
-<td class="gt_row gt_right">−15.5%</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">South Alabama</td>
-<td class="gt_row gt_left gt_striped">Sun Belt</td>
-<td class="gt_row gt_right gt_striped">707</td>
-<td class="gt_row gt_right gt_striped">598</td>
-<td class="gt_row gt_right gt_striped">−15.4%</td></tr>
-    <tr><td class="gt_row gt_left">Cal State Bakersfield</td>
-<td class="gt_row gt_left">Big West</td>
-<td class="gt_row gt_right">414</td>
-<td class="gt_row gt_right">352</td>
-<td class="gt_row gt_right">−15.0%</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">Creighton</td>
-<td class="gt_row gt_left gt_striped">Big East</td>
-<td class="gt_row gt_right gt_striped">742</td>
-<td class="gt_row gt_right gt_striped">652</td>
-<td class="gt_row gt_right gt_striped">−12.1%</td></tr>
-    <tr><td class="gt_row gt_left">Colorado</td>
-<td class="gt_row gt_left">Pac-12</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">539</td>
-<td class="gt_row gt_right">−11.8%</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">Virginia</td>
-<td class="gt_row gt_left gt_striped">ACC</td>
-<td class="gt_row gt_right gt_striped">535</td>
-<td class="gt_row gt_right gt_striped">480</td>
-<td class="gt_row gt_right gt_striped">−10.3%</td></tr>
-    <tr><td class="gt_row gt_left">Virginia Commonwealth</td>
-<td class="gt_row gt_left">A-10</td>
-<td class="gt_row gt_right">510</td>
-<td class="gt_row gt_right">462</td>
-<td class="gt_row gt_right">−9.4%</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">Wisconsin</td>
-<td class="gt_row gt_left gt_striped">Big Ten</td>
-<td class="gt_row gt_right gt_striped">689</td>
-<td class="gt_row gt_right gt_striped">633</td>
-<td class="gt_row gt_right gt_striped">−8.1%</td></tr>
+    <tr><td class="gt_row gt_left">Long Island University</td>
+<td class="gt_row gt_right">758</td>
+<td class="gt_row gt_right">420</td>
+<td class="gt_row gt_right">−44.6%</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Denver</td>
+<td class="gt_row gt_right gt_striped">631</td>
+<td class="gt_row gt_right gt_striped">442</td>
+<td class="gt_row gt_right gt_striped">−30.0%</td></tr>
+    <tr><td class="gt_row gt_left">Mississippi Valley State</td>
+<td class="gt_row gt_right">652</td>
+<td class="gt_row gt_right">464</td>
+<td class="gt_row gt_right">−28.8%</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Massachusetts</td>
+<td class="gt_row gt_right gt_striped">770</td>
+<td class="gt_row gt_right gt_striped">555</td>
+<td class="gt_row gt_right gt_striped">−27.9%</td></tr>
+    <tr><td class="gt_row gt_left">Incarnate Word</td>
+<td class="gt_row gt_right">772</td>
+<td class="gt_row gt_right">557</td>
+<td class="gt_row gt_right">−27.8%</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Syracuse</td>
+<td class="gt_row gt_right gt_striped">736</td>
+<td class="gt_row gt_right gt_striped">547</td>
+<td class="gt_row gt_right gt_striped">−25.7%</td></tr>
+    <tr><td class="gt_row gt_left">The Citadel</td>
+<td class="gt_row gt_right">938</td>
+<td class="gt_row gt_right">702</td>
+<td class="gt_row gt_right">−25.2%</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Mercer</td>
+<td class="gt_row gt_right gt_striped">764</td>
+<td class="gt_row gt_right gt_striped">586</td>
+<td class="gt_row gt_right gt_striped">−23.3%</td></tr>
+    <tr><td class="gt_row gt_left">Monmouth</td>
+<td class="gt_row gt_right">597</td>
+<td class="gt_row gt_right">466</td>
+<td class="gt_row gt_right">−21.9%</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Florida International</td>
+<td class="gt_row gt_right gt_striped">852</td>
+<td class="gt_row gt_right gt_striped">671</td>
+<td class="gt_row gt_right gt_striped">−21.2%</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
-      <td class="gt_sourcenote" colspan="5"><strong>By:</strong> Derek Willis  |  <strong>Source:</strong> <a href="https://www.sports-reference.com/cbb/seasons/">Sports Reference</a></td>
+      <td class="gt_sourcenote" colspan="4"><strong>By:</strong> Derek Willis  |  <strong>Source:</strong> <a href="https://www.sports-reference.com/cbb/seasons/">Sports Reference</a></td>
     </tr>
   </tfoot>
   
@@ -4933,7 +4903,7 @@ using the `.groups` argument.</code></pre>
 </div>
 </div>
 </div>
-<p>Throughout the semester, we’ve been using color and other signals to highlight things. Let’s pretend we’re doing a project on Minnesota. Note they’re the first Big Ten team on this list. With a little <code>tab_style</code> magic, we can change individual rows and add color. The last <code>tab_style</code> block here will first pass off the styles we want to use – we’re going to make the rows maroon and the text gold – and then for locations we specify where with a simple filter. What that means is that any rows we can address with logic – all rows with a value greater than X, for example – we can change the styling.</p>
+<p>Throughout the semester, we’ve been using color and other signals to highlight things. Let’s pretend we’re doing a project on Syracuse. With a little <code>tab_style</code> magic, we can change individual rows and add color. The last <code>tab_style</code> block here will first pass off the styles we want to use – we’re going to make the rows maroon and the text gold – and then for locations we specify where with a simple filter. What that means is that any rows we can address with logic – all rows with a value greater than X, for example – we can change the styling.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>threechange <span class="sc">%&gt;%</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
@@ -4942,7 +4912,7 @@ using the `.groups` argument.</code></pre>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Did Maryland Shoot Fewer Threes in 2021-22?"</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Yes, but it wasn't a big change. These 10 teams completely changed their offenses."</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"No, the Terps shot more. But these 10 teams completely changed their offenses."</span></span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"**By:** Derek Willis  |  **Source:** [Sports Reference](https://www.sports-reference.com/cbb/seasons/)"</span>)</span>
@@ -4970,20 +4940,20 @@ using the `.groups` argument.</code></pre>
 <span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
 <span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"maroon"</span>),</span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"gold"</span>)</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"blue"</span>),</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"orange"</span>)</span>
 <span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>      ),</span>
 <span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Team <span class="sc">==</span> <span class="st">"Minnesota"</span>)</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Team <span class="sc">==</span> <span class="st">"Syracuse"</span>)</span>
 <span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="wqlldwdupt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ivuvcqrrlt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#wqlldwdupt .gt_table {
+#ivuvcqrrlt .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -5008,7 +4978,7 @@ using the `.groups` argument.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#wqlldwdupt .gt_heading {
+#ivuvcqrrlt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5020,7 +4990,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wqlldwdupt .gt_title {
+#ivuvcqrrlt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5032,7 +5002,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-width: 0;
 }
 
-#wqlldwdupt .gt_subtitle {
+#ivuvcqrrlt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5044,13 +5014,13 @@ using the `.groups` argument.</code></pre>
   border-top-width: 0;
 }
 
-#wqlldwdupt .gt_bottom_border {
+#ivuvcqrrlt .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wqlldwdupt .gt_col_headings {
+#ivuvcqrrlt .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5065,7 +5035,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wqlldwdupt .gt_col_heading {
+#ivuvcqrrlt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5085,7 +5055,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#wqlldwdupt .gt_column_spanner_outer {
+#ivuvcqrrlt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5097,15 +5067,15 @@ using the `.groups` argument.</code></pre>
   padding-right: 4px;
 }
 
-#wqlldwdupt .gt_column_spanner_outer:first-child {
+#ivuvcqrrlt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wqlldwdupt .gt_column_spanner_outer:last-child {
+#ivuvcqrrlt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wqlldwdupt .gt_column_spanner {
+#ivuvcqrrlt .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5117,7 +5087,7 @@ using the `.groups` argument.</code></pre>
   width: 100%;
 }
 
-#wqlldwdupt .gt_group_heading {
+#ivuvcqrrlt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5142,7 +5112,7 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#wqlldwdupt .gt_empty_group_heading {
+#ivuvcqrrlt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5157,15 +5127,15 @@ using the `.groups` argument.</code></pre>
   vertical-align: middle;
 }
 
-#wqlldwdupt .gt_from_md > :first-child {
+#ivuvcqrrlt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wqlldwdupt .gt_from_md > :last-child {
+#ivuvcqrrlt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wqlldwdupt .gt_row {
+#ivuvcqrrlt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5184,7 +5154,7 @@ using the `.groups` argument.</code></pre>
   overflow-x: hidden;
 }
 
-#wqlldwdupt .gt_stub {
+#ivuvcqrrlt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5197,7 +5167,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#wqlldwdupt .gt_stub_row_group {
+#ivuvcqrrlt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5211,11 +5181,11 @@ using the `.groups` argument.</code></pre>
   vertical-align: top;
 }
 
-#wqlldwdupt .gt_row_group_first td {
+#ivuvcqrrlt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wqlldwdupt .gt_summary_row {
+#ivuvcqrrlt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5225,16 +5195,16 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#wqlldwdupt .gt_first_summary_row {
+#ivuvcqrrlt .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-#wqlldwdupt .gt_first_summary_row.thick {
+#ivuvcqrrlt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wqlldwdupt .gt_last_summary_row {
+#ivuvcqrrlt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5244,7 +5214,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wqlldwdupt .gt_grand_summary_row {
+#ivuvcqrrlt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5254,7 +5224,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#wqlldwdupt .gt_first_grand_summary_row {
+#ivuvcqrrlt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5264,11 +5234,11 @@ using the `.groups` argument.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#wqlldwdupt .gt_striped {
+#ivuvcqrrlt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wqlldwdupt .gt_table_body {
+#ivuvcqrrlt .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5277,7 +5247,7 @@ using the `.groups` argument.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wqlldwdupt .gt_footnotes {
+#ivuvcqrrlt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5291,7 +5261,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wqlldwdupt .gt_footnote {
+#ivuvcqrrlt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -5300,7 +5270,7 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#wqlldwdupt .gt_sourcenotes {
+#ivuvcqrrlt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5314,7 +5284,7 @@ using the `.groups` argument.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wqlldwdupt .gt_sourcenote {
+#ivuvcqrrlt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5322,140 +5292,136 @@ using the `.groups` argument.</code></pre>
   padding-right: 5px;
 }
 
-#wqlldwdupt .gt_left {
+#ivuvcqrrlt .gt_left {
   text-align: left;
 }
 
-#wqlldwdupt .gt_center {
+#ivuvcqrrlt .gt_center {
   text-align: center;
 }
 
-#wqlldwdupt .gt_right {
+#ivuvcqrrlt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wqlldwdupt .gt_font_normal {
+#ivuvcqrrlt .gt_font_normal {
   font-weight: normal;
 }
 
-#wqlldwdupt .gt_font_bold {
+#ivuvcqrrlt .gt_font_bold {
   font-weight: bold;
 }
 
-#wqlldwdupt .gt_font_italic {
+#ivuvcqrrlt .gt_font_italic {
   font-style: italic;
 }
 
-#wqlldwdupt .gt_super {
+#ivuvcqrrlt .gt_super {
   font-size: 65%;
 }
 
-#wqlldwdupt .gt_footnote_marks {
+#ivuvcqrrlt .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#ivuvcqrrlt .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#wqlldwdupt .gt_asterisk {
+#ivuvcqrrlt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wqlldwdupt .gt_indent_1 {
-  text-indent: 5px;
+#ivuvcqrrlt .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
 }
 
-#wqlldwdupt .gt_indent_2 {
-  text-indent: 10px;
+#ivuvcqrrlt .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
 }
 
-#wqlldwdupt .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#wqlldwdupt .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#wqlldwdupt .gt_indent_5 {
-  text-indent: 25px;
+#ivuvcqrrlt .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <td colspan="5" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</td>
+      <th colspan="4" class="gt_heading gt_title gt_font_normal" style="color: #000000; text-align: left; font-weight: bold;">Did Maryland Shoot Fewer Threes in 2021-22?</th>
     </tr>
     <tr>
-      <td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">Yes, but it wasn't a big change. These 10 teams completely changed their offenses.</td>
+      <th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="color: #000000; text-align: left;">No, the Terps shot more. But these 10 teams completely changed their offenses.</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Team</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Conference</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">2020-2021</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">2021-2022</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;" scope="col">Percent Change</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">Team</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">2021-2022</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">2022-2023</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold;">Percent Change</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Toledo</td>
-<td class="gt_row gt_left">MAC</td>
-<td class="gt_row gt_right">817</td>
-<td class="gt_row gt_right">605</td>
-<td class="gt_row gt_right">−25.9%</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">San Diego State</td>
-<td class="gt_row gt_left gt_striped">MWC</td>
-<td class="gt_row gt_right gt_striped">611</td>
-<td class="gt_row gt_right gt_striped">477</td>
-<td class="gt_row gt_right gt_striped">−21.9%</td></tr>
-    <tr><td class="gt_row gt_left" style="background-color: #B03060; color: #FFD700;">Minnesota</td>
-<td class="gt_row gt_left" style="background-color: #B03060; color: #FFD700;">Big Ten</td>
-<td class="gt_row gt_right" style="background-color: #B03060; color: #FFD700;">730</td>
-<td class="gt_row gt_right" style="background-color: #B03060; color: #FFD700;">617</td>
-<td class="gt_row gt_right" style="background-color: #B03060; color: #FFD700;">−15.5%</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">South Alabama</td>
-<td class="gt_row gt_left gt_striped">Sun Belt</td>
-<td class="gt_row gt_right gt_striped">707</td>
-<td class="gt_row gt_right gt_striped">598</td>
-<td class="gt_row gt_right gt_striped">−15.4%</td></tr>
-    <tr><td class="gt_row gt_left">Cal State Bakersfield</td>
-<td class="gt_row gt_left">Big West</td>
-<td class="gt_row gt_right">414</td>
-<td class="gt_row gt_right">352</td>
-<td class="gt_row gt_right">−15.0%</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">Creighton</td>
-<td class="gt_row gt_left gt_striped">Big East</td>
-<td class="gt_row gt_right gt_striped">742</td>
-<td class="gt_row gt_right gt_striped">652</td>
-<td class="gt_row gt_right gt_striped">−12.1%</td></tr>
-    <tr><td class="gt_row gt_left">Colorado</td>
-<td class="gt_row gt_left">Pac-12</td>
-<td class="gt_row gt_right">611</td>
-<td class="gt_row gt_right">539</td>
-<td class="gt_row gt_right">−11.8%</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">Virginia</td>
-<td class="gt_row gt_left gt_striped">ACC</td>
-<td class="gt_row gt_right gt_striped">535</td>
-<td class="gt_row gt_right gt_striped">480</td>
-<td class="gt_row gt_right gt_striped">−10.3%</td></tr>
-    <tr><td class="gt_row gt_left">Virginia Commonwealth</td>
-<td class="gt_row gt_left">A-10</td>
-<td class="gt_row gt_right">510</td>
-<td class="gt_row gt_right">462</td>
-<td class="gt_row gt_right">−9.4%</td></tr>
-    <tr><td class="gt_row gt_left gt_striped">Wisconsin</td>
-<td class="gt_row gt_left gt_striped">Big Ten</td>
-<td class="gt_row gt_right gt_striped">689</td>
-<td class="gt_row gt_right gt_striped">633</td>
-<td class="gt_row gt_right gt_striped">−8.1%</td></tr>
+    <tr><td class="gt_row gt_left">Long Island University</td>
+<td class="gt_row gt_right">758</td>
+<td class="gt_row gt_right">420</td>
+<td class="gt_row gt_right">−44.6%</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Denver</td>
+<td class="gt_row gt_right gt_striped">631</td>
+<td class="gt_row gt_right gt_striped">442</td>
+<td class="gt_row gt_right gt_striped">−30.0%</td></tr>
+    <tr><td class="gt_row gt_left">Mississippi Valley State</td>
+<td class="gt_row gt_right">652</td>
+<td class="gt_row gt_right">464</td>
+<td class="gt_row gt_right">−28.8%</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Massachusetts</td>
+<td class="gt_row gt_right gt_striped">770</td>
+<td class="gt_row gt_right gt_striped">555</td>
+<td class="gt_row gt_right gt_striped">−27.9%</td></tr>
+    <tr><td class="gt_row gt_left">Incarnate Word</td>
+<td class="gt_row gt_right">772</td>
+<td class="gt_row gt_right">557</td>
+<td class="gt_row gt_right">−27.8%</td></tr>
+    <tr><td class="gt_row gt_left gt_striped" style="background-color: #0000FF; color: #FFA500;">Syracuse</td>
+<td class="gt_row gt_right gt_striped" style="background-color: #0000FF; color: #FFA500;">736</td>
+<td class="gt_row gt_right gt_striped" style="background-color: #0000FF; color: #FFA500;">547</td>
+<td class="gt_row gt_right gt_striped" style="background-color: #0000FF; color: #FFA500;">−25.7%</td></tr>
+    <tr><td class="gt_row gt_left">The Citadel</td>
+<td class="gt_row gt_right">938</td>
+<td class="gt_row gt_right">702</td>
+<td class="gt_row gt_right">−25.2%</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Mercer</td>
+<td class="gt_row gt_right gt_striped">764</td>
+<td class="gt_row gt_right gt_striped">586</td>
+<td class="gt_row gt_right gt_striped">−23.3%</td></tr>
+    <tr><td class="gt_row gt_left">Monmouth</td>
+<td class="gt_row gt_right">597</td>
+<td class="gt_row gt_right">466</td>
+<td class="gt_row gt_right">−21.9%</td></tr>
+    <tr><td class="gt_row gt_left gt_striped">Florida International</td>
+<td class="gt_row gt_right gt_striped">852</td>
+<td class="gt_row gt_right gt_striped">671</td>
+<td class="gt_row gt_right gt_striped">−21.2%</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
-      <td class="gt_sourcenote" colspan="5"><strong>By:</strong> Derek Willis  |  <strong>Source:</strong> <a href="https://www.sports-reference.com/cbb/seasons/">Sports Reference</a></td>
+      <td class="gt_sourcenote" colspan="4"><strong>By:</strong> Derek Willis  |  <strong>Source:</strong> <a href="https://www.sports-reference.com/cbb/seasons/">Sports Reference</a></td>
     </tr>
   </tfoot>
   
@@ -5465,7 +5431,7 @@ using the `.groups` argument.</code></pre>
 </div>
 <p>Two things here:</p>
 <ol type="1">
-<li>Dear God that color scheme is awful, which is fitting for a school that worships a lawn-wrecking varmint.</li>
+<li>Dear God that color scheme is awful, which is fitting for a school that has a non-rhyming mascot.</li>
 <li>We’ve arrived where we want to be: We’ve created a clear table that allows a reader to compare schools at will while also using color to draw attention to the thing we want to draw attention to. We’ve kept it simple so the color has impact.</li>
 </ol>
 
@@ -5474,21 +5440,6 @@ using the `.groups` argument.</code></pre>
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
-  }
-  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -389,11 +394,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/attendance.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 149 Columns: 9
+<pre><code>Rows: 149 Columns: 12
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (2): Institution, Conference
-dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
+chr  (2): Institution, Conference
+dbl (10): 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -403,97 +408,101 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(attendance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 9
-  Institution     Conference    `2013` `2014` `2015` `2016` `2017` `2018` `2019`
-  &lt;chr&gt;           &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 Air Force       MWC           228562 168967 156158 177519 174924 166205 162505
-2 Akron           MAC           107101  55019 108588  62021 117416  92575 107752
-3 Alabama         SEC           710538 710736 707786 712747 712053 710931 707817
-4 Appalachian St. FBS Independ… 149366     NA     NA     NA     NA     NA     NA
-5 Appalachian St. Sun Belt          NA 138995 128755 156916 154722 131716 166640
-6 Arizona         Pac-12        285713 354973 308355 338017 255791 318051 237194</code></pre>
+<pre><code># A tibble: 6 × 12
+  Institution Conference `2013` `2014` `2015` `2016` `2017` `2018` `2019` `2020`
+  &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 Air Force   MWC        228562 168967 156158 177519 174924 166205 162505   5600
+2 Akron       MAC        107101  55019 108588  62021 117416  92575 107752     NA
+3 Alabama     SEC        710538 710736 707786 712747 712053 710931 707817  97120
+4 Appalachia… FBS Indep… 149366     NA     NA     NA     NA     NA     NA     NA
+5 Appalachia… Sun Belt       NA 138995 128755 156916 154722 131716 166640     NA
+6 Arizona     Pac-12     285713 354973 308355 338017 255791 318051 237194     NA
+# ℹ 2 more variables: `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>The code to calculate percent change is pretty simple. Remember, with <code>summarize</code>, we used <code>n()</code> to count things. With <code>mutate</code>, we use very similar syntax to calculate a new value using other values in our dataset. So in this case, we’re trying to do (new-old)/old, but we’re doing it with fields. If we look at what we got when we did <code>head</code>, you’ll see there’s `2019` as the new data, and we’ll use `2018` as the old data. So we’re looking at one year. Then, to help us, we’ll use arrange again to sort it, so we get the fastest growing school over one year.</p>
+<p>The code to calculate percent change is pretty simple. Remember, with <code>summarize</code>, we used <code>n()</code> to count things. With <code>mutate</code>, we use very similar syntax to calculate a new value using other values in our dataset. So in this case, we’re trying to do (new-old)/old, but we’re doing it with fields. If we look at what we got when we did <code>head</code>, you’ll see there’s `2022` as the new data, and we’ll use `2021` as the old data. So we’re looking at one year. Then, to help us, we’ll use arrange again to sort it, so we get the fastest growing school over one year.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> (<span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> (<span class="st">`</span><span class="at">2022</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2021</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2021</span><span class="st">`</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 149 × 10
-   Institution Confe…¹ `2013` `2014` `2015` `2016` `2017` `2018` `2019`   change
-   &lt;chr&gt;       &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
- 1 Air Force   MWC     228562 168967 156158 177519 174924 166205 162505 -0.0223 
- 2 Akron       MAC     107101  55019 108588  62021 117416  92575 107752  0.164  
- 3 Alabama     SEC     710538 710736 707786 712747 712053 710931 707817 -0.00438
- 4 Appalachia… FBS In… 149366     NA     NA     NA     NA     NA     NA NA      
- 5 Appalachia… Sun Be…     NA 138995 128755 156916 154722 131716 166640  0.265  
- 6 Arizona     Pac-12  285713 354973 308355 338017 255791 318051 237194 -0.254  
- 7 Arizona St. Pac-12  501509 343073 368985 286417 359660 291091 344161  0.182  
- 8 Arkansas    SEC     431174 399124 471279 487067 442569 367748 356517 -0.0305 
- 9 Arkansas S… Sun Be… 149477 149163 138043 136200 119538 119001 124017  0.0422 
-10 Army West … FBS In… 169781 171310 185946 163267 185543 190156 185935 -0.0222 
-# … with 139 more rows, and abbreviated variable name ¹​Conference</code></pre>
+<pre><code># A tibble: 149 × 13
+   Institution     Conference   `2013` `2014` `2015` `2016` `2017` `2018` `2019`
+   &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 Air Force       MWC          228562 168967 156158 177519 174924 166205 162505
+ 2 Akron           MAC          107101  55019 108588  62021 117416  92575 107752
+ 3 Alabama         SEC          710538 710736 707786 712747 712053 710931 707817
+ 4 Appalachian St. FBS Indepen… 149366     NA     NA     NA     NA     NA     NA
+ 5 Appalachian St. Sun Belt         NA 138995 128755 156916 154722 131716 166640
+ 6 Arizona         Pac-12       285713 354973 308355 338017 255791 318051 237194
+ 7 Arizona St.     Pac-12       501509 343073 368985 286417 359660 291091 344161
+ 8 Arkansas        SEC          431174 399124 471279 487067 442569 367748 356517
+ 9 Arkansas St.    Sun Belt     149477 149163 138043 136200 119538 119001 124017
+10 Army West Point FBS Indepen… 169781 171310 185946 163267 185543 190156 185935
+# ℹ 139 more rows
+# ℹ 4 more variables: `2020` &lt;dbl&gt;, `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;, change &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>What do we see right away? Do those numbers look like we expect them to? No.&nbsp;They’re a decimal expressed as a percentage. So let’s fix that by multiplying by 100.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> ((<span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span>)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> ((<span class="st">`</span><span class="at">2022</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2021</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2021</span><span class="st">`</span>)<span class="sc">*</span><span class="dv">100</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 149 × 10
-   Institution  Confe…¹ `2013` `2014` `2015` `2016` `2017` `2018` `2019`  change
-   &lt;chr&gt;        &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
- 1 Air Force    MWC     228562 168967 156158 177519 174924 166205 162505  -2.23 
- 2 Akron        MAC     107101  55019 108588  62021 117416  92575 107752  16.4  
- 3 Alabama      SEC     710538 710736 707786 712747 712053 710931 707817  -0.438
- 4 Appalachian… FBS In… 149366     NA     NA     NA     NA     NA     NA  NA    
- 5 Appalachian… Sun Be…     NA 138995 128755 156916 154722 131716 166640  26.5  
- 6 Arizona      Pac-12  285713 354973 308355 338017 255791 318051 237194 -25.4  
- 7 Arizona St.  Pac-12  501509 343073 368985 286417 359660 291091 344161  18.2  
- 8 Arkansas     SEC     431174 399124 471279 487067 442569 367748 356517  -3.05 
- 9 Arkansas St. Sun Be… 149477 149163 138043 136200 119538 119001 124017   4.22 
-10 Army West P… FBS In… 169781 171310 185946 163267 185543 190156 185935  -2.22 
-# … with 139 more rows, and abbreviated variable name ¹​Conference</code></pre>
+<pre><code># A tibble: 149 × 13
+   Institution     Conference   `2013` `2014` `2015` `2016` `2017` `2018` `2019`
+   &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 Air Force       MWC          228562 168967 156158 177519 174924 166205 162505
+ 2 Akron           MAC          107101  55019 108588  62021 117416  92575 107752
+ 3 Alabama         SEC          710538 710736 707786 712747 712053 710931 707817
+ 4 Appalachian St. FBS Indepen… 149366     NA     NA     NA     NA     NA     NA
+ 5 Appalachian St. Sun Belt         NA 138995 128755 156916 154722 131716 166640
+ 6 Arizona         Pac-12       285713 354973 308355 338017 255791 318051 237194
+ 7 Arizona St.     Pac-12       501509 343073 368985 286417 359660 291091 344161
+ 8 Arkansas        SEC          431174 399124 471279 487067 442569 367748 356517
+ 9 Arkansas St.    Sun Belt     149477 149163 138043 136200 119538 119001 124017
+10 Army West Point FBS Indepen… 169781 171310 185946 163267 185543 190156 185935
+# ℹ 139 more rows
+# ℹ 4 more variables: `2020` &lt;dbl&gt;, `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;, change &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Now, does this ordering do anything for us? No.&nbsp;Let’s fix that with arrange.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> ((<span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2018</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span>)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> ((<span class="st">`</span><span class="at">2022</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2021</span><span class="st">`</span>)<span class="sc">/</span><span class="st">`</span><span class="at">2021</span><span class="st">`</span>)<span class="sc">*</span><span class="dv">100</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(change))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 149 × 10
-   Institution   Confe…¹ `2013` `2014` `2015` `2016` `2017` `2018` `2019` change
-   &lt;chr&gt;         &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Kansas        Big 12  265187 204462 190972 154969 186490 116544 237122  103. 
- 2 Coastal Caro. Sun Be…     NA     NA     NA     NA  89754  53173  90112   69.5
- 3 La.-Monroe    Sun Be…  85177  90540  58659  67057  49640  71048 100367   41.3
- 4 Virginia      ACC     370234 275243 302994 239576 275788 238232 335040   40.6
- 5 Louisiana Te… C-USA    93332 100272 125863 102059 142626  87623 122631   40.0
- 6 North Caroli… ACC     360500 328000 347500 301500 350500 218111 303000   38.9
- 7 Fla. Atlantic C-USA    72758  70608 105703  60437 151580 102308 140857   37.7
- 8 Texas St.     Sun Be… 108371 123589 108998 108717 104680  78689 102840   30.7
- 9 New Mexico S… FBS In… 112347     NA     NA     NA     NA  68529  89523   30.6
-10 San Jose St.  MWC      98174  75340  91869  92515  85235  71276  92374   29.6
-# … with 139 more rows, and abbreviated variable name ¹​Conference</code></pre>
+<pre><code># A tibble: 149 × 13
+   Institution    Conference    `2013` `2014` `2015` `2016` `2017` `2018` `2019`
+   &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 FIU            C-USA          92717  95728  76907 117526 100002 109797  83242
+ 2 Hawaii         MWC           185931 192159 164031 170299 145463 205455 211090
+ 3 San Diego St.  MWC           199344 226839 203459 223735 275428 220071 179376
+ 4 Tulane         AAC               NA 150074 137577 136310 101634 108090 121628
+ 5 Kansas         Big 12        265187 204462 190972 154969 186490 116544 237122
+ 6 New Mexico St. FBS Independ… 112347     NA     NA     NA     NA  68529  89523
+ 7 UConn          AAC           216523 192230 169343 187569 122007 125543 109297
+ 8 Arizona        Pac-12        285713 354973 308355 338017 255791 318051 237194
+ 9 Air Force      MWC           228562 168967 156158 177519 174924 166205 162505
+10 Duke           ACC           182431 191039 158562 179369 187581 159878 154867
+# ℹ 139 more rows
+# ℹ 4 more variables: `2020` &lt;dbl&gt;, `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;, change &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>So who had the most growth in 2019 compared to the year before? Kansas.</p>
+<p>So who had the most growth in 2022 compared to the year before? Hawaii. But their figure, as well as that of FIU and San Diego St.&nbsp;and Tulane, are likely Covid-related. Heck, many of them are likely Covid-related. But how about Kansas?</p>
 <section id="a-more-complex-example" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="a-more-complex-example"><span class="header-section-number">5.1</span> A more complex example</h2>
 <p>There’s metric in basketball that’s easy to understand – shooting percentage. It’s the number of shots made divided by the number of shots attempted. Simple, right? Except it’s a little too simple. Because what about three point shooters? They tend to be more vailable because the three point shot is worth more. What about players who get to the line? In shooting percentage, free throws are nowhere to be found.</p>
 <p>Basketball nerds, because of these weaknesses, have created a new metric called <a href="https://en.wikipedia.org/wiki/True_shooting_percentage">True Shooting Percentage</a>. True shooting percentage takes into account all aspects of a players shooting to determine who the real shooters are.</p>
 <p>Using <code>dplyr</code> and <code>mutate</code>, we can calculate true shooting percentage. So let’s look at a new dataset, one of every college basketball player’s season stats in 2021-22 season. It’s a dataset of 5,688 players, and we’ve got 59 variables – one of them is True Shooting Percentage, but we’re going to ignore that.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://mattwaite.github.io/sportsdatafiles/players22.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://mattwaite.github.io/sportsdatafiles/players23.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Import it like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/players22.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/players23.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 5688 Columns: 59
+<pre><code>Rows: 5681 Columns: 59
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr (10): Team, Player, Class, Pos, Height, Hometown, High School, Summary, ...
@@ -517,29 +526,29 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5,688 × 60
-   Team     Player   `#` Class Pos   Height Weight Homet…¹ High …² Summary  Rk.x
-   &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;
- 1 Washing… Noah …    32 JR    G     6-3       185 Seattl… Garfie… 0.6 Pt…    13
- 2 Troy Tr… DJ Ro…    34 FR    G     6-1       160 Monroe… Oakman… 1.0 Pt…    17
- 3 Syracus… Arthu…    33 SO    G     6-3       185 Wallin… Sheeha… 0.8 Pt…    13
- 4 Stony B… Prest…    12 &lt;NA&gt;  G     6-4       205 Syracu… Jamesv… 3.0 Pt…    14
- 5 USC Tro… Amar …    55 SR    G     5-7       150 Long B… Fremon… 3.0 Pt…    13
- 6 South C… Ford …    44 JR    G     6-3       183 Charlo… United… 3.0 Pt…    16
- 7 UNC Gre… Jevon…    15 &lt;NA&gt;  G     6-3       170 Durham… &lt;NA&gt;    1.0 Pt…    13
- 8 New Mex… Safi …     2 &lt;NA&gt;  G     5-11      165 Las Cr… &lt;NA&gt;    3.0 Pt…    15
- 9 New Mex… Camer…    20 &lt;NA&gt;  G     6-1       165 Kirtla… Kirtla… 0.8 Pt…    15
-10 Mercer … John …    15 SO    F     6-6       210 Atlant… Marist… 1.5 Pt…    14
-# … with 5,678 more rows, 49 more variables: G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;,
-#   FG &lt;dbl&gt;, FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;,
-#   `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;,
-#   ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;,
-#   TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, `TS%` &lt;dbl&gt;,
-#   `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;, FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, `ORB%` &lt;dbl&gt;,
-#   `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, …</code></pre>
+<pre><code># A tibble: 5,681 × 60
+   Team    Player   `#` Class Pos   Height Weight Hometown `High School` Summary
+   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;  
+ 1 Oklaho… Westo…    35 JR    G     6-3       180 Fairvie… Fairview HS   0.4 Pt…
+ 2 Northe… Dawso…     4 FR    G     6-3       190 Scottsb… IMG Academy   1.0 Pt…
+ 3 North … Grays…    20 FR    G     6-3       175 Carroll… Hebron (TX)   0.3 Pt…
+ 4 UNC Ta… Jacks…    30 SR    G     6-1       180 Richmon… Collegiate S… 0.8 Pt…
+ 5 Missis… Justi…    15 SR    G     6-5       215 Birming… Hoover (AL)   0.8 Pt…
+ 6 Georgi… Braxt…    34 SO    G     6-2       185 Atlanta… Riverwood In… 0.6 Pt…
+ 7 Florid… Alex …    21 JR    G     6-4       185 Colts N… Ranney School 0.5 Pt…
+ 8 Fairle… Brand…    99 SO    G     5-11      165 Tarryto… The Gunnery … 1.5 Pt…
+ 9 Easter… Luke …    22 FR    F     6-8       205 Surpris… Paradise Hon… 1.0 Pt…
+10 Bradle… Sam H…    13 SO    G     6-2       180 Napervi… Benet Academy 0.5 Pt…
+# ℹ 5,671 more rows
+# ℹ 50 more variables: Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;, FG &lt;dbl&gt;,
+#   FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;, `3P` &lt;dbl&gt;,
+#   `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;,
+#   DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;,
+#   PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, `TS%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;,
+#   FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, `ORB%` &lt;dbl&gt;, `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
-<p>You’ll be forgiven if you did not hear about USC’s shooting sensation Amar Ross. He played in one game, took one shot and actually hit it. It happened to be a three pointer, which is one more three pointer than I’ve hit in college basketball. So props to him. Does that mean he had the best true shooting season in college basketball in the 2021-22 season?</p>
+<p>You’ll be forgiven if you did not hear about Oklahoma State’s shooting sensation Weston Church. He played in seven games, took one shot and actually hit it. It happened to be a three pointer, which is one more three pointer than I’ve hit in college basketball. So props to him. Does that mean he had the best true shooting season in college basketball in the 2022-23 season?</p>
 <p>Not hardly.</p>
 <p>We’ll talk about how to narrow the pile and filter out data in the next chapter.</p>
 

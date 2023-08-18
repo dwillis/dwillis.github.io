@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -391,11 +396,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/attendance.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 149 Columns: 9
+<pre><code>Rows: 149 Columns: 12
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (2): Institution, Conference
-dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
+chr  (2): Institution, Conference
+dbl (10): 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -407,43 +412,46 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">"Maryland"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 9
-  Institution Conference `2013` `2014` `2015` `2016` `2017` `2018` `2019`
-  &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 Maryland    ACC        288946     NA     NA     NA     NA     NA     NA
-2 Maryland    Big Ten        NA 281884 310389 237690 237859 201562 226871</code></pre>
+<pre><code># A tibble: 2 × 12
+  Institution Conference `2013` `2014` `2015` `2016` `2017` `2018` `2019` `2020`
+  &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 Maryland    ACC        288946     NA     NA     NA     NA     NA     NA     NA
+2 Maryland    Big Ten        NA 281884 310389 237690 237859 201562 226871     NA
+# ℹ 2 more variables: `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Or if we want to see schools that had more than half a million people buy tickets to a football game in a season, we do the following. NOTE THE BACKTICKS.</p>
+<p>Or if we want to see schools that had more than half a million people buy tickets to a football game last season, we do the following. NOTE THE BACKTICKS.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="sc">&gt;=</span> <span class="dv">500000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">2022</span><span class="st">`</span> <span class="sc">&gt;=</span> <span class="dv">500000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16 × 9
-   Institution    Conference    `2013` `2014` `2015` `2016` `2017` `2018` `2019`
-   &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Alabama        SEC           710538 710736 707786 712747 712053 710931 707817
- 2 Auburn         SEC           685252 612157 612157 695498 605120 591236 600355
- 3 Clemson        ACC           574333 572262 588266 566787 565412 562799 566074
- 4 Florida        SEC           524638 515001 630457 439229 520290 576299 508103
- 5 Georgia        SEC           556476 649222 649222 556476 556476 649222 649722
- 6 LSU            SEC           639927 712063 654084 708618 591034 705733 705892
- 7 Michigan       Big Ten       781144 734364 771174 883741 669534 775156 780215
- 8 Nebraska       Big Ten       727466 638744 629983 631402 628583 623240 625436
- 9 Notre Dame     FBS Independ… 484770 484770 484770 484770 543354 465732 534017
-10 Ohio St.       Big Ten       734528 744075 750705 750944 752464 713630 723679
-11 Penn St.       Big Ten       676112 711358 698590 701800 746946 738396 739747
-12 South Carolina SEC           576805 569664 472934 538441 550099 515396 545737
-13 Tennessee      SEC           669087 698276 704088 706776 670454 650887 702912
-14 Texas          Big 12        593857 564618 540210 587283 556667 586277 577834
-15 Texas A&amp;M      SEC           697003 630735 725354 713418 691612 698908 711258
-16 Wisconsin      Big Ten       552378 556642 546099 476144 551766 540072 535301</code></pre>
+<pre><code># A tibble: 17 × 12
+   Institution    Conference `2013` `2014` `2015` `2016` `2017` `2018` `2019`
+   &lt;chr&gt;          &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 Alabama        SEC        710538 710736 707786 712747 712053 710931 707817
+ 2 Arkansas       SEC        431174 399124 471279 487067 442569 367748 356517
+ 3 Auburn         SEC        685252 612157 612157 695498 605120 591236 600355
+ 4 Clemson        ACC        574333 572262 588266 566787 565412 562799 566074
+ 5 Florida        SEC        524638 515001 630457 439229 520290 576299 508103
+ 6 Georgia        SEC        556476 649222 649222 556476 556476 649222 649722
+ 7 LSU            SEC        639927 712063 654084 708618 591034 705733 705892
+ 8 Michigan       Big Ten    781144 734364 771174 883741 669534 775156 780215
+ 9 Nebraska       Big Ten    727466 638744 629983 631402 628583 623240 625436
+10 Ohio St.       Big Ten    734528 744075 750705 750944 752464 713630 723679
+11 Oklahoma       Big 12     508334 510972 512139 521142 519119 607146 499533
+12 Penn St.       Big Ten    676112 711358 698590 701800 746946 738396 739747
+13 South Carolina SEC        576805 569664 472934 538441 550099 515396 545737
+14 Tennessee      SEC        669087 698276 704088 706776 670454 650887 702912
+15 Texas          Big 12     593857 564618 540210 587283 556667 586277 577834
+16 Texas A&amp;M      SEC        697003 630735 725354 713418 691612 698908 711258
+17 Wisconsin      Big Ten    552378 556642 546099 476144 551766 540072 535301
+# ℹ 3 more variables: `2020` &lt;dbl&gt;, `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>But what if we want to see all of the Power Five conferences? We <em>could</em> use conditional logic in our filter. The conditional logic operators are <code>|</code> for OR and <code>&amp;</code> for AND. NOTE: AND means all conditions have to be met. OR means any of the conditions work. So be careful about boolean logic.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">"Big 10"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"SEC"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"Pac-12"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"ACC"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"Big 12"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 51 × 9
+<pre><code># A tibble: 51 × 12
    Institution    Conference `2013` `2014` `2015` `2016` `2017` `2018` `2019`
    &lt;chr&gt;          &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
  1 Alabama        SEC        710538 710736 707786 712747 712053 710931 707817
@@ -456,7 +464,8 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
  8 California     Pac-12     345303 286051 292797 279769 219290 300061 254597
  9 Clemson        ACC        574333 572262 588266 566787 565412 562799 566074
 10 Colorado       Pac-12     230778 226670 236331 279652 282335 274852 297435
-# … with 41 more rows</code></pre>
+# ℹ 41 more rows
+# ℹ 3 more variables: `2020` &lt;dbl&gt;, `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>But that’s a lot of repetitive code. And a lot of typing. And typing is the devil. So what if we could create a list and pass it into the filter? It’s pretty simple.</p>
@@ -469,7 +478,7 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 65 × 9
+<pre><code># A tibble: 65 × 12
    Institution    Conference `2013` `2014` `2015` `2016` `2017` `2018` `2019`
    &lt;chr&gt;          &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
  1 Alabama        SEC        710538 710736 707786 712747 712053 710931 707817
@@ -482,29 +491,30 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
  8 California     Pac-12     345303 286051 292797 279769 219290 300061 254597
  9 Clemson        ACC        574333 572262 588266 566787 565412 562799 566074
 10 Colorado       Pac-12     230778 226670 236331 279652 282335 274852 297435
-# … with 55 more rows</code></pre>
+# ℹ 55 more rows
+# ℹ 3 more variables: `2020` &lt;dbl&gt;, `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <section id="selecting-data-to-make-it-easier-to-read" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="selecting-data-to-make-it-easier-to-read"><span class="header-section-number">6.1</span> Selecting data to make it easier to read</h2>
 <p>So now we have our Power Five list. What if we just wanted to see attendance from the most recent season and ignore all the rest? Select to the rescue.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Institution, Conference, <span class="st">`</span><span class="at">2018</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Institution, Conference, <span class="st">`</span><span class="at">2022</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 65 × 3
-   Institution    Conference `2018`
+   Institution    Conference `2022`
    &lt;chr&gt;          &lt;chr&gt;       &lt;dbl&gt;
- 1 Alabama        SEC        710931
- 2 Arizona        Pac-12     318051
- 3 Arizona St.    Pac-12     291091
- 4 Arkansas       SEC        367748
- 5 Auburn         SEC        591236
- 6 Baylor         Big 12     248017
- 7 Boston College ACC        263363
- 8 California     Pac-12     300061
- 9 Clemson        ACC        562799
-10 Colorado       Pac-12     274852
-# … with 55 more rows</code></pre>
+ 1 Alabama        SEC        692870
+ 2 Arizona        Pac-12     309465
+ 3 Arizona St.    Pac-12     258488
+ 4 Arkansas       SEC        512087
+ 5 Auburn         SEC        681621
+ 6 Baylor         Big 12     272779
+ 7 Boston College ACC        214233
+ 8 California     Pac-12     270172
+ 9 Clemson        ACC        564860
+10 Colorado       Pac-12     257084
+# ℹ 55 more rows</code></pre>
 </div>
 </div>
 <p>If you have truly massive data, Select has tools to help you select fields that start_with the same things or ends with a certain word. <a href="https://dplyr.tidyverse.org/reference/select.html">The documentation will guide you</a> if you need those someday. For 90 plus percent of what we do, just naming the fields will be sufficient.</p>
@@ -512,14 +522,14 @@ dbl (7): 2013, 2014, 2015, 2016, 2017, 2018, 2019
 <section id="using-conditional-filters-to-set-limits" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="using-conditional-filters-to-set-limits"><span class="header-section-number">6.2</span> Using conditional filters to set limits</h2>
 <p>Let’s return to the problem of one-hit wonders in basketball mucking up our true shooting analysis. How can we set limits in something like a question of who had the best season? Let’s grab every player from last season.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/players22.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/players23.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Let’s get set up similar to the previous chapter.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/players22.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/players23.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 5688 Columns: 59
+<pre><code>Rows: 5681 Columns: 59
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr (10): Team, Player, Class, Pos, Height, Hometown, High School, Summary, ...
@@ -532,29 +542,29 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5,688 × 60
-   Team     Player   `#` Class Pos   Height Weight Homet…¹ High …² Summary  Rk.x
-   &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;
- 1 Washing… Noah …    32 JR    G     6-3       185 Seattl… Garfie… 0.6 Pt…    13
- 2 Troy Tr… DJ Ro…    34 FR    G     6-1       160 Monroe… Oakman… 1.0 Pt…    17
- 3 Syracus… Arthu…    33 SO    G     6-3       185 Wallin… Sheeha… 0.8 Pt…    13
- 4 Stony B… Prest…    12 &lt;NA&gt;  G     6-4       205 Syracu… Jamesv… 3.0 Pt…    14
- 5 USC Tro… Amar …    55 SR    G     5-7       150 Long B… Fremon… 3.0 Pt…    13
- 6 South C… Ford …    44 JR    G     6-3       183 Charlo… United… 3.0 Pt…    16
- 7 UNC Gre… Jevon…    15 &lt;NA&gt;  G     6-3       170 Durham… &lt;NA&gt;    1.0 Pt…    13
- 8 New Mex… Safi …     2 &lt;NA&gt;  G     5-11      165 Las Cr… &lt;NA&gt;    3.0 Pt…    15
- 9 New Mex… Camer…    20 &lt;NA&gt;  G     6-1       165 Kirtla… Kirtla… 0.8 Pt…    15
-10 Mercer … John …    15 SO    F     6-6       210 Atlant… Marist… 1.5 Pt…    14
-# … with 5,678 more rows, 49 more variables: G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;,
-#   FG &lt;dbl&gt;, FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;,
-#   `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;,
-#   ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;,
-#   TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, `TS%` &lt;dbl&gt;,
-#   `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;, FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, `ORB%` &lt;dbl&gt;,
-#   `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, …</code></pre>
+<pre><code># A tibble: 5,681 × 60
+   Team    Player   `#` Class Pos   Height Weight Hometown `High School` Summary
+   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;  
+ 1 Oklaho… Westo…    35 JR    G     6-3       180 Fairvie… Fairview HS   0.4 Pt…
+ 2 Northe… Dawso…     4 FR    G     6-3       190 Scottsb… IMG Academy   1.0 Pt…
+ 3 North … Grays…    20 FR    G     6-3       175 Carroll… Hebron (TX)   0.3 Pt…
+ 4 UNC Ta… Jacks…    30 SR    G     6-1       180 Richmon… Collegiate S… 0.8 Pt…
+ 5 Missis… Justi…    15 SR    G     6-5       215 Birming… Hoover (AL)   0.8 Pt…
+ 6 Georgi… Braxt…    34 SO    G     6-2       185 Atlanta… Riverwood In… 0.6 Pt…
+ 7 Florid… Alex …    21 JR    G     6-4       185 Colts N… Ranney School 0.5 Pt…
+ 8 Fairle… Brand…    99 SO    G     5-11      165 Tarryto… The Gunnery … 1.5 Pt…
+ 9 Easter… Luke …    22 FR    F     6-8       205 Surpris… Paradise Hon… 1.0 Pt…
+10 Bradle… Sam H…    13 SO    G     6-2       180 Napervi… Benet Academy 0.5 Pt…
+# ℹ 5,671 more rows
+# ℹ 50 more variables: Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;, FG &lt;dbl&gt;,
+#   FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;, `3P` &lt;dbl&gt;,
+#   `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;,
+#   DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;,
+#   PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, `TS%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;,
+#   FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, `ORB%` &lt;dbl&gt;, `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
-<p>In that season, USC’s Amar Ross is your One Shot One Three True Shooting champion.</p>
+<p>In that season, we’ve got several players that can lay claim to the title of One Shot One Three True Shooting champion.</p>
 <p>In most contests, like the batting title in Major League Baseball, there’s a minimum number of X to qualify. In baseball, it’s at bats. In basketball, it attempts. So let’s set a floor and see how it changes. What if we said you had to have played 100 minutes in a season? The top players in college basketball play more than 1000 minutes in a season. So 100 is not that much. Let’s try it and see.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
@@ -562,29 +572,29 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting)) <span class="sc">%&gt;%</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP <span class="sc">&gt;</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3,776 × 60
-   Team     Player   `#` Class Pos   Height Weight Homet…¹ High …² Summary  Rk.x
-   &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;
- 1 VMI Key… Coope…    15 FR    G     6-5       185 Frisco… Wakela… 4.3 Pt…     8
- 2 Samford… Quinn…    13 SO    G     6-5       195 Johns … Mount … 2.8 Pt…     9
- 3 Detroit… Kyle …     2 SO    G     6-0       180 Detroi… Cass T… 1.0 Pt…    11
- 4 Pitt Pa… Danie…     4 SR    F     6-7       220 Bladen… Bladen… 3.3 Pt…     9
- 5 Hofstra… Jarro…     2 SR    F     6-8       220 Cresce… Cushin… 4.2 Pt…     8
- 6 Cornell… Kelle…    15 SO    F     6-7       190 Plano,… Presto… 8.6 Pt…     4
- 7 New Mex… Virsh…    12 JR    G     6-2       165 Milwau… Hillcr… 4.9 Pt…    11
- 8 Bowling… Isaac…    12 JR    G     6-4       185 Bowlin… Bowlin… 2.6 Pt…    13
- 9 Princet… Max J…    40 SR    G     6-3       195 High P… Woodbe… 3.1 Pt…     7
-10 Duke Bl… Mark …    15 SO    C     7-0       243 Virgin… IMG Ac… 11.0 P…     4
-# … with 3,766 more rows, 49 more variables: G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;,
-#   FG &lt;dbl&gt;, FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;,
-#   `3P` &lt;dbl&gt;, `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;,
-#   ORB &lt;dbl&gt;, DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;,
-#   TOV &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, `TS%` &lt;dbl&gt;,
-#   `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;, FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, `ORB%` &lt;dbl&gt;,
-#   `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, …</code></pre>
+<pre><code># A tibble: 3,829 × 60
+   Team    Player   `#` Class Pos   Height Weight Hometown `High School` Summary
+   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;  
+ 1 Milwau… Moses…    33 SR    C     7-1       225 Wau, So… Bahr El-Ghaz… 2.8 Pt…
+ 2 Stony … Leon …    33 FR    F     6-10      198 Alkmaar… Asheville Sc… 2.3 Pt…
+ 3 Wake F… Matth…    33 SO    F     7-1       250 &lt;NA&gt;     FC Barcelona… 6.1 Pt…
+ 4 San Fr… Volod…    33 JR    C     7-1       270 Truskav… Kaunas A. Pu… 3.5 Pt…
+ 5 Winthr… Camer…    10 JR    G     6-5       195 Thomasv… Thomasville … 1.3 Pt…
+ 6 Omaha … Kyle …     3 SR    G     6-5       190 Omaha, … Creighton Pr… 3.3 Pt…
+ 7 New Me… Sebas…     3 SO    C     6-11      240 &lt;NA&gt;     Marks Gymnas… 1.5 Pt…
+ 8 Loyola… Jacob…    22 JR    C     6-10      240 Edina, … Edina HS      1.8 Pt…
+ 9 Southe… Felix…     1 SR    G     6-2       175 Stockho… Fryshuset BC… 3.1 Pt…
+10 Alabam… Nick …    23 JR    F     6-9        NA &lt;NA&gt;     &lt;NA&gt;          3.5 Pt…
+# ℹ 3,819 more rows
+# ℹ 50 more variables: Rk.x &lt;dbl&gt;, G &lt;dbl&gt;, GS &lt;dbl&gt;, MP &lt;dbl&gt;, FG &lt;dbl&gt;,
+#   FGA &lt;dbl&gt;, `FG%` &lt;dbl&gt;, `2P` &lt;dbl&gt;, `2PA` &lt;dbl&gt;, `2P%` &lt;dbl&gt;, `3P` &lt;dbl&gt;,
+#   `3PA` &lt;dbl&gt;, `3P%` &lt;dbl&gt;, FT &lt;dbl&gt;, FTA &lt;dbl&gt;, `FT%` &lt;dbl&gt;, ORB &lt;dbl&gt;,
+#   DRB &lt;dbl&gt;, TRB &lt;dbl&gt;, AST &lt;dbl&gt;, STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TOV &lt;dbl&gt;, PF &lt;dbl&gt;,
+#   PTS &lt;dbl&gt;, Rk.y &lt;dbl&gt;, PER &lt;dbl&gt;, `TS%` &lt;dbl&gt;, `eFG%` &lt;dbl&gt;, `3PAr` &lt;dbl&gt;,
+#   FTr &lt;dbl&gt;, PProd &lt;dbl&gt;, `ORB%` &lt;dbl&gt;, `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
-<p>Now you get VMI’s Cooper Sisco, who played in 15 games and was on the floor for 119 minutes. So he played regularly, but not a lot. But in that time, he only attempted 38 shots, and made 63 percent of them. In other words, when he shot, he probably scored. He just rarely shot.</p>
+<p>Now you get Milwaukee’s Moses Bol, who played in 32 games and was on the floor for 310 minutes. So he played regularly, but not a lot. But in that time, he only attempted 46 shots, and made 78 percent of them. In other words, when he shot, he probably scored. He just rarely shot.</p>
 <p>So is 100 minutes our level? Here’s the truth – there’s not really an answer here. We’re picking a cutoff. If you can cite a reason for it and defend it, then it probably works.</p>
 </section>
 <section id="top-list" class="level2" data-number="6.3">
@@ -592,24 +602,24 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 <p>One last little dplyr trick that’s nice to have in the toolbox is a shortcut for selecting only the top values for your dataset. Want to make a Top 10 List? Or Top 25? Or Top Whatever You Want? It’s easy.</p>
 <p>So what are the top 10 Power Five schools by season attendance. All we’re doing here is chaining commands together with what we’ve already got. We’re <em>filtering</em> by our list of Power Five conferences, we’re <em>selecting</em> the three fields we need, now we’re going to <em>arrange</em> it by total attendance and then we’ll introduce the new function: <code>top_n</code>. The <code>top_n</code> function just takes a number. So we want a top 10 list? We do it like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Institution, Conference, <span class="st">`</span><span class="at">2019</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">2019</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Institution, Conference, <span class="st">`</span><span class="at">2022</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">2022</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Selecting by 2019</code></pre>
+<pre><code>Selecting by 2022</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
-   Institution Conference `2019`
+   Institution Conference `2022`
    &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;
- 1 Michigan    Big Ten    780215
- 2 Penn St.    Big Ten    739747
- 3 Ohio St.    Big Ten    723679
- 4 Texas A&amp;M   SEC        711258
- 5 Alabama     SEC        707817
- 6 LSU         SEC        705892
- 7 Tennessee   SEC        702912
- 8 Georgia     SEC        649722
- 9 Nebraska    Big Ten    625436
-10 Auburn      SEC        600355</code></pre>
+ 1 Michigan    Big Ten    881971
+ 2 Ohio St.    Big Ten    837300
+ 3 Penn St.    Big Ten    751650
+ 4 LSU         SEC        704172
+ 5 Tennessee   SEC        703727
+ 6 Texas       Big 12     701697
+ 7 Alabama     SEC        692870
+ 8 Auburn      SEC        681621
+ 9 Texas A&amp;M   SEC        680491
+10 Florida     SEC        610261</code></pre>
 </div>
 </div>
 <p>That’s all there is to it. Just remember – for it to work correctly, you need to sort your data BEFORE you run top_n.&nbsp;Otherwise, you’re just getting the first 10 values in the list. The function doesn’t know what field you want the top values of. You have to do it.</p>

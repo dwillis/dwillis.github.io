@@ -329,17 +329,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with blogdown</span></a>
+  <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  <a href="./blogging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
+  <a href="./checklist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></a>
   </div>
 </li>
     </ul>
@@ -376,14 +381,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we’ll grab the data, each football game in 2021.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/footballlogs21.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/footballlogs22.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Now load it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/footballlogs21.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/footballlogs22.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1655 Columns: 54
+<pre><code>Rows: 1672 Columns: 54
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr   (8): HomeAway, Opponent, Result, TeamFull, TeamURL, Outcome, Team, Con...
@@ -420,12 +425,12 @@ date  (1): Date
 <pre><code># A tibble: 1 × 2
   AvgOffYardsPer AvgDefYardsPer
            &lt;dbl&gt;          &lt;dbl&gt;
-1           5.79           5.66</code></pre>
+1           5.70           5.55</code></pre>
 </div>
 </div>
 <p>I also want to highlight playoff teams.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>playoff_teams <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Cincinnati"</span>, <span class="st">"Alabama"</span>, <span class="st">"Michigan"</span>, <span class="st">"Ohio State"</span>)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>playoff_teams <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Texas Christian"</span>, <span class="st">"Georgia"</span>, <span class="st">"Michigan"</span>, <span class="st">"Ohio State"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>playoffs <span class="ot">&lt;-</span> ypp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">%in%</span> playoff_teams)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -437,10 +442,10 @@ date  (1): Date
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>playoffs, <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP)) <span class="sc">+</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fl">5.7</span>, <span class="at">color=</span><span class="st">"dark grey"</span>) <span class="sc">+</span> </span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fl">5.7</span>, <span class="at">color=</span><span class="st">"dark grey"</span>) <span class="sc">+</span> </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">7</span>, <span class="at">y=</span><span class="fl">5.5</span>, <span class="at">label=</span><span class="st">"Good Offense, Good Defense"</span>), <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fl">6.7</span>, <span class="at">y=</span><span class="fl">4.3</span>, <span class="at">label=</span><span class="st">"Good Offense, Good Defense"</span>), <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">5</span>, <span class="at">y=</span><span class="dv">6</span>, <span class="at">label=</span><span class="st">"Bad Defense, Bad Offense"</span>), <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data=</span>playoffs, <span class="fu">aes</span>(<span class="at">x=</span>OffensiveYPP, <span class="at">y=</span>DefensiveYPP, <span class="at">label=</span>Team)) <span class="sc">+</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Offensive Yards Per Play"</span>, <span class="at">y=</span><span class="st">"Defensive Points Per Play"</span>, <span class="at">title=</span><span class="st">"All four playoff teams are good"</span>, <span class="at">subtitle=</span><span class="st">"Each of the four have above average offenses and defenses."</span>, <span class="at">caption=</span><span class="st">"Source: Sports-Reference.com | By Derek Willis"</span>) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Offensive Yards Per Play"</span>, <span class="at">y=</span><span class="st">"Defensive Points Per Play"</span>, <span class="at">title=</span><span class="st">"All four playoff teams were good"</span>, <span class="at">subtitle=</span><span class="st">"Three of the four have above average offenses and defenses."</span>, <span class="at">caption=</span><span class="st">"Source: Sports-Reference.com | By Derek Willis"</span>) <span class="sc">+</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
