@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.646">
+<meta name="generator" content="quarto-1.2.475">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,73 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -98,7 +40,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -352,15 +294,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"> <span class="header-section-number">37.1</span> Setup</a></li>
-  <li><a href="#seeing-your-site" id="toc-seeing-your-site" class="nav-link" data-scroll-target="#seeing-your-site"> <span class="header-section-number">37.2</span> Seeing your site</a></li>
-  <li><a href="#editing-files" id="toc-editing-files" class="nav-link" data-scroll-target="#editing-files"> <span class="header-section-number">37.3</span> Editing files</a></li>
-  <li><a href="#creating-a-new-post" id="toc-creating-a-new-post" class="nav-link" data-scroll-target="#creating-a-new-post"> <span class="header-section-number">37.4</span> Creating a new post</a></li>
-  <li><a href="#publishing-your-site" id="toc-publishing-your-site" class="nav-link" data-scroll-target="#publishing-your-site"> <span class="header-section-number">37.5</span> Publishing your site</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="toc-section-number">37.1</span>  Setup</a></li>
+  <li><a href="#creating-a-post" id="toc-creating-a-post" class="nav-link" data-scroll-target="#creating-a-post"><span class="toc-section-number">37.2</span>  Creating a post</a></li>
+  <li><a href="#seeing-your-site" id="toc-seeing-your-site" class="nav-link" data-scroll-target="#seeing-your-site"><span class="toc-section-number">37.3</span>  Seeing your site</a></li>
+  <li><a href="#publishing-your-site" id="toc-publishing-your-site" class="nav-link" data-scroll-target="#publishing-your-site"><span class="toc-section-number">37.4</span>  Publishing your site</a></li>
   </ul>
 </nav>
     </div>
@@ -377,6 +318,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -393,35 +335,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <section id="setup" class="level2" data-number="37.1">
 <h2 data-number="37.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">37.1</span> Setup</h2>
-<p>With those requirements in mind, we’re going to use a library called Quarto, which creates blog posts from files that are very similar to the R Markdown files you’ve been working with in this book.</p>
-<p>It installs how you think it should. Go into the console and run this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'quarto'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>After that, we’re ready to start making a blog. To do that, go to File &gt; New Project and select New Directory, and follow the instructions <a href="https://quarto.org/docs/websites/website-blog.html">here</a>. In the Project Type view, you may have to scroll down to find “Quarto blog” but that’s your choice.</p>
+<p>With those requirements in mind, we’re going to use a library called Quarto, which supercharges R Markdown to make documents, websites, blogs and books. It’s new, and growing, and you can do a lot with it.</p>
+<p>You’ll first go to <a href="https://quarto.org/docs/get-started/">Quarto’s website</a> and wait just one moment before you do anything.</p>
+<p>Before you install Quarto, you should close R Studio. So close R Studio, install it, restart R Studio and come back to this tutorial. Then install Quarto.</p>
+<p>After that, we’re ready to start making a blog. To do that, go to File &gt; New Project and select New Directory, and follow the instructions <a href="https://quarto.org/docs/websites/website-blog.html">here</a>. In the Project Type view, you may have to scroll down to find “Quarto blog” but that’s the choice you want.</p>
 <p>And now we’ve come to our first decision point.</p>
-<p>First, name the directory you’re going to put this into. Keep it simple. Blog is fine. Then decide where on your computer you’re going to put it. Put it somewhere you’re going to remember. Don’t put it on your Desktop. Put it in a folder. Remember what folder because you’re going to need this later. Choose “None” as your engine and check the “Open in new session” box. Do NOT create a new repository at this point, then create the project. That should open another RStudio instance.</p>
-<p>Now for the big decision: What theme to use. There are <a href="https://quarto.org/docs/websites/website-blog.html#themes">lots of choices</a>, and the default is called <code>cosmo</code>.</p>
-<p>When you hit Create Project, you should get an R Studio screen. You might have a file open called _quarto.yaml. If you don’t, open it (you can use the files pane in the bottom right). This file will look different depending on which theme you used. This configuration file needs to have a few things in it. This is the _quarto.yml for my website, but you should use it as a guide for what yours will need:</p>
+<p>First, name the directory you’re going to put this into. Keep it simple. Blog is fine. Then decide where on your computer you’re going to put it. Put it somewhere you’re going to remember. Don’t put it on your Desktop. Put it in a folder. Remember what folder because you’re going to need this later. Choose “None” as your engine and check the “Open in new session” box. Do NOT create a new repository at this point, then create the project.</p>
+<p>When you hit Create Project, you should get an R Studio screen. You might have two files open – _quarto.yml and index.qmd. If you don’t, open them (you can use the files pane in the bottom right). The important one for now is _quarto.yml. This file will look different depending on some choices you make.</p>
+<p>The choices you need to make:</p>
+<ul>
+<li>The website title should be yours.</li>
+<li>The Github account (more on this soon) and Twitter handles should be yours.</li>
+<li>If you want a custom favicon logo, you’ll have to include one. You can ignore this for a while.</li>
+<li>You should pick a <a href="https://quarto.org/docs/websites/website-blog.html#themes">not-default theme</a>. If you want to have themes for light and dark mode, the code below handles that. If you want just one theme, the default code you get in your _quarto.yml file does that.</li>
+<li>Add the execute: freeze bits below to your file. This way, your code only executes when you change it. This will become more important later when you have multiple posts.</li>
+</ul>
 <pre><code>project:
   type: website
 
 website:
-  title: "Sports Blog"
+  title: "Derek's Collection of Miscellany"
+  description: "A blog about random fiddling with code and data."
   navbar:
     right:
       - about.qmd
       - icon: github
-      href: https://github.com/dwillis
+        href: https://github.com/dwillis
       - icon: twitter
-      href: https://twitter.com/derekwillis
+        href: https://twitter.com/derekwillis
+  favicon: logo.png
+  
 format:
   html:
-    theme: cosmo
-    css: styles.css</code></pre>
+    theme:
+      light: litera
+      dark: cyborg
+    css: styles.css
+
+editor: source
+
+execute:
+  freeze: auto</code></pre>
 </section>
-<section id="seeing-your-site" class="level2" data-number="37.2">
-<h2 data-number="37.2" class="anchored" data-anchor-id="seeing-your-site"><span class="header-section-number">37.2</span> Seeing your site</h2>
+<section id="creating-a-post" class="level2" data-number="37.2">
+<h2 data-number="37.2" class="anchored" data-anchor-id="creating-a-post"><span class="header-section-number">37.2</span> Creating a post</h2>
+<p>Under the files tab on the lower right, you’ll see a folder named posts. In there, you’ll find two folders with sample posts in them. There’s not much to them, but they’re useful to look at before we delete them.</p>
+<p>To create a post, you’re going to first create a folder for it. <strong>The folder name matters because it’s going to be part of your url.</strong> For this to work your folder name has to do a couple of things:</p>
+<ul>
+<li>Contain only lowercase letters and dashes instead of spaces. So My Awesome Post will not work. It should be my-awesome-post.</li>
+<li>Contain words that are in your post, and would be something people would search for. If your post is about Maryland women’s run into the NCAA Tournament, make sure your post title and folder name contains those words.</li>
+<li>In other words, <strong>you need to think about what your post is about before you make this folder</strong>. Can you change it later? Yes. But the sooner you start focusing on a topic the better.</li>
+</ul>
+<p>After you have created the folder, go to the button next to the create folder button and create a Quarto Document. Name that document index.qmd. <strong>DO NOT NAME IT CAPITAL I INDEX. IT’S LOWER CASE I.</strong></p>
+<p>At the top, you will have something called a yaml header, which are things that set up the page. They are quite simple to figure out. Here is an example you should copy and edit for all of your posts.</p>
+<pre><code>---
+title: "CHANGE THIS TO BE THE TITLE OF YOUR POST"
+author: "THIS IS YOUR NAME"
+date: '2023-XX-XX'
+categories: [lowercaseword, lowercaseword, lowercaseword]
+image: "image.png"
+format: 
+  html:
+    code-fold: true
+---</code></pre>
+<p>For us, the cold-fold bit is important, and it is not standard. This will allow users to see your code that makes your graphics, without displaying it. Users can decide if they want to see the code.</p>
+<p>Now that you have a folder and an index.qmd file with a proper yaml header, you’re ready to write your post. This document works just the same as any .qmd file we’ve worked with all semester. Create text between code blocks, and your code blocks will execute to produce graphics.</p>
+</section>
+<section id="seeing-your-site" class="level2" data-number="37.3">
+<h2 data-number="37.3" class="anchored" data-anchor-id="seeing-your-site"><span class="header-section-number">37.3</span> Seeing your site</h2>
 <p>While you are creating your site, you’re going to want to see it. Now’s a good time to introduce serving your site in R Studio so you can see it before you deploy it.</p>
 <p>You can use the Render button in your editor to do that, and if you want to see it inside RStudio you can check the “Preview in Viewer Pane” from the drop-down menu just to the right of the Render button. Otherwise, the site will render in your browser locally.</p>
 <div class="cell">
@@ -430,71 +411,8 @@ format:
 </div>
 </div>
 </section>
-<section id="editing-files" class="level2" data-number="37.3">
-<h2 data-number="37.3" class="anchored" data-anchor-id="editing-files"><span class="header-section-number">37.3</span> Editing files</h2>
-<p>You’ll be working with the same Quarto files (.qmd) that we’ve been working with all semester. Same structure as the exercise files, just with some metadata at the top of each post - title, date, etc. Each of your files is a blog post that will reside in the <code>posts</code> directory:</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="images/quartopost.png" class="img-fluid" width="287"></p>
-</div>
-</div>
-<p>But there are other files associated with your blog. Let’s start with editing the about.qmd file.</p>
-<p>At the top, you will have something called a yaml header, which are things that set up the page. They are quite simple to figure out. Here’s the yaml header it generates. Here’s mine; you can change yours to update the Twitter and GitHub values.</p>
-<pre><code>    ---
-    title: "About"
-    image: profile.jpg
-    about:
-      template: jolla
-      links:
-        - icon: twitter
-          text: Twitter
-          href: https://twitter.com/derekwillis
-        - icon: github
-          text: Github
-          href: https://github.com/dwillis
-    ---</code></pre>
-<p>Change yours, then change the text below the yaml header, and then save it. Click on the Render button and then check out the result in the Viewer tab on the right.</p>
-</section>
-<section id="creating-a-new-post" class="level2" data-number="37.4">
-<h2 data-number="37.4" class="anchored" data-anchor-id="creating-a-new-post"><span class="header-section-number">37.4</span> Creating a new post</h2>
-<p>You’ll notice in your <code>posts</code> folder that there are multiple posts. Depending on your theme, you might just have folders in post, and you might have some markdown files. They work mostly the same way.</p>
-<p>The magic here is how you name them. You’ll want to give the folders containing your posts a clean, meaningful name. The reason for that is that urls matter for Google. Clean urls with meaningful information in them rank higher.</p>
-<p>So in <code>posts</code>, you’ll see the folders are named similarly – the headline of your post in all lower case with dashes instead of spaces. So if I were writing a post called “I love sports data”, the slug version of that would be i-love-sports-data. Inside each folder is a file called <code>index.qmd</code> - that’s where your actual post will go.</p>
-<p><strong>NOTE: CAPITALIZATION MATTERS. AS IN, DON’T.</strong> You don’t see capitals in URLs, so don’t use them.</p>
-<p>So let’s create a post.</p>
-<p>Using the Files pane, you can create a new folder, name it and inside that create an <code>index.qmd</code> file. But that seems kinda repetitive. So that’s install a library that will make that task easier. We’ll be installing it directly from GitHub:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'remotes'</span>, <span class="at">repos =</span> <span class="st">"http://cran.us.r-project.org"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-The downloaded binary packages are in
-    /var/folders/d3/n35gxlzs361_3bbcn6br1my80000gq/T//Rtmph9yWlm/downloaded_packages</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"smach/newpost"</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Skipping install of 'newpost' from a github remote, the SHA1 (069d5eac) has not changed since last install.
-  Use `force = TRUE` to force installation</code></pre>
-</div>
-</div>
-<p>Now, let’s load our library:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(newpost)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>From here, we can create a new post by editing and copying this into the console:</p>
-<pre><code>newpost("this is a test", description="does this work?", author="put your name here")</code></pre>
-<p>You should see a new folder in your <code>posts</code> directory with today’s date followed by “this-is-a-test”, and inside will be an index.qmd file. So you’ll want to give some thought to the names of your posts, although you can change them after you make one.</p>
-<p>The first thing you’ll see in the index.qmd file is the yaml header. Typically, if we’ve filled out the previous block correctly, we should be good. But if you need to fix something, you can do it here.</p>
-<pre><code>---
-title: "this-is-a-test"
-author: "Derek Willis"
-description: "does this work?"
-date: "2023-08-18"
-categories: []
----</code></pre>
-<p>Below the yaml header? That’s up to you. Go do some of that writing stuff you do, and you can mix code and words just like we’ve done with the exercises.</p>
-</section>
-<section id="publishing-your-site" class="level2" data-number="37.5">
-<h2 data-number="37.5" class="anchored" data-anchor-id="publishing-your-site"><span class="header-section-number">37.5</span> Publishing your site</h2>
+<section id="publishing-your-site" class="level2" data-number="37.4">
+<h2 data-number="37.4" class="anchored" data-anchor-id="publishing-your-site"><span class="header-section-number">37.4</span> Publishing your site</h2>
 <p>Quarto will take your .qmd files and create static html. What does static html mean? It means there’s no server creating it on the fly – that’s called dynamic html – so this can be hosted on the simplest of servers.</p>
 <p>Publishing takes a lot of steps to get set up, but once it is, it’s easy.</p>
 <p><strong>Step 1: Get a GitHub account</strong></p>
@@ -557,6 +475,24 @@ categories: []
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -578,7 +514,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -606,31 +559,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
