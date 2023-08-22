@@ -1,0 +1,271 @@
+Season,Team,PTS
+2015,Atlanta Hawks,102.5
+2016,Atlanta Hawks,102.8
+2017,Atlanta Hawks,103.2
+2018,Atlanta Hawks,103.4
+2019,Atlanta Hawks,113.3
+2020,Atlanta Hawks,111.8
+2021,Atlanta Hawks,113.3
+2022,Atlanta Hawks,113.9
+2023,Atlanta Hawks,118.4
+2015,Boston Celtics,101.4
+2016,Boston Celtics,105.7
+2017,Boston Celtics,108
+2018,Boston Celtics,104
+2019,Boston Celtics,112.4
+2020,Boston Celtics,113.7
+2021,Boston Celtics,112
+2022,Boston Celtics,111.8
+2023,Boston Celtics,117.9
+2015,Brooklyn Nets,98
+2016,Brooklyn Nets,98.6
+2017,Brooklyn Nets,105.8
+2018,Brooklyn Nets,106.6
+2019,Brooklyn Nets,112.2
+2020,Brooklyn Nets,111.8
+2021,Brooklyn Nets,118.7
+2022,Brooklyn Nets,112.9
+2023,Brooklyn Nets,113.4
+2015,Charlotte Hornets,94.2
+2016,Charlotte Hornets,103.4
+2017,Charlotte Hornets,104.9
+2018,Charlotte Hornets,108.2
+2019,Charlotte Hornets,110.7
+2020,Charlotte Hornets,102.9
+2021,Charlotte Hornets,109.8
+2022,Charlotte Hornets,115.3
+2023,Charlotte Hornets,111
+2015,Chicago Bulls,100.8
+2016,Chicago Bulls,101.6
+2017,Chicago Bulls,102.9
+2018,Chicago Bulls,102.9
+2019,Chicago Bulls,104.9
+2020,Chicago Bulls,106.8
+2021,Chicago Bulls,111.6
+2022,Chicago Bulls,111.6
+2023,Chicago Bulls,113.1
+2015,Cleveland Cavaliers,103.1
+2016,Cleveland Cavaliers,104.3
+2017,Cleveland Cavaliers,110.3
+2018,Cleveland Cavaliers,110.9
+2019,Cleveland Cavaliers,104.5
+2020,Cleveland Cavaliers,106.9
+2021,Cleveland Cavaliers,104
+2022,Cleveland Cavaliers,107.8
+2023,Cleveland Cavaliers,112.3
+2015,Dallas Mavericks,105.2
+2016,Dallas Mavericks,102.3
+2017,Dallas Mavericks,97.9
+2018,Dallas Mavericks,102.3
+2019,Dallas Mavericks,108.9
+2020,Dallas Mavericks,117
+2021,Dallas Mavericks,111.8
+2022,Dallas Mavericks,108
+2023,Dallas Mavericks,114.2
+2015,Denver Nuggets,101.5
+2016,Denver Nuggets,101.9
+2017,Denver Nuggets,111.7
+2018,Denver Nuggets,110
+2019,Denver Nuggets,110.7
+2020,Denver Nuggets,111.3
+2021,Denver Nuggets,115.5
+2022,Denver Nuggets,112.7
+2023,Denver Nuggets,115.8
+2015,Detroit Pistons,98.5
+2016,Detroit Pistons,102
+2017,Detroit Pistons,101.3
+2018,Detroit Pistons,103.8
+2019,Detroit Pistons,107
+2020,Detroit Pistons,107.2
+2021,Detroit Pistons,107.4
+2022,Detroit Pistons,104.8
+2023,Detroit Pistons,110.3
+2015,Golden State Warriors,110
+2016,Golden State Warriors,114.9
+2017,Golden State Warriors,115.9
+2018,Golden State Warriors,113.5
+2019,Golden State Warriors,117.7
+2020,Golden State Warriors,106.3
+2021,Golden State Warriors,112.9
+2022,Golden State Warriors,111
+2023,Golden State Warriors,118.9
+2015,Houston Rockets,103.9
+2016,Houston Rockets,106.5
+2017,Houston Rockets,115.3
+2018,Houston Rockets,112.4
+2019,Houston Rockets,113.9
+2020,Houston Rockets,117.8
+2021,Houston Rockets,107.6
+2022,Houston Rockets,109.7
+2023,Houston Rockets,110.7
+2015,Indiana Pacers,97.3
+2016,Indiana Pacers,102.2
+2017,Indiana Pacers,105.1
+2018,Indiana Pacers,105.6
+2019,Indiana Pacers,108
+2020,Indiana Pacers,109.4
+2021,Indiana Pacers,114
+2022,Indiana Pacers,111.5
+2023,Indiana Pacers,116.3
+2015,Los Angeles Clippers,106.7
+2016,Los Angeles Clippers,104.5
+2017,Los Angeles Clippers,108.7
+2018,Los Angeles Clippers,109
+2019,Los Angeles Clippers,115.1
+2020,Los Angeles Clippers,116.3
+2021,Los Angeles Clippers,114.7
+2022,Los Angeles Clippers,108.4
+2023,Los Angeles Clippers,113.6
+2015,Los Angeles Lakers,98.5
+2016,Los Angeles Lakers,97.3
+2017,Los Angeles Lakers,104.6
+2018,Los Angeles Lakers,108.1
+2019,Los Angeles Lakers,111.8
+2020,Los Angeles Lakers,113.4
+2021,Los Angeles Lakers,109.7
+2022,Los Angeles Lakers,112.1
+2023,Los Angeles Lakers,117.2
+2015,Memphis Grizzlies,98.3
+2016,Memphis Grizzlies,99.1
+2017,Memphis Grizzlies,100.5
+2018,Memphis Grizzlies,99.3
+2019,Memphis Grizzlies,103.5
+2020,Memphis Grizzlies,112.6
+2021,Memphis Grizzlies,113.7
+2022,Memphis Grizzlies,115.6
+2023,Memphis Grizzlies,116.9
+2015,Miami Heat,94.7
+2016,Miami Heat,100
+2017,Miami Heat,103.2
+2018,Miami Heat,103.4
+2019,Miami Heat,105.7
+2020,Miami Heat,112
+2021,Miami Heat,106.3
+2022,Miami Heat,110
+2023,Miami Heat,109.5
+2015,Milwaukee Bucks,97.8
+2016,Milwaukee Bucks,99
+2017,Milwaukee Bucks,103.6
+2018,Milwaukee Bucks,106.5
+2019,Milwaukee Bucks,118.1
+2020,Milwaukee Bucks,118.7
+2021,Milwaukee Bucks,119.2
+2022,Milwaukee Bucks,115.5
+2023,Milwaukee Bucks,116.9
+2015,Minnesota Timberwolves,97.8
+2016,Minnesota Timberwolves,102.4
+2017,Minnesota Timberwolves,105.6
+2018,Minnesota Timberwolves,109.5
+2019,Minnesota Timberwolves,112.5
+2020,Minnesota Timberwolves,113.3
+2021,Minnesota Timberwolves,110.6
+2022,Minnesota Timberwolves,115.9
+2023,Minnesota Timberwolves,115.8
+2015,New Orleans Pelicans,99.4
+2016,New Orleans Pelicans,102.7
+2017,New Orleans Pelicans,104.3
+2018,New Orleans Pelicans,111.7
+2019,New Orleans Pelicans,115.4
+2020,New Orleans Pelicans,115.8
+2021,New Orleans Pelicans,115
+2022,New Orleans Pelicans,109.3
+2023,New Orleans Pelicans,114.4
+2015,New York Knicks,91.9
+2016,New York Knicks,98.4
+2017,New York Knicks,104.3
+2018,New York Knicks,104.5
+2019,New York Knicks,104.6
+2020,New York Knicks,105.8
+2021,New York Knicks,106.9
+2022,New York Knicks,106.5
+2023,New York Knicks,116
+2015,Oklahoma City Thunder,104
+2016,Oklahoma City Thunder,110.2
+2017,Oklahoma City Thunder,106.6
+2018,Oklahoma City Thunder,107.9
+2019,Oklahoma City Thunder,114.5
+2020,Oklahoma City Thunder,110.4
+2021,Oklahoma City Thunder,105.5
+2022,Oklahoma City Thunder,103.7
+2023,Oklahoma City Thunder,117.5
+2015,Orlando Magic,95.7
+2016,Orlando Magic,102.1
+2017,Orlando Magic,101.1
+2018,Orlando Magic,103.4
+2019,Orlando Magic,107.3
+2020,Orlando Magic,107.3
+2021,Orlando Magic,104.3
+2022,Orlando Magic,104.2
+2023,Orlando Magic,111.4
+2015,Philadelphia 76ers,92
+2016,Philadelphia 76ers,97.4
+2017,Philadelphia 76ers,102.4
+2018,Philadelphia 76ers,109.8
+2019,Philadelphia 76ers,115.2
+2020,Philadelphia 76ers,110.7
+2021,Philadelphia 76ers,113.3
+2022,Philadelphia 76ers,109.9
+2023,Philadelphia 76ers,115.2
+2015,Phoenix Suns,102.4
+2016,Phoenix Suns,100.9
+2017,Phoenix Suns,107.7
+2018,Phoenix Suns,103.9
+2019,Phoenix Suns,107.5
+2020,Phoenix Suns,113.6
+2021,Phoenix Suns,114.3
+2022,Phoenix Suns,114.8
+2023,Phoenix Suns,113.6
+2015,Portland Trail Blazers,102.8
+2016,Portland Trail Blazers,105.1
+2017,Portland Trail Blazers,107.9
+2018,Portland Trail Blazers,105.6
+2019,Portland Trail Blazers,114.7
+2020,Portland Trail Blazers,115
+2021,Portland Trail Blazers,114.7
+2022,Portland Trail Blazers,106.2
+2023,Portland Trail Blazers,113.4
+2015,Sacramento Kings,101.3
+2016,Sacramento Kings,106.6
+2017,Sacramento Kings,102.8
+2018,Sacramento Kings,98.8
+2019,Sacramento Kings,114.2
+2020,Sacramento Kings,110.1
+2021,Sacramento Kings,114.6
+2022,Sacramento Kings,110.3
+2023,Sacramento Kings,120.7
+2015,San Antonio Spurs,103.2
+2016,San Antonio Spurs,103.5
+2017,San Antonio Spurs,105.3
+2018,San Antonio Spurs,102.7
+2019,San Antonio Spurs,111.7
+2020,San Antonio Spurs,114.1
+2021,San Antonio Spurs,110.7
+2022,San Antonio Spurs,113.2
+2023,San Antonio Spurs,113
+2015,Toronto Raptors,104
+2016,Toronto Raptors,102.7
+2017,Toronto Raptors,106.9
+2018,Toronto Raptors,111.7
+2019,Toronto Raptors,114.4
+2020,Toronto Raptors,112.8
+2021,Toronto Raptors,111.7
+2022,Toronto Raptors,109.4
+2023,Toronto Raptors,112.9
+2015,Utah Jazz,95.1
+2016,Utah Jazz,97.7
+2017,Utah Jazz,100.7
+2018,Utah Jazz,104.1
+2019,Utah Jazz,111.7
+2020,Utah Jazz,111.3
+2021,Utah Jazz,116.2
+2022,Utah Jazz,113.6
+2023,Utah Jazz,117.1
+2015,Washington Wizards,98.5
+2016,Washington Wizards,104.1
+2017,Washington Wizards,109.2
+2018,Washington Wizards,106.6
+2019,Washington Wizards,114
+2020,Washington Wizards,114.4
+2021,Washington Wizards,114.9
+2022,Washington Wizards,108.6
+2023,Washington Wizards,113.2
