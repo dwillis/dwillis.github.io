@@ -413,14 +413,14 @@ time  (2): goalie_min_plyd, defensive_goalie_min_plyd
 <p>But is there one?</p>
 <p>We’re going create a new dataframe called newcorrelations that takes our data that we imported and adds a column called <code>differential</code> which is the difference between <code>goals</code> and <code>defensive_goals</code>, and then we’ll use correlations to see how related those two things are.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="ot">&lt;-</span> correlations <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="ot">&lt;-</span> correlations <span class="sc">|&gt;</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">differential =</span> goals <span class="sc">-</span> defensive_goals</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In R, there is a <code>cor</code> function, and it works much the same as <code>mean</code> or <code>median</code>. So we want to see if <code>differential</code> is correlated with <code>fouls</code>, which is the yards of penalties a team gets in a game. We do that by referencing <code>differential</code> and <code>fouls</code> and specifying we want a <code>pearson</code> correlation. The number we get back is the correlation coefficient.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, fouls, <span class="at">method=</span><span class="st">"pearson"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, fouls, <span class="at">method=</span><span class="st">"pearson"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   correlation
@@ -431,7 +431,7 @@ time  (2): goalie_min_plyd, defensive_goalie_min_plyd
 <p>So on a scale of -1 to 1, where 0 means there’s no relationship at all and 1 or -1 means a perfect relationship, fouls and whether or not the team scores more goals than it gives up are at 0.02543571. You could say they’re 2.5 percent related toward the positive – more fouls, the higher your differential. Another way to say it? They’re 97.5 percent not related.</p>
 <p>What about the number of yellow cards instead of fouls? Do more aggressive defensive teams also score more?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">|&gt;</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, yellow_cards, <span class="at">method=</span><span class="st">"pearson"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
@@ -487,7 +487,7 @@ F-statistic:  1.58 on 1 and 2440 DF,  p-value: 0.2089</code></pre>
 <p>So instead of looking at fouls, let’s make a new metric: shots on goal. Can we predict the score differential by looking at the shots they put on goal?</p>
 <p>First, let’s look at the correlation coefficent.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, so_g, <span class="at">method=</span><span class="st">"pearson"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
