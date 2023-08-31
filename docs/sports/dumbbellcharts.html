@@ -415,9 +415,9 @@ date  (1): date
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>big10 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Nebraska Cornhuskers"</span>, <span class="st">"Iowa Hawkeyes"</span>, <span class="st">"Minnesota Golden Gophers"</span>, <span class="st">"Illinois Fighting Illini"</span>, <span class="st">"Northwestern Wildcats"</span>, <span class="st">"Wisconsin Badgers"</span>, <span class="st">"Indiana Hoosiers"</span>, <span class="st">"Purdue Boilermakers"</span>, <span class="st">"Ohio State Buckeyes"</span>, <span class="st">"Michigan Wolverines"</span>, <span class="st">"Michigan State Spartans"</span>, <span class="st">"Penn State Nittany Lions"</span>, <span class="st">"Rutgers Scarlet Knights"</span>, <span class="st">"Maryland Terrapins, Terps"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>errors <span class="ot">&lt;-</span> logs <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> big10) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(team) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>errors <span class="ot">&lt;-</span> logs <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> big10) <span class="sc">|&gt;</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(team) <span class="sc">|&gt;</span> </span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_errors =</span> <span class="fu">sum</span>(errors), </span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">opp_errors =</span> <span class="fu">sum</span>(defensive_errors))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -518,7 +518,7 @@ Ignoring unknown parameters: `linewidth`</code></pre>
 </div>
 <p>How about some layering?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> errors <span class="sc">%&gt;%</span> <span class="fu">filter</span>(team <span class="sc">==</span> <span class="st">"Maryland Terrapins, Terps"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> errors <span class="sc">|&gt;</span> <span class="fu">filter</span>(team <span class="sc">==</span> <span class="st">"Maryland Terrapins, Terps"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>

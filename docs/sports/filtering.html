@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-0.9.646">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,15 +11,10 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
-  vertical-align: middle;
-}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -58,7 +53,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -71,7 +66,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -103,7 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -357,13 +352,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#selecting-data-to-make-it-easier-to-read" id="toc-selecting-data-to-make-it-easier-to-read" class="nav-link active" data-scroll-target="#selecting-data-to-make-it-easier-to-read"><span class="toc-section-number">6.1</span>  Selecting data to make it easier to read</a></li>
-  <li><a href="#using-conditional-filters-to-set-limits" id="toc-using-conditional-filters-to-set-limits" class="nav-link" data-scroll-target="#using-conditional-filters-to-set-limits"><span class="toc-section-number">6.2</span>  Using conditional filters to set limits</a></li>
-  <li><a href="#top-list" id="toc-top-list" class="nav-link" data-scroll-target="#top-list"><span class="toc-section-number">6.3</span>  Top list</a></li>
+  <li><a href="#selecting-data-to-make-it-easier-to-read" id="toc-selecting-data-to-make-it-easier-to-read" class="nav-link active" data-scroll-target="#selecting-data-to-make-it-easier-to-read"> <span class="header-section-number">6.1</span> Selecting data to make it easier to read</a></li>
+  <li><a href="#using-conditional-filters-to-set-limits" id="toc-using-conditional-filters-to-set-limits" class="nav-link" data-scroll-target="#using-conditional-filters-to-set-limits"> <span class="header-section-number">6.2</span> Using conditional filters to set limits</a></li>
+  <li><a href="#top-list" id="toc-top-list" class="nav-link" data-scroll-target="#top-list"> <span class="header-section-number">6.3</span> Top list</a></li>
   </ul>
 </nav>
     </div>
@@ -380,7 +375,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
-  
     
   </div>
   
@@ -416,7 +410,7 @@ dbl (10): 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022
 <p>Before we do that, a note about conditions. Most of the conditional operators you’ll understand – greater than and less than are &gt; and &lt;. The tough one to remember is equal to. In conditional statements, equal to is == not =. If you haven’t noticed, = is a variable assignment operator, not a conditional statement. So equal is == and NOT equal is !=.</p>
 <p>So if you want to see Institutions equal to Maryland, you do this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">"Maryland"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">|&gt;</span> <span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">"Maryland"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 12
   Institution Conference `2013` `2014` `2015` `2016` `2017` `2018` `2019` `2020`
@@ -428,7 +422,7 @@ dbl (10): 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022
 </div>
 <p>Or if we want to see schools that had more than half a million people buy tickets to a football game last season, we do the following. NOTE THE BACKTICKS.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">2022</span><span class="st">`</span> <span class="sc">&gt;=</span> <span class="dv">500000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">2022</span><span class="st">`</span> <span class="sc">&gt;=</span> <span class="dv">500000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 17 × 12
    Institution    Conference `2013` `2014` `2015` `2016` `2017` `2018` `2019`
@@ -455,7 +449,7 @@ dbl (10): 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022
 </div>
 <p>But what if we want to see all of the Power Five conferences? We <em>could</em> use conditional logic in our filter. The conditional logic operators are <code>|</code> for OR and <code>&amp;</code> for AND. NOTE: AND means all conditions have to be met. OR means any of the conditions work. So be careful about boolean logic.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">"Big 10"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"SEC"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"Pac-12"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"ACC"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"Big 12"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">|&gt;</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">"Big 10"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"SEC"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"Pac-12"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"ACC"</span> <span class="sc">|</span> Conference <span class="sc">==</span> <span class="st">"Big 12"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 51 × 12
    Institution    Conference `2013` `2014` `2015` `2016` `2017` `2018` `2019`
@@ -482,7 +476,7 @@ dbl (10): 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022
 </div>
 <p>Now with a list, we can use the %in% operator. It does what you think it does – it gives you data that matches things IN the list you give it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">|&gt;</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 65 × 12
    Institution    Conference `2013` `2014` `2015` `2016` `2017` `2018` `2019`
@@ -505,7 +499,7 @@ dbl (10): 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022
 <h2 data-number="6.1" class="anchored" data-anchor-id="selecting-data-to-make-it-easier-to-read"><span class="header-section-number">6.1</span> Selecting data to make it easier to read</h2>
 <p>So now we have our Power Five list. What if we just wanted to see attendance from the most recent season and ignore all the rest? Select to the rescue.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Institution, Conference, <span class="st">`</span><span class="at">2022</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">|&gt;</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive) <span class="sc">|&gt;</span> <span class="fu">select</span>(Institution, Conference, <span class="st">`</span><span class="at">2022</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 65 × 3
    Institution    Conference `2022`
@@ -544,8 +538,8 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">|&gt;</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5,681 × 60
@@ -573,9 +567,9 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 <p>In that season, we’ve got several players that can lay claim to the title of One Shot One Three True Shooting champion.</p>
 <p>In most contests, like the batting title in Major League Baseball, there’s a minimum number of X to qualify. In baseball, it’s at bats. In basketball, it attempts. So let’s set a floor and see how it changes. What if we said you had to have played 100 minutes in a season? The top players in college basketball play more than 1000 minutes in a season. So 100 is not that much. Let’s try it and see.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting)) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>players <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trueshooting =</span> (PTS<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>(FGA <span class="sc">+</span> (.<span class="dv">44</span><span class="sc">*</span>FTA))))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(trueshooting)) <span class="sc">|&gt;</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP <span class="sc">&gt;</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3,829 × 60
@@ -608,7 +602,7 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 <p>One last little dplyr trick that’s nice to have in the toolbox is a shortcut for selecting only the top values for your dataset. Want to make a Top 10 List? Or Top 25? Or Top Whatever You Want? It’s easy.</p>
 <p>So what are the top 10 Power Five schools by season attendance. All we’re doing here is chaining commands together with what we’ve already got. We’re <em>filtering</em> by our list of Power Five conferences, we’re <em>selecting</em> the three fields we need, now we’re going to <em>arrange</em> it by total attendance and then we’ll introduce the new function: <code>top_n</code>. The <code>top_n</code> function just takes a number. So we want a top 10 list? We do it like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Institution, Conference, <span class="st">`</span><span class="at">2022</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">2022</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>attendance <span class="sc">|&gt;</span> <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive) <span class="sc">|&gt;</span> <span class="fu">select</span>(Institution, Conference, <span class="st">`</span><span class="at">2022</span><span class="st">`</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">2022</span><span class="st">`</span>)) <span class="sc">|&gt;</span> <span class="fu">top_n</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Selecting by 2022</code></pre>
 </div>
@@ -636,24 +630,6 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -675,24 +651,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
     setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -720,50 +679,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      let href = ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
       });
-    }
+      return popup.innerHTML;
+    });
   }
 });
 </script>
