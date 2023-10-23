@@ -1,0 +1,108 @@
+---
+title: "What Was That?"
+author: "Derek Willis"
+date: "2023-10-17"
+categories: [maryland football, wtf]
+format:
+  html:
+    code-fold: true
+---
+
+```{r}
+suppressMessages(library(tidyverse))
+suppressMessages(library(cfbfastR))
+
+pbp <- load_cfb_pbp(seasons = c(2019, 2020, 2021, 2022, 2023))
+
+big_ten <- c('Maryland', 'Wisconsin', 'Ohio State', 'Michigan', 'Michigan State', 'Penn State', 'Rutgers', 'Northwestern', 'Iowa', 'Minnesota', 'Nebraska', 'Indiana', 'Illinois', 'Purdue')
+```
+
+If you were at Secu stadium on Oct. 14 for the Maryland-Illinois game and saw the Terrapins run the ball on third and six from the Illinois 29-yard line late in the game, you might have had the question I did: "Why didn't Maryland pass?"
+
+It turns out that running the ball in that situation isn't the strangest thing for Maryland under Mike Locksley. It may not have been a successful call, but it wasn't totally unexpected, either. While the Terps aren't a one-dimensional offensive team, since the start of the 2019 season they have run the ball on third and six more than all but two Big Ten teams (Nebraska and Northwestern).
+
+```{r}
+third_and_six <- pbp |> filter(down == 3, distance == 6)
+third_and_six_runs <- third_and_six |> filter(str_detect(play_type, "Rush"))
+
+runs_by_team <- third_and_six_runs |> group_by(pos_team)  |> summarise(total = n()) |> arrange(desc(total))
+
+runs_by_team_big_ten <- third_and_six_runs |> filter(pos_team %in% big_ten) |> group_by(pos_team)  |> summarise(total = n()) |> arrange(desc(total))
+```
+
+The most common call in that specific game situation is to pass the ball, according to an analysis of play-by-play data from college football games for the past five seasons. Slightly more than one in five times, the offensive team runs the ball, but that doesn't apply equally to every team. Programs that emphasize the ground game such as the military academies run much more often in that situation than most other teams. Crucially, running doesn't seem crazy when you consider the outcomes: when choosing to run on third-and-six, nearly 40% of the time a team gains at least six yards, including plays that result in a touchdown.
+
+```{r}
+nrow(third_and_six_runs)/nrow(third_and_six)
+
+third_and_six_rush_success <- third_and_six_runs |> filter(yards_gained >= 6) |> nrow()
+
+third_and_six_rush_success/third_and_six_runs |> nrow()
+```
+
+But has that strategy worked for Maryland? Under Locksley, the Terps have passed the ball on two of every three plays when facing third-and-six, which means they run more often than the average team. And while pass plays in that situation have tended to gain more yardage, when they do run they average nearly six yards. In 16 rushing attempts from that third-down situation, the Terps have gained at least six yards _half the time_, including a 12-yard gain from Roman Hemby earlier in the Illinois game. That's not a huge number of plays, but it puts Maryland among the top 30 teams that have succeeded the most by running on third-and-six since 2018. I've limited my results to teams that have run the ball on third-and-six at least 10 times over this period.
+
+```{r}
+
+runs_by_team_success <- third_and_six_runs |> filter(yards_gained >= 6) |>  group_by(pos_team)  |> summarise(success = n()) |> arrange(desc(success))
+
+runs_by_team |> inner_join(runs_by_team_success) |> mutate(percent = success/total*100) |> arrange(desc(percent)) |> filter(total >= 10)
+```
+
+Maryland's success running on third-and-six isn't quite that of Kentucky, which has done it 10 of 12 times, or even Charlotte (8 of 14 times), who the Terps have beaten twice in a row. But they've succeeded more often than Michigan, Notre Dame and Georgia, to name three Power 5 teams. Still, history would lean towards calling a pass play. Was there something about this particular opponent and situation that made a run more likely?
+
+Let's look at Illinois. Over the past five seasons, the Illini have been pretty good at stopping third-and-six rushes short of a first down, accomplishing that two out of every three attempts.
+
+
+```{r}
+def_rush <- third_and_six |> 
+  filter(str_detect(play_type, "Rush")) |> 
+  group_by(def_pos_team) |>
+  summarise(total = n()) |> 
+  arrange(desc(total))
+
+def_rush_success <- third_and_six |> 
+  filter(str_detect(play_type, "Rush")) |> 
+  filter(yards_gained >= 6) |>
+  group_by(def_pos_team) |>
+  summarise(success = n()) |> 
+  arrange(desc(success))
+
+def_rush |> 
+  inner_join(def_rush_success) |> 
+  filter(def_pos_team %in% big_ten) |> 
+  mutate(percent = success/total*100) |> 
+  arrange(desc(percent)) |> 
+  filter(total >= 10)
+
+```
+
+But this season has been a different story for a struggling team. How different? Antwain Littleton II's loss of one yard on third-and-six was the first time in four attempts that Illinois didn't give up a first down.
+
+
+```{r}
+def_rush_2023 <- third_and_six |> 
+  filter(str_detect(play_type, "Rush"), season == 2023) |> 
+  group_by(def_pos_team) |>
+  summarise(total = n()) |> 
+  arrange(desc(total))
+
+def_rush_success_2023 <- third_and_six |> 
+  filter(str_detect(play_type, "Rush"), season == 2023) |> 
+  filter(yards_gained >= 6) |>
+  group_by(def_pos_team) |>
+  summarise(success = n()) |> 
+  arrange(desc(success))
+
+def_rush_2023 |> 
+  inner_join(def_rush_success_2023) |> 
+  mutate(percent = success/total*100) |> 
+  arrange(desc(percent)) 
+```
+
+```{r}
+third_and_six |> 
+  filter(str_detect(play_type, "Rush"), season == 2023) |> 
+  filter(yards_gained < 6, def_pos_team == 'Illinois') |> 
+  select(year, pos_team, def_pos_team, period, down, distance, play_type, play_text)
+```
