@@ -1,0 +1,26 @@
+---
+title: "How Newsrooms Should be Talking About AI"
+author: "Derek Willis"
+date: "2023-11-06"
+format:
+  html:
+    df-print: paged
+    toc: true
+engine: knitr
+---
+
+If you've heard about news organizations using AI, chances are you've heard about some bad choices. Maybe it was CNET publishing AI-written stories with "[very dumb errors](https://futurism.com/cnet-ai-errors)", Gannett publishing some sports stories [that looked as if they were written by authors unfamiliar with sports](https://www.businessinsider.com/gannett-pauses-ai-written-articles-after-social-media-mockery-2023-8) or just [the delight of general content farms](https://www.newsguardtech.com/special-reports/newsbots-ai-generated-news-websites-proliferating/).
+
+I'm pretty confident that there are better, smarter uses of AI going on in newsrooms, but mostly we don't hear about those. Maybe there's a lesson in that.
+
+Newsrooms need to be investigating AI systems, both as a reporting assignment and for their utility in the service of doing journalism. But before they adopt or implement AI systems to produce material for readers and viewers, they should consider looking inward first. That's where AI can have a real impact that serves audiences and the newsrooms that depend on them. Let's work on building internal systems.
+
+It's ironic that many newsrooms have exactly the materials that AI companies want: lots of original material describing people, places and events. The kind of things used to train and enhance language models. What if, before news organizations use AI systems to write the latest news and sports stories, they used AI technology to better understand the institutions and people they cover? What if news organizations used AI to better prepare their journalists to ask better questions?
+
+The idea here isn't new, just the technology. Newsrooms have been bringing knives to gun fights for a long time now by failing not only to use the newest hardware and software for journalism but also by [not building better tools](https://thescoop.org/thefix/better-tools/) to do it. A reporter starting out in an unfamiliar place covering a new beat today has access to more information than her counterpart did 25 years ago, but most of it is useless without knowing where to start and what questions to ask.
+
+It turns out that large language models - what we mean these days when we talk about the engines of AI services - are pretty good at helping with that. Imagine being able to give that new reporter a way to learn from the news organization's archives that is more than the traditional "Here's some information, I hope you find something interesting!" method. Call them "reporter-in-the-loop" systems, because that's what they are: AI guided by a journalist rather than simply consumed by the public. And not only by organizing the information newsrooms already have, but by suggesting areas where they haven't paid enough attention.
+
+The additional benefit of this approach is that by encountering and interrogating AI systems in a way that doesn't involve instant publishing, reporters will get better at understanding them and using them. There will always be the temptation to by an off-the-shelf product or service that will plug AI into a newsroom. But let's not take short-term gain (and it may not be much of one, given our track record) over the development of truly useful AI systems guided by humans.
+
+The goal for newsrooms should not be using AI as a replacement for reporting and editing but as an enhancer of those tasks. We should be solving reporting capacity problems, not substituting code for reporting wholesale. Less sexy? Maybe. But we're valuing the wrong thing here by not looking at how AI can help newsrooms improve the ways they understand and tell the stories of their communities. That's where the biggest impact will be right now, because that's where newsrooms, especially smaller ones, are struggling. Most AI-generated stories right now are ephemeral; we signal their value by choosing to produce them without people involved. Let's put AI to work on making our reporters and editors better, and better stories will come.
