@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Journalism with R and the Tidyverse - 12&nbsp; Using GitHub</title>
+<title>Data Journalism with R and the Tidyverse - 32&nbsp; Writing with numbers</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,8 +25,7 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./r-basics.html" rel="next">
-<link href="./publicrecords.html" rel="prev">
+<link href="./basicstats.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -65,7 +64,7 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using GitHub</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Writing with numbers</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -145,7 +144,7 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./github.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using GitHub</span></a>
+  <a href="./github.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using GitHub</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -245,7 +244,7 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Writing with numbers</span></a>
+  <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Writing with numbers</span></a>
   </div>
 </li>
     </ul>
@@ -257,9 +256,9 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link active" data-scroll-target="#how-it-works"> <span class="header-section-number">12.1</span> How It Works</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"> <span class="header-section-number">12.2</span> Getting Started</a></li>
-  <li><a href="#advanced-use" id="toc-advanced-use" class="nav-link" data-scroll-target="#advanced-use"> <span class="header-section-number">12.3</span> Advanced Use</a></li>
+  <li><a href="#how-to-write-about-numbers-without-overwhelming-with-numbers." id="toc-how-to-write-about-numbers-without-overwhelming-with-numbers." class="nav-link active" data-scroll-target="#how-to-write-about-numbers-without-overwhelming-with-numbers."> <span class="header-section-number">32.1</span> How to write about numbers without overwhelming with numbers.</a></li>
+  <li><a href="#when-exact-numbers-matter" id="toc-when-exact-numbers-matter" class="nav-link" data-scroll-target="#when-exact-numbers-matter"> <span class="header-section-number">32.2</span> When exact numbers matter</a></li>
+  <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example"> <span class="header-section-number">32.3</span> An example</a></li>
   </ul>
 </nav>
     </div>
@@ -268,7 +267,7 @@ ul.task-list{list-style: none;}
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using GitHub</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Writing with numbers</span></h1>
 </div>
 
 
@@ -282,21 +281,55 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<p>GitHub is a platform for managing and storing files, data and code built atop Git, a popular open source version control software. GitHub accounts are free and it’s <a href="https://docs.github.com/en/get-started/quickstart">easy to get started</a>. The one prerequisite is that you have <a href="https://docs.github.com/en/get-started/quickstart/set-up-git">Git installed on your local computer</a>. There are installers for Mac, Windows and Linux.</p>
-<section id="how-it-works" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="how-it-works"><span class="header-section-number">12.1</span> How It Works</h2>
-<p>Version control is based on the ideas that you want to keep track of changes you make to a collection of files and that multiple people can work together without getting in each other’s way or having to do things in a set order. For individual users, it’s great for making sure that you always have your work.</p>
-<p>GitHub users work in what are known as repositories on their local computers and also <em>push</em> changes to a remote repository located on GitHub. That remote repository is key: if you lose your computer, you can fetch a version of your files from GitHub. If you want to work with someone else on the same files, you can each have a local copy, push changes to GitHub and then pull each others’ changes back to your local computers.</p>
-<p>So, like Microsoft Word’s track changes but with a remote backup and multiple editors.</p>
+<p>The number one sin of all early career data journalist is to get really, really, really attached to the analysis you’ve done and include every number you find.</p>
+<p>Don’t do that.</p>
+<p>Numbers tell you what. Numbers rarely tell you why. What question has driven most people since they were three years old? Why. The very first thing to do is realize that is the purpose of reporting. You’ve done the analysis to determine the what. Now go do the reporting to do the why. Or as an old editor of mine used to say “Now go do that reporting shit you do.”</p>
+<p>The trick to writing a numbers story is to frame your story around people. Sometimes, your lead can be a number, if that number is compelling. Often, your lead is a person, a person who is one of the numbers you are writing about.</p>
+<p>Tell their story. Briefly. Then, let us hear from them. Let them speak about what it is you are writing about.</p>
+<p>Then come the numbers.</p>
+<section id="how-to-write-about-numbers-without-overwhelming-with-numbers." class="level2" data-number="32.1">
+<h2 data-number="32.1" class="anchored" data-anchor-id="how-to-write-about-numbers-without-overwhelming-with-numbers."><span class="header-section-number">32.1</span> How to write about numbers without overwhelming with numbers.</h2>
+<p>Writing complex stories is often a battle against that complexity. You don’t want to overwhelm. You want to simplify where you can. The first place you can do that is only use exact numbers where an exact number is called for.</p>
+<p>Where you can, do the following:</p>
+<ul>
+<li>Using ratios instead of percents</li>
+<li>Often, it’s better to put it in counts of 10. 6 of 10, 4 of 10. It’s easy to translate that from a percentage to a ratio.</li>
+<li>But be careful when your number is 45 percent. Is that 4 in 10 or 5 in 10?</li>
+<li>If a ratio doesn’t make sense, round. There’s 287,401 people in Lincoln, according to the Census Bureau. It’s easier, and no less accurate, to say there’s more than 287,000 people in Lincoln.</li>
+</ul>
+<p><strong>A critical question your writing should answer: As compared to what?</strong></p>
+<p>How does this compare to the average? The state? The nation? The top? The bottom?</p>
+<p>One of the most damning numbers in the series of stories Craig Pittman and I wrote that became the book <a href="https://www.amazon.com/Paving-Paradise-Floridas-Vanishing-Wetlands-ebook/dp/B004HZXZCE">Paving Paradise</a> was comparing approvals and denials.</p>
+<p>We were looking at the US Army Corps of Engineers and their permitting program. We were able to get a dataset of just a few years of permits that was relatively clean. From that, we were able to count the number of times the corps had said yes to a developer to wipe out wetlands the law protected and how many times they said no.</p>
+<p>They said yes 12,000 times. They said no once.</p>
+<p>That one time? Someone wanted to build an eco-lodge in the Everglades. Literally. Almost every acre of the property was wetlands. So in order to build it, the developer would have to fill in the very thing they were going to try to bring people into. The corps said no.</p>
 </section>
-<section id="getting-started" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">12.2</span> Getting Started</h2>
-<p>After installing Git and signing up for a GitHub account, <a href="https://docs.github.com/en/desktop/installing-and-configuring-github-desktop">download and install GitHub Desktop</a>. It will have you sign into your GitHub account and then you’ll have access to any existing repositories. If you don’t have any, that’s fine! You can <a href="https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/overview/creating-your-first-repository-using-github-desktop">make one locally</a>.</p>
-<p>GitHub has <a href="https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop">good documentation for working in the Desktop app</a>, and while the emphasis in this book will be on using GitHub for version control, it also supports recording issues (read: problems or questions) with your files, contributing to projects that aren’t yours and more.</p>
+<section id="when-exact-numbers-matter" class="level2" data-number="32.2">
+<h2 data-number="32.2" class="anchored" data-anchor-id="when-exact-numbers-matter"><span class="header-section-number">32.2</span> When exact numbers matter</h2>
+<p>Sometimes ratios and rounding are not appropriate.</p>
+<p>This is being written in the days of the coronavirus. Case counts are where an exact number is called for. You don’t say that there are more than 70 cases in Lancaster County on the day this was written. You specify. It’s 75.</p>
+<p>You don’t say almost 30 deaths. It’s 28.</p>
+<p>Where this also comes into play is any time there are deaths: Do not round bodies.</p>
 </section>
-<section id="advanced-use" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="advanced-use"><span class="header-section-number">12.3</span> Advanced Use</h2>
-<p>Although our focus is on the GitHub Desktop app, you can use Git and GitHub from your computer’s command line interface, and GitHub has a purpose-built <a href="https://docs.github.com/en/github-cli">command line client</a>, too. GitHub can also serve as a publishing platform for many types of files, and entire websites are hosted on <a href="https://docs.github.com/en/pages">GitHub Pages</a>.</p>
+<section id="an-example" class="level2" data-number="32.3">
+<h2 data-number="32.3" class="anchored" data-anchor-id="an-example"><span class="header-section-number">32.3</span> An example</h2>
+<p><a href="https://www.azcentral.com/in-depth/news/local/arizona-wildfires/2019/07/22/wildfire-risks-more-than-500-spots-have-greater-hazard-than-paradise/1434502001/">Read this story from USA Today and the Arizona Republic</a>. Notice first that the top sets up a conflict: People say one thing, and that thing is not true.</p>
+<blockquote class="blockquote">
+<p>No one could have anticipated such a catastrophe, people said. The fire’s speed was unprecedented, the ferocity unimaginable, the devastation unpredictable.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Those declarations were simply untrue. Though the toll may be impossible to predict, worst-case fires are a historic and inevitable fact.</p>
+</blockquote>
+<p>The first voice you hear? An expert who studies wildfires.</p>
+<blockquote class="blockquote">
+<p>Phillip Levin, a researcher at the University of Washington and lead scientist for the Nature Conservancy in Washington, puts it this way: “Fire is natural. But the disaster happens because people didn’t know to leave, or couldn’t leave. It didn’t have to happen.”</p>
+</blockquote>
+<p>Then notice how they take what is a complex analysis using geographic information systems, raster analysis, the merging of multiple different datasets together and show that it’s quite simple – the averaging together of pixels on a 1-5 scale.</p>
+<p>Then, the compare what they found to a truly massive fire: The Paradise fire that burned 19,000 structures.</p>
+<blockquote class="blockquote">
+<p>Across the West, 526 small communities — more than 10 percent of all places — rank higher.</p>
+</blockquote>
+<p>And that is how it’s done. Simplify, round, ratios: simple metrics, powerful results.</p>
 
 
 </section>
@@ -398,14 +431,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./publicrecords.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Public records</span></span>
+      <a href="./basicstats.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./r-basics.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">R Basics</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
