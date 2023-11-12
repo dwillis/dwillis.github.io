@@ -1,0 +1,112 @@
+---
+title: "West Virginia High School Football Blowouts"
+author: "Derek Willis"
+date: "2023-11-13"
+format:
+  html:
+    df-print: paged
+    code-fold: true
+engine: knitr
+jupyter: python3
+---
+
+It has been a long time since I covered high school football in any way. The previous century, in fact.
+
+But when Duncan Slade, the deputy managing editor at Mountain State Spotlight, emailed me in late October to ask for my advice on a story involving West Virginia high school football games, I couldn't say no. It was an interesting story idea and it involved data, too.
+
+State legislators passed a law earlier this year that allowed high school athletes to transfer between high schools without sitting out a year, as previously had been the case. One of the anecdotal effects? More blowout games where one team ran up margins of 40, 50 or even 70 points. The question Mountain State Spotlight wanted to answer was: is this real?
+
+Luckily, there's good data available to help with that. The [WVTailgateCentral website](http://wvtailgatecentral.com/) has game-by-game scores going back to 2009, with the exception of 2017 (the web app's database credentials [don't seem to work for that year](http://wvtailgatecentral.com/hs/fb2017/week_schedule.php?startdate=2017-08-12&enddate=2017-08-20)). I told Duncan that if it were my story, I'd scrape that site for game data and then calculate average margins, and I offered to do just that.
+
+One view of WVTailgateCentral is that it's an old-school site, but that's good news for would-be scrapers: the uncomplicated HTML that uses a single table and allows you to change the URL so that instead of a week-by-week listing of games you can get [a whole season on a single page](http://www.wvtailgatecentral.com/hs/fb2023/week_schedule.php?startdate=2023-08-01&enddate=2023-11-15). Here's the [scraper](https://github.com/dwillis/wv_football/blob/main/scraper.py) I wrote in Python to retrieve game scores, identify the home state of each team (since this database includes some non-WV games) and calculate the absolute point difference:
+
+```{python}
+import csv
+import requests
+from bs4 import BeautifulSoup
+
+years = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2021, 2022, 2023]
+
+games = []
+
+def state_from_team(team):
+    if "(KY)" in team:
+        state = "KY"
+    elif "(OH)" in team:
+        state = "OH"
+    elif "(MD)" in team:
+        state = "MD"
+    elif "(VA" in team:
+        state = "VA"
+    elif "(PA)" in team:
+        state = "PA"
+    elif "(NC)" in team:
+        state = "NC"
+    elif "(ON)" in team:
+        state = "ON"
+    elif "(CN)" in team:
+        state = "CN"
+    elif "(SC)" in team:
+        state = "SC"
+    elif "(DC)" in team:
+        state = "DC"
+    elif "(DE)" in team:
+        state = "DE"
+    elif "(NY)" in team:
+        state = "NY"
+    elif "(NY)" in team:
+        state = "NY"
+    elif "(TN)" in team:
+        state = "TN"
+    elif "(NJ)" in team:
+        state = "NJ"
+    elif "(MI)" in team:
+        state = "MI"
+    elif "(A)" in team:
+        state = "PA"
+    else:
+        state = "WV"
+    return state
+
+for year in years:
+    print(year)
+    url = f"http://wvtailgatecentral.com/hs/fb{year}/week_schedule.php?startdate={year}-08-01&enddate={year}-12-31"
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, "html.parser")
+    rows = soup.find('table').find_all('tr')[1:]
+    for row in rows:
+        date = row.find_all('td')[0].text
+        if "**" in row.find_all('td')[1].text:
+            home_team = row.find_all('td')[1].text.replace(" **", "")
+            home_team_score = row.find_all('td')[2].text
+            home_team_state = state_from_team(home_team)
+            visiting_team = row.find_all('td')[3].text
+            visiting_team_score = row.find_all('td')[4].text
+            visiting_team_state = state_from_team(visiting_team)
+        elif "**" in row.find_all('td')[3].text:
+            home_team = row.find_all('td')[3].text.replace(" **", "")
+            home_team_score = row.find_all('td')[4].text
+            home_team_state = state_from_team(home_team)
+            visiting_team = row.find_all('td')[1].text
+            visiting_team_score = row.find_all('td')[2].text
+            visiting_team_state = state_from_team(visiting_team)
+        else:
+            print("No home team!")
+            home_team = row.find_all('td')[1].text.replace(" **", "")
+            home_team_score = row.find_all('td')[2].text
+            home_team_state = state_from_team(home_team)
+            visiting_team = row.find_all('td')[3].text
+            visiting_team_score = row.find_all('td')[4].text
+            visiting_team_state = state_from_team(visiting_team)
+        score_diff = abs(int(home_team_score) - int(visiting_team_score))
+        games.append([year, date, home_team, home_team_score, home_team_state, visiting_team, visiting_team_score, visiting_team_state, score_diff])
+
+with open("scores.csv", "w") as f:
+    output_file = csv.writer(f)
+    output_file.writerow(["year", "date", "home_team", "home_team_score", "home_team_state", "visiting_team", "visiting_team_score", "visiting_team_state", "differential"])
+    output_file.writerows(games)
+```
+
+It's certainly possible to do all of this in Python or R, but I like to mix and match, especially when it comes to scraping, since I prefer Python's tooling. But for quick data exploration and visualization, it's hard to beat R in Quarto notebooks. You can see my [code here](https://github.com/dwillis/wv_football/blob/main/wv_scores.qmd), or [check out the HTML version](https://thescoop.org/wv_football/wv_scores.html). And the answer to the question is yes, there are a lot of blowout games in 2023, more than ever. It's not particularly close, either, but there is a wrinkle in the data: the jump in blowouts really started *last year*, when the transfer rule was still in place. This season's blowouts are, on average, greater and there are more of them (and in particular [more games with 70+ point margins!](https://datawrapper.dwcdn.net/GgR28/1/)), but it's not like it came out of nowhere.
+
+You should [read the story by Henry Culvyhouse](https://mountainstatespotlight.org/2023/11/09/high-school-football-transfer-rule-blowouts/) that delves into how the state legislature made the change and what some of its biggest backers think now that they've seen the results.

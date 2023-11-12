@@ -1,0 +1,18 @@
+{
+  "hash": "d3a161a2ac264b728a294735be06bc8e",
+  "result": {
+    "markdown": "---\ntitle: Teaching News Apps with Codespaces - The Results\ndescription: Turns out removing barriers works\ndate: 2023-05-27\nauthor: \"Derek Willis\"\nformat:\n  html:\n    df-print: paged\n    toc: true\nengine: knitr\n---\n\n\nThe News Applications course I teach at Maryland has two big projects: building a bot/notification system of some kind and a more \"traditional\" news app that involves browsing, searching and displaying data. Since the students had been working in GitHub's Codespaces this semester, we didn't have to worry about final deployment issues, which can be both annoying and non-trivial. Plus, I could spin up a version of their work pretty much anytime, which was helpful for providing feedback.\n\nIt's tough to compare the final news app projects to those from the previous year's class, in part because of that environmental difference, but also because the 2022 version was the first time out for me teaching that course. Presumably I've gotten a bit better at doing that. What I can say is that removing the barrier posed by setting up and maintaining working virtual environments yielded a lot of benefits, and I won't be going back.\n\nI'd like to show some of the final projects (screenshots only, since these aren't deployed anywhere) to illustrate what's possible in a semester-long course when you don't have to spend as much time on configuration and installation issues. In each case, the student in question gave me permission to display these screenshots. A couple of things they have in common: all of these were built using Python's handy Flask library, along with some JavaScript. Most of them involve loading data from some external source, although one of them does text extraction from PDFs scraped using Selenium. One of the advantages of using Codespaces has been that I can see and run those setup and loading tasks; I don't just see the final result.\n\nThe first is an app that displays information about sites with [PFAS contamination](https://www.epa.gov/pfas/pfas-explained) - long-lasting chemicals whose components can take years to break down. Amanda Hernandez, who graduated in May, made this app that allows users to find places on a map and bring up details, or to search a table presented using the DataTables JS library.\n\n![](pfas_homepage.png)\n\nWhile News Apps isn't a design course - and I'm not the person to teach one - we do look at the work done by newsrooms like ProPublica and others for some basic guidelines. Many of the students come into the class having taken design-related courses previously, too. \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../../../../site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\n<script src=\"../../../../../site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
