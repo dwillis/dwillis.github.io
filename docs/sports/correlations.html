@@ -400,7 +400,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/dwillis/NCAAWomensSoccerData/main/data/ncaa_womens_soccer_matchstats_2023.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 6203 Columns: 56
+<pre><code>Rows: 6321 Columns: 56
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr   (7): team, opponent, home_away, outcome, goalie_min_plyd, defensive_go...
@@ -429,7 +429,7 @@ date  (1): date
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1      0.0228</code></pre>
+1      0.0202</code></pre>
 </div>
 </div>
 <p>So on a scale of -1 to 1, where 0 means there’s no relationship at all and 1 or -1 means a perfect relationship, fouls and whether or not the team scores more goals than it gives up are at 0.02702439. You could say they’re 2.7 percent related toward the positive – more fouls, the higher your differential. Another way to say it? They’re 97.3 percent not related.</p>
@@ -441,7 +441,7 @@ date  (1): date
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1     -0.0853</code></pre>
+1     -0.0851</code></pre>
 </div>
 </div>
 <p>So wait, what does this all mean?</p>
@@ -460,18 +460,16 @@ lm(formula = differential ~ fouls, data = newcorrelations)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--12.9630  -1.0637  -0.0205   1.0082  16.0658 
+-12.9682  -1.0574  -0.0192   1.0063  16.0572 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)  
-(Intercept) -0.108936   0.080207  -1.358   0.1745  
-fouls        0.014387   0.008016   1.795   0.0727 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -0.095478   0.079373  -1.203    0.229
+fouls        0.012743   0.007926   1.608    0.108
 
-Residual standard error: 2.334 on 6201 degrees of freedom
-Multiple R-squared:  0.0005192, Adjusted R-squared:  0.000358 
-F-statistic: 3.221 on 1 and 6201 DF,  p-value: 0.07274</code></pre>
+Residual standard error: 2.332 on 6319 degrees of freedom
+Multiple R-squared:  0.0004089, Adjusted R-squared:  0.0002507 
+F-statistic: 2.585 on 1 and 6319 DF,  p-value: 0.1079</code></pre>
 </div>
 </div>
 <p>There’s three things we need here:</p>
@@ -513,18 +511,18 @@ lm(formula = differential ~ so_g, data = newcorrelations)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--11.5204  -1.1190   0.0781   1.2752   7.2535 
+-11.5214  -1.1222   0.0784   1.2780   7.2751 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -2.282451   0.042829  -53.29   &lt;2e-16 ***
-so_g         0.401449   0.006283   63.89   &lt;2e-16 ***
+(Intercept) -2.278985   0.042389  -53.76   &lt;2e-16 ***
+so_g         0.400194   0.006213   64.42   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.813 on 6201 degrees of freedom
-Multiple R-squared:  0.397, Adjusted R-squared:  0.3969 
-F-statistic:  4082 on 1 and 6201 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 1.812 on 6319 degrees of freedom
+Multiple R-squared:  0.3964,    Adjusted R-squared:  0.3963 
+F-statistic:  4150 on 1 and 6319 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>First we check p-value: 0.00000000000000022. That’s sixteen zeros between the decimal and 22. Is that less than .05? Uh, yeah. So this is really, really, really not random. But anyone who has watched a game of soccer knows this is true. It makes intuitive sense.</p>
