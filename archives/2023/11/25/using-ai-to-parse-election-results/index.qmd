@@ -13,7 +13,7 @@ If there's one state that justifies the need for OpenElections, it's Mississippi
 
 ![Statewide Results](ms_statewide.png)
 
-There's a lot going on here, but the lowlights, from a parsing perspective, start with the counties displayed as vertical column names, followed by the combination of candidate name and party in the same box. Those vertical headers make parsing more complicated; you can extract the text from this file, but very few programs will preserve the layout of those counties. This is an electronic PDF, so you can usually export it to a spreadsheet that you'll then spend time reformatting. Depending on the election, a lot of time.
+There's a lot going on here, but the lowlights, from a parsing perspective, start with the counties displayed as vertical column names, followed by the combination of candidate name and party in the same box. Those vertical headers make parsing more complicated; you can extract the text from this file, but very few programs will preserve the layout of those counties. [This is an electronic PDF](https://sos.ms.gov/elections/electionresults/2023General/State%20Certified%20Results/2023%20Statewide%20Recapitulation%20Sheet.pdf), so you can usually export it to a spreadsheet that you'll then spend time reformatting. Depending on the election, a lot of time.
 
 This is a very good candidate for AI services because we have a consistent (if not totally logical) structure to the document and we know what the output should look like: in this case, a CSV file with one row per candidate results. That means that a parsed file should look something like this:
 
