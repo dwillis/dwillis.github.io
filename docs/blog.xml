@@ -9,8 +9,74 @@
 <link>https://www.thescoop.org/blog.html</link>
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
-<generator>quarto-1.2.475</generator>
-<lastBuildDate>Mon, 13 Nov 2023 05:00:00 GMT</lastBuildDate>
+<generator>quarto-1.3.353</generator>
+<lastBuildDate>Sat, 25 Nov 2023 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Using AI to Parse Election Results</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>If there’s one state that justifies the need for OpenElections, it’s Mississippi. Unlike some other states that don’t have a centralized election results system, Mississippi does. Each of the state’s 82 counties uses the same form to report official results to the Secretary of State. But that form is quite a thing in terms of organization:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/ms_statewide.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Statewide Results</figcaption>
+</figure>
+</div>
+<p>There’s a lot going on here, but the lowlights, from a parsing perspective, start with the counties displayed as vertical column names, followed by the combination of candidate name and party in the same box. Those vertical headers make parsing more complicated; you can extract the text from this file, but very few programs will preserve the layout of those counties. This is an electronic PDF, so you can usually export it to a spreadsheet that you’ll then spend time reformatting. Depending on the election, a lot of time.</p>
+<p>This is a very good candidate for AI services because we have a consistent (if not totally logical) structure to the document and we know what the output should look like: in this case, a CSV file with one row per candidate results. That means that a parsed file should look something like this:</p>
+<pre><code>county,office,district,party,candidate,votes
+Adams,Governor,,Dem,Brandon Presley,5782
+Adams,Governor,,Rep,Tate Reeves,3516
+Adams,Governor,,Ind,Gwendolyn Gray,130
+Adams,Lieutenant Governor,,Dem,D. Ryan Grover,5111
+Adams,Lieutenant Governor,,Rep,Delbert Hosemann,4101
+Adams,Secretary of State,,Dem,Ty Pinkins,5162
+Adams,Secretary of State,,Rep,Michael Watson,4058</code></pre>
+<p>I first reached for Claude.ai from the folks at Anthropic, mostly because it handed file uploads slightly before OpenAI added that as a ChatGPT feature. It didn’t start out well, though:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/claude_01.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">What file?</figcaption>
+</figure>
+</div>
+<p>Eventually it told me that the PDF was copyrighted material (it is not, being a government work in the public domain). After I told Claude that, it was happy to do the job.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/claude_02.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">It’s a start</figcaption>
+</figure>
+</div>
+<p>Well, happy to <em>start</em> the job is more accurate. It’s an annoying thing to deal with a service that takes the instructions but then … doesn’t actually finish the job? Consider it another lesson in prompt editing: I had to tell it to make sure to do all of the counties and candidates. Even so, Claude’s UI means that it spits out the results to the screen, and there seems to be a limit on how much it can produce at one go, so I had to break up the conversion into multiple groups of counties. Still, in the end it worked - at least for the statewide offices I wanted, the ones with a result in every county.</p>
+<p>For state legislative elections, Mississippi uses the same county grid format but puts an “X” in a county where the candidate wasn’t actually on the ballot. That means that if a state legislator only represented one county, she’d have one row with some number of votes and 81 with an “X” for the votes. For whatever reason, that confused both Claude and ChatGPT, in the sense that both were not able to produce the kind of file I wanted. Here’s what I asked Claude to do with state senate results:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/claude_03.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Looks ok…</figcaption>
+</figure>
+</div>
+<p>Looks ok, but since the example used Adams County, the first “result” shows that, too, even though District 1 is in DeSoto County. This is one of the times when AI-generated results look authoritative but are completely wrong.</p>
+<p>I tried ChatGPT-4, which has a couple of features I like when it comes to this sort of task: it narrates its processes and provides a link to a downloadable file for the results (which also has the effect of making the results a surprise):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/chatgpt_01.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Narration</figcaption>
+</figure>
+</div>
+<p>Eventually it was able to do better than Claude at parsing state senate results (like Claude, I had to tell it to do all of the candidates), but had issues with state house results: the CSV files it produced looked good but placed results in the wrong counties. Eventually I saved the state house results as an Excel file and reworked that using R. You can see <a href="https://github.com/openelections/openelections-data-ms/blob/master/2023/20231107__ms__general__county.csv">the final result on GitHub</a>. In total, this took me a couple of hours, mostly spent experimenting with the correct prompt wording. Going forward it should take less time to do, and I have some ideas for tackling the state house results, too.</p>
+<p>There are tradeoffs here, of course. OpenElections used to sometimes pay folks for data entry services, and some of them were quite good at the job, paying attention to every detail, asking useful questions that helped to understand what we were working with, that sort of thing. AI’s strengths are enough to make that a less attractive option, even if we’re paying $20 a month for a service or using an API. It costs less and takes less time in most cases. There is still a need for human oversight of these processes - ChatGPT’s struggles with state legislative results is the most glaring example - but I suspect even those pitfalls can be lessened or eliminated, and with them the obvious need for people in the loop.</p>
+<p>There should still be people in the loop, if only because the raw materials here - those PDFs published by the state - are the result of a human-designed process that has quirks that are much easier for humans to understand. Perhaps in an ideal scenario, the results are produced in a format that software can understand. But that’s not the world we live in, and we’ll need people who can help translate between the human systems and the digital ones.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/index.html</guid>
+  <pubDate>Sat, 25 Nov 2023 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>West Virginia High School Football Blowouts</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -28,84 +94,488 @@
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;">import</span> csv</span>
-<span id="cb1-2"><span class="im" style="color: #00769E;">import</span> requests</span>
-<span id="cb1-3"><span class="im" style="color: #00769E;">from</span> bs4 <span class="im" style="color: #00769E;">import</span> BeautifulSoup</span>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> csv</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> requests</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> bs4 <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> BeautifulSoup</span>
 <span id="cb1-4"></span>
-<span id="cb1-5">years <span class="op" style="color: #5E5E5E;">=</span> [<span class="dv" style="color: #AD0000;">2009</span>, <span class="dv" style="color: #AD0000;">2010</span>, <span class="dv" style="color: #AD0000;">2011</span>, <span class="dv" style="color: #AD0000;">2012</span>, <span class="dv" style="color: #AD0000;">2013</span>, <span class="dv" style="color: #AD0000;">2014</span>, <span class="dv" style="color: #AD0000;">2015</span>, <span class="dv" style="color: #AD0000;">2016</span>, <span class="dv" style="color: #AD0000;">2018</span>, <span class="dv" style="color: #AD0000;">2019</span>, <span class="dv" style="color: #AD0000;">2020</span>, <span class="dv" style="color: #AD0000;">2021</span>, <span class="dv" style="color: #AD0000;">2022</span>, <span class="dv" style="color: #AD0000;">2023</span>]</span>
+<span id="cb1-5">years <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2009</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2010</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2011</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2012</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2013</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2014</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2015</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2016</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2018</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2019</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2020</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2021</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2022</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span>]</span>
 <span id="cb1-6"></span>
-<span id="cb1-7">games <span class="op" style="color: #5E5E5E;">=</span> []</span>
+<span id="cb1-7">games <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
 <span id="cb1-8"></span>
-<span id="cb1-9"><span class="kw" style="color: #003B4F;">def</span> state_from_team(team):</span>
-<span id="cb1-10">    <span class="cf" style="color: #003B4F;">if</span> <span class="st" style="color: #20794D;">"(KY)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-11">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"KY"</span></span>
-<span id="cb1-12">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(OH)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-13">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"OH"</span></span>
-<span id="cb1-14">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(MD)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-15">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"MD"</span></span>
-<span id="cb1-16">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(VA"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-17">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"VA"</span></span>
-<span id="cb1-18">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(PA)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-19">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"PA"</span></span>
-<span id="cb1-20">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(NC)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-21">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"NC"</span></span>
-<span id="cb1-22">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(ON)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-23">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"ON"</span></span>
-<span id="cb1-24">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(CN)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-25">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"CN"</span></span>
-<span id="cb1-26">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(SC)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-27">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"SC"</span></span>
-<span id="cb1-28">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(DC)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-29">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"DC"</span></span>
-<span id="cb1-30">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(DE)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-31">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"DE"</span></span>
-<span id="cb1-32">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(NY)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-33">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"NY"</span></span>
-<span id="cb1-34">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(NY)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-35">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"NY"</span></span>
-<span id="cb1-36">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(TN)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-37">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"TN"</span></span>
-<span id="cb1-38">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(NJ)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-39">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"NJ"</span></span>
-<span id="cb1-40">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(MI)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-41">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"MI"</span></span>
-<span id="cb1-42">    <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"(A)"</span> <span class="kw" style="color: #003B4F;">in</span> team:</span>
-<span id="cb1-43">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"PA"</span></span>
-<span id="cb1-44">    <span class="cf" style="color: #003B4F;">else</span>:</span>
-<span id="cb1-45">        state <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">"WV"</span></span>
-<span id="cb1-46">    <span class="cf" style="color: #003B4F;">return</span> state</span>
+<span id="cb1-9"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> state_from_team(team):</span>
+<span id="cb1-10">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(KY)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-11">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"KY"</span></span>
+<span id="cb1-12">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(OH)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-13">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"OH"</span></span>
+<span id="cb1-14">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(MD)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-15">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"MD"</span></span>
+<span id="cb1-16">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(VA"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-17">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"VA"</span></span>
+<span id="cb1-18">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(PA)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-19">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PA"</span></span>
+<span id="cb1-20">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(NC)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-21">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"NC"</span></span>
+<span id="cb1-22">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(ON)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-23">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ON"</span></span>
+<span id="cb1-24">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(CN)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-25">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"CN"</span></span>
+<span id="cb1-26">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(SC)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-27">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SC"</span></span>
+<span id="cb1-28">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(DC)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-29">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"DC"</span></span>
+<span id="cb1-30">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(DE)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-31">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"DE"</span></span>
+<span id="cb1-32">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(NY)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-33">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"NY"</span></span>
+<span id="cb1-34">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(NY)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-35">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"NY"</span></span>
+<span id="cb1-36">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(TN)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-37">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TN"</span></span>
+<span id="cb1-38">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(NJ)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-39">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"NJ"</span></span>
+<span id="cb1-40">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(MI)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-41">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"MI"</span></span>
+<span id="cb1-42">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(A)"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> team:</span>
+<span id="cb1-43">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PA"</span></span>
+<span id="cb1-44">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span>:</span>
+<span id="cb1-45">        state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"WV"</span></span>
+<span id="cb1-46">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> state</span>
 <span id="cb1-47"></span>
-<span id="cb1-48"><span class="cf" style="color: #003B4F;">for</span> year <span class="kw" style="color: #003B4F;">in</span> years:</span>
-<span id="cb1-49">    <span class="bu" style="color: null;">print</span>(year)</span>
-<span id="cb1-50">    url <span class="op" style="color: #5E5E5E;">=</span> <span class="ss" style="color: #20794D;">f"http://wvtailgatecentral.com/hs/fb</span><span class="sc" style="color: #5E5E5E;">{</span>year<span class="sc" style="color: #5E5E5E;">}</span><span class="ss" style="color: #20794D;">/week_schedule.php?startdate=</span><span class="sc" style="color: #5E5E5E;">{</span>year<span class="sc" style="color: #5E5E5E;">}</span><span class="ss" style="color: #20794D;">-08-01&amp;enddate=</span><span class="sc" style="color: #5E5E5E;">{</span>year<span class="sc" style="color: #5E5E5E;">}</span><span class="ss" style="color: #20794D;">-12-31"</span></span>
-<span id="cb1-51">    r <span class="op" style="color: #5E5E5E;">=</span> requests.get(url)</span>
-<span id="cb1-52">    soup <span class="op" style="color: #5E5E5E;">=</span> BeautifulSoup(r.text, <span class="st" style="color: #20794D;">"html.parser"</span>)</span>
-<span id="cb1-53">    rows <span class="op" style="color: #5E5E5E;">=</span> soup.find(<span class="st" style="color: #20794D;">'table'</span>).find_all(<span class="st" style="color: #20794D;">'tr'</span>)[<span class="dv" style="color: #AD0000;">1</span>:]</span>
-<span id="cb1-54">    <span class="cf" style="color: #003B4F;">for</span> row <span class="kw" style="color: #003B4F;">in</span> rows:</span>
-<span id="cb1-55">        date <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">0</span>].text</span>
-<span id="cb1-56">        <span class="cf" style="color: #003B4F;">if</span> <span class="st" style="color: #20794D;">"**"</span> <span class="kw" style="color: #003B4F;">in</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">1</span>].text:</span>
-<span id="cb1-57">            home_team <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">1</span>].text.replace(<span class="st" style="color: #20794D;">" **"</span>, <span class="st" style="color: #20794D;">""</span>)</span>
-<span id="cb1-58">            home_team_score <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">2</span>].text</span>
-<span id="cb1-59">            home_team_state <span class="op" style="color: #5E5E5E;">=</span> state_from_team(home_team)</span>
-<span id="cb1-60">            visiting_team <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">3</span>].text</span>
-<span id="cb1-61">            visiting_team_score <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">4</span>].text</span>
-<span id="cb1-62">            visiting_team_state <span class="op" style="color: #5E5E5E;">=</span> state_from_team(visiting_team)</span>
-<span id="cb1-63">        <span class="cf" style="color: #003B4F;">elif</span> <span class="st" style="color: #20794D;">"**"</span> <span class="kw" style="color: #003B4F;">in</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">3</span>].text:</span>
-<span id="cb1-64">            home_team <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">3</span>].text.replace(<span class="st" style="color: #20794D;">" **"</span>, <span class="st" style="color: #20794D;">""</span>)</span>
-<span id="cb1-65">            home_team_score <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">4</span>].text</span>
-<span id="cb1-66">            home_team_state <span class="op" style="color: #5E5E5E;">=</span> state_from_team(home_team)</span>
-<span id="cb1-67">            visiting_team <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">1</span>].text</span>
-<span id="cb1-68">            visiting_team_score <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">2</span>].text</span>
-<span id="cb1-69">            visiting_team_state <span class="op" style="color: #5E5E5E;">=</span> state_from_team(visiting_team)</span>
-<span id="cb1-70">        <span class="cf" style="color: #003B4F;">else</span>:</span>
-<span id="cb1-71">            <span class="bu" style="color: null;">print</span>(<span class="st" style="color: #20794D;">"No home team!"</span>)</span>
-<span id="cb1-72">            home_team <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">1</span>].text.replace(<span class="st" style="color: #20794D;">" **"</span>, <span class="st" style="color: #20794D;">""</span>)</span>
-<span id="cb1-73">            home_team_score <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">2</span>].text</span>
-<span id="cb1-74">            home_team_state <span class="op" style="color: #5E5E5E;">=</span> state_from_team(home_team)</span>
-<span id="cb1-75">            visiting_team <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">3</span>].text</span>
-<span id="cb1-76">            visiting_team_score <span class="op" style="color: #5E5E5E;">=</span> row.find_all(<span class="st" style="color: #20794D;">'td'</span>)[<span class="dv" style="color: #AD0000;">4</span>].text</span>
-<span id="cb1-77">            visiting_team_state <span class="op" style="color: #5E5E5E;">=</span> state_from_team(visiting_team)</span>
-<span id="cb1-78">        score_diff <span class="op" style="color: #5E5E5E;">=</span> <span class="bu" style="color: null;">abs</span>(<span class="bu" style="color: null;">int</span>(home_team_score) <span class="op" style="color: #5E5E5E;">-</span> <span class="bu" style="color: null;">int</span>(visiting_team_score))</span>
+<span id="cb1-48"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> year <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> years:</span>
+<span id="cb1-49">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(year)</span>
+<span id="cb1-50">    url <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"http://wvtailgatecentral.com/hs/fb</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>year<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/week_schedule.php?startdate=</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>year<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">-08-01&amp;enddate=</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>year<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">-12-31"</span></span>
+<span id="cb1-51">    r <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> requests.get(url)</span>
+<span id="cb1-52">    soup <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> BeautifulSoup(r.text, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"html.parser"</span>)</span>
+<span id="cb1-53">    rows <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> soup.find(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'table'</span>).find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tr'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>:]</span>
+<span id="cb1-54">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> row <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> rows:</span>
+<span id="cb1-55">        date <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>].text</span>
+<span id="cb1-56">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"**"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>].text:</span>
+<span id="cb1-57">            home_team <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>].text.replace(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" **"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)</span>
+<span id="cb1-58">            home_team_score <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>].text</span>
+<span id="cb1-59">            home_team_state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> state_from_team(home_team)</span>
+<span id="cb1-60">            visiting_team <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>].text</span>
+<span id="cb1-61">            visiting_team_score <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>].text</span>
+<span id="cb1-62">            visiting_team_state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> state_from_team(visiting_team)</span>
+<span id="cb1-63">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"**"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>].text:</span>
+<span id="cb1-64">            home_team <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>].text.replace(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" **"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)</span>
+<span id="cb1-65">            home_team_score <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>].text</span>
+<span id="cb1-66">            home_team_state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> state_from_team(home_team)</span>
+<span id="cb1-67">            visiting_team <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>].text</span>
+<span id="cb1-68">            visiting_team_score <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>].text</span>
+<span id="cb1-69">            visiting_team_state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> state_from_team(visiting_team)</span>
+<span id="cb1-70">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span>:</span>
+<span id="cb1-71">            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"No home team!"</span>)</span>
+<span id="cb1-72">            home_team <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>].text.replace(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" **"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)</span>
+<span id="cb1-73">            home_team_score <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>].text</span>
+<span id="cb1-74">            home_team_state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> state_from_team(home_team)</span>
+<span id="cb1-75">            visiting_team <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>].text</span>
+<span id="cb1-76">            visiting_team_score <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>].text</span>
+<span id="cb1-77">            visiting_team_state <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> state_from_team(visiting_team)</span>
+<span id="cb1-78">        score_diff <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">abs</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>(home_team_score) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>(visiting_team_score))</span>
 <span id="cb1-79">        games.append([year, date, home_team, home_team_score, home_team_state, visiting_team, visiting_team_score, visiting_team_state, score_diff])</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -129,9 +599,39 @@ No home team!
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="cf" style="color: #003B4F;">with</span> <span class="bu" style="color: null;">open</span>(<span class="st" style="color: #20794D;">"scores.csv"</span>, <span class="st" style="color: #20794D;">"w"</span>) <span class="im" style="color: #00769E;">as</span> f:</span>
-<span id="cb3-2">    output_file <span class="op" style="color: #5E5E5E;">=</span> csv.writer(f)</span>
-<span id="cb3-3">    output_file.writerow([<span class="st" style="color: #20794D;">"year"</span>, <span class="st" style="color: #20794D;">"date"</span>, <span class="st" style="color: #20794D;">"home_team"</span>, <span class="st" style="color: #20794D;">"home_team_score"</span>, <span class="st" style="color: #20794D;">"home_team_state"</span>, <span class="st" style="color: #20794D;">"visiting_team"</span>, <span class="st" style="color: #20794D;">"visiting_team_score"</span>, <span class="st" style="color: #20794D;">"visiting_team_state"</span>, <span class="st" style="color: #20794D;">"differential"</span>])</span>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">with</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"scores.csv"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"w"</span>) <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> f:</span>
+<span id="cb3-2">    output_file <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> csv.writer(f)</span>
+<span id="cb3-3">    output_file.writerow([<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"year"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"date"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"home_team"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"home_team_score"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"home_team_state"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"visiting_team"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"visiting_team_score"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"visiting_team_state"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"differential"</span>])</span>
 <span id="cb3-4">    output_file.writerows(games)</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -183,12 +683,70 @@ No home team!
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">suppressMessages</span>(<span class="fu" style="color: #4758AB;">library</span>(tidyverse))</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;">suppressMessages</span>(<span class="fu" style="color: #4758AB;">library</span>(cfbfastR))</span>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">suppressMessages</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse))</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">suppressMessages</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(cfbfastR))</span>
 <span id="cb1-3"></span>
-<span id="cb1-4">pbp <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">load_cfb_pbp</span>(<span class="at" style="color: #657422;">seasons =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">2019</span>, <span class="dv" style="color: #AD0000;">2020</span>, <span class="dv" style="color: #AD0000;">2021</span>, <span class="dv" style="color: #AD0000;">2022</span>, <span class="dv" style="color: #AD0000;">2023</span>))</span>
+<span id="cb1-4">pbp <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">load_cfb_pbp</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">seasons =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2019</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2020</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2021</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2022</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span>))</span>
 <span id="cb1-5"></span>
-<span id="cb1-6">big_ten <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">'Maryland'</span>, <span class="st" style="color: #20794D;">'Wisconsin'</span>, <span class="st" style="color: #20794D;">'Ohio State'</span>, <span class="st" style="color: #20794D;">'Michigan'</span>, <span class="st" style="color: #20794D;">'Michigan State'</span>, <span class="st" style="color: #20794D;">'Penn State'</span>, <span class="st" style="color: #20794D;">'Rutgers'</span>, <span class="st" style="color: #20794D;">'Northwestern'</span>, <span class="st" style="color: #20794D;">'Iowa'</span>, <span class="st" style="color: #20794D;">'Minnesota'</span>, <span class="st" style="color: #20794D;">'Nebraska'</span>, <span class="st" style="color: #20794D;">'Indiana'</span>, <span class="st" style="color: #20794D;">'Illinois'</span>, <span class="st" style="color: #20794D;">'Purdue'</span>)</span></code></pre></div>
+<span id="cb1-6">big_ten <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Maryland'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Wisconsin'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Ohio State'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Michigan'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Michigan State'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Penn State'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Rutgers'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Northwestern'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Iowa'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Minnesota'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Nebraska'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Indiana'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Illinois'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Purdue'</span>)</span></code></pre></div>
 </details>
 </div>
 <p>If you were at Secu stadium on Oct.&nbsp;14 for the Maryland-Illinois game and saw the Terrapins run the ball on third and six from the Illinois 29-yard line late in the game, you might have had the question I did: “Why didn’t Maryland pass?”</p>
@@ -196,28 +754,124 @@ No home team!
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">third_and_six <span class="ot" style="color: #003B4F;">&lt;-</span> pbp <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">filter</span>(down <span class="sc" style="color: #5E5E5E;">==</span> <span class="dv" style="color: #AD0000;">3</span>, distance <span class="sc" style="color: #5E5E5E;">==</span> <span class="dv" style="color: #AD0000;">6</span>)</span>
-<span id="cb2-2">third_and_six_runs <span class="ot" style="color: #003B4F;">&lt;-</span> third_and_six <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">filter</span>(<span class="fu" style="color: #4758AB;">str_detect</span>(play_type, <span class="st" style="color: #20794D;">"Rush"</span>))</span>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">third_and_six <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> pbp <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(down <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, distance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>)</span>
+<span id="cb2-2">third_and_six_runs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> third_and_six <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(play_type, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rush"</span>))</span>
 <span id="cb2-3"></span>
-<span id="cb2-4">runs_by_team <span class="ot" style="color: #003B4F;">&lt;-</span> third_and_six_runs <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">group_by</span>(pos_team)  <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">total =</span> <span class="fu" style="color: #4758AB;">n</span>()) <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(total))</span>
+<span id="cb2-4">runs_by_team <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> third_and_six_runs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(pos_team)  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">total =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(total))</span>
 <span id="cb2-5"></span>
-<span id="cb2-6">runs_by_team_big_ten <span class="ot" style="color: #003B4F;">&lt;-</span> third_and_six_runs <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">filter</span>(pos_team <span class="sc" style="color: #5E5E5E;">%in%</span> big_ten) <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">group_by</span>(pos_team)  <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">total =</span> <span class="fu" style="color: #4758AB;">n</span>()) <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(total))</span></code></pre></div>
+<span id="cb2-6">runs_by_team_big_ten <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> third_and_six_runs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(pos_team <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> big_ten) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(pos_team)  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">total =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(total))</span></code></pre></div>
 </details>
 </div>
 <p>The most common call in that specific game situation is to pass the ball, according to an analysis of play-by-play data from college football games for the past five seasons. Slightly more than one in five times, the offensive team runs the ball, but that doesn’t apply equally to every team. Programs that emphasize the ground game such as the military academies run much more often in that situation than most other teams. Crucially, running doesn’t seem crazy when you consider the outcomes: when choosing to run on third-and-six, nearly 40% of the time a team gains at least six yards, including plays that result in a touchdown.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;">nrow</span>(third_and_six_runs)<span class="sc" style="color: #5E5E5E;">/</span><span class="fu" style="color: #4758AB;">nrow</span>(third_and_six)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(third_and_six_runs)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(third_and_six)</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2103855</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">third_and_six_rush_success <span class="ot" style="color: #003B4F;">&lt;-</span> third_and_six_runs <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">filter</span>(yards_gained <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="dv" style="color: #AD0000;">6</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">nrow</span>()</span>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">third_and_six_rush_success <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> third_and_six_runs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(yards_gained <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>()</span>
 <span id="cb5-2"></span>
-<span id="cb5-3">third_and_six_rush_success<span class="sc" style="color: #5E5E5E;">/</span>third_and_six_runs <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">nrow</span>()</span></code></pre></div>
+<span id="cb5-3">third_and_six_rush_success<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>third_and_six_runs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3934817</code></pre>
@@ -227,9 +881,67 @@ No home team!
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">runs_by_team_success <span class="ot" style="color: #003B4F;">&lt;-</span> third_and_six_runs <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">filter</span>(yards_gained <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="dv" style="color: #AD0000;">6</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span>  <span class="fu" style="color: #4758AB;">group_by</span>(pos_team)  <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">success =</span> <span class="fu" style="color: #4758AB;">n</span>()) <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(success))</span>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">runs_by_team_success <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> third_and_six_runs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(yards_gained <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(pos_team)  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">success =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(success))</span>
 <span id="cb7-2"></span>
-<span id="cb7-3">runs_by_team <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">inner_join</span>(runs_by_team_success) <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">percent =</span> success<span class="sc" style="color: #5E5E5E;">/</span>total<span class="sc" style="color: #5E5E5E;">*</span><span class="dv" style="color: #AD0000;">100</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(percent)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> <span class="fu" style="color: #4758AB;">filter</span>(total <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
+<span id="cb7-3">runs_by_team <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inner_join</span>(runs_by_team_success) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">percent =</span> success<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>total<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(percent)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(total <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Joining with `by = join_by(pos_team)`</code></pre>
@@ -256,25 +968,125 @@ No home team!
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">def_rush <span class="ot" style="color: #003B4F;">&lt;-</span> third_and_six <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb10-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="fu" style="color: #4758AB;">str_detect</span>(play_type, <span class="st" style="color: #20794D;">"Rush"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb10-3">  <span class="fu" style="color: #4758AB;">group_by</span>(def_pos_team) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
-<span id="cb10-4">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">total =</span> <span class="fu" style="color: #4758AB;">n</span>()) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb10-5">  <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(total))</span>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">def_rush <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> third_and_six <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(play_type, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rush"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(def_pos_team) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb10-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">total =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(total))</span>
 <span id="cb10-6"></span>
-<span id="cb10-7">def_rush_success <span class="ot" style="color: #003B4F;">&lt;-</span> third_and_six <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb10-8">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="fu" style="color: #4758AB;">str_detect</span>(play_type, <span class="st" style="color: #20794D;">"Rush"</span>)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb10-9">  <span class="fu" style="color: #4758AB;">filter</span>(yards_gained <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="dv" style="color: #AD0000;">6</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
-<span id="cb10-10">  <span class="fu" style="color: #4758AB;">group_by</span>(def_pos_team) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
-<span id="cb10-11">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">success =</span> <span class="fu" style="color: #4758AB;">n</span>()) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb10-12">  <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(success))</span>
+<span id="cb10-7">def_rush_success <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> third_and_six <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(play_type, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rush"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(yards_gained <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb10-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(def_pos_team) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb10-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">success =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(success))</span>
 <span id="cb10-13"></span>
-<span id="cb10-14">def_rush <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb10-15">  <span class="fu" style="color: #4758AB;">inner_join</span>(def_rush_success) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb10-16">  <span class="fu" style="color: #4758AB;">filter</span>(def_pos_team <span class="sc" style="color: #5E5E5E;">%in%</span> big_ten) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb10-17">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">percent =</span> success<span class="sc" style="color: #5E5E5E;">/</span>total<span class="sc" style="color: #5E5E5E;">*</span><span class="dv" style="color: #AD0000;">100</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb10-18">  <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(percent)) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb10-19">  <span class="fu" style="color: #4758AB;">filter</span>(total <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
+<span id="cb10-14">def_rush <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inner_join</span>(def_rush_success) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(def_pos_team <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> big_ten) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">percent =</span> success<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>total<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-18">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(percent)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb10-19">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(total <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Joining with `by = join_by(def_pos_team)`</code></pre>
@@ -300,23 +1112,117 @@ No home team!
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">def_rush_2023 <span class="ot" style="color: #003B4F;">&lt;-</span> third_and_six <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb13-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="fu" style="color: #4758AB;">str_detect</span>(play_type, <span class="st" style="color: #20794D;">"Rush"</span>), season <span class="sc" style="color: #5E5E5E;">==</span> <span class="dv" style="color: #AD0000;">2023</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb13-3">  <span class="fu" style="color: #4758AB;">group_by</span>(def_pos_team) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
-<span id="cb13-4">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">total =</span> <span class="fu" style="color: #4758AB;">n</span>()) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb13-5">  <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(total))</span>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">def_rush_2023 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> third_and_six <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb13-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(play_type, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rush"</span>), season <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb13-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(def_pos_team) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb13-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">total =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb13-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(total))</span>
 <span id="cb13-6"></span>
-<span id="cb13-7">def_rush_success_2023 <span class="ot" style="color: #003B4F;">&lt;-</span> third_and_six <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb13-8">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="fu" style="color: #4758AB;">str_detect</span>(play_type, <span class="st" style="color: #20794D;">"Rush"</span>), season <span class="sc" style="color: #5E5E5E;">==</span> <span class="dv" style="color: #AD0000;">2023</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb13-9">  <span class="fu" style="color: #4758AB;">filter</span>(yards_gained <span class="sc" style="color: #5E5E5E;">&gt;=</span> <span class="dv" style="color: #AD0000;">6</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
-<span id="cb13-10">  <span class="fu" style="color: #4758AB;">group_by</span>(def_pos_team) <span class="sc" style="color: #5E5E5E;">|&gt;</span></span>
-<span id="cb13-11">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">success =</span> <span class="fu" style="color: #4758AB;">n</span>()) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb13-12">  <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(success))</span>
+<span id="cb13-7">def_rush_success_2023 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> third_and_six <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb13-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(play_type, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rush"</span>), season <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb13-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(yards_gained <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb13-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(def_pos_team) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb13-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">success =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb13-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(success))</span>
 <span id="cb13-13"></span>
-<span id="cb13-14">def_rush_2023 <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb13-15">  <span class="fu" style="color: #4758AB;">inner_join</span>(def_rush_success_2023) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb13-16">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">percent =</span> success<span class="sc" style="color: #5E5E5E;">/</span>total<span class="sc" style="color: #5E5E5E;">*</span><span class="dv" style="color: #AD0000;">100</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb13-17">  <span class="fu" style="color: #4758AB;">arrange</span>(<span class="fu" style="color: #4758AB;">desc</span>(percent)) </span></code></pre></div>
+<span id="cb13-14">def_rush_2023 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb13-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inner_join</span>(def_rush_success_2023) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb13-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">percent =</span> success<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>total<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb13-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(percent)) </span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Joining with `by = join_by(def_pos_team)`</code></pre>
@@ -341,10 +1247,38 @@ No home team!
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">third_and_six <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb16-2">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="fu" style="color: #4758AB;">str_detect</span>(play_type, <span class="st" style="color: #20794D;">"Rush"</span>), season <span class="sc" style="color: #5E5E5E;">==</span> <span class="dv" style="color: #AD0000;">2023</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb16-3">  <span class="fu" style="color: #4758AB;">filter</span>(yards_gained <span class="sc" style="color: #5E5E5E;">&lt;</span> <span class="dv" style="color: #AD0000;">6</span>, def_pos_team <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">'Illinois'</span>) <span class="sc" style="color: #5E5E5E;">|&gt;</span> </span>
-<span id="cb16-4">  <span class="fu" style="color: #4758AB;">select</span>(year, pos_team, def_pos_team, period, down, distance, play_type, play_text)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">third_and_six <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb16-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(play_type, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rush"</span>), season <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb16-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(yards_gained <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, def_pos_team <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Illinois'</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb16-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, distance, play_type, play_text)</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>────────────────────────────────────────────────────────────── cfbfastR 1.9.0 ──</code></pre>
@@ -386,7 +1320,6 @@ No home team!
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/05/27/teaching-news-apps-with-codespaces-results/index.html</guid>
   <pubDate>Sat, 27 May 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://www.thescoop.org/archives/2023/05/27/teaching-news-apps-with-codespaces-results/pfas_homepage.png" medium="image" type="image/png" height="192" width="144"/>
 </item>
 <item>
   <title>Teaching News Apps with Codespaces</title>
@@ -418,7 +1351,6 @@ No home team!
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/03/22/teaching-newsapps-with-codespaces/index.html</guid>
   <pubDate>Wed, 22 Mar 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://www.thescoop.org/archives/2023/03/22/teaching-newsapps-with-codespaces/rstudio_codespaces.png" medium="image" type="image/png" height="128" width="144"/>
 </item>
 <item>
   <title>Teaching Journalism with ChatGPT</title>
@@ -484,7 +1416,6 @@ No home team!
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/01/04/what-is-happening-in-morgantown/index.html</guid>
   <pubDate>Wed, 04 Jan 2023 05:00:00 GMT</pubDate>
-  <media:content url="https://www.thescoop.org/archives/2023/01/04/what-is-happening-in-morgantown/wv_nurses.png" medium="image" type="image/png" height="87" width="144"/>
 </item>
 <item>
   <title>Welcome Back</title>
@@ -806,10 +1737,8 @@ No home team!
 <p>Picking Ben Welsh to lead off was, in hindsight, a rookie mistake on my part, but the session was pretty well-received, and we all had fun doing it (all 25-30 of us). Fast forward to earlier this year, and here was the crowd for the lightning talks in Baltimore:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<figure class="figure">
-<img src="https://www.thescoop.org/archives/2014/07/08/lightning-strikes/http:/knightlab.northwestern.edu/wp-content/uploads/2014/03/lightningtalks_NICAR14_akesslerdc.jpg" title="Holy crap!" class="img-fluid figure-img">
-</figure>
-<p></p><figcaption class="figure-caption">A big crowd</figcaption><p></p>
+<p><img src="https://www.thescoop.org/archives/2014/07/08/lightning-strikes/http:/knightlab.northwestern.edu/wp-content/uploads/2014/03/lightningtalks_NICAR14_akesslerdc.jpg" title="Holy crap!" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">A big crowd</figcaption>
 </figure>
 </div>
 <p>In five years, lightning talks went from being a small session competing with other sessions for attendees to a <a href="http://ire.org/conferences/nicar-2014/lightning/">standing-room only event</a> in the biggest ballroom the hotel had. I’ve been privileged to help run it, along with Aron Pilhofer and the folks at IRE who constantly encouraged and supported it. My favorite part of the last few NICAR conferences has been seeing new speakers (and some regulars) wow and entertain their colleagues.</p>
@@ -823,7 +1752,6 @@ No home team!
  ]]></description>
   <guid>https://www.thescoop.org/archives/2014/07/08/lightning-strikes/index.html</guid>
   <pubDate>Tue, 08 Jul 2014 04:00:00 GMT</pubDate>
-  <media:content url="http://knightlab.northwestern.edu/wp-content/uploads/2014/03/lightningtalks_NICAR14_akesslerdc.jpg " medium="image"/>
 </item>
 <item>
   <title>How It Starts</title>
@@ -874,61 +1802,6 @@ No home team!
  ]]></description>
   <guid>https://www.thescoop.org/archives/2013/10/09/data-journalism-student-media-edition/index.html</guid>
   <pubDate>Wed, 09 Oct 2013 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>The Natives Aren’t Restless Enough</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2013/10/01/the-natives-arent-restless-enough/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>A couple of points to start with, in the hopes of not wasting readers’ time and preparing for some reactions:</p>
-<ol type="1">
-<li>This post could be named “Get Off My Lawn” or “In My Day, We Earned It!” or some other title that would demonstrate that I am, more than ever, a <a href="https://twitter.com/kendall/status/385111992799084544">cranky old guy</a> now.</li>
-<li>What follows obviously does not apply to everyone younger than I am (42, for the record). But it does apply to a distressingly large percentage of those who I have taught at the university level (undergraduate and graduate) over the past eight years.</li>
-<li>This post stems from one sentence in a <a href="http://www.poynter.org/latest-news/top-stories/223548/online-course-shows-impact-importance-of-data-driven-journalism/">Poynter summary of a MOOC I helped teach</a>, but this is not about the author of that piece. It’s about a larger mindset that I see.</li>
-<li>Youth is wasted on the young. (See point #1, above.)</li>
-</ol>
-<p>This post could be about how slow, feature-less and pathetic the Internet tools and sites I first encountered were compared to the ones we have now, but as we know too well, nostalgia isn’t a selling point. It could be a screed about how kids today don’t appreciate what they have, but I’ve tried that on our seven-year-old daughter with minimal results. Instead, this is about the very real situation I see in classrooms and among too many people who describe themselves as “digitally savvy” or “digital natives”.</p>
-<p>I really enjoyed the <a href="https://knightcenter.utexas.edu/node/14149/">data journalism MOOC itself</a> and was glad to see the Poynter write-up. It was my first involvement with MOOCs and it was a fascinating experiment. But there was one line from the Poynter piece that brought to the surface a couple of thoughts I’ve been harboring for awhile about teaching journalism to people who have grown up with the Web. Here it is:</p>
-<blockquote class="blockquote">
-<p>I’m a millennial and therefore digitally savvy, but I could feel sweat bead across my forehead while reading Matt Waite’s account of scraping government data to create Politifact.</p>
-</blockquote>
-<p>The term “digitally savvy” (or, worse, “digital native”) is more flash than substance, but let me take a stab at what it is supposed to refer to: individuals who supposedly emerged from the womb with a facility for computing devices, the Internet and (especially) social media. They speak (type) an abbreviated language mystifying to their elders, have some different theories on the notions of sharing and privacy and have been exposed since an early age to what is surely much more information than any generation in humanity’s existence.</p>
-<p>Let’s stipulate up front that the facility with devices thing is very real and very much worth paying attention to, for lots of reasons. That our then-three-year-old daughter could unlock and control an iPhone with greater ease than my parents could has broad implications for device manufacturers and those who write software for them. It is also an example of the accumulated baggage that learned habits and expectations can bring. Those are interesting, serious issues that deserve study. But that’s not the problem that bugs me.</p>
-<p>This is: too many journalism students and journalists are native <em>users</em> rather than actual natives. The difference is enormous, and has real implications. Actual natives can build in addition to use digital tools, giving themselves many more opportunities to make better journalism. Users can only work within the constraints that other people set.</p>
-<p>When I’m teaching classes or looking at resumes of journalism students, I see a lot of this kind of thing, usually on a hosted WordPress install:</p>
-<blockquote class="blockquote">
-<p>Skills: WordPress, Microsoft Office, social media</p>
-</blockquote>
-<p>Those are useful skills, to a point, but if you’re coming out of journalism school and those are your big technical skills, congratulations: you’ve just joined nearly all of your peers in almost every discipline. You can use TweetDeck? Great. Did you hand-code at least part of your “professional vanity site”? Do you actually know how the Internet works? I’ve come across too many journalism students who believe (or have been led to believe) that they are technologically adept, only to find that when it comes to how things online actually work, their knowledge is broad but very shallow. For example, I routinely find that most of my students are unaware of search engines’ advanced search capabilities, let alone that computers have powerful command-line interfaces.</p>
-<p>Most of my students are not what I would call digital natives. They are more like users, and while journalism needs users, it desperately needs creators. Otherwise we all end up using what other people make, and we end up making fewer great things for our readers.</p>
-<p>When people see themselves as users, they grow nervous at tinkering with the building blocks. They actually shy away from learning, because learning can be so much harder than just using a finished something handed to you. It’s ok to be nervous about new concepts, but what I’ve seen increasingly from journalism students is an incuriosity that borders on indifference. Part of this is the sweet lull of search results, something we all fall prey to. You know about this: you search for something and if it’s not in the first page or two of results, you presume it’s either a) unknowable or b) too hard to get at. The end result is a feeling of powerlessness, like this from the <a href="http://www.poynter.org/latest-news/top-stories/223548/online-course-shows-impact-importance-of-data-driven-journalism/">Poynter piece</a>:</p>
-<blockquote class="blockquote">
-<p>What I hated about week four (sorry Jeremy, you’re still amazing) was how paralyzed I felt. These data journalists and news developers seemed so far ahead. How were the rest of us with limited coding skills going to grapple with foreign languages like Ruby on Rails?</p>
-</blockquote>
-<p>I’ve talked to journalism instructors who have experienced this and it seems to be one of the most frustrating things out there. Maybe the worst moment I’ve had as a journalism teacher is when a <em>graduate</em> student asked me, in the middle of class: “How are we expected to learn if you don’t teach us?” My first thought, which I safely kept unspoken, was: “How did you make it this far?” Because I don’t think that sort of approach is likely to lead to a journalism career that is successful or enjoyable. I’m pretty sure that if journalism ever needed incurious people, it surely cannot survive with them now.</p>
-<p>The best journalists (and students) I know force themselves into uncomfortable situations when it comes to learning. They are not content to be handed information and just accept it. They want to explore, to figure things out, even when there’s some risk of failure there. There are examples from the “digital native” generation, folks like <a href="http://www.greglinch.com/">Greg Linch</a>, who wasn’t content to use WordPress but dove into ways to extend it and fit it to journalism’s needs. Or <a href="http://michelleminkoff.com/">Michelle Minkoff</a> or <a href="http://heatherlynnbrady.com/">Heather Brady</a>, two former students of mine. I’ve never known any of them to say, “That looks hard and I don’t know anything about it, so I’ll just avoid it.” Paralysis ensures that you’ll stay where you are. The very worst that could happen if you choose to dive in is that you fail and, in failing, learn something.</p>
-<p>Many journalism students might rightly point out that their curriculums didn’t exactly demand this kind of approach, and to the extent that’s the case, that’s not their fault. But it is still an excuse, in the sense that a flawed curriculum can’t literally stop you from learning. So what can you do? Try things. Some suggestions:</p>
-<ol type="1">
-<li>If you use WordPress, try to write an extension. Or take a theme you like and build a flat HTML site of your own.</li>
-<li>If you know how to use Excel, try learning a database like <a href="https://github.com/tthibo/SQL-Tutorial/blob/master/tutorial_files/part1.textile">SQLite</a> (it’s in your phone and the Firefox browser).</li>
-<li>Open the Terminal on your Mac laptop. <a href="http://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line">Learn some commands</a> in order to do things like connect to the web. You can do much of the same stuff on Windows, believe it or not.</li>
-<li>Spend more time reading the source of web pages. Copy the parts you like or don’t understand, and study them.</li>
-<li>Download <a href="https://blog.twitter.com/2012/your-twitter-archive">your Twitter archive</a> and analyze it in Excel or SQLite.</li>
-<li>Learn how to connect to the <a href="https://apigee.com/console/twitter">Twitter</a> or <a href="https://apigee.com/console/facebook">Facebook</a> API and retrieve information from it, even in a web browser.</li>
-<li>Pick a journalism problem you have (maybe a site you check often doesn’t have an RSS feed) and try to solve it.</li>
-</ol>
-<p>Notice that I didn’t say, “everyone must learn to code.” I don’t advocate learning to code for its own sake, or for everyone. Have a problem in mind, or a story you want to tell. If you need code to do that, then there’s your opening. For the sake of your own career, if not the state of the industry, what you should fear are points in the process of doing journalism where you have to say, “I don’t know how to do that” and hand your story - the story you care about - off to someone else with no understanding of what they are about to do. That fear should motivate you to learn, and learning is contagious. More importantly, you should <em>want</em> to learn, to be excited about learning. Be curious. Newsrooms are filled with restless people looking for great stories, wondering how to explain the world. How can someone be “digitally savvy” and yet filled with dread about exploring the digital world?</p>
-<p>Building isn’t just more useful than being a user, it’s also more empowering. Of course there are times when building and creating is filled with frustration, but in most cases that frustration is your own. You have a better chance of resolving that feeling than if you sit around waiting for someone else to solve your problems for you. Journalism needs problem solvers and creators so that we can make users out of more people. Next time you encounter a new and unfamiliar technology or skill, take that nervous energy and use it to improve yourself. We’ll all be better off if you do.</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2013/10/01/the-natives-arent-restless-enough/index.html</guid>
-  <pubDate>Tue, 01 Oct 2013 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

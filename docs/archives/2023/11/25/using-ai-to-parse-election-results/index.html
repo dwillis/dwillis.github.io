@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Derek Willis">
+<meta name="dcterms.date" content="2023-11-25">
 
-<title>Derek Willis</title>
+<title>Derek Willis - Using AI to Parse Election Results</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +25,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<script src="../../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -60,59 +60,31 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
+<link href="../../../../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../../../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-    const options = {
-      valueNames: ['listing-title','listing-description','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      page: 18,
-    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
-    };
 
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<meta name="twitter:title" content="">
-<meta name="twitter:image" content="https://www.thescoop.org/images/middle_school.png">
+<meta name="twitter:title" content="Derek Willis - Using AI to Parse Election Results">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/ms_statewide.png">
 <meta name="twitter:creator" content="@derekwillis">
-<meta name="twitter:image-height" content="855">
-<meta name="twitter:image-width" content="2520">
+<meta name="twitter:image-height" content="1134">
+<meta name="twitter:image-width" content="2192">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/dwillis.png" alt="" class="navbar-logo">
+    <a href="../../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../../images/dwillis.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../../../index.html">
     <span class="navbar-title">Derek Willis</span>
     </a>
   </div>
@@ -123,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="./blog.xml" rel="" target=""><i class="bi bi-rss" role="img" aria-label="feed">
+    <a class="nav-link" href="../../../../../blog.xml" rel="" target=""><i class="bi bi-rss" role="img" aria-label="feed">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -138,14 +110,42 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Using AI to Parse Election Results</li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Using AI to Parse Election Results</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Derek Willis </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 25, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
         <div class="sidebar-tools-main tools-wide">
@@ -157,43 +157,43 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../about" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./now" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../now" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Now</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./then" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../then" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Then</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./help" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../help" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ways I Can Help</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./thefix" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../thefix" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The Fix</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blog.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../blog.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blog</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./teaching" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../teaching" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
   </div>
 </li>
@@ -202,87 +202,69 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<section id="hi-im-derek.-i-love-using-data-to-find-and-tell-stories.-and-asking-questions." class="level3">
-<h3 class="anchored" data-anchor-id="hi-im-derek.-i-love-using-data-to-find-and-tell-stories.-and-asking-questions.">Hi, I’m Derek. I love using data to find and tell stories. And asking questions.</h3>
-<p><img src="images/middle_school.png" class="img-fluid"></p>
+
+<p>If there’s one state that justifies the need for OpenElections, it’s Mississippi. Unlike some other states that don’t have a centralized election results system, Mississippi does. Each of the state’s 82 counties uses the same form to report official results to the Secretary of State. But that form is quite a thing in terms of organization:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ms_statewide.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Statewide Results</figcaption>
+</figure>
+</div>
+<p>There’s a lot going on here, but the lowlights, from a parsing perspective, start with the counties displayed as vertical column names, followed by the combination of candidate name and party in the same box. Those vertical headers make parsing more complicated; you can extract the text from this file, but very few programs will preserve the layout of those counties. This is an electronic PDF, so you can usually export it to a spreadsheet that you’ll then spend time reformatting. Depending on the election, a lot of time.</p>
+<p>This is a very good candidate for AI services because we have a consistent (if not totally logical) structure to the document and we know what the output should look like: in this case, a CSV file with one row per candidate results. That means that a parsed file should look something like this:</p>
+<pre><code>county,office,district,party,candidate,votes
+Adams,Governor,,Dem,Brandon Presley,5782
+Adams,Governor,,Rep,Tate Reeves,3516
+Adams,Governor,,Ind,Gwendolyn Gray,130
+Adams,Lieutenant Governor,,Dem,D. Ryan Grover,5111
+Adams,Lieutenant Governor,,Rep,Delbert Hosemann,4101
+Adams,Secretary of State,,Dem,Ty Pinkins,5162
+Adams,Secretary of State,,Rep,Michael Watson,4058</code></pre>
+<p>I first reached for Claude.ai from the folks at Anthropic, mostly because it handed file uploads slightly before OpenAI added that as a ChatGPT feature. It didn’t start out well, though:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="claude_01.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">What file?</figcaption>
+</figure>
+</div>
+<p>Eventually it told me that the PDF was copyrighted material (it is not, being a government work in the public domain). After I told Claude that, it was happy to do the job.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="claude_02.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">It’s a start</figcaption>
+</figure>
+</div>
+<p>Well, happy to <em>start</em> the job is more accurate. It’s an annoying thing to deal with a service that takes the instructions but then … doesn’t actually finish the job? Consider it another lesson in prompt editing: I had to tell it to make sure to do all of the counties and candidates. Even so, Claude’s UI means that it spits out the results to the screen, and there seems to be a limit on how much it can produce at one go, so I had to break up the conversion into multiple groups of counties. Still, in the end it worked - at least for the statewide offices I wanted, the ones with a result in every county.</p>
+<p>For state legislative elections, Mississippi uses the same county grid format but puts an “X” in a county where the candidate wasn’t actually on the ballot. That means that if a state legislator only represented one county, she’d have one row with some number of votes and 81 with an “X” for the votes. For whatever reason, that confused both Claude and ChatGPT, in the sense that both were not able to produce the kind of file I wanted. Here’s what I asked Claude to do with state senate results:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="claude_03.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Looks ok…</figcaption>
+</figure>
+</div>
+<p>Looks ok, but since the example used Adams County, the first “result” shows that, too, even though District 1 is in DeSoto County. This is one of the times when AI-generated results look authoritative but are completely wrong.</p>
+<p>I tried ChatGPT-4, which has a couple of features I like when it comes to this sort of task: it narrates its processes and provides a link to a downloadable file for the results (which also has the effect of making the results a surprise):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="chatgpt_01.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Narration</figcaption>
+</figure>
+</div>
+<p>Eventually it was able to do better than Claude at parsing state senate results (like Claude, I had to tell it to do all of the candidates), but had issues with state house results: the CSV files it produced looked good but placed results in the wrong counties. Eventually I saved the state house results as an Excel file and reworked that using R. You can see <a href="https://github.com/openelections/openelections-data-ms/blob/master/2023/20231107__ms__general__county.csv">the final result on GitHub</a>. In total, this took me a couple of hours, mostly spent experimenting with the correct prompt wording. Going forward it should take less time to do, and I have some ideas for tackling the state house results, too.</p>
+<p>There are tradeoffs here, of course. OpenElections used to sometimes pay folks for data entry services, and some of them were quite good at the job, paying attention to every detail, asking useful questions that helped to understand what we were working with, that sort of thing. AI’s strengths are enough to make that a less attractive option, even if we’re paying $20 a month for a service or using an API. It costs less and takes less time in most cases. There is still a need for human oversight of these processes - ChatGPT’s struggles with state legislative results is the most glaring example - but I suspect even those pitfalls can be lessened or eliminated, and with them the obvious need for people in the loop.</p>
+<p>There should still be people in the loop, if only because the raw materials here - those PDFs published by the state - are the result of a human-designed process that has quirks that are much easier for humans to understand. Perhaps in an ideal scenario, the results are produced in a format that software can understand. But that’s not the world we live in, and we’ll need people who can help translate between the human systems and the digital ones.</p>
 
 
 
-</section>
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1700888400000" data-listing-file-modified-sort="1700933512464" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
-<a href="./archives/2023/11/25/using-ai-to-parse-election-results/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Using AI to Parse Election Results
-</h5>
-<div class="card-text listing-description">
-If there’s one state that justifies the need for OpenElections, it’s Mississippi. Unlike some other states that don’t have a centralized election results system…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Nov 25, 2023
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1699851600000" data-listing-file-modified-sort="1699993500114" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
-<a href="./archives/2023/11/13/wv-football-blowouts/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-West Virginia High School Football Blowouts
-</h5>
-<div class="card-text listing-description">
-It has been a long time since I covered high school football in any way. The previous century, in fact.
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Nov 13, 2023
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-date-sort="1699246800000" data-listing-file-modified-sort="1699312228226" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
-<a href="./archives/2023/11/06/how-newsrooms-should-be-talking-about-ai/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-How Newsrooms Should be Talking About AI
-</h5>
-<div class="card-text listing-description">
-If you’ve heard about news organizations using AI, chances are you’ve heard about some bad choices. Maybe it was CNET publishing AI-written stories with “very dumb errors”, Gannett publishing some sports…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Nov 6, 2023
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
-  <ul class="pagination"></ul>
-</nav>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

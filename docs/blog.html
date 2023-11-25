@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -91,6 +91,7 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="alternate" type="application/rss+xml" title="Derek Willis" href="blog.xml"><meta name="twitter:title" content="Derek Willis -">
@@ -112,79 +113,91 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">Derek Willis</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="./blog.xml"><i class="bi bi-rss" role="img" aria-label="feed">
+    <a class="nav-link" href="./blog.xml" rel="" target=""><i class="bi bi-rss" role="img" aria-label="feed">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./blog.html">Blog</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://twitter.com/derekwillis" title="" class="sidebar-tool px-1"><i class="bi bi-twitter"></i></a>
-    <a href="https://newsie.social/@derekwillis" title="" class="sidebar-tool px-1"><i class="bi bi-mastodon"></i></a>
-    <a href="https://github.com/dwillis" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="https://twitter.com/derekwillis" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
+    <a href="https://newsie.social/@derekwillis" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-mastodon"></i></a>
+    <a href="https://github.com/dwillis" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
 </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about" class="sidebar-item-text sidebar-link">About</a>
+  <a href="./about" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./now" class="sidebar-item-text sidebar-link">Now</a>
+  <a href="./now" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Now</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./then" class="sidebar-item-text sidebar-link">Then</a>
+  <a href="./then" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Then</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./help" class="sidebar-item-text sidebar-link">Ways I Can Help</a>
+  <a href="./help" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ways I Can Help</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./thefix" class="sidebar-item-text sidebar-link">The Fix</a>
+  <a href="./thefix" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Fix</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blog.html" class="sidebar-item-text sidebar-link active">Blog</a>
+  <a href="./blog.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Blog</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./teaching" class="sidebar-item-text sidebar-link">Teaching</a>
+  <a href="./teaching" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -201,13 +214,37 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1699851600000" data-listing-file-modified-sort="1699885567345" data-listing-reading-time-sort="5.87">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1700888400000" data-listing-file-modified-sort="1700933512464" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2023/11/13/wv-football-blowouts/index.html">
-<div class="thumbnail-image">
+<p><a href="./archives/2023/11/25/using-ai-to-parse-election-results/index.html"> <p class="card-img-top"><img src="archives/2023/11/25/using-ai-to-parse-election-results/ms_statewide.png"  class="thumbnail-image card-img"/></p> </a></p>
+</div>
+<div class="body">
+<a href="./archives/2023/11/25/using-ai-to-parse-election-results/index.html">
+<h3 class="no-anchor listing-title">
+Using AI to Parse Election Results
+</h3>
+<div class="listing-subtitle">
 
 </div>
-</a><p><a href="./archives/2023/11/13/wv-football-blowouts/index.html"></a></p>
+<div class="listing-description">
+If there’s one state that justifies the need for OpenElections, it’s Mississippi. Unlike some other states that don’t have a centralized election results system…
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./archives/2023/11/25/using-ai-to-parse-election-results/index.html">
+<div class="listing-date">
+Nov 25, 2023
+</div>
+<div class="listing-author">
+Derek Willis
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1699851600000" data-listing-file-modified-sort="1699993500114" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="thumbnail">
+<p><a href="./archives/2023/11/13/wv-football-blowouts/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2023/11/13/wv-football-blowouts/index.html">
@@ -233,13 +270,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1699246800000" data-listing-file-modified-sort="1699312501543" data-listing-reading-time-sort="3.04">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1699246800000" data-listing-file-modified-sort="1699312228226" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2023/11/06/how-newsrooms-should-be-talking-about-ai/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2023/11/06/how-newsrooms-should-be-talking-about-ai/index.html"></a></p>
+<p><a href="./archives/2023/11/06/how-newsrooms-should-be-talking-about-ai/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2023/11/06/how-newsrooms-should-be-talking-about-ai/index.html">
@@ -265,13 +298,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="maryland football,wtf" data-listing-date-sort="1697515200000" data-listing-file-modified-sort="1698329852370" data-listing-reading-time-sort="3.815">
+<div class="quarto-post image-right" data-index="3" data-categories="maryland football,wtf" data-listing-date-sort="1697515200000" data-listing-file-modified-sort="1698260663519" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2023/10/17/third-and-six/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2023/10/17/third-and-six/index.html"></a></p>
+<p><a href="./archives/2023/10/17/third-and-six/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2023/10/17/third-and-six/index.html">
@@ -297,9 +326,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1685160000000" data-listing-file-modified-sort="1699885567331" data-listing-reading-time-sort="1.9">
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1685160000000" data-listing-file-modified-sort="1699993500095" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<p><a href="./archives/2023/05/27/teaching-news-apps-with-codespaces-results/index.html"> <img src="./archives/2023/05/27/teaching-news-apps-with-codespaces-results/pfas_homepage.png" class="thumnail-image"> </a></p>
+<p><a href="./archives/2023/05/27/teaching-news-apps-with-codespaces-results/index.html"> <p class="card-img-top"><img src="archives/2023/05/27/teaching-news-apps-with-codespaces-results/pfas_homepage.png"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2023/05/27/teaching-news-apps-with-codespaces-results/index.html">
@@ -325,9 +354,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1679457600000" data-listing-file-modified-sort="1680019431681" data-listing-reading-time-sort="5.92">
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1679457600000" data-listing-file-modified-sort="1698260663515" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
-<p><a href="./archives/2023/03/22/teaching-newsapps-with-codespaces/index.html"> <img src="./archives/2023/03/22/teaching-newsapps-with-codespaces/rstudio_codespaces.png" class="thumnail-image"> </a></p>
+<p><a href="./archives/2023/03/22/teaching-newsapps-with-codespaces/index.html"> <p class="card-img-top"><img src="archives/2023/03/22/teaching-newsapps-with-codespaces/rstudio_codespaces.png"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2023/03/22/teaching-newsapps-with-codespaces/index.html">
@@ -353,13 +382,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1676091600000" data-listing-file-modified-sort="1677603322998" data-listing-reading-time-sort="4.28">
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1676091600000" data-listing-file-modified-sort="1698260663515" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2023/02/11/teaching-journalism-with-chatgpt/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2023/02/11/teaching-journalism-with-chatgpt/index.html"></a></p>
+<p><a href="./archives/2023/02/11/teaching-journalism-with-chatgpt/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2023/02/11/teaching-journalism-with-chatgpt/index.html">
@@ -385,9 +410,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1672808400000" data-listing-file-modified-sort="1674059025481" data-listing-reading-time-sort="4.95">
+<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1672808400000" data-listing-file-modified-sort="1698260663502" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<p><a href="./archives/2023/01/04/what-is-happening-in-morgantown/index.html"> <img src="./archives/2023/01/04/what-is-happening-in-morgantown/wv_nurses.png" class="thumnail-image"> </a></p>
+<p><a href="./archives/2023/01/04/what-is-happening-in-morgantown/index.html"> <p class="card-img-top"><img src="archives/2023/01/04/what-is-happening-in-morgantown/wv_nurses.png"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2023/01/04/what-is-happening-in-morgantown/index.html">
@@ -413,13 +438,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1672462800000" data-listing-file-modified-sort="1674059025481" data-listing-reading-time-sort="1.645">
+<div class="quarto-post image-right" data-index="8" data-listing-date-sort="1672462800000" data-listing-file-modified-sort="1698260663501" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<a href="./archives/2022/12/31/welcome-back/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2022/12/31/welcome-back/index.html"></a></p>
+<p><a href="./archives/2022/12/31/welcome-back/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2022/12/31/welcome-back/index.html">
@@ -445,13 +466,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-listing-date-sort="1552107600000" data-listing-file-modified-sort="1674059025481" data-listing-reading-time-sort="4.015">
+<div class="quarto-post image-right" data-index="9" data-listing-date-sort="1552107600000" data-listing-file-modified-sort="1698260663500" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2019/03/09/the-more-important-problem/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2019/03/09/the-more-important-problem/index.html"></a></p>
+<p><a href="./archives/2019/03/09/the-more-important-problem/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2019/03/09/the-more-important-problem/index.html">
@@ -477,13 +494,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-listing-date-sort="1550984400000" data-listing-file-modified-sort="1674059025480" data-listing-reading-time-sort="3.24">
+<div class="quarto-post image-right" data-index="10" data-listing-date-sort="1550984400000" data-listing-file-modified-sort="1698260663499" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2019/02/24/making-the-best-nicar-listserv/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2019/02/24/making-the-best-nicar-listserv/index.html"></a></p>
+<p><a href="./archives/2019/02/24/making-the-best-nicar-listserv/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2019/02/24/making-the-best-nicar-listserv/index.html">
@@ -509,13 +522,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-listing-date-sort="1522891205000" data-listing-file-modified-sort="1674059025480" data-listing-reading-time-sort="3.31">
+<div class="quarto-post image-right" data-index="11" data-listing-date-sort="1522891205000" data-listing-file-modified-sort="1698260663498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2018/04/05/the-best-training/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2018/04/05/the-best-training/index.html"></a></p>
+<p><a href="./archives/2018/04/05/the-best-training/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2018/04/05/the-best-training/index.html">
@@ -541,13 +550,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-listing-date-sort="1514437200000" data-listing-file-modified-sort="1674059025479" data-listing-reading-time-sort="11.5">
+<div class="quarto-post image-right" data-index="12" data-listing-date-sort="1514437200000" data-listing-file-modified-sort="1698260663497" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12">
 <div class="thumbnail">
-<a href="./archives/2017/12/28/academy-fight-song-part-2/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2017/12/28/academy-fight-song-part-2/index.html"></a></p>
+<p><a href="./archives/2017/12/28/academy-fight-song-part-2/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2017/12/28/academy-fight-song-part-2/index.html">
@@ -573,13 +578,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-listing-date-sort="1475121600000" data-listing-file-modified-sort="1674059025478" data-listing-reading-time-sort="5.455">
+<div class="quarto-post image-right" data-index="13" data-listing-date-sort="1475121600000" data-listing-file-modified-sort="1698260663497" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
-<a href="./archives/2016/09/29/government-and-civic-tech/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2016/09/29/government-and-civic-tech/index.html"></a></p>
+<p><a href="./archives/2016/09/29/government-and-civic-tech/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2016/09/29/government-and-civic-tech/index.html">
@@ -605,13 +606,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-listing-date-sort="1438142400000" data-listing-file-modified-sort="1674059025478" data-listing-reading-time-sort="3.815">
+<div class="quarto-post image-right" data-index="14" data-listing-date-sort="1438142400000" data-listing-file-modified-sort="1698260663496" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2015/07/29/my-favorite-things/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2015/07/29/my-favorite-things/index.html"></a></p>
+<p><a href="./archives/2015/07/29/my-favorite-things/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2015/07/29/my-favorite-things/index.html">
@@ -637,13 +634,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-listing-date-sort="1433563200000" data-listing-file-modified-sort="1674059025477" data-listing-reading-time-sort="4.295">
+<div class="quarto-post image-right" data-index="15" data-listing-date-sort="1433563200000" data-listing-file-modified-sort="1698260663496" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2015/06/06/civic-data-and-journalism/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2015/06/06/civic-data-and-journalism/index.html"></a></p>
+<p><a href="./archives/2015/06/06/civic-data-and-journalism/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2015/06/06/civic-data-and-journalism/index.html">
@@ -669,13 +662,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-listing-date-sort="1416200400000" data-listing-file-modified-sort="1674059025477" data-listing-reading-time-sort="4.86">
+<div class="quarto-post image-right" data-index="16" data-listing-date-sort="1416200400000" data-listing-file-modified-sort="1698260663495" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2014/11/17/were-all-publishers-now/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2014/11/17/were-all-publishers-now/index.html"></a></p>
+<p><a href="./archives/2014/11/17/were-all-publishers-now/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2014/11/17/were-all-publishers-now/index.html">
@@ -701,9 +690,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-listing-date-sort="1404792000000" data-listing-file-modified-sort="1674059025477" data-listing-reading-time-sort="3.81">
+<div class="quarto-post image-right" data-index="17" data-listing-date-sort="1404792000000" data-listing-file-modified-sort="1698260663495" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<p><a href="./archives/2014/07/08/lightning-strikes/index.html"> <img src="http://knightlab.northwestern.edu/wp-content/uploads/2014/03/lightningtalks_NICAR14_akesslerdc.jpg " class="thumnail-image"> </a></p>
+<p><a href="./archives/2014/07/08/lightning-strikes/index.html"> <p class="card-img-top"><img src="http://knightlab.northwestern.edu/wp-content/uploads/2014/03/lightningtalks_NICAR14_akesslerdc.jpg" title="Holy crap!" class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2014/07/08/lightning-strikes/index.html">
@@ -729,13 +718,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="17" data-listing-date-sort="1400731200000" data-listing-file-modified-sort="1674059025476" data-listing-reading-time-sort="3.58">
+<div class="quarto-post image-right" data-index="18" data-listing-date-sort="1400731200000" data-listing-file-modified-sort="1698260663495" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2014/05/22/how-it-starts/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2014/05/22/how-it-starts/index.html"></a></p>
+<p><a href="./archives/2014/05/22/how-it-starts/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2014/05/22/how-it-starts/index.html">
@@ -761,13 +746,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="18" data-listing-date-sort="1381291200000" data-listing-file-modified-sort="1674059025476" data-listing-reading-time-sort="3.255">
+<div class="quarto-post image-right" data-index="19" data-listing-date-sort="1381291200000" data-listing-file-modified-sort="1698260663494" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2013/10/09/data-journalism-student-media-edition/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/10/09/data-journalism-student-media-edition/index.html"></a></p>
+<p><a href="./archives/2013/10/09/data-journalism-student-media-edition/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/10/09/data-journalism-student-media-edition/index.html">
@@ -793,13 +774,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="19" data-listing-date-sort="1380600000000" data-listing-file-modified-sort="1674059025476" data-listing-reading-time-sort="8.34">
+<div class="quarto-post image-right" data-index="20" data-listing-date-sort="1380600000000" data-listing-file-modified-sort="1698260663494" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
 <div class="thumbnail">
-<a href="./archives/2013/10/01/the-natives-arent-restless-enough/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/10/01/the-natives-arent-restless-enough/index.html"></a></p>
+<p><a href="./archives/2013/10/01/the-natives-arent-restless-enough/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/10/01/the-natives-arent-restless-enough/index.html">
@@ -825,13 +802,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="20" data-listing-date-sort="1377144000000" data-listing-file-modified-sort="1674059025475" data-listing-reading-time-sort="6.49">
+<div class="quarto-post image-right" data-index="21" data-listing-date-sort="1377144000000" data-listing-file-modified-sort="1698260663493" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
 <div class="thumbnail">
-<a href="./archives/2013/08/22/teaching-hospitals-journalism-education-and-a-hatchet-job/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/08/22/teaching-hospitals-journalism-education-and-a-hatchet-job/index.html"></a></p>
+<p><a href="./archives/2013/08/22/teaching-hospitals-journalism-education-and-a-hatchet-job/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/08/22/teaching-hospitals-journalism-education-and-a-hatchet-job/index.html">
@@ -857,13 +830,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="21" data-listing-date-sort="1373947200000" data-listing-file-modified-sort="1674059025475" data-listing-reading-time-sort="3.785">
+<div class="quarto-post image-right" data-index="22" data-listing-date-sort="1373947200000" data-listing-file-modified-sort="1698260663493" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2013/07/16/why-develop-in-the-newsroom/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/07/16/why-develop-in-the-newsroom/index.html"></a></p>
+<p><a href="./archives/2013/07/16/why-develop-in-the-newsroom/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/07/16/why-develop-in-the-newsroom/index.html">
@@ -889,13 +858,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="22" data-listing-date-sort="1372737600000" data-listing-file-modified-sort="1674059025475" data-listing-reading-time-sort="2.82">
+<div class="quarto-post image-right" data-index="23" data-listing-date-sort="1372737600000" data-listing-file-modified-sort="1698260663493" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2013/07/02/what-good-is-dat/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/07/02/what-good-is-dat/index.html"></a></p>
+<p><a href="./archives/2013/07/02/what-good-is-dat/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/07/02/what-good-is-dat/index.html">
@@ -921,13 +886,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="23" data-listing-date-sort="1370318400000" data-listing-file-modified-sort="1674059025474" data-listing-reading-time-sort="10.525">
+<div class="quarto-post image-right" data-index="24" data-listing-date-sort="1370318400000" data-listing-file-modified-sort="1698260663493" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
 <div class="thumbnail">
-<a href="./archives/2013/06/04/lessons-from-data-crunched-democracy/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/06/04/lessons-from-data-crunched-democracy/index.html"></a></p>
+<p><a href="./archives/2013/06/04/lessons-from-data-crunched-democracy/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/06/04/lessons-from-data-crunched-democracy/index.html">
@@ -953,13 +914,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="24" data-listing-date-sort="1369108800000" data-listing-file-modified-sort="1674059025474" data-listing-reading-time-sort="3.315">
+<div class="quarto-post image-right" data-index="25" data-listing-date-sort="1369108800000" data-listing-file-modified-sort="1698260663492" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2013/05/21/what-they-say-about-us/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/05/21/what-they-say-about-us/index.html"></a></p>
+<p><a href="./archives/2013/05/21/what-they-say-about-us/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/05/21/what-they-say-about-us/index.html">
@@ -985,13 +942,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="25" data-listing-date-sort="1367121600000" data-listing-file-modified-sort="1674059025474" data-listing-reading-time-sort="9.285">
+<div class="quarto-post image-right" data-index="26" data-listing-date-sort="1367121600000" data-listing-file-modified-sort="1698260663492" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
 <div class="thumbnail">
-<a href="./archives/2013/04/28/academy-fight-song/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/04/28/academy-fight-song/index.html"></a></p>
+<p><a href="./archives/2013/04/28/academy-fight-song/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/04/28/academy-fight-song/index.html">
@@ -1021,13 +974,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="26" data-listing-date-sort="1366776000000" data-listing-file-modified-sort="1674059025473" data-listing-reading-time-sort="2.515">
+<div class="quarto-post image-right" data-index="27" data-listing-date-sort="1366776000000" data-listing-file-modified-sort="1698260663492" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2013/04/24/the-itemizer/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/04/24/the-itemizer/index.html"></a></p>
+<p><a href="./archives/2013/04/24/the-itemizer/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/04/24/the-itemizer/index.html">
@@ -1053,13 +1002,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="27" data-listing-date-sort="1363658160000" data-listing-file-modified-sort="1674059025473" data-listing-reading-time-sort="2.075">
+<div class="quarto-post image-right" data-index="28" data-listing-date-sort="1363658160000" data-listing-file-modified-sort="1698260663491" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2013/03/18/steve-coll/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/03/18/steve-coll/index.html"></a></p>
+<p><a href="./archives/2013/03/18/steve-coll/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/03/18/steve-coll/index.html">
@@ -1085,13 +1030,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="28" data-listing-date-sort="1362200400000" data-listing-file-modified-sort="1674059025473" data-listing-reading-time-sort="3.9">
+<div class="quarto-post image-right" data-index="29" data-listing-date-sort="1362200400000" data-listing-file-modified-sort="1698260663491" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2013/03/02/mobile-apps-where-the-data-lives/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/03/02/mobile-apps-where-the-data-lives/index.html"></a></p>
+<p><a href="./archives/2013/03/02/mobile-apps-where-the-data-lives/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/03/02/mobile-apps-where-the-data-lives/index.html">
@@ -1117,13 +1058,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="29" data-listing-date-sort="1358991900000" data-listing-file-modified-sort="1674059025472" data-listing-reading-time-sort="2.06">
+<div class="quarto-post image-right" data-index="30" data-listing-date-sort="1358991900000" data-listing-file-modified-sort="1698260663491" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2013/01/23/magic-removal/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/01/23/magic-removal/index.html"></a></p>
+<p><a href="./archives/2013/01/23/magic-removal/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/01/23/magic-removal/index.html">
@@ -1149,13 +1086,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="30" data-listing-date-sort="1358129700000" data-listing-file-modified-sort="1674059025472" data-listing-reading-time-sort="4.49">
+<div class="quarto-post image-right" data-index="31" data-listing-date-sort="1358129700000" data-listing-file-modified-sort="1698260663490" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2013/01/13/on-aaron-swartz/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2013/01/13/on-aaron-swartz/index.html"></a></p>
+<p><a href="./archives/2013/01/13/on-aaron-swartz/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2013/01/13/on-aaron-swartz/index.html">
@@ -1181,13 +1114,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="31" data-listing-date-sort="1356498000000" data-listing-file-modified-sort="1674059025472" data-listing-reading-time-sort="3.855">
+<div class="quarto-post image-right" data-index="32" data-listing-date-sort="1356498000000" data-listing-file-modified-sort="1698260663490" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2012/12/26/the-data-driven-congressional-reporter/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2012/12/26/the-data-driven-congressional-reporter/index.html"></a></p>
+<p><a href="./archives/2012/12/26/the-data-driven-congressional-reporter/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2012/12/26/the-data-driven-congressional-reporter/index.html">
@@ -1213,13 +1142,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="32" data-listing-date-sort="1355604360000" data-listing-file-modified-sort="1674059025471" data-listing-reading-time-sort="2.985">
+<div class="quarto-post image-right" data-index="33" data-listing-date-sort="1355604360000" data-listing-file-modified-sort="1698260663490" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2012/12/15/on-vengeance/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2012/12/15/on-vengeance/index.html"></a></p>
+<p><a href="./archives/2012/12/15/on-vengeance/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2012/12/15/on-vengeance/index.html">
@@ -1245,13 +1170,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="33" data-listing-date-sort="1354540123000" data-listing-file-modified-sort="1674059025471" data-listing-reading-time-sort="4.875">
+<div class="quarto-post image-right" data-index="34" data-listing-date-sort="1354540123000" data-listing-file-modified-sort="1698260663490" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2012/12/03/thoughts-on-newsfoo/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2012/12/03/thoughts-on-newsfoo/index.html"></a></p>
+<p><a href="./archives/2012/12/03/thoughts-on-newsfoo/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2012/12/03/thoughts-on-newsfoo/index.html">
@@ -1277,13 +1198,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="34" data-listing-date-sort="1354048080000" data-listing-file-modified-sort="1674059025471" data-listing-reading-time-sort="8.88">
+<div class="quarto-post image-right" data-index="35" data-listing-date-sort="1354048080000" data-listing-file-modified-sort="1698260663489" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
 <div class="thumbnail">
-<a href="./archives/2012/11/27/how-i-got-here/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2012/11/27/how-i-got-here/index.html"></a></p>
+<p><a href="./archives/2012/11/27/how-i-got-here/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2012/11/27/how-i-got-here/index.html">
@@ -1309,13 +1226,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="35" data-listing-date-sort="1352491560000" data-listing-file-modified-sort="1674059025470" data-listing-reading-time-sort="1.515">
+<div class="quarto-post image-right" data-index="36" data-listing-date-sort="1352491560000" data-listing-file-modified-sort="1698260663489" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<a href="./archives/2012/11/09/what-ive-been-up-to-lately/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2012/11/09/what-ive-been-up-to-lately/index.html"></a></p>
+<p><a href="./archives/2012/11/09/what-ive-been-up-to-lately/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2012/11/09/what-ive-been-up-to-lately/index.html">
@@ -1338,13 +1251,9 @@ Nov 9, 2012
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="36" data-listing-date-sort="1350273600000" data-listing-file-modified-sort="1674059025470" data-listing-reading-time-sort="2.275">
+<div class="quarto-post image-right" data-index="37" data-listing-date-sort="1350273600000" data-listing-file-modified-sort="1698260663489" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2012/10/15/congressional-data-github/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2012/10/15/congressional-data-github/index.html"></a></p>
+<p><a href="./archives/2012/10/15/congressional-data-github/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2012/10/15/congressional-data-github/index.html">
@@ -1370,13 +1279,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="37" data-listing-date-sort="1343966400000" data-listing-file-modified-sort="1674059025470" data-listing-reading-time-sort="2.57">
+<div class="quarto-post image-right" data-index="38" data-listing-date-sort="1343966400000" data-listing-file-modified-sort="1698260663488" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2012/08/03/share-your-knowledge/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2012/08/03/share-your-knowledge/index.html"></a></p>
+<p><a href="./archives/2012/08/03/share-your-knowledge/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2012/08/03/share-your-knowledge/index.html">
@@ -1402,13 +1307,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="38" data-listing-date-sort="1338177600000" data-listing-file-modified-sort="1674059025470" data-listing-reading-time-sort="3.12">
+<div class="quarto-post image-right" data-index="39" data-listing-date-sort="1338177600000" data-listing-file-modified-sort="1698260663488" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2012/05/28/finding-new-money/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2012/05/28/finding-new-money/index.html"></a></p>
+<p><a href="./archives/2012/05/28/finding-new-money/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2012/05/28/finding-new-money/index.html">
@@ -1434,13 +1335,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="39" data-listing-date-sort="1336881600000" data-listing-file-modified-sort="1674059025469" data-listing-reading-time-sort="5.35">
+<div class="quarto-post image-right" data-index="40" data-listing-date-sort="1336881600000" data-listing-file-modified-sort="1698260663487" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
-<a href="./archives/2012/05/13/lost-in-the-weeds/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2012/05/13/lost-in-the-weeds/index.html"></a></p>
+<p><a href="./archives/2012/05/13/lost-in-the-weeds/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2012/05/13/lost-in-the-weeds/index.html">
@@ -1466,13 +1363,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="40" data-listing-date-sort="1335844800000" data-listing-file-modified-sort="1674059025469" data-listing-reading-time-sort="2.4">
+<div class="quarto-post image-right" data-index="41" data-listing-date-sort="1335844800000" data-listing-file-modified-sort="1698260663487" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2012/05/01/our-mark-knoller-problem/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2012/05/01/our-mark-knoller-problem/index.html"></a></p>
+<p><a href="./archives/2012/05/01/our-mark-knoller-problem/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2012/05/01/our-mark-knoller-problem/index.html">
@@ -1498,13 +1391,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="41" data-listing-date-sort="1328331600000" data-listing-file-modified-sort="1674059025468" data-listing-reading-time-sort="5.11">
+<div class="quarto-post image-right" data-index="42" data-listing-date-sort="1328331600000" data-listing-file-modified-sort="1698260663487" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
-<a href="./archives/2012/02/04/on-legislative-data-transparency/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2012/02/04/on-legislative-data-transparency/index.html"></a></p>
+<p><a href="./archives/2012/02/04/on-legislative-data-transparency/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2012/02/04/on-legislative-data-transparency/index.html">
@@ -1530,13 +1419,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="42" data-listing-date-sort="1318824000000" data-listing-file-modified-sort="1674059025468" data-listing-reading-time-sort="5.655">
+<div class="quarto-post image-right" data-index="43" data-listing-date-sort="1318824000000" data-listing-file-modified-sort="1698260663486" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
-<a href="./archives/2011/10/17/what-we-dont-know-about-elections/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2011/10/17/what-we-dont-know-about-elections/index.html"></a></p>
+<p><a href="./archives/2011/10/17/what-we-dont-know-about-elections/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2011/10/17/what-we-dont-know-about-elections/index.html">
@@ -1562,13 +1447,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="43" data-listing-date-sort="1318824000000" data-listing-file-modified-sort="1674059025467" data-listing-reading-time-sort="4.48">
+<div class="quarto-post image-right" data-index="44" data-listing-date-sort="1318824000000" data-listing-file-modified-sort="1698260663486" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2011/08/10/in-defense-of-building-tools/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2011/08/10/in-defense-of-building-tools/index.html"></a></p>
+<p><a href="./archives/2011/08/10/in-defense-of-building-tools/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2011/08/10/in-defense-of-building-tools/index.html">
@@ -1594,13 +1475,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="44" data-listing-date-sort="1311739200000" data-listing-file-modified-sort="1674059025467" data-listing-reading-time-sort="2.575">
+<div class="quarto-post image-right" data-index="45" data-listing-date-sort="1311739200000" data-listing-file-modified-sort="1698260663486" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2011/07/27/why-teach-sql/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2011/07/27/why-teach-sql/index.html"></a></p>
+<p><a href="./archives/2011/07/27/why-teach-sql/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2011/07/27/why-teach-sql/index.html">
@@ -1626,13 +1503,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="45" data-listing-date-sort="1304222400000" data-listing-file-modified-sort="1674059025467" data-listing-reading-time-sort="3.595">
+<div class="quarto-post image-right" data-index="46" data-listing-date-sort="1304222400000" data-listing-file-modified-sort="1698260663485" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2011/05/01/interviewing-data/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2011/05/01/interviewing-data/index.html"></a></p>
+<p><a href="./archives/2011/05/01/interviewing-data/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2011/05/01/interviewing-data/index.html">
@@ -1658,13 +1531,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="46" data-listing-date-sort="1299387600000" data-listing-file-modified-sort="1674059025466" data-listing-reading-time-sort="3.235">
+<div class="quarto-post image-right" data-index="47" data-listing-date-sort="1299387600000" data-listing-file-modified-sort="1698260663485" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2011/03/06/what-apis-mean-for-data-journalists/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2011/03/06/what-apis-mean-for-data-journalists/index.html"></a></p>
+<p><a href="./archives/2011/03/06/what-apis-mean-for-data-journalists/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2011/03/06/what-apis-mean-for-data-journalists/index.html">
@@ -1690,13 +1559,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="47" data-listing-date-sort="1291698000000" data-listing-file-modified-sort="1674059025466" data-listing-reading-time-sort="4.435">
+<div class="quarto-post image-right" data-index="48" data-listing-date-sort="1291698000000" data-listing-file-modified-sort="1698260663484" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2010/12/07/why-students-should-come-to-the-car-conference/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2010/12/07/why-students-should-come-to-the-car-conference/index.html"></a></p>
+<p><a href="./archives/2010/12/07/why-students-should-come-to-the-car-conference/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2010/12/07/why-students-should-come-to-the-car-conference/index.html">
@@ -1722,13 +1587,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="48" data-listing-date-sort="1284436800000" data-listing-file-modified-sort="1674059025466" data-listing-reading-time-sort="3.38">
+<div class="quarto-post image-right" data-index="49" data-listing-date-sort="1284436800000" data-listing-file-modified-sort="1698260663483" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2010/09/14/hard-problems/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2010/09/14/hard-problems/index.html"></a></p>
+<p><a href="./archives/2010/09/14/hard-problems/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2010/09/14/hard-problems/index.html">
@@ -1754,13 +1615,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="49" data-listing-date-sort="1284177600000" data-listing-file-modified-sort="1674059025466" data-listing-reading-time-sort="2.9">
+<div class="quarto-post image-right" data-index="50" data-listing-date-sort="1284177600000" data-listing-file-modified-sort="1698260663482" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2010/09/11/how-far-weve-come/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2010/09/11/how-far-weve-come/index.html"></a></p>
+<p><a href="./archives/2010/09/11/how-far-weve-come/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2010/09/11/how-far-weve-come/index.html">
@@ -1786,13 +1643,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="50" data-listing-date-sort="1280548800000" data-listing-file-modified-sort="1674059025465" data-listing-reading-time-sort="1.835">
+<div class="quarto-post image-right" data-index="51" data-listing-date-sort="1280548800000" data-listing-file-modified-sort="1698260663482" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<a href="./archives/2010/07/31/a-github-for-data/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2010/07/31/a-github-for-data/index.html"></a></p>
+<p><a href="./archives/2010/07/31/a-github-for-data/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2010/07/31/a-github-for-data/index.html">
@@ -1818,13 +1671,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="51" data-listing-date-sort="1278907200000" data-listing-file-modified-sort="1674059025465" data-listing-reading-time-sort="2.785">
+<div class="quarto-post image-right" data-index="52" data-listing-date-sort="1278907200000" data-listing-file-modified-sort="1698260663481" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2010/07/12/how-apis-help-the-newsroom/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2010/07/12/how-apis-help-the-newsroom/index.html"></a></p>
+<p><a href="./archives/2010/07/12/how-apis-help-the-newsroom/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2010/07/12/how-apis-help-the-newsroom/index.html">
@@ -1850,9 +1699,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="52" data-listing-date-sort="1273550400000" data-listing-file-modified-sort="1674059025465" data-listing-reading-time-sort="2.55">
+<div class="quarto-post image-right" data-index="53" data-listing-date-sort="1273550400000" data-listing-file-modified-sort="1698260663481" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<p><a href="./archives/2010/05/11/using-the-nyt-congress-api-with-excel/index.html"> <img data-src="./archives/2010/05/images/key_signup.png" class="thumnail-image"> </a></p>
+<p><a href="./archives/2010/05/11/using-the-nyt-congress-api-with-excel/index.html"> <p class="card-img-top"><img data-src="archives/2010/05/images/key_signup.png"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2010/05/11/using-the-nyt-congress-api-with-excel/index.html">
@@ -1878,13 +1727,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="53" data-listing-date-sort="1266901200000" data-listing-file-modified-sort="1674059025464" data-listing-reading-time-sort="2.41">
+<div class="quarto-post image-right" data-index="54" data-listing-date-sort="1266901200000" data-listing-file-modified-sort="1698260663481" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2010/02/23/a-gentle-introduction-to-google-app-engine/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2010/02/23/a-gentle-introduction-to-google-app-engine/index.html"></a></p>
+<p><a href="./archives/2010/02/23/a-gentle-introduction-to-google-app-engine/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2010/02/23/a-gentle-introduction-to-google-app-engine/index.html">
@@ -1910,13 +1755,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="54" data-listing-date-sort="1266469200000" data-listing-file-modified-sort="1674059025464" data-listing-reading-time-sort="0.795">
+<div class="quarto-post image-right" data-index="55" data-listing-date-sort="1266469200000" data-listing-file-modified-sort="1698260663480" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
-<a href="./archives/2010/02/18/lightning-talks-at-nicar/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2010/02/18/lightning-talks-at-nicar/index.html"></a></p>
+<p><a href="./archives/2010/02/18/lightning-talks-at-nicar/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2010/02/18/lightning-talks-at-nicar/index.html">
@@ -1942,13 +1783,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="55" data-listing-date-sort="1261717200000" data-listing-file-modified-sort="1674059025464" data-listing-reading-time-sort="2.01">
+<div class="quarto-post image-right" data-index="56" data-listing-date-sort="1261717200000" data-listing-file-modified-sort="1698260663480" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2009/12/25/the-gift-of-data/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2009/12/25/the-gift-of-data/index.html"></a></p>
+<p><a href="./archives/2009/12/25/the-gift-of-data/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2009/12/25/the-gift-of-data/index.html">
@@ -1974,13 +1811,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="56" data-listing-date-sort="1259470800000" data-listing-file-modified-sort="1674059025463" data-listing-reading-time-sort="3.235">
+<div class="quarto-post image-right" data-index="57" data-listing-date-sort="1259470800000" data-listing-file-modified-sort="1698260663480" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2009/11/29/the-future-of-ire-training/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2009/11/29/the-future-of-ire-training/index.html"></a></p>
+<p><a href="./archives/2009/11/29/the-future-of-ire-training/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2009/11/29/the-future-of-ire-training/index.html">
@@ -2006,13 +1839,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="57" data-listing-date-sort="1258779600000" data-listing-file-modified-sort="1674059025463" data-listing-reading-time-sort="3.995">
+<div class="quarto-post image-right" data-index="58" data-listing-date-sort="1258779600000" data-listing-file-modified-sort="1698260663479" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2009/11/21/a-question-of-emphasis/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2009/11/21/a-question-of-emphasis/index.html"></a></p>
+<p><a href="./archives/2009/11/21/a-question-of-emphasis/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2009/11/21/a-question-of-emphasis/index.html">
@@ -2038,13 +1867,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="58" data-listing-date-sort="1257742800000" data-listing-file-modified-sort="1674059025463" data-listing-reading-time-sort="3.155">
+<div class="quarto-post image-right" data-index="59" data-listing-date-sort="1257742800000" data-listing-file-modified-sort="1698260663479" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2009/11/09/buying-into-computational-journalism/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2009/11/09/buying-into-computational-journalism/index.html"></a></p>
+<p><a href="./archives/2009/11/09/buying-into-computational-journalism/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2009/11/09/buying-into-computational-journalism/index.html">
@@ -2070,13 +1895,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="59" data-listing-date-sort="1256702400000" data-listing-file-modified-sort="1674059025462" data-listing-reading-time-sort="2.055">
+<div class="quarto-post image-right" data-index="60" data-listing-date-sort="1256702400000" data-listing-file-modified-sort="1698260663478" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2009/10/28/the-fecs-disclosure-data-catalog/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2009/10/28/the-fecs-disclosure-data-catalog/index.html"></a></p>
+<p><a href="./archives/2009/10/28/the-fecs-disclosure-data-catalog/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2009/10/28/the-fecs-disclosure-data-catalog/index.html">
@@ -2102,13 +1923,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="60" data-listing-date-sort="1248408000000" data-listing-file-modified-sort="1674059025462" data-listing-reading-time-sort="1.685">
+<div class="quarto-post image-right" data-index="61" data-listing-date-sort="1248408000000" data-listing-file-modified-sort="1698260663478" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<a href="./archives/2009/07/24/one-way-to-encourage-innovation/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2009/07/24/one-way-to-encourage-innovation/index.html"></a></p>
+<p><a href="./archives/2009/07/24/one-way-to-encourage-innovation/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2009/07/24/one-way-to-encourage-innovation/index.html">
@@ -2134,13 +1951,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="61" data-listing-date-sort="1245902400000" data-listing-file-modified-sort="1674059025462" data-listing-reading-time-sort="2.105">
+<div class="quarto-post image-right" data-index="62" data-listing-date-sort="1245902400000" data-listing-file-modified-sort="1698260663477" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2009/06/25/the-fundamental-training-need/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2009/06/25/the-fundamental-training-need/index.html"></a></p>
+<p><a href="./archives/2009/06/25/the-fundamental-training-need/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2009/06/25/the-fundamental-training-need/index.html">
@@ -2166,13 +1979,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="62" data-listing-date-sort="1243915200000" data-listing-file-modified-sort="1674059025461" data-listing-reading-time-sort="4.45">
+<div class="quarto-post image-right" data-index="63" data-listing-date-sort="1243915200000" data-listing-file-modified-sort="1698260663476" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2009/06/02/the-case-against-teaching-access/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2009/06/02/the-case-against-teaching-access/index.html"></a></p>
+<p><a href="./archives/2009/06/02/the-case-against-teaching-access/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2009/06/02/the-case-against-teaching-access/index.html">
@@ -2198,13 +2007,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="63" data-listing-date-sort="1237953600000" data-listing-file-modified-sort="1674059025461" data-listing-reading-time-sort="2.7">
+<div class="quarto-post image-right" data-index="64" data-listing-date-sort="1237953600000" data-listing-file-modified-sort="1698260663476" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2009/03/25/no-really-show-us-the-data/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2009/03/25/no-really-show-us-the-data/index.html"></a></p>
+<p><a href="./archives/2009/03/25/no-really-show-us-the-data/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2009/03/25/no-really-show-us-the-data/index.html">
@@ -2230,13 +2035,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="64" data-listing-date-sort="1229662800000" data-listing-file-modified-sort="1674059025460" data-listing-reading-time-sort="2.15">
+<div class="quarto-post image-right" data-index="65" data-listing-date-sort="1229662800000" data-listing-file-modified-sort="1698260663475" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2008/12/19/represent-and-geodjango/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2008/12/19/represent-and-geodjango/index.html"></a></p>
+<p><a href="./archives/2008/12/19/represent-and-geodjango/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2008/12/19/represent-and-geodjango/index.html">
@@ -2262,13 +2063,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="65" data-listing-date-sort="1222142400000" data-listing-file-modified-sort="1674059025460" data-listing-reading-time-sort="0.415">
+<div class="quarto-post image-right" data-index="66" data-listing-date-sort="1222142400000" data-listing-file-modified-sort="1698260663475" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
-<a href="./archives/2008/09/23/white-house-beat-feature-request/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2008/09/23/white-house-beat-feature-request/index.html"></a></p>
+<p><a href="./archives/2008/09/23/white-house-beat-feature-request/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2008/09/23/white-house-beat-feature-request/index.html">
@@ -2294,13 +2091,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="66" data-listing-date-sort="1221969600000" data-listing-file-modified-sort="1674059025459" data-listing-reading-time-sort="1.23">
+<div class="quarto-post image-right" data-index="67" data-listing-date-sort="1221969600000" data-listing-file-modified-sort="1698260663475" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<a href="./archives/2008/09/21/the-difference/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2008/09/21/the-difference/index.html"></a></p>
+<p><a href="./archives/2008/09/21/the-difference/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2008/09/21/the-difference/index.html">
@@ -2326,13 +2119,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="67" data-listing-date-sort="1216699200000" data-listing-file-modified-sort="1674059025459" data-listing-reading-time-sort="2.76">
+<div class="quarto-post image-right" data-index="68" data-listing-date-sort="1216699200000" data-listing-file-modified-sort="1698260663474" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2008/07/22/the-birth-of-quadruplets-or-understanding-the-process/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2008/07/22/the-birth-of-quadruplets-or-understanding-the-process/index.html"></a></p>
+<p><a href="./archives/2008/07/22/the-birth-of-quadruplets-or-understanding-the-process/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2008/07/22/the-birth-of-quadruplets-or-understanding-the-process/index.html">
@@ -2358,13 +2147,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="68" data-listing-date-sort="1214712000000" data-listing-file-modified-sort="1674059025459" data-listing-reading-time-sort="2.86">
+<div class="quarto-post image-right" data-index="69" data-listing-date-sort="1214712000000" data-listing-file-modified-sort="1698260663474" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2008/06/29/caspios-lessons/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2008/06/29/caspios-lessons/index.html"></a></p>
+<p><a href="./archives/2008/06/29/caspios-lessons/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2008/06/29/caspios-lessons/index.html">
@@ -2390,13 +2175,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="69" data-listing-date-sort="1213848000000" data-listing-file-modified-sort="1674059025458" data-listing-reading-time-sort="4.365">
+<div class="quarto-post image-right" data-index="70" data-listing-date-sort="1213848000000" data-listing-file-modified-sort="1698260663474" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2008/06/19/the-future-of-news-libraries/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2008/06/19/the-future-of-news-libraries/index.html"></a></p>
+<p><a href="./archives/2008/06/19/the-future-of-news-libraries/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2008/06/19/the-future-of-news-libraries/index.html">
@@ -2422,13 +2203,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="70" data-listing-date-sort="1211601600000" data-listing-file-modified-sort="1674059025458" data-listing-reading-time-sort="5.805">
+<div class="quarto-post image-right" data-index="71" data-listing-date-sort="1211601600000" data-listing-file-modified-sort="1698260663473" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
-<a href="./archives/2008/05/24/on-bomb-throwing/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2008/05/24/on-bomb-throwing/index.html"></a></p>
+<p><a href="./archives/2008/05/24/on-bomb-throwing/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2008/05/24/on-bomb-throwing/index.html">
@@ -2454,13 +2231,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="71" data-listing-date-sort="1195102800000" data-listing-file-modified-sort="1674059025457" data-listing-reading-time-sort="2.96">
+<div class="quarto-post image-right" data-index="72" data-listing-date-sort="1195102800000" data-listing-file-modified-sort="1698260663473" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2007/11/15/of-the-web-vs-on-the-web/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/11/15/of-the-web-vs-on-the-web/index.html"></a></p>
+<p><a href="./archives/2007/11/15/of-the-web-vs-on-the-web/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/11/15/of-the-web-vs-on-the-web/index.html">
@@ -2486,13 +2259,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="72" data-listing-date-sort="1194325200000" data-listing-file-modified-sort="1674059025457" data-listing-reading-time-sort="3.08">
+<div class="quarto-post image-right" data-index="73" data-listing-date-sort="1194325200000" data-listing-file-modified-sort="1698260663472" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<a href="./archives/2007/11/06/innovation-belongs-in-the-newsroom/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/11/06/innovation-belongs-in-the-newsroom/index.html"></a></p>
+<p><a href="./archives/2007/11/06/innovation-belongs-in-the-newsroom/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/11/06/innovation-belongs-in-the-newsroom/index.html">
@@ -2518,13 +2287,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="73" data-listing-date-sort="1192507200000" data-listing-file-modified-sort="1674059025456" data-listing-reading-time-sort="1.505">
+<div class="quarto-post image-right" data-index="74" data-listing-date-sort="1192507200000" data-listing-file-modified-sort="1698260663472" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<a href="./archives/2007/10/16/the-times/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/10/16/the-times/index.html"></a></p>
+<p><a href="./archives/2007/10/16/the-times/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/10/16/the-times/index.html">
@@ -2550,13 +2315,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="74" data-listing-date-sort="1191124800000" data-listing-file-modified-sort="1674059025456" data-listing-reading-time-sort="2.41">
+<div class="quarto-post image-right" data-index="75" data-listing-date-sort="1191124800000" data-listing-file-modified-sort="1698260663472" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2007/09/30/teaching-data-on-the-web/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/09/30/teaching-data-on-the-web/index.html"></a></p>
+<p><a href="./archives/2007/09/30/teaching-data-on-the-web/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/09/30/teaching-data-on-the-web/index.html">
@@ -2582,13 +2343,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="75" data-listing-date-sort="1189569600000" data-listing-file-modified-sort="1674059025456" data-listing-reading-time-sort="2.65">
+<div class="quarto-post image-right" data-index="76" data-listing-date-sort="1189569600000" data-listing-file-modified-sort="1698260663471" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2007/09/12/on-trials-software-and-otherwise/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/09/12/on-trials-software-and-otherwise/index.html"></a></p>
+<p><a href="./archives/2007/09/12/on-trials-software-and-otherwise/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/09/12/on-trials-software-and-otherwise/index.html">
@@ -2614,13 +2371,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="76" data-listing-date-sort="1189137600000" data-listing-file-modified-sort="1674059025455" data-listing-reading-time-sort="5.445">
+<div class="quarto-post image-right" data-index="77" data-listing-date-sort="1189137600000" data-listing-file-modified-sort="1698260663471" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
-<a href="./archives/2007/09/07/outsourcing-database-development-or-the-caspio-issue/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/09/07/outsourcing-database-development-or-the-caspio-issue/index.html"></a></p>
+<p><a href="./archives/2007/09/07/outsourcing-database-development-or-the-caspio-issue/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/09/07/outsourcing-database-development-or-the-caspio-issue/index.html">
@@ -2646,13 +2399,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="77" data-listing-date-sort="1185854400000" data-listing-file-modified-sort="1674059025455" data-listing-reading-time-sort="2.055">
+<div class="quarto-post image-right" data-index="78" data-listing-date-sort="1185854400000" data-listing-file-modified-sort="1698260663471" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2007/07/31/django-ical-vobject/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/07/31/django-ical-vobject/index.html"></a></p>
+<p><a href="./archives/2007/07/31/django-ical-vobject/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/07/31/django-ical-vobject/index.html">
@@ -2678,13 +2427,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="78" data-listing-date-sort="1184126400000" data-listing-file-modified-sort="1674059025455" data-listing-reading-time-sort="2.73">
+<div class="quarto-post image-right" data-index="79" data-listing-date-sort="1184126400000" data-listing-file-modified-sort="1698260663470" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2007/07/11/the-original-and-future-facebook/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/07/11/the-original-and-future-facebook/index.html"></a></p>
+<p><a href="./archives/2007/07/11/the-original-and-future-facebook/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/07/11/the-original-and-future-facebook/index.html">
@@ -2710,13 +2455,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="79" data-listing-date-sort="1181793600000" data-listing-file-modified-sort="1674059025454" data-listing-reading-time-sort="1.255">
+<div class="quarto-post image-right" data-index="80" data-listing-date-sort="1181793600000" data-listing-file-modified-sort="1698260663470" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<a href="./archives/2007/06/14/the-new-competition/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/06/14/the-new-competition/index.html"></a></p>
+<p><a href="./archives/2007/06/14/the-new-competition/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/06/14/the-new-competition/index.html">
@@ -2742,13 +2483,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="80" data-listing-date-sort="1181620800000" data-listing-file-modified-sort="1674059025454" data-listing-reading-time-sort="2.095">
+<div class="quarto-post image-right" data-index="81" data-listing-date-sort="1181620800000" data-listing-file-modified-sort="1698260663470" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2007/06/12/finding-enterprise-reporting/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/06/12/finding-enterprise-reporting/index.html"></a></p>
+<p><a href="./archives/2007/06/12/finding-enterprise-reporting/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/06/12/finding-enterprise-reporting/index.html">
@@ -2774,13 +2511,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="81" data-listing-date-sort="1180411200000" data-listing-file-modified-sort="1674059025453" data-listing-reading-time-sort="4.665">
+<div class="quarto-post image-right" data-index="82" data-listing-date-sort="1180411200000" data-listing-file-modified-sort="1698260663469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<a href="./archives/2007/05/29/shoot-the-google/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/05/29/shoot-the-google/index.html"></a></p>
+<p><a href="./archives/2007/05/29/shoot-the-google/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/05/29/shoot-the-google/index.html">
@@ -2806,13 +2539,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="82" data-listing-date-sort="1170565200000" data-listing-file-modified-sort="1674059025453" data-listing-reading-time-sort="1.52">
+<div class="quarto-post image-right" data-index="83" data-listing-date-sort="1170565200000" data-listing-file-modified-sort="1698260663469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<a href="./archives/2007/02/04/why-the-web/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2007/02/04/why-the-web/index.html"></a></p>
+<p><a href="./archives/2007/02/04/why-the-web/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2007/02/04/why-the-web/index.html">
@@ -2838,13 +2567,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="83" data-listing-date-sort="1133758800000" data-listing-file-modified-sort="1674059025453" data-listing-reading-time-sort="0.635">
+<div class="quarto-post image-right" data-index="84" data-listing-date-sort="1133758800000" data-listing-file-modified-sort="1698260663469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
-<a href="./archives/2005/12/05/congressional-vote-database/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2005/12/05/congressional-vote-database/index.html"></a></p>
+<p><a href="./archives/2005/12/05/congressional-vote-database/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2005/12/05/congressional-vote-database/index.html">
@@ -2870,13 +2595,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="84" data-listing-date-sort="1116388800000" data-listing-file-modified-sort="1674059025452" data-listing-reading-time-sort="2.605">
+<div class="quarto-post image-right" data-index="85" data-listing-date-sort="1116388800000" data-listing-file-modified-sort="1698260663468" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2005/05/18/xpdf-on-the-mac/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2005/05/18/xpdf-on-the-mac/index.html"></a></p>
+<p><a href="./archives/2005/05/18/xpdf-on-the-mac/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2005/05/18/xpdf-on-the-mac/index.html">
@@ -2902,13 +2623,9 @@ Derek Willis
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="85" data-listing-date-sort="1017032400000" data-listing-file-modified-sort="1674059025452" data-listing-reading-time-sort="2.91">
+<div class="quarto-post image-right" data-index="86" data-listing-date-sort="1017032400000" data-listing-file-modified-sort="1698260663468" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
-<a href="./archives/2002/03/25/the-long-bet/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./archives/2002/03/25/the-long-bet/index.html"></a></p>
+<p><a href="./archives/2002/03/25/the-long-bet/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
 <a href="./archives/2002/03/25/the-long-bet/index.html">
@@ -2969,9 +2686,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -3036,6 +2767,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -3079,6 +2896,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">© Copyright 2022 Derek Willis. Published using Quarto.</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 
