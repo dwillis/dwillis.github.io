@@ -395,14 +395,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggalt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s say we want to highlight the top scorers in women’s college basketball. So let’s use our player data.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://raw.githubusercontent.com/dwillis/hhs-snapshots/main/data/player_totals_20230417.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://raw.githubusercontent.com/dwillis/hhs-snapshots/main/data/player_totals_20231130.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>And while we’re loading it, let’s filter out anyone who hasn’t played.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/dwillis/hhs-snapshots/main/data/player_totals_20230417.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">filter</span>(mp <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/dwillis/hhs-snapshots/main/data/player_totals_20231130.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">filter</span>(mp <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 15321 Columns: 182
+<pre><code>Rows: 14037 Columns: 182
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr   (5): full_name, hhs_player_id_text, rollup, source, hhs_player_id
@@ -421,9 +421,9 @@ lgl   (1): opp_ppsa
 </div>
 </div>
 <p>So we can see right away that there are some dots at the very top that we’d want to highlight. Who are these scoring machines?</p>
-<p>Like we have done in the past, let’s make a dataframe of top scorers. We’ll set the cutoff at 700 points in a season.</p>
+<p>Like we have done in the past, let’s make a dataframe of top scorers. We’ll set the cutoff at 175 points this early in the season.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>topscorers <span class="ot">&lt;-</span> players <span class="sc">|&gt;</span> <span class="fu">filter</span>(pts <span class="sc">&gt;</span> <span class="dv">700</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>topscorers <span class="ot">&lt;-</span> players <span class="sc">|&gt;</span> <span class="fu">filter</span>(pts <span class="sc">&gt;</span> <span class="dv">175</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And like we’ve done in the past, we can add it to the chart with another geom_point. We’ll make all the players grey, we’ll make all the top scorers black.</p>
 <div class="cell">
@@ -470,14 +470,14 @@ lgl   (1): opp_ppsa
 <p><img src="encirclingpoints_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Now let’s clean this up and make it presentable. If you look at the top scorers, four were Wooden Award finalists. So here’s what a chart telling that story might look like.</p>
+<p>Now let’s clean this up and make it presentable. If you look at the top scorers, just one - Caitlin Clark - is a Division I player. So here’s what a chart telling that story might look like.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>players, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>pts), <span class="at">color=</span><span class="st">"grey"</span>) <span class="sc">+</span> </span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>topscorers, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>pts), <span class="at">color=</span><span class="st">"black"</span>) <span class="sc">+</span> </span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_encircle</span>(<span class="at">data=</span>topscorers, <span class="fu">aes</span>(<span class="at">x=</span>mp, <span class="at">y=</span>pts), <span class="at">s_shape=</span>.<span class="dv">5</span>, <span class="at">expand=</span>.<span class="dv">03</span>, <span class="at">colour=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">750</span>, <span class="at">y=</span><span class="dv">800</span>, <span class="at">label=</span><span class="st">"Top scorers"</span>)) <span class="sc">+</span> </span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Top scorers are Wooden Award candidates"</span>, <span class="at">subtitle=</span><span class="st">"Big scorers Maddy Siegrist, Caitlin Clark, Angel Reese and Aneesah Morrow among 15 finalists"</span>, <span class="at">x=</span><span class="st">"Minutes"</span>, <span class="at">y=</span><span class="st">"Points"</span>) <span class="sc">+</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">275</span>, <span class="at">y=</span><span class="dv">275</span>, <span class="at">label=</span><span class="st">"Top scorers"</span>)) <span class="sc">+</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Caitlin Clark Alone At Top"</span>, <span class="at">subtitle=</span><span class="st">"The Iowa star is by far the top scorer among all NCAA players"</span>, <span class="at">x=</span><span class="st">"Minutes"</span>, <span class="at">y=</span><span class="st">"Points"</span>) <span class="sc">+</span> </span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
@@ -495,7 +495,7 @@ lgl   (1): opp_ppsa
 <p>Works the same way – use layering and color smartly and tell the story with all your tools.</p>
 <p>Let’s grab the top three point attempt takers on the 2022-23 Maryland roster. As of now, only one will be coming back.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>players23 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/players23.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>players23 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://thescoop.org/sports-data-files/players23.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 5681 Columns: 59
 ── Column specification ────────────────────────────────────────────────────────
