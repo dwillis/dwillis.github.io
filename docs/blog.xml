@@ -10,7 +10,287 @@
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
 <generator>quarto-1.3.353</generator>
-<lastBuildDate>Sat, 25 Nov 2023 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 25 Dec 2023 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Introducing Women’s College Volleyball Roster Data</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Last year some students of mine at Maryland and I worked to produce a comprehensive set of <a href="https://github.com/Sports-Roster-Data/womens-college-basketball">data on women’s college basketball rosters</a>, and while that process involved a lot of manual effort on top of a base of Python scrapers, it also got me thinking: how hard would it be to extend that system to other sports? As it turns out, it wasn’t that hard, which is why today I’m happy to announce the release of <a href="https://github.com/Sports-Roster-Data/womens-volleyball">comprehensive roster data for women’s college volleyball</a> for the 2023 season.</p>
+<p>There are more women playing volleyball than basketball at the college level, thanks to teams that are slightly larger than many basketball teams and the proliferation of teams. We’ve collected more than 920 teams’ rosters, accounting for more than 15,800 players. Texas and Ohio provide the most players per capita, which was somewhat surprising to me given that Texas has so many people. It also has a lot of colleges that play volleyball. Alexa Henry, a graduate student at UMD, spent some time digging into this data and found that Texas is a leading exporter of players, too: even though the state has 49 NCAA volleyball teams, more than 1,630 Texans are on rosters across the nation. At an average of 17 players on each team, Texas players alone could populate nearly 96 entire teams.</p>
+<p>The first step in collecting this data was to take the <a href="https://github.com/dwillis/wbb/blob/master/ncaa/rosters.py">Python scrapers</a> I wrote for basketball rosters and point them towards volleyball rosters. Most universities use the same software for all of their teams, so it was mostly a matter of developing <a href="https://github.com/Sports-Roster-Data/womens-volleyball/blob/main/teams.json">a list of team URLs</a>. The first time I ran the <a href="https://github.com/Sports-Roster-Data/womens-volleyball/blob/main/rosters.py">volleyball scrapers</a> they yielded nearly 12,000 players, which I estimated to be about 80 percent of the total number. I made one big change to help retrieve the remainder: incorporating Simon Willison’s excellent <a href="https://shot-scraper.datasette.io/en/stable/">shot-scraper library</a>.</p>
+<p>Ostensibly a tool for taking automated screenshots, shot-scraper also (as its name suggests) has a useful ability to scrape websites, and in particular ones where JavaScript makes traditional scraping more annoying. College roster pages are a good example of this, because they often fetch JSON after page load. That doesn’t mean you can’t use the traditional requests + BeautifulSoup pattern, but with shot-scraper you can execute JavaScript against the page, and that comes in very handy.</p>
+<p>Here’s an example: the <a href="https://sjsuspartans.com/sports/womens-volleyball/roster">San Jose State roster</a>. It’s a fairly typical example of what college team roster pages look like:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/san_jose_roster.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">San Jose State roster</figcaption>
+</figure>
+</div>
+<p>What we want from this page is a JSON array of player objects based on the HTML attributes in the source. Skipping HTML parsing and heading straight to grabbing objects from the DOM makes things easier. Given access to the page, here’s the JavaScript that does it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">Array</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">from</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">document</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">querySelectorAll</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'.roster__players .roster-card-item'</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> el <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=&gt;</span> {</span>
+<span id="cb1-2">     <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">const</span> id <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">''</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-3">     <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">const</span> name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'.roster-card-item__title-link'</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-4">     <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">const</span> year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">querySelectorAll</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'.roster-player-card-profile-field__value'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-5">     <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">const</span> height <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">querySelectorAll</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'.roster-player-card-profile-field__value'</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-6">     <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">const</span> position <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'.roster-card-item__position'</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-7">     <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">const</span> hometown <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">".roster-player-card-profile-field__value--hometown"</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-8">     hs_el <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">".roster-player-card-profile-field__value--school"</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-9">     <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">const</span> high_school <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> hs_el <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">?</span> hs_el<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">innerText</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">''</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-10">     ps_el <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">".roster-player-card-profile-field__value--previous_school"</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-11">     <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">const</span> previous_school <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ps_el <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">?</span> ps_el<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">innerText</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">''</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-12">     <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">const</span> jersey <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">".roster-card-item__jersey-number"</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-13">     <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">const</span> url <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"a"</span>)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'href'</span>]<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-14">     <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> {id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> name<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> year<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> hometown<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> high_school<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> previous_school<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> height<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> position<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> jersey<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> url}<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb1-15">    })</span></code></pre></div>
+<script type="text/javascript">
+Array.from(document.querySelectorAll('.roster__players .roster-card-item'), el => {
+     const id = '';
+     const name = el.querySelector('.roster-card-item__title-link').innerText;
+     const year = el.querySelectorAll('.roster-player-card-profile-field__value')[1].innerText;
+     const height = el.querySelectorAll('.roster-player-card-profile-field__value')[0].innerText;
+     const position = el.querySelector('.roster-card-item__position').innerText;
+     const hometown = el.querySelector(".roster-player-card-profile-field__value--hometown").innerText;
+     hs_el = el.querySelector(".roster-player-card-profile-field__value--school");
+     const high_school = hs_el ? hs_el.innerText : '';
+     ps_el = el.querySelector(".roster-player-card-profile-field__value--previous_school");
+     const previous_school = ps_el ? ps_el.innerText : '';
+     const jersey = el.querySelector(".roster-card-item__jersey-number").innerText;
+     const url = el.querySelector("a")['href'];
+     return {id, name, year, hometown, high_school, previous_school, height, position, jersey, url};
+    })
+</script>
+</div>
+<p>That, plus a little post-processing, produces an array that looks like this (this version is truncated):</p>
+<pre><code>[{'id': '', 'name': 'Jiana Lawson', 'year': 'Senior', 'hometown': 'Tucson, Ariz.', 'high_school': 'Catalina Foothills HS', 'previous_school': '', 'height': '5′10″', 'position': 'MB', 'jersey': '#1', 'url': 'https://sjsuspartans.com/sports/womens-volleyball/roster/season/2023/player/jiana-lawson', 'team_id': 630, 'team': 'San Jose State', 'season': '2023'}, {'id': '', 'name': 'Brooke Bryant', 'year': 'Junior', 'hometown': 'Irvine, Calif.', 'high_school': 'Santa Margarita HS', 'previous_school': '', 'height': '5′11″', 'position': 'RS', 'jersey': '#2', 'url': 'https://sjsuspartans.com/sports/womens-volleyball/roster/season/2023/player/brooke-bryant', 'team_id': 630, 'team': 'San Jose State', 'season': '2023'}]</code></pre>
+<p>The function for San Jose State is <a href="https://github.com/Sports-Roster-Data/womens-volleyball/blob/main/rosters.py#L296-L318">here</a>. It’s not fancy, but it doesn’t need to be. The good news is that shot-scraper can accept pretty much any JavaScript: a ternary operator, string functions, etc. The bad news is that some of these sites have so much JavaScript running on them that it can get a little fussy.</p>
+<p>This doesn’t make scraping one-click simple, a task that AI will probably hasten in most cases. But it does reduce the amount of time I spend wrestling with weird HTML and JS interactions, and it has made it possible for me to gather even more teams’ rosters, cutting down on the manual work needed for this effort. It allows me to ask: what other sports can I collect rosters from?</p>
+
+
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/index.html</guid>
+  <pubDate>Mon, 25 Dec 2023 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Using AI to Parse Election Results</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -27,7 +307,7 @@
 <figcaption class="figure-caption">Statewide Results</figcaption>
 </figure>
 </div>
-<p>There’s a lot going on here, but the lowlights, from a parsing perspective, start with the counties displayed as vertical column names, followed by the combination of candidate name and party in the same box. Those vertical headers make parsing more complicated; you can extract the text from this file, but very few programs will preserve the layout of those counties. This is an electronic PDF, so you can usually export it to a spreadsheet that you’ll then spend time reformatting. Depending on the election, a lot of time.</p>
+<p>There’s a lot going on here, but the lowlights, from a parsing perspective, start with the counties displayed as vertical column names, followed by the combination of candidate name and party in the same box. Those vertical headers make parsing more complicated; you can extract the text from this file, but very few programs will preserve the layout of those counties. <a href="https://sos.ms.gov/elections/electionresults/2023General/State%20Certified%20Results/2023%20Statewide%20Recapitulation%20Sheet.pdf">This is an electronic PDF</a>, so you can usually export it to a spreadsheet that you’ll then spend time reformatting. Depending on the election, a lot of time.</p>
 <p>This is a very good candidate for AI services because we have a consistent (if not totally logical) structure to the document and we know what the output should look like: in this case, a CSV file with one row per candidate results. That means that a parsed file should look something like this:</p>
 <pre><code>county,office,district,party,candidate,votes
 Adams,Governor,,Dem,Brandon Presley,5782
@@ -1779,29 +2059,6 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2014/05/22/how-it-starts/index.html</guid>
   <pubDate>Thu, 22 May 2014 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Data Journalism, Student Media Edition</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2013/10/09/data-journalism-student-media-edition/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>I had the privilege of <a href="https://twitter.com/dukesanford/status/387608300600426496">speaking to students (and some faculty) at Duke University</a> on Monday, and it was inspiring to see so many people come out to listen to a very geeky talk, to say nothing of the speaker. Afterwards, several students came up to ask how they could start doing data journalism at a student newspaper, particularly at a private university not subject to most public records requests. If I’m going to encourage student journalists to embrace data journalism, it’s only right that I try to provide some suggestions on how to do this in a university environment.</p>
-<p>First suggestion: as much as you’d like to address issues of national significance - and I totally did this when I worked at both The Pitt News and The Independent Florida Alligator - stick to what is right in front of you. Universities large and small are communities themselves, with often strange and interesting methods of governance and communication. They make for great stories. With that in mind, start with your university’s <a href="http://ir.provost.duke.edu/">Institutional Research office</a>. It might be called something else, but nearly every school has something like it. The IR office’s job is to collect information - data - about the school, its students and faculty, and to publish reports on the same. IR offices often conduct surveys, too, which can tell you what kinds of questions are important to the university (some even do <a href="http://web.mit.edu/surveys/parent2007/core/welcome.html">surveys of parents</a>).</p>
-<p>Some are pretty good about publishing data as data, usually a spreadsheet. Other times it’ll be a <a href="http://ir.provost.duke.edu/facts/tuitionandfinaid/tuition%20history%20through%201213.pdf">PDF</a> or maybe even a Word doc. It doesn’t matter - you’ll want to build your own set of data about the university, and you won’t want to restrict yourself to only what IR offices are interested in. Start with a spreadsheet - maybe Google spreadsheets, so multiple people can access or edit it. Consider this <a href="http://thescoop.org/thefix/the-information-gap/">a resource for your entire news organization</a>, not just you. When you leave, make sure someone else takes over the care and feeding of it. Make it so that your student paper or radio station is an expert in the demographics of the university.</p>
-<p>As you build up a collection of data, you’ll be able to write actual trend stories about incoming classes or the number of full-time faculty at the school. Instead of having to recompile the same information over and over for different stories, you can do it once and use it all over the place. And it’s not like the university can say that the data isn’t correct; they can, but they’ll need to correct it.</p>
-<p>Second suggestion: Follow the <a href="http://research.duke.edu/">research</a> money. Higher education is now a complex combination of students, faculty, administrators and the funding that makes it all possible. Faculty members hope to bring in research money to pursue their interests and to enhance their profiles. While a not insignificant portion of that research is funded by private sources, the government pays for quite a lot of academic research. Student media outlets should know about it. After all, the <a href="http://www.dukechronicle.com/articles/2013/09/23/duke-professor-wins-award-advance-research">occasional story about a faculty research grant</a> is a common thing for a lot of campus newspapers.</p>
-<p>(Note: were the federal government not shutdown at the moment, I’d provide some links to sources of research grant information and data. But you’re journalists, you can find them.)</p>
-<p>Third suggestion: Decide what 2-3 things that your university does that makes it regionally or nationally known. This may include athletics. Figure out how to dive deep into those subjects, including collecting whatever data is available. If sports is on the table, then track plays or players or coaches or all of the above. If it’s a particular school or department, gather up all the details on faculty, classes, students, etc. Ask students and faculty what they’d like to know about those things, or what they <em>think</em> they already know. Own your home court, basically. That should be something Duke students, at least, find familiar.</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2013/10/09/data-journalism-student-media-edition/index.html</guid>
-  <pubDate>Wed, 09 Oct 2013 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
