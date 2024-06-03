@@ -11,7 +11,7 @@ engine: knitr
 
 I called it my "running with scissors" class, because after I offered to teach a course on using artificial intelligence for journalism, the thought dawned on me that I had very little idea how to actually design and teach such a class.
 
-![*Running with scissors, a terrible image from DALL-E*](scissors.png)
+![*Running with scissors, a terrible image from DALL-E*](scissors.png){fig-align="left" width="400"}
 
 Here's what I eventually settled on: give students access to various AI services - ChatGPT, Claude, Gemini and other LLMs - and then ask them to apply them to specific journalism-related tasks. These tasks included some of the most fundamental journalism processes, including:
 

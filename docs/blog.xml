@@ -9,13 +9,66 @@
 <link>https://www.thescoop.org/blog.html</link>
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
-<generator>quarto-1.3.450</generator>
-<lastBuildDate>Sat, 27 Jan 2024 05:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.553</generator>
+<lastBuildDate>Mon, 03 Jun 2024 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Lessons from Teaching a Journalism Class on AI</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2024/06/03/lessons-from-teaching-journalism-class-ai/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I called it my “running with scissors” class, because after I offered to teach a course on using artificial intelligence for journalism, the thought dawned on me that I had very little idea how to actually design and teach such a class.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2024/06/03/lessons-from-teaching-journalism-class-ai/scissors.png" class="img-fluid figure-img" width="400"></p>
+<figcaption><em>Running with scissors, a terrible image from DALL-E</em></figcaption>
+</figure>
+</div>
+<p>Here’s what I eventually settled on: give students access to various AI services - ChatGPT, Claude, Gemini and other LLMs - and then ask them to apply them to specific journalism-related tasks. These tasks included some of the most fundamental journalism processes, including:</p>
+<ul>
+<li>coming up with story ideas</li>
+<li>trying to figure out what kinds of people to talk to</li>
+<li>finding key ideas in a document or report</li>
+<li>editing text</li>
+<li>generating headlines or social media copy</li>
+</ul>
+<p>The list of tasks also touched on some jobs that LLMs are pretty good at: extracting structured data from unstructured text, converting one story format to another and describing the elements of an image or video.</p>
+<p>For each task, I gave students a template for documenting their work. For example, one task was uploading a document to an LLM and asking it to summarize it in a way that would be useful for finding a story. We had team and individual exercises, but they used the same basic template, and as the semester went on I asked them to use multiple large language models in their tasks. They needed to describe their process in doing so. Here’s an example of a template:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2024/06/03/lessons-from-teaching-journalism-class-ai/summary_doc.png" class="img-fluid figure-img"></p>
+<figcaption><em>Basic template</em></figcaption>
+</figure>
+</div>
+<p>The key part - the part that was worth the most - was asking them to evaluate the results and reflect on how useful this process was. This got them thinking about their expectations versus the reality of generated text and images, so that they could compare the two. Students may not be experts on how AI works, but they are smart enough to judge output compared to expectations and will learn from their processes. Early on, I also had some students do the same task without any computer technology at all - Team Luddite. Here’s one of the evaluations from a task on generating follow-up story ideas from an existing story:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2024/06/03/lessons-from-teaching-journalism-class-ai/sample_eval.png" class="img-fluid figure-img"></p>
+<figcaption><em>Sample evaluation</em></figcaption>
+</figure>
+</div>
+<p>These evaluations were key to students gaining an understanding of what LLMs can do (and what they should not be used for). Repeated conversations with LLMs help them to ask better questions, which is kind of the whole point of doing journalism in the first place. Chat interfaces seem “neutral” but the back and forth of the conversation reveals some habits, and knowing those is critical for both asking the right questions and understanding the responses.</p>
+<p>Most of the students started out with either a degree of enthusiasm about the abilities of LLMs or a pretty skeptical take on their usefulness. Many of them assumed that the confidence displayed by LLMs in their responses was justified. They all learned to be less deferential in their prompts, which is what I wanted.</p>
+<p>The journalism implications of some of these tasks were pretty profound. For example, one assignment had students ask LLMs to examine images and describe their details. Without getting all “Columbo” here, looking for telling items in images is a pretty arduous manual task for humans, and not all of us are very good at it. Accurate assistance for tasks like this at scale would make a lot of things possible for newsrooms, especially smaller newsrooms.</p>
+<p>The running with scissors theme was the right one: I repeatedly had to change or add things. One week we used AI to describe the visual elements of videos, noting that doing that meant stripping out any audio. When we met <em>two days later</em>, the tool we used (Google’s Gemini) had changed so that it retained the audio and you could ask questions of it. More than any other class, this one demanded that I keep up because new things are happening all the time, and in particular LLMs are getting new capabilities. When I teach it again next spring, my scissors will likely be a different size (and maybe shape), but there will be a lot of unknowns again.</p>
+<p>The major assignments for this class were two guides based on their evaluations: each student picked an existing news organization and wrote a guide describing three ways that organization might use AI in a responsible manner. The second guide, a group project, is a deep dive on a specific task like editing for style or summarizing PDFs. I’ll share more takeaways from those projects in future posts.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2024/06/03/lessons-from-teaching-journalism-class-ai/</guid>
+  <pubDate>Mon, 03 Jun 2024 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>A Better Way to Process Mississippi Precinct Results</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2024/01/27/a-better-way-to-process-mississippi-precinct-results/index.html</link>
+  <link>https://www.thescoop.org/archives/2024/01/27/a-better-way-to-process-mississippi-precinct-results/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -25,7 +78,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.thescoop.org/archives/2024/01/27/a-better-way-to-process-mississippi-precinct-results/panola_precinct.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Panola results</figcaption>
+<figcaption>Panola results</figcaption>
 </figure>
 </div>
 <p>That means that to turn what obviously are tables into actual data, you need to choose one of two options: data entry or OCR, where software extracts the values. In a better world, the electronic versions get posted somewhere so that OCR isn’t needed, but we don’t live in that world and it’s unlikely we will anytime soon. As part of my work with OpenElections, I’ve mostly relied on data entry, which has its own issues and can cost significant amounts of money. For a state like Mississippi, we’re talking about more than 50,000 rows of data for a statewide general election, which easily will run into four figures (and usually leads to transcription mistakes).</p>
@@ -127,7 +180,7 @@ font-style: inherit;">.xlsx"</span>)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.thescoop.org/archives/2024/01/27/a-better-way-to-process-mississippi-precinct-results/panola_excel.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Panola results in Excel</figcaption>
+<figcaption>Panola results in Excel</figcaption>
 </figure>
 </div>
 <p>Now, this isn’t perfect. Those vertically-oriented headers with the precinct names aren’t there; Textract, like most OCR software, just doesn’t deal with them, although they also don’t ruin the OCR job, either. The candidate name and party are slapped together, as they are in the original document. But the table of results is pristine. In processing all 82 counties, I found 3 instances where Textract didn’t get the votes right, and those were due to either a stray mark on the original document or because the PDF’s orientation was uneven. Processing all 82 files took less than an hour, and cost less than $50. Let me repeat that: it cost less than $50 to produce high-quality vote totals for every county in the state.</p>
@@ -136,14 +189,15 @@ font-style: inherit;">.xlsx"</span>)</span></code></pre></div>
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2024/01/27/a-better-way-to-process-mississippi-precinct-results/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2024/01/27/a-better-way-to-process-mississippi-precinct-results/</guid>
   <pubDate>Sat, 27 Jan 2024 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Introducing Women’s College Volleyball Roster Data</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/index.html</link>
+  <link>https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -156,7 +210,7 @@ font-style: inherit;">.xlsx"</span>)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/san_jose_roster.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">San Jose State roster</figcaption>
+<figcaption>San Jose State roster</figcaption>
 </figure>
 </div>
 <p>What we want from this page is a JSON array of player objects based on the HTML attributes in the source. Skipping HTML parsing and heading straight to grabbing objects from the DOM makes things easier. Given access to the page, here’s the JavaScript that does it:</p>
@@ -416,14 +470,15 @@ Array.from(document.querySelectorAll('.roster__players .roster-card-item'), el =
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/</guid>
   <pubDate>Mon, 25 Dec 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Using AI to Parse Election Results</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/index.html</link>
+  <link>https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -432,7 +487,7 @@ Array.from(document.querySelectorAll('.roster__players .roster-card-item'), el =
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/ms_statewide.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Statewide Results</figcaption>
+<figcaption>Statewide Results</figcaption>
 </figure>
 </div>
 <p>There’s a lot going on here, but the lowlights, from a parsing perspective, start with the counties displayed as vertical column names, followed by the combination of candidate name and party in the same box. Those vertical headers make parsing more complicated; you can extract the text from this file, but very few programs will preserve the layout of those counties. <a href="https://sos.ms.gov/elections/electionresults/2023General/State%20Certified%20Results/2023%20Statewide%20Recapitulation%20Sheet.pdf">This is an electronic PDF</a>, so you can usually export it to a spreadsheet that you’ll then spend time reformatting. Depending on the election, a lot of time.</p>
@@ -449,14 +504,14 @@ Adams,Secretary of State,,Rep,Michael Watson,4058</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/claude_01.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">What file?</figcaption>
+<figcaption>What file?</figcaption>
 </figure>
 </div>
 <p>Eventually it told me that the PDF was copyrighted material (it is not, being a government work in the public domain). After I told Claude that, it was happy to do the job.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/claude_02.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">It’s a start</figcaption>
+<figcaption>It’s a start</figcaption>
 </figure>
 </div>
 <p>Well, happy to <em>start</em> the job is more accurate. It’s an annoying thing to deal with a service that takes the instructions but then … doesn’t actually finish the job? Consider it another lesson in prompt editing: I had to tell it to make sure to do all of the counties and candidates. Even so, Claude’s UI means that it spits out the results to the screen, and there seems to be a limit on how much it can produce at one go, so I had to break up the conversion into multiple groups of counties. Still, in the end it worked - at least for the statewide offices I wanted, the ones with a result in every county.</p>
@@ -464,7 +519,7 @@ Adams,Secretary of State,,Rep,Michael Watson,4058</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/claude_03.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Looks ok…</figcaption>
+<figcaption>Looks ok…</figcaption>
 </figure>
 </div>
 <p>Looks ok, but since the example used Adams County, the first “result” shows that, too, even though District 1 is in DeSoto County. This is one of the times when AI-generated results look authoritative but are completely wrong.</p>
@@ -472,7 +527,7 @@ Adams,Secretary of State,,Rep,Michael Watson,4058</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/chatgpt_01.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Narration</figcaption>
+<figcaption>Narration</figcaption>
 </figure>
 </div>
 <p>Eventually it was able to do better than Claude at parsing state senate results (like Claude, I had to tell it to do all of the candidates), but had issues with state house results: the CSV files it produced looked good but placed results in the wrong counties. Eventually I saved the state house results as an Excel file and reworked that using R. You can see <a href="https://github.com/openelections/openelections-data-ms/blob/master/2023/20231107__ms__general__county.csv">the final result on GitHub</a>. In total, this took me a couple of hours, mostly spent experimenting with the correct prompt wording. Going forward it should take less time to do, and I have some ideas for tackling the state house results, too.</p>
@@ -482,14 +537,15 @@ Adams,Secretary of State,,Rep,Michael Watson,4058</code></pre>
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/</guid>
   <pubDate>Sat, 25 Nov 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>West Virginia High School Football Blowouts</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/11/13/wv-football-blowouts/index.html</link>
+  <link>https://www.thescoop.org/archives/2023/11/13/wv-football-blowouts/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -500,7 +556,7 @@ Adams,Secretary of State,,Rep,Michael Watson,4058</code></pre>
 <p>Luckily, there’s good data available to help with that. The <a href="http://wvtailgatecentral.com/">WVTailgateCentral website</a> has game-by-game scores going back to 2009, with the exception of 2017 (the web app’s database credentials <a href="http://wvtailgatecentral.com/hs/fb2017/week_schedule.php?startdate=2017-08-12&amp;enddate=2017-08-20">don’t seem to work for that year</a>). I told Duncan that if it were my story, I’d scrape that site for game data and then calculate average margins, and I offered to do just that.</p>
 <p>One view of WVTailgateCentral is that it’s an old-school site, but that’s good news for would-be scrapers: the uncomplicated HTML that uses a single table and allows you to change the URL so that instead of a week-by-week listing of games you can get <a href="http://www.wvtailgatecentral.com/hs/fb2023/week_schedule.php?startdate=2023-08-01&amp;enddate=2023-11-15">a whole season on a single page</a>. Here’s the <a href="https://github.com/dwillis/wv_football/blob/main/scraper.py">scraper</a> I wrote in Python to retrieve game scores, identify the home state of each team (since this database includes some non-WV games) and calculate the absolute point difference:</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
@@ -1005,7 +1061,7 @@ No home team!
 2022
 2023</code></pre>
 </div>
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="cf" style="color: #003B4F;
 background-color: null;
@@ -1052,14 +1108,15 @@ font-style: inherit;">"differential"</span>])</span>
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/11/13/wv-football-blowouts/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2023/11/13/wv-football-blowouts/</guid>
   <pubDate>Mon, 13 Nov 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>How Newsrooms Should be Talking About AI</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/11/06/how-newsrooms-should-be-talking-about-ai/index.html</link>
+  <link>https://www.thescoop.org/archives/2023/11/06/how-newsrooms-should-be-talking-about-ai/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1076,20 +1133,21 @@ font-style: inherit;">"differential"</span>])</span>
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/11/06/how-newsrooms-should-be-talking-about-ai/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2023/11/06/how-newsrooms-should-be-talking-about-ai/</guid>
   <pubDate>Mon, 06 Nov 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>What Was That?</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/10/17/third-and-six/index.html</link>
+  <link>https://www.thescoop.org/archives/2023/10/17/third-and-six/</link>
   <description><![CDATA[ 
 
 
 
 
+
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1160,7 +1218,7 @@ font-style: inherit;">'Purdue'</span>)</span></code></pre></div>
 <p>If you were at Secu stadium on Oct.&nbsp;14 for the Maryland-Illinois game and saw the Terrapins run the ball on third and six from the Illinois 29-yard line late in the game, you might have had the question I did: “Why didn’t Maryland pass?”</p>
 <p>It turns out that running the ball in that situation isn’t the strangest thing for Maryland under Mike Locksley. It may not have been a successful call, but it wasn’t totally unexpected, either. While the Terps aren’t a one-dimensional offensive team, since the start of the 2019 season they have run the ball on third and six more than all but two Big Ten teams (Nebraska and Northwestern).</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">third_and_six <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1242,7 +1300,7 @@ font-style: inherit;">desc</span>(total))</span></code></pre></div>
 </div>
 <p>The most common call in that specific game situation is to pass the ball, according to an analysis of play-by-play data from college football games for the past five seasons. Slightly more than one in five times, the offensive team runs the ball, but that doesn’t apply equally to every team. Programs that emphasize the ground game such as the military academies run much more often in that situation than most other teams. Crucially, running doesn’t seem crazy when you consider the outcomes: when choosing to run on third-and-six, nearly 40% of the time a team gains at least six yards, including plays that result in a touchdown.</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1255,7 +1313,7 @@ font-style: inherit;">nrow</span>(third_and_six)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2103855</code></pre>
 </div>
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">third_and_six_rush_success <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1287,7 +1345,7 @@ font-style: inherit;">nrow</span>()</span></code></pre></div>
 </div>
 <p>But has that strategy worked for Maryland? Under Locksley, the Terps have passed the ball on two of every three plays when facing third-and-six, which means they run more often than the average team. And while pass plays in that situation have tended to gain more yardage, when they do run they average nearly six yards. In 16 rushing attempts from that third-down situation, the Terps have gained at least six yards <em>half the time</em>, including a 12-yard gain from Roman Hemby earlier in the Illinois game. That’s not a huge number of plays, but it puts Maryland among the top 30 teams that have succeeded the most by running on third-and-six since 2018. I’ve limited my results to teams that have run the ball on third-and-six at least 10 times over this period.</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">runs_by_team_success <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1374,7 +1432,7 @@ font-style: inherit;">10</span>)</span></code></pre></div>
 <p>Maryland’s success running on third-and-six isn’t quite that of Kentucky, which has done it 10 of 12 times, or even Charlotte (8 of 14 times), who the Terps have beaten twice in a row. But they’ve succeeded more often than Michigan, Notre Dame and Georgia, to name three Power 5 teams. Still, history would lean towards calling a pass play. Was there something about this particular opponent and situation that made a run more likely?</p>
 <p>Let’s look at Illinois. Over the past five seasons, the Illini have been pretty good at stopping third-and-six rushes short of a first down, accomplishing that two out of every three attempts.</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">def_rush <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1518,7 +1576,7 @@ font-style: inherit;">10</span>)</span></code></pre></div>
 </div>
 <p>But this season has been a different story for a struggling team. How different? Antwain Littleton II’s loss of one yard on third-and-six was the first time in four attempts that Illinois didn’t give up a first down.</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">def_rush_2023 <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1653,7 +1711,7 @@ font-style: inherit;">desc</span>(percent)) </span></code></pre></div>
 </div>
 </div>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">third_and_six <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1704,14 +1762,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
  ]]></description>
   <category>maryland football</category>
   <category>wtf</category>
-  <guid>https://www.thescoop.org/archives/2023/10/17/third-and-six/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2023/10/17/third-and-six/</guid>
   <pubDate>Tue, 17 Oct 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Teaching News Apps with Codespaces - The Results</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/05/27/teaching-news-apps-with-codespaces-results/index.html</link>
+  <link>https://www.thescoop.org/archives/2023/05/27/teaching-news-apps-with-codespaces-results/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1726,14 +1785,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/05/27/teaching-news-apps-with-codespaces-results/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2023/05/27/teaching-news-apps-with-codespaces-results/</guid>
   <pubDate>Sat, 27 May 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Teaching News Apps with Codespaces</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/03/22/teaching-newsapps-with-codespaces/index.html</link>
+  <link>https://www.thescoop.org/archives/2023/03/22/teaching-newsapps-with-codespaces/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1757,14 +1817,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/03/22/teaching-newsapps-with-codespaces/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2023/03/22/teaching-newsapps-with-codespaces/</guid>
   <pubDate>Wed, 22 Mar 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Teaching Journalism with ChatGPT</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/02/11/teaching-journalism-with-chatgpt/index.html</link>
+  <link>https://www.thescoop.org/archives/2023/02/11/teaching-journalism-with-chatgpt/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1793,14 +1854,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/02/11/teaching-journalism-with-chatgpt/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2023/02/11/teaching-journalism-with-chatgpt/</guid>
   <pubDate>Sat, 11 Feb 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>What is Happening in Morgantown?</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/01/04/what-is-happening-in-morgantown/index.html</link>
+  <link>https://www.thescoop.org/archives/2023/01/04/what-is-happening-in-morgantown/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1822,14 +1884,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/01/04/what-is-happening-in-morgantown/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2023/01/04/what-is-happening-in-morgantown/</guid>
   <pubDate>Wed, 04 Jan 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Welcome Back</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2022/12/31/welcome-back/index.html</link>
+  <link>https://www.thescoop.org/archives/2022/12/31/welcome-back/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1842,14 +1905,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2022/12/31/welcome-back/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2022/12/31/welcome-back/</guid>
   <pubDate>Sat, 31 Dec 2022 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The More Important Problem</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2019/03/09/the-more-important-problem/index.html</link>
+  <link>https://www.thescoop.org/archives/2019/03/09/the-more-important-problem/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1866,14 +1930,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2019/03/09/the-more-important-problem/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2019/03/09/the-more-important-problem/</guid>
   <pubDate>Sat, 09 Mar 2019 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The NICAR-L Improvement Project</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2019/02/24/making-the-best-nicar-listserv/index.html</link>
+  <link>https://www.thescoop.org/archives/2019/02/24/making-the-best-nicar-listserv/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1906,14 +1971,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2019/02/24/making-the-best-nicar-listserv/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2019/02/24/making-the-best-nicar-listserv/</guid>
   <pubDate>Sun, 24 Feb 2019 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The Best Training</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2018/04/05/the-best-training/index.html</link>
+  <link>https://www.thescoop.org/archives/2018/04/05/the-best-training/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1932,14 +1998,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2018/04/05/the-best-training/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2018/04/05/the-best-training/</guid>
   <pubDate>Thu, 05 Apr 2018 01:20:05 GMT</pubDate>
 </item>
 <item>
   <title>Academy Fight Song, Part 2</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2017/12/28/academy-fight-song-part-2/index.html</link>
+  <link>https://www.thescoop.org/archives/2017/12/28/academy-fight-song-part-2/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1988,14 +2055,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2017/12/28/academy-fight-song-part-2/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2017/12/28/academy-fight-song-part-2/</guid>
   <pubDate>Thu, 28 Dec 2017 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Government and Civic Tech</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2016/09/29/government-and-civic-tech/index.html</link>
+  <link>https://www.thescoop.org/archives/2016/09/29/government-and-civic-tech/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2017,14 +2085,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2016/09/29/government-and-civic-tech/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2016/09/29/government-and-civic-tech/</guid>
   <pubDate>Thu, 29 Sep 2016 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>My Favorite Things</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2015/07/29/my-favorite-things/index.html</link>
+  <link>https://www.thescoop.org/archives/2015/07/29/my-favorite-things/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2047,14 +2116,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2015/07/29/my-favorite-things/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2015/07/29/my-favorite-things/</guid>
   <pubDate>Wed, 29 Jul 2015 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Civic Data and Journalism</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2015/06/06/civic-data-and-journalism/index.html</link>
+  <link>https://www.thescoop.org/archives/2015/06/06/civic-data-and-journalism/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2073,14 +2143,15 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2015/06/06/civic-data-and-journalism/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2015/06/06/civic-data-and-journalism/</guid>
   <pubDate>Sat, 06 Jun 2015 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>We’re All Publishers Now</title>
   <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2014/11/17/were-all-publishers-now/index.html</link>
+  <link>https://www.thescoop.org/archives/2014/11/17/were-all-publishers-now/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2108,58 +2179,8 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
 
  ]]></description>
-  <guid>https://www.thescoop.org/archives/2014/11/17/were-all-publishers-now/index.html</guid>
+  <guid>https://www.thescoop.org/archives/2014/11/17/were-all-publishers-now/</guid>
   <pubDate>Mon, 17 Nov 2014 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Lightning Strikes</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2014/07/08/lightning-strikes/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>On November 19, 2009, Jaimi Dowdell of Investigative Reporters &amp; Editors sent an email to more than a dozen of us asking about some ideas for advanced sessions for the <a href="http://www.ire.org/blog/ire-news/2009/06/30/asus-cronkite-school-will-host-2010-car-confere/">2010 CAR conference in Phoenix</a>. Here’s part of my response:</p>
-<blockquote class="blockquote">
-<p>I think the ideas are great. A couple of possible suggestions:</p>
-<ol type="1">
-<li>A session of “lightning talks”, in which people present a single idea or technique in a short time. I think it would lessen the pressure on presenters and expand the universe of them, too. http://en.wikipedia.org/wiki/Lightning_Talk</li>
-</ol>
-</blockquote>
-<p>Every once in awhile, I have an idea that pans out.</p>
-<p>Lightning talks, a popular feature of many a conference, were almost completely unknown to the journalism community. A few of us had seen them at technical conferences we’d been to, but mostly it was a foreign concept, particularly for a conference that had always featured 45-minute sessions with talks by the very best data reporters and editors around.</p>
-<p>The first session in Phoenix was in a pretty standard room. There were 10 talks that year, and half of the audience consisted of the presenters. Here’s the lineup:</p>
-<ul>
-<li>Google Charts. Easy, Clear, Indestructable. (Ben Welsh)</li>
-<li>Like Snowboard Cross, but With Data (Scott Klein)</li>
-<li>The new free visualization tool (Sarah Cohen)</li>
-<li>Easy peasy due diligence (Danielle Cervantes)</li>
-<li>Data Manipulation or Graphics with R (Bill Alpert)</li>
-<li>Essential Queries for SQL Server (Anthony DeBarros)</li>
-<li>Using an API with Excel (Derek Willis)</li>
-<li>Easy interactive charts with Open Flash Charts (Tim Henderson)</li>
-<li>Hello, Newsroom! Build out a GIS-enabled web app in &lt; five minutes (Brian Boyer)</li>
-<li>The hidden power of Javascript (Michelle Minkoff)</li>
-</ul>
-<p>Picking Ben Welsh to lead off was, in hindsight, a rookie mistake on my part, but the session was pretty well-received, and we all had fun doing it (all 25-30 of us). Fast forward to earlier this year, and here was the crowd for the lightning talks in Baltimore:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://www.thescoop.org/archives/2014/07/08/lightning-strikes/http:/knightlab.northwestern.edu/wp-content/uploads/2014/03/lightningtalks_NICAR14_akesslerdc.jpg" title="Holy crap!" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">A big crowd</figcaption>
-</figure>
-</div>
-<p>In five years, lightning talks went from being a small session competing with other sessions for attendees to a <a href="http://ire.org/conferences/nicar-2014/lightning/">standing-room only event</a> in the biggest ballroom the hotel had. I’ve been privileged to help run it, along with Aron Pilhofer and the folks at IRE who constantly encouraged and supported it. My favorite part of the last few NICAR conferences has been seeing new speakers (and some regulars) wow and entertain their colleagues.</p>
-<p>And that’s why it’s time for me to hand over the lightning talk reins: because we have so much talent in our community, and five years is long enough for anyone to be heading up a showcase of our brightest. Starting this summer, Sisi Wei, who gave a remarkable talk in 2013 about <a href="http://vimeo.com/61297159">making games for news</a>, will be leading the session at next year’s conference in Atlanta. Besides being a smart and funny and good person, Sisi is also someone who has worked very hard to bring new people into our community, and that’s one reason she’s such a good person to lead lightning talks.</p>
-<p>We’ve already talked in general about some of the changes that lightning talks needs now that it’s such a popular event. Mainly, these changes involve the talk submission and voting process, which in the past has favored people who pitched earliest and those who are well-known in our community. We’ve grown too much for that to continue. For many first-time NICAR attendees, lightning talks are perhaps the one place where they could see themselves being able to contribute; after all, it’s just five minutes as opposed to an hour. Working with the IRE staff, Sisi will be mindful of the need for lightning talks to be a place where we get to hear from a broad range of speakers with different levels of experience. It might also be time to retire the <a href="http://ire.aronpilhofer.com">submission site</a> that Aron hastily put together years ago.</p>
-<p>None of this would be possible were it not for the openness of IRE, including Mark Horvit, who has been incredibly supportive of lightning talks, and of the IRE staff. All of us owe a debt to them and to that first round of speakers who tried something new, and made it a success.</p>
-<p>Witnessing the growth of lightning talks at NICAR has been a joy for me. I have always looked forward to presenting the lineup of awesome presenters and watching as the audience were blown away by their passion and creativity. Now I get to experience that myself, and we all get the benefit that IRE has always provided: dedicated volunteers helping to make our profession that much better. I can’t wait to see what Sisi has for us in Atlanta.</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2014/07/08/lightning-strikes/index.html</guid>
-  <pubDate>Tue, 08 Jul 2014 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
