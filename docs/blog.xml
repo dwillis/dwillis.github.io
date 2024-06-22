@@ -10,7 +10,98 @@
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
 <generator>quarto-1.4.555</generator>
-<lastBuildDate>Thu, 20 Jun 2024 07:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 22 Jun 2024 07:00:00 GMT</lastBuildDate>
+<item>
+  <title>All Foreign Gifts Around Us</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2024/06/22/all-foreign-gifts-around-us/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Whenever American federal officials - from the President to members of Congress and executive branch employees - meet with foreign government representatives, they often are offered gifts. Some of them are <a href="https://foreignpolicy.com/2017/04/27/eight-of-the-weirdest-gifts-foreign-dignitaries-gave-the-president/">pretty weird</a>, like crocodile insurance. Others are very pricey, such as gold medallions. Or paintings, like one given to Dwight Eisenhower from Konrad Adenauer, then the chancellor of Germany.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2024/06/22/all-foreign-gifts-around-us/three_wise_kings.jpg" class="img-fluid figure-img"></p>
+<figcaption><em>Adoration of the Three Kings, ca. 1500</em></figcaption>
+</figure>
+</div>
+<p>The reporting on these has mostly been anecdotal, either when those gifts are given during public events, or when they get recorded in a government publication long after the fact. But these foreign gifts really are data.</p>
+<p>Lots of government information <em>should</em> be data, but doesn’t come in that format. Often it’s stored inside PDF files, but it’s even worse: what obviously should be structured as clean rows and columns is anything but. That leaves reporters with a series of bad options:</p>
+<ul>
+<li>Spending a lot of time trying to correctly copy and paste information from one format to another</li>
+<li>Literally re-typing stuff that has already been typed!</li>
+<li>Limiting reporting to anecdotes, not data</li>
+<li>Regular expressions! (<a href="https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/">Now you have two problems</a>)</li>
+</ul>
+<p>The worst part is that you can see how this information should be structured. Getting there is another matter.</p>
+<p>For example, a page like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2024/06/22/all-foreign-gifts-around-us/original.png" class="img-fluid figure-img"></p>
+<figcaption><em>Original</em></figcaption>
+</figure>
+</div>
+<p>Clearly this is structured information, but the fact that the text wraps over to multiple lines and columns often contain multiple pieces of information is a problem. There is a solution!</p>
+<section id="a-large-language-model-solution" class="level2">
+<h2 class="anchored" data-anchor-id="a-large-language-model-solution">A Large Language Model Solution</h2>
+<p>One thing that most LLMs are pretty good at is taking information in one context and putting it into another one. That includes translation, switching language style/meter/tone and even reproducing original text in another voice (try this with Dr.&nbsp;Seuss!). That ability extends to restructuring data like the file from above. Given the proper prompts and source material, an LLM should be able to produce something like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2024/06/22/all-foreign-gifts-around-us/extracted_output.png" class="img-fluid figure-img"></p>
+<figcaption><em>Extracted</em></figcaption>
+</figure>
+</div>
+<p>That’s a JSON file, which is a common format for storing data on the Web. It’s like a spreadsheet but more flexible.</p>
+<p>You <em>can</em> try and upload a PDF directly to an LLM - a lot of them will be able to handle that well - but I encourage you to get as close to a text version of the PDF as possible, preserving the layout as much as you can. There are various ways you can do this; I used a command-line utility called <code>pdftotext</code> to convert a PDF to plain text. A typical command would look like this:</p>
+<p><code>pdftotext -layout 2024-03129.pdf</code></p>
+<p>That would produce a text file called <code>2024-03129.txt</code> that looks like <a href="https://github.com/dwillis/all-foreign-gifts-around-us/blob/main/text/2024-03129.txt">this</a>.</p>
+<p>That text is what you want to provide to an LLM. For this task I chose Claude, specifically the Claude 3 Sonnet model. It costs $20 a month if you want file uploads and other goodies, but you also should be able to paste text into the chat window or API playground. If you have a single PDF, you might want to go that route. If you have multiple PDFs, you probably want to do this programatically using the API. But don’t worry about that yet - we’re just trying to do one file successfully.</p>
+</section>
+<section id="the-prompt" class="level2">
+<h2 class="anchored" data-anchor-id="the-prompt">The Prompt</h2>
+<p>Having the original file as text is necessary for this task, but it’s not sufficient. You need to be able to describe to an LLM what you want it to do. That’s where reporters should be able to shine: we may not know the answer, but we know the questions. When you are crafting a prompt, you’re asking a question (even if you don’t phrase it that way).</p>
+<p>Most LLMs have two types of prompts: a <code>system</code> prompt and a <code>user</code> prompt. You should think about the former as a set of rules that will apply to everything you want an LLM to do. For example, if you only want it to produce a CSV file, put that in the system prompt. Here’s my system prompt for this task:</p>
+<p><code>create only valid JSON objects based on the provided text and example. Never include any additional text or explanation. Always use double-quotes for every key and value. No yapping, no hallucinations.</code></p>
+<p>You want to use simple, direct language here, words like “only”, “never” and “always” are good. The final phrase - “no yapping” is something that most LLMs will recognize as an instruction to cut down on wordiness like the narration they often provide. “No hallucinations” may not always work, but it doesn’t hurt to include.</p>
+<p>I’m almost ready to describe the specific task, but first I want to talk about the importance of providing examples, especially when restructuring information. Think of it this way: you’re giving it a before example (the original text) and an after example (the structure you want). That will help guide the LLMs work. Example outputs are really, really helpful. Here’s what I provided in my prompt:</p>
+<pre><code>example_json = {
+                "name_and_title": "name and title of the recipient",
+                "gift_description": "the gift",
+                "received": "the date received in yyyy-mm-dd format",
+                "estimated_value": "the dollar value only, no dollar sign",
+                "disposition": "the disposition of the gift, not including 'Disposition-'",
+                "foreign_donor": "name and title of foreign donor",
+                "circumstances": "why the gift was accepted"
+            }</code></pre>
+<p>You’ll notice that most of these are descriptive, not literal examples. You should try either approach; this one is a mix of the two. The balance is being general enough that the LLM can recognize the overall pattern and specific enough that it doesn’t give you additional information you don’t want.</p>
+<p>Finally, here’s my user prompt:</p>
+<p><code>Extract all Tangible Gifts contained in the following text into individual JSON objects based on this example: {example} {text}</code></p>
+<p>Each time I insert the example and the text of the PDF I’m working with.</p>
+</section>
+<section id="it-works-mostly" class="level2">
+<h2 class="anchored" data-anchor-id="it-works-mostly">It Works! (Mostly)</h2>
+<p>Mostly, this approach worked for me, but sometimes Claude ignored my instructions by giving me introductory text like <code>Here are the JSON objects for the Tangible Gifts extracted from the provided text:</code> before listing the data. I spent time trying to tweak the prompts to get it not to do this, but couldn’t prevent it all the time. In the end, I declared victory and removed the extra text manually. It’s not perfect, but it saved me a LOT of time.</p>
+<p>How do I know it (mostly) worked? I conducted spot-checks on every file, comparing the results to originals. Consider this the fact-checking portion of the reporting process. It’s very easy to be so impressed by an LLM’s abilities that you implicitly trust its output. DON’T DO THIS. Trust your reporter instincts, not a machine, and verify.</p>
+<p>I ended up doing a couple of more extraction tasks on the JSON it produced so that I could have more granular data (separate names and titles, for example). In all, it took me a few hours and cost about $10 to do this via Claude’s API - most of that was tweaking the prompt to get better results. Here’s what the final product looks like:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2024/06/22/all-foreign-gifts-around-us/final_output.png" class="img-fluid figure-img"></p>
+<figcaption><em>Final output</em></figcaption>
+</figure>
+</div>
+<p>The actual data file is <a href="https://raw.githubusercontent.com/dwillis/all-foreign-gifts-around-us/main/combined_json_with_both_names.json">here</a>. Next year, when the federal government publishes its latest update of these gifts, I can grab that PDF, turn it into text and extract the data. It might take me 10 minutes to clean things up, and then I’ll have even more data. You can see all of the scripts and data <a href="https://github.com/dwillis/all-foreign-gifts-around-us">here</a>.</p>
+<p>You may not need a full pipeline like this. You might just need to work on a single PDF or text file. Don’t let that stop you from trying out these tools. Find the process that works for you. Oh, and the title of this post and my repository? Yeah, that’s <a href="https://www.youtube.com/watch?v=2mURti-s0jc">intentional</a>. Consider it my gift to you.</p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2024/06/22/all-foreign-gifts-around-us/</guid>
+  <pubDate>Sat, 22 Jun 2024 07:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Why I Mostly Don’t Use AI for Campaign Finance … Yet</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -2312,33 +2403,6 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2015/07/29/my-favorite-things/</guid>
   <pubDate>Wed, 29 Jul 2015 07:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Civic Data and Journalism</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2015/06/06/civic-data-and-journalism/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>A solid foundation of publicly available, consistent civic data - think of election results, voting information and other political records - is more important than ever for journalism. And while we’ve made a good start, we have a long way to go.</p>
-<p>On June 5 I had the privilege of being on a panel at the <a href="https://personaldemocracy.com/static-content/pdf-2015-program">Personal Democracy Forum</a> in New York with Luciana Lopez of Reuters, Jonathan Capehart of The Washington Post and Jenn Topper of the Sunlight Foundation. The title was “How Civic Tech is Changing the Way Newsrooms Cover Elections,” and our discussion was wide-ranging, thanks to a) good panel selection and b) expansive definitions of civic tech.</p>
-<p>My basic theme was this: newsrooms need access to a basic level of civic data and technology now more than ever, for two major reasons. First, the days when most newsrooms had the budget and staff to maintain their own versions of important civic data (like voter files or campaign contributions) are gone. Instead, the most common options are seeking out such data from third-party providers or not doing it at all. While there are some excellent third-party providers, including the folks at Sunlight and the Center for Responsive Politics, this is still a system that makes it harder for journalists to stumble across potential stories on their own.</p>
-<p>Second, consensus on how to describe some political situation is harder to achieve when the number of publishers multiplies. Maybe we don’t want total consensus, but I’d argue that it’s desirable and important that we at least are able to have a common understanding of the key data that informs our civic life and how we report on it. Along with methodological transparency, it’s a way that we can be upfront with readers and each other.</p>
-<p>Two projects have helped make these points clearer to me. The first, <a href="https://theunitedstates.io/">the United States project</a>, is the result of conversations between Eric Mill (then at Sunlight), Joshua Tauberer of Govtrack and myself that came to a head in August 2012. We all agreed that it made no sense for each of us to maintain separate scrapers for legislative data, and that beyond duplicative work, it created the possibility that different choices made in isolation would result in different data. No one wanted a situation in which three providers of congressional data disagreed with each other - and we had a few cases of that, inadvertently.</p>
-<p>The project grew from an initial focus on Congress to include executive branch data, including <a href="https://github.com/unitedstates/inspectors-general">a central repository of inspector general reports</a>. It now has a number of contributors, and decisions are made by rough consensus. The result is a stable foundation of legislative data. If, for example, <a href="http://developer.nytimes.com/docs/congress_api">The New York Times Congress API</a> that I maintain were to be discontinued, something very similar to it could be re-created in a matter of weeks, if not days, using this data as its primary source. In less than three years, a group of volunteers has made it possible for virtually anyone seeking bulk legislative data to not have to spend weeks or months reinventing the wheel. That’s a huge accomplishment for civic technology, and for journalism.</p>
-<p>The second project is <a href="http://openelections.net/">OpenElections</a>, which I’ve been working on along with Serdar Tumgoren and a host of volunteers since early 2013. This effort will go on for years, but its goal is to remove the high barriers to journalists and developers seeking to work with historic election results data. To make it easier for people to understand how elections have played out in their towns, counties and states over the past 15 years (and further if we can). Most newsrooms, never bastions of efficiency during good economic times, now face pressures that make it all but impossible to embark on months-long efforts to collect and parse data. If they were able to do so, OpenElections wouldn’t exist.</p>
-<p>What makes these efforts worthwhile for me is the idea that someone, somewhere will use the data we’ve gathered and published to make something I’ve never considered. Or to look at issues or trends I’ll never look at. This is public data; it should have a public home and a public understanding. There’s still a huge role for journalism in civic technology, none bigger than providing context and understanding from our shared foundation. And there’s still a lot of work to do. We have too many silos of civic information about politicians and candidates. We duplicate each other’s work too often to make sense.</p>
-<p>The United States project and OpenElections could have been owned by a single newsroom and turned out ok. But I don’t think that’s the best scenario, because then the data that provides a common foundation is subject to a single organization’s control. We literally, and figuratively, can’t afford that.</p>
-<p>So here’s what you can do: if you’re interested in congressional or election results data, consider contributing to these projects. Or consider filling the other gaps we have, especially at lower levels of government. But whatever you do, try to ensure that your work doesn’t become someone else’s repetition. Our common foundation, and our ability to deliver the kind of journalism that our civic life demands, can’t afford it, either.</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2015/06/06/civic-data-and-journalism/</guid>
-  <pubDate>Sat, 06 Jun 2015 07:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
