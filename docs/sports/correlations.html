@@ -368,6 +368,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -407,8 +413,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Throughout sports, you will find no shortage of opinions. From people yelling at their TV screens to an entire industry of people paid to have opinions, there are no shortage of reasons why this team sucks and that player is great. They may have their reasons, but a better question is, does that reason really matter?</p>
 <p>Can we put some numbers behind that? Can we prove it or not?</p>
 <p>This is what we’re going to start to answer. And we’ll do it with correlations and regressions.</p>
-<p>First, we need data from the 2023 women’s college soccer season.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://raw.githubusercontent.com/dwillis/NCAAWomensSoccerData/main/data/ncaa_womens_soccer_matchstats_2023.csv">
+<p>First, we need data from the 2024 women’s college soccer season.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://raw.githubusercontent.com/dwillis/NCAAWomensSoccerData/main/data/ncaa_womens_soccer_matchstats_2024.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Then load the tidyverse.</p>
@@ -417,13 +423,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Now import the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/dwillis/NCAAWomensSoccerData/main/data/ncaa_womens_soccer_matchstats_2023.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/dwillis/NCAAWomensSoccerData/main/data/ncaa_womens_soccer_matchstats_2024.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 6365 Columns: 56
+<pre><code>Rows: 2192 Columns: 36
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr   (7): team, opponent, home_away, outcome, goalie_min_plyd, defensive_go...
-dbl  (48): team_score, opponent_score, overtime, games, goals, assists, sh_a...
+chr   (6): team, opponent, home_away, outcome, minutes, defensive_minutes
+dbl  (29): team_score, opponent_score, overtime, gp, goals, assists, points,...
 date  (1): date
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
@@ -448,19 +454,18 @@ date  (1): date
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1      0.0207</code></pre>
+1      0.0125</code></pre>
 </div>
 </div>
-<p>So on a scale of -1 to 1, where 0 means there’s no relationship at all and 1 or -1 means a perfect relationship, fouls and whether or not the team scores more goals than it gives up are at 0.02071133 You could say they’re 2.0 percent related toward the positive – more fouls, the higher your differential. Another way to say it? They’re 98 percent not related.</p>
+<p>So on a scale of -1 to 1, where 0 means there’s no relationship at all and 1 or -1 means a perfect relationship, fouls and whether or not the team scores more goals than it gives up are at 0.01254812. You could say they’re 1.3 percent related toward the positive – more fouls, the higher your differential. Another way to say it? They’re almost 99 percent not related.</p>
 <p>What about the number of yellow cards instead of fouls? Do more aggressive defensive teams also score more?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, yellow_cards, <span class="at">method=</span><span class="st">"pearson"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>newcorrelations <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(differential, yellow_cards, <span class="at">method=</span><span class="st">"pearson"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1     -0.0853</code></pre>
+1     -0.0944</code></pre>
 </div>
 </div>
 <p>So wait, what does this all mean?</p>
@@ -479,25 +484,23 @@ lm(formula = differential ~ fouls, data = newcorrelations)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--12.9673  -1.0586  -0.0195   1.0066  16.0588 
+-10.1012  -1.1384  -0.0826   1.8267   9.9546 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)  
-(Intercept) -0.09788    0.07899  -1.239   0.2154  
-fouls        0.01304    0.00789   1.652   0.0985 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) 0.008153   0.151942   0.054    0.957
+fouls       0.009306   0.015846   0.587    0.557
 
-Residual standard error: 2.33 on 6363 degrees of freedom
-Multiple R-squared:  0.000429,  Adjusted R-squared:  0.0002719 
-F-statistic: 2.731 on 1 and 6363 DF,  p-value: 0.09849</code></pre>
+Residual standard error: 2.594 on 2190 degrees of freedom
+Multiple R-squared:  0.0001575, Adjusted R-squared:  -0.0002991 
+F-statistic: 0.3449 on 1 and 2190 DF,  p-value: 0.5571</code></pre>
 </div>
 </div>
 <p>There’s three things we need here:</p>
 <ol type="1">
-<li>First we want to look at the p-value. It’s at the bottom right corner of the output. In the case of fouls, the p-value is 0.09849. The threshold we’re looking for here is .05. If it’s less than .05, then the relationship is considered to be <em>statistically significant</em>. Significance here does not mean it’s a big deal. It means it’s not random. That’s it. Just that. Not random. So in our case, the relationship between fouls and a team’s aggregate point differential are <strong>not statistically significant</strong>. The differences in score difference and fouls could be completely random. This is another sign we should just stop with this.</li>
-<li>Second, we look at the Adjusted R-squared value. It’s right above the p-value. Adjusted R-squared is a measure of how much of the difference between teams aggregate point values can be explained by fouls. Our correlation coefficient said they’re 2 percent related to each other, but fouls’ ability to explain the difference between teams? About 0.0002719 percent. That’s … not much. It’s really nothing. Again, we should quit.</li>
-<li>The third thing we can look at, and we only bother if the first two are meaningful, is the coefficients. In the middle, you can see the (Intercept) is -0.09788 and the fouls coefficient is 0.01304. Remember high school algebra? Remember learning the equation of a line? Remember swearing that learning <code>y=mx+b</code> is stupid because you’ll never need it again? Surprise. It’s useful again. In this case, we could try to predict a team’s score differential in a game – will they score more than they give up – by using <code>y=mx+b</code>. In this case, y is the aggregate score, m is 0.01304 and b is -0.09788. So we would multiply a teams total fouls by 0.01304 and then add -0.09788 to it. The result would tell you what the total aggregate score in the game would be, according to our model. Chance that you’re even close with this? Almost none. Did I say we should quit? Yeah.</li>
+<li>First we want to look at the p-value. It’s at the bottom right corner of the output. In the case of fouls, the p-value is 0.5571. The threshold we’re looking for here is .05. If it’s less than .05, then the relationship is considered to be <em>statistically significant</em>. Significance here does not mean it’s a big deal. It means it’s not random. That’s it. Just that. Not random. So in our case, the relationship between fouls and a team’s aggregate point differential are <strong>not statistically significant</strong>. The differences in score difference and fouls could be completely random. This is another sign we should just stop with this.</li>
+<li>Second, we look at the Adjusted R-squared value. It’s right above the p-value. Adjusted R-squared is a measure of how much of the difference between teams aggregate point values can be explained by fouls. Our correlation coefficient said they’re 2 percent related to each other, but fouls’ ability to explain the difference between teams? About -0.0002991 percent. That’s … not much. It’s really nothing. Again, we should quit.</li>
+<li>The third thing we can look at, and we only bother if the first two are meaningful, is the coefficients. In the middle, you can see the (Intercept) is 0.008153 and the fouls coefficient is 0.009306 Remember high school algebra? Remember learning the equation of a line? Remember swearing that learning <code>y=mx+b</code> is stupid because you’ll never need it again? Surprise. It’s useful again. In this case, we could try to predict a team’s score differential in a game – will they score more than they give up – by using <code>y=mx+b</code>. In this case, y is the aggregate score, m is 0.009306 and b is 0.008153. So we would multiply a teams total fouls by 0.009306 and then add 0.008153. to it. The result would tell you what the total aggregate score in the game would be, according to our model. Chance that you’re even close with this? Almost none. Did I say we should quit? Yeah.</li>
 </ol>
 <p>So fouls are totally meaningless to the outcome of a game.</p>
 <p>You can see the problem in a graph. On the X axis is fouls, on the y is point differential. If these elements had a strong relationship, we’d see a clear pattern moving from right to left, sloping down. On the left would be the teams with few fouls and a positive point differential. On right would be teams with high fouls and negative point differentials. Do you see that below?</p>
@@ -522,10 +525,10 @@ F-statistic: 2.731 on 1 and 6363 DF,  p-value: 0.09849</code></pre>
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1       0.629</code></pre>
+1       0.679</code></pre>
 </div>
 </div>
-<p>Answer: 63 percent. Not a perfect relationship, but pretty good. But how meaningful is that relationship and how predictive is it?</p>
+<p>Answer: 67 percent. Not a perfect relationship, but pretty good. But how meaningful is that relationship and how predictive is it?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">lm</span>(differential <span class="sc">~</span> so_g, <span class="at">data =</span> newcorrelations)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(net)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -535,31 +538,31 @@ Call:
 lm(formula = differential ~ so_g, data = newcorrelations)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--11.5238  -1.1225   0.0781   1.2772   7.2819 
+    Min      1Q  Median      3Q     Max 
+-7.9604 -1.1659  0.1574  1.2752  5.3052 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -2.275609   0.042262  -53.84   &lt;2e-16 ***
-so_g         0.399685   0.006196   64.50   &lt;2e-16 ***
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -2.48075    0.07201  -34.45   &lt;2e-16 ***
+so_g         0.44111    0.01019   43.28   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.812 on 6363 degrees of freedom
-Multiple R-squared:  0.3954,    Adjusted R-squared:  0.3953 
-F-statistic:  4161 on 1 and 6363 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 1.904 on 2190 degrees of freedom
+Multiple R-squared:  0.461, Adjusted R-squared:  0.4608 
+F-statistic:  1873 on 1 and 2190 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>First we check p-value: 0.00000000000000022. That’s sixteen zeros between the decimal and 22. Is that less than .05? Uh, yeah. So this is really, really, really not random. But anyone who has watched a game of soccer knows this is true. It makes intuitive sense.</p>
-<p>Second, Adjusted R-squared: 0.3953. So we can predict about 39 percent of the difference in the score differential by simply looking at the shots on goal the team has.</p>
-<p>Third, the coefficients: In this case, our <code>y=mx+b</code> formula looks like <code>y = 0.399685x + -2.275609</code>. So if we were applying this, let’s look at Maryland’s 3-3 draw against Navy on August 24, 2023. Maryland’s shots on goal in that game? 11. What does our model say the point differential should have been?</p>
+<p>Second, Adjusted R-squared: 0.4608. So we can predict about 46 percent of the difference in the score differential by simply looking at the shots on goal the team has.</p>
+<p>Third, the coefficients: In this case, our <code>y=mx+b</code> formula looks like <code>y = 0.44111x + -2.48075</code>. So if we were applying this, let’s look at Maryland’s 3-2 loss to George Mason on Sept.&nbsp;1, 2024. Maryland’s shots on goal in that game? 9. What does our model say the point differential should have been?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.399685</span><span class="sc">*</span><span class="dv">11</span>)<span class="sc">+-</span><span class="fl">2.275609</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.44111</span><span class="sc">*</span><span class="dv">9</span>)<span class="sc">+-</span><span class="fl">2.48075</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.120926</code></pre>
+<pre><code>[1] 1.48924</code></pre>
 </div>
 </div>
-<p>So by our model, Maryland should have won by two goals. Some games are closer than others. But when you can explain 39 percent of the difference, this is the kind of result you get. What would improve the model? Using more data to start. And using more inputs.</p>
+<p>So by our model, Maryland should have won by at least one goal. Some games are closer than others. But when you can explain 46 percent of the difference, this is the kind of result you get. What would improve the model? Using more data to start. And using more inputs.</p>
 
 
 </section>
