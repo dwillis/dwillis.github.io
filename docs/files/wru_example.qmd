@@ -1,0 +1,60 @@
+```{r}
+library(wru)
+library(tidyverse)
+```
+
+```{r}
+granville <- read_delim("https://dwillis.github.io/files/ncvoter39.txt", delim='\t') |> 
+  rename(surname = last_name, first = first_name, middle = middle_name, state = state_cd, county = county_id) |> filter(!is.na(state)) |> 
+  mutate(county = paste0("0",as.character(county)))
+```
+
+# Predict Race in Granville based on Name Only
+
+```{r}
+predict_race(voter.file = granville |> select(-nc_senate_abbrv, -nc_house_abbrv, -munic_dist_abbrv, -ethnic_code, -judic_dist_abbrv, -munic_dist_desc), surname.only = TRUE, names.to.use = "surname, first") |> select(ncid, surname, first, middle, party_cd, race_code, pred.whi, pred.bla, pred.his, pred.asi, pred.oth)
+```
+
+# Predict Race in Granville Based on Name and County
+
+```{r}
+predict_race(voter.file = granville |> select(-nc_senate_abbrv, -nc_house_abbrv, -munic_dist_abbrv, -ethnic_code, -judic_dist_abbrv, -munic_dist_desc), census.geo = "county", names.to.use = "surname, first") |> select(ncid, surname, first, middle, party_cd, race_code, pred.whi, pred.bla, pred.his, pred.asi, pred.oth)
+```
+
+# Predict Race in Granville Based on Name and Party
+
+```{r}
+predict_race(voter.file = granville |> select(-nc_senate_abbrv, -nc_house_abbrv, -munic_dist_abbrv, -ethnic_code, -judic_dist_abbrv, -munic_dist_desc), party = party, surname.only = TRUE, names.to.use = "surname, first") |> select(ncid, surname, first, middle, party_cd, race_code, pred.whi, pred.bla, pred.his, pred.asi, pred.oth)
+```
+
+# Compare with Granville Actual Counts
+
+```{r}
+granville |> 
+  group_by(race_code) |> 
+  summarize(count = n())
+```
+
+# Predicted Counts for Probability > X Using Name Alone
+
+```{r}
+predict_race(voter.file = granville |> select(-nc_senate_abbrv, -nc_house_abbrv, -munic_dist_abbrv, -ethnic_code, -judic_dist_abbrv, -munic_dist_desc), surname.only = TRUE, names.to.use = "surname, first") |> select(ncid, surname, first, middle, party_cd, race_code, pred.whi, pred.bla, pred.his, pred.asi, pred.oth) |> 
+ filter(pred.whi >= 0.30) |> 
+  summarize(count = n())
+```
+
+# Maryland Voters
+
+```{r}
+md_voters <- read_csv("https://dwillis.github.io/files/new_voters.csv") |> 
+  rename(surname = LastName, first=FirstName, middle=MiddleName) |> 
+  mutate(state='MD')
+```
+
+# Predict Race Based on Party and Name
+
+```{r}
+predict_race(voter.file = md_voters, party = Party, surname.only = TRUE, names.to.use = "surname") |> select(VTR_ID, surname, first, middle, Party, County, ResidentialCity, pred.whi, pred.bla, pred.his, pred.asi, pred.oth) |> 
+  filter(County == "Montgomery")
+```
+
