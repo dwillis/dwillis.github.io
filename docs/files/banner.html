@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>banner</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="banner_files/libs/clipboard/clipboard.min.js"></script>
+<script src="banner_files/libs/quarto-html/quarto.js"></script>
+<script src="banner_files/libs/quarto-html/popper.min.js"></script>
+<script src="banner_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="banner_files/libs/quarto-html/anchor.min.js"></script>
+<link href="banner_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="banner_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="banner_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="banner_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="banner_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="converting-county-totals" class="level3">
+<h3 class="anchored" data-anchor-id="converting-county-totals">Converting County Totals</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>voters12 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"voters12.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>voters14 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"PrecinctRegisterCounts_ByCounty_GG14.xls"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">year=</span><span class="dv">2014</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">unaf =</span> una)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>voters16 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"PG16_Eligible_Active_Voters_by_County.xlsx"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">year=</span><span class="dv">2016</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">unaf =</span> una)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>voters18 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"GG18_Eligible_Active_Voters_by_County.xlsx"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">year=</span><span class="dv">2018</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">unaf =</span> una)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>voters20 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Eligible Active Voters by County - PG20.xlsx"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">year=</span><span class="dv">2020</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">unaf =</span> una) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">oth =</span> bar <span class="sc">+</span> wcp <span class="sc">+</span> oth) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>bar, <span class="sc">-</span>wcp)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>voters22 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Eligible Active Voters by County - GG22.xlsx"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">year=</span><span class="dv">2022</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">oth =</span> bar <span class="sc">+</span> wcp <span class="sc">+</span> oth) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>bar, <span class="sc">-</span>wcp) <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">unaf =</span> una)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>voters24 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"sept24.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">year=</span><span class="dv">2024</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>pct_dem24, <span class="sc">-</span>pct_rep24, <span class="sc">-</span>pct_unaffil24) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">oth =</span> nlm <span class="sc">+</span> oth) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>nlm)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>voters12to24 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">list</span>(voters12, voters14, voters16, voters18, voters20, voters22, voters24))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>pct_change_12_24 <span class="ot">&lt;-</span> voters12 <span class="sc">|&gt;</span> <span class="fu">inner_join</span>(voters24, <span class="fu">join_by</span>(county)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.x$"</span>, <span class="st">"_12"</span>, .), <span class="fu">ends_with</span>(<span class="st">".x"</span>))  <span class="sc">|&gt;</span> </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.y$"</span>, <span class="st">"_24"</span>, .), <span class="fu">ends_with</span>(<span class="st">".y"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>year_12, <span class="sc">-</span>year_24) <span class="sc">|&gt;</span> </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_change_dem =</span> (dem_24<span class="sc">-</span>dem_12)<span class="sc">/</span>dem_12 <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_change_rep =</span> (rep_24<span class="sc">-</span>rep_12)<span class="sc">/</span>rep_12 <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_change_unaf =</span> (unaf_24<span class="sc">-</span>unaf_12)<span class="sc">/</span>unaf_12 <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(county, pct_change_dem, pct_change_rep, pct_change_unaf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="load-it-all-in" class="level3">
+<h3 class="anchored" data-anchor-id="load-it-all-in">Load it all in</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>voters12to24 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"voters12to24.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>voters12to24 <span class="ot">&lt;-</span> voters12to24 <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_dem =</span> dem<span class="sc">/</span>total <span class="sc">*</span><span class="dv">100</span>, <span class="at">pct_rep =</span> rep<span class="sc">/</span>total <span class="sc">*</span> <span class="dv">100</span>, <span class="at">pct_unaf =</span> unaf<span class="sc">/</span>total <span class="sc">*</span><span class="dv">100</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-rise-of-the-unaffiliated-voter" class="level3">
+<h3 class="anchored" data-anchor-id="the-rise-of-the-unaffiliated-voter">The Rise of the Unaffiliated Voter</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>voters12to24 <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>pct_unaf, <span class="at">group=</span>county)) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>county)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="banner_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s start with this virtual law of recent Maryland politics: the presidential race here won’t be particularly close. Maryland has long been a reliably Democratic state, and that’s expected to be the case in 2024 as it has been before. Should former Gov.&nbsp;Larry Hogan, a Republican, be elected to the Senate, it will be due to his ability to attract a certain percentage of Democrats and Democratic-leaning independents to defeat Angela Alsobrooks, not a surge of Republican voters in the state.</p>
+<p>But look deeper beneath the seemingly placid surface, and there’s something worth paying attention to. Maryland might be blue, but like most states, it has seen a steady rise in voters choosing no party when registering to vote, or moving away from one of the two major parties. These “unaffiliated” voters now account for more than one in five voters in the state, up from 16 percent in 2012. More than one in four current voters in Montgomery, Anne Arundel, Howard and Frederick counties does not profess a party, even if many of them still vote like they do. In Montgomery County, where the last Republican to represent it in the State Senate <a href="https://moco360.media/2017/10/10/jean-roesser-last-republican-to-represent-montgomery-county-in-state-senate-dies-at-87/">was defeated in 2002</a>, unaffiliated voters have represented at least a fifth of the electorate for more than a decade. But for most other counties - and for Baltimore City - unaffiliated voters have grown in significant ways. As a whole, Maryland has seen its unaffiliated voters increase by 50 percent since the 2012 election, and these voters now represent nearly as much of the electorate as Republicans do.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pct_change_12_24 <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"pct_change"</span>), <span class="at">names_to =</span> <span class="st">"change_type"</span>, <span class="at">values_to =</span> <span class="st">"percentage"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> change_type, <span class="at">y =</span> percentage, <span class="at">fill =</span> change_type)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">pct_change_dem =</span> <span class="st">"blue"</span>, <span class="at">pct_change_rep =</span> <span class="st">"red"</span>, <span class="at">pct_change_unaf =</span> <span class="st">"orange"</span>)) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"More Unaffiliated Voters Everywhere"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Percentage change between 2012 and 2024"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Affiliation"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Percentage Change"</span>) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> county) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="banner_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The expansion of unaffiliated voters has happened in fast-growing counties like Charles and Eastern Shore counties like Dorchester. Sometimes it coincides with a growth in Democratic registration and a decline in Republican registration, as is the case in Howard County, or the reverse, as in Caroline County. But with a single exception - Cecil County in the state’s northeast - the percentage change in unaffiliated voters between 2012 and 2024 has outpaced that of both major parties.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pct_change_12_24 <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(pct_change_unaf <span class="sc">&lt;</span> pct_change_rep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  county pct_change_dem pct_change_rep pct_change_unaf
+  &lt;chr&gt;           &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt;
+1 Cecil           -21.3           44.7            35.0</code></pre>
+</div>
+</div>
+<p>Even Democratic strongholds aren’t immune to this shift. Prince George’s County, where Democrats outnumber Republicans 11-to-1, unaffiliated voters have increased nearly 80 percent since 2012, albeit from a small baseline. They now account for 16 percent of the electorate, even though they cannot vote in primary elections. Meanwhile, Democratic registrations have increased by about 3 percent during the same period. Baltimore City has seen smaller growth in unaffiliated voters - a 37% increase - while the two major parties have both lost voters compared to 12 years ago.</p>
+<p>Political science research shows that many voters who declare themselves independent still maintain a partisan stance when casting ballots, so it’s not as if these new unaffiliated voters represent a separate political force in Maryland. But there are places where unaffiliated voters seem less tied to a party, and the most interesting of them is Frederick County. Based on voter registration data, Frederick is Maryland’s most politically diverse electorate: it is the only jurisdiction in the state where the percentage of Democrats, Republicans and unaffiliated voters are within 12 points of each other. Once a reliably Republican county, it supported Hogan in 2018 <a href="https://elections.maryland.gov/elections/2018/results/general/gen_detail_results_2018_2_BOT003-.html">by a wide margin</a>, gave Joe Biden <a href="https://elections.maryland.gov/elections/2020/results/general/gen_detail_results_2020_4_BOT001-.html">a narrower victory in 2020</a> and went for Wes Moore in 2022 <a href="https://elections.maryland.gov/elections/2022/general_results/gen_detail_results_2022_1_1.html">by an even smaller margin</a>. Democrats now outnumber Republicans in the county, but by less than five percentage points. More than a quarter of Frederick County voters are independents.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>voters12to24 <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, <span class="fu">abs</span>(pct_dem <span class="sc">-</span> pct_unaf) <span class="sc">&lt;</span> <span class="dv">12</span>, <span class="fu">abs</span>(pct_rep <span class="sc">-</span> pct_unaf) <span class="sc">&lt;</span> <span class="dv">12</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(county, pct_dem, pct_rep, pct_unaf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  county    pct_dem pct_rep pct_unaf
+  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+1 Frederick    38.4    33.6     26.4</code></pre>
+</div>
+</div>
+<p>We can’t know whether unaffiliated voters actually swing between parties when voting, but we do have some evidence about voters behave in specific jurisdictions. Using <a href="https://marylandstateboard-my.sharepoint.com/personal/cyril_komp_elections_maryland_gov/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fcyril%5Fkomp%5Felections%5Fmaryland%5Fgov%2FDocuments%2F2022%20General%20Election&amp;ga=1">cast vote records from the 2022 general election</a>, we can see some evidence of the political flexibility of Frederick County voters. Two years ago, more than 11 percent of them opted for Republicans in races for Comptroller, Attorney General, the Senate and the House of Representatives yet didn’t support Dan Cox, the GOP nominee for governor. Granted, Cox was in some ways a uniquely bad candidate, but most conservative areas of the state stuck with him. In Garrett County, less than one percent of voters fit the “Republican but not Cox” profile. To be clear: the overwhelming majority of Frederick voters who chose Republicans for statewide and congressional office also voted for Cox. But those who split their tickets - an increasingly rare political act - could have given the county to Cox that year (Moore would have won the state handily at any rate).</p>
+<p>Frederick is also the most interesting Maryland jurisdiction because it is the largest one that doesn’t fit the overall trend of voter registration. The state as a whole has seen little movement among Democrats and Republicans, and a substantial increase in unaffiliated voters. Frederick has seen a shift as more Democrats move from the DC suburbs, with a small increase in Republican registration over time, but the overall pattern is clear: unaffiliated voters could supplant Republicans as Frederick’s second-largest voting bloc, something that has already happened in the state’s most-populous jurisdictions, along with Charles County, which switched in the past two years. Anne Arundel and Baltimore County could be heading the same way, while unaffilated voters could surpass Democrats in many of the state’s rural counties in the next few years. That polarization will impact the reach of the two main parties in local races.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>voters12to24 <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>pct_dem), <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>pct_rep), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>pct_unaf), <span class="at">color=</span><span class="st">"orange"</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Frederick and Calvert Closely Divided"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Percentage"</span>) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>county) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="banner_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If Hogan ends up winning the Senate race, it will be because his campaign was able to convince people who typically vote Democratic to back him. Those who might have left the party, or didn’t feel enough of an attachment to register with the dominant political force in the state to join it in the first place, would be the place to go looking for potential supporters. And Frederick County would be very high on the list of places to look for them.</p>
+<p>And at the local level, Frederick is one of the few places in the state where both major parties can contest just about every office, and where unaffiliated voters might make the difference. We don’t have other counties that mirror Frederick’s political make-up, although Calvert and Harford come closest.</p>
+</section>
+<section id="why-this-matters-beyond-2024" class="level3">
+<h3 class="anchored" data-anchor-id="why-this-matters-beyond-2024">Why This Matters Beyond 2024</h3>
+<p>Setting aside the 2024 implications, both for the Senate race and the 6th District congressional race, which is centered on Frederick, there’s another reason to care about the rise of unaffiliated voters: Maryland’s closed primary system effectively locks them out of decision-making in a number of counties, from deep-red Garrett County in the western panhandle to the deep blue Montgomery County. The question of what Maryland’s Republican Party becomes after 2024 is a good place to start. Should Hogan win, he assumes the mantle of leadership within the party in the state. Should he lose, that probably falls to Rep.&nbsp;Andy Harris, whose wife Nicole is the party chair, but the question of who controls and shapes the state party will be determined by a smaller set of voters.</p>
+<p>The same is true for Democrats, albeit at a lower level. Democrats may not be especially concerned by the growth of unaffiliated voters in Prince George’s or Baltimore City, where they hold enormous majorities. Maryland voter data doesn’t contain information about race, but it’s hard to imagine that the new unaffiliated voters in those two jurisdictions don’t include a growing number of African-Americans or Hispanics. The potential movement of non-white voters away from Democrats has been a key factor in the presidential race; it’s not likely confined to the national level, but is playing out across the country. Maryland, for all it can lack in competitiveness, isn’t immune from those forces, and there are stories to tell about this shift.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
