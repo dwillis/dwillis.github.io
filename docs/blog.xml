@@ -9,8 +9,69 @@
 <link>https://www.thescoop.org/blog.html</link>
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
-<generator>quarto-1.4.555</generator>
-<lastBuildDate>Sat, 22 Jun 2024 07:00:00 GMT</lastBuildDate>
+<generator>quarto-1.5.57</generator>
+<lastBuildDate>Mon, 09 Dec 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>The A in AI Stands for Archives</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2024/12/09/ai-is-for-archives/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>The following is based on a talk I gave at American University on Oct.&nbsp;25, 2024.</em></p>
+<p>Since this is about Artificial Intelligence and Large Language Models, let me offer this initial baseline:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2024/12/09/ai-is-for-archives/llms.jpg" class="img-fluid figure-img" width="216"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>I need to emphasize this not just as a journalism educator but as a participant in our shared civic life. There are many, many examples of people using LLMs as reference tools, and even some <a href="https://www.perplexity.ai/">products</a> that explicitly pitch LLMs as facts-as-a-service platforms. Even with the best of intentions and all kinds of guardrails, this is risky business. That’s because fundamentally, what most LLMs do is pretty simple: they predict the next word. That’s a bit of an oversimplification, but the reality is that <a href="https://ig.ft.com/generative-ai/">probabilistic prediction</a> is a huge part of how the “generative” part of generative AI works.</p>
+<p>Don’t get me wrong, this isn’t a pitch to avoid using LLMs for journalistic tasks. I teach a whole class experimenting with AI for journalism and I’m convinced that there are a number of very good use cases for applying this technology to the kind of work reporters and editors do. Instead, this is a pitch to look beyond generative AI for its own sake and towards a journalism problem that LLMs could actually help address.</p>
+<p>News organizations are sitting on a trove of valuable raw materials: the words, images, audio and video that they produce every day. That’s a huge asset, but mostly those organization treat them as an afterthought. Those materials are locked away in proprietary platforms where the most advanced access is a search button, and maybe the ability to sort the results by date. Search is great, but it’s much less useful if you treat the contents as single things, which in the case of most news organizations means a blob of text. Control-F was state of the art in the previous century, and searching for information is a baseline skill at this point, not a specialty.</p>
+<p>“The world has become so complicated, the growth of available information so explosive, that the journalist needs to be a filter as well as a transmitter, an organizer and interpreter as well as one who gathers and delivers facts.” <a href="https://carolinadatadesk.github.io/pmeyer/book/Chapter1.htm">Phil Meyer wrote that in 1973</a>. Think about what has changed about information since that time, and how most news organizations have failed to respond. Most news website search engines are, at best, marginally useful. Others have their best information locked away in inaccessible formats. Can you think of any other industry that treats its crucial materials so carelessly? Can you imagine it succeeding?</p>
+<p>There’s so much that news organizations can and should be doing with their own archives that it can seem an insurmountable challenge. How can we begin to solve a problem that ranges from stitching together pieces of stories scattered across the pages of image PDFs to turning those stories into useful products that would help people better understand the places they live and the institutions that impact their lives?</p>
+<p>One place to start is to make the materials we have - the stories, images, audio and video - better and more useful for journalists. Set aside for the moment the idea of handing AI over to consumers, since there’s already a lot of competition there, and <a href="https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2024/public-attitudes-towards-use-ai-and-journalism">it’s not clear that news consumers actually want that</a>. I’d like to make the case for internal improvements via LLMs, starting with what I call structured data interviews.</p>
+<p>That’s where journalists can make our archives more useful not by having AI generate a summary but by extracting important information from those blobs of text we have. There are plenty of possibilities here, but let me illustrate one of them. Nearly a decade ago, I worked on <a href="https://www.nytimes.com/2015/06/28/upshot/maiden-names-on-the-rise-again.html">a story about maiden names for The New York Times</a> along with Claire Cain Miller. Our question was whether we could find any evidence that women were keeping their names when marrying. There was some survey data on this, and some academic research using college alumni directories, but not a lot of data. I suggested that we use the wedding announcement published by The Times, knowing that those listings were not nearly representative of the American public, <a href="https://github.com/TheUpshot/nyt_weddings">not just because they were at hand</a>, but because they had a consistent format. Here’s <a href="https://www.nytimes.com/1985/10/27/style/susan-robertson-psychologist-weds.html">one from 1985</a> where the bride kept her name:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2024/12/09/ai-is-for-archives/wedding85.png" class="img-fluid figure-img" width="390"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here’s part of another, <a href="https://www.nytimes.com/2014/06/22/fashion/weddings/gabriela-herman-tyson-evans.html?unlocked_article_code=1.gE4.FsyD.NKxWBkEm0s_T&amp;smid=url-share">from 2014</a>:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2024/12/09/ai-is-for-archives/wedding14.png" class="img-fluid figure-img" width="316"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice how similarly the two are in format, and that’s important. Nine years ago, I was able to parse these by writing some truly terrible Ruby code and then going through and checking almost all of the results. We <a href="https://www.nytimes.com/2015/06/28/upshot/about-the-maiden-name-analysis.html">limited the data we used to only selected years</a> because I didn’t have enough time to do a larger set. If I were doing this story today, I would use an LLM to extract the information I needed, and I could have done many, many more announcements. Here’s a very simple example using that 2014 announcement: I asked ChatGPT to produce a CSV file with some basic information about the wedding extracted from the text, and I didn’t bother giving it an example. <a href="https://chatgpt.com/share/4335a108-e4ff-4390-9d53-53f4b1380666">It did the job very well</a>, and without hallucinations. When we actually provide the text for an LLM to work on and specific instructions, many of them produce very good results.</p>
+<p>You might be tempted to think that this is not much more than a parlor trick, but the implications are real and significant. Imagine if The Times had the detailed personal information contained in these announcements as <em>data</em>, searchable in different ways. Think of the connections it might be able to make faster, or the story ideas that would be possible that simply aren’t now. What if every newsroom that collected and published information like this, maybe about schools or businesses or sports, had that ability? Mostly, they do now, thanks to LLMs.</p>
+<p>Extractive AI, as you might call it, has the potential to not just unlock things that news organizations “know” but can’t recall, but to make possible stories that otherwise would require months of time and technical skill to accomplish. And it would help news organizations take advantage of a huge, nearly unmatched resource: their own knowledge of the communities and institutions they cover. At a time when local news organizations have shed most of their institutional knowledge and often struggle to retain talented employees for more than a year or two, imagine what it could mean not just to retain that community expertise but be able to build upon it. Imagine what it could mean to be able to look at major topics informed not just by history but by the knowledge of the habits and patterns that make up hundreds or thousands of decisions and choices, both individual and collective. Imagine news organizations being able to hand a newly-minted reporter a guide to the topics she’ll cover, informed by their own coverage habits but with the ability to respond to questions.</p>
+<p>None of these will come to fruition by simply applying AI, of course. We need journalists who can serve as information scientists, testing out processes and evaluating the results. We need journalists comfortable enough with what they know about how LLMs work to make good choices when using them. And we need editors and publishers willing to see not just the newest fad but the persistent value in the information that their reporters and editors collect and publish. <a href="https://thescoop.org/thefix/the-annotated-archive/">We need to value our archives</a> and the people who make use of them.</p>
+<p>The good news is that, as a technical matter, much of the path is now clear. There are good, stable solutions to the problems of turning images into text and extracting meaning from that text. There are open source LLMs that are edging closer to what the commercial models can do, making it possible to avoid being locked into a particular platform or vendor. There are people and institutions willing and able to experiment. This mostly isn’t a technical problem anymore. It’s a human problem, and while AI provides assistance, it requires human guidance to understand our shared history.</p>
+<p>While I was preparing for the talk at American, I was listening to an audiobook called <a href="https://www.goodreads.com/book/show/204316858-the-barn">“The Barn” by Wright Thompson</a>. It’s a history of the killing of Emmett Till in the Mississippi Delta in August 1955 that focuses on the barn where Till was tortured and murdered. That barn mostly had been written out of the “official history” of the tragedy, and the actual details of the crime are widely misunderstood or unknown, even by most residents of the Delta. The true story was hidden by the killers and, in particular, <a href="https://mississippitoday.org/2024/08/16/the-writer-and-killers-stole-the-story-of-emmett-till-from-his-mother-and-family/">a journalist who wrote a 1956 Look magazine article about the murder</a>. We now know the truth because people wrote things down and preserved them, and because others went looking. The memo that proved the lie about Till’s murder now sits in a university archive.</p>
+<p>Archives are at once old and new. They are old because they are the resting place of facts and stories and ideas that only age. New because we can use them to learn more about who we are and how we got here. What people and ideas and truths we’ve clung to. How we might do better.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2024/12/09/ai-is-for-archives/</guid>
+  <pubDate>Mon, 09 Dec 2024 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>All Foreign Gifts Around Us</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -100,7 +161,7 @@
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2024/06/22/all-foreign-gifts-around-us/</guid>
-  <pubDate>Sat, 22 Jun 2024 07:00:00 GMT</pubDate>
+  <pubDate>Sat, 22 Jun 2024 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Why I Mostly Don’t Use AI for Campaign Finance … Yet</title>
@@ -160,81 +221,101 @@ background-color: null;
 font-style: inherit;"># Function to standardize purpose descriptions</span></span>
 <span id="cb1-11"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> standardize_purpose(purpose):</span>
 <span id="cb1-12">    purpose <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> purpose.lower()</span>
 <span id="cb1-13">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'transfer'</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> purpose:</span>
 <span id="cb1-14">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Transfer'</span></span>
 <span id="cb1-15">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'insurance'</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> purpose:</span>
 <span id="cb1-16">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Insurance'</span></span>
 <span id="cb1-17">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'legal'</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> purpose:</span>
 <span id="cb1-18">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Legal Consulting'</span></span>
 <span id="cb1-19">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'printing'</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> purpose <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">or</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'postage'</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> purpose:</span>
 <span id="cb1-20">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Printing/Postage'</span></span>
 <span id="cb1-21">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'payroll'</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> purpose:</span>
 <span id="cb1-22">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Payroll'</span></span>
 <span id="cb1-23">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">else</span>:</span>
 <span id="cb1-24">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Other'</span></span>
@@ -294,7 +375,7 @@ font-style: inherit;"># Display the result</span></span>
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2024/06/20/ai-campaign-finance/</guid>
-  <pubDate>Thu, 20 Jun 2024 07:00:00 GMT</pubDate>
+  <pubDate>Thu, 20 Jun 2024 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Lessons from Teaching a Journalism Class on AI</title>
@@ -346,7 +427,7 @@ font-style: inherit;"># Display the result</span></span>
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2024/06/03/lessons-from-teaching-journalism-class-ai/</guid>
-  <pubDate>Mon, 03 Jun 2024 07:00:00 GMT</pubDate>
+  <pubDate>Mon, 03 Jun 2024 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>A Better Way to Process Mississippi Precinct Results</title>
@@ -402,23 +483,30 @@ font-style: inherit;">"path/to/local/folder"</span></span>
 <span id="cb1-8"></span>
 <span id="cb1-9"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> root, dirs, files <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> os.walk(folder_path):</span>
 <span id="cb1-10">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> file_name <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> files:</span>
 <span id="cb1-11">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> file_name.endswith(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">".pdf"</span>):</span>
 <span id="cb1-12">            <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> file_name <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> [<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Panola.pdf'</span>, <span class="st" style="color: #20794D;
@@ -475,7 +563,7 @@ font-style: inherit;">.xlsx"</span>)</span></code></pre></div>
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2024/01/27/a-better-way-to-process-mississippi-precinct-results/</guid>
-  <pubDate>Sat, 27 Jan 2024 08:00:00 GMT</pubDate>
+  <pubDate>Sat, 27 Jan 2024 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Introducing Women’s College Volleyball Roster Data</title>
@@ -518,9 +606,11 @@ font-style: inherit;">'.roster__players .roster-card-item'</span>)<span class="o
 background-color: null;
 font-style: inherit;">,</span> el <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">=&gt;</span> {</span>
 <span id="cb1-2">     <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">const</span> id <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
@@ -530,6 +620,7 @@ background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb1-3">     <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">const</span> name <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
@@ -547,6 +638,7 @@ background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb1-4">     <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">const</span> year <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
@@ -566,6 +658,7 @@ background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb1-5">     <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">const</span> height <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
@@ -585,6 +678,7 @@ background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb1-6">     <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">const</span> position <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
@@ -602,6 +696,7 @@ background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb1-7">     <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">const</span> hometown <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
@@ -630,6 +725,7 @@ background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb1-9">     <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">const</span> high_school <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> hs_el <span class="op" style="color: #5E5E5E;
@@ -658,6 +754,7 @@ background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb1-11">     <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">const</span> previous_school <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ps_el <span class="op" style="color: #5E5E5E;
@@ -675,6 +772,7 @@ background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb1-12">     <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">const</span> jersey <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
@@ -692,6 +790,7 @@ background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb1-13">     <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">const</span> url <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
@@ -707,6 +806,7 @@ background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb1-14">     <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> {id<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span> name<span class="op" style="color: #5E5E5E;
@@ -756,7 +856,7 @@ Array.from(document.querySelectorAll('.roster__players .roster-card-item'), el =
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/</guid>
-  <pubDate>Mon, 25 Dec 2023 08:00:00 GMT</pubDate>
+  <pubDate>Mon, 25 Dec 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Using AI to Parse Election Results</title>
@@ -823,7 +923,7 @@ Adams,Secretary of State,,Rep,Michael Watson,4058</code></pre>
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/</guid>
-  <pubDate>Sat, 25 Nov 2023 08:00:00 GMT</pubDate>
+  <pubDate>Sat, 25 Nov 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>West Virginia High School Football Blowouts</title>
@@ -893,13 +993,16 @@ font-style: inherit;">=</span> []</span>
 <span id="cb1-8"></span>
 <span id="cb1-9"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> state_from_team(team):</span>
 <span id="cb1-10">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(KY)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-11">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -908,10 +1011,12 @@ background-color: null;
 font-style: inherit;">"KY"</span></span>
 <span id="cb1-12">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(OH)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-13">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -920,10 +1025,12 @@ background-color: null;
 font-style: inherit;">"OH"</span></span>
 <span id="cb1-14">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(MD)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-15">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -932,10 +1039,12 @@ background-color: null;
 font-style: inherit;">"MD"</span></span>
 <span id="cb1-16">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(VA"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-17">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -944,10 +1053,12 @@ background-color: null;
 font-style: inherit;">"VA"</span></span>
 <span id="cb1-18">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(PA)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-19">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -956,10 +1067,12 @@ background-color: null;
 font-style: inherit;">"PA"</span></span>
 <span id="cb1-20">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(NC)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-21">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -968,10 +1081,12 @@ background-color: null;
 font-style: inherit;">"NC"</span></span>
 <span id="cb1-22">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(ON)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-23">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -980,10 +1095,12 @@ background-color: null;
 font-style: inherit;">"ON"</span></span>
 <span id="cb1-24">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(CN)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-25">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -992,10 +1109,12 @@ background-color: null;
 font-style: inherit;">"CN"</span></span>
 <span id="cb1-26">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(SC)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-27">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1004,10 +1123,12 @@ background-color: null;
 font-style: inherit;">"SC"</span></span>
 <span id="cb1-28">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(DC)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-29">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1016,10 +1137,12 @@ background-color: null;
 font-style: inherit;">"DC"</span></span>
 <span id="cb1-30">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(DE)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-31">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1028,10 +1151,12 @@ background-color: null;
 font-style: inherit;">"DE"</span></span>
 <span id="cb1-32">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(NY)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-33">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1040,10 +1165,12 @@ background-color: null;
 font-style: inherit;">"NY"</span></span>
 <span id="cb1-34">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(NY)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-35">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1052,10 +1179,12 @@ background-color: null;
 font-style: inherit;">"NY"</span></span>
 <span id="cb1-36">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(TN)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-37">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1064,10 +1193,12 @@ background-color: null;
 font-style: inherit;">"TN"</span></span>
 <span id="cb1-38">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(NJ)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-39">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1076,10 +1207,12 @@ background-color: null;
 font-style: inherit;">"NJ"</span></span>
 <span id="cb1-40">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(MI)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-41">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1088,10 +1221,12 @@ background-color: null;
 font-style: inherit;">"MI"</span></span>
 <span id="cb1-42">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"(A)"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> team:</span>
 <span id="cb1-43">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1100,6 +1235,7 @@ background-color: null;
 font-style: inherit;">"PA"</span></span>
 <span id="cb1-44">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">else</span>:</span>
 <span id="cb1-45">        state <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1108,12 +1244,15 @@ background-color: null;
 font-style: inherit;">"WV"</span></span>
 <span id="cb1-46">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> state</span>
 <span id="cb1-47"></span>
 <span id="cb1-48"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> year <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> years:</span>
 <span id="cb1-49">    <span class="bu" style="color: null;
 background-color: null;
@@ -1160,8 +1299,10 @@ background-color: null;
 font-style: inherit;">1</span>:]</span>
 <span id="cb1-54">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> row <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> rows:</span>
 <span id="cb1-55">        date <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1172,10 +1313,12 @@ background-color: null;
 font-style: inherit;">0</span>].text</span>
 <span id="cb1-56">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"**"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> row.find_all(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
@@ -1221,10 +1364,12 @@ background-color: null;
 font-style: inherit;">=</span> state_from_team(visiting_team)</span>
 <span id="cb1-63">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"**"</span> <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> row.find_all(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
@@ -1270,6 +1415,7 @@ background-color: null;
 font-style: inherit;">=</span> state_from_team(visiting_team)</span>
 <span id="cb1-70">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">else</span>:</span>
 <span id="cb1-71">            <span class="bu" style="color: null;
 background-color: null;
@@ -1350,6 +1496,7 @@ No home team!
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">with</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">open</span>(<span class="st" style="color: #20794D;
@@ -1394,7 +1541,7 @@ font-style: inherit;">"differential"</span>])</span>
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/11/13/wv-football-blowouts/</guid>
-  <pubDate>Mon, 13 Nov 2023 08:00:00 GMT</pubDate>
+  <pubDate>Mon, 13 Nov 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>How Newsrooms Should be Talking About AI</title>
@@ -1419,7 +1566,7 @@ font-style: inherit;">"differential"</span>])</span>
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/11/06/how-newsrooms-should-be-talking-about-ai/</guid>
-  <pubDate>Mon, 06 Nov 2023 08:00:00 GMT</pubDate>
+  <pubDate>Mon, 06 Nov 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>What Was That?</title>
@@ -2048,7 +2195,7 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
   <category>maryland football</category>
   <category>wtf</category>
   <guid>https://www.thescoop.org/archives/2023/10/17/third-and-six/</guid>
-  <pubDate>Tue, 17 Oct 2023 07:00:00 GMT</pubDate>
+  <pubDate>Tue, 17 Oct 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Teaching News Apps with Codespaces - The Results</title>
@@ -2071,7 +2218,7 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/05/27/teaching-news-apps-with-codespaces-results/</guid>
-  <pubDate>Sat, 27 May 2023 07:00:00 GMT</pubDate>
+  <pubDate>Sat, 27 May 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Teaching News Apps with Codespaces</title>
@@ -2103,7 +2250,7 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/03/22/teaching-newsapps-with-codespaces/</guid>
-  <pubDate>Wed, 22 Mar 2023 07:00:00 GMT</pubDate>
+  <pubDate>Wed, 22 Mar 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Teaching Journalism with ChatGPT</title>
@@ -2140,7 +2287,7 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/02/11/teaching-journalism-with-chatgpt/</guid>
-  <pubDate>Sat, 11 Feb 2023 08:00:00 GMT</pubDate>
+  <pubDate>Sat, 11 Feb 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>What is Happening in Morgantown?</title>
@@ -2170,7 +2317,7 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/01/04/what-is-happening-in-morgantown/</guid>
-  <pubDate>Wed, 04 Jan 2023 08:00:00 GMT</pubDate>
+  <pubDate>Wed, 04 Jan 2023 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Welcome Back</title>
@@ -2191,7 +2338,7 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2022/12/31/welcome-back/</guid>
-  <pubDate>Sat, 31 Dec 2022 08:00:00 GMT</pubDate>
+  <pubDate>Sat, 31 Dec 2022 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The More Important Problem</title>
@@ -2216,7 +2363,7 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2019/03/09/the-more-important-problem/</guid>
-  <pubDate>Sat, 09 Mar 2019 08:00:00 GMT</pubDate>
+  <pubDate>Sat, 09 Mar 2019 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The NICAR-L Improvement Project</title>
@@ -2257,7 +2404,7 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2019/02/24/making-the-best-nicar-listserv/</guid>
-  <pubDate>Sun, 24 Feb 2019 08:00:00 GMT</pubDate>
+  <pubDate>Sun, 24 Feb 2019 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The Best Training</title>
@@ -2341,7 +2488,7 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2017/12/28/academy-fight-song-part-2/</guid>
-  <pubDate>Thu, 28 Dec 2017 08:00:00 GMT</pubDate>
+  <pubDate>Thu, 28 Dec 2017 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Government and Civic Tech</title>
@@ -2371,38 +2518,7 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2016/09/29/government-and-civic-tech/</guid>
-  <pubDate>Thu, 29 Sep 2016 07:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>My Favorite Things</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2015/07/29/my-favorite-things/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>As first reported on the tweets, <a href="https://www.propublica.org/about/derek-willis-to-join-propublicas-politics-team">I have a new job</a>, at ProPublica, where I’ll be working on news applications, investigations and other incredible stuff with the <a href="https://www.propublica.org/data/">News Apps team</a>.</p>
-<p>Leaving The New York Times wasn’t easy. There are so many good people there, so many really smart journalists. So as a way of saying goodbye, here’s a list of some of my favorite things from my seven-and-a-half years at The Times (my longest time in any job, btw):</p>
-<ol type="1">
-<li><a href="http://projects.nytimes.com/represent/">Represent</a>. Even though it didn’t last, this was the most rewarding thing I worked on in terms of coming up with an idea and seeing it to <a href="http://open.blogs.nytimes.com/2008/12/22/represent/">completion</a>, thanks mostly to my then-colleague Andrei Scheinkman, now at FiveThirtyEight. Represent was a departure for The Times into personalization and feed aggregation at a time when both were still new ideas in the newsroom. It also was, to the best of my knowledge, the first Django app at the NYT. We stopped maintaining it a few years ago, but it lived on in other projects, including the <a href="http://developer.nytimes.com/docs/read/districts_api">Districts API</a> and “<a href="http://www.nytimes.com/interactive/nyregion/The-Other-Races.html">The Other Races</a>” from 2013.</li>
-<li><a href="http://projects.nytimes.com/toxic-waters">Toxic Waters</a>. One of the first large projects I worked on at The Times, this involved both obtaining and loading EPA data as well as helping to decide how we’d present records of inspections and violations for water pollution permit holders. I didn’t do the really amazing visual aspects of this project, but really enjoyed digging into a new dataset and being able to help readers find out more information on water pollution where they live.</li>
-<li><a href="https://github.com/nytimes/Fech">Fech</a>. This started as an intern project with Michael Strickland and Evan Carmi; the goal was to create an internal toolkit to process electronic campaign finance filings from the FEC. Since <a href="http://open.blogs.nytimes.com/2011/08/29/introducing-fech/">releasing it</a>, we’ve gotten contributions from people outside The Times and Fech has become something of a standard, inspiring a Python version, too. It also powers <a href="http://itemizer.herokuapp.com/">Itemizer</a>.</li>
-<li><a href="http://elections.nytimes.com/2012/">2012 Election Coverage and results</a>. Elections are a huge deal at The Times, an all-hands-on-deck affair. I was really proud to be a part of the process for elections beginning in 2008, but for me 2012 was a high-water mark. We were able to build individual campaign finance elements like <a href="http://elections.nytimes.com/2012/campaign-finance">this one with Jeremy Ashkenas</a> and <a href="http://elections.nytimes.com/2012/campaign-finance/independent-expenditures/totals">another with Kevin Quealy</a>, plus contribute to <a href="http://elections.nytimes.com/2012/results/president/exit-polls">exit polls</a> and other parts.</li>
-<li><a href="http://developer.nytimes.com/docs/campaign_finance_api/">Campaign Finance</a> and <a href="http://developer.nytimes.com/docs/congress_api">Congress</a> APIs. These were somewhat accidental projects in the sense that from a publishing standpoint they weren’t strictly necessary. But both APIs provided information to the public that otherwise would have been difficult to obtain. Even though the FEC now has an API and the United States project has expanded the congressional data available, they have been used in <a href="http://finzi.psych.upenn.edu/library/govdat/html/nyt_cg_membersponsorcompare.html">academic projects</a>, <a href="http://danwin.com/2012/01/congressmiles-a-ruby-coding-tutorial-with-the-face-and-times-congress-apis/">silly projects</a> and <a href="https://projects.propublica.org/sandyvote/">serious projects</a>.</li>
-<li>Upshot Mississippi Senate primary coverage. The 2014 GOP primary and runoff in Mississippi gave me a chance to use precinct-level results data in near real-time. Pairing with Nate Cohn, we examined the impact of black turnout in <a href="http://www.nytimes.com/2014/07/10/upshot/voting-totals-reveal-crucial-boost-from-blacks-in-cochrans-victory.html">two</a> <a href="http://www.nytimes.com/2014/07/15/upshot/more-evidence-that-thad-cochran-owes-runoff-win-to-black-voters.html">stories</a> that provided evidence instead of just anecdotes. I also was able to delve into the <a href="http://www.nytimes.com/2014/06/17/upshot/a-church-pac-link-raises-questions-in-mississippi.html">murky world of outside spending in that race</a>.</li>
-<li><a href="http://www.nytimes.com/2014/05/07/upshot/a-mysterious-republican-committee-in-the-virgin-islands.html">VIGOP</a> This is a crazy story, still ongoing, about how a small party organization is trying to raise its profile through some controversial and fairly unorthodox methods. The artwork makes it even better.</li>
-<li><a href="http://www.nytimes.com/2014/09/06/upshot/looking-for-john-mccain-try-a-sunday-morning-show.html">Sunday Morning Talk Show Guests</a>. One of my favorite things to do is to try and confirm or debunk the conventional wisdom about a topic, and there are few things more conventional wisdom than being a guest on the Sunday talk shows. I worked for several weeks standardizing data on talk show guests (<a href="https://github.com/TheUpshot/Sunday-Shows">which we released</a>) and then <a href="http://www.nytimes.com/interactive/2014/09/05/upshot/05up-sundayguests.html">helped build the table</a> that displayed the most frequent guests.</li>
-<li><a href="http://www.nytimes.com/2014/10/09/upshot/how-actblue-became-a-powerful-force-in-fund-raising.html">ActBlue</a>. One of the biggest stories around political fundraising has been the rise of the small donor, and ActBlue, a Democratic conduit organization, is right in the middle of that. I used ActBlue filings to show how their users have expanded and grown as repeat donors, to the benefit of Democratic candidates and organizations up and down the ballot.</li>
-<li><a href="http://www.nytimes.com/2015/06/28/upshot/maiden-names-on-the-rise-again.html">Maiden Names</a>. When I came to The Times, I half-jokingly said that one of my goals was to combine the <a href="http://www.nytimes.com/pages/fashion/weddings/index.html">wedding announcements</a> with people mentioned in <a href="http://www.nytimes.com/pages/business/dealbook/index.html">DealBook</a> to create a network of New York’s elite. We never did that, but before I left I was able to finally do an analysis of wedding announcement data with my Upshot colleague Claire Cain Miller and get a Sunday Styles byline, to boot. This one was a lot of fun, and a great way to end my time at The Times.</li>
-</ol>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2015/07/29/my-favorite-things/</guid>
-  <pubDate>Wed, 29 Jul 2015 07:00:00 GMT</pubDate>
+  <pubDate>Thu, 29 Sep 2016 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
