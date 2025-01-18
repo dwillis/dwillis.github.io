@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Journalism with R and the Tidyverse - 15&nbsp; Data Cleaning Part II: Janitor</title>
+<title>20&nbsp; Data Cleaning Part II: Janitor – Data Journalism with R and the Tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -112,13 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-cleaning-part-ii.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-cleaning-part-ii.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -166,146 +166,176 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./xl-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./xl-refresher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An Excel Refresher</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./xl-filter-sort.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sorting and filtering to find stories</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./xl-formulas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Formulas in Google Sheets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./xl-practice-noc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Practice exercise</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./publicrecords.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Public records</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Public records</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Setting Up Your Computer To Use GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./replication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aggregates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Aggregates</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./mutating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mutating data</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Working with dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Aggregates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./filters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Filters and selections</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Filters and selections</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Working with dates</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mutating.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mutating data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./open-refine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./merging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Combining and joining</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pdfs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rvest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></span></a>
+  <a href="./merging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Combining and joining</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./census.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-reporting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-publication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./geographic-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Geographic data basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Geographic data basics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./geographicanalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Geographic analysis</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ai_and_llms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">AI and Data Journalism</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Geographic analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./textanalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">An intro to text analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">An intro to text analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rvest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basicstats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ai_and_llms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">AI and Data Journalism</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Writing with numbers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Writing with numbers</span></span></a>
   </div>
 </li>
     </ul>
@@ -318,10 +348,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#cleaning-headers" id="toc-cleaning-headers" class="nav-link active" data-scroll-target="#cleaning-headers"><span class="header-section-number">15.1</span> Cleaning headers</a></li>
-  <li><a href="#changing-data-types" id="toc-changing-data-types" class="nav-link" data-scroll-target="#changing-data-types"><span class="header-section-number">15.2</span> Changing data types</a></li>
-  <li><a href="#duplicates" id="toc-duplicates" class="nav-link" data-scroll-target="#duplicates"><span class="header-section-number">15.3</span> Duplicates</a></li>
-  <li><a href="#cleaning-strings" id="toc-cleaning-strings" class="nav-link" data-scroll-target="#cleaning-strings"><span class="header-section-number">15.4</span> Cleaning strings</a></li>
+  <li><a href="#cleaning-headers" id="toc-cleaning-headers" class="nav-link active" data-scroll-target="#cleaning-headers"><span class="header-section-number">20.1</span> Cleaning headers</a></li>
+  <li><a href="#changing-capitalization" id="toc-changing-capitalization" class="nav-link" data-scroll-target="#changing-capitalization"><span class="header-section-number">20.2</span> Changing capitalization</a></li>
+  <li><a href="#duplicates" id="toc-duplicates" class="nav-link" data-scroll-target="#duplicates"><span class="header-section-number">20.3</span> Duplicates</a></li>
+  <li><a href="#cleaning-strings" id="toc-cleaning-strings" class="nav-link" data-scroll-target="#cleaning-strings"><span class="header-section-number">20.4</span> Cleaning strings</a></li>
   </ul>
 </nav>
     </div>
@@ -330,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></h1>
+<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></h1>
 </div>
 
 
@@ -347,496 +377,319 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The bane of every data analyst’s existence is data cleaning.</p>
-<p>Every developer, every data system, every agency, the all have opinions about how data gets collected. Some decisions make sense from the outside. Some decisions are based entirely on internal politics: who is creating the data, how they are creating it, why they are creating it. Is it automated? Is it manual? Are data normalized? Are there free form fields where users can just type into or does the system restrict them to choices?</p>
-<p>Your journalistic questions – what you want the data to tell you – is almost never part of that equation.</p>
-<p>So cleaning data is the process of fixing issues in your data so you can answer the questions you want to answer. Data cleaning is a critical step that you can’t skip past. A standard metric is that 80 percent of the time working with data will be spent cleaning and verifying data, and 20 percent the more exciting parts like analysis and visualization.</p>
+<p>The necessary bane of every data journalist’s existence is data cleaning.</p>
+<p>Every developer, every data system, every agency, they all have opinions about how data gets collected. Some decisions make sense from the outside. Some decisions are based entirely on internal politics: who is creating the data, how they are creating it, why they are creating it. Is it automated? Is it manual? Are data normalized? Are there free form fields where users can just type into or does the system restrict them to choices?</p>
+<p>Your journalistic questions – what you want the data to tell you – are almost never part of that equation.</p>
+<p>So cleaning data is the process of fixing issues in your data so you can answer the questions you want to answer. Data cleaning is a critical step that you can’t skip. A standard metric is that 80 percent of the time working with data will be spent cleaning and verifying data, and 20 percent the more exciting parts like analysis and visualization.</p>
 <p>The tidyverse has a lot of built-in tools for data cleaning. We’re also going to make use of a new library, called <code>janitor</code> that has a bunch of great functions for cleaning data. Let’s load those now.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now let’s load a tiny slice of our Maryland WinRed contributions. To make the cleaning demonstration in this chapter easier, this dataset only has 14 rows, all from Conowingo, Maryland.</p>
+<p>Let’s continue with our Maryland grants and loans data that we worked with in the previous chapter.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>conowingo <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/conowingo.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Let’s glimpse it to get a sense of it, to examine the column data types and possible values.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(conowingo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 14
-Columns: 21
-$ `1_linenumber`   &lt;chr&gt; "SA11AI", "SA11AI", "SA11AI", "SA11AI", "SA11AI", "SA…
-$ fec_committee_id &lt;chr&gt; "C00694323", "C00694323", "C00694323", "C00694323", "…
-$ tran_id          &lt;chr&gt; "AC8C7155172624C54909", "A61211F59EBD8451C8A8", "A9C8…
-$ flag_orgind      &lt;chr&gt; "IND", "IND", "IND", "IND", "IND", "IND", "IND", "IND…
-$ LAST_NAME        &lt;chr&gt; "Pabis", "Garvey", "Huddleston", "Huddleston", "Buona…
-$ first_name       &lt;chr&gt; "Sherry", "Brian", "Deborah", "Deborah", "Wm", "Debor…
-$ middle_name      &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA
-$ prefix           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA
-$ suffix           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA
-$ `address one`    &lt;chr&gt; "144 Bill Leight Rd", "116 Finnegans Pl", "118 Merry …
-$ address_two      &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA
-$ city             &lt;chr&gt; "Conowingo", "Conowing", "conowingo", "Conowingo", "C…
-$ state            &lt;chr&gt; "MD", "MD", "MD", "MD", "MD", "MD", "MD", "MD", "MD",…
-$ zip              &lt;chr&gt; "21918", "21918", "21918", "21918", "21918", "21918-2…
-$ date             &lt;date&gt; 2022-04-16, 2022-06-24, 2022-06-15, 2022-06-18, 2022-…
-$ amount           &lt;chr&gt; "45", "35", "25", "25", "25", "25", "15", "10", "5.76…
-$ aggregate_amount &lt;dbl&gt; 180, 35, 45, 95, 41, 70, 15, 41, 41, 41, 41, 41, 41, …
-$ employer         &lt;chr&gt; "SELF-EMPLOYED", "US ARMY", "RETIRED", "RETIRED", "JR…
-$ occupation       &lt;chr&gt; "SOFTWARE ENGINEER", "INFORMATION REQUESTED", "RETIR…
-$ memo_text        &lt;chr&gt; "Earmarked for SAVE AMERICA JOINT FUNDRAISING COMMITT…
-$ cycle            &lt;dbl&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022,…</code></pre>
-</div>
-</div>
-<p>And let’s examine the full data set.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 14 × 21
-   `1_linenumber` fec_committee_id tran_id      flag_orgind LAST_NAME first_name
-   &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
- 1 SA11AI         C00694323        AC8C7155172… IND         Pabis     Sherry    
- 2 SA11AI         C00694323        A61211F59EB… IND         Garvey    Brian     
- 3 SA11AI         C00694323        A9C895B091C… IND         Huddlest… Deborah   
- 4 SA11AI         C00694323        ABAA82A5E70… IND         Huddlest… Deborah   
- 5 SA11AI         C00694323        A45519E3246… IND         Buonaugu… Wm        
- 6 SA11AI         C00694323        A33987D736E… IND         Huddlest… Deborah   
- 7 SA11AI         C00694323        AE7C6D0C074… IND         Hamilton  Derrick   
- 8 SA11AI         C00694323        A07D7A1ECE3… IND         Buonaugu… Wm        
- 9 SA11AI         C00694323        A290335F896… IND         Buonaugu… Wm        
-10 SA11AI         C00694323        AD6C11068B7… IND         Buonaugu… Wm        
-11 SA11AI         C00694323        A99BBCB87D5… IND         Buonaugu… Wm        
-12 SA11AI         C00694323        A142B275F78… IND         Buonaugu… Wm        
-13 SA11AI         C00694323        AF8E4C98168… IND         Buonaugu… Wm        
-14 SA11AI         C00694323        AE7C6D0C074… IND         Hamilton  Derrick   
-# ℹ 15 more variables: middle_name &lt;lgl&gt;, prefix &lt;lgl&gt;, suffix &lt;lgl&gt;,
-#   `address one` &lt;chr&gt;, address_two &lt;lgl&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,
-#   date &lt;date&gt;, amount &lt;chr&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;</code></pre>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>md_grants_loans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/State_of_Maryland_Grant_and_Loan_Data__FY2009_to_FY2022_20250115.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 19482 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (6): Grantor, Grantee, Zip Code, Description, Category, Date
+dbl (3): Fiscal Year, Amount, Fiscal Period
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
 <p>There are a number of issues with this data set that might get in the way of asking questions and receiving accurate answers. They are:</p>
 <ul>
-<li>The column headers are inconsistently styled (note: I’ve purposely dirtied these up, which is why they look different than previous versions of this data we’ve loaded). Those problems will make them hard to analyze, to refer to in functions we write.</li>
-<li>The amount column is stored as a character, not a number. If we try to do math to it – say, calculate the average contribution size – it won’t work.</li>
-<li>There’s a fully duplicated row – a common problem in data sets. The 14th row is exactly the same as the seventh.</li>
-<li>The city field has five different forms – including misspellings – of Conowingo. If we wanted to group and count the number of contributions in Conowingo, this inconsistency would not let us do that correctly.</li>
-<li>The zip field mixes five digit ZIP codes and nine digit ZIP codes. If we wanted to group and count the number of contributions in a given ZIP code, this inconsistency would not let us do that correctly.</li>
-<li>The street address field is inconsistent. It has multiple variations of Merry Knoll Lane.</li>
+<li>The column names have spaces in them. This isn’t a deal-breaker, as we used this dataframe previously. But it does require that you do some things differently when writing code, and ideally you don’t want spaces in your column names.</li>
+<li>Inconsistent capitalization across multiple columns. Sometimes the grantee is capitalized, and other times not. Portions of the grantor name are sometimes capitalized. This issue will ruin your ability to count and add things using those columns.</li>
+<li>The zip field mixes five digit ZIP codes and nine digit ZIP codes, and some of the records include spaces. If we wanted to group and count the number of loans in a given ZIP code, this inconsistency would not let us do that correctly.</li>
+<li>The category column is inconsistent and has some missing values.</li>
 </ul>
-<p>Let’s get cleaning. Our goal will be to build up one block of code that does all the necessary cleaning in order to answer this question: what is the total amount of contributions from Conowingo, MD in ZIP code 21918?</p>
-<section id="cleaning-headers" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="cleaning-headers"><span class="header-section-number">15.1</span> Cleaning headers</h2>
+<p>Let’s get cleaning. Our goal will be to build up one block of code that does all the necessary cleaning in order to answer this question: which zip code has gotten the most amount of money from the Maryland Tourism Board?</p>
+<section id="cleaning-headers" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="cleaning-headers"><span class="header-section-number">20.1</span> Cleaning headers</h2>
 <p>One of the first places we can start with cleaning data is cleaning the column names (or headers).</p>
 <p>Every system has their own way of recording headers, and every developer has their own thoughts of what a good idea is within it. R is most happy when headers are lower case, without special characters.</p>
 <p>If column headers start with a number, or have a space in between two words, you have to set them off with backticks when using them in a function. Generally speaking, we want one word (or words separated by an underscore), all lowercase, that don’t start with numbers.</p>
 <p>The <code>janitor</code> library makes fixing headers trivially simple with the function <code>clean_names()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo <span class="ot">&lt;-</span> conowingo <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans <span class="ot">&lt;-</span> md_grants_loans <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 14 × 21
-   x1_linenumber fec_committee_id tran_id       flag_orgind last_name first_name
-   &lt;chr&gt;         &lt;chr&gt;            &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
- 1 SA11AI        C00694323        AC8C71551726… IND         Pabis     Sherry    
- 2 SA11AI        C00694323        A61211F59EBD… IND         Garvey    Brian     
- 3 SA11AI        C00694323        A9C895B091C8… IND         Huddlest… Deborah   
- 4 SA11AI        C00694323        ABAA82A5E70D… IND         Huddlest… Deborah   
- 5 SA11AI        C00694323        A45519E3246C… IND         Buonaugu… Wm        
- 6 SA11AI        C00694323        A33987D736EC… IND         Huddlest… Deborah   
- 7 SA11AI        C00694323        AE7C6D0C0742… IND         Hamilton  Derrick   
- 8 SA11AI        C00694323        A07D7A1ECE3C… IND         Buonaugu… Wm        
- 9 SA11AI        C00694323        A290335F896E… IND         Buonaugu… Wm        
-10 SA11AI        C00694323        AD6C11068B72… IND         Buonaugu… Wm        
-11 SA11AI        C00694323        A99BBCB87D53… IND         Buonaugu… Wm        
-12 SA11AI        C00694323        A142B275F787… IND         Buonaugu… Wm        
-13 SA11AI        C00694323        AF8E4C981687… IND         Buonaugu… Wm        
-14 SA11AI        C00694323        AE7C6D0C0742… IND         Hamilton  Derrick   
-# ℹ 15 more variables: middle_name &lt;lgl&gt;, prefix &lt;lgl&gt;, suffix &lt;lgl&gt;,
-#   address_one &lt;chr&gt;, address_two &lt;lgl&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,
-#   date &lt;date&gt;, amount &lt;chr&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 19,482 × 9
+   grantor              grantee zip_code fiscal_year amount description category
+   &lt;chr&gt;                &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;   
+ 1 Commerce/Maryland T… PRINCE… 20772           2017 1.28e5 Maryland T… Grant   
+ 2 Department of Healt… Associ… 21201           2010 9.34e4 Minority O… Grant   
+ 3 Maryland Department… WESTED… 94107-1…        2014 1.61e6 GRANTS FOR… Grant   
+ 4 Department of Healt… Maryla… 21075           2010 2.14e5 Babies Bor… Grant   
+ 5 Department of Natur… Anacos… 20710           2017 1.74e5 Payments m… Grant   
+ 6 Department of Busin… Washin… 21740           2009 5.59e4 grant fund… Grant   
+ 7 Boards and Commissi… Domest… 21045           2014 1.72e5 Domestic V… Grant   
+ 8 MD Small Business D… Dacore… 20601           2018 1.04e5 Maryland S… Loan    
+ 9 Maryland Higher Edu… Mount … 21727           2015 1.75e6 Sellinger … Grant   
+10 Department of Busin… Olney … 20830           2010 2.16e5 Grant fund… Grant   
+# ℹ 19,472 more rows
+# ℹ 2 more variables: fiscal_period &lt;dbl&gt;, date &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>This function changed <code>LAST_NAME</code> to <code>last_name</code>. It put an underscore in <code>address_one</code> to get rid of the space. And it changed <code>1_linenumber</code> to <code>x1_linenumber</code>. That last one was an improvement – it no longer starts with a number – but it’s still kind of clunky.</p>
-<p>We can use a tidyverse function <code>rename()</code> to fix that. Let’s just call it <code>linenumber</code>. NOTE: when using <code>rename()</code>, the <em>new</em> name comes first.</p>
+<p>This function changed <code>Zip Code</code> to <code>zip_code</code> and generally got rid of capital letters and replaced spaces with underscores. If we wanted to rename a column, we can use a tidyverse function <code>rename()</code> to do that. Let’s change <code>grantor</code> to <code>source</code> as an example. NOTE: when using <code>rename()</code>, the <em>new</em> name comes first.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo <span class="ot">&lt;-</span> conowingo <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">linenumber =</span> x1_linenumber)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans <span class="ot">&lt;-</span> md_grants_loans <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">source =</span> grantor)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 14 × 21
-   linenumber fec_committee_id tran_id          flag_orgind last_name first_name
-   &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
- 1 SA11AI     C00694323        AC8C7155172624C… IND         Pabis     Sherry    
- 2 SA11AI     C00694323        A61211F59EBD845… IND         Garvey    Brian     
- 3 SA11AI     C00694323        A9C895B091C8A4A… IND         Huddlest… Deborah   
- 4 SA11AI     C00694323        ABAA82A5E70D445… IND         Huddlest… Deborah   
- 5 SA11AI     C00694323        A45519E3246C947… IND         Buonaugu… Wm        
- 6 SA11AI     C00694323        A33987D736EC447… IND         Huddlest… Deborah   
- 7 SA11AI     C00694323        AE7C6D0C074234D… IND         Hamilton  Derrick   
- 8 SA11AI     C00694323        A07D7A1ECE3C44B… IND         Buonaugu… Wm        
- 9 SA11AI     C00694323        A290335F896EC41… IND         Buonaugu… Wm        
-10 SA11AI     C00694323        AD6C11068B72B40… IND         Buonaugu… Wm        
-11 SA11AI     C00694323        A99BBCB87D53C45… IND         Buonaugu… Wm        
-12 SA11AI     C00694323        A142B275F787E48… IND         Buonaugu… Wm        
-13 SA11AI     C00694323        AF8E4C981687E4D… IND         Buonaugu… Wm        
-14 SA11AI     C00694323        AE7C6D0C074234D… IND         Hamilton  Derrick   
-# ℹ 15 more variables: middle_name &lt;lgl&gt;, prefix &lt;lgl&gt;, suffix &lt;lgl&gt;,
-#   address_one &lt;chr&gt;, address_two &lt;lgl&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,
-#   date &lt;date&gt;, amount &lt;chr&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 19,482 × 9
+   source grantee zip_code fiscal_year amount description category fiscal_period
+   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;dbl&gt;
+ 1 Comme… PRINCE… 20772           2017 1.28e5 Maryland T… Grant                1
+ 2 Depar… Associ… 21201           2010 9.34e4 Minority O… Grant                1
+ 3 Maryl… WESTED… 94107-1…        2014 1.61e6 GRANTS FOR… Grant                1
+ 4 Depar… Maryla… 21075           2010 2.14e5 Babies Bor… Grant                1
+ 5 Depar… Anacos… 20710           2017 1.74e5 Payments m… Grant                1
+ 6 Depar… Washin… 21740           2009 5.59e4 grant fund… Grant                1
+ 7 Board… Domest… 21045           2014 1.72e5 Domestic V… Grant                1
+ 8 MD Sm… Dacore… 20601           2018 1.04e5 Maryland S… Loan                 1
+ 9 Maryl… Mount … 21727           2015 1.75e6 Sellinger … Grant                1
+10 Depar… Olney … 20830           2010 2.16e5 Grant fund… Grant                1
+# ℹ 19,472 more rows
+# ℹ 1 more variable: date &lt;chr&gt;</code></pre>
 </div>
 </div>
 </section>
-<section id="changing-data-types" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="changing-data-types"><span class="header-section-number">15.2</span> Changing data types</h2>
-<p>Right now, the amount column is stored as a character. Do you see the little <code>&lt;chr&gt;</code> under the amount column in the table above? If we wanted to do math to it, we’d get an error, like so.</p>
+<section id="changing-capitalization" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="changing-capitalization"><span class="header-section-number">20.2</span> Changing capitalization</h2>
+<p>Right now the <code>source</code>, <code>grantee</code> and <code>description</code> columns have inconsistent capitalization. We can fix that using a mutate statement and a function that changes the case of text called <code>str_to_upper()</code>. We’ll use the same columns, overwriting what’s in there since all we’re doing is changing case.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>total_conowingo <span class="ot">&lt;-</span> cleaned_conowingo <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_amount =</span> <span class="fu">sum</span>(amount))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `summarise()`:
-ℹ In argument: `total_amount = sum(amount)`.
-Caused by error in `sum()`:
-! invalid 'type' (character) of argument</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>total_conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'total_conowingo' not found</code></pre>
-</div>
-</div>
-<p>We got an “invalid ‘type’ (character)” error. So let’s fix that using the mutate() function in concert with as.numeric(). We’ll reuse the same column name, so it overwrites it.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo <span class="ot">&lt;-</span> conowingo <span class="sc">|&gt;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">linenumber =</span> x1_linenumber) <span class="sc">|&gt;</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">amount =</span> <span class="fu">as.numeric</span>(amount))</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans <span class="ot">&lt;-</span> md_grants_loans <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">source =</span> grantor) <span class="sc">|&gt;</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="fu">str_to_upper</span>(source), <span class="at">grantee =</span> <span class="fu">str_to_upper</span>(grantee), <span class="at">description =</span> <span class="fu">str_to_upper</span>(description))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 14 × 21
-   linenumber fec_committee_id tran_id          flag_orgind last_name first_name
-   &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
- 1 SA11AI     C00694323        AC8C7155172624C… IND         Pabis     Sherry    
- 2 SA11AI     C00694323        A61211F59EBD845… IND         Garvey    Brian     
- 3 SA11AI     C00694323        A9C895B091C8A4A… IND         Huddlest… Deborah   
- 4 SA11AI     C00694323        ABAA82A5E70D445… IND         Huddlest… Deborah   
- 5 SA11AI     C00694323        A45519E3246C947… IND         Buonaugu… Wm        
- 6 SA11AI     C00694323        A33987D736EC447… IND         Huddlest… Deborah   
- 7 SA11AI     C00694323        AE7C6D0C074234D… IND         Hamilton  Derrick   
- 8 SA11AI     C00694323        A07D7A1ECE3C44B… IND         Buonaugu… Wm        
- 9 SA11AI     C00694323        A290335F896EC41… IND         Buonaugu… Wm        
-10 SA11AI     C00694323        AD6C11068B72B40… IND         Buonaugu… Wm        
-11 SA11AI     C00694323        A99BBCB87D53C45… IND         Buonaugu… Wm        
-12 SA11AI     C00694323        A142B275F787E48… IND         Buonaugu… Wm        
-13 SA11AI     C00694323        AF8E4C981687E4D… IND         Buonaugu… Wm        
-14 SA11AI     C00694323        AE7C6D0C074234D… IND         Hamilton  Derrick   
-# ℹ 15 more variables: middle_name &lt;lgl&gt;, prefix &lt;lgl&gt;, suffix &lt;lgl&gt;,
-#   address_one &lt;chr&gt;, address_two &lt;lgl&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,
-#   date &lt;date&gt;, amount &lt;dbl&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 19,482 × 9
+   source grantee zip_code fiscal_year amount description category fiscal_period
+   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;dbl&gt;
+ 1 COMME… PRINCE… 20772           2017 1.28e5 MARYLAND T… Grant                1
+ 2 DEPAR… ASSOCI… 21201           2010 9.34e4 MINORITY O… Grant                1
+ 3 MARYL… WESTED… 94107-1…        2014 1.61e6 GRANTS FOR… Grant                1
+ 4 DEPAR… MARYLA… 21075           2010 2.14e5 BABIES BOR… Grant                1
+ 5 DEPAR… ANACOS… 20710           2017 1.74e5 PAYMENTS M… Grant                1
+ 6 DEPAR… WASHIN… 21740           2009 5.59e4 GRANT FUND… Grant                1
+ 7 BOARD… DOMEST… 21045           2014 1.72e5 DOMESTIC V… Grant                1
+ 8 MD SM… DACORE… 20601           2018 1.04e5 MARYLAND S… Loan                 1
+ 9 MARYL… MOUNT … 21727           2015 1.75e6 SELLINGER … Grant                1
+10 DEPAR… OLNEY … 20830           2010 2.16e5 GRANT FUND… Grant                1
+# ℹ 19,472 more rows
+# ℹ 1 more variable: date &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>Notice that the amount has been converted to a <code>&lt;dbl&gt;</code>, which is short for double, a number format. When we attempt to add up all of the amounts to create a total, this time it works fine.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>total_conowingo <span class="ot">&lt;-</span> cleaned_conowingo <span class="sc">|&gt;</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_amount =</span> <span class="fu">sum</span>(amount))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>total_conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  total_amount
-         &lt;dbl&gt;
-1          226</code></pre>
-</div>
-</div>
+<p>What this does is make it so that using <code>group_by</code> will result in fewer rows due to inconsistent capitalization. It won’t fix misspellings, but working off a single case style definitely helps.</p>
 </section>
-<section id="duplicates" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="duplicates"><span class="header-section-number">15.3</span> Duplicates</h2>
+<section id="duplicates" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="duplicates"><span class="header-section-number">20.3</span> Duplicates</h2>
 <p>One of the most difficult problems to fix in data is duplicate records in the data. They can creep in with bad joins, bad data entry practices, mistakes – all kinds of reasons. A duplicated record isn’t always there because of an error, but you need to know if it’s there before making that determination.</p>
 <p>So the question is, do we have any records repeated?</p>
 <p>Here we’ll use a function called <code>get_dupes</code> from the janitor library to check for fully repeated records in our cleaned data set.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo <span class="sc">|&gt;</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_dupes</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_dupes</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>No variable names specified - using all columns.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 22
-  linenumber fec_committee_id tran_id           flag_orgind last_name first_name
-  &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
-1 SA11AI     C00694323        AE7C6D0C074234DC… IND         Hamilton  Derrick   
-2 SA11AI     C00694323        AE7C6D0C074234DC… IND         Hamilton  Derrick   
-# ℹ 16 more variables: middle_name &lt;lgl&gt;, prefix &lt;lgl&gt;, suffix &lt;lgl&gt;,
-#   address_one &lt;chr&gt;, address_two &lt;lgl&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,
-#   date &lt;date&gt;, amount &lt;dbl&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;, dupe_count &lt;int&gt;</code></pre>
+<pre><code># A tibble: 58 × 10
+   source grantee zip_code fiscal_year amount description category fiscal_period
+   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;dbl&gt;
+ 1 BOARD… CASA C… 21740           2009 6.62e4 SERVICES T… Grant                1
+ 2 BOARD… CASA C… 21740           2009 6.62e4 SERVICES T… Grant                1
+ 3 BOARD… FAMILY… 21218           2009 2.18e5 PRE-ADJUDI… Grant                1
+ 4 BOARD… FAMILY… 21218           2009 2.18e5 PRE-ADJUDI… Grant                1
+ 5 BOARD… HEARTL… 21705           2009 5.32e4 UNDERSERVE… Grant                1
+ 6 BOARD… HEARTL… 21705           2009 5.32e4 UNDERSERVE… Grant                1
+ 7 BOARD… MARYLA… 21012           2009 9.72e4 CAPACITY B… Grant                1
+ 8 BOARD… MARYLA… 21012           2009 9.72e4 CAPACITY B… Grant                1
+ 9 BOARD… MARYLA… 21012           2009 9.72e4 SEXUAL ASS… Grant                1
+10 BOARD… MARYLA… 21012           2009 9.72e4 SEXUAL ASS… Grant                1
+# ℹ 48 more rows
+# ℹ 2 more variables: date &lt;chr&gt;, dupe_count &lt;int&gt;</code></pre>
 </div>
 </div>
-<p>In this case, a contribution by Derrick Hamilton in our table is fully duplicated. Every field is identical in each.</p>
-<p>We can fix this by adding the function <code>distinct()</code> to our cleaning script. This will keep only one copy of each unique record in our table</p>
+<p>And the answer is … maybe? Because the original dataset doesn’t have a unique identifier for each grant, it’s <em>possible</em> that we have duplicates here, as many as 58. If we could confirm that these actually are duplicates, we can fix this by adding the function <code>distinct()</code> to our cleaning script. This will keep only one copy of each unique record in our table. But we’d need to confirm that first.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo <span class="ot">&lt;-</span> conowingo <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">linenumber =</span> x1_linenumber) <span class="sc">|&gt;</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">amount =</span> <span class="fu">as.numeric</span>(amount)) <span class="sc">|&gt;</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans <span class="ot">&lt;-</span> md_grants_loans <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">source =</span> grantor) <span class="sc">|&gt;</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="fu">str_to_upper</span>(source), <span class="at">grantee =</span> <span class="fu">str_to_upper</span>(grantee), <span class="at">description =</span> <span class="fu">str_to_upper</span>(description)) <span class="sc">|&gt;</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 13 × 21
-   linenumber fec_committee_id tran_id          flag_orgind last_name first_name
-   &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
- 1 SA11AI     C00694323        AC8C7155172624C… IND         Pabis     Sherry    
- 2 SA11AI     C00694323        A61211F59EBD845… IND         Garvey    Brian     
- 3 SA11AI     C00694323        A9C895B091C8A4A… IND         Huddlest… Deborah   
- 4 SA11AI     C00694323        ABAA82A5E70D445… IND         Huddlest… Deborah   
- 5 SA11AI     C00694323        A45519E3246C947… IND         Buonaugu… Wm        
- 6 SA11AI     C00694323        A33987D736EC447… IND         Huddlest… Deborah   
- 7 SA11AI     C00694323        AE7C6D0C074234D… IND         Hamilton  Derrick   
- 8 SA11AI     C00694323        A07D7A1ECE3C44B… IND         Buonaugu… Wm        
- 9 SA11AI     C00694323        A290335F896EC41… IND         Buonaugu… Wm        
-10 SA11AI     C00694323        AD6C11068B72B40… IND         Buonaugu… Wm        
-11 SA11AI     C00694323        A99BBCB87D53C45… IND         Buonaugu… Wm        
-12 SA11AI     C00694323        A142B275F787E48… IND         Buonaugu… Wm        
-13 SA11AI     C00694323        AF8E4C981687E4D… IND         Buonaugu… Wm        
-# ℹ 15 more variables: middle_name &lt;lgl&gt;, prefix &lt;lgl&gt;, suffix &lt;lgl&gt;,
-#   address_one &lt;chr&gt;, address_two &lt;lgl&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,
-#   date &lt;date&gt;, amount &lt;dbl&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 19,453 × 9
+   source grantee zip_code fiscal_year amount description category fiscal_period
+   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;dbl&gt;
+ 1 COMME… PRINCE… 20772           2017 1.28e5 MARYLAND T… Grant                1
+ 2 DEPAR… ASSOCI… 21201           2010 9.34e4 MINORITY O… Grant                1
+ 3 MARYL… WESTED… 94107-1…        2014 1.61e6 GRANTS FOR… Grant                1
+ 4 DEPAR… MARYLA… 21075           2010 2.14e5 BABIES BOR… Grant                1
+ 5 DEPAR… ANACOS… 20710           2017 1.74e5 PAYMENTS M… Grant                1
+ 6 DEPAR… WASHIN… 21740           2009 5.59e4 GRANT FUND… Grant                1
+ 7 BOARD… DOMEST… 21045           2014 1.72e5 DOMESTIC V… Grant                1
+ 8 MD SM… DACORE… 20601           2018 1.04e5 MARYLAND S… Loan                 1
+ 9 MARYL… MOUNT … 21727           2015 1.75e6 SELLINGER … Grant                1
+10 DEPAR… OLNEY … 20830           2010 2.16e5 GRANT FUND… Grant                1
+# ℹ 19,443 more rows
+# ℹ 1 more variable: date &lt;chr&gt;</code></pre>
 </div>
 </div>
 </section>
-<section id="cleaning-strings" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="cleaning-strings"><span class="header-section-number">15.4</span> Cleaning strings</h2>
-<p>The rest of the problems with this data set all have to do with inconsistent format of values in a few of the columns. To fix these problems, we’re going to make use of mutate() and a new function, <code>case_when()</code> in concert with “string functions” – special functions that allow us to clean up columns stored as character strings. The tidyverse package <code>stringr</code> has lots of useful string functions, more than we’ll learn in this chapter.</p>
-<p>Let’s start by cleaning up the zip field. Remember, three of rows had a five-digit ZIP code, while two had a nine-digit ZIP code, separated by a hyphen.</p>
-<p>We’re going to write code that tells R to keep the first five digits on the left, and get rid of anything after that by using <code>mutate()</code> in concert with <code>str_sub()</code>, from the <code>stringr</code> package.</p>
+<section id="cleaning-strings" class="level2" data-number="20.4">
+<h2 data-number="20.4" class="anchored" data-anchor-id="cleaning-strings"><span class="header-section-number">20.4</span> Cleaning strings</h2>
+<p>The rest of the problems with this data set all have to do with inconsistent format of values in a few of the columns. To fix these problems, we’re going to make use of mutate() in concert with “string functions” – special functions that allow us to clean up columns stored as character strings. The tidyverse package <code>stringr</code> has lots of useful string functions, more than we’ll learn in this chapter.</p>
+<p>Let’s start by cleaning up the zip field. Remember, some of the rows had a five-digit ZIP code, while others had a nine-digit ZIP code, separated by a hyphen or not.</p>
+<p>We’re going to write code that tells R to make a new column for our zips, keeping the first five digits on the left, and get rid of anything after that by using <code>mutate()</code> in concert with <code>str_sub()</code>, from the <code>stringr</code> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo <span class="ot">&lt;-</span> conowingo <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">linenumber =</span> x1_linenumber) <span class="sc">|&gt;</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">amount =</span> <span class="fu">as.numeric</span>(amount)) <span class="sc">|&gt;</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip =</span> <span class="fu">str_sub</span>(zip, <span class="at">start=</span><span class="dv">1</span>L, <span class="at">end=</span><span class="dv">5</span>L))</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans <span class="ot">&lt;-</span> md_grants_loans <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">source =</span> grantor) <span class="sc">|&gt;</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="fu">str_to_upper</span>(source), <span class="at">grantee =</span> <span class="fu">str_to_upper</span>(grantee), <span class="at">description =</span> <span class="fu">str_to_upper</span>(description)) <span class="sc">|&gt;</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip5 =</span> <span class="fu">str_sub</span>(zip_code, <span class="at">start=</span><span class="dv">1</span>L, <span class="at">end=</span><span class="dv">5</span>L))</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 13 × 21
-   linenumber fec_committee_id tran_id          flag_orgind last_name first_name
-   &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
- 1 SA11AI     C00694323        AC8C7155172624C… IND         Pabis     Sherry    
- 2 SA11AI     C00694323        A61211F59EBD845… IND         Garvey    Brian     
- 3 SA11AI     C00694323        A9C895B091C8A4A… IND         Huddlest… Deborah   
- 4 SA11AI     C00694323        ABAA82A5E70D445… IND         Huddlest… Deborah   
- 5 SA11AI     C00694323        A45519E3246C947… IND         Buonaugu… Wm        
- 6 SA11AI     C00694323        A33987D736EC447… IND         Huddlest… Deborah   
- 7 SA11AI     C00694323        AE7C6D0C074234D… IND         Hamilton  Derrick   
- 8 SA11AI     C00694323        A07D7A1ECE3C44B… IND         Buonaugu… Wm        
- 9 SA11AI     C00694323        A290335F896EC41… IND         Buonaugu… Wm        
-10 SA11AI     C00694323        AD6C11068B72B40… IND         Buonaugu… Wm        
-11 SA11AI     C00694323        A99BBCB87D53C45… IND         Buonaugu… Wm        
-12 SA11AI     C00694323        A142B275F787E48… IND         Buonaugu… Wm        
-13 SA11AI     C00694323        AF8E4C981687E4D… IND         Buonaugu… Wm        
-# ℹ 15 more variables: middle_name &lt;lgl&gt;, prefix &lt;lgl&gt;, suffix &lt;lgl&gt;,
-#   address_one &lt;chr&gt;, address_two &lt;lgl&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,
-#   date &lt;date&gt;, amount &lt;dbl&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 19,453 × 10
+   source grantee zip_code fiscal_year amount description category fiscal_period
+   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;dbl&gt;
+ 1 COMME… PRINCE… 20772           2017 1.28e5 MARYLAND T… Grant                1
+ 2 DEPAR… ASSOCI… 21201           2010 9.34e4 MINORITY O… Grant                1
+ 3 MARYL… WESTED… 94107-1…        2014 1.61e6 GRANTS FOR… Grant                1
+ 4 DEPAR… MARYLA… 21075           2010 2.14e5 BABIES BOR… Grant                1
+ 5 DEPAR… ANACOS… 20710           2017 1.74e5 PAYMENTS M… Grant                1
+ 6 DEPAR… WASHIN… 21740           2009 5.59e4 GRANT FUND… Grant                1
+ 7 BOARD… DOMEST… 21045           2014 1.72e5 DOMESTIC V… Grant                1
+ 8 MD SM… DACORE… 20601           2018 1.04e5 MARYLAND S… Loan                 1
+ 9 MARYL… MOUNT … 21727           2015 1.75e6 SELLINGER … Grant                1
+10 DEPAR… OLNEY … 20830           2010 2.16e5 GRANT FUND… Grant                1
+# ℹ 19,443 more rows
+# ℹ 2 more variables: date &lt;chr&gt;, zip5 &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>Let’s break down this line of code. It says: take the value in each zip column and extract the first character on the left (1L) through the fifth character on the left (5L), and then use that five-digit zip to overwrite the zip column.</p>
-<p>We’ll use a different set of functions to standardize how we standardize the different flavors of the word “Conowingo” in the city column. Let’s start by changing every value to title case – first letter uppercase, subsequent letters lowercase – using the <code>str_to_title()</code> function from <code>stringr</code>.</p>
+<p>Let’s break down that last line of code. It says: take the value in each zip column and extract the first character on the left (1L) through the fifth character on the left (5L), and then use that five-digit zip to populate a new zip5 column.</p>
+<p>If we arrange the zip5 column we can see that there are some non-digits in there, so let’s make those NA. For that, we’re going to use <code>case_when()</code>, a function that let’s us say if a value meets a certain condition, then change it, and if it doesn’t, don’t change it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo <span class="ot">&lt;-</span> conowingo <span class="sc">|&gt;</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">linenumber =</span> x1_linenumber) <span class="sc">|&gt;</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">amount =</span> <span class="fu">as.numeric</span>(amount)) <span class="sc">|&gt;</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip =</span> <span class="fu">str_sub</span>(zip, <span class="at">start=</span><span class="dv">1</span>L, <span class="at">end=</span><span class="dv">5</span>L)) <span class="sc">|&gt;</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">city =</span> <span class="fu">str_to_title</span>(city))</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans <span class="ot">&lt;-</span> md_grants_loans <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">source =</span> grantor) <span class="sc">|&gt;</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="fu">str_to_upper</span>(source), <span class="at">grantee =</span> <span class="fu">str_to_upper</span>(grantee), <span class="at">description =</span> <span class="fu">str_to_upper</span>(description)) <span class="sc">|&gt;</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip5 =</span> <span class="fu">str_sub</span>(zip_code, <span class="at">start=</span><span class="dv">1</span>L, <span class="at">end=</span><span class="dv">5</span>L)) <span class="sc">|&gt;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip5 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    zip5 <span class="sc">==</span> <span class="st">"Vario"</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    zip5 <span class="sc">==</span> <span class="st">"UB7 O"</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    zip5 <span class="sc">==</span> <span class="st">"UB7 "</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> zip5</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 13 × 21
-   linenumber fec_committee_id tran_id          flag_orgind last_name first_name
-   &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
- 1 SA11AI     C00694323        AC8C7155172624C… IND         Pabis     Sherry    
- 2 SA11AI     C00694323        A61211F59EBD845… IND         Garvey    Brian     
- 3 SA11AI     C00694323        A9C895B091C8A4A… IND         Huddlest… Deborah   
- 4 SA11AI     C00694323        ABAA82A5E70D445… IND         Huddlest… Deborah   
- 5 SA11AI     C00694323        A45519E3246C947… IND         Buonaugu… Wm        
- 6 SA11AI     C00694323        A33987D736EC447… IND         Huddlest… Deborah   
- 7 SA11AI     C00694323        AE7C6D0C074234D… IND         Hamilton  Derrick   
- 8 SA11AI     C00694323        A07D7A1ECE3C44B… IND         Buonaugu… Wm        
- 9 SA11AI     C00694323        A290335F896EC41… IND         Buonaugu… Wm        
-10 SA11AI     C00694323        AD6C11068B72B40… IND         Buonaugu… Wm        
-11 SA11AI     C00694323        A99BBCB87D53C45… IND         Buonaugu… Wm        
-12 SA11AI     C00694323        A142B275F787E48… IND         Buonaugu… Wm        
-13 SA11AI     C00694323        AF8E4C981687E4D… IND         Buonaugu… Wm        
-# ℹ 15 more variables: middle_name &lt;lgl&gt;, prefix &lt;lgl&gt;, suffix &lt;lgl&gt;,
-#   address_one &lt;chr&gt;, address_two &lt;lgl&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,
-#   date &lt;date&gt;, amount &lt;dbl&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 19,453 × 10
+   source grantee zip_code fiscal_year amount description category fiscal_period
+   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;dbl&gt;
+ 1 COMME… PRINCE… 20772           2017 1.28e5 MARYLAND T… Grant                1
+ 2 DEPAR… ASSOCI… 21201           2010 9.34e4 MINORITY O… Grant                1
+ 3 MARYL… WESTED… 94107-1…        2014 1.61e6 GRANTS FOR… Grant                1
+ 4 DEPAR… MARYLA… 21075           2010 2.14e5 BABIES BOR… Grant                1
+ 5 DEPAR… ANACOS… 20710           2017 1.74e5 PAYMENTS M… Grant                1
+ 6 DEPAR… WASHIN… 21740           2009 5.59e4 GRANT FUND… Grant                1
+ 7 BOARD… DOMEST… 21045           2014 1.72e5 DOMESTIC V… Grant                1
+ 8 MD SM… DACORE… 20601           2018 1.04e5 MARYLAND S… Loan                 1
+ 9 MARYL… MOUNT … 21727           2015 1.75e6 SELLINGER … Grant                1
+10 DEPAR… OLNEY … 20830           2010 2.16e5 GRANT FUND… Grant                1
+# ℹ 19,443 more rows
+# ℹ 2 more variables: date &lt;chr&gt;, zip5 &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>That was enough to standardize two values (CONOWINGO and conowingo). The only ones that remain are the two clear misspellings (Conowing and Conowingoo). To fix those, we’re going to do some manual editing. And for that, we’re going to use <code>case_when()</code>, a function that let’s us say if a value meets a certain condition, then change it, and if it doesn’t, don’t change it.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo <span class="ot">&lt;-</span> conowingo <span class="sc">|&gt;</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">linenumber =</span> x1_linenumber) <span class="sc">|&gt;</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">amount =</span> <span class="fu">as.numeric</span>(amount)) <span class="sc">|&gt;</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip =</span> <span class="fu">str_sub</span>(zip, <span class="at">start=</span><span class="dv">1</span>L, <span class="at">end=</span><span class="dv">5</span>L)) <span class="sc">|&gt;</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">city =</span> <span class="fu">str_to_title</span>(city)) <span class="sc">|&gt;</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">city =</span> <span class="fu">case_when</span>(</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    city <span class="sc">==</span> <span class="st">"Conowing"</span> <span class="sc">~</span> <span class="st">"Conowingo"</span>,</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> city</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 13 × 21
-   linenumber fec_committee_id tran_id          flag_orgind last_name first_name
-   &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
- 1 SA11AI     C00694323        AC8C7155172624C… IND         Pabis     Sherry    
- 2 SA11AI     C00694323        A61211F59EBD845… IND         Garvey    Brian     
- 3 SA11AI     C00694323        A9C895B091C8A4A… IND         Huddlest… Deborah   
- 4 SA11AI     C00694323        ABAA82A5E70D445… IND         Huddlest… Deborah   
- 5 SA11AI     C00694323        A45519E3246C947… IND         Buonaugu… Wm        
- 6 SA11AI     C00694323        A33987D736EC447… IND         Huddlest… Deborah   
- 7 SA11AI     C00694323        AE7C6D0C074234D… IND         Hamilton  Derrick   
- 8 SA11AI     C00694323        A07D7A1ECE3C44B… IND         Buonaugu… Wm        
- 9 SA11AI     C00694323        A290335F896EC41… IND         Buonaugu… Wm        
-10 SA11AI     C00694323        AD6C11068B72B40… IND         Buonaugu… Wm        
-11 SA11AI     C00694323        A99BBCB87D53C45… IND         Buonaugu… Wm        
-12 SA11AI     C00694323        A142B275F787E48… IND         Buonaugu… Wm        
-13 SA11AI     C00694323        AF8E4C981687E4D… IND         Buonaugu… Wm        
-# ℹ 15 more variables: middle_name &lt;lgl&gt;, prefix &lt;lgl&gt;, suffix &lt;lgl&gt;,
-#   address_one &lt;chr&gt;, address_two &lt;lgl&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,
-#   date &lt;date&gt;, amount &lt;dbl&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<p>This is a little complex, so let’s break it down.</p>
-<p>What the code above says, in English, is this: Look at all the values in the city column. If the value is “Conowing”, then (that’s what the “~” means, then) replace it with the word “Conowingo”. If it’s anything other than that (that’s what “TRUE” means, otherwise), then keep the existing value in that column.</p>
-<p>We could fix “Conowingoo” by adding another line inside that function, that looks identical: <code>city == "Conowingoo" ~ "Conowingo"</code>. Like so.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo <span class="ot">&lt;-</span> conowingo <span class="sc">|&gt;</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">linenumber =</span> x1_linenumber) <span class="sc">|&gt;</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">amount =</span> <span class="fu">as.numeric</span>(amount)) <span class="sc">|&gt;</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip =</span> <span class="fu">str_sub</span>(zip, <span class="at">start=</span><span class="dv">1</span>L, <span class="at">end=</span><span class="dv">5</span>L)) <span class="sc">|&gt;</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">city =</span> <span class="fu">str_to_title</span>(city)) <span class="sc">|&gt;</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">city =</span> <span class="fu">case_when</span>(</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    city <span class="sc">==</span> <span class="st">"Conowing"</span> <span class="sc">~</span> <span class="st">"Conowingo"</span>,</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    city <span class="sc">==</span> <span class="st">"Conowingoo"</span> <span class="sc">~</span> <span class="st">"Conowingo"</span>,</span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> city</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 13 × 21
-   linenumber fec_committee_id tran_id          flag_orgind last_name first_name
-   &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
- 1 SA11AI     C00694323        AC8C7155172624C… IND         Pabis     Sherry    
- 2 SA11AI     C00694323        A61211F59EBD845… IND         Garvey    Brian     
- 3 SA11AI     C00694323        A9C895B091C8A4A… IND         Huddlest… Deborah   
- 4 SA11AI     C00694323        ABAA82A5E70D445… IND         Huddlest… Deborah   
- 5 SA11AI     C00694323        A45519E3246C947… IND         Buonaugu… Wm        
- 6 SA11AI     C00694323        A33987D736EC447… IND         Huddlest… Deborah   
- 7 SA11AI     C00694323        AE7C6D0C074234D… IND         Hamilton  Derrick   
- 8 SA11AI     C00694323        A07D7A1ECE3C44B… IND         Buonaugu… Wm        
- 9 SA11AI     C00694323        A290335F896EC41… IND         Buonaugu… Wm        
-10 SA11AI     C00694323        AD6C11068B72B40… IND         Buonaugu… Wm        
-11 SA11AI     C00694323        A99BBCB87D53C45… IND         Buonaugu… Wm        
-12 SA11AI     C00694323        A142B275F787E48… IND         Buonaugu… Wm        
-13 SA11AI     C00694323        AF8E4C981687E4D… IND         Buonaugu… Wm        
-# ℹ 15 more variables: middle_name &lt;lgl&gt;, prefix &lt;lgl&gt;, suffix &lt;lgl&gt;,
-#   address_one &lt;chr&gt;, address_two &lt;lgl&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,
-#   date &lt;date&gt;, amount &lt;dbl&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;</code></pre>
-</div>
-</div>
+<p>That last bit is a little complex, so let’s break it down.</p>
+<p>What the code above says, in English, is this: Look at all the values in the zip5 column. If the value is “Vario”, then (that’s what the “~” means, then) replace it with NA. Same for the other variations. If it’s anything other than that (that’s what “TRUE” means, otherwise), then keep the existing value in that column.</p>
 <p>Instead of specifying the exact value, we can also solve the problem by using something more generalizable, using a function called str_detect(), which allows us to search parts of words.</p>
-<p>The second line of our case_when() function below now says, in English: look in the city column. If you find that one of the values starts with “Conowing” (the “^” symbol means “starts with”), then (the tilde ~ means then) change it to “Conowingo”.</p>
+<p>The second line of our case_when() function below now says, in English: look in the city column. If you find that one of the values starts with “UB7” (the “^” symbol means “starts with”), then (the tilde ~ means then) change it to NA.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo <span class="ot">&lt;-</span> conowingo <span class="sc">|&gt;</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">linenumber =</span> x1_linenumber) <span class="sc">|&gt;</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">amount =</span> <span class="fu">as.numeric</span>(amount)) <span class="sc">|&gt;</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip =</span> <span class="fu">str_sub</span>(zip, <span class="at">start=</span><span class="dv">1</span>L, <span class="at">end=</span><span class="dv">5</span>L)) <span class="sc">|&gt;</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">city =</span> <span class="fu">str_to_title</span>(city)) <span class="sc">|&gt;</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">city =</span> <span class="fu">case_when</span>(</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(city,<span class="st">"^Conowing"</span>) <span class="sc">~</span> <span class="st">"Conowingo"</span>,</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> city</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>cleaned_conowingo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning function</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans <span class="ot">&lt;-</span> md_grants_loans <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">source =</span> grantor) <span class="sc">|&gt;</span> </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="fu">str_to_upper</span>(source), <span class="at">grantee =</span> <span class="fu">str_to_upper</span>(grantee), <span class="at">description =</span> <span class="fu">str_to_upper</span>(description)) <span class="sc">|&gt;</span> </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip5 =</span> <span class="fu">str_sub</span>(zip_code, <span class="at">start=</span><span class="dv">1</span>L, <span class="at">end=</span><span class="dv">5</span>L)) <span class="sc">|&gt;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip5 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    zip5 <span class="sc">==</span> <span class="st">"Vario"</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(zip5, <span class="st">"^UB7"</span>) <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> zip5</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># display the cleaned dataset</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 13 × 21
-   linenumber fec_committee_id tran_id          flag_orgind last_name first_name
-   &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
- 1 SA11AI     C00694323        AC8C7155172624C… IND         Pabis     Sherry    
- 2 SA11AI     C00694323        A61211F59EBD845… IND         Garvey    Brian     
- 3 SA11AI     C00694323        A9C895B091C8A4A… IND         Huddlest… Deborah   
- 4 SA11AI     C00694323        ABAA82A5E70D445… IND         Huddlest… Deborah   
- 5 SA11AI     C00694323        A45519E3246C947… IND         Buonaugu… Wm        
- 6 SA11AI     C00694323        A33987D736EC447… IND         Huddlest… Deborah   
- 7 SA11AI     C00694323        AE7C6D0C074234D… IND         Hamilton  Derrick   
- 8 SA11AI     C00694323        A07D7A1ECE3C44B… IND         Buonaugu… Wm        
- 9 SA11AI     C00694323        A290335F896EC41… IND         Buonaugu… Wm        
-10 SA11AI     C00694323        AD6C11068B72B40… IND         Buonaugu… Wm        
-11 SA11AI     C00694323        A99BBCB87D53C45… IND         Buonaugu… Wm        
-12 SA11AI     C00694323        A142B275F787E48… IND         Buonaugu… Wm        
-13 SA11AI     C00694323        AF8E4C981687E4D… IND         Buonaugu… Wm        
-# ℹ 15 more variables: middle_name &lt;lgl&gt;, prefix &lt;lgl&gt;, suffix &lt;lgl&gt;,
-#   address_one &lt;chr&gt;, address_two &lt;lgl&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,
-#   date &lt;date&gt;, amount &lt;dbl&gt;, aggregate_amount &lt;dbl&gt;, employer &lt;chr&gt;,
-#   occupation &lt;chr&gt;, memo_text &lt;chr&gt;, cycle &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 19,453 × 10
+   source grantee zip_code fiscal_year amount description category fiscal_period
+   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;dbl&gt;
+ 1 COMME… PRINCE… 20772           2017 1.28e5 MARYLAND T… Grant                1
+ 2 DEPAR… ASSOCI… 21201           2010 9.34e4 MINORITY O… Grant                1
+ 3 MARYL… WESTED… 94107-1…        2014 1.61e6 GRANTS FOR… Grant                1
+ 4 DEPAR… MARYLA… 21075           2010 2.14e5 BABIES BOR… Grant                1
+ 5 DEPAR… ANACOS… 20710           2017 1.74e5 PAYMENTS M… Grant                1
+ 6 DEPAR… WASHIN… 21740           2009 5.59e4 GRANT FUND… Grant                1
+ 7 BOARD… DOMEST… 21045           2014 1.72e5 DOMESTIC V… Grant                1
+ 8 MD SM… DACORE… 20601           2018 1.04e5 MARYLAND S… Loan                 1
+ 9 MARYL… MOUNT … 21727           2015 1.75e6 SELLINGER … Grant                1
+10 DEPAR… OLNEY … 20830           2010 2.16e5 GRANT FUND… Grant                1
+# ℹ 19,443 more rows
+# ℹ 2 more variables: date &lt;chr&gt;, zip5 &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>By using str_detect(city,“^Conowing”), we pick up any values that start with “Conowing”, so it would change all four of these. If we used city == “Conowing”, it would only pick up one.</p>
-<p>Lastly, there’s the issue with inconsistent spelling of Merry Knoll Lane in the street address column. Do we need to clean this?</p>
-<p>Remember the motivating question that’s driving us to do this cleaning: what is the total amount of contributions from Conowingo, MD in ZIP code 21918?</p>
-<p>We don’t need the street_address field to answer that question. So we’re not going to bother cleaning it.</p>
-<p>That’s a good approach for the future. A good rule of thumb is that you should only spend time cleaning fields that are critical to the specific analysis you want to do.</p>
+<p>We’ve gotten the source and zip code data as clean as we can, and now we can answer our question: which zip code has gotten the most amount of money from the Maryland Tourism Board? A good rule of thumb is that you should only spend time cleaning fields that are critical to the specific analysis you want to do.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cleaned_md_grants_loans <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(source <span class="sc">==</span> <span class="st">'COMMERCE/MARYLAND TOURISM BOARD'</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(zip5) <span class="sc">|&gt;</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_amount =</span> <span class="fu">sum</span>(amount)) <span class="sc">|&gt;</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_amount))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 2
+  zip5  total_amount
+  &lt;chr&gt;        &lt;dbl&gt;
+1 21202       648069
+2 21601       400000
+3 20005       250000
+4 21401       190570
+5 20772       128041
+6 21701       116708
+7 21740        63070
+8 21014        52490</code></pre>
+</div>
+</div>
+<p>Why, it’s <a href="https://censusreporter.org/profiles/86000US21202-21202/">downtown Baltimore, including the Inner Harbor area</a>.</p>
 
 
 </section>
@@ -877,18 +730,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -920,7 +762,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -928,7 +792,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1254,12 +1118,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./data-cleaning-part-i.html" class="pagination-link" aria-label="Data Cleaning Part I: Data smells">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./open-refine.html" class="pagination-link" aria-label="Data Cleaning Part III: Open Refine">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

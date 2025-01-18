@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Journalism with R and the Tidyverse - 14&nbsp; Data Cleaning Part I: Data smells</title>
+<title>19&nbsp; Data Cleaning Part I: Data smells – Data Journalism with R and the Tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./data-cleaning-part-ii.html" rel="next">
-<link href="./filters.html" rel="prev">
+<link href="./mutating.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -112,13 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-cleaning-part-i.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-cleaning-part-i.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -166,146 +166,176 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./xl-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./xl-refresher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An Excel Refresher</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./xl-filter-sort.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sorting and filtering to find stories</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./xl-formulas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Formulas in Google Sheets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./xl-practice-noc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Practice exercise</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./publicrecords.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Public records</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Public records</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Setting Up Your Computer To Use GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./replication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aggregates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Aggregates</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./mutating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mutating data</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Working with dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Aggregates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./filters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Filters and selections</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Filters and selections</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Working with dates</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mutating.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mutating data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./open-refine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./merging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Combining and joining</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pdfs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rvest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></span></a>
+  <a href="./merging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Combining and joining</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./census.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-reporting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-publication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./geographic-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Geographic data basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Geographic data basics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./geographicanalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Geographic analysis</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ai_and_llms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">AI and Data Journalism</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Geographic analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./textanalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">An intro to text analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">An intro to text analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rvest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basicstats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ai_and_llms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">AI and Data Journalism</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Writing with numbers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Writing with numbers</span></span></a>
   </div>
 </li>
     </ul>
@@ -318,10 +348,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#wrong-type" id="toc-wrong-type" class="nav-link active" data-scroll-target="#wrong-type"><span class="header-section-number">14.1</span> Wrong Type</a></li>
-  <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data"><span class="header-section-number">14.2</span> Missing Data</a></li>
-  <li><a href="#gaps-in-data" id="toc-gaps-in-data" class="nav-link" data-scroll-target="#gaps-in-data"><span class="header-section-number">14.3</span> Gaps in data</a></li>
-  <li><a href="#suspicious-outliers" id="toc-suspicious-outliers" class="nav-link" data-scroll-target="#suspicious-outliers"><span class="header-section-number">14.4</span> Suspicious Outliers</a></li>
+  <li><a href="#wrong-type" id="toc-wrong-type" class="nav-link active" data-scroll-target="#wrong-type"><span class="header-section-number">19.1</span> Wrong Type</a></li>
+  <li><a href="#wrong-spatial-data" id="toc-wrong-spatial-data" class="nav-link" data-scroll-target="#wrong-spatial-data"><span class="header-section-number">19.2</span> Wrong Spatial Data</a></li>
+  <li><a href="#gaps-in-data-missing-data" id="toc-gaps-in-data-missing-data" class="nav-link" data-scroll-target="#gaps-in-data-missing-data"><span class="header-section-number">19.3</span> Gaps in data &amp; Missing data</a></li>
+  <li><a href="#unusual-outliers" id="toc-unusual-outliers" class="nav-link" data-scroll-target="#unusual-outliers"><span class="header-section-number">19.4</span> Unusual Outliers</a></li>
   </ul>
 </nav>
     </div>
@@ -330,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></h1>
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></h1>
 </div>
 
 
@@ -367,9 +397,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Not all of these data smells are detectable in code. You may have to ask people about the data. You may have to compare it to another dataset yourself. Does the agency that uses the data produce reports from the data? Does your analysis match those reports? That will expose wrongly derived data, or wrong units, or mistakes you made with inclusion or exclusion.</p>
 <p>But with several of these data smells, we can do them first, before we do anything else.</p>
-<p>We’re going to examine three here as they apply to some precinct-level election results data: wrong type, missing data and gaps in data.</p>
-<section id="wrong-type" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="wrong-type"><span class="header-section-number">14.1</span> Wrong Type</h2>
+<p>We’re going to examine several here as they apply to some <a href="https://opendata.maryland.gov/Budget/State-of-Maryland-Payments-Data-FY2008-to-FY2024/7syw-q4cy">Maryland state government payments data</a> and <a href="https://opendata.maryland.gov/Budget/State-of-Maryland-Grant-and-Loan-Data-FY2009-to-FY/absk-avps">Maryland state government grant &amp; loan data</a>.</p>
+<section id="wrong-type" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="wrong-type"><span class="header-section-number">19.1</span> Wrong Type</h2>
 <p>First, let’s look at <strong>Wrong Type Of Data</strong>.</p>
 <p>We can sniff that out by looking at the output of <code>readr</code>.</p>
 <p>Let’s load the tidyverse.</p>
@@ -379,12 +409,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the tidyverse</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Then let’s load some precinct-level election results data from Texas for the 2020 general election.</p>
 <p>This time, we’re going to load the data in a CSV format, which stands for comma separated values and is essentially a fancy structured text file. Each column in the csv is separated – “delimited” – by a comma from the next column.</p>
 <p>We’re also going to introduce a new argument to our function that reads in the data, read_csv(), called “guess_max”. As R reads in the csv file, it will attempt to make some calls on what “data type” to assign to each field: number, character, date, and so on. The “guess_max” argument says: look at the values in the whatever number of rows we specify before deciding which data type to assign. In this case, we’ll pick 10.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>texas_precinct_20 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tx_precinct_2020.csv"</span>, <span class="at">guess_max=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>payments <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/State_of_Maryland_Payments_Data__FY2008_to_FY2024_20250115.csv"</span>, <span class="at">guess_max=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
 e.g.:
@@ -392,12 +421,11 @@ e.g.:
   problems(dat)</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 476915 Columns: 13
+<pre><code>Rows: 369008 Columns: 8
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (5): county, precinct, office, candidate, party
-dbl (6): district, votes, absentee, election_day, early_voting, mail
-lgl (2): provisional, limited
+chr (4): Agency Name, Vendor Name, Date, Category
+dbl (4): Fiscal Year, Vendor Zip, Amount, Fiscal Period
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -405,278 +433,159 @@ lgl (2): provisional, limited
 </div>
 <p>Pay attention to the red warning that signals “one or more parsing issues.” It advises us to run the problems() function to see what went wrong. Let’s do that.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(texas_precinct_20)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(payments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,640 × 5
-     row   col expected           actual file 
-   &lt;int&gt; &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;  &lt;chr&gt;
- 1 28450    12 1/0/T/F/TRUE/FALSE 20     ""   
- 2 28450    13 1/0/T/F/TRUE/FALSE 21     ""   
- 3 28451    12 1/0/T/F/TRUE/FALSE 15     ""   
- 4 28451    13 1/0/T/F/TRUE/FALSE 3      ""   
- 5 28465    12 1/0/T/F/TRUE/FALSE 20     ""   
- 6 28465    13 1/0/T/F/TRUE/FALSE 20     ""   
- 7 28466    12 1/0/T/F/TRUE/FALSE 15     ""   
- 8 28466    13 1/0/T/F/TRUE/FALSE 3      ""   
- 9 28472    12 1/0/T/F/TRUE/FALSE 22     ""   
-10 28472    13 1/0/T/F/TRUE/FALSE 17     ""   
-# ℹ 1,630 more rows</code></pre>
+<pre><code># A tibble: 369 × 5
+     row   col expected actual file                                             
+   &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;                                            
+ 1  9568     4 a double L4Z4B  /Users/dwillis/code/datajournalismbook-maryland/…
+ 2 10117     4 a double L4Y1Z  /Users/dwillis/code/datajournalismbook-maryland/…
+ 3 10476     4 a double 0LAND  /Users/dwillis/code/datajournalismbook-maryland/…
+ 4 12308     4 a double H4S    /Users/dwillis/code/datajournalismbook-maryland/…
+ 5 13084     4 a double N2G    /Users/dwillis/code/datajournalismbook-maryland/…
+ 6 15549     4 a double GOR    /Users/dwillis/code/datajournalismbook-maryland/…
+ 7 15772     4 a double N5V    /Users/dwillis/code/datajournalismbook-maryland/…
+ 8 15844     4 a double T1Y    /Users/dwillis/code/datajournalismbook-maryland/…
+ 9 15877     4 a double R2C    /Users/dwillis/code/datajournalismbook-maryland/…
+10 15973     4 a double L4L34  /Users/dwillis/code/datajournalismbook-maryland/…
+# ℹ 359 more rows</code></pre>
 </div>
 </div>
-<p>It produces a table of all the parsing problems. It has 1,640 rows, which means we have that many problems. In almost every case here, the <code>readr</code> library has guessed that a given column was of a “logical” data type – True or False. It did it based on very limited information – only 1,000 rows. So, when it hit a value that looked like a date, or a character string, it didn’t know what to do. So it just didn’t read in that value correctly.</p>
-<p>The easy way to fix this is to set the guess_max argument higher. It will take a little longer to load, but we’ll use every single row in the data set to guess the column type – 476,915</p>
+<p>It produces a table of all the parsing problems. It has 369 rows, which means we have that some problems but not a huge number considering we have 369,000 rows. In almost every case here, the <code>readr</code> library has guessed that a given column was of a “double” data type – a number. It did it based on very limited information – only 10 rows. So, when it hit a value that looked like a date, or a character string, it didn’t know what to do. So it just didn’t read in that value correctly.</p>
+<p>The easy way to fix this is to set the guess_max argument higher. It will take a little longer to load, but we’ll use every single row in the data set to guess the column type – all 322,138 of them.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>texas_precinct_20 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tx_precinct_2020.csv"</span>, <span class="at">guess_max=</span><span class="dv">476915</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>payments <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/State_of_Maryland_Payments_Data__FY2008_to_FY2024_20250115.csv"</span>, <span class="at">guess_max=</span><span class="dv">369008</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 476915 Columns: 13
+<pre><code>Rows: 369008 Columns: 8
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (6): county, precinct, office, candidate, party, election_day
-dbl (5): district, absentee, mail, provisional, limited
-num (2): votes, early_voting
+chr (5): Agency Name, Vendor Name, Vendor Zip, Date, Category
+dbl (3): Fiscal Year, Amount, Fiscal Period
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>This time, we got no parsing failures. And if we examine the data types <code>readr</code> assigned to each column using glimpse(), they generally make sense.</p>
+<p>No parsing errors this time! You can see what the columns are using the <code>glimpse</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(texas_precinct_20)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(payments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 476,915
-Columns: 13
-$ county       &lt;chr&gt; "Newton", "Newton", "Newton", "Newton", "Newton", "Newton…
-$ precinct     &lt;chr&gt; "Box 1", "Box 1", "Box 1", "Box 1", "Box 1", "Box 1", "Bo…
-$ office       &lt;chr&gt; "Registered Voters", "Ballots Cast", "President", "Presid…
-$ district     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ candidate    &lt;chr&gt; NA, NA, "Donald J Trump", "Joseph R Biden", "Jo Jorgensen…
-$ party        &lt;chr&gt; NA, NA, "REP", "DEM", "LBT", "GRE", NA, NA, NA, NA, NA, N…
-$ votes        &lt;dbl&gt; 1003, 665, 557, 92, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 553,…
-$ absentee     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ election_day &lt;chr&gt; NA, "141", "124", "11", "2", "2", "0", "0", "0", "0", "0"…
-$ early_voting &lt;dbl&gt; NA, 524, 433, 81, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 430, 8…
-$ mail         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ provisional  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ limited      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…</code></pre>
+<pre><code>Rows: 369,008
+Columns: 8
+$ `Fiscal Year`   &lt;dbl&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, …
+$ `Agency Name`   &lt;chr&gt; "AID TO UNIVERSITY OF MD MEDICAL SYSTEM", "BALTIMORE C…
+$ `Vendor Name`   &lt;chr&gt; "U M M S", "3M PHJ3884", "4 IMPRINT", "A J STATIONERS"…
+$ `Vendor Zip`    &lt;chr&gt; "21273", "15250", "53201", "21226", "21228", "21210", …
+$ Amount          &lt;dbl&gt; 9701191.00, 6212.00, 8312.96, 21810.09, 30195.57, 1002…
+$ `Fiscal Period` &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ Date            &lt;chr&gt; "01/01/2008 12:00:00 AM", "01/01/2008 12:00:00 AM", "0…
+$ Category        &lt;chr&gt; "Vendor Payment", "Vendor Payment", "Vendor Payment", …</code></pre>
 </div>
 </div>
-<p>Things that should be characters – like county, precinct, candidate – are characters (chr). Things that should be numbers (dbl) – like votes – are numbers.</p>
-<p>There are some minor problems. The election_day column is a good example. It read in as a number (chr), even though there clearly are numbers in it judging from our initial inspection. Here’s why: the original file has a single value in that column that is “5+”.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>texas_precinct_20 <span class="sc">|&gt;</span> <span class="fu">filter</span>(election_day <span class="sc">==</span> <span class="st">"5+"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 13
-  county   precinct office  district candidate party votes absentee election_day
-  &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       
-1 Anderson 11       Railro…       NA Chrysta … DEM     141       NA 5+          
-# ℹ 4 more variables: early_voting &lt;dbl&gt;, mail &lt;dbl&gt;, provisional &lt;dbl&gt;,
-#   limited &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<p>Because this is just one result that’s weird, we can fix it by comparing the other votes Castaneda received in Anderson to the county totals for her. The difference should be what that “5+” value should be. I’ve done those calculations and it turns out that 49 is the actual likely value.</p>
-<p>We can fix that pretty easily, by changing that value to “49” using <code>case_when</code> and then using <code>mutate</code> to make the entire column numeric.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>texas_precinct_20 <span class="ot">&lt;-</span> texas_precinct_20 <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">election_day =</span> <span class="fu">case_when</span>(</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    election_day <span class="sc">==</span> <span class="st">'5+'</span> <span class="sc">~</span> <span class="st">'49'</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> election_day</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>texas_precinct_20 <span class="ot">&lt;-</span> texas_precinct_20 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">election_day =</span> <span class="fu">as.numeric</span>(election_day))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>When we glimpse() the dataframe again, it’s been changed</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(texas_precinct_20)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 476,915
-Columns: 13
-$ county       &lt;chr&gt; "Newton", "Newton", "Newton", "Newton", "Newton", "Newton…
-$ precinct     &lt;chr&gt; "Box 1", "Box 1", "Box 1", "Box 1", "Box 1", "Box 1", "Bo…
-$ office       &lt;chr&gt; "Registered Voters", "Ballots Cast", "President", "Presid…
-$ district     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ candidate    &lt;chr&gt; NA, NA, "Donald J Trump", "Joseph R Biden", "Jo Jorgensen…
-$ party        &lt;chr&gt; NA, NA, "REP", "DEM", "LBT", "GRE", NA, NA, NA, NA, NA, N…
-$ votes        &lt;dbl&gt; 1003, 665, 557, 92, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 553,…
-$ absentee     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ election_day &lt;dbl&gt; NA, 141, 124, 11, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123, 1…
-$ early_voting &lt;dbl&gt; NA, 524, 433, 81, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 430, 8…
-$ mail         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ provisional  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-$ limited      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…</code></pre>
-</div>
-</div>
-<p>Now we’ve got numbers in the election_day column that we can add.</p>
+<p>Things that should be characters – like agency name, vendor name – are characters (chr). Things that should be numbers (dbl) – like amount and fiscal year – are numbers. We’ve seen before that sometimes dates aren’t defined as date datatypes by R - we can fix that using <code>lubridate</code>.</p>
 </section>
-<section id="missing-data" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="missing-data"><span class="header-section-number">14.2</span> Missing Data</h2>
-<p>The second smell we can find in code is <strong>missing data</strong>.</p>
-<p>We can do that by grouping and counting columns. In addition to identifying the presence of NA values, this method will also give us a sense of the distribution of values in those columns.</p>
-<p>Let’s start with the “mail” column, which represents the number of votes a candidate received in a precinct from ballots cast by mail. The following code groups by the mail column, counts the number in each group, and then sorts from highest to lowest. There are 402,345 NA values in this column. This is most of our rows, so that should give us some pause. Either counties didn’t report votes by mail as a separate category or called it something else. This will impact how we can describe the data.</p>
+<section id="wrong-spatial-data" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="wrong-spatial-data"><span class="header-section-number">19.2</span> Wrong Spatial Data</h2>
+<p>The second smell we can find in code is <strong>wrong spatial data</strong>. Spatial data means data that refers to some geography; in this dataset the only geographical element is the vendor’s zip code. Zip codes should be, at a minimum, five characters long (although composed of numbers, zip codes aren’t used as numbers).</p>
+<p>We can check to see if any of the zip codes are less than five characters by using <a href="https://stringr.tidyverse.org/reference/str_length.html">a function called <code>str_length</code></a> inside a filter:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>texas_precinct_20 <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(mail) <span class="sc">|&gt;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count=</span><span class="fu">n</span>()</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>payments <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Vendor Zip</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_length</span>(<span class="st">`</span><span class="at">Vendor Zip</span><span class="st">`</span>) <span class="sc">&lt;</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">count=</span><span class="fu">n</span>()</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 30 × 2
-    mail  count
-   &lt;dbl&gt;  &lt;int&gt;
- 1    NA 402345
- 2     0  71589
- 3     1   1708
- 4     2    646
- 5     3    277
- 6     4    125
- 7     5     79
- 8     6     35
- 9     7     21
-10     8     21
-# ℹ 20 more rows</code></pre>
+<pre><code># A tibble: 553 × 2
+   `Vendor Zip` count
+   &lt;chr&gt;        &lt;int&gt;
+ 1 2241          2044
+ 2 8873           434
+ 3 2284           356
+ 4 7921           296
+ 5 4915           197
+ 6 8650           195
+ 7 7188           194
+ 8 7101           191
+ 9 1441           133
+10 7102           112
+# ℹ 543 more rows</code></pre>
 </div>
 </div>
-<p>Now let’s try the “provisional” column, which represents the number of accepted provisional votes cast. In this case, there are 135,073 NA values. The rest have different dollar amounts.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>texas_precinct_20 <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(provisional) <span class="sc">|&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count=</span><span class="fu">n</span>()</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 27 × 2
-   provisional  count
-         &lt;dbl&gt;  &lt;int&gt;
- 1          NA 473381
- 2           0   2836
- 3           1    210
- 4           2    105
- 5           3     69
- 6           5     53
- 7           4     44
- 8           6     44
- 9          10     29
-10           7     27
-# ℹ 17 more rows</code></pre>
-</div>
-</div>
-<p>The number of NA values - 473,381 - is even higher, which should give us confidence that most Texas counties did not report provisional votes at the precinct level. Like with mail votes, this helps define the constraints we have to work under with this data.</p>
+<p>So, yes, we definitely have some zip codes that are less than 5 characters long, which is not good, particularly because we don’t have any other geographical information (such as a state) that would tell us whether we’re missing a leading zero or some other character.</p>
 </section>
-<section id="gaps-in-data" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="gaps-in-data"><span class="header-section-number">14.3</span> Gaps in data</h2>
-<p>Let’s now look at <strong>gaps in data</strong>. It’s been my experience that gaps in data often have to do with time, but there are other potential gaps, too. To illustrate those, we’re going to introduce some voter registration data from Yadkin County, North Carolina. Let’s load it and take a look:</p>
+<section id="gaps-in-data-missing-data" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="gaps-in-data-missing-data"><span class="header-section-number">19.3</span> Gaps in data &amp; Missing data</h2>
+<p>Let’s now look at <strong>gaps in data</strong>. These often occur when you have a date or time element in your data, but there are other potential gaps, too. To illustrate those, we’re going to introduce some Maryland state grant and loan data from 2009 forward. Let’s load it and take a look:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>yadkin_voters <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/yadkin_voters.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>md_grants_loans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/State_of_Maryland_Grant_and_Loan_Data__FY2009_to_FY2022_20250115.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
-e.g.:
-  dat &lt;- vroom(...)
-  problems(dat)</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 28456 Columns: 67
+<pre><code>Rows: 19482 Columns: 9
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr  (37): county_desc, voter_reg_num, ncid, last_name, first_name, middle_n...
-dbl   (9): county_id, zip_code, full_phone_number, birth_year, age_at_year_e...
-lgl  (20): mail_addr3, mail_addr4, ward_abbrv, ward_desc, county_commiss_abb...
-date  (1): registr_dt
+chr (6): Grantor, Grantee, Zip Code, Description, Category, Date
+dbl (3): Fiscal Year, Amount, Fiscal Period
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>Each row represents a current or previously registered voter in the county, along with information about that person and the political jurisdictions they reside in. When we talk about gaps, often they indicate the administrative boundaries. Here’s an example: let’s find the most recent <code>registr_dt</code> in this dataset:</p>
+<p>Each row represents a recipient of state grant or loan, along with information about their location and the state agency that provided the money. When we talk about gaps, often they indicate the administrative rules. Here’s an example: let’s count the number of payments in each category (Grant or Loan) by year in this dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>yadkin_voters <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(registr_dt))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>md_grants_loans <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Fiscal Year</span><span class="st">`</span>, Category) <span class="sc">|&gt;</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">Fiscal Year</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Fiscal Year'. You can override using the
+`.groups` argument.</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 28,456 × 67
-   county_id county_desc voter_reg_num ncid     last_name first_name middle_name
-       &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;      
- 1        99 YADKIN      000000086882  ER48215  FINCANNON JOY        LYNN       
- 2        99 YADKIN      000000086881  ER48214  LUCK      ERIN       EILEEN     
- 3        99 YADKIN      000000086883  ER37698  OSBORNE   EMILY      DANIELLE   
- 4        99 YADKIN      000000086880  AC8089   TEMPLE    BRENDA     PUGH       
- 5        99 YADKIN      000000086879  EN44870  EDWARDS   ROCKY      ALLEN      
- 6        99 YADKIN      000000086875  BN367045 HAWKINS   COREY      ALAN       
- 7        99 YADKIN      000000086877  BN273260 LING      ANDREW     STUART     
- 8        99 YADKIN      000000086878  ER48213  SPICER    CHARLES    STANLEY    
- 9        99 YADKIN      000000086876  CG173637 WHITAKER  SABRINA    JOLEIGH RAY
-10        99 YADKIN      000000086874  ER48212  GLEI      SALLY      COWIN      
-# ℹ 28,446 more rows
-# ℹ 60 more variables: name_suffix_lbl &lt;chr&gt;, status_cd &lt;chr&gt;,
-#   voter_status_desc &lt;chr&gt;, reason_cd &lt;chr&gt;, voter_status_reason_desc &lt;chr&gt;,
-#   res_street_address &lt;chr&gt;, res_city_desc &lt;chr&gt;, state_cd &lt;chr&gt;,
-#   zip_code &lt;dbl&gt;, mail_addr1 &lt;chr&gt;, mail_addr2 &lt;chr&gt;, mail_addr3 &lt;lgl&gt;,
-#   mail_addr4 &lt;lgl&gt;, mail_city &lt;chr&gt;, mail_state &lt;chr&gt;, mail_zipcode &lt;chr&gt;,
-#   full_phone_number &lt;dbl&gt;, confidential_ind &lt;chr&gt;, registr_dt &lt;date&gt;, …</code></pre>
+<pre><code># A tibble: 35 × 3
+# Groups:   Fiscal Year [15]
+   `Fiscal Year` Category count
+           &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt;
+ 1          2009 Grant      819
+ 2          2010 Grant      612
+ 3          2010 Loan        76
+ 4          2010 &lt;NA&gt;         1
+ 5          2011 Grant      990
+ 6          2011 Loan        45
+ 7          2011 &lt;NA&gt;         1
+ 8          2012 Grant     1100
+ 9          2012 Loan        58
+10          2013 Grant      986
+# ℹ 25 more rows</code></pre>
 </div>
 </div>
-<p>It’s July 14, 2022. That means that this dataset doesn’t have any records newer than that, so if we were describing it we’d need to include that information.</p>
-<p>What about the most recent <code>birth_year</code>?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>yadkin_voters <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(birth_year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 28,456 × 67
-   county_id county_desc voter_reg_num ncid    last_name  first_name middle_name
-       &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;      
- 1        99 YADKIN      000000086335  ER47897 ADAMS      BLAIN      NOAH       
- 2        99 YADKIN      000000086376  ER47937 ALEXANDER  PERRY      NATHANIEL  
- 3        99 YADKIN      000000086569  ER48064 ALVARENGA… KAREN      ESMERALDA  
- 4        99 YADKIN      000000086849  ER48202 ALVAREZ-A… PABLO      &lt;NA&gt;       
- 5        99 YADKIN      000000086392  ER47953 ARCADIO-P… JAZMIN     &lt;NA&gt;       
- 6        99 YADKIN      000000086060  ER47741 ARELLANO-… ALEX       &lt;NA&gt;       
- 7        99 YADKIN      000000086414  ER47975 ARZATE-HE… ELIDETH    &lt;NA&gt;       
- 8        99 YADKIN      000000086336  ER47898 ARZATE-VE… JESSICA    &lt;NA&gt;       
- 9        99 YADKIN      000000086371  ER47932 BALL       ALEXIS     NYKOL      
-10        99 YADKIN      000000086147  ER47790 BAUTISTA   ALEXANDRIA ROSE       
-# ℹ 28,446 more rows
-# ℹ 60 more variables: name_suffix_lbl &lt;chr&gt;, status_cd &lt;chr&gt;,
-#   voter_status_desc &lt;chr&gt;, reason_cd &lt;chr&gt;, voter_status_reason_desc &lt;chr&gt;,
-#   res_street_address &lt;chr&gt;, res_city_desc &lt;chr&gt;, state_cd &lt;chr&gt;,
-#   zip_code &lt;dbl&gt;, mail_addr1 &lt;chr&gt;, mail_addr2 &lt;chr&gt;, mail_addr3 &lt;lgl&gt;,
-#   mail_addr4 &lt;lgl&gt;, mail_city &lt;chr&gt;, mail_state &lt;chr&gt;, mail_zipcode &lt;chr&gt;,
-#   full_phone_number &lt;dbl&gt;, confidential_ind &lt;chr&gt;, registr_dt &lt;date&gt;, …</code></pre>
-</div>
-</div>
-<p>Lots of 2004 records in there, which makes sense, since those folks are just becoming eligible to vote in North Carolina, where the minimum age is 18. In other words, we shouldn’t see records in here where the “birth_year” is greater than 2004. If we do, we should ask some questions.</p>
-<p>It’s good to be aware of all gaps in data, but they don’t always represent a problem.</p>
+<p>We can see a couple of issues here: first, there is no loan data for FY 2009. That’s mentioned in <a href="https://opendata.maryland.gov/Budget/State-of-Maryland-Grant-and-Loan-Data-FY2009-to-FY/absk-avps">the source page for the data</a>. It’s good to be aware of all gaps in data, but they don’t always represent a problem. Second, and more problematic, there are a few records where the Category is NA - that data is missing. There also are some inconsistent values - there are 50 records in FY2013 with the category of “L” (probably loans) and one in FY 2017 that is listed as “Contract”.</p>
 </section>
-<section id="suspicious-outliers" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="suspicious-outliers"><span class="header-section-number">14.4</span> Suspicious Outliers</h2>
-<p>Any time you are going to focus on a column for analysis, you should check for suspicious values. Are there any unusually large values or unusually small values? Are there any values that should not exist in the data?</p>
-<p>Finally, let’s first look at “registr_dt” again, so we can see if there’s any missing months, or huge differences in the number of registrations by month. If we’re going to work with dates, we should have <code>lubridate</code> handy for <code>floor_date</code>.</p>
+<section id="unusual-outliers" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="unusual-outliers"><span class="header-section-number">19.4</span> Unusual Outliers</h2>
+<p>Any time you are going to focus on a column for analysis, you should check for unusual values. Are there any unusually large values or unusually small values? Are there any values that raise immediate questions about the data? Let’s look at the smallest amounts in the grants and loan data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The <code>floor_date</code> function will allow us to group by month, instead of a single day.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>yadkin_voters <span class="sc">|&gt;</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">registration_month =</span> <span class="fu">floor_date</span>(registr_dt, <span class="st">"month"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(registration_month) <span class="sc">|&gt;</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summarise</span>(</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">count=</span><span class="fu">n</span>()</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(registration_month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>md_grants_loans <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Amount)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 634 × 2
-   registration_month count
-   &lt;date&gt;             &lt;int&gt;
- 1 1900-01-01            12
- 2 1900-05-01             1
- 3 1933-02-01             1
- 4 1949-04-01             1
- 5 1949-12-01             1
- 6 1951-04-01             1
- 7 1955-06-01             1
- 8 1956-05-01             1
- 9 1956-10-01             1
-10 1960-04-01             1
-# ℹ 624 more rows</code></pre>
+<pre><code># A tibble: 19,482 × 9
+   Grantor          Grantee `Zip Code` `Fiscal Year` Amount Description Category
+   &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;   
+ 1 Department of N… Land P… 21285               2009   60   Catherine … Grant   
+ 2 Maryland Depart… UNITED… 21031               2012   96.0 FOOD SERVI… Grant   
+ 3 Conservation Re… Easter… 21601               2018  186.  Rolling Vi… Grant   
+ 4 Maryland Depart… FAMILY… 20877               2013  304   RTTT - EAR… Grant   
+ 5 Maryland Depart… Washin… 21740               2017  361   Hold Harml… Grant   
+ 6 Maryland Depart… THE CH… 21215-3211          2012  362.  FOOD SERVI… Grant   
+ 7 Maryland Depart… ARCHDI… 21227               2012  379.  MARYLAND M… Grant   
+ 8 Maryland Depart… HUMAN … 21158               2013  387   CASH FOR C… Grant   
+ 9 Department of N… The Co… 22209               2012  402.  R Creighto… Grant   
+10 Governor's Offi… Court … 21204               2018  411.  Children's… Grant   
+# ℹ 19,472 more rows
+# ℹ 2 more variables: `Fiscal Period` &lt;dbl&gt;, Date &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>So, uh, if this data is accurate, then we have 13 registered voters who are more than 120 years old in Yadkin County. What’s the most likely explanation for this? Some data systems have placeholder values when certain information isn’t known or available. The next oldest registration month is from 1933, which seems plausible.</p>
+<p>There are two grants for less than $100, which might not be problematic at all, but given that just two of 19,000 are for very small amounts you might wonder if there are suggested amounts for applicants and how tiny ones get evaluated compared to very large requests. As journalists, we should be skeptical of information put in front of us and ask why or what it says about the data itself.</p>
 
 
 </section>
@@ -717,18 +626,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -760,7 +658,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -768,7 +688,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1093,13 +1013,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./filters.html" class="pagination-link" aria-label="Filters and selections">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Filters and selections</span></span>
+      <a href="./mutating.html" class="pagination-link" aria-label="Mutating data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mutating data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./data-cleaning-part-ii.html" class="pagination-link" aria-label="Data Cleaning Part II: Janitor">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
