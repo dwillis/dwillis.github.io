@@ -10,7 +10,187 @@
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Mon, 09 Dec 2024 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 27 Jan 2025 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>LLM Extraction Challenge: Fundraising Emails</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2025/01/27/llm-extraction-challenge-fundraising-emails/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>What kind of sicko signs up for political fundraising emails from just about every committee? Oh, right, that’s me.</p>
+<p>Sure, there’s a certain masochism to this, but I’m genuinely interested in seeing how campaigns communicate their messages to prospective donors and the distance between what they are willing to say in an email to their supporters compared to other contexts. But, as with nearly every aspect of election data, there’s a catch: the fundraising emails don’t have the same kind of unique identifiers that, say, Federal Election Commission records do. At best, they have <a href="https://www.fec.gov/help-candidates-and-committees/advertising-and-disclaimers/">FEC-mandated disclaimers</a>, but even those aren’t as useful as they could be: they use committee names rather than the unique IDs that campaign finance data relies on.</p>
+<p>Here’s where I’ve turned to LLMs to help. Initially, I thought that I’d would be able to use pattern matching to identify and extract disclaimer language from emails, and to a certain degree that’s possible. Many of the emails employ similar language and put the disclaimer near the end of messages, like this one from the Pennsylvania Democratic Party:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2025/01/27/llm-extraction-challenge-fundraising-emails/padem_disclaimer.png" class="img-fluid figure-img" width="246"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The “Paid for by The” is a good marker for this language, but not every committee uses that exact syntax and you can imagine that there might be fundraising emails where the phrase “paid for by the taxpayers” appears in a different part of the email. The other issue is getting the name from the disclaimer - knowing when to stop, basically. Sometimes that’s easy: the entire disclaimer is “Paid for by [name of committee]” and no other nearby text. Other times the disclaimer language just keeps going:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2025/01/27/llm-extraction-challenge-fundraising-emails/cedar_key_disclaimer.png" class="img-fluid figure-img" width="171"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This seems like something I could train a library to detect, and that did cross my mind. But mostly I was interested in seeing both how an LLM would handle this task and whether there were differences between various models, given the same data and prompt. So I took 1,000 <a href="https://political-emails.herokuapp.com/">emails</a> from November 2024 (I get anywhere from 3-12k a month, depending on where we are in the election calendar) and identified the committee name from the disclaimer text (along with the name of the sender, which often is only in the text). Then I fed the same emails to multiple LLMs and provided the following instructions:</p>
+<blockquote class="blockquote">
+<p>Produce a JSON object with the following keys: ‘committee’, which is the name of the committee in the disclaimer that begins with Paid for by but does not include <code>Paid for by</code>, the committee address or the treasurer name. If no committee is present, the value of ‘committee’ should be None. Also add a key called ‘sender’, which is the name of the person, if any, mentioned as the author of the email. If there is no person named, the value is None. Do not include any other text, no yapping.</p>
+</blockquote>
+<p>I ran that prompt against 20 different models via Ollama, Groq and directly (Anthropic and OpenAI), and then compared the results to my original data that I extracted committee names from, using the naming style present in the email. If you’ve played around with a lot of LLMs, you won’t be surprised by the results - or maybe some of them will surprise you:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Total Records</th>
+<th>Committee Matches</th>
+<th>Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OpenAI 4o</td>
+<td>1000</td>
+<td>934</td>
+<td>93.4%</td>
+</tr>
+<tr class="even">
+<td>Claude 3.5 Sonnet</td>
+<td>985</td>
+<td>903</td>
+<td>91.7%</td>
+</tr>
+<tr class="odd">
+<td>OpenAI 4o November</td>
+<td>1000</td>
+<td>858</td>
+<td>85.8%</td>
+</tr>
+<tr class="even">
+<td>Gemma2</td>
+<td>495</td>
+<td>403</td>
+<td>81.4%</td>
+</tr>
+<tr class="odd">
+<td>Llama 3.3</td>
+<td>1000</td>
+<td>802</td>
+<td>80.2%</td>
+</tr>
+<tr class="even">
+<td>Llama 3.1 8b</td>
+<td>507</td>
+<td>406</td>
+<td>80.1%</td>
+</tr>
+<tr class="odd">
+<td>Phi 4</td>
+<td>1000</td>
+<td>798</td>
+<td>79.8%</td>
+</tr>
+<tr class="even">
+<td>Gemma2 27b</td>
+<td>994</td>
+<td>790</td>
+<td>79.5%</td>
+</tr>
+<tr class="odd">
+<td>Claude 3.5 Haiku</td>
+<td>880</td>
+<td>654</td>
+<td>74.3%</td>
+</tr>
+<tr class="even">
+<td>Mixtral</td>
+<td>461</td>
+<td>337</td>
+<td>73.1%</td>
+</tr>
+<tr class="odd">
+<td>QwQ</td>
+<td>996</td>
+<td>716</td>
+<td>71.9%</td>
+</tr>
+<tr class="even">
+<td>Mistral Small</td>
+<td>502</td>
+<td>346</td>
+<td>68.9%</td>
+</tr>
+<tr class="odd">
+<td>DeepSeek R1 32b</td>
+<td>1000</td>
+<td>663</td>
+<td>66.3%</td>
+</tr>
+<tr class="even">
+<td>Starling LM</td>
+<td>270</td>
+<td>168</td>
+<td>62.2%</td>
+</tr>
+<tr class="odd">
+<td>EXAONE 3.5</td>
+<td>960</td>
+<td>582</td>
+<td>60.6%</td>
+</tr>
+<tr class="even">
+<td>InternLM2</td>
+<td>992</td>
+<td>574</td>
+<td>57.9%</td>
+</tr>
+<tr class="odd">
+<td>Llama 3.2 3b</td>
+<td>524</td>
+<td>239</td>
+<td>45.6%</td>
+</tr>
+<tr class="even">
+<td>DeepSeek R1 8b</td>
+<td>781</td>
+<td>296</td>
+<td>37.9%</td>
+</tr>
+<tr class="odd">
+<td>Phi 3</td>
+<td>521</td>
+<td>143</td>
+<td>27.4%</td>
+</tr>
+<tr class="even">
+<td>Solar Pro</td>
+<td>1000</td>
+<td>259</td>
+<td>25.9%</td>
+</tr>
+</tbody>
+</table>
+<p>First, an explainer on what the columns mean: the total records is the number, out of 1,000 emails, where the LLM was able to generate a JSON response without raising an error. The commercial models, plus newer open source ones such as Llama 3.3, DeepSeek’s 32b version and Phi 4, were basically able to do that for all or nearly all of the records. Others struggled to get even half of them.</p>
+<p>The number of committee matches represents the number of times when the LLM did produce a valid response that it correctly matched the committee in the training dataset. My own cutoff for “good enough” here is about 80 percent, meaning that in addition to the models I mentioned above, Gemma2 (27b version) gets pretty close.</p>
+<p>What stands out to me here is the performance of Llama 3.3 and the drop-off for the small models (honestly, though, shout-out to InternLM2, which did kinda ok!). I recognize that the latter condition is probably open to change given some fine-tuning, of which I performed none. This is zero-shot stuff. My next steps are to do more emails and I’d love some feedback on ways to improve this process.</p>
+<p>You can see the training data, the JSON files and the code used to produce them at <a href="https://github.com/dwillis/LLM-Extraction-Challenge">this repository</a>.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2025/01/27/llm-extraction-challenge-fundraising-emails/</guid>
+  <pubDate>Mon, 27 Jan 2025 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>The A in AI Stands for Archives</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -2489,36 +2669,6 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2017/12/28/academy-fight-song-part-2/</guid>
   <pubDate>Thu, 28 Dec 2017 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Government and Civic Tech</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2016/09/29/government-and-civic-tech/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Looking at what has happened to civic technology organizations at the national level lately, you could get the impression that the federal government, having absorbed some of the lessons of organizations like the <a href="http://sunlightfoundation.com/blog/2016/09/20/statement-from-sunlight-foundations-board-chairman/">Sunlight Foundation</a> and <a href="http://civichall.org/civicist/recharging-the-brigade-code-for-americas-challenge/">Code for America</a>, has pulled energy and talent away from those entities, making it harder for them to exist.</p>
-<p>I think there is some truth to this, but it is not nearly the whole story and we risk drawing the wrong lessons from it. In general, I subscribe to <a href="https://medium.com/@joshuatauberer/civic-techs-act-iii-is-beginning-4df5d1720468#.f22421fan">what Josh Tauberer says on this</a>, but I think it’s worth exploring what it means after this migration from civic organizations into government.</p>
-<p>The flow of people from civic technology groups (and those in similar orbits, like journalism) into government service is, in once sense, part of a progression. Organizations like Sunlight have done some of the work they argue that government should be doing: making data more easily available and creating user experiences that citizens might actually find useful. It makes sense that governments do that where appropriate, and to some extent that could impact Sunlight’s ability to raise money to do similar work.</p>
-<p>I am not convinced that government technologists are doing the same work, however, or that, as <a href="http://krues8dr.com/blog/2016/09/27/the-end-of-the-second-act-of-civic-tech/">Bill Hunt writes</a>, such efforts are “seemingly bypassing the need for civic tech entirely.” Labeling that kind of work as civic tech is accurate only up to a point. Instead, I’d offer “government tech” as a more fitting description of the work being done. This makes sense: if the federal government hires technologists, it stands to reason that they would work on government technology issues and problems. The examples of 18F and the U.S. Digital Service show that, given the resources, government technologists will tackle government problems like <a href="https://github.com/18F/micropurchase">procurement</a>, <a href="https://github.com/18F/web-design-standards">design</a> and <a href="https://github.com/18F/hhs-acf-uc-dashboard">data integration</a>.</p>
-<p>There are some exceptions to this – I am still impressed and somewhat surprised that 18F has been working on an <a href="https://github.com/18F/openFEC">API for the Federal Election Commission’s data</a>, for example – but as a taxpayer I would expect that government technologists work on the many issues and opportunities their situations present. One could reasonably argue that there is a civic component of this, and to a point that’s true. But I do not think it is identical to the mission and purpose of organizations such as Sunlight or to the work of individuals like <a href="https://razor.occams.info/">Josh Tauberer</a>. Parallel at times, sure.</p>
-<p>Think of it this way: if Congress ever decided to do something like 18F or USDS, an obvious project would be adding voting data to Congress.gov. But there’s a reason that <a href="https://www.congress.gov/">Congress.gov</a>, as fine as it is, doesn’t show recent votes by lawmakers or offer users the ability to compare voting records: it serves no <strong>government</strong> purpose to do so. Comparing voting records, or seeing how often your representative misses votes, are civic tasks: they are designed to benefit citizens, regardless of the wishes of elected officials. That’s one reason people like <a href="https://www.govtrack.us/">GovTrack</a>: it tells them things they want to know about their representatives that those representatives have little incentive to provide.</p>
-<p>The barriers to providing such information have never been technical, not really. When Josh and others were asking the Library of Congress for bulk legislative data 10 years ago, it wasn’t as if the technical capacity to make it happen didn’t exist. The reasons given for it not happening were entirely political.</p>
-<p>That doesn’t mean that government technology work has little or no civic benefit: plenty of it clearly does, and my friends who work in agencies in desperate need of their talent are doing this for all of us. As a taxpayer and someone who works with technology, I value that work and I hope it continues.</p>
-<p>But it might not, for a couple of reasons. Funding for government programs can end, some of these jobs are explicitly temporary and many of the people attracted to government service in this area have skills that are worth far more in the private sector. If you are hired into the federal government near or at a <a href="https://www.opm.gov/policy-data-oversight/pay-leave/salaries-wages/salary-tables/pdf/2016/GS.pdf">GS-15 level</a>, there is little room for you to earn more. Some could choose to stay, for good reasons.</p>
-<p>Some of the people who joined 18F and USDS will go back to the private sector, and we’ve got some for-profit efforts that do similar work in the civic space, too. That’s not a bad thing; it validates the idea that information can be powerful and useful. I don’t begrudge people making money from public information (well, maybe I do if they are government employees themselves), but as with government work, it’s not exactly the same work as what Dan O’Neil and his <a href="http://www.derivativeworks.com/2016/05/leaving-smart-chicago-for-ad-hoc.html">former colleagues at Smart Chicago Collaborative</a> have been doing. That stuff is hard.</p>
-<p>Institutions and programs come and go. What remains is the need for focused work that makes it easier for citizens to understand what their governments are doing with their money and in their name. Some of that can be done by government. Some of that can be done by the private sector. But some of it - the less popular stuff that can’t be easily monetized or takes a lot of effort to do - won’t ever happen without dedicated people who work outside those two sectors. That’s part of what made the idea of Sunlight Labs, even if it didn’t always deliver the goods, so necessary.</p>
-<p>I agree that we largely are past the days of foundations throwing millions of dollars at individual tools and platforms that marry technology with a civic purpose (and here I should say that a project of mine, <a href="http://www.openelections.net/">OpenElections</a>, got <a href="http://www.knightfoundation.org/press/releases/six-ventures-bring-data-public-winners-knight-news">$200,000 from the Knight Foundation</a>, which was a huge help). That’s probably a good thing in some respects, because it led to a surplus of similarly-oriented projects that all required maintenance. We’ve seen the result of that: consolidation or elimination, <a href="https://theunitedstates.io/">hopefully preserving</a> the best ideas and practices. If funders want to see a different focus, or more explicit outcomes, the people working in this area need to respond to that or find another way to do what they want to do.</p>
-<p>It may be frustrating to everyone in this space that we are still working on the infrastructure of civic information, but there is so much work to be done, and there is clear evidence that building such platforms can make it easier for others to create <a href="https://dssg.uchicago.edu/2015/07/09/sunlight-project-finding-legislative-plagiarism/">meaningful things</a> that put more power in the hands of citizens. Let’s keep doing that however we can, trying to avoid the mistakes we’ve all made, and not forget that people, and not institutions, are why we do this.</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2016/09/29/government-and-civic-tech/</guid>
-  <pubDate>Thu, 29 Sep 2016 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

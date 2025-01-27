@@ -42,7 +42,7 @@ website:
         href: teaching
 
   page-footer: 
-    left: "© Copyright 2022 Derek Willis. Published using Quarto."
+    left: "© Copyright 2025 Derek Willis. Published using Quarto."
 format:
   html:
     theme: flatly
