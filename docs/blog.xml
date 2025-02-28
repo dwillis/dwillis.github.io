@@ -10,7 +10,464 @@
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Mon, 27 Jan 2025 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 28 Feb 2025 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Turning Congressional Job Listings Into Data Using LLM</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2025/02/28/turning-congressional-job-listings-into-data/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>As a former Hill reporter, some of the best never-published stories revolved around the treatment (usually, mistreatment) of congressional staff. The people who actually make Congress work mostly don’t have a lot of power and are subject to the demands, schedules and whims of the lawmakers who employ them. It’s also tough to get a real understanding of how lawmakers actually understand and value the work that their staff does. Many of them are elected for reasons unrelated to their managerial skills.</p>
+<p>Aside from whispered conversations, it’s tough to get much insight into how lawmakers understand what their staff should do. That’s why the House of Representatives job listings matter. They’re one of the few public signals we get about how members think about the staff they hire. But the problem? These listings are scattered across weekly bulletins that arrive by email, buried in text and formatted just inconsistently enough to make structured analysis a pain.</p>
+<section id="starting-out-as-a-pdf" class="level3">
+<h3 class="anchored" data-anchor-id="starting-out-as-a-pdf">Starting Out as a PDF</h3>
+<p>Each week, the House publishes a bulletin with job openings (and also internships). Some are for committee staff, some are for member offices, and they cover everything from entry-level staff assistants to senior policy advisors. Not every office posts openings there, but a good number do. The listings follow a loose format, but with plenty of quirks:</p>
+<ul>
+<li>Some offices spell out duties in detail; others are vague.</li>
+<li>Pay transparency is rare. A few offices mention salary, but most listings leave job seekers guessing.<br>
+</li>
+<li>Different hiring practices. Some offices want a resume and cover letter, others use an internal portal, and a few ask applicants to email a generic address.</li>
+</ul>
+<p>Here’s a pretty typical example:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2025/02/28/turning-congressional-job-listings-into-data/house_job1.png" class="img-fluid figure-img" width="332"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If you want to track hiring trends, analyze the kinds of skills offices value, or even see which members are expanding their staff, this blob of text isn’t good enough. You need structured data. - not just a weekly dump of text. That’s where the <a href="https://llm.datasette.io/en/stable/">Python library llm</a>, made by the enthusiastically productive <a href="https://simonwillison.net/">Simon Willison</a>, comes in handy.</p>
+<section id="better-structure-through-llm" class="level4">
+<h4 class="anchored" data-anchor-id="better-structure-through-llm">Better Structure Through LLM</h4>
+<p>To make sense of the job postings, I first dumped out the text of each PDF using the <code>pdftotext</code> command-line utility. It’s a great tool that should be in every journalist’s toolbox. An example of the exported text is <a href="https://github.com/dwillis/house-jobs/blob/master/output/HVAPS_Template_Members_2025_02__24.txt">here</a> Then I consulted my friendly neighborhood Large Language Model (Claude 3.5 in this case) to assist me in writing Python code using the llm library that would parse the job listings and create structured data. I wanted to do a couple of things, but the goal was to have a process that:</p>
+<ul>
+<li>Splits the raw text into job listings using MEM-XXX-YY pattern.</li>
+<li>Runs each listing through an LLM to extract structured fields.</li>
+<li>Outputs the data into JSON for analysis.</li>
+</ul>
+</section>
+<section id="splitting-the-text-into-job-listings" class="level4">
+<h4 class="anchored" data-anchor-id="splitting-the-text-into-job-listings">Splitting the Text Into Job Listings</h4>
+<p>The job bulletins are lengthy, unstructured text files, and some of them would exceed the input limits of an LLM. The first step was to break them into individual listings using <strong>regex-based chunking</strong>, using the MEM-XXX-YY pattern.</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> re</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> typing <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> List</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> split_into_job_chunks(text: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> List[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>]:</span>
+<span id="cb1-5">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Split text into chunks based on MEM- pattern while keeping each job listing intact."""</span></span>
+<span id="cb1-6">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Split on MEM- pattern but keep the delimiter</span></span>
+<span id="cb1-7">    chunks <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> re.split(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r'(?=MEM-)'</span>, text)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>:]</span>
+<span id="cb1-8">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Remove empty chunks and strip whitespace</span></span>
+<span id="cb1-9">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> [chunk.strip() <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> chunk <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> chunks <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> chunk.strip()]</span></code></pre></div>
+<p>This ensured that each <strong>MEM-XXX-YY</strong> entry remained intact, preserving all details associated with each job.</p>
+</section>
+<section id="extracting-key-fields-using-google-gemini" class="level4">
+<h4 class="anchored" data-anchor-id="extracting-key-fields-using-google-gemini">Extracting Key Fields Using Google Gemini</h4>
+<p>Once I had clean job chunks, I passed them through a structured extraction process using <a href="https://ai.google.dev/gemini-api/docs/models/gemini">Google Gemini’s Flash 2.0 model</a>. The llm library makes this very easy, thanks to a plugin that supports Gemini models. Originally I wrote <a href="https://github.com/dwillis/house-jobs/blob/master/parser.py#L35">the prompt to process each listing</a>, but then I asked Gemini to improve my prompt for me. <a href="https://github.com/dwillis/house-jobs/blob/master/parser2.py#L22-L42">It absolutely did</a>, adding not only some formatting instructions but also suggesting I pull out information about equal opportunity hiring statements in the listings:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">command <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"""cat temp_chunk.txt | llm --system $'You are an expert in parsing congressional job listings from text files split into chunks. Extract job listings into a structured JSON array where each listing is an object with consistent fields. Handle the following formatting requirements: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-2"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            1. Convert any non-ASCII characters </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">(including smartquotes, em-dashes, etc.</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">) to their closest ASCII equivalent </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-3"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            2. Normalize bullet points and list formatting into consistent structures </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-4"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            3. Maintain hierarchical relationships in nested lists </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-5"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            4. Preserve paragraph breaks in description fields </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-6"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            5. Format all dates in ISO 8601 format </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">(YYYY-MM-DD</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">)' </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-7"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            -m gemini-2.0-flash-exp -o json_object 1 </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-8"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            $'Create a JSON array containing objects for each job listing with the following required fields: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-9"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - id: Job ID in format "MEM-XXX-YY", where XXX is the number from the listing </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">(do not use literally XXX</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">). do not carry over IDs from one chunk to the next. </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-10"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - position_title: Full position title </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-11"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - office: Congressional office or committee name - do not use placeholders </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-12"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - location: Primary work location </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-13"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - posting_date: Date from filename </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">(format: YYYY-MM-DD</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">) </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-14"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - description: Full job description </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-15"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - responsibilities: Array of responsibilities </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-16"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - qualifications: Array of required qualifications </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-17"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - how_to_apply: Application instructions </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-18"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - salary_info: Salary information if provided </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">(use null if not specified</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">) </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-19"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - contact: Contact information for applications </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-20"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            - equal_opportunity: Equal opportunity statement if present </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">(use null if not specified</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">) </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\\</span></span>
+<span id="cb2-21"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">            Do not process introductory boilerplate language or subscribe/unsubscribe sections as job listings. Format all text fields as UTF-8 strings, convert bullet points to array elements, and maintain paragraph structure in longer text fields. Remove any formatting characters while preserving the semantic structure of the content.'"""</span></span></code></pre></div>
+<p>The prompt provides an example of how I wanted the JSON to look, but Simon has actually made that part better today with his <a href="https://simonwillison.net/2025/Feb/28/llm-schemas/">JSON schemas option for llm</a>. I will be using that going forward.</p>
+<p>Oh, and cost? I’m cheap, so I ran this using Gemini’s 1,500 daily API calls on the free tier. Took me a few days. $0.</p>
+</section>
+<section id="and-now-you-have-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="and-now-you-have-the-data">And Now You Have the Data</h4>
+<p>Running that script produced structured JSON data of the PDF version I showed above that looks like this:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb3-2">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"id"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"MEM-085-24"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-3">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"position_title"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Staff Assistant"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-4">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"office"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rep. French Hill (AR02)"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-5">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"location"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Washington D.C."</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-6">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"posting_date"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2024-03-04"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-7">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"description"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"The Office of Rep. French Hill (AR02) seeks to fill the position of staff assistant in the Washington D.C. office.</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Primary responsibilities include, but are not limited to, answering phones, processing mail, greeting visitors, processing flag and tour requests, supporting the staff’s day to day activities, various office management tasks, and assisting with long-term projects.</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Arkansas ties are preferred."</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-8">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"responsibilities"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span></span>
+<span id="cb3-9">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Answering phones"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-10">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Processing mail"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-11">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Greeting visitors"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-12">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Processing flag and tour requests"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-13">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Supporting the staff’s day to day activities"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-14">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Various office management tasks"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-15">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Assisting with long-term projects"</span></span>
+<span id="cb3-16">    <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-17">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"qualifications"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span></span>
+<span id="cb3-18">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Clear communication skills for verbal and written correspondence"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-19">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A professional demeanor and a positive disposition while interacting with visitors"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-20">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Ability to creatively problems solve in a fast-paced environment"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-21">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Time management skills including the ability to prioritize, and track work status"</span></span>
+<span id="cb3-22">    <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-23">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"how_to_apply"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Applicants should send their resume and cover letter to AR02.Applications@mail.house.gov, with the subject line ‘Staff Assistant’."</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-24">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"salary_info"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">null</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-25">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"contact"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"AR02.Applications@mail.house.gov"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb3-26">    <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">"equal_opportunity"</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">:</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">null</span></span>
+<span id="cb3-27">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+<p>There’s a lot of stuff in here, and most of it is still long-ish text. But, now I can treat sections of the job listings individually rather than as a whole. That’s important for several reasons.</p>
+</section>
+<section id="what-this-data-can-tell-us" class="level4">
+<h4 class="anchored" data-anchor-id="what-this-data-can-tell-us">What This Data Can Tell Us</h4>
+<p>With this structured data, I can analyze trends in congressional hiring, asking questions such as:</p>
+<ul>
+<li>Which roles are in demand?</li>
+<li>Do members prioritize legislative work or communications?</li>
+<li>How transparent are offices about pay?</li>
+<li>How have the descriptions of roles changed over time?</li>
+</ul>
+<p>For job seekers, structured job listings mean better searchability — no more combing through PDFs just to find which offices are hiring. For Hill watchers, these postings offer a unique way to track how members think about staffing. Members might not put out press releases about what kind of staff they value most, but their job postings help tell the story. And with the right tools, we can read between the lines.</p>
+<p>The next steps here are to collect all of these listings-as-data, remove duplicates (because many of the listings are posted for weeks) and then make it easier to compare and contrast them. Luckily, llm and other libraries from Simon will help with all of that, and in particular I’m looking forward to using <a href="https://llm.datasette.io/en/stable/embeddings/cli.html">llm’s embeddings functionality</a> to help surface similarities in listings and their features. More to come on that. In the meantime, you can find the original PDFs, text versions and JSON files at <a href="https://github.com/dwillis/house-jobs">this repository</a>. If you want to collaborate on this work or have questions, <a href="https://thescoop.org/help/">I’d love to hear from you!</a></p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2025/02/28/turning-congressional-job-listings-into-data/</guid>
+  <pubDate>Fri, 28 Feb 2025 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>LLM Extraction Challenge: Fundraising Emails</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -2612,63 +3069,6 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2018/04/05/the-best-training/</guid>
   <pubDate>Thu, 05 Apr 2018 01:20:05 GMT</pubDate>
-</item>
-<item>
-  <title>Academy Fight Song, Part 2</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2017/12/28/academy-fight-song-part-2/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>It begins, as so many things do these days, with a <a href="https://twitter.com/jmart181/status/943316917019955201">tweet</a>.</p>
-<p>The tweet references <a href="https://ejobs.umd.edu/postings/55483">an academic job listing</a> from the University of Maryland, where I have taught journalism as an adjunct, and the eye-rolling reactions of professional journalists to it. Like many job listings in the past few years, it has just the right level of “Computer Jesus” in its minimum (!) qualifications:</p>
-<blockquote class="blockquote">
-<p>The successful candidate will have a passion for journalism and the watchdog role it should play in a democratic society. Research and teaching topics of interest to both schools include data analytics as applied to journalism and/or social media; fairness, accountability and transparency in algorithms; news automation; audience analytics and engagement, including those illuminating trends in politics, society or sports; data visualization; social networks; and/or digital innovation. The successful candidate will be expected to have a Ph.D.&nbsp;at the time of appointment.</p>
-</blockquote>
-<p>Now, let’s get something out of the way: there are indeed academics who are qualified for this job, and presumably one of them will be hired to do it. My belief that the population of qualified candidates with <em>substantial journalism experience</em> is relatively small may be mistaken; I’d love to see evidence otherwise.</p>
-<p>Back to the tweet by <a href="https://communication.depaul.edu/faculty-and-staff/faculty/Pages/martin2.aspx">Jason Martin</a>, who chairs DePaul’s journalism program and previously worked as a reporter. <a href="https://twitter.com/jmart181/status/943316917019955201">Martin’s claim</a> is about how many professionals view their academic counterparts with disdain, to the extent that we think about them at all. That’s a real thing, although I don’t think that’s what motivated my colleagues’ reactions. As a journalist who has taught at the university level for more than 15 years, I think the reason that some of my colleagues who do work in data journalism engaged in the Twitter eye-rolling is pretty clear: the bulk of the most relevant work being done in these areas is being done in newsrooms by professional journalists. Most of them will only ever teach as an adjunct and, despite the efforts of good administrators, are rarely accepted as anything but temporary necessities by traditional faculty.</p>
-<p>So, when we hear this: “Professionals fail to recognize the ways our research informs &amp; enhances industry.”</p>
-<p>We also hear this: “We need working professionals to teach many of our advanced skills-based classes that we tell students keep us on the cutting edge, but they will never be considered full participants in higher education unless they have credentials we recognize.”</p>
-<p>You would roll your eyes, too.</p>
-<p>/////</p>
-<p>There is no good reason why the study of what used to be called “computer-assisted reporting” and its descendants has languished in relative obscurity at many universities. If you’re looking for academic work on this area, you could start with <a href="http://www.unc.edu/~pmeyer/">Phil Meyer</a>, who practiced journalism using social science methods and then continued his work in academia.</p>
-<p>Here’s <a href="http://web.archive.org/web/20070428083511/http://www.asne.org/kiosk/editor/september/meyer.htm">what Meyer wrote in 1996 about journalism education</a>:</p>
-<blockquote class="blockquote">
-<p>Engineering, medicine, business administration, library science - almost any profession you can name that has research committed professional schools has always generated a continuing demand for new knowledge. Every new graduating class from a school of engineering or medicine is viewed nervously by the practitioners in its field because the kids have knowledge that the old guys don’t. Aging engineers wind up in administrative or sales jobs because the technology has changed faster than their ability to keep up.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>The sources of that change have been people with research degrees, many of them in universities.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Whether you are ready or not, that is happening to us, even on the craft side. New graduates who can create Web pages, digitize photographs and do electronic searching are in demand precisely because they have skills that midcareer professionals haven’t had the time or interest to acquire. There is also demand for newly trained database reporters who have analytical and statistical skills never learned by their seniors.</p>
-</blockquote>
-<p>The whole thing is worth a read, and then some reflection. It’s not that there aren’t scholars who are examining the use of new technologies or the changes that have overrun journalism in the past 20 years. But Meyer also created and critiqued techniques, like <a href="http://www.academia.edu/860996/The_USA_Today_index_of_ethnic_diversity">The USA TODAY Diversity Index</a> he and Shawn McIntosh, then at the news organization, invented in 1991. His work has been deeply relevant to how we think about journalism but also how we practice it. That’s a big reason why professional journalists doing data-related work hold Meyer in such high esteem.</p>
-<p>The sad part is that Meyer could just as easily have published his essay in 2000, 2004, 2008, 2012 or even 2017. Journalism education has not remained exactly the same as it was in 1996 - there are more classes in different areas, including quantitative skills - but these changes have not been broad-based nor have they substantially changed the composition of faculties. Are journalism schools producing the kinds of research now that are guiding newsrooms? Having taught at seven different universities during the past 15 years, my impression is that journalism graduates are more <em>educated</em> and have been exposed to new techniques and technologies, although not in the depth needed. I also believe that the driver of this growth has been the work of industry, not academia. As an aging professional, I worry about graduating kids from other fields more than I do those graduating from most journalism schools.</p>
-<p>Advanced degrees, which could be providing the fuel for pushing our field forward, are instead viewed either as necessary credentials just to enter the profession or as a pathway to teaching and research that too often does not address what is happening in the profession, particularly when it comes to the use of quantitative methods.</p>
-<p>There are, of course, journalism programs that do a better job of teaching data courses: hiring full-time faculty and even making them eligible for tenure, or offering multiple classes instead of one. But overall the picture is not encouraging. In their 2016 report, <a href="https://journalism.columbia.edu/system/files/content/teaching_data_and_computational_journalism.pdf">“Teaching Data and Computational Journalism”</a>, Charles Berret and Cheryl Phillips surveyed more than 100 journalism programs from the United States and found that “many journalism programs do not have a faculty member skilled in data journalism” and nearly half offer no classes at all. Most are taught by professionals working as adjuncts.</p>
-<p>Martin <a href="https://twitter.com/jmart181/status/943327660062724096">suggests</a> that this need not be the case: “And let’s be blunt: good quant PhDs with journalism experience can teach data journalism.” Nobody denies that this is the case, but I’d like to see a list of good quant PhDs with journalism experience currently employed by universities. Is the academy producing enough of them to take over the instruction of data analysis from professionals? If not, is there any expectation of when that might be the case? Are the incentives even in place for this to happen?</p>
-<p>Universities that want to serve student needs when it comes to data and digital skills and practices cannot say they are doing it well if they off-load that responsibility to adjuncts teaching upper-level electives or as part of graduate programs that can be prohibitively expensive. Every time I teach, I hear from graduating seniors that they wished they had had <em>any</em> exposure to these types of classes in the past four years - and these are students from R1 research institutions with well-known journalism programs.</p>
-<p>The report offers multiple suggestions for changing this situation – all of them useful – but there is a more fundamental issue at play here, the one that Martin’s tweet raises: if there are loads of benefits to journalism that accrue from the work of journalism PhDs, why do many professional journalists think otherwise? What can be done about that? And are universities willing to take those steps?</p>
-<p>It’s instructive to look at <a href="https://twitter.com/jmart181/status/943708060643676160">Martin’s response</a> to a question about why a PhD requirement was necessary for that Maryland job:</p>
-<blockquote class="blockquote">
-<p>Produce research that contributes to development/reputation of dept/college &amp; field. Research lines such as gig in question are expected to create publications thru rigor, peer review. Universities have standards for research productivity &amp; evaluate faculty across disciplines.</p>
-</blockquote>
-<p>All of these benefit the university, the college/department and the researcher, perhaps in that order. If the research itself has benefits for the industry or teaching, how are those valued? Professionals can rightly look at this situation and think: how does this job benefit the aspect of journalism education most visible to them - the education of future journalists and the study of their craft? These aren’t trolling questions. Professional journalists want to increase the skills of journalism students and the number of them who can do quantitative work. We wouldn’t essentially volunteer our time teaching if we didn’t.</p>
-<p>I think there are at least two areas that we need to address. The first is to have academics make their research more accessible (both in terms of relevance and availability) and the second is for professionals to have a way to participate in the conversation about that research in a manner that promotes respect and allows industry concerns to inform academic research.</p>
-<p>To do both, we could look to political science, where quantitative methods are blossoming along with an ethos that encourages the sharing of data and research. In early January I’ll be attending the <a href="http://spsa.net/">Southern Political Science Association</a> conference, mostly because it has the academic work that is most relevant to my own professional interests of politics and elections (also, it’s in New Orleans). The work of the people I go to see is very much grounded in academic tradition; it also often speaks directly to current issues and events. I get both story ideas and new ways of thinking about how we are doing (or not doing) our job from this conference, and I can recognize the potential uses for journalism. And increasingly, it’s <a href="https://dataverse.harvard.edu/">easier</a> to get at their data. The potential impacts of quantitative political science research have not been <a href="https://www.nytimes.com/2014/10/29/upshot/professors-research-project-stirs-political-outrage-in-montana.html?_r=0">without controversy</a>, but from a professional perspective these are conversations we need to be having. And political science has done a <a href="https://www.washingtonpost.com/news/monkey-cage/">better job</a> lately of trying to make its research <a href="https://www.vox.com/mischiefs-of-faction">more digestible for general audiences</a>, which communication scholars could use as a basis for experimentation.</p>
-<p>In contrast, the <em>theme</em> of the 2017 Association for Education in Journalism and Mass Communication <a href="http://aejmc.org/events/chicago17/about/">conference</a> was “Closing the Gap: Media, Research and the Profession.” <a href="https://guidebook.com/guide/97687/event/16164480/">Here’s the nut</a>: “Professionals no longer need some of the skills taught in our classes, and, too often, research conducted by educators is no longer relevant to a rapidly evolving industry.” Better sharing would help combat this, and it starts small. Journalism academics should insist on publishing their research instead of having faculty bio pages that contain literally no links to their work, <a href="https://communication.depaul.edu/faculty-and-staff/faculty/Pages/martin2.aspx">Dr.&nbsp;Martin</a>. More <a href="https://github.com/mwe400/IJOCNewsOnEarlyWeb">GitHub repositories</a>, more open sharing of work, please. “We’d like to share our research about mass communication but are prevented by publishing agreements” is another classic eye-roller, even if it’s not something within the complete control of academics. Professionals are <a href="https://github.com/datadesk">figuring this out</a>; it’s time academics join us so that they can dispel our weaker (or non-existent) criticism.</p>
-<p>The next necessary step to reduce the disconnect that Martin cites is to get more journalists and academics talking about each other’s work. Nikki Usher, a George Washington University professor, graciously (particularly considering <a href="http://thescoop.org/archives/2012/05/13/lost-in-the-weeds/">my reaction</a> to our initial encounter) offered to organize such a session last year when I was <a href="https://github.com/dwillis/systems-for-reporting">teaching</a> at GW’s School of Media and Public Affairs. <a href="https://twitter.com/nikkiusher/status/943479839784423424">Her description of the session</a> is accurate; I’d only add that I don’t look to academics to develop literal tools for use in the newsroom but to <em>evaluate</em> what we’re doing in a way that we often can’t do. Some of the ideas I offered up include things that probably do sound trivial or boring to researchers, but as newsrooms are literally redefining their structures and operations, even measuring the outputs would help advance our understanding of the craft. These conversations will be awkward or even uncomfortable at times; they are all the more necessary for it. Prof.&nbsp;Usher’s has <a href="https://medium.com/@nikkiusher/does-anyone-care-about-journalism-research-no-really-358d789b749a">thoughts on this process that are worth reading</a>, although in some cases I think she answers glib questions with glib answers.</p>
-<p>I am not anti-academic. I saw the frustrations my dad dealt with in achieving his PhD and securing a university job that expected published research. My own undergraduate education was more theoretical (<a href="https://theconversation.com/defending-science-how-the-art-of-rhetoric-can-help-68210">rhetoric!</a>) than practical, and the time I have spent teaching has been some of the most rewarding of my career. But I am increasingly concerned that the imbalance between professionals and the academy, in which both of us retreat to our corners and snipe at the other, is not only corrosive to both but poses a larger threat to journalism education. I’m not sure that data journalism is best taught in an academic setting, that the existing incentives and structures offer few rewards for those who try and serve students and industry poorly. I think that segment of journalism education could actually be done better outside the university setting, which would be problematic for schools trying to attract students. Mostly, I’m not sure how much more I want to participate in a system that takes our energy and time but isn’t interested in supporting work that isn’t connected to a PhD, as <a href="https://twitter.com/SStirling/status/943667810567360514">Stephen Stirling puts it so well</a>.</p>
-<p>If we want to bridge this gap, maybe what’s necessary is for professionals who teach data-related classes to teach <em>less</em> and to focus more on discussing research and advising both journalism schools and student journalists. I serve on councils for the <a href="https://www.jou.ufl.edu/">University of Florida</a> and <a href="https://mediainnovation.wvu.edu/">West Virginia University</a>, and perhaps that is where I can make more of a difference, along with trying to serve as a mentor for individual students and young professionals. The hard reality is that my teaching experience has increased the disconnect between my own work and the academic institutions that prepare students for it, not helped to narrow it. We all lose when that gap persists, but students lose the most, and in the end we will all pay for it.</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2017/12/28/academy-fight-song-part-2/</guid>
-  <pubDate>Thu, 28 Dec 2017 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
