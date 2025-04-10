@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Derek Willis">
+<meta name="dcterms.date" content="2025-04-10">
 
-<title>Derek Willis</title>
+<title>My LLM Extraction Challenge Leaderboard Is Better Now – Derek Willis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +22,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<script src="../../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,83 +102,27 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
+<link href="../../../../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../../../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-title','listing-description','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      page: 18,
-    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta name="twitter:title" content="Derek Willis">
+<meta name="twitter:title" content="My LLM Extraction Challenge Leaderboard Is Better Now – Derek Willis">
+<meta name="twitter:description" content="Academic and journalist">
 <meta name="twitter:creator" content="@derekwillis">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/dwillis.png" alt="" class="navbar-logo">
+    <a href="../../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../../images/dwillis.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../../../index.html">
     <span class="navbar-title">Derek Willis</span>
     </a>
   </div>
@@ -155,7 +133,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="./blog.xml"> <i class="bi bi-rss" role="img" aria-label="feed">
+    <a class="nav-link" href="../../../../../blog.xml"> <i class="bi bi-rss" role="img" aria-label="feed">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -170,14 +148,42 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">My LLM Extraction Challenge Leaderboard Is Better Now</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">My LLM Extraction Challenge Leaderboard Is Better Now</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Derek Willis </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 10, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
         <div class="sidebar-tools-main tools-wide">
@@ -189,43 +195,43 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../about" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./now" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../now" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Now</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./then" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../then" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Then</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./help" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../help" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ways I Can Help</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./thefix" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../thefix" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The Fix</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blog.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../blog.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blog</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./teaching" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../teaching" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
   </div>
 </li>
@@ -234,85 +240,50 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<section id="hi-im-derek.-i-love-using-data-to-find-and-tell-stories.-and-asking-questions." class="level3">
-<h3 class="anchored" data-anchor-id="hi-im-derek.-i-love-using-data-to-find-and-tell-stories.-and-asking-questions.">Hi, I’m Derek. I love using data to find and tell stories. And asking questions.</h3>
-<p><img src="images/middle_school.png" class="img-fluid"></p>
+
+<p>I had been staring at my <a href="https://thescoop.org/LLM-Extraction-Challenge/">Political Email Extraction Leaderboard</a> since I first published it, and was disappointed by some of the performances I found in extracting committee names from the disclaimers in fundraising messages. Some of the commercial models did worse than I expected, below 90% in some cases, and I was surprised. I should have been more skeptical.</p>
+<p>Once I dug into how I was compiling my stats, I found a pretty simple mistake I made: when matching the committee names produced by LLMs to my ground truth training committees, I was doing an exact match without regard to case sensitivity. So “PA Democratic Party” would not have matched “Pa Democratic Party”. There were not a ton of those kinds of scenarios, but there were some, and as a result, the accuracy of most of the models improved, and in a way that made more sense to me.</p>
+<p>Here’s what I changed, code-wise:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"committee_csv"</span> <span class="kw">in</span> merged.columns <span class="kw">and</span> <span class="st">"committee_json"</span> <span class="kw">in</span> merged.columns:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if the `committee` attributes match</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    merged[<span class="st">"committee_match"</span>] <span class="op">=</span> merged[<span class="st">"committee_csv"</span>] <span class="op">==</span> merged[<span class="st">"committee_json"</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If columns do not exist, default to no matches</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    merged[<span class="st">"committee_match"</span>] <span class="op">=</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>to this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"committee_csv"</span> <span class="kw">in</span> merged.columns <span class="kw">and</span> <span class="st">"committee_json"</span> <span class="kw">in</span> merged.columns:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    y_true <span class="op">=</span> merged[<span class="st">"committee_csv"</span>].fillna(<span class="st">"none"</span>).astype(<span class="bu">str</span>).<span class="bu">str</span>.lower().<span class="bu">str</span>.strip()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> merged[<span class="st">"committee_json"</span>].fillna(<span class="st">"none"</span>).astype(<span class="bu">str</span>).<span class="bu">str</span>.lower().<span class="bu">str</span>.strip()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    merged[<span class="st">"committee_match"</span>] <span class="op">=</span> y_true <span class="op">==</span> y_pred</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    merged[<span class="st">"committee_match"</span>] <span class="op">=</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>By converting the committee names entirely to lower case and calling <code>strip()</code> on them, I reduced the number of false negatives in my results. This had some visible results. For example, <a href="https://github.com/dwillis/LLM-Extraction-Challenge/blob/f9d75907e47a67ca4b692c7fd1a102af0f467430/fundraising-emails/summary_all_json.csv#L3">GPT-4o previously sat at a less-than-impressive 79.3 percent accuracy</a> and now sits at a <a href="https://github.com/dwillis/LLM-Extraction-Challenge/blob/main/fundraising-emails/summary_all_json.csv#L3">much more impressive 96.7 percent accuracy rate</a>. This makes sense, given what I understood to be GPT-4o’s capabilities, and I should have caught this problem sooner.</p>
+<p>What this means is that the <a href="https://thescoop.org/LLM-Extraction-Challenge/">updated leaderboard</a> is dominated by the commercial models from OpenAI, Anthropic and Google, but Qwen2.5 and Mistral’s Small 3.1 model both scored over 90%, which is impressive in both cases. Check out the new leaders:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="updated_leaders.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You’ll notice that I’ve added a few other columns, too. Those are the standard classification report outputs from our pal <code>scikit-learn</code>, and they provide a bit more context on each model’s performance. I’ll also be publishing soon individual classification reports for each model that go into further detail on the emails.</p>
+<p>The changes to the leaderboard suggest a couple of things to me: most decent-sized models do a pretty solid job with this task, which is what I would have hoped to see. I was a little surprised to see Gemma2 models outperform Gemma3 ones here, and that’s worth digging into further to understand. The results from the Cogito models that I added recently initially puzzled me because the larger ones didn’t do much better; now that I’ve fixed the matching problem Cogito’s 70b model hit 89% accuracy, equivalent to Llama 3.3.</p>
+<p>I’ve mostly abandoned testing the initial prompt I developed for this, but also have updated that leaderboard, with results that are broadly similar, but interestingly Llama 3.3 seems to have done <em>better</em> with that prompt than the newer one that I prefer. What do you see here?</p>
 
 
 
-</section>
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1744257600000" data-listing-file-modified-sort="1744324310609" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="531">
-<a href="./archives/2025/04/10/updated-llm-extraction-leaderboard/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-My LLM Extraction Challenge Leaderboard Is Better Now
-</h5>
-<div class="card-text listing-description">
-I had been staring at my Political Email Extraction Leaderboard since I first published it, and was disappointed by some of the performances I found in extracting committee…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Apr 10, 2025
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1740718800000" data-listing-file-modified-sort="1740783152598" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1784">
-<a href="./archives/2025/02/28/turning-congressional-job-listings-into-data/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Turning Congressional Job Listings Into Data Using LLM
-</h5>
-<div class="card-text listing-description">
-As a former Hill reporter, some of the best never-published stories revolved around the treatment (usually, mistreatment) of congressional staff. The people who actually…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Feb 28, 2025
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-date-sort="1737954000000" data-listing-file-modified-sort="1738002720133" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1609">
-<a href="./archives/2025/01/27/llm-extraction-challenge-fundraising-emails/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-LLM Extraction Challenge: Fundraising Emails
-</h5>
-<div class="card-text listing-description">
-What kind of sicko signs up for political fundraising emails from just about every committee? Oh, right, that’s me.
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Jan 27, 2025
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
