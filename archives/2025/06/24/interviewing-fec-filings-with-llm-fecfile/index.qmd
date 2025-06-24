@@ -1,0 +1,49 @@
+---
+title: "Interviewing FEC Filings with llm-fecfile"
+author: "Derek Willis"
+date: "2025-06-24"
+format:
+  html:
+    df-print: paged
+    toc: true
+engine: knitr
+execute:
+  eval: false
+---
+
+Today I'm releasing a new Python command-line library that allows users to ask questions of federal campaign finance filings by leveraging large language models, with some built-in help. This project, [llm-fecfile](https://github.com/dwillis/llm-fecfile), also builds on previous work by data journalists that helps make these filings easier to parse and use. The combination of LLMs and domain expertise is a powerful one that has some real implications for journalists.
+
+I'm a big fan of [Simon Willison's LLM Python library](https://llm.datasette.io/en/stable/), both for its ease of use and its flexible nature. I can test out multiple models without changing much at all, and it's ability to [store prompts and responses in SQLite databases](https://llm.datasette.io/en/stable/logging.html#logging) is a big help for when you want to actually see what you've done and how your habits have changed.
+
+But there are parts of the library that I haven't really explored much, and top of my list has been [fragments](https://llm.datasette.io/en/stable/fragments.html), reusable text that can be included with multiple prompts. When I teach data journalism to students, I often talk about it as learning how to interview data. Fragments can make that process easier. A lot of my prompts follow a similar process: here's some material that I'd like to ask some questions about or do something with. Do something often enough, and you should start to think about ways to automate that process.
+
+A common task I find myself doing - and teaching my students to do - is to take some text and upload or paste it into an LLM's chat window, along with a question or command. Sometimes those conversations extend for awhile, and if you've used LLMs long enough you've run into occasional issues of continuity, where you have to repeat yourself or provide the same context. Fragments don't remove this problem completely, but they provide an efficient and replicable process for adapting to it.
+
+What got me thinking more about fragments was [an excellent library](https://github.com/kevinschaul/llm-fragments-us-legislation) by Kevin Schaul of The Washington Post that leverages the Congress.gov API to make it easy to ask a model to summarize or otherwise interview congressional legislation. You grab the text of the bill using the API and send it to an LLM to start that conversation. It's especially useful for large amounts of text:
+
+```{bash}
+# This bill is yuge, so use a model with enough context!
+llm -f bill:hr1-119 'Summarize this bill' -m gemini-2.5-pro-preview-05-06
+```
+
+Schaul's library is simple - it's basically a single Python file that does the work of parsing the API output and making it available to your LLM of choice - and seems designed for folks who have a decent idea of what they are looking for in legislation. Now, I'm a Congress geek for sure, but for years federal campaign finance data has been my thing. I've helped build APIs, libraries and news apps devoted to making that data more available. Federal Election Commission filings are [data files](https://www.fec.gov/resources/cms-content/documents/rawdatainst.pdf), and there are a number of good projects that help you retrieve and parse them. So it was a natural choice for getting more familiar with fragments.
+
+Like a lot of my recent coding projects, I turned to an LLM to help me build this one. I started with [a similar effort by Chris Amico](https://github.com/eyeseast/llm-documentcloud) that provides access to documents uploaded to the excellent DocumentCloud service via its API. I asked Claude 4 Sonnet to create a basic template for a repository that would do something similar with FEC filings, using [Evan Sonderegger's fecfile parser](https://github.com/esonderegger/fecfile). It took me about an hour or so to get the library into a basic working prototype, where I could pass in the ID number of a filing and ask a question, like this:
+
+```{bash}
+llm -f fec:1896830 "What are the key financial aspects of this filing?"
+```
+
+If you were to ask that of virtually any model by uploading the data or PDF version, you'd get back a pretty standard overview of the financials, something like [this from OpenAI's 4.1 mini model](https://chatgpt.com/share/685ab71d-9674-8008-b544-a071576e8c6c). Which is good, but from a reporter's standpoint that's not much more than what you'd get from a brief look at the filing. That feels like the minimum a user should expect here, and that alone could be useful in helping a journalist triage filings.
+
+But FEC filings are interesting in weird ways, and that's what I really want help with when trying to decide which ones deserve some attention. I've long had a set of heuristics for this, but even so I miss newsworthy stuff. What if I could put some of that into the library itself, so it analyzes filings the way I might? That's what I'm going for with llm-fecfile.
+
+In practice, that means hard-coding some instructions in the library, like [those governing overall tone and style for responses](https://github.com/dwillis/llm-fecfile/blob/main/llm_fecfile.py#L29-L35) or [how to handle F99 filings](https://github.com/dwillis/llm-fecfile/blob/main/llm_fecfile.py#L408-L412), which often are boilerplate responses to FEC inquiries but can contain details of fraud and other unusual activity. Here's how llm-fecfile handles one recent one:
+
+```{bash}
+uv run llm -f fec:1897073 "anything unusual here?"
+```
+
+> This filing is a fairly typical F99 form used to provide a miscellaneous text communication. The content addresses a compliance issue the committee encountered with their May 2025 monthly report. Specifically, the DC Democratic State Committee acknowledges that a refund to Metro Washington Council AFLCIO was made outside the required 30-day window for confirming whether the original contribution was permissible under federal rules. They state they will implement new processes to ensure future compliance with the confirmation requirements.
+
+I expect that these will change as I use the library more; ideally the responses would be more succinct and incorporate more instructions.I definitely welcome feedback and suggestions for improvement.
