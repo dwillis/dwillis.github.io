@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sports Data Analysis and Visualization - 11&nbsp; Residuals</title>
+<title>11&nbsp; Residuals – Sports Data Analysis and Visualization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1577067484ec7a2ab3d04528a804f744.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,13 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./residuals.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Residuals</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -368,6 +368,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -486,20 +492,19 @@ Caused by error:
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="sc">|&gt;</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">'Big Ten'</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">|&gt;</span> <span class="fu">select</span>(Date, Team, Opponent, W_L, differential, FGPctMargin, predicted, residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,046 × 8
-   Date       Team         Opponent        W_L   diffe…¹ FGPct…² predi…³ resid…⁴
-   &lt;date&gt;     &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1 2020-12-15 Northwestern Quincy          W          52  0.089    11.4     40.6
- 2 2020-11-25 Nebraska     McNeese State   W          47  0.118    15.0     32.0
- 3 2020-11-25 Illinois     North Carolina… W          62  0.243    30.3     31.7
- 4 2021-11-22 Iowa         Western Michig… W          48  0.147    18.5     29.5
- 5 2021-11-16 Iowa         North Carolina… W          17 -0.098   -11.5     28.5
- 6 2020-12-05 Northwestern Chicago State   W          45  0.15     18.9     26.1
- 7 2014-11-16 Illinois     Coppin State    W          58  0.258    32.1     25.9
- 8 2020-12-13 Iowa         Northern Illin… W          53  0.219    27.4     25.6
- 9 2020-12-10 Minnesota    UMKC            W          29  0.0510    6.78    22.2
-10 2022-01-14 Purdue       Nebraska        W          27  0.0360    4.94    22.1
-# … with 1,036 more rows, and abbreviated variable names ¹​differential,
-#   ²​FGPctMargin, ³​predicted, ⁴​residuals</code></pre>
+   Date       Team   Opponent W_L   differential FGPctMargin predicted residuals
+   &lt;date&gt;     &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+ 1 2020-12-15 North… Quincy   W               52      0.089      11.4       40.6
+ 2 2020-11-25 Nebra… McNeese… W               47      0.118      15.0       32.0
+ 3 2020-11-25 Illin… North C… W               62      0.243      30.3       31.7
+ 4 2021-11-22 Iowa   Western… W               48      0.147      18.5       29.5
+ 5 2021-11-16 Iowa   North C… W               17     -0.098     -11.5       28.5
+ 6 2020-12-05 North… Chicago… W               45      0.15       18.9       26.1
+ 7 2014-11-16 Illin… Coppin … W               58      0.258      32.1       25.9
+ 8 2020-12-13 Iowa   Norther… W               53      0.219      27.4       25.6
+ 9 2020-12-10 Minne… UMKC     W               29      0.0510      6.78      22.2
+10 2022-01-14 Purdue Nebraska W               27      0.0360      4.94      22.1
+# ℹ 1,036 more rows</code></pre>
 </div>
 </div>
 <p>So looking at this table, what you see here are the teams who scored more than their FG percentage margin would indicate. One of them should jump off the page at you.</p>
@@ -580,20 +585,19 @@ F-statistic: 97.97 on 1 and 98133 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fouls <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">|&gt;</span> <span class="fu">select</span>(Team, Opponent, W_L, TeamScore, OpponentScore, TotalFouls, residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 98,135 × 7
-   Team                  Opponent         W_L   TeamSc…¹ Oppon…² Total…³ resid…⁴
-   &lt;chr&gt;                 &lt;chr&gt;            &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1 Bryant                Thomas (ME)      W          147      39      34   107. 
- 2 McNeese State         Dallas Christian W          140      37      33   102. 
- 3 Appalachian State     Toccoa Falls     W          135      34      35    99.7
- 4 Purdue Fort Wayne     &lt;NA&gt;             W          130      34      19    93.6
- 5 James Madison         Carlow           W          135      40      29    93.3
- 6 North Dakota State    Oak Hills        W          108      14      12    91.1
- 7 Florida International Trinity (FL)     W          146      55      39    90.0
- 8 Lamar                 Howard Payne     W          121      32      35    87.7
- 9 Georgia Southern      Carver College   W          139      51      38    86.9
-10 Youngstown State      Franciscan       W          134      46      35    86.7
-# … with 98,125 more rows, and abbreviated variable names ¹​TeamScore,
-#   ²​OpponentScore, ³​TotalFouls, ⁴​residuals</code></pre>
+   Team              Opponent W_L   TeamScore OpponentScore TotalFouls residuals
+   &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Bryant            Thomas … W           147            39         34     107. 
+ 2 McNeese State     Dallas … W           140            37         33     102. 
+ 3 Appalachian State Toccoa … W           135            34         35      99.7
+ 4 Purdue Fort Wayne &lt;NA&gt;     W           130            34         19      93.6
+ 5 James Madison     Carlow   W           135            40         29      93.3
+ 6 North Dakota Sta… Oak Hil… W           108            14         12      91.1
+ 7 Florida Internat… Trinity… W           146            55         39      90.0
+ 8 Lamar             Howard … W           121            32         35      87.7
+ 9 Georgia Southern  Carver … W           139            51         38      86.9
+10 Youngstown State  Francis… W           134            46         35      86.7
+# ℹ 98,125 more rows</code></pre>
 </div>
 </div>
 <p>First, note all of the biggest misses here are all blowout games. The worst games of the season, the worst being Bryant vs.&nbsp;Thomas. The model missed that differential by … 107 points. The margin of victory? 108 points. In other words, this model is not great! But let’s look at it anyway.</p>
@@ -660,18 +664,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -703,7 +696,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -711,7 +724,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -808,7 +821,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

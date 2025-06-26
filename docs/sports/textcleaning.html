@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sports Data Analysis and Visualization - 30&nbsp; Text cleaning</title>
+<title>30&nbsp; Text cleaning – Sports Data Analysis and Visualization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1577067484ec7a2ab3d04528a804f744.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,13 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./textcleaning.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Text cleaning</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -368,6 +368,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -447,10 +453,10 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 4     4 "Nickeil … SG       21 NOP      41   501   7.6 0.441  0.515 0.123    1.7
 5     5 "Grayson … SG       24 MEM      30   498  11.4 0.577  0.517 0.199    1.1
 6     6 "Jarrett … C        21 BRK      64  1647  20.3 0.658  0.012 0.574   12.5
-# … with 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;,
-#   `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, ...20 &lt;lgl&gt;,
-#   OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;,
-#   DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
+# ℹ 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;,
+#   `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, ...20 &lt;lgl&gt;, OWS &lt;dbl&gt;,
+#   DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;,
+#   BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>You can see that every players name is their name, then two backslashes, then some version of their name that must have meaning to Sports Reference, but not to us. So we need to get rid of that.</p>
@@ -472,10 +478,10 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 4     4 Nickeil A… SG       21 NOP      41   501   7.6 0.441  0.515 0.123    1.7
 5     5 Grayson A… SG       24 MEM      30   498  11.4 0.577  0.517 0.199    1.1
 6     6 Jarrett A… C        21 BRK      64  1647  20.3 0.658  0.012 0.574   12.5
-# … with 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;,
-#   `STL%` &lt;dbl&gt;, `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, ...20 &lt;lgl&gt;,
-#   OWS &lt;dbl&gt;, DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;,
-#   DBPM &lt;dbl&gt;, BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
+# ℹ 17 more variables: `DRB%` &lt;dbl&gt;, `TRB%` &lt;dbl&gt;, `AST%` &lt;dbl&gt;, `STL%` &lt;dbl&gt;,
+#   `BLK%` &lt;dbl&gt;, `TOV%` &lt;dbl&gt;, `USG%` &lt;dbl&gt;, ...20 &lt;lgl&gt;, OWS &lt;dbl&gt;,
+#   DWS &lt;dbl&gt;, WS &lt;dbl&gt;, `WS/48` &lt;dbl&gt;, ...25 &lt;lgl&gt;, OBPM &lt;dbl&gt;, DBPM &lt;dbl&gt;,
+#   BPM &lt;dbl&gt;, VORP &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Just like that, the trash is gone.</p>
@@ -505,15 +511,14 @@ dbl (4): Rank, S, Kills, Per Set
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kills)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 9
-   Rank Player                      Cl    Ht    Pos       S Kills Per S…¹ Season
-  &lt;dbl&gt; &lt;chr&gt;                       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
-1     1 Lindsey Ruddins, UC Santa … So.   6-2   OH       90   526    5.84 2017-…
-2     2 Pilar Victoria, Arkansas (… Sr.   5-11  OH      116   634    5.47 2017-…
-3     3 Laura Milos, Oral Roberts … Sr.   5-10  OH      106   560    5.28 2017-…
-4     4 Carlyle Nusbaum, Lipscomb … Jr.   5-10  OH      100   522    5.22 2017-…
-5     5 Veronica Jones-Perry, BYU … Jr.   6-0   OH      118   569    4.82 2017-…
-6     6 Torrey Van Winden, Cal Pol… So.   6-3   OH      101   477    4.72 2017-…
-# … with abbreviated variable name ¹​`Per Set`</code></pre>
+   Rank Player                    Cl    Ht    Pos       S Kills `Per Set` Season
+  &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+1     1 Lindsey Ruddins, UC Sant… So.   6-2   OH       90   526      5.84 2017-…
+2     2 Pilar Victoria, Arkansas… Sr.   5-11  OH      116   634      5.47 2017-…
+3     3 Laura Milos, Oral Robert… Sr.   5-10  OH      106   560      5.28 2017-…
+4     4 Carlyle Nusbaum, Lipscom… Jr.   5-10  OH      100   522      5.22 2017-…
+5     5 Veronica Jones-Perry, BY… Jr.   6-0   OH      118   569      4.82 2017-…
+6     6 Torrey Van Winden, Cal P… So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 </div>
 </div>
 <p>First things first, Player isn’t just player, it’s player, school and conference, all in one. And Ht is a character field – and in feet and inches.</p>
@@ -524,15 +529,14 @@ dbl (4): Rank, S, Kills, Per Set
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>kills <span class="sc">|&gt;</span> <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"Player"</span>, <span class="st">"School"</span>), <span class="at">sep=</span><span class="st">","</span>) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 10
-   Rank Player               School Cl    Ht    Pos       S Kills Per S…¹ Season
-  &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
-1     1 Lindsey Ruddins      " UC … So.   6-2   OH       90   526    5.84 2017-…
-2     2 Pilar Victoria       " Ark… Sr.   5-11  OH      116   634    5.47 2017-…
-3     3 Laura Milos          " Ora… Sr.   5-10  OH      106   560    5.28 2017-…
-4     4 Carlyle Nusbaum      " Lip… Jr.   5-10  OH      100   522    5.22 2017-…
-5     5 Veronica Jones-Perry " BYU… Jr.   6-0   OH      118   569    4.82 2017-…
-6     6 Torrey Van Winden    " Cal… So.   6-3   OH      101   477    4.72 2017-…
-# … with abbreviated variable name ¹​`Per Set`</code></pre>
+   Rank Player             School Cl    Ht    Pos       S Kills `Per Set` Season
+  &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+1     1 Lindsey Ruddins    " UC … So.   6-2   OH       90   526      5.84 2017-…
+2     2 Pilar Victoria     " Ark… Sr.   5-11  OH      116   634      5.47 2017-…
+3     3 Laura Milos        " Ora… Sr.   5-10  OH      106   560      5.28 2017-…
+4     4 Carlyle Nusbaum    " Lip… Jr.   5-10  OH      100   522      5.22 2017-…
+5     5 Veronica Jones-Pe… " BYU… Jr.   6-0   OH      118   569      4.82 2017-…
+6     6 Torrey Van Winden  " Cal… So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 </div>
 </div>
 <p>Good start.</p>
@@ -547,15 +551,14 @@ dbl (4): Rank, S, Kills, Per Set
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
-   Rank Player       School Confe…¹ Cl    Ht    Pos       S Kills Per S…² Season
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
-1     1 Lindsey Rud… " UC … Big We… So.   6-2   OH       90   526    5.84 2017-…
-2     2 Pilar Victo… " Ark… SEC)    Sr.   5-11  OH      116   634    5.47 2017-…
-3     3 Laura Milos  " Ora… Summit… Sr.   5-10  OH      106   560    5.28 2017-…
-4     4 Carlyle Nus… " Lip… ASUN)   Jr.   5-10  OH      100   522    5.22 2017-…
-5     5 Veronica Jo… " BYU… WCC)    Jr.   6-0   OH      118   569    4.82 2017-…
-6     6 Torrey Van … " Cal… Big We… So.   6-3   OH      101   477    4.72 2017-…
-# … with abbreviated variable names ¹​Conference, ²​`Per Set`</code></pre>
+   Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+1     1 Lindse… " UC … Big West)  So.   6-2   OH       90   526      5.84 2017-…
+2     2 Pilar … " Ark… SEC)       Sr.   5-11  OH      116   634      5.47 2017-…
+3     3 Laura … " Ora… Summit Le… Sr.   5-10  OH      106   560      5.28 2017-…
+4     4 Carlyl… " Lip… ASUN)      Jr.   5-10  OH      100   522      5.22 2017-…
+5     5 Veroni… " BYU… WCC)       Jr.   6-0   OH      118   569      4.82 2017-…
+6     6 Torrey… " Cal… Big West)  So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 </div>
 </div>
 <p>Uh oh. Says we have problems in rows 15, 42 and 83. What are they? The NCAA has decided to put (FL), (NY) and (PA) into three teams to tell you they’re in Florida, New York and Pennsylvania respectively. Well, we can fix that with some gsub and we’ll use a switch called <code>fixed</code>, which when set to TRUE it means this literal string, no special characters.</p>
@@ -569,15 +572,14 @@ dbl (4): Rank, S, Kills, Per Set
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
-   Rank Player       School Confe…¹ Cl    Ht    Pos       S Kills Per S…² Season
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
-1     1 Lindsey Rud… " UC … Big We… So.   6-2   OH       90   526    5.84 2017-…
-2     2 Pilar Victo… " Ark… SEC)    Sr.   5-11  OH      116   634    5.47 2017-…
-3     3 Laura Milos  " Ora… Summit… Sr.   5-10  OH      106   560    5.28 2017-…
-4     4 Carlyle Nus… " Lip… ASUN)   Jr.   5-10  OH      100   522    5.22 2017-…
-5     5 Veronica Jo… " BYU… WCC)    Jr.   6-0   OH      118   569    4.82 2017-…
-6     6 Torrey Van … " Cal… Big We… So.   6-3   OH      101   477    4.72 2017-…
-# … with abbreviated variable names ¹​Conference, ²​`Per Set`</code></pre>
+   Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+1     1 Lindse… " UC … Big West)  So.   6-2   OH       90   526      5.84 2017-…
+2     2 Pilar … " Ark… SEC)       Sr.   5-11  OH      116   634      5.47 2017-…
+3     3 Laura … " Ora… Summit Le… Sr.   5-10  OH      106   560      5.28 2017-…
+4     4 Carlyl… " Lip… ASUN)      Jr.   5-10  OH      100   522      5.22 2017-…
+5     5 Veroni… " BYU… WCC)       Jr.   6-0   OH      118   569      4.82 2017-…
+6     6 Torrey… " Cal… Big West)  So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 </div>
 </div>
 <p>One last thing: see the trailing paren?</p>
@@ -592,15 +594,14 @@ dbl (4): Rank, S, Kills, Per Set
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
-   Rank Player       School Confe…¹ Cl    Ht    Pos       S Kills Per S…² Season
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
-1     1 Lindsey Rud… " UC … Big We… So.   6-2   OH       90   526    5.84 2017-…
-2     2 Pilar Victo… " Ark… SEC     Sr.   5-11  OH      116   634    5.47 2017-…
-3     3 Laura Milos  " Ora… Summit… Sr.   5-10  OH      106   560    5.28 2017-…
-4     4 Carlyle Nus… " Lip… ASUN    Jr.   5-10  OH      100   522    5.22 2017-…
-5     5 Veronica Jo… " BYU… WCC     Jr.   6-0   OH      118   569    4.82 2017-…
-6     6 Torrey Van … " Cal… Big We… So.   6-3   OH      101   477    4.72 2017-…
-# … with abbreviated variable names ¹​Conference, ²​`Per Set`</code></pre>
+   Rank Player  School Conference Cl    Ht    Pos       S Kills `Per Set` Season
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+1     1 Lindse… " UC … Big West   So.   6-2   OH       90   526      5.84 2017-…
+2     2 Pilar … " Ark… SEC        Sr.   5-11  OH      116   634      5.47 2017-…
+3     3 Laura … " Ora… Summit Le… Sr.   5-10  OH      106   560      5.28 2017-…
+4     4 Carlyl… " Lip… ASUN       Jr.   5-10  OH      100   522      5.22 2017-…
+5     5 Veroni… " BYU… WCC        Jr.   6-0   OH      118   569      4.82 2017-…
+6     6 Torrey… " Cal… Big West   So.   6-3   OH      101   477      4.72 2017-…</code></pre>
 </div>
 </div>
 <p>Looking good, no errors.</p>
@@ -619,16 +620,15 @@ dbl (4): Rank, S, Kills, Per Set
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 12
-   Rank Player       School Confe…¹ Cl     Feet Inches Pos       S Kills Per S…²
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-1     1 Lindsey Rud… " UC … Big We… So.       6      2 OH       90   526    5.84
-2     2 Pilar Victo… " Ark… SEC     Sr.       5     11 OH      116   634    5.47
-3     3 Laura Milos  " Ora… Summit… Sr.       5     10 OH      106   560    5.28
-4     4 Carlyle Nus… " Lip… ASUN    Jr.       5     10 OH      100   522    5.22
-5     5 Veronica Jo… " BYU… WCC     Jr.       6      0 OH      118   569    4.82
-6     6 Torrey Van … " Cal… Big We… So.       6      3 OH      101   477    4.72
-# … with 1 more variable: Season &lt;chr&gt;, and abbreviated variable names
-#   ¹​Conference, ²​`Per Set`</code></pre>
+   Rank Player  School Conference Cl     Feet Inches Pos       S Kills `Per Set`
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+1     1 Lindse… " UC … Big West   So.       6      2 OH       90   526      5.84
+2     2 Pilar … " Ark… SEC        Sr.       5     11 OH      116   634      5.47
+3     3 Laura … " Ora… Summit Le… Sr.       5     10 OH      106   560      5.28
+4     4 Carlyl… " Lip… ASUN       Jr.       5     10 OH      100   522      5.22
+5     5 Veroni… " BYU… WCC        Jr.       6      0 OH      118   569      4.82
+6     6 Torrey… " Cal… Big West   So.       6      3 OH      101   477      4.72
+# ℹ 1 more variable: Season &lt;chr&gt;</code></pre>
 </div>
 </div>
 <p>But how do we turn that into a height? Math!</p>
@@ -646,16 +646,15 @@ dbl (4): Rank, S, Kills, Per Set
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 13
-   Rank Player       School Confe…¹ Cl     Feet Inches Pos       S Kills Per S…²
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-1     1 Lindsey Rud… " UC … Big We… So.       6      2 OH       90   526    5.84
-2     2 Pilar Victo… " Ark… SEC     Sr.       5     11 OH      116   634    5.47
-3     3 Laura Milos  " Ora… Summit… Sr.       5     10 OH      106   560    5.28
-4     4 Carlyle Nus… " Lip… ASUN    Jr.       5     10 OH      100   522    5.22
-5     5 Veronica Jo… " BYU… WCC     Jr.       6      0 OH      118   569    4.82
-6     6 Torrey Van … " Cal… Big We… So.       6      3 OH      101   477    4.72
-# … with 2 more variables: Season &lt;chr&gt;, Height &lt;dbl&gt;, and abbreviated variable
-#   names ¹​Conference, ²​`Per Set`</code></pre>
+   Rank Player  School Conference Cl     Feet Inches Pos       S Kills `Per Set`
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+1     1 Lindse… " UC … Big West   So.       6      2 OH       90   526      5.84
+2     2 Pilar … " Ark… SEC        Sr.       5     11 OH      116   634      5.47
+3     3 Laura … " Ora… Summit Le… Sr.       5     10 OH      106   560      5.28
+4     4 Carlyl… " Lip… ASUN       Jr.       5     10 OH      100   522      5.22
+5     5 Veroni… " BYU… WCC        Jr.       6      0 OH      118   569      4.82
+6     6 Torrey… " Cal… Big West   So.       6      3 OH      101   477      4.72
+# ℹ 2 more variables: Season &lt;chr&gt;, Height &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>And now, in 10 lines of code, using separate, mutate and gsub, we’ve turned the mess that is the NCAA’s data into actually useful data we can analyze.</p>
@@ -700,18 +699,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -743,7 +731,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -751,7 +759,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -848,7 +856,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
