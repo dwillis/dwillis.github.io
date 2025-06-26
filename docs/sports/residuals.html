@@ -492,19 +492,20 @@ Caused by error:
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="sc">|&gt;</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">'Big Ten'</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">|&gt;</span> <span class="fu">select</span>(Date, Team, Opponent, W_L, differential, FGPctMargin, predicted, residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,046 × 8
-   Date       Team   Opponent W_L   differential FGPctMargin predicted residuals
-   &lt;date&gt;     &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
- 1 2020-12-15 North… Quincy   W               52      0.089      11.4       40.6
- 2 2020-11-25 Nebra… McNeese… W               47      0.118      15.0       32.0
- 3 2020-11-25 Illin… North C… W               62      0.243      30.3       31.7
- 4 2021-11-22 Iowa   Western… W               48      0.147      18.5       29.5
- 5 2021-11-16 Iowa   North C… W               17     -0.098     -11.5       28.5
- 6 2020-12-05 North… Chicago… W               45      0.15       18.9       26.1
- 7 2014-11-16 Illin… Coppin … W               58      0.258      32.1       25.9
- 8 2020-12-13 Iowa   Norther… W               53      0.219      27.4       25.6
- 9 2020-12-10 Minne… UMKC     W               29      0.0510      6.78      22.2
-10 2022-01-14 Purdue Nebraska W               27      0.0360      4.94      22.1
-# ℹ 1,036 more rows</code></pre>
+   Date       Team         Opponent        W_L   diffe…¹ FGPct…² predi…³ resid…⁴
+   &lt;date&gt;     &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 2020-12-15 Northwestern Quincy          W          52  0.089    11.4     40.6
+ 2 2020-11-25 Nebraska     McNeese State   W          47  0.118    15.0     32.0
+ 3 2020-11-25 Illinois     North Carolina… W          62  0.243    30.3     31.7
+ 4 2021-11-22 Iowa         Western Michig… W          48  0.147    18.5     29.5
+ 5 2021-11-16 Iowa         North Carolina… W          17 -0.098   -11.5     28.5
+ 6 2020-12-05 Northwestern Chicago State   W          45  0.15     18.9     26.1
+ 7 2014-11-16 Illinois     Coppin State    W          58  0.258    32.1     25.9
+ 8 2020-12-13 Iowa         Northern Illin… W          53  0.219    27.4     25.6
+ 9 2020-12-10 Minnesota    UMKC            W          29  0.0510    6.78    22.2
+10 2022-01-14 Purdue       Nebraska        W          27  0.0360    4.94    22.1
+# … with 1,036 more rows, and abbreviated variable names ¹​differential,
+#   ²​FGPctMargin, ³​predicted, ⁴​residuals</code></pre>
 </div>
 </div>
 <p>So looking at this table, what you see here are the teams who scored more than their FG percentage margin would indicate. One of them should jump off the page at you.</p>
@@ -585,19 +586,20 @@ F-statistic: 97.97 on 1 and 98133 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fouls <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">|&gt;</span> <span class="fu">select</span>(Team, Opponent, W_L, TeamScore, OpponentScore, TotalFouls, residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 98,135 × 7
-   Team              Opponent W_L   TeamScore OpponentScore TotalFouls residuals
-   &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
- 1 Bryant            Thomas … W           147            39         34     107. 
- 2 McNeese State     Dallas … W           140            37         33     102. 
- 3 Appalachian State Toccoa … W           135            34         35      99.7
- 4 Purdue Fort Wayne &lt;NA&gt;     W           130            34         19      93.6
- 5 James Madison     Carlow   W           135            40         29      93.3
- 6 North Dakota Sta… Oak Hil… W           108            14         12      91.1
- 7 Florida Internat… Trinity… W           146            55         39      90.0
- 8 Lamar             Howard … W           121            32         35      87.7
- 9 Georgia Southern  Carver … W           139            51         38      86.9
-10 Youngstown State  Francis… W           134            46         35      86.7
-# ℹ 98,125 more rows</code></pre>
+   Team                  Opponent         W_L   TeamSc…¹ Oppon…² Total…³ resid…⁴
+   &lt;chr&gt;                 &lt;chr&gt;            &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 Bryant                Thomas (ME)      W          147      39      34   107. 
+ 2 McNeese State         Dallas Christian W          140      37      33   102. 
+ 3 Appalachian State     Toccoa Falls     W          135      34      35    99.7
+ 4 Purdue Fort Wayne     &lt;NA&gt;             W          130      34      19    93.6
+ 5 James Madison         Carlow           W          135      40      29    93.3
+ 6 North Dakota State    Oak Hills        W          108      14      12    91.1
+ 7 Florida International Trinity (FL)     W          146      55      39    90.0
+ 8 Lamar                 Howard Payne     W          121      32      35    87.7
+ 9 Georgia Southern      Carver College   W          139      51      38    86.9
+10 Youngstown State      Franciscan       W          134      46      35    86.7
+# … with 98,125 more rows, and abbreviated variable names ¹​TeamScore,
+#   ²​OpponentScore, ³​TotalFouls, ⁴​residuals</code></pre>
 </div>
 </div>
 <p>First, note all of the biggest misses here are all blowout games. The worst games of the season, the worst being Bryant vs.&nbsp;Thomas. The model missed that differential by … 107 points. The margin of victory? 108 points. In other words, this model is not great! But let’s look at it anyway.</p>

@@ -426,11 +426,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/logs24.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 11937 Columns: 60
+<pre><code>Rows: 11990 Columns: 48
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr  (10): Season, GameType, TeamFullName, Opponent, HomeAway, W_L, OT, URL,...
-dbl  (49): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
+chr   (8): Season, TeamFullName, Opponent, HomeAway, W_L, URL, Conference, Team
+dbl  (39): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
 date  (1): Date
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
@@ -530,8 +530,7 @@ date  (1): Date
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>ill, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>TeamFGPCT), <span class="at">color=</span><span class="st">"orange"</span>) <span class="sc">+</span> </span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">65</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
-(`geom_line()`).</code></pre>
+<pre><code>Warning: Removed 1 row containing missing values (`geom_line()`).</code></pre>
 </div>
 <div class="cell-output-display">
 <div>

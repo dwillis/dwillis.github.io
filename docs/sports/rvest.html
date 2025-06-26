@@ -472,8 +472,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>scoringoffense22 <span class="ot">&lt;-</span> scoringoffense22 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2022</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in `mutate()`:
-! Can't transform a data frame with `NA` or `""` names.</code></pre>
+<pre><code>Error in initialize(...): attempt to use zero-length variable name</code></pre>
 </div>
 </div>
 <p>Uh oh. Error. What does it say? It’s … not clear, but a hint is that our first column doesn’t have a name. Each column must be named. If you look at our data in the environment tab in the upper right corner, you’ll see that indeed, the first column has no name. It’s the FBS rank of each team. So we can fix that and mutate in the same step. We’ll do that using <code>rename</code> and since the field doesn’t have a name to rename it, we’ll use a position argument. We’ll say rename column 1 as Rank.</p>
@@ -535,11 +534,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 4 4     Alaba… 37    31    6     .838  23.19 9.65  NA    16    2     NA    15   
 5 5     Alaba… 33    15    18    .455  -10.… -7.71 NA    10    8     NA    9    
 6 6     Alaba… 31    8     23    .258  -16.… -6.29 NA    6     12    NA    5    
-# ℹ 25 more variables: X14 &lt;chr&gt;, X15 &lt;lgl&gt;, X16 &lt;chr&gt;, X17 &lt;chr&gt;, X18 &lt;lgl&gt;,
-#   X19 &lt;chr&gt;, X20 &lt;chr&gt;, X21 &lt;lgl&gt;, X22 &lt;chr&gt;, X23 &lt;chr&gt;, X24 &lt;chr&gt;,
-#   X25 &lt;chr&gt;, X26 &lt;chr&gt;, X27 &lt;chr&gt;, X28 &lt;chr&gt;, X29 &lt;chr&gt;, X30 &lt;chr&gt;,
-#   X31 &lt;chr&gt;, X32 &lt;chr&gt;, X33 &lt;chr&gt;, X34 &lt;chr&gt;, X35 &lt;chr&gt;, X36 &lt;chr&gt;,
-#   X37 &lt;chr&gt;, X38 &lt;chr&gt;</code></pre>
+# … with 25 more variables: X14 &lt;chr&gt;, X15 &lt;lgl&gt;, X16 &lt;chr&gt;, X17 &lt;chr&gt;,
+#   X18 &lt;lgl&gt;, X19 &lt;chr&gt;, X20 &lt;chr&gt;, X21 &lt;lgl&gt;, X22 &lt;chr&gt;, X23 &lt;chr&gt;,
+#   X24 &lt;chr&gt;, X25 &lt;chr&gt;, X26 &lt;chr&gt;, X27 &lt;chr&gt;, X28 &lt;chr&gt;, X29 &lt;chr&gt;,
+#   X30 &lt;chr&gt;, X31 &lt;chr&gt;, X32 &lt;chr&gt;, X33 &lt;chr&gt;, X34 &lt;chr&gt;, X35 &lt;chr&gt;,
+#   X36 &lt;chr&gt;, X37 &lt;chr&gt;, X38 &lt;chr&gt;</code></pre>
 </div>
 </div>
 <p>So, that’s not ideal. We have headers and data mixed together, and our columns are named X1 to X38. Also note: They’re all character fields. Because the headers are interspersed with data, it all gets called character data. So we’ve got to first rename each field.</p>
@@ -563,21 +562,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 33
-   Rank School      Games OverallWins OverallLosses WinPct OverallSRS OverallSOS
-  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-1     1 Abilene Ch…    30          13            17  0.433      -2.79       0.9 
-2     2 Air Force      32          14            18  0.438       2          2.12
-3     3 Akron          33          22            11  0.667       4.19      -1.65
-4     4 Alabama&nbsp;NC…    37          31             6  0.838      23.2        9.65
-5     5 Alabama A&amp;M    33          15            18  0.455     -10.8       -7.71
-6     6 Alabama St…    31           8            23  0.258     -16.3       -6.29
-# ℹ 25 more variables: ConferenceWins &lt;dbl&gt;, ConferenceLosses &lt;dbl&gt;,
-#   HomeWins &lt;dbl&gt;, HomeLosses &lt;dbl&gt;, AwayWins &lt;dbl&gt;, AwayLosses &lt;dbl&gt;,
-#   ForPoints &lt;dbl&gt;, OppPoints &lt;dbl&gt;, Minutes &lt;dbl&gt;, FieldGoalsMade &lt;dbl&gt;,
-#   FieldGoalsAttempted &lt;dbl&gt;, FieldGoalPCT &lt;dbl&gt;, ThreePointMade &lt;dbl&gt;,
-#   ThreePointAttempts &lt;dbl&gt;, ThreePointPct &lt;dbl&gt;, FreeThrowsMade &lt;dbl&gt;,
-#   FreeThrowsAttempted &lt;dbl&gt;, FreeThrowPCT &lt;dbl&gt;, OffensiveRebounds &lt;dbl&gt;,
-#   TotalRebounds &lt;dbl&gt;, Assists &lt;dbl&gt;, Steals &lt;dbl&gt;, Blocks &lt;dbl&gt;, …</code></pre>
+   Rank School      Games Overa…¹ Overa…² WinPct Overa…³ Overa…⁴ Confe…⁵ Confe…⁶
+  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1     1 Abilene Ch…    30      13      17  0.433   -2.79    0.9        5      11
+2     2 Air Force      32      14      18  0.438    2       2.12       5      13
+3     3 Akron          33      22      11  0.667    4.19   -1.65      13       5
+4     4 Alabama&nbsp;NC…    37      31       6  0.838   23.2     9.65      16       2
+5     5 Alabama A&amp;M    33      15      18  0.455  -10.8    -7.71      10       8
+6     6 Alabama St…    31       8      23  0.258  -16.3    -6.29       6      12
+# … with 23 more variables: HomeWins &lt;dbl&gt;, HomeLosses &lt;dbl&gt;, AwayWins &lt;dbl&gt;,
+#   AwayLosses &lt;dbl&gt;, ForPoints &lt;dbl&gt;, OppPoints &lt;dbl&gt;, Minutes &lt;dbl&gt;,
+#   FieldGoalsMade &lt;dbl&gt;, FieldGoalsAttempted &lt;dbl&gt;, FieldGoalPCT &lt;dbl&gt;,
+#   ThreePointMade &lt;dbl&gt;, ThreePointAttempts &lt;dbl&gt;, ThreePointPct &lt;dbl&gt;,
+#   FreeThrowsMade &lt;dbl&gt;, FreeThrowsAttempted &lt;dbl&gt;, FreeThrowPCT &lt;dbl&gt;,
+#   OffensiveRebounds &lt;dbl&gt;, TotalRebounds &lt;dbl&gt;, Assists &lt;dbl&gt;, Steals &lt;dbl&gt;,
+#   Blocks &lt;dbl&gt;, Turnovers &lt;dbl&gt;, PersonalFouls &lt;dbl&gt;, and abbreviated …</code></pre>
 </div>
 </div>
 
