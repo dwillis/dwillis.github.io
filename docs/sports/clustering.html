@@ -368,12 +368,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Using packages to get data</span></span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -431,11 +425,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/players25.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 5818 Columns: 63
+<pre><code>Rows: 5818 Columns: 57
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (14): Team, Player, Class, Pos.x, Height, Hometown, High School, Summary...
-dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 3P, 3PA, 3P%, 2P, 2PA, 2...
+chr (10): Team, Player, Class, Height, Hometown, High School, Summary, Pos, ...
+dbl (47): #, Weight, G, GS, MP, FG, FGA, FG%, 3P, 3PA, 3P%, 2P, 2PA, 2P%, eF...
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -445,7 +439,7 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 3P, 3PA, 3P%, 2P, 2PA, 2...
 <p>First, it won’t do to have players who haven’t played, so we can use filter to find anyone with greater than 0 minutes played. Next, Derik Queen is listed as a center, so let’s just look at centers. Third, we want to limit the data to things that make sense to look at for Queen – things like shooting, rebounds, blocks, turnovers and points.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>playersselected <span class="ot">&lt;-</span> players <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">|&gt;</span> <span class="fu">filter</span>(Pos.x <span class="sc">==</span> <span class="st">"C"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">|&gt;</span> <span class="fu">filter</span>(Pos <span class="sc">==</span> <span class="st">"C"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Player, Team, Pos, MP, <span class="st">`</span><span class="at">FG%</span><span class="st">`</span>, TRB, BLK, TOV, PTS) <span class="sc">|&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -558,125 +552,29 @@ Available components:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#big10 &lt;- c("Nebraska Cornhuskers", "Iowa Hawkeyes", "Minnesota Golden Gophers", "Illinois Fighting Illini", "Northwestern Wildcats", "Wisconsin Badgers", "Indiana Hoosiers", "Purdue Boilermakers", "Ohio State Buckeyes", "Michigan Wolverines", "Michigan State Spartans", "Penn State Nittany Lions", "Rutgers Scarlet Knights", "Maryland Terrapins")</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>playercluster <span class="sc">|&gt;</span> <span class="fu">filter</span>(k8.cluster <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(MP))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>playercluster <span class="sc">|&gt;</span> <span class="fu">filter</span>(k8.cluster <span class="sc">==</span> <span class="dv">6</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(MP))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                     Player                                        Team Pos  MP
-1                Zach Riley                          Fordham Rams Men's   C 580
-2    Efstratios Kalliontzis             North Carolina A&amp;T Aggies Men's   C 574
-3             Matej Bosnjak                Wichita State Shockers Men's   C 478
-4                  Mor Seck                 Fresno State Bulldogs Men's   C 463
-5             Leeroy Odiahi          Western Kentucky Hilltoppers Men's   C 454
-6        Godswill Erheriene                    Seton Hall Pirates Men's   C 454
-7               Boden Kapke                       Butler Bulldogs Men's   C 454
-8            Jack Whitbourn              UC-Riverside Highlanders Men's   C 448
-9           Maximo Milovich                  UC-San Diego Tritons Men's   C 439
-10              Grant Asman                       Lipscomb Bisons Men's   C 420
-11         Treyton Thompson                       Stetson Hatters Men's   C 406
-12             Ben Hendriks                  Ball State Cardinals Men's   C 403
-13             Braxton Meah                  Nebraska Cornhuskers Men's   C 387
-14            Rodrick Payne         Western Illinois Leathernecks Men's   C 380
-15             Rick Issanza                Loyola Marymount Lions Men's   C 378
-16            David Onanina              Bethune-Cookman Wildcats Men's   C 377
-17              Peter Carey                          Siena Saints Men's   C 374
-18                 Tim Oboh                         Buffalo Bulls Men's   C 370
-19                Kean Webb                     San Diego Toreros Men's   C 366
-20          Caleb Middleton                New Hampshire Wildcats Men's   C 363
-21               Houran Dan                      Seattle Redhawks Men's   C 360
-22            Percy Daniels                     Tulane Green Wave Men's   C 359
-23              Luke Wilson        Appalachian State Mountaineers Men's   C 358
-24           Ray Somerville                Delaware State Hornets Men's   C 355
-25             Cameron Fens                  South Dakota Coyotes Men's   C 349
-26           Mike Bednostin                    Lafayette Leopards Men's   C 340
-27              Yusuf Jihad               Eastern Michigan Eagles Men's   C 337
-28  Nikita Konstantynovskyi             Notre Dame Fighting Irish Men's   C 336
-29          Patrick Wessler                  Virginia Tech Hokies Men's   C 329
-30         Christ Essandoko                     Providence Friars Men's   C 328
-31               Kachi Nzeh              Penn State Nittany Lions Men's   C 327
-32              David Idada     Southeast Missouri State Redhawks Men's   C 322
-33            Malick Diallo                      TCU Horned Frogs Men's   C 315
-34            Janko Bulajic                       Lamar Cardinals Men's   C 307
-35          Emmanuel Ogbole               Rutgers Scarlet Knights Men's   C 305
-36 Jermaine Ballisager-Webb                       Portland Pilots Men's   C 300
-37             Egan Shields               Northern Colorado Bears Men's   C 295
-38      Adbulai Fanta Kabba                       Denver Pioneers Men's   C 293
-39           Cade Hornecker            Abilene Christian Wildcats Men's   C 290
-40           Devin Brafford                          Siena Saints Men's   C 284
-41           Franck Kepnang                    Washington Huskies Men's   C 280
-42          Jerrell Colbert                          SMU Mustangs Men's   C 278
-43              Daniel Umoh Mississippi Valley State Delta Devils Men's   C 277
-44            Shilo Jackson    Texas A&amp;M-Corpus Christi Islanders Men's   C 271
-45              Chol Marial               San Jose State Spartans Men's   C 258
-46          Randarius Jones                          Troy Trojans Men's   C 250
-47      Tristen Guillouette             Florida Gulf Coast Eagles Men's   C 243
-48            Scottie Ebube                       Wyoming Cowboys Men's   C 239
-49            Thierno Sylla         Stephen F. Austin Lumberjacks Men's   C 236
-50          Tommy Gankhuyag      Texas-Rio Grande Valley Vaqueros Men's   C 227
-51              Roee Oselka                     Green Bay Phoenix Men's   C 225
-52             Tai Hamilton                       Winthrop Eagles Men's   C 220
-53             Jorge Moreno             Southern Illinois Salukis Men's   C 206
-54              Kai Burdick            Southern Utah Thunderbirds Men's   C 203
-55            Logan Duncomb                       Winthrop Eagles Men's   C 192
-56                Ali Ragab          Northern Arizona Lumberjacks Men's   C 144
-     FG. TRB BLK TOV PTS k8.cluster
-1  0.343  99   3  16  76          1
-2  0.565  97  13  18 114          1
-3  0.441 111   8  26 107          1
-4  0.425 101  14  15  91          1
-5  0.609  85  29  15  60          1
-6  0.562  92  16  23  90          1
-7  0.402  96   4  11 141          1
-8  0.471 151   7  20 111          1
-9  0.604  92   6  11  76          1
-10 0.417  66  13  26  98          1
-11 0.500 106  17  31 126          1
-12 0.658  73   9  27 122          1
-13 0.766  98  12  29  86          1
-14 0.531  83  15  17  71          1
-15 0.680  80  28  15  78          1
-16 0.551  78  14  22 139          1
-17 0.619  69  36  22 129          1
-18 0.457  68   9  28 116          1
-19 0.563  56  11  18  80          1
-20 0.613 107  14  20 118          1
-21 0.513  71  15  21 117          1
-22 0.667  59  26  17  56          1
-23 0.604  86  32  19  86          1
-24 0.597  64  17  21  93          1
-25 0.568  95  21  16 163          1
-26 0.559  87   9  23  74          1
-27 0.440  39   3  20 137          1
-28 0.722 115   3  15  85          1
-29 0.625  90  11  12 121          1
-30 0.507  85  14  26  94          1
-31 0.611  64   9   9  76          1
-32 0.718  90   9  19  68          1
-33 0.490  78  17  24  65          1
-34 0.467  68   7  19  68          1
-35 0.587  86   9  17  71          1
-36 0.640  52   4  14 125          1
-37 0.582  43   8  10  69          1
-38 0.630  79  21  22  75          1
-39 0.436  72   6  13  91          1
-40 0.500  53  24  12  94          1
-41 0.533  72  27  15  96          1
-42 0.636  59  23  25  83          1
-43 0.609  62  11  23  59          1
-44 0.600  65  13  17 108          1
-45 0.383  62  31  18  45          1
-46 0.612  54  16  15  80          1
-47 0.608  67  16  16  78          1
-48 0.676  63   8  32 114          1
-49 0.368  66  14  27  78          1
-50 0.519  38   3  18  73          1
-51 0.576  36  13  18  44          1
-52 0.486  69  22  13  54          1
-53 0.627  67   6  15  80          1
-54 0.533  72  11  12  54          1
-55 0.542  61  11  15  72          1
-56 0.519  49  12  17  33          1</code></pre>
+<pre><code>            Player                         Team Pos   MP   FG. TRB BLK TOV PTS
+1 Ryan Kalkbrenner     Creighton Bluejays Men's   C 1206 0.653 303  93  51 672
+2      Derik Queen     Maryland Terrapins Men's   C 1093 0.526 323  39  85 594
+3     Robbie Avila  Saint Louis Billikens Men's   C 1053 0.492 215  24 101 535
+4    Bent Leuchten    UC-Irvine Anteaters Men's   C 1045 0.544 354  50  60 599
+5 Hunter Dickinson        Kansas Jayhawks Men's   C 1025 0.526 340  44  74 592
+6    Nathan Bittle           Oregon Ducks Men's   C  971 0.511 265  75  56 496
+7  Noah Williamson         Bucknell Bison Men's   C  945 0.538 244  35  91 562
+8   Carter Welling Utah Valley Wolverines Men's   C  784 0.478 201  57  69 420
+  k8.cluster
+1          6
+2          6
+3          6
+4          6
+5          6
+6          6
+7          6
+8          6</code></pre>
 </div>
 </div>
-<p>So there are the 7 centers most like Derik Queen last season. Were they the best centers in the country?</p>
+<p>So here are the 7 centers most like Derik Queen last season. Were they the best centers in the country?</p>
 <section id="advanced-metrics" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="advanced-metrics"><span class="header-section-number">13.1</span> Advanced metrics</h2>
 <p>How much does this change if we change the metrics? I used pretty standard box score metrics above. What if we did it using Player Efficiency Rating, True Shooting Percentage, Point Production, Assist Percentage, Win Shares Per 40 Minutes and Box Plus Minus (you can get definitions of all of them by <a href="https://www.sports-reference.com/cbb/schools/maryland/men/2025.html">hovering over the stats on Maryland’s stats page</a>).</p>
@@ -684,7 +582,7 @@ Available components:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>playersadvanced <span class="ot">&lt;-</span> players <span class="sc">|&gt;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Pos.x <span class="sc">==</span> <span class="st">"C"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Pos <span class="sc">==</span> <span class="st">"C"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Player, Team, Pos, PER, <span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, PProd, <span class="st">`</span><span class="at">AST%</span><span class="st">`</span>, <span class="st">`</span><span class="at">WS/40</span><span class="st">`</span>, BPM) <span class="sc">|&gt;</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -760,7 +658,7 @@ Available components:
 [6] "betweenss"    "size"         "iter"         "ifault"      </code></pre>
 </div>
 </div>
-<p>Looks like this time, cluster 3 is all below average and cluster 8 is all above. Which cluster is Derik Queen in?</p>
+<p>Looks like this time, cluster 1 is all below average and cluster 4 is all above. Which cluster is Derik Queen in?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>playeradvcluster <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(playersadvanced, advk8<span class="sc">$</span>cluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -775,52 +673,68 @@ Available components:
 1             4</code></pre>
 </div>
 </div>
-<p>Cluster 8 on my dataset. So in this season, we can say he’s in a group of players who are all above average on these advanced metrics.</p>
+<p>Cluster 4 on my dataset. So in this season, we can say he’s in a group of players who are all above average on these advanced metrics.</p>
 <p>Now who are his peers?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>playeradvcluster <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(advk8.cluster <span class="sc">==</span> <span class="dv">8</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(advk8.cluster <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">|&gt;</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(PProd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             Player                              Team Pos  PER   TS. PProd AST.
-1       Peter Carey                Siena Saints Men's   C 20.7 0.653   136 12.7
-2   Patrick Ngongba            Duke Blue Devils Men's   C 24.7 0.728   122 12.6
-3      Jorge Moreno   Southern Illinois Salukis Men's   C 21.4 0.622    86 11.6
-4     Fredrick King          Creighton Bluejays Men's   C 21.7 0.659    84  3.9
-5       Even Brauns               Iowa Hawkeyes Men's   C 18.1 0.734    77  9.9
-6   Motiejus Krivas            Arizona Wildcats Men's   C 25.4 0.603    65 13.0
-7  Micah Handlogten              Florida Gators Men's   C 20.6 0.614    62 13.2
-8        Isaac Jack               Dayton Flyers Men's   C 19.2 0.770    60  7.4
-9   Andrew McKeever          Saint Mary's Gaels Men's   C 25.5 0.597    44  1.8
-10    Naheem McLeod             Syracuse Orange Men's   C 22.1 0.788    40  6.6
-11        Will Berg         Purdue Boilermakers Men's   C 14.6 0.752    39  9.2
-12   Ismaila Diagne            Gonzaga Bulldogs Men's   C 24.5 0.821    28  0.0
-13   Hunter Harding  Central Michigan Chippewas Men's   C 19.7 0.736    27 15.1
-14    Braden Pierce          Maryland Terrapins Men's   C 19.6 0.550    14 14.4
-15  Daniel Jacobsen         Purdue Boilermakers Men's   C 28.2 0.697    11  0.0
-16       Tegra Izay Southern Miss Golden Eagles Men's   C 22.0 0.833     9  5.2
-17        Alex Koch                Mercer Bears Men's   C 36.8 0.641     9  0.0
-   WS.40  BPM advk8.cluster
-1  0.157  0.3             8
-2  0.277 11.3             8
-3  0.150  0.7             8
-4  0.162  4.5             8
-5  0.144  5.1             8
-6  0.219  8.6             8
-7  0.210 11.4             8
-8  0.146 -2.0             8
-9  0.208  5.0             8
-10 0.165  6.5             8
-11 0.126  3.0             8
-12 0.226  6.2             8
-13 0.193  2.8             8
-14 0.216  3.4             8
-15 0.215  7.6             8
-16 0.178 -2.5             8
-17 0.273 -9.9             8</code></pre>
+<pre><code>               Player                                Team Pos  PER   TS. PProd
+1    Ryan Kalkbrenner            Creighton Bluejays Men's   C 29.1 0.684   589
+2         Derik Queen            Maryland Terrapins Men's   C 24.7 0.591   584
+3       Bent Leuchten           UC-Irvine Anteaters Men's   C 28.7 0.648   582
+4    Hunter Dickinson               Kansas Jayhawks Men's   C 25.8 0.571   558
+5        Robbie Avila         Saint Louis Billikens Men's   C 21.0 0.605   542
+6     Noah Williamson                Bucknell Bison Men's   C 23.5 0.594   515
+7       Nathan Bittle                  Oregon Ducks Men's   C 25.5 0.598   476
+8       Essam Mostafa Middle Tennessee Blue Raiders Men's   C 29.0 0.621   468
+9      Kyler Filewich              Wofford Terriers Men's   C 24.6 0.529   452
+10        Oumar Ballo              Indiana Hoosiers Men's   C 23.7 0.618   404
+11      Payton Sparks          Ball State Cardinals Men's   C 26.1 0.618   404
+12     Mitchell Saxen            Saint Mary's Gaels Men's   C 22.3 0.547   400
+13    Tomislav Ivisic      Illinois Fighting Illini Men's   C 22.0 0.597   400
+14     Carter Welling        Utah Valley Wolverines Men's   C 21.0 0.560   388
+15      Jeff Woodward               Colgate Raiders Men's   C 27.9 0.655   376
+16    Amar Kuljuhovic   North Dakota Fighting Hawks Men's   C 19.4 0.572   373
+17       Jacob Hutson        Northern Iowa Panthers Men's   C 19.5 0.557   370
+18    Christoph Tilly           Santa Clara Broncos Men's   C 23.5 0.623   367
+19 Justin Vander Baan            Lafayette Leopards Men's   C 23.0 0.547   364
+20        Miles Rubin          Loyola (IL) Ramblers Men's   C 22.1 0.683   322
+21       Michael Walz              Richmond Spiders Men's   C 19.5 0.587   269
+22    Lawson Lovering                     Utah Utes Men's   C 15.5 0.505   262
+23     Dylan Cardwell                 Auburn Tigers Men's   C 20.3 0.627   240
+24   Brandon Garrison             Kentucky Wildcats Men's   C 16.6 0.547   231
+25          Aday Mara                   UCLA Bruins Men's   C 28.8 0.594   216
+   AST. WS.40  BPM advk8.cluster
+1  10.0 0.236 12.2             4
+2  11.6 0.216  9.2             4
+3  12.5 0.277  9.0             4
+4  14.4 0.197 10.3             4
+5  24.1 0.158  4.7             4
+6  12.7 0.154  2.2             4
+7  14.4 0.203 11.4             4
+8   9.7 0.237  6.3             4
+9  24.1 0.168  3.5             4
+10 14.7 0.174  8.8             4
+11 13.6 0.197  2.2             4
+12 11.2 0.196  8.5             4
+13 15.8 0.187 10.7             4
+14 12.1 0.160  2.9             4
+15 22.6 0.209  3.0             4
+16 14.0 0.111  0.2             4
+17 14.9 0.148  1.8             4
+18 16.0 0.193  6.7             4
+19 24.0 0.157  3.8             4
+20 11.7 0.167  5.1             4
+21 27.3 0.135  3.2             4
+22 22.0 0.097  3.6             4
+23 12.7 0.189 11.4             4
+24 18.0 0.116  6.3             4
+25 16.7 0.222 11.4             4</code></pre>
 </div>
 </div>
-<p>Sorting on Points Produced, Derik Queen is second out of the 25 centers who land in Cluster 8. Seems advanced metrics rate Derik Queen pretty highly.</p>
+<p>Sorting on Points Produced, Derik Queen is second out of the 25 centers who land in Cluster 4. Seems advanced metrics rate him pretty highly.</p>
 
 
 </section>
