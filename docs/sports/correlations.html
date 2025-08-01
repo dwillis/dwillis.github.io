@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9&nbsp; Correlations and regression – Sports Data Analysis and Visualization</title>
+<title>Sports Data Analysis and Visualization - 9&nbsp; Correlations and regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1577067484ec7a2ab3d04528a804f744.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,13 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./correlations.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations and regression</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -413,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Throughout sports, you will find no shortage of opinions. From people yelling at their TV screens to an entire industry of people paid to have opinions, there are no shortage of reasons why this team sucks and that player is great. They may have their reasons, but a better question is, does that reason really matter?</p>
 <p>Can we put some numbers behind that? Can we prove it or not?</p>
 <p>This is what we’re going to start to answer. And we’ll do it with correlations and regressions.</p>
-<p>First, we need data from the 2025 women’s college lacrosse season.</p>
+<p>First, we need data from the 2024 women’s college soccer season.</p>
 <pre><p><strong>For this walkthrough:</strong></p><p><a href="https://raw.githubusercontent.com/dwillis/NCAAWomensSoccerData/main/data/ncaa_womens_soccer_matchstats_2024.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
@@ -425,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/dwillis/NCAAWomensSoccerData/main/data/ncaa_womens_soccer_matchstats_2024.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 6451 Columns: 36
+<pre><code>Rows: 2192 Columns: 36
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr   (6): team, opponent, home_away, outcome, minutes, defensive_minutes
@@ -436,7 +436,7 @@ date  (1): date
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>To do this, we need all college lacrosse teams and their season stats from this year. How much, over the course of a season, does a thing matter? That’s the question you’re going to answer.</p>
+<p>To do this, we need all college soccer teams and their season stats from this year. How much, over the course of a season, does a thing matter? That’s the question you’re going to answer.</p>
 <p>In our case, we want to know how much does a team’s fouls influence the number of goals they score in a season? How much difference can we explain in goals with fouls?</p>
 <p>We’re going to use two different methods here and they’re closely related. Correlations – specifically the Pearson Correlation Coefficient – is a measure of how related two numbers are in a linear fashion. In other words – if our X value goes up one, what happens to Y? If it also goes up 1, that’s a perfect correlation. X goes up 1, Y goes up 1. Every time. Correlation coefficients are a number between 0 and 1, with zero being no correlation and 1 being perfect correlation <strong>if our data is linear</strong>. We’ll soon go over scatterplots to visually determine if our data is linear, but for now, we have a hypothesis: More fouls are bad. Fouls hurt. So if a team gets lots of them, they should have worse outcomes than teams that get few of them. That is an argument for a linear relationship between them.</p>
 <p>But is there one?</p>
@@ -454,7 +454,7 @@ date  (1): date
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1      0.0181</code></pre>
+1      0.0125</code></pre>
 </div>
 </div>
 <p>So on a scale of -1 to 1, where 0 means there’s no relationship at all and 1 or -1 means a perfect relationship, fouls and whether or not the team scores more goals than it gives up are at 0.01254812. You could say they’re 1.3 percent related toward the positive – more fouls, the higher your differential. Another way to say it? They’re almost 99 percent not related.</p>
@@ -465,7 +465,7 @@ date  (1): date
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1     -0.0723</code></pre>
+1     -0.0944</code></pre>
 </div>
 </div>
 <p>So wait, what does this all mean?</p>
@@ -484,16 +484,16 @@ lm(formula = differential ~ fouls, data = newcorrelations)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--10.0486  -1.0714  -0.0373   0.9969  10.0196 
+-10.1012  -1.1384  -0.0826   1.8267   9.9546 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -0.065158   0.077276  -0.843    0.399
-fouls        0.011381   0.007845   1.451    0.147
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) 0.008153   0.151942   0.054    0.957
+fouls       0.009306   0.015846   0.587    0.557
 
-Residual standard error: 2.264 on 6449 degrees of freedom
-Multiple R-squared:  0.0003262, Adjusted R-squared:  0.0001712 
-F-statistic: 2.104 on 1 and 6449 DF,  p-value: 0.1469</code></pre>
+Residual standard error: 2.594 on 2190 degrees of freedom
+Multiple R-squared:  0.0001575, Adjusted R-squared:  -0.0002991 
+F-statistic: 0.3449 on 1 and 2190 DF,  p-value: 0.5571</code></pre>
 </div>
 </div>
 <p>There’s three things we need here:</p>
@@ -525,7 +525,7 @@ F-statistic: 2.104 on 1 and 6449 DF,  p-value: 0.1469</code></pre>
 <pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
-1       0.602</code></pre>
+1       0.679</code></pre>
 </div>
 </div>
 <p>Answer: 67 percent. Not a perfect relationship, but pretty good. But how meaningful is that relationship and how predictive is it?</p>
@@ -539,18 +539,18 @@ lm(formula = differential ~ so_g, data = newcorrelations)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--9.2804 -1.0389  0.0988  1.2365  5.8234 
+-7.9604 -1.1659  0.1574  1.2752  5.3052 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -2.13264    0.04233  -50.38   &lt;2e-16 ***
-so_g         0.37923    0.00626   60.58   &lt;2e-16 ***
+(Intercept) -2.48075    0.07201  -34.45   &lt;2e-16 ***
+so_g         0.44111    0.01019   43.28   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.808 on 6449 degrees of freedom
-Multiple R-squared:  0.3627,    Adjusted R-squared:  0.3626 
-F-statistic:  3670 on 1 and 6449 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 1.904 on 2190 degrees of freedom
+Multiple R-squared:  0.461, Adjusted R-squared:  0.4608 
+F-statistic:  1873 on 1 and 2190 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>First we check p-value: 0.00000000000000022. That’s sixteen zeros between the decimal and 22. Is that less than .05? Uh, yeah. So this is really, really, really not random. But anyone who has watched a game of soccer knows this is true. It makes intuitive sense.</p>
@@ -603,7 +603,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -635,27 +646,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -663,7 +654,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -760,6 +751,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

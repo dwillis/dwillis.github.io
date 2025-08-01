@@ -10,7 +10,67 @@
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Tue, 24 Jun 2025 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 01 Aug 2025 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Making Scraping Better with AI Assistance</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2025/08/01/making-scraping-better-with-ai-assistance/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>When I started teaching at Maryland in 2021, one of the first things I did was pull up <a href="https://app.testudo.umd.edu/soc/">the university’s Schedule of Classes</a>, something I still do all the time. It’s a (relatively) quick way to see what classes are being offered and how many seats are available in them. As browsable web apps go, it’s not too bad. You can start by looking through a single department/college’s offerings, or you can search for a specific course or instructor.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2025/08/01/making-scraping-better-with-ai-assistance/testudo_soc.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It is not, however, a great way to <em>search</em> across courses and the filtering criteria available is limited. For example, I can’t see how many journalism classes offered on specific days still have seats remaining without looking at all of the open sections one by one. I also can’t see at a glance which schools are offering classes on, say, artificial intelligence. Again, this isn’t to say that the schedule app isn’t useful; it just doesn’t serve some good and necessary needs.</p>
+<p>I wasn’t the only one who thought so; my friend Ed Summers had <a href="https://github.com/edsu/testudo">written some code</a> more than five years ago that scraped the Schedule of Classes (he called it Testudo because that’s the broader course scheduler app and, of course, <a href="https://en.wikipedia.org/wiki/Testudo_(mascot)">our mascot</a>). It remains good, clean code that generates JSON files with details of individual classes. I decided to take that as my foundation and <a href="https://github.com/dwillis/testudo">extend it</a>. Some of the changes I made included <a href="https://github.com/dwillis/testudo/commit/72e84076498cc6ba3b1036db7b54e0f3be946ad4">adding the course level (undergraduate or graduate)</a> and the <a href="https://github.com/dwillis/testudo/commit/2ef924fa03445ec831cf335f6b9c66019b4662ff">number of course sections</a>.</p>
+<p>But there were more elements I wanted to add to the data, and not a lot of time to focus on doing that. That changed after I found a fall course in Computer Science that piqued my interest: <a href="https://app.testudo.umd.edu/soc/search?courseId=CMSC398Z&amp;sectionId=&amp;termId=202508&amp;_openSectionsOnly=on&amp;creditCompare=&amp;credits=&amp;courseLevelFilter=ALL&amp;instructor=&amp;_facetoface=on&amp;_blended=on&amp;_online=on&amp;courseStartCompare=&amp;courseStartHour=&amp;courseStartMin=&amp;courseStartAM=&amp;courseEndHour=&amp;courseEndMin=&amp;courseEndAM=&amp;teachingCenter=ALL&amp;_classDay1=on&amp;_classDay2=on&amp;_classDay3=on&amp;_classDay4=on&amp;_classDay5=on">CMSC398Z, Effective use of AI Coding Assistants and Agents</a>. I’ve audited a couple of classes at UMD (thanks, tuition remission benefit!) and have really enjoyed the experience, so I checked on that option for this class. No dice, so I emailed the instructor, <a href="https://www.cs.umd.edu/~pugh/">Bill Pugh</a>, and asked if I could sit in. That led to some discussions and now I’ll be co-teaching the course! Which means that I need to get up to speed on using tools like Copilot, Cursor and Claude Code. My Testudo project seemed like a good opportunity to see an AI coding assistant in action.</p>
+<p>Using Copilot with VS Code, I picked Claude 4 Sonnet as the LLM and began with some basic upgrades: switch the code to use <a href="https://docs.astral.sh/uv/">uv</a> for the Python environment and dependencies, and then take what was a single scraper file and make it more modular. Along the way, I asked it to create actual tests for the code and then suggest a reorganized repository. Here’s what it came up with:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2025/08/01/making-scraping-better-with-ai-assistance/copilot_repo.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>My first reaction was that this might be overkill, and considering my own previous software projects, it definitely was an upgrade. But in particular the command-line interface was a big improvement, because previously if I wanted to change the scope of the scraping I’d need to edit the single <code>testudo.py</code> script. Claude provided not just a flexible interface but one that could be used to test out results, since at that point it wasn’t possible to scrape, say, just one department’s courses. At every step, I asked Claude to run the code it had written to see the results, and that’s a big part of why this process worked for me: I knew exactly what to expect from the output and had worked with this data for several years.</p>
+<p>The outcome was a <a href="https://github.com/dwillis/testudo">much more robust and flexible codebase</a> that actually made me want to scrape the data and make use of it. That’s important, because we want software to be <em>useful</em>. Now if I have a question about the courses being offered by a single department, even over time, the CLI tool can fetch those for me and put them into a SQLite database. Here’s an example: a few years ago I helped shame some of my colleagues into posting their syllabi in a timely fashion, and I used the Testudo data to show where Journalism ranked among all of the colleges/departments of the university. It was a clunky process.</p>
+<p>Now, I can run the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> run python json_to_sqlite.py data/202508 fall25_courses.db</span></code></pre></div>
+</div>
+<p>And get a database of courses for this upcoming semester, which now includes the semester of the most recently-posted syllabus (if there is one). So I fire up <a href="https://datasette.io/">Datasette</a> and find that fewer than one in three courses (undergrad and graduate) have a syllabus posted, and while the most common semester for those is Fall 2024, scores of classes have syllabi from 2018 and 2019, and a few even date back to 2015! At least journalism is doing pretty well in terms of posting them, I guess.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2025/08/01/making-scraping-better-with-ai-assistance/course_syllabi.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>My Copilot journey wasn’t perfect, just like any experience with coding. I had to remind it several times about using uv to run commands, and occasionally it tried to go beyond the boundaries of what I requested. Supervision is important for these coding assistants. There are still too many emojis and wildly over-confident language (it didn’t just build a tool, it built a “comprehensive tool”). I also have learned to ask for written plans in advance and wrap-up documents at the end of the process as a way of keeping track of my expectations and what actually changed.</p>
+<p>But these coding assistants, properly supervised, make tackling issues I had little appetite for a much easier prospect, and even fun in parts. I upgraded a Rails 4 app to use Rails 7 in about 45 minutes, which I would have never even tried to do in a single day. It’s prett clear to me, a non-expert software developer, that these assistants can be very useful and that we should be incorporating them into how we teach coding. That’s what I’m looking forward to this fall.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2025/08/01/making-scraping-better-with-ai-assistance/</guid>
+  <pubDate>Fri, 01 Aug 2025 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Interviewing FEC Filings with llm-fecfile</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -3241,43 +3301,6 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/03/22/teaching-newsapps-with-codespaces/</guid>
   <pubDate>Wed, 22 Mar 2023 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Teaching Journalism with ChatGPT</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/02/11/teaching-journalism-with-chatgpt/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p><em>You’ll want to read Jeremy Littau’s piece titled “<a href="https://jeremylittau.substack.com/p/whos-afraid-of-chatgpt">Who’s Afraid of ChatGPT?</a>” for a more foundational view on this topic.</em></p>
-<p>At first glance, the idea that one of my students could take an assignment from my Data Journalism class - say, summarizing data using R and the Tidyverse - and ask an AI chatbot to provide the answer (or something that gets close to it) should be slightly terrifying.</p>
-<p>Need to know the proper syntax for creating a dumbbell chart using ggplot? What about the code to scrape tabular data from a government website? Ask your online pal.</p>
-<p>What’s my job, exactly?</p>
-<p>I tell people that I teach data journalism skills to students, and that’s true. But the real story is, inevitably, more complicated. One time during a classroom exercise involving actual data, a student asked whether the answer she got was “correct”, knowing that the data was missing some values and structured in a way that made answering the question difficult.</p>
-<p>“What is truth?” I half-jokingly replied.</p>
-<p>If you use ChatGPT and similar services, at some point you’ll probably end up with the same reaction.</p>
-<p>So yes, I do teach R and Python and SQL, but there are other people who teach those subjects who know more about them than I do. We have entire departments filled with smart people who study how to use these tools and who use them far more extensively than I do. I teach about tools <em>for journalism</em>, and that’s where the emphasis needs to be.</p>
-<p>Those tools make it possible to do more rigorous journalism, to go from the anecdotal to the systematic. But they do not do these things by themselves. Good journalism adds context, identifies and explains priorities and significance. Teaching data journalism isn’t just, to borrow a phrase from <a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2012.00605.x">Amanda Cox</a>: “Here’s some data; hope you find something interesting!” We start with a question and ask more, refining our inquiry based on what we discover. We analyze and describe. If AI tools can help with that process, I want my students to know how.</p>
-<p>My policy, at least for now, is this: I want my students to use ChatGPT and other AI services to help them solve specific problems, and I want to know about it when they do. Here’s what I put in my syllabi:</p>
-<blockquote class="blockquote">
-<p>The basic rule is: if you use it, you must disclose that you did so in that assignment’s submission, and include any prompts you provided to the tool. Sources matter.</p>
-</blockquote>
-<p>If I’m asking students to find some meaning in data, maybe a pattern or outlier that’s newsworthy, and they have an idea of how to do that but spend an hour struggling to get the precise syntax correct, that’s probably not going to be a great learning experience. Some of them might be energized by the challenge, I suppose, but is that the point? If they can find assistance in finishing a task so they can actually answer the question, that’s the important part to me.</p>
-<p>There are always ways to misuse tools and risks involved in any process that provides efficiency at the expense of step-by-step work. That’s not new, but AI can make the risks greater because there’s an implied authority that we bestow (a whole other, if related, problem). AI systems are and will be problematic and potentially harmful, like any human-designed system. We are still early in figuring out the harms. That’s an argument for engaging them as journalists, not for shying away.</p>
-<p>If this seems like soft-headed mollycoddling, I would submit to you that the many hours I spent trying to wrangle data from electronic PDFs before <a href="https://tabula.technology/">Tabula</a> came along were not exactly instructive. I learned that there are dozens of ways to lock data inside a PDF prison. It makes for a slightly funny story at conferences, but I would have done better things with my time - maybe better stories - had I had a better tool.</p>
-<p>The bit about disclosing the prompts is key for journalism students. One of my hobbyhorses is that we don’t do a good enough job of teaching student journalists how to ask good questions. Partly that’s because we focus a lot of attention on the final product, typically a story, and partly it’s because it’s both easier and consistent to have students complete the same kinds of assignments. We also overestimate the quality of our ideas a lot, and don’t interrogate them as much as we should.</p>
-<p>I want to know what my students are asking from ChatGPT and other AI products, not just because the prompts and the answers are related, but because precise questions are more likely to yield specific answers. I’d like to know if my students are getting better at asking questions.</p>
-<p>If my students can learn to use AI systems with creativity, curiosity and skepticism, they’re going to be better journalists. If they can ask better questions and have more experience and confidence in evaluating the results, they’re going to be better journalists.</p>
-<p>What’s my job, exactly? I teach data journalism skills to students. If I end up spending more time developing that questioning skill, I suspect that’s going to make a bigger difference in the long run.</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/02/11/teaching-journalism-with-chatgpt/</guid>
-  <pubDate>Sat, 11 Feb 2023 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
