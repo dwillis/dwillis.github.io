@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sports Data Analysis and Visualization - 11&nbsp; Residuals</title>
+<title>11&nbsp; Residuals – Sports Data Analysis and Visualization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1577067484ec7a2ab3d04528a804f744.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,13 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./residuals.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Residuals</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -346,26 +346,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./blogging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></span></a>
   </div>
 </li>
     </ul>
@@ -404,11 +404,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>When looking at a linear model of your data, there’s a measure you need to be aware of called residuals. The residual is the distance between what the model predicted and what the real outcome is. Take our model at the end of the correlation and regression chapter. Our model predicted Maryland’s women soccer should have outscored Navy by 2.12 goals a year ago. The match was a 3-3 draw. So our residual is -2.12.</p>
+<p>When looking at a linear model of your data, there’s a measure you need to be aware of called residuals. The residual is the distance between what the model predicted and what the real outcome is. Take our model at the end of the correlation and regression chapter. Our model predicted Maryland’s women soccer should have outscored George Mason by a goal a year ago. The match was a 3-2 loss. So our residual is -2.</p>
 <p>Residuals can tell you several things, but most important is if a linear model the right model for your data. If the residuals appear to be random, then a linear model is appropriate. If they have a pattern, it means something else is going on in your data and a linear model isn’t appropriate.</p>
 <p>Residuals can also tell you who is under-performing and over-performing the model. And the more robust the model – the better your r-squared value is – the more meaningful that label of under or over-performing is.</p>
-<p>Let’s go back to our model for college basketball. For our predictor, let’s use Net FG Percentage - the difference between the two teams’ shooting success.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/cbblogs1524.csv">
+<p>Let’s go back to our model for men’s college basketball. For our predictor, let’s use Net FG Percentage - the difference between the two teams’ shooting success.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/cbblogs1125.csv.zip">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Then load the tidyverse.</p>
@@ -416,14 +416,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cbblogs1524.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cbblogs1125.csv.zip"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 98161 Columns: 51
+<pre><code>Multiple files in zip: reading 'cbblogs1125.csv'
+Rows: 169224 Columns: 61
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr   (9): Season, TeamFull, Opponent, HomeAway, W_L, URL, Conference, Team,...
-dbl  (39): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
-lgl   (2): Blank, season
+chr  (10): Season, GameType, TeamFullName, Opponent, HomeAway, W_L, OT, URL,...
+dbl  (50): file_source, Game, TeamScore, OpponentScore, TeamFG, TeamFGA, Tea...
 date  (1): Date
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
@@ -445,23 +445,23 @@ lm(formula = differential ~ FGPctMargin, data = residualmodel)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--51.242  -6.244  -0.221   5.916  68.455 
+-51.912  -6.248  -0.206   5.946  70.084 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   0.53004    0.03038   17.45   &lt;2e-16 ***
-FGPctMargin 122.54301    0.27274  449.31   &lt;2e-16 ***
+(Intercept)   0.55052    0.02324   23.69   &lt;2e-16 ***
+FGPctMargin 119.82551    0.20700  578.87   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.503 on 98133 degrees of freedom
-  (26 observations deleted due to missingness)
-Multiple R-squared:  0.6729,    Adjusted R-squared:  0.6729 
-F-statistic: 2.019e+05 on 1 and 98133 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 9.544 on 169218 degrees of freedom
+  (4 observations deleted due to missingness)
+Multiple R-squared:  0.6645,    Adjusted R-squared:  0.6645 
+F-statistic: 3.351e+05 on 1 and 169218 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>We’ve seen this output before, but let’s review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has under-performed the model by 51 points (!), and a team has overperformed it by 68 points (!!). The median residual, where half are above and half are below, is just slightly below the fit line. Close here is good.</p>
-<p>Next: Look at the Adjusted R-squared value. What that says is that 67 percent of a team’s scoring differential can be predicted by their FG percentage margin.</p>
+<p>We’ve seen this output before, but let’s review because if you are using scatterplots to make a point, you should do this. First, note the Min and Max residual at the top. A team has under-performed the model by 51 points (!), and a team has overperformed it by 70 points (!!). The median residual, where half are above and half are below, is just slightly below the fit line. Close here is good.</p>
+<p>Next: Look at the Adjusted R-squared value. What that says is that 66 percent of a team’s scoring differential can be predicted by their FG percentage margin.</p>
 <p>Last: Look at the p-value. We are looking for a p-value smaller than .05. At .05, we can say that our correlation didn’t happen at random. And, in this case, it REALLY didn’t happen at random. But if you know a little bit about basketball, it doesn’t surprise you that the more you shoot better than your opponent, the more you win by. It’s an intuitive result.</p>
 <p>What we want to do now is look at those residuals. We want to add them to our individual game records. We can do that by creating two new fields – predicted and residuals – to our dataframe like this:</p>
 <div class="cell">
@@ -470,7 +470,7 @@ F-statistic: 2.019e+05 on 1 and 98133 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>Error in `mutate()`:
 ℹ In argument: `predicted = predict(fit)`.
 Caused by error:
-! `predicted` must be size 98161 or 1, not 98135.</code></pre>
+! `predicted` must be size 169224 or 1, not 169220.</code></pre>
 </div>
 </div>
 <p>Uh, oh. What’s going on here? When you get a message like this, where R is complaining about the size of the data, it most likely means that your model is using some columns that have NA values. In this case, the number of columns looks small - perhaps 3 - so let’s just get rid of those rows by using the calculated columns from our model:</p>
@@ -481,29 +481,28 @@ Caused by error:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="ot">&lt;-</span> residualmodel <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">predicted =</span> <span class="fu">predict</span>(fit), <span class="at">residuals =</span> <span class="fu">residuals</span>(fit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now we can sort our data by those residuals. Sorting in descending order gives us the games where teams overperformed the model. To make it easier to read, I’m going to use select to give us just the columns we need to see and limit our results to Big Ten teams.</p>
+<p>Now we can sort our data by those residuals. Sorting in descending order gives us the games where teams overperformed the model. To make it easier to read, I’m going to use select to give us just the columns we need to see and limit our results to Big Ten games.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="sc">|&gt;</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">'Big Ten'</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">|&gt;</span> <span class="fu">select</span>(Date, Team, Opponent, W_L, differential, FGPctMargin, predicted, residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>residualmodel <span class="sc">|&gt;</span> <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">'Big Ten MBB'</span>, GameType <span class="sc">==</span> <span class="st">'REG (Conf)'</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">|&gt;</span> <span class="fu">select</span>(Date, Team, Opponent, W_L, differential, FGPctMargin, predicted, residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,046 × 8
-   Date       Team         Opponent        W_L   diffe…¹ FGPct…² predi…³ resid…⁴
-   &lt;date&gt;     &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1 2020-12-15 Northwestern Quincy          W          52  0.089    11.4     40.6
- 2 2020-11-25 Nebraska     McNeese State   W          47  0.118    15.0     32.0
- 3 2020-11-25 Illinois     North Carolina… W          62  0.243    30.3     31.7
- 4 2021-11-22 Iowa         Western Michig… W          48  0.147    18.5     29.5
- 5 2021-11-16 Iowa         North Carolina… W          17 -0.098   -11.5     28.5
- 6 2020-12-05 Northwestern Chicago State   W          45  0.15     18.9     26.1
- 7 2014-11-16 Illinois     Coppin State    W          58  0.258    32.1     25.9
- 8 2020-12-13 Iowa         Northern Illin… W          53  0.219    27.4     25.6
- 9 2020-12-10 Minnesota    UMKC            W          29  0.0510    6.78    22.2
-10 2022-01-14 Purdue       Nebraska        W          27  0.0360    4.94    22.1
-# … with 1,036 more rows, and abbreviated variable names ¹​differential,
-#   ²​FGPctMargin, ³​predicted, ⁴​residuals</code></pre>
+<pre><code># A tibble: 3,884 × 8
+   Date       Team   Opponent W_L   differential FGPctMargin predicted residuals
+   &lt;date&gt;     &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+ 1 2016-01-18 Purdue Rutgers  W               50      0.109      13.6       36.4
+ 2 2023-01-28 Maryl… Nebraska W               19     -0.087      -9.87      28.9
+ 3 2020-01-21 Maryl… Northwe… W               11     -0.148     -17.2       28.2
+ 4 2016-03-02 Michi… Rutgers  W               31      0.0250      3.55      27.5
+ 5 2011-02-15 Ohio … Michiga… W               10     -0.145     -16.8       26.8
+ 6 2023-02-12 Iowa   Minneso… W               12     -0.125     -14.4       26.4
+ 7 2013-01-30 India… Purdue   W               37      0.093      11.7       25.3
+ 8 2015-01-20 Wisco… Iowa     W               32      0.057       7.38      24.6
+ 9 2016-01-23 India… Northwe… W               32      0.071       9.06      22.9
+10 2012-01-29 India… Iowa     W               14     -0.0780     -8.80      22.8
+# ℹ 3,874 more rows</code></pre>
 </div>
 </div>
-<p>So looking at this table, what you see here are the teams who scored more than their FG percentage margin would indicate. One of them should jump off the page at you.</p>
-<p>Look at that Maryland-Northwestern game from 2020. The Wildcats shot better than the Terps, but the model predicted Northwestern would win by 17 points. Instead, Maryland <strong>won by 11</strong>!</p>
+<p>So looking at this table, what you see here are the teams who scored more than their FG percentage margin would indicate. One of the predicted values should jump off the page at you.</p>
+<p>Look at that Maryland-Northwestern game from 2020. The Wildcats shot better than the Terps, and the model predicted Northwestern would win by 17 points. Instead, Maryland <strong>won by 11</strong>!</p>
 <p>But, before we can bestow any validity on this model, we need to see if this linear model is appropriate. We’ve done that some looking at our p-values and R-squared values. But one more check is to look at the residuals themselves. We do that by plotting the residuals with the predictor. We’ll get into plotting soon, but for now just seeing it is enough.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -549,28 +548,28 @@ lm(formula = differential ~ TotalFouls, data = fouls)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--81.056 -10.628  -0.056   9.587 106.658 
+-95.709 -10.567   0.008   9.645 106.574 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  3.771005   0.262763  14.351   &lt;2e-16 ***
-TotalFouls  -0.071448   0.007219  -9.898   &lt;2e-16 ***
+(Intercept)  3.831495   0.199862   19.17   &lt;2e-16 ***
+TotalFouls  -0.070755   0.005468  -12.94   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 16.61 on 98133 degrees of freedom
-  (26 observations deleted due to missingness)
-Multiple R-squared:  0.0009973, Adjusted R-squared:  0.0009871 
-F-statistic: 97.97 on 1 and 98133 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 16.47 on 169218 degrees of freedom
+  (4 observations deleted due to missingness)
+Multiple R-squared:  0.0009884, Adjusted R-squared:  0.0009825 
+F-statistic: 167.4 on 1 and 169218 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>So from top to bottom:</p>
 <ul>
-<li>Our min and max go from -94 to positive 107</li>
-<li>Our adjusted R-squared is … 0.000986. Not much at all.</li>
+<li>Our min and max go from -95 to positive 107</li>
+<li>Our adjusted R-squared is … 0.0009825. Not much at all.</li>
 <li>Our p-value is … is less than than .05, so that’s something.</li>
 </ul>
-<p>So what we can say about this model is that it’s statistically significant, but doesn’t really explain much. It’s not meaningless, but on its own the total number of fouls doesn’t go very far in explaining the point differential. Normally, we’d stop right here – why bother going forward with a predictive model that isn’t terribly predictive? But let’s do it anyway. Oh, and see that “(65 observations deleted due to missingness)” bit? That means we need to lose some incomplete data again.</p>
+<p>So what we can say about this model is that it’s statistically significant, but doesn’t really explain much. It’s not meaningless, but on its own the total number of fouls doesn’t go very far in explaining the point differential. Normally, we’d stop right here – why bother going forward with a predictive model that isn’t terribly predictive? But let’s do it anyway. Oh, and see that “(4 observations deleted due to missingness)” bit? That means we need to lose some incomplete data again.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fouls <span class="ot">&lt;-</span> fouls <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(TotalFouls))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>fouls<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(pfit)</span>
@@ -579,21 +578,20 @@ F-statistic: 97.97 on 1 and 98133 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fouls <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(residuals)) <span class="sc">|&gt;</span> <span class="fu">select</span>(Team, Opponent, W_L, TeamScore, OpponentScore, TotalFouls, residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 98,135 × 7
-   Team                  Opponent         W_L   TeamSc…¹ Oppon…² Total…³ resid…⁴
-   &lt;chr&gt;                 &lt;chr&gt;            &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1 Bryant                Thomas (ME)      W          147      39      34   107. 
- 2 McNeese State         Dallas Christian W          140      37      33   102. 
- 3 Appalachian State     Toccoa Falls     W          135      34      35    99.7
- 4 Purdue Fort Wayne     &lt;NA&gt;             W          130      34      19    93.6
- 5 James Madison         Carlow           W          135      40      29    93.3
- 6 North Dakota State    Oak Hills        W          108      14      12    91.1
- 7 Florida International Trinity (FL)     W          146      55      39    90.0
- 8 Lamar                 Howard Payne     W          121      32      35    87.7
- 9 Georgia Southern      Carver College   W          139      51      38    86.9
-10 Youngstown State      Franciscan       W          134      46      35    86.7
-# … with 98,125 more rows, and abbreviated variable names ¹​TeamScore,
-#   ²​OpponentScore, ³​TotalFouls, ⁴​residuals</code></pre>
+<pre><code># A tibble: 169,220 × 7
+   Team              Opponent W_L   TeamScore OpponentScore TotalFouls residuals
+   &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Bryant            &lt;NA&gt;     W           147            39         34     107. 
+ 2 Southern          &lt;NA&gt;     W           116            12         37     103. 
+ 3 McNeese State     &lt;NA&gt;     W           140            37         33     102. 
+ 4 Western Carolina  &lt;NA&gt;     W           141            39         30     100. 
+ 5 Appalachian State &lt;NA&gt;     W           135            34         35      99.6
+ 6 Kansas City       &lt;NA&gt;     W           119            19         24      97.9
+ 7 Purdue Fort Wayne &lt;NA&gt;     W           130            34         19      93.5
+ 8 James Madison     &lt;NA&gt;     W           135            40         29      93.2
+ 9 Grambling         &lt;NA&gt;     W           147            52         20      92.6
+10 Utah              Mississ… W           143            49         30      92.3
+# ℹ 169,210 more rows</code></pre>
 </div>
 </div>
 <p>First, note all of the biggest misses here are all blowout games. The worst games of the season, the worst being Bryant vs.&nbsp;Thomas. The model missed that differential by … 107 points. The margin of victory? 108 points. In other words, this model is not great! But let’s look at it anyway.</p>
@@ -660,18 +658,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -703,7 +690,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -711,7 +718,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -808,7 +815,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

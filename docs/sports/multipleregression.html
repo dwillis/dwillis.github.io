@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sports Data Analysis and Visualization - 10&nbsp; Multiple regression</title>
+<title>10&nbsp; Multiple regression – Sports Data Analysis and Visualization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1577067484ec7a2ab3d04528a804f744.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,13 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./multipleregression.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multiple regression</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -346,26 +346,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./blogging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></span></a>
   </div>
 </li>
     </ul>
@@ -373,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
@@ -399,8 +399,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Last chapter, we looked at correlations and linear regression to predict how one element of a game would predict the score. But we know that a single variable, in all but the rarest instances, is not going to be that predictive. We need more than one. Enter multiple regression. Multiple regression lets us add – wait for it – multiple predictors to our equation to help us get a better fit to reality.</p>
-<p>That presents it’s own problems. So let’s get set up. The dataset we’ll use is all men’s college basketball games between 2015 and 2024.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/cbblogs1524.csv">
+<p>That presents it’s own problems. So let’s get set up. The dataset we’ll use is all men’s college basketball games between 2011 and 2025.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/cbblogs1125.csv.zip">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>We need the tidyverse.</p>
@@ -409,14 +409,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>And the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cbblogs1524.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cbblogs1125.csv.zip"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 98161 Columns: 51
+<pre><code>Multiple files in zip: reading 'cbblogs1125.csv'
+Rows: 169224 Columns: 61
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr   (9): Season, TeamFull, Opponent, HomeAway, W_L, URL, Conference, Team,...
-dbl  (39): Game, TeamScore, OpponentScore, TeamFG, TeamFGA, TeamFGPCT, Team3...
-lgl   (2): Blank, season
+chr  (10): Season, GameType, TeamFullName, Opponent, HomeAway, W_L, OT, URL,...
+dbl  (50): file_source, Game, TeamScore, OpponentScore, TeamFG, TeamFGA, Tea...
 date  (1): Date
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
@@ -441,22 +441,22 @@ lm(formula = Differential ~ NetRebounds, data = logs)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--59.216  -8.579  -0.233   8.203  78.185 
+-61.642  -8.532  -0.207   8.248  94.358 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 0.651821   0.041475   15.72   &lt;2e-16 ***
-NetRebounds 1.072698   0.004278  250.72   &lt;2e-16 ***
+(Intercept) 0.697139   0.031515   22.12   &lt;2e-16 ***
+NetRebounds 1.054990   0.003255  324.14   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 12.97 on 98133 degrees of freedom
-  (26 observations deleted due to missingness)
-Multiple R-squared:  0.3905,    Adjusted R-squared:  0.3904 
-F-statistic: 6.286e+04 on 1 and 98133 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 12.94 on 169218 degrees of freedom
+  (4 observations deleted due to missingness)
+Multiple R-squared:  0.3831,    Adjusted R-squared:  0.3831 
+F-statistic: 1.051e+05 on 1 and 169218 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Remember: There’s a lot here, but only some of it we care about. What is the Adjusted R-squared value? What’s the p-value and is it less than .05? In this case, we can predict about 39 percent of the difference in differential with the net rebounds in the game.</p>
+<p>Remember: There’s a lot here, but only some of it we care about. What is the Adjusted R-squared value? What’s the p-value and is it less than .05? In this case, we can predict about 38 percent of the difference in differential with the net rebounds in the game.</p>
 <p>To add more predictors to this mix, we merely add them. But it’s not that simple, as you’ll see in a moment. So first, let’s look at adding turnover margin to our prediction model:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Differential <span class="sc">~</span> NetRebounds <span class="sc">+</span> TurnoverMargin, <span class="at">data=</span>logs)</span>
@@ -468,25 +468,25 @@ lm(formula = Differential ~ NetRebounds + TurnoverMargin, data = logs)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--46.158  -6.899  -0.062   6.845  45.874 
+-46.307  -6.873  -0.064   6.830  49.523 
 
 Coefficients:
-                Estimate Std. Error  t value Pr(&gt;|t|)    
-(Intercept)     0.303968   0.032952    9.225   &lt;2e-16 ***
-NetRebounds     1.200686   0.003438  349.286   &lt;2e-16 ***
-TurnoverMargin -1.557334   0.006487 -240.067   &lt;2e-16 ***
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     0.338141   0.025092   13.48   &lt;2e-16 ***
+NetRebounds     1.184100   0.002621  451.72   &lt;2e-16 ***
+TurnoverMargin -1.546417   0.004933 -313.48   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 10.3 on 98132 degrees of freedom
-  (26 observations deleted due to missingness)
-Multiple R-squared:  0.616, Adjusted R-squared:  0.616 
-F-statistic: 7.87e+04 on 2 and 98132 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 10.29 on 169217 degrees of freedom
+  (4 observations deleted due to missingness)
+Multiple R-squared:  0.6097,    Adjusted R-squared:  0.6097 
+F-statistic: 1.322e+05 on 2 and 169217 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>First things first: What is the adjusted R-squared? This model predicts about 61 percent of the differential.</p>
 <p>Second: what is the p-value and is it less than .05?</p>
-<p>Third: Compare the residual standard error. We went from 12.95 to 10.3. The meaning of this is both really opaque and also simple – by adding data, we reduced the amount of error in our model. Residual standard error is the total distance between what our model would predict and what we actually have in the data. So lots of residual error means the distance between reality and our model is wider. So the width of our predictive range in this example shrank while we improved the amount of the difference we could predict. That’s good, and not always going to be the case.</p>
+<p>Third: Compare the residual standard error. We went from 12.94 to 10.3. The meaning of this is both really opaque and also simple – by adding data, we reduced the amount of error in our model. Residual standard error is the total distance between what our model would predict and what we actually have in the data. So lots of residual error means the distance between reality and our model is wider. So the width of our predictive range in this example shrank while we improved the amount of the difference we could predict. That’s good, and not always going to be the case.</p>
 <p>One of the more difficult things to understand about multiple regression is the issue of multicollinearity. What that means is that there is significant correlation overlap between two variables – the two are related to each other as well as to the target output – and all you are doing by adding both of them is adding error with no real value to the R-squared. In pure statistics, we don’t want any multicollinearity at all. Violating that assumption limits the applicability of what you are doing. So if we have some multicollinearity, it limits our scope of application to college basketball. We can’t say this will work for every basketball league and level everywhere. What we need to do is see how correlated each value is to each other and throw out ones that are highly co-correlated.</p>
 <p>So to find those, we have to create a correlation matrix that shows us how each value is correlated to our outcome variable, but also with each other. We can do that in the <code>Hmisc</code> library. We install that in the console with <code>install.packages("Hmisc")</code></p>
 <div class="cell">
@@ -504,21 +504,21 @@ F-statistic: 7.87e+04 on 2 and 98132 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cormatrix<span class="sc">$</span>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                      Differential NetRebounds TurnoverMargin   TeamFGPCT
-Differential             1.0000000   0.6248635    -0.37224236  0.60842699
-NetRebounds              0.6248635   1.0000000     0.15509130  0.36726732
-TurnoverMargin          -0.3722424   0.1550913     1.00000000 -0.03109904
-TeamFGPCT                0.6084270   0.3672673    -0.03109904  1.00000000
-TeamTotalRebounds        0.4887337   0.7514775     0.09713362  0.02665011
-OpponentFGPCT           -0.6165787  -0.3776729     0.03438953 -0.11505868
-OpponentTotalRebounds   -0.4292394  -0.7190817    -0.13197214 -0.52680962
+Differential             1.0000000   0.6189143    -0.37292019  0.60659177
+NetRebounds              0.6189143   1.0000000     0.15712085  0.36075626
+TurnoverMargin          -0.3729202   0.1571208     1.00000000 -0.02617653
+TeamFGPCT                0.6065918   0.3607563    -0.02617653  1.00000000
+TeamTotalRebounds        0.4796608   0.7474168     0.09997749  0.02222265
+OpponentFGPCT           -0.6124710  -0.3688248     0.02892920 -0.11829996
+OpponentTotalRebounds   -0.4265115  -0.7180688    -0.13111165 -0.51822144
                       TeamTotalRebounds OpponentFGPCT OpponentTotalRebounds
-Differential                 0.48873374  -0.616578694          -0.429239429
-NetRebounds                  0.75147749  -0.377672886          -0.719081689
-TurnoverMargin               0.09713362   0.034389532          -0.131972135
-TeamFGPCT                    0.02665011  -0.115058678          -0.526809615
-TeamTotalRebounds            1.00000000  -0.546787074          -0.081890501
-OpponentFGPCT               -0.54678707   1.000000000          -0.005413951
-OpponentTotalRebounds       -0.08189050  -0.005413951           1.000000000</code></pre>
+Differential                 0.47966080  -0.612471013          -0.426511535
+NetRebounds                  0.74741681  -0.368824848          -0.718068849
+TurnoverMargin               0.09997749   0.028929201          -0.131111653
+TeamFGPCT                    0.02222265  -0.118299958          -0.518221439
+TeamTotalRebounds            1.00000000  -0.534652332          -0.074323920
+OpponentFGPCT               -0.53465233   1.000000000          -0.006469967
+OpponentTotalRebounds       -0.07432392  -0.006469967           1.000000000</code></pre>
 </div>
 </div>
 <p>Notice right away – NetRebounds is highly correlated. But NetRebounds is also highly correlated with TeamTotalRebounds. And that makes sense: TeamTotalRebounds feeds into NetRebounds. Including both of these measures would be pointless – they would add error without adding much in the way of predictive power.</p>
@@ -537,32 +537,32 @@ lm(formula = Differential ~ NetRebounds + TurnoverMargin + TeamFGPCT +
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--26.171  -3.679  -0.023   3.651  37.368 
+-29.955  -3.650  -0.026   3.626  37.661 
 
 Coefficients:
                  Estimate Std. Error  t value Pr(&gt;|t|)    
-(Intercept)      0.226590   0.156372    1.449    0.147    
-NetRebounds      0.656535   0.002128  308.520   &lt;2e-16 ***
-TurnoverMargin  -1.311144   0.003484 -376.362   &lt;2e-16 ***
-TeamFGPCT       91.270480   0.254245  358.986   &lt;2e-16 ***
-OpponentFGPCT  -91.510307   0.254204 -359.988   &lt;2e-16 ***
+(Intercept)      0.168687   0.117743    1.433    0.152    
+NetRebounds      0.655831   0.001604  408.886   &lt;2e-16 ***
+TurnoverMargin  -1.317830   0.002637 -499.805   &lt;2e-16 ***
+TeamFGPCT       89.952654   0.190823  471.392   &lt;2e-16 ***
+OpponentFGPCT  -90.064048   0.190918 -471.742   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 5.474 on 98130 degrees of freedom
-  (26 observations deleted due to missingness)
-Multiple R-squared:  0.8915,    Adjusted R-squared:  0.8915 
-F-statistic: 2.015e+05 on 4 and 98130 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 5.454 on 169215 degrees of freedom
+  (4 observations deleted due to missingness)
+Multiple R-squared:  0.8904,    Adjusted R-squared:  0.8904 
+F-statistic: 3.438e+05 on 4 and 169215 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Go down the list:</p>
 <p>What is the Adjusted R-squared now? What is the p-value and is it less than .05? What is the Residual standard error?</p>
 <p>The final thing we can do with this is predict things. Look at our coefficients table. See the Estimates? We can build a formula from that, same as we did with linear regressions.</p>
-<p>How does this apply in the real world? Let’s pretend for a minute that you are Kevin Willard, and you want to win conference titles. To do that, we need to know what attributes of a team we should emphasize. We can do that by looking at what previous Big Ten conference champions looked like.</p>
-<p>So if our goal is to predict a conference champion team, we need to know what those teams did. Here’s the regular season conference champions in this dataset.</p>
+<p>How does this apply in the real world? Let’s pretend for a minute that you are Buzz Williams, and you want to win conference titles. To do that, we need to know what attributes of a team we should emphasize. We can do that by looking at what previous Big Ten conference champions looked like.</p>
+<p>So if our goal is to predict a conference champion team, we need to know what those teams did. Here’s the regular season conference champions in this dataset since the 2017 season:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">|&gt;</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Michigan"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2020-2021'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Wisconsin"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2019-2020'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Michigan State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2018-2019'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Michigan State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2017-2018'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">'Illinois'</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2021-2022'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">'Purdue'</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2022-2023'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">'Purdue'</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2023-2024'</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Michigan"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2020-2021'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Wisconsin"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2019-2020'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Michigan State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2018-2019'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Michigan State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2017-2018'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">'Illinois'</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2021-2022'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">'Purdue'</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2022-2023'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">'Purdue'</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2023-2024'</span> <span class="sc">|</span> Team <span class="sc">==</span> <span class="st">"Michigan State"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2024-2025'</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetRebounds =</span> <span class="fu">mean</span>(NetRebounds),</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanTurnoverMargin =</span> <span class="fu">mean</span>(TurnoverMargin),</span>
@@ -573,23 +573,23 @@ F-statistic: 2.015e+05 on 4 and 98130 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code># A tibble: 1 × 4
   meanNetRebounds meanTurnoverMargin meanTeamFGPCT meanOpponentFGPCT
             &lt;dbl&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
-1            9.61               1.97         0.477             0.399</code></pre>
+1            8.16               1.40         0.468             0.401</code></pre>
 </div>
 </div>
 <p>Now it’s just plug and chug.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (netrebounds estimate * meanNetRebounds) + (turnover margin estimate * meanTurnoverMargin) + (TeamFGPCT estimate * meanTeamFGPCT) + (OpponentFGPCT estimate * meanOpponentFGPCT) + Intercept</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.657726</span><span class="sc">*</span><span class="fl">9.645933</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">1.313064</span><span class="sc">*</span><span class="fl">1.933014</span>) <span class="sc">+</span> (<span class="fl">91.403110</span><span class="sc">*</span><span class="fl">0.4780766</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">91.650923</span><span class="sc">*</span><span class="fl">0.3981818</span>) <span class="sc">+</span> <span class="fl">0.233954</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.655831</span><span class="sc">*</span><span class="fl">8.155235</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">1.317830</span><span class="sc">*</span><span class="fl">1.397112</span>) <span class="sc">+</span> (<span class="fl">89.952654</span><span class="sc">*</span><span class="fl">0.46787</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">90.064048</span><span class="sc">*</span><span class="fl">0.4012419</span>) <span class="sc">+</span> <span class="fl">0.168687</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.24412</code></pre>
+<pre><code>[1] 9.624665</code></pre>
 </div>
 </div>
-<p>So a team with those numbers is going to average scoring 11 more points per game than their opponent. Not a ton, but hey, the Big Ten has been a competitive conference lately.</p>
-<p>How does that compare to Maryland in 2023-24 season?</p>
+<p>So a team with those numbers is going to average scoring 9.6 more points per game than their opponent. Not a ton, but hey, the Big Ten has been a competitive conference lately.</p>
+<p>How does that compare to Maryland in 2024-25 season?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">|&gt;</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    Team <span class="sc">==</span> <span class="st">"Maryland"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2023-2024'</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    Team <span class="sc">==</span> <span class="st">"Maryland"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2024-2025'</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">meanNetRebounds =</span> <span class="fu">mean</span>(NetRebounds),</span>
@@ -601,29 +601,29 @@ F-statistic: 2.015e+05 on 4 and 98130 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code># A tibble: 1 × 4
   meanNetRebounds meanTurnoverMargin meanTeamFGPCT meanOpponentFGPCT
             &lt;dbl&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
-1            1.27             -0.394         0.414             0.419</code></pre>
+1            2.47              -3.44         0.469             0.415</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.657726</span><span class="sc">*</span><span class="fl">1.277778</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">0.3055556</span><span class="sc">*</span><span class="fl">1.933014</span>) <span class="sc">+</span> (<span class="fl">91.403110</span><span class="sc">*</span><span class="fl">0.4133056</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">91.650923</span><span class="sc">*</span><span class="fl">0.4171944</span>) <span class="sc">+</span> <span class="fl">0.233954</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.655831</span><span class="sc">*</span><span class="fl">2.472222</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">1.317830</span><span class="sc">*-</span><span class="fl">3.444444</span>) <span class="sc">+</span> (<span class="fl">89.952654</span><span class="sc">*</span><span class="fl">0.4687778</span>) <span class="sc">+</span> (<span class="sc">-</span><span class="fl">90.064048</span><span class="sc">*</span><span class="fl">0.4150278</span>) <span class="sc">+</span> <span class="fl">0.168687</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.02490395</code></pre>
+<pre><code>[1] 11.11796</code></pre>
 </div>
 </div>
-<p>By this model, it predicted we would, on average, barely outscore our opponents over that season. The reality?</p>
+<p>By this model, it predicted UMD would, on average, outscore its opponents by 11 points over that season. The reality?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>logs <span class="sc">|&gt;</span> </span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">filter</span>(</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>         Team <span class="sc">==</span> <span class="st">"Maryland"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2023-2024'</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>         Team <span class="sc">==</span> <span class="st">"Maryland"</span> <span class="sc">&amp;</span> Season <span class="sc">==</span> <span class="st">'2024-2025'</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">avg_score =</span> <span class="fu">mean</span>(TeamScore), <span class="at">avg_opp =</span> <span class="fu">mean</span>(OpponentScore))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   avg_score avg_opp
       &lt;dbl&gt;   &lt;dbl&gt;
-1      69.0    65.9</code></pre>
+1      81.1    67.2</code></pre>
 </div>
 </div>
-<p>We outscored them by about 3 points on average, so maybe this isn’t the best model, or suggests that perhaps Maryland found a way to be successful outside of these parameters. What would you change?</p>
+<p>We outscored them by nearly 14 points on average, which suggests that perhaps Maryland found a way to be even more successful outside of these parameters. What would you change?</p>
 
 
 
@@ -663,18 +663,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -706,7 +695,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -714,7 +723,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -811,7 +820,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

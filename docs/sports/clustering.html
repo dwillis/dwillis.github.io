@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sports Data Analysis and Visualization - 13&nbsp; Clustering</title>
+<title>13&nbsp; Clustering – Sports Data Analysis and Visualization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1577067484ec7a2ab3d04528a804f744.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,13 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clustering.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Clustering</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -346,26 +346,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./blogging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></span></a>
   </div>
 </li>
     </ul>
@@ -408,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>There are better ways.</p>
 <p>In this chapter, we’re going to use a method that sounds advanced but it really quite simple called k-means clustering. It’s based on the concept of the k-nearest neighbor algorithm. You’re probably already scared. Don’t be.</p>
 <p>Imagine two dots on a scatterplot. If you took a ruler out and measured the distance between those dots, you’d know how far apart they are. In math, that’s called the Euclidean distance. It’s just the space between them in numbers. Where k-nearest neighbor comes in, you have lots of dots and you want measure the distance between all of them. What does k-means clustering do? It lumps them into groups based on the average distance between them. Players who are good on offense but bad on defense are over here, good offense good defense are over here. And using the Euclidean distance between them, we can decide who is in and who is out of those groups.</p>
-<p>For this exercise, I want to look at Jalen Smith, who played two seasons at Maryland before decamping for the NBA. Had he stayed, he might have been among the all-time Terp greats. So who does Jalen Smith compare to?</p>
+<p>For this exercise, I want to look at Derik Queen, who played one season at Maryland before decamping for the NBA. Had he stayed, he might have been among the all-time Terp greats. So who does Derik Queen compare to?</p>
 <p>To answer this, we’ll use k-means clustering.</p>
 <p>First thing we do is load some libraries and set a seed, so if we run this repeatedly, our random numbers are generated from the same base. If you don’t have the cluster library, just add it on the console with <code>install.packages("cluster")</code></p>
 <div class="cell">
@@ -417,29 +417,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>I’ve gone and scraped stats for every player in that season.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/players20.csv">
+<p>I’ve gone and scraped stats for every player last season.</p>
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/players25.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Now load that data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/players20.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/players25.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 5452 Columns: 57
+<pre><code>Rows: 5818 Columns: 57
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr  (8): Team, Player, Class, Pos, Height, Hometown, High School, Summary
-dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
+chr (10): Team, Player, Class, Height, Hometown, High School, Summary, Pos, ...
+dbl (47): #, Weight, G, GS, MP, FG, FGA, FG%, 3P, 3PA, 3P%, 2P, 2PA, 2P%, eF...
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
 <p>To cluster this data properly, we have some work to do.</p>
-<p>First, it won’t do to have players who haven’t played, so we can use filter to find anyone with greater than 0 minutes played. Next, Jalen Smith is a forward, so let’s just look at forwards. Third, we want to limit the data to things that make sense to look at for Smith – things like shooting, rebounds, blocks, turnovers and points.</p>
+<p>First, it won’t do to have players who haven’t played, so we can use filter to find anyone with greater than 0 minutes played. Next, Derik Queen is listed as a center, so let’s just look at centers. Third, we want to limit the data to things that make sense to look at for Queen – things like shooting, rebounds, blocks, turnovers and points.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>playersselected <span class="ot">&lt;-</span> players <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">|&gt;</span> <span class="fu">filter</span>(Pos <span class="sc">==</span> <span class="st">"F"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">|&gt;</span> <span class="fu">filter</span>(Pos <span class="sc">==</span> <span class="st">"C"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Player, Team, Pos, MP, <span class="st">`</span><span class="at">FG%</span><span class="st">`</span>, TRB, BLK, TOV, PTS) <span class="sc">|&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -484,70 +484,32 @@ dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>k8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>K-means clustering with 8 clusters of sizes 263, 161, 44, 188, 90, 392, 103, 398
+<pre><code>K-means clustering with 8 clusters of sizes 56, 26, 31, 28, 37, 8, 6, 66
 
 Cluster means:
           MP         FG%        TRB        BLK        TOV        PTS
-1  0.8578410 -0.04802976  0.5296900 -0.1249576  0.8012144  0.6761765
-2  0.6114599  0.43888680  0.6835198  1.1508637  0.3303347  0.3928252
-3  1.3194410  0.57964043  1.7227785  3.8227947  0.9327078  1.2461273
-4  1.5250965  0.34205779  1.6794426  0.7714193  1.7162316  1.8637568
-5 -1.1562229  2.05173492 -1.0114963 -0.6981471 -1.0058198 -0.9280719
-6 -0.1008779  0.08931655 -0.1790649 -0.1316087 -0.1660950 -0.2669699
-7 -1.2907157 -2.43019592 -1.1384508 -0.8183787 -1.1343745 -1.0786200
-8 -0.9856353 -0.29446744 -0.9105630 -0.6706989 -0.8922622 -0.8719061
+1 -0.1463575  0.06087454 -0.2258969 -0.2232569 -0.1338834 -0.3110702
+2  1.2340831  0.56874622  1.3141886  2.1358712  0.7182216  0.8191132
+3  0.6496780  0.13395291  0.4474867  0.1569653  0.5771021  0.4205940
+4  1.4049575  0.25956500  1.4393448  0.4696840  1.4729983  1.5331265
+5 -0.8886908  1.08843491 -0.8211314 -0.6281013 -0.8224037 -0.7114553
+6  2.0601633 -0.09150173  2.1302168  1.6202760  2.7011350  3.0675147
+7 -1.2088294 -3.91383033 -1.0828274 -0.8552925 -1.0785801 -0.9524554
+8 -0.9047839 -0.69202775 -0.8462928 -0.6914856 -0.8336223 -0.7930986
 
 Clustering vector:
-   [1] 4 2 6 7 8 4 3 8 8 8 8 8 5 4 4 2 1 8 5 1 8 8 5 7 4 2 6 5 4 2 3 1 6 6 7 7 4
-  [38] 4 2 4 4 6 8 1 8 8 4 6 8 8 8 4 8 8 1 2 8 8 4 1 6 8 5 4 4 1 6 8 2 2 6 8 5 5
-  [75] 3 4 1 8 5 8 5 4 1 6 6 8 8 8 1 6 2 5 6 6 6 5 4 3 8 7 1 6 8 8 5 5 7 4 1 6 5
- [112] 4 4 1 6 8 5 4 1 6 8 8 1 2 6 6 8 7 1 6 7 4 1 1 8 3 2 7 4 1 8 4 1 8 8 4 1 8
- [149] 2 5 6 2 6 6 8 1 1 2 6 8 4 8 8 8 2 6 6 6 8 7 2 8 2 1 2 6 1 4 1 6 8 8 8 1 1
- [186] 1 8 8 7 4 6 6 8 6 8 4 6 1 6 6 6 1 2 1 6 8 8 3 1 8 6 2 6 6 6 8 4 6 8 8 8 7
- [223] 1 2 6 8 2 2 2 6 4 1 8 8 1 1 6 6 8 7 4 4 2 2 8 4 3 8 7 4 1 7 8 4 6 6 6 6 4
- [260] 2 6 6 6 1 2 8 7 4 6 6 8 3 1 1 8 1 2 6 8 8 7 1 2 2 8 4 4 1 6 8 4 4 1 6 5 4
- [297] 8 8 5 1 1 2 8 8 3 4 1 8 4 1 6 6 7 4 1 6 6 8 2 6 8 8 4 6 5 8 7 4 4 8 8 4 2
- [334] 6 6 6 6 7 7 7 6 5 5 8 8 4 1 1 6 5 7 8 4 4 5 8 8 1 6 8 7 6 6 5 8 2 8 7 4 1
- [371] 1 2 8 1 2 6 8 7 6 1 6 8 4 1 2 1 8 1 4 6 8 5 8 5 4 4 6 6 8 4 1 6 8 3 1 1 6
- [408] 4 6 6 8 6 8 3 6 6 8 1 2 1 6 8 1 2 5 4 3 8 8 1 6 6 8 8 5 1 6 8 8 1 1 8 8 1
- [445] 6 8 4 1 6 8 8 5 7 1 8 6 8 7 3 6 6 6 6 8 2 6 8 4 1 1 6 7 4 6 1 8 2 6 6 8 8
- [482] 6 6 8 5 5 8 4 1 6 7 1 1 6 8 5 4 2 8 8 1 2 8 2 6 8 7 4 3 8 4 6 8 4 3 6 6 8
- [519] 6 2 5 1 6 6 6 4 3 6 8 8 4 4 6 6 6 1 2 6 8 5 4 4 2 6 6 4 3 6 7 7 4 2 6 8 8
- [556] 8 4 1 2 2 8 8 8 7 4 4 8 4 3 1 5 1 1 6 6 6 4 2 5 8 1 2 6 8 4 8 8 8 7 4 1 6
- [593] 8 8 8 2 2 8 7 7 4 1 6 5 8 6 6 5 4 2 1 8 4 3 6 6 8 8 4 1 6 6 8 7 2 6 8 4 4
- [630] 5 8 8 8 7 2 2 8 1 1 3 6 8 7 3 1 2 6 8 7 4 2 6 8 7 4 2 1 8 8 1 8 7 7 8 1 4
- [667] 6 6 8 8 2 6 8 1 3 5 8 4 4 6 2 6 1 1 1 8 4 2 8 4 1 6 6 8 4 1 1 8 8 6 2 2 6
- [704] 7 1 4 2 6 7 1 1 5 3 2 1 8 6 6 8 8 4 4 2 6 8 4 3 1 8 8 3 1 6 6 8 8 1 2 6 8
- [741] 8 6 2 6 6 8 7 4 6 6 6 6 8 8 1 6 6 8 1 6 6 6 8 5 5 1 1 4 1 8 7 1 2 2 5 4 1
- [778] 8 8 8 1 2 8 6 8 7 4 3 8 8 8 8 5 7 1 6 8 8 6 6 6 6 8 7 2 6 6 6 6 2 5 6 8 8
- [815] 3 1 1 6 2 6 8 5 1 6 6 6 8 8 7 2 6 6 5 2 2 2 6 8 8 4 2 6 6 3 6 8 8 1 6 8 7
- [852] 2 6 8 8 3 6 5 8 5 8 5 1 6 1 8 8 4 1 1 8 8 8 2 2 6 6 6 2 6 2 6 8 7 1 6 8 2
- [889] 2 1 5 4 1 1 2 6 8 8 1 1 6 6 7 4 1 1 2 1 6 8 1 5 8 7 4 4 2 8 5 2 6 6 6 5 5
- [926] 4 4 1 5 1 6 6 6 4 1 2 6 8 8 1 1 2 6 7 5 3 6 7 1 7 1 8 8 8 4 1 6 6 8 4 6 8
- [963] 4 6 8 8 4 2 6 6 6 6 8 4 6 6 8 3 2 6 6 8 7 4 2 6 8 7 7 1 1 6 8 6 8 6 6 7 1
-[1000] 1 6 6 6 8 7 1 2 1 6 8 1 1 8 4 6 8 3 8 7 4 6 8 8 8 7 1 2 6 8 8 2 6 8 8 8 8
-[1037] 2 2 1 6 4 6 8 8 8 3 1 1 6 6 8 8 7 2 1 8 8 1 6 8 5 8 1 6 6 7 4 2 6 6 6 8 1
-[1074] 1 6 1 2 1 6 5 2 6 8 1 6 2 8 6 6 6 8 8 4 1 2 6 6 4 8 6 8 1 2 1 6 6 7 7 4 6
-[1111] 8 5 2 1 2 6 6 5 5 8 5 4 4 8 5 8 4 6 6 2 6 8 7 1 6 7 7 4 2 8 4 4 2 2 6 5 4
-[1148] 1 6 8 8 8 4 3 6 6 7 5 2 6 6 8 5 1 2 6 8 8 8 8 8 7 1 6 6 8 6 8 7 3 6 6 6 4
-[1185] 2 3 4 4 2 8 4 4 8 8 6 2 2 8 4 4 2 8 2 2 1 8 8 4 3 2 8 2 1 8 6 1 1 1 6 6 5
-[1222] 5 2 1 7 8 4 4 8 8 1 1 2 6 6 2 1 6 1 6 6 7 4 6 8 8 4 6 6 8 4 1 1 6 5 2 2 8
-[1259] 6 6 6 8 4 1 8 7 4 5 2 1 6 6 6 8 4 1 6 1 8 8 7 3 6 8 5 1 3 6 6 6 8 3 4 1 1
-[1296] 1 6 6 6 8 4 2 2 8 8 1 6 8 4 2 5 2 6 6 8 7 4 6 8 8 8 8 1 2 7 1 1 8 6 8 6 8
-[1333] 7 8 8 4 3 6 2 1 2 6 8 5 1 1 8 8 7 8 4 1 6 1 2 6 4 4 6 4 6 5 6 8 4 1 6 8 8
-[1370] 7 4 6 5 8 7 1 6 6 6 8 6 7 4 6 1 1 6 6 8 8 8 1 1 6 8 2 6 5 1 1 8 5 1 4 6 8
-[1407] 5 4 8 7 1 2 6 6 7 1 6 8 1 1 1 6 8 6 6 6 6 7 1 1 6 8 8 8 4 1 2 8 1 1 6 8 4
-[1444] 1 1 2 8 1 8 4 5 8 4 1 6 6 8 7 1 1 6 6 8 7 4 1 1 6 8 2 6 6 6 6 8 8 1 4 1 1
-[1481] 8 8 7 1 4 6 5 8 1 6 2 8 7 2 3 2 6 8 8 4 2 6 6 8 7 1 1 6 8 1 2 6 6 4 6 6 1
-[1518] 1 4 1 8 5 7 4 6 8 4 1 4 6 8 4 6 3 6 8 4 1 6 8 6 8 5 4 1 2 5 7 4 1 8 8 8 7
-[1555] 7 2 6 8 8 7 1 1 6 8 2 1 1 1 6 8 8 8 7 3 4 6 5 4 6 6 8 4 6 6 2 8 8 7 1 1 2
-[1592] 6 1 1 6 6 5 1 2 6 8 8 2 6 6 6 5 7 2 1 6 6 1 8 1 1 1 6 8 6 6 6 8 8 8 4 1 8
-[1629] 6 5 4 1 8 5 8 1 2 6 6
+  [1] 2 3 1 8 4 1 1 2 1 1 1 8 3 3 1 5 4 8 8 1 3 3 8 6 8 8 8 8 3 5 4 2 2 8 1 2 1
+ [38] 6 5 1 7 1 1 5 3 8 3 1 8 2 5 1 5 5 8 1 1 4 5 8 1 5 5 4 1 1 8 1 5 8 1 1 1 1
+ [75] 1 4 5 1 1 3 4 3 5 6 5 8 3 1 3 2 2 8 5 5 1 5 2 1 5 8 8 8 1 3 4 6 3 8 8 8 2
+[112] 8 8 8 8 3 1 8 2 5 4 1 1 2 4 8 4 8 1 8 8 7 5 8 3 3 8 3 1 1 4 3 8 1 8 3 8 8
+[149] 4 3 3 3 4 5 2 6 8 7 1 2 8 5 1 8 2 1 2 1 3 4 6 4 2 4 8 8 5 4 5 5 5 4 2 5 4
+[186] 2 8 8 1 8 5 8 8 3 8 1 1 8 2 1 4 8 4 5 7 8 8 2 1 5 5 8 8 8 2 5 7 1 1 5 6 5
+[223] 5 3 4 4 8 7 2 8 5 8 4 3 4 3 8 4 1 1 8 6 2 8 1 4 1 8 2 8 3 1 5 3 8 2 3 1
 
 Within cluster sum of squares by cluster:
-[1] 310.41877 241.01243 137.33736 443.93894 116.53203 384.86933  56.08423
-[8] 221.54760
- (between_SS / total_SS =  80.5 %)
+[1] 47.05815771 54.36226600 31.47483028 33.25682799 24.38259758 21.56104504
+[7]  0.03684809 31.99020794
+ (between_SS / total_SS =  84.2 %)
 
 Available components:
 
@@ -555,27 +517,29 @@ Available components:
 [6] "betweenss"    "size"         "iter"         "ifault"      </code></pre>
 </div>
 </div>
-<p>Interpreting this output, the very first thing you need to know is that <strong>the cluster numbers are meaningless</strong>. They aren’t ranks. They aren’t anything. After you have taken that on board, look at the cluster sizes at the top. Clusters 3 and 4 are pretty large compared to others. That’s notable. Then we can look at the cluster means. For reference, 0 is going to be average. So group 1 is below average on minutes played. Groups 8 is slightly above, group 5 is well above.</p>
-<p>So which group is Jalen Smith in? Well, first we have to put our data back together again. In K8, there is a list of cluster assignments in the same order we put them in, but recall we have no names. So we need to re-combine them with our original data. We can do that with the following:</p>
+<p>Interpreting this output, the very first thing you need to know is that <strong>the cluster numbers are meaningless</strong>. They aren’t ranks. They aren’t anything. After you have taken that on board, look at the cluster sizes at the top. Clusters 2 and 8 are pretty large compared to others. That’s notable. Then we can look at the cluster means. For reference, 0 is going to be average. So group 5 is above average on minutes played. Groups 2 is slightly below, group 1 is well above.</p>
+<p>So which group is Derik Queen in? Well, first we have to put our data back together again. In K8, there is a list of cluster assignments in the same order we put them in, but recall we have no names. So we need to re-combine them with our original data. We can do that with the following:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>playercluster <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(playersselected, k8<span class="sc">$</span>cluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now we have a dataframe called playercluster that has our player names and what cluster they are in. The fastest way to find Jalen Smith is to double click on the playercluster table in the environment and use the search in the top right of the table. Because this is based on some random selections of points to start the groupings, these may change from person to person, but Smith is in Group 2 in my data.</p>
-<p>We now have a dataset and can plot it like anything else. Let’s get Jalen Smith and then plot him against the rest of college basketball on rebounds versus minutes played.</p>
+<p>Now we have a dataframe called playercluster that has our player names and what cluster they are in. The fastest way to find Derik Queen is to double click on the playercluster table in the environment and use the search in the top right of the table. Because this is based on some random selections of points to start the groupings, these may change from person to person, but Smith is in Group 2 in my data.</p>
+<p>We now have a dataset and can plot it like anything else. Let’s get Derik Queen and then plot him against the rest of college basketball on rebounds versus minutes played.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cm <span class="ot">&lt;-</span> playercluster <span class="sc">|&gt;</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Jalen Smith"</span>)</span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dq <span class="ot">&lt;-</span> playercluster <span class="sc">|&gt;</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Derik Queen"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>dq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       Player               Team Pos  MP   FG. TRB BLK TOV PTS k8.cluster
-1 Jalen Smith Maryland Terrapins   F 861 0.534 293  64  49 425          3</code></pre>
+<pre><code>       Player                     Team Pos   MP   FG. TRB BLK TOV PTS
+1 Derik Queen Maryland Terrapins Men's   C 1093 0.526 323  39  85 594
+  k8.cluster
+1          6</code></pre>
 </div>
 </div>
-<p>So Jalen’s in cluster 2, which if you look at our clusters, puts him in the cluster with all above average metrics. What does that look like? We know Jalen was a rebounding machine, so where do group 2 people grade out on rebounds?</p>
+<p>So Derik’s in cluster 1, which if you look at our clusters, puts him in the cluster with nearly all above average metrics. What does that look like? We know Derik was a rebounding machine, so where do group 1 people grade out on rebounds?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>playercluster, <span class="fu">aes</span>(<span class="at">x=</span>MP, <span class="at">y=</span>TRB, <span class="at">color=</span>k8.cluster)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>cm, <span class="fu">aes</span>(<span class="at">x=</span>MP, <span class="at">y=</span>TRB), <span class="at">color=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>dq, <span class="fu">aes</span>(<span class="at">x=</span>MP, <span class="at">y=</span>TRB), <span class="at">color=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -584,35 +548,41 @@ Available components:
 </div>
 </div>
 </div>
-<p>Not bad, not bad. But who are Jalen Smith’s peers? If we look at the numbers in Group 2, there’s 495 of them. So let’s limit them to just Big Ten guards. Unfortunately, my scraper didn’t quite work and in the place of Conference is the coach’s name. So I’m going to have to do this the hard way and make a list of Big Ten teams and filter on that. Then I’ll sort by minutes played.</p>
+<p>Not bad, not bad. But who are Derik Queen’s peers? If we look at the numbers in Group 1, there’s 8 of them.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>big10 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Nebraska Cornhuskers"</span>, <span class="st">"Iowa Hawkeyes"</span>, <span class="st">"Minnesota Golden Gophers"</span>, <span class="st">"Illinois Fighting Illini"</span>, <span class="st">"Northwestern Wildcats"</span>, <span class="st">"Wisconsin Badgers"</span>, <span class="st">"Indiana Hoosiers"</span>, <span class="st">"Purdue Boilermakers"</span>, <span class="st">"Ohio State Buckeyes"</span>, <span class="st">"Michigan Wolverines"</span>, <span class="st">"Michigan State Spartans"</span>, <span class="st">"Penn State Nittany Lions"</span>, <span class="st">"Rutgers Scarlet Knights"</span>, <span class="st">"Maryland Terrapins"</span>)</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#big10 &lt;- c("Nebraska Cornhuskers", "Iowa Hawkeyes", "Minnesota Golden Gophers", "Illinois Fighting Illini", "Northwestern Wildcats", "Wisconsin Badgers", "Indiana Hoosiers", "Purdue Boilermakers", "Ohio State Buckeyes", "Michigan Wolverines", "Michigan State Spartans", "Penn State Nittany Lions", "Rutgers Scarlet Knights", "Maryland Terrapins")</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>playercluster <span class="sc">|&gt;</span> <span class="fu">filter</span>(k8.cluster <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">filter</span>(Team <span class="sc">%in%</span> big10) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(MP))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>playercluster <span class="sc">|&gt;</span> <span class="fu">filter</span>(k8.cluster <span class="sc">==</span> <span class="dv">6</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(MP))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            Player                    Team Pos  MP   FG. TRB BLK TOV PTS
-1       Kyle Young     Ohio State Buckeyes   F 573 0.585 144  13  14 188
-2 Brandon Johns Jr     Michigan Wolverines   F 546 0.492 111  20  21 169
-3     Ryan Kriener           Iowa Hawkeyes   F 514 0.559 118  20  35 220
-4     E.J. Liddell     Ohio State Buckeyes   F 441 0.443  98  28  26 175
-5   Marcus Bingham Michigan State Spartans   F 330 0.409 111  40  14 107
+<pre><code>            Player                         Team Pos   MP   FG. TRB BLK TOV PTS
+1 Ryan Kalkbrenner     Creighton Bluejays Men's   C 1206 0.653 303  93  51 672
+2      Derik Queen     Maryland Terrapins Men's   C 1093 0.526 323  39  85 594
+3     Robbie Avila  Saint Louis Billikens Men's   C 1053 0.492 215  24 101 535
+4    Bent Leuchten    UC-Irvine Anteaters Men's   C 1045 0.544 354  50  60 599
+5 Hunter Dickinson        Kansas Jayhawks Men's   C 1025 0.526 340  44  74 592
+6    Nathan Bittle           Oregon Ducks Men's   C  971 0.511 265  75  56 496
+7  Noah Williamson         Bucknell Bison Men's   C  945 0.538 244  35  91 562
+8   Carter Welling Utah Valley Wolverines Men's   C  784 0.478 201  57  69 420
   k8.cluster
-1          2
-2          2
-3          2
-4          2
-5          2</code></pre>
+1          6
+2          6
+3          6
+4          6
+5          6
+6          6
+7          6
+8          6</code></pre>
 </div>
 </div>
-<p>So there are the 4 forwards most like Jalen Smith in the Big Ten. Are they the best forwards in the conference?</p>
+<p>So here are the 7 centers most like Derik Queen last season. Were they the best centers in the country?</p>
 <section id="advanced-metrics" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="advanced-metrics"><span class="header-section-number">13.1</span> Advanced metrics</h2>
-<p>How much does this change if we change the metrics? I used pretty standard box score metrics above. What if we did it using Player Efficiency Rating, True Shooting Percentage, Point Production, Assist Percentage, Win Shares Per 40 Minutes and Box Plus Minus (you can get definitions of all of them by <a href="https://www.sports-reference.com/cbb/schools/nebraska/2020.html">hovering over the stats on Nebraksa’s stats page</a>).</p>
+<p>How much does this change if we change the metrics? I used pretty standard box score metrics above. What if we did it using Player Efficiency Rating, True Shooting Percentage, Point Production, Assist Percentage, Win Shares Per 40 Minutes and Box Plus Minus (you can get definitions of all of them by <a href="https://www.sports-reference.com/cbb/schools/maryland/men/2025.html">hovering over the stats on Maryland’s stats page</a>).</p>
 <p>We’ll repeat the process. Filter out players who don’t play, players with stats missing, and just focus on those stats listed above.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>playersadvanced <span class="ot">&lt;-</span> players <span class="sc">|&gt;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MP<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Pos <span class="sc">==</span> <span class="st">"F"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Pos <span class="sc">==</span> <span class="st">"C"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Player, Team, Pos, PER, <span class="st">`</span><span class="at">TS%</span><span class="st">`</span>, PProd, <span class="st">`</span><span class="at">AST%</span><span class="st">`</span>, <span class="st">`</span><span class="at">WS/40</span><span class="st">`</span>, BPM) <span class="sc">|&gt;</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -634,16 +604,12 @@ Available components:
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>k.values <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span></span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># extract wss for 2-15 clusters</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>wss_values <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(k.values, wss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: did not converge in 10 iterations
-
-Warning: did not converge in 10 iterations</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(k.values, wss_values,</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">type=</span><span class="st">"b"</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">frame =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab=</span><span class="st">"Number of clusters K"</span>,</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab=</span><span class="st">"Total within-clusters sum of squares"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>wss_values <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(k.values, wss)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(k.values, wss_values,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">type=</span><span class="st">"b"</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">frame =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab=</span><span class="st">"Number of clusters K"</span>,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab=</span><span class="st">"Total within-clusters sum of squares"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -652,73 +618,39 @@ Warning: did not converge in 10 iterations</code></pre>
 </div>
 </div>
 </div>
-<p>Looks like 4.</p>
+<p>Looks like 8 again.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>advk4 <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(playersadvscaled, <span class="at">centers =</span> <span class="dv">4</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>advk8 <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(playersadvscaled, <span class="at">centers =</span> <span class="dv">8</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>What do we have here?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>advk4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>advk8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>K-means clustering with 4 clusters of sizes 627, 320, 612, 82
+<pre><code>K-means clustering with 8 clusters of sizes 10, 54, 2, 25, 56, 63, 31, 17
 
 Cluster means:
-         PER        TS%      PProd        AST%      WS/40        BPM
-1  0.3328142  0.5094144 -0.0942388 -0.09932351  0.3805037  0.3628638
-2  0.9655878  0.4538599  1.5112893  0.82146770  0.8477533  0.8427975
-3 -0.5374881 -0.3986254 -0.5452426 -0.22446363 -0.5022825 -0.4844985
-4 -2.3014614 -2.6912101 -1.1077608 -0.77100101 -2.4690239 -2.4475330
+          PER         TS%      PProd       AST%        WS/40         BPM
+1 -2.80397873 -3.32576860 -0.9757080 -1.1460236 -2.779002133 -2.44465692
+2  0.58549934  0.46575451  0.9259213 -0.1446943  0.564620860  0.56788941
+3  3.91910490  2.61177952 -0.9430676 -1.3207832  3.141851512  3.45044891
+4  1.03333914  0.26289465  2.0174109  1.7580590  0.882444035  1.09048724
+5 -0.80660282 -0.61517254 -0.7087302 -0.3516492 -0.770575283 -0.81273103
+6 -0.06088192  0.22607412 -0.4488703 -0.5876646 -0.008179258  0.02469389
+7 -0.14080517 -0.02569281 -0.3445817  0.9967488 -0.156052595 -0.28053836
+8  0.94831844  1.01849923 -0.5965913  0.2223432  1.027107675  0.72184555
 
 Clustering vector:
-   [1] 2 1 1 3 3 2 2 3 1 3 3 1 1 2 2 1 1 3 1 3 3 3 1 4 2 1 1 1 2 2 2 2 2 1 3 4 2
-  [38] 2 1 2 2 3 1 2 1 3 2 3 3 3 3 2 1 3 1 1 1 3 2 2 1 1 1 2 2 1 1 3 1 1 1 3 1 2
-  [75] 2 2 1 1 1 3 1 2 1 1 3 3 3 3 3 1 1 1 3 3 1 3 2 2 3 4 1 1 3 1 1 1 4 2 1 1 1
- [112] 2 2 2 1 3 1 2 2 1 3 3 2 3 3 1 3 3 1 1 4 2 1 1 3 1 1 4 2 2 1 2 1 3 3 2 2 3
- [149] 3 1 2 1 3 3 3 2 1 1 1 1 2 1 3 3 2 1 3 3 1 3 2 3 1 1 2 1 1 1 1 1 3 3 3 1 3
- [186] 3 1 3 4 2 1 1 1 3 3 2 1 3 1 3 1 2 1 3 1 1 3 2 1 3 3 1 1 1 3 4 2 1 3 3 3 4
- [223] 3 1 3 3 1 2 1 1 2 3 3 3 3 3 1 3 3 4 2 2 1 1 1 2 1 1 4 2 3 4 3 2 2 1 1 3 2
- [260] 1 1 1 1 2 1 3 4 2 3 3 3 2 1 3 3 2 1 1 3 3 4 1 1 1 1 2 2 3 1 3 2 2 1 3 1 2
- [297] 3 3 1 3 3 3 3 3 2 2 1 3 2 1 3 3 4 2 1 3 3 3 1 1 3 1 2 1 1 3 4 2 2 1 3 2 1
- [334] 1 1 1 1 4 4 3 3 1 1 1 4 2 1 1 3 1 4 3 2 2 1 3 3 2 3 3 3 2 3 2 3 1 1 3 2 2
- [371] 1 1 3 3 3 3 3 3 1 1 1 3 3 3 1 3 1 2 2 1 1 1 3 3 2 2 1 3 1 2 1 1 3 2 3 3 3
- [408] 2 1 1 1 1 3 2 1 3 3 3 3 3 3 3 1 1 1 2 1 3 3 3 1 1 3 3 1 2 1 3 3 1 3 3 3 2
- [445] 1 3 2 1 1 3 3 2 4 2 1 1 3 4 2 3 1 1 3 3 1 1 3 2 1 1 3 4 2 1 3 3 1 1 1 3 3
- [482] 1 1 1 1 1 3 2 1 3 4 2 3 1 3 1 1 1 3 3 1 1 3 1 1 3 3 2 2 1 2 1 3 2 2 1 1 3
- [519] 3 1 1 1 1 3 1 2 2 3 1 3 2 2 1 3 1 1 1 3 3 1 2 2 1 1 3 1 2 1 1 4 4 2 1 3 1
- [556] 3 1 2 2 2 1 1 3 3 4 2 2 3 2 2 1 1 2 1 3 3 3 2 3 3 3 2 1 1 4 2 1 1 3 4 1 3
- [593] 1 3 3 3 2 1 1 3 4 2 2 1 1 3 1 1 1 2 1 1 3 2 2 1 3 1 2 2 2 3 3 3 3 2 1 1 2
- [630] 2 1 3 3 3 4 2 1 3 2 1 1 3 3 4 2 1 1 1 1 3 2 1 3 1 4 2 3 1 3 3 1 3 3 3 4 1
- [667] 1 1 1 3 3 1 3 1 3 2 1 3 2 1 1 1 3 1 3 1 1 2 1 3 2 2 3 1 3 2 2 1 3 3 1 1 1
- [704] 1 4 2 1 1 3 3 3 3 1 2 3 3 1 3 3 3 3 2 2 1 1 1 1 1 3 3 3 1 1 3 3 3 3 1 3 1
- [741] 3 3 1 1 3 1 3 4 2 3 1 3 3 3 1 3 1 3 3 1 1 1 1 3 1 1 2 1 1 1 1 4 2 2 1 1 2
- [778] 1 3 3 3 3 3 3 3 3 4 2 1 3 1 1 1 1 4 1 1 1 3 3 3 3 1 3 3 3 1 3 3 1 1 1 1 3
- [815] 1 2 2 1 1 1 1 1 1 1 1 3 1 1 3 4 1 3 3 1 2 2 3 1 3 3 2 1 1 3 2 1 1 3 1 3 3
- [852] 4 2 3 3 3 2 1 1 3 1 1 1 3 3 3 3 3 2 2 3 3 3 3 1 1 1 1 1 1 1 1 1 3 2 1 3 3
- [889] 1 1 3 1 2 1 3 3 3 3 3 1 2 1 3 3 2 1 1 1 3 3 3 1 3 1 4 2 2 2 1 3 2 1 1 3 1
- [926] 3 2 2 2 1 2 3 3 3 2 3 1 1 1 1 1 3 1 1 4 1 2 1 3 3 4 3 3 3 3 2 2 1 3 1 1 3
- [963] 3 2 3 3 3 2 2 1 1 3 1 3 2 3 3 4 2 1 1 3 3 4 2 1 1 1 3 3 3 3 3 1 3 3 2 1 4
-[1000] 2 1 3 3 3 1 4 1 1 3 3 1 1 1 3 2 1 3 1 1 4 1 3 3 3 3 4 1 2 3 1 3 2 1 3 3 3
-[1037] 3 2 1 1 3 2 1 3 3 3 2 1 1 3 1 3 3 4 1 3 3 3 1 3 1 1 3 1 3 3 3 1 1 3 3 3 1
-[1074] 1 3 3 1 2 3 3 1 1 3 3 2 1 1 3 3 1 3 1 3 2 3 1 3 3 2 3 1 3 3 1 3 3 3 4 4 2
-[1111] 1 3 1 2 1 1 1 1 1 1 3 1 2 3 1 1 3 2 3 1 1 1 1 4 3 3 3 3 2 1 3 2 2 2 2 2 1
-[1148] 2 1 1 3 3 1 2 2 1 3 4 2 1 1 1 3 1 2 1 1 3 3 1 3 3 3 1 1 1 3 1 3 4 2 3 1 3
-[1185] 2 1 1 2 2 2 1 2 2 3 3 1 1 3 3 2 2 1 1 2 1 1 1 1 2 2 1 3 1 3 3 1 2 1 1 3 1
-[1222] 1 1 3 1 4 4 2 2 3 3 1 3 1 3 3 2 3 1 1 1 3 3 2 1 3 3 2 1 3 3 2 2 1 3 1 2 1
-[1259] 3 2 1 3 1 2 2 1 3 2 3 2 1 1 1 1 1 2 3 3 1 3 3 3 2 1 3 1 2 1 3 3 3 3 2 1 1
-[1296] 3 1 3 3 3 3 2 1 1 3 3 3 3 3 2 2 1 2 1 1 3 3 2 3 3 2 3 3 2 2 3 2 2 3 3 3 3
-[1333] 3 4 4 3 1 1 1 1 1 1 3 3 1 2 1 1 3 2 3 2 1 1 3 1 3 2 2 1 2 3 1 3 3 2 3 3 3
-[1370] 3 4 2 1 1 3 4 3 1 3 3 1 3 4 2 1 3 3 3 3 3 3 3 2 1 1 4 1 1 3 2 3 4 2 2 1 1
-[1407] 3 1 2 3 4 3 3 3 3 4 3 3 3 1 1 1 1 3 3 3 3 2 4 3 1 3 3 1 3 2 2 1 3 2 1 1 3
-[1444] 2 2 1 1 1 1 3 2 1 1 2 3 3 3 3 4 2 2 1 3 3 4 2 1 1 3 3 1 3 3 3 3 3 3 2 2 1
-[1481] 2 1 3 3 2 2 3 1 3 1 1 1 3 3 1 1 2 3 3 3 2 1 3 1 3 4 2 2 1 3 2 2 3 1 2 1 3
-[1518] 1 1 2 3 3 3 4 4 2 1 3 2 1 2 3 3 2 1 2 3 1 2 1 1 1 3 3 1 2 1 1 1 4 2 1 1 3
-[1555] 3 4 4 1 1 3 1 4 2 1 1 4 3 1 3 3 3 3 3 3 4 2 2 1 1 2 1 1 1 2 1 3 1 1 3 3 2
-[1592] 1 1 3 1 1 1 1 1 2 3 1 1 3 1 3 3 3 3 4 1 2 1 3 3 3 1 3 3 3 4 3 3 3 3 4 1 2
-[1629] 1 1 3 1 2 2 1 1 1 1 2 1 3
+  [1] 2 2 6 1 4 6 6 2 5 6 6 5 2 7 6 5 2 5 5 6 6 2 6 4 5 5 7 6 4 7 2 4 2 5 7 2 6
+ [38] 4 6 6 1 6 7 7 2 5 2 6 6 2 6 6 3 8 1 7 5 1 2 6 6 7 3 8 2 6 8 5 6 7 6 2 8 7
+ [75] 5 6 4 6 5 6 2 4 2 8 4 6 5 2 6 4 2 2 7 8 8 7 6 2 7 7 5 5 6 6 6 2 4 5 5 1 7
+[112] 7 7 6 6 5 2 6 5 2 6 4 6 5 6 2 5 4 7 6 5 5 1 5 5 7 6 5 5 6 6 2 6 5 5 6 2 6
+[149] 5 4 2 2 7 2 8 2 4 8 1 6 4 5 5 7 5 2 7 4 7 4 2 4 2 2 2 5 5 2 6 8 6 4 2 5 4
+[186] 6 5 5 5 7 8 5 6 2 5 5 7 7 2 6 2 5 2 8 1 7 5 2 6 6 5 5 6 6 2 8 1 6 6 8 4 8
+[223] 6 2 4 2 6 1 2 5 8 7 2 2 2 7 5 2 7 5 6 4 2 5 6 4 6 5 4 8 2 6 5 5 5 2 7 5
 
 Within cluster sum of squares by cluster:
-[1] 1427.2032 1442.9566 1161.4081  669.2421
- (between_SS / total_SS =  52.2 %)
+[1] 61.68774 54.61697  3.33234 59.95049 83.85300 64.48091 53.46295 43.85311
+ (between_SS / total_SS =  72.4 %)
 
 Available components:
 
@@ -726,40 +658,83 @@ Available components:
 [6] "betweenss"    "size"         "iter"         "ifault"      </code></pre>
 </div>
 </div>
-<p>Looks like this time, cluster 1 is all below average and cluster 5 is all above. Which cluster is Jalen Smith in?</p>
+<p>Looks like this time, cluster 1 is all below average and cluster 4 is all above. Which cluster is Derik Queen in?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>playeradvcluster <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(playersadvanced, advk4<span class="sc">$</span>cluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>playeradvcluster <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(playersadvanced, advk8<span class="sc">$</span>cluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>jsadv <span class="ot">&lt;-</span> playeradvcluster <span class="sc">|&gt;</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Jalen Smith"</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>jsadv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>dqadv <span class="ot">&lt;-</span> playeradvcluster <span class="sc">|&gt;</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Derik Queen"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>dqadv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       Player               Team Pos  PER   TS. PProd AST. WS.40  BPM
-1 Jalen Smith Maryland Terrapins   F 28.9 0.623   392  5.2 0.252 11.8
-  advk4.cluster
-1             2</code></pre>
+<pre><code>       Player                     Team Pos  PER   TS. PProd AST. WS.40 BPM
+1 Derik Queen Maryland Terrapins Men's   C 24.7 0.591   584 11.6 0.216 9.2
+  advk8.cluster
+1             4</code></pre>
 </div>
 </div>
-<p>Cluster 4 on my dataset. So in this season, we can say he’s in a big group of players who are all above average on these advanced metrics.</p>
-<p>Now who are his Big Ten peers?</p>
+<p>Cluster 4 on my dataset. So in this season, we can say he’s in a group of players who are all above average on these advanced metrics.</p>
+<p>Now who are his peers?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>playeradvcluster <span class="sc">|&gt;</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(advk4.cluster <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">|&gt;</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">%in%</span> big10) <span class="sc">|&gt;</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(PProd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>playeradvcluster <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(advk8.cluster <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(PProd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            Player                Team Pos   PER TS. PProd AST.  WS.40   BPM
-1 Harrison Hookfin Ohio State Buckeyes   F  -8.3 0.2     3    0 -0.206 -15.0
-2       Samad Qawi   Wisconsin Badgers   F -17.5 0.0     1    0 -0.206 -14.6
-3 Nathan Childress    Indiana Hoosiers   F  -6.0 0.0     1    0 -0.200 -27.3
-  advk4.cluster
-1             4
-2             4
-3             4</code></pre>
+<pre><code>               Player                                Team Pos  PER   TS. PProd
+1    Ryan Kalkbrenner            Creighton Bluejays Men's   C 29.1 0.684   589
+2         Derik Queen            Maryland Terrapins Men's   C 24.7 0.591   584
+3       Bent Leuchten           UC-Irvine Anteaters Men's   C 28.7 0.648   582
+4    Hunter Dickinson               Kansas Jayhawks Men's   C 25.8 0.571   558
+5        Robbie Avila         Saint Louis Billikens Men's   C 21.0 0.605   542
+6     Noah Williamson                Bucknell Bison Men's   C 23.5 0.594   515
+7       Nathan Bittle                  Oregon Ducks Men's   C 25.5 0.598   476
+8       Essam Mostafa Middle Tennessee Blue Raiders Men's   C 29.0 0.621   468
+9      Kyler Filewich              Wofford Terriers Men's   C 24.6 0.529   452
+10        Oumar Ballo              Indiana Hoosiers Men's   C 23.7 0.618   404
+11      Payton Sparks          Ball State Cardinals Men's   C 26.1 0.618   404
+12     Mitchell Saxen            Saint Mary's Gaels Men's   C 22.3 0.547   400
+13    Tomislav Ivisic      Illinois Fighting Illini Men's   C 22.0 0.597   400
+14     Carter Welling        Utah Valley Wolverines Men's   C 21.0 0.560   388
+15      Jeff Woodward               Colgate Raiders Men's   C 27.9 0.655   376
+16    Amar Kuljuhovic   North Dakota Fighting Hawks Men's   C 19.4 0.572   373
+17       Jacob Hutson        Northern Iowa Panthers Men's   C 19.5 0.557   370
+18    Christoph Tilly           Santa Clara Broncos Men's   C 23.5 0.623   367
+19 Justin Vander Baan            Lafayette Leopards Men's   C 23.0 0.547   364
+20        Miles Rubin          Loyola (IL) Ramblers Men's   C 22.1 0.683   322
+21       Michael Walz              Richmond Spiders Men's   C 19.5 0.587   269
+22    Lawson Lovering                     Utah Utes Men's   C 15.5 0.505   262
+23     Dylan Cardwell                 Auburn Tigers Men's   C 20.3 0.627   240
+24   Brandon Garrison             Kentucky Wildcats Men's   C 16.6 0.547   231
+25          Aday Mara                   UCLA Bruins Men's   C 28.8 0.594   216
+   AST. WS.40  BPM advk8.cluster
+1  10.0 0.236 12.2             4
+2  11.6 0.216  9.2             4
+3  12.5 0.277  9.0             4
+4  14.4 0.197 10.3             4
+5  24.1 0.158  4.7             4
+6  12.7 0.154  2.2             4
+7  14.4 0.203 11.4             4
+8   9.7 0.237  6.3             4
+9  24.1 0.168  3.5             4
+10 14.7 0.174  8.8             4
+11 13.6 0.197  2.2             4
+12 11.2 0.196  8.5             4
+13 15.8 0.187 10.7             4
+14 12.1 0.160  2.9             4
+15 22.6 0.209  3.0             4
+16 14.0 0.111  0.2             4
+17 14.9 0.148  1.8             4
+18 16.0 0.193  6.7             4
+19 24.0 0.157  3.8             4
+20 11.7 0.167  5.1             4
+21 27.3 0.135  3.2             4
+22 22.0 0.097  3.6             4
+23 12.7 0.189 11.4             4
+24 18.0 0.116  6.3             4
+25 16.7 0.222 11.4             4</code></pre>
 </div>
 </div>
-<p>Sorting on Points Produced, Jalen Smith is third out of the 15 forwards in the Big Ten who land in Cluster 4. Seems advanced metrics rate Jalen Smith pretty highly.</p>
+<p>Sorting on Points Produced, Derik Queen is second out of the 25 centers who land in Cluster 4. Seems advanced metrics rate him pretty highly.</p>
 
 
 </section>
@@ -800,18 +775,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -843,7 +807,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -851,7 +835,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -948,7 +932,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
