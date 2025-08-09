@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sports Data Analysis and Visualization - 34&nbsp; Intro to rvest</title>
+<title>34&nbsp; Intro to rvest – Sports Data Analysis and Visualization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -64,17 +64,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./advancedrvest.html" rel="next">
+<link href="./sportsreferencecsvs.html" rel="next">
 <link href="./finishingtouches.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1577067484ec7a2ab3d04528a804f744.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,13 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./rvest.html"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Intro to rvest</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -346,26 +346,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advancedrvest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./sportsreferencecsvs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./blogging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Building your own blog with Quarto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Project Checklist</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./usingpackages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Using packages to get data</span></span></a>
   </div>
 </li>
     </ul>
@@ -406,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>All the way back in Chapter 2, we used Google Sheets and importHTML to get our own data out of a website. For me, that’s a lot of pointing and clicking and copying and pasting. R has a library that can automate the harvesting of data from HTML on the internet. It’s called <code>rvest</code>.</p>
-<p>Let’s grab <a href="http://www.cfbstats.com/2022/leader/national/team/offense/split01/category09/sort01.html">a simple, basic HTML table from College Football Stats</a>. There’s nothing particularly strange about this table – it’s simply formatted and easy to scrape.</p>
+<p>Let’s grab <a href="http://www.cfbstats.com/2023/leader/national/team/offense/split01/category09/sort01.html">a simple, basic HTML table from College Football Stats</a>. There’s nothing particularly strange about this table – it’s simply formatted and easy to scrape.</p>
 <p>First we’ll need some libraries. We’re going to use a library called <code>rvest</code>, which you can get by running <code>install.packages('rvest')</code> in the console.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
@@ -451,34 +451,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>What if we want more than one year in our dataframe?</p>
 <p>This is a common problem. What if we want to look at every scoring offense going back several years? The website has them going back to 2009. How can we combine them?</p>
 <p>First, we should note, that the data does not have anything in it to indicate what year it comes from. So we’re going to have to add that. And we’re going to have to figure out a way to stack two dataframes on top of each other.</p>
-<p>So let’s grab 2022.</p>
+<p>So let’s grab 2024.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>scoringoffenseurl22 <span class="ot">&lt;-</span> <span class="st">"http://www.cfbstats.com/2022/leader/national/team/offense/split01/category09/sort01.html"</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>scoringoffenseurl24 <span class="ot">&lt;-</span> <span class="st">"http://www.cfbstats.com/2024/leader/national/team/offense/split01/category09/sort01.html"</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>scoringoffense22 <span class="ot">&lt;-</span> scoringoffenseurl22 <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>scoringoffense24 <span class="ot">&lt;-</span> scoringoffenseurl24 <span class="sc">|&gt;</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">'//*[@id="content"]/div[2]/table'</span>) <span class="sc">|&gt;</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>scoringoffense22 <span class="ot">&lt;-</span> scoringoffense22[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>scoringoffense24 <span class="ot">&lt;-</span> scoringoffense24[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>First, how are we going to know, in the data, which year our data is from? We can use mutate.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>scoringoffense22 <span class="ot">&lt;-</span> scoringoffense22 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2022</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>scoringoffense24 <span class="ot">&lt;-</span> scoringoffense24 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2024</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in initialize(...): attempt to use zero-length variable name</code></pre>
+<pre><code>Error in `mutate()`:
+! Can't transform a data frame with `NA` or `""` names.</code></pre>
 </div>
 </div>
 <p>Uh oh. Error. What does it say? It’s … not clear, but a hint is that our first column doesn’t have a name. Each column must be named. If you look at our data in the environment tab in the upper right corner, you’ll see that indeed, the first column has no name. It’s the FBS rank of each team. So we can fix that and mutate in the same step. We’ll do that using <code>rename</code> and since the field doesn’t have a name to rename it, we’ll use a position argument. We’ll say rename column 1 as Rank.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>scoringoffense23 <span class="ot">&lt;-</span> scoringoffense <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">Rank =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2023</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>scoringoffense22 <span class="ot">&lt;-</span> scoringoffense22 <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">Rank =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2022</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>scoringoffense24 <span class="ot">&lt;-</span> scoringoffense24 <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">Rank =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">YEAR =</span> <span class="dv">2024</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And now, to combine the two tables together length-wise – we need to make long data – we’ll use a dpylr function called <code>bind_rows</code>. The good thing is bind_rows is simple.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(scoringoffense23, scoringoffense22)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(scoringoffense23, scoringoffense24)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Note in the environment tab we now have a data frame called combined that has 264 observations – which just so happens to be what 131 from 2022 and 133 from 2023 add up to.</p>
+<p>Note in the environment tab we now have a data frame called combined that has 268 observations – which just so happens to be what 134 from 2024 and 2023 add up to.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -499,10 +500,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>What do you do when the table has non-standard headers?</p>
 <p>Unfortunately, non-standard means there’s no one way to do it – it’s going to depend on the table and the headers. But here’s one idea: Don’t try to make it work.</p>
 <p>I’ll explain.</p>
-<p>Let’s try to get <a href="https://www.sports-reference.com/cbb/seasons/2022-school-stats.html">season team stats from Sports Reference</a>. If you look at that page, you’ll see the problem right away – the headers span two rows, and they repeat. That’s going to be all kinds of no good. You can’t import that. Dataframes must have names all in one row. If you have two-line headers, you have a problem you have to fix before you can do anything else with it.</p>
+<p>Let’s try to get <a href="https://www.sports-reference.com/cbb/seasons/2024-school-stats.html">season team stats from Sports Reference</a>. If you look at that page, you’ll see the problem right away – the headers span two rows, and they repeat. That’s going to be all kinds of no good. You can’t import that. Dataframes must have names all in one row. If you have two-line headers, you have a problem you have to fix before you can do anything else with it.</p>
 <p>First we’ll grab the page.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.sports-reference.com/cbb/seasons/2023-school-stats.html"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.sports-reference.com/cbb/seasons/2024-school-stats.html"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, similar to our example above, we’ll read the html, use XPath to find the table, and then read that table with a directive passed to it setting the header to FALSE. That tells rvest that there isn’t a header row. Just import it as data.</p>
 <div class="cell">
@@ -522,20 +523,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 6 × 38
   X1    X2     X3    X4    X5    X6    X7    X8    X9    X10   X11   X12   X13  
   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt; &lt;chr&gt;
-1 1     Abile… 30    13    17    .433  -2.79 0.90  NA    5     11    NA    9    
-2 2     Air F… 32    14    18    .438  2.00  2.12  NA    5     13    NA    10   
-3 3     Akron  33    22    11    .667  4.19  -1.65 NA    13    5     NA    15   
-4 4     Alaba… 37    31    6     .838  23.19 9.65  NA    16    2     NA    15   
-5 5     Alaba… 33    15    18    .455  -10.… -7.71 NA    10    8     NA    9    
-6 6     Alaba… 31    8     23    .258  -16.… -6.29 NA    6     12    NA    5    
-# … with 25 more variables: X14 &lt;chr&gt;, X15 &lt;lgl&gt;, X16 &lt;chr&gt;, X17 &lt;chr&gt;,
-#   X18 &lt;lgl&gt;, X19 &lt;chr&gt;, X20 &lt;chr&gt;, X21 &lt;lgl&gt;, X22 &lt;chr&gt;, X23 &lt;chr&gt;,
-#   X24 &lt;chr&gt;, X25 &lt;chr&gt;, X26 &lt;chr&gt;, X27 &lt;chr&gt;, X28 &lt;chr&gt;, X29 &lt;chr&gt;,
-#   X30 &lt;chr&gt;, X31 &lt;chr&gt;, X32 &lt;chr&gt;, X33 &lt;chr&gt;, X34 &lt;chr&gt;, X35 &lt;chr&gt;,
-#   X36 &lt;chr&gt;, X37 &lt;chr&gt;, X38 &lt;chr&gt;</code></pre>
+1 1     Abile… 34    16    18    .471  -4.12 -1.12 NA    10    10    NA    8    
+2 2     Air F… 31    9     22    .290  -4.77 1.43  NA    2     16    NA    4    
+3 3     Akron… 35    24    11    .686  2.77  -2.08 NA    13    5     NA    13   
+4 4     Alaba… 37    25    12    .676  20.69 11.80 NA    13    5     NA    14   
+5 5     Alaba… 35    12    23    .343  -14.… -7.52 NA    9     9     NA    7    
+6 6     Alaba… 32    13    19    .406  -11.… -6.87 NA    8     10    NA    7    
+# ℹ 25 more variables: X14 &lt;chr&gt;, X15 &lt;lgl&gt;, X16 &lt;chr&gt;, X17 &lt;chr&gt;, X18 &lt;lgl&gt;,
+#   X19 &lt;chr&gt;, X20 &lt;chr&gt;, X21 &lt;lgl&gt;, X22 &lt;chr&gt;, X23 &lt;chr&gt;, X24 &lt;chr&gt;,
+#   X25 &lt;chr&gt;, X26 &lt;chr&gt;, X27 &lt;chr&gt;, X28 &lt;chr&gt;, X29 &lt;chr&gt;, X30 &lt;chr&gt;,
+#   X31 &lt;chr&gt;, X32 &lt;chr&gt;, X33 &lt;chr&gt;, X34 &lt;chr&gt;, X35 &lt;chr&gt;, X36 &lt;chr&gt;,
+#   X37 &lt;chr&gt;, X38 &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>So, that’s not ideal. We have headers and data mixed together, and our columns are named X1 to X38. Also note: They’re all character fields. Because the headers are interspersed with data, it all gets called character data. So we’ve got to first rename each field.</p>
+<p>So, that’s not ideal. Our columns are named X1 to X38. Also note: They’re all character fields. Because the headers are interspersed with data, it all gets called character data. So we’ve got to first rename each field.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stats <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">Rank=</span>X1, <span class="at">School=</span>X2, <span class="at">Games=</span>X3, <span class="at">OverallWins=</span>X4, <span class="at">OverallLosses=</span>X5, <span class="at">WinPct=</span>X6, <span class="at">OverallSRS=</span>X7, <span class="at">OverallSOS=</span>X8, <span class="at">Blank1=</span>X9, <span class="at">ConferenceWins=</span>X10, <span class="at">ConferenceLosses=</span>X11, <span class="at">Blank2=</span>X12, <span class="at">HomeWins=</span>X13, <span class="at">HomeLosses=</span>X14, <span class="at">Blank3=</span>X15, <span class="at">AwayWins=</span>X16, <span class="at">AwayLosses=</span>X17, <span class="at">Blank4=</span>X18, <span class="at">ForPoints=</span>X19, <span class="at">OppPoints=</span>X20, <span class="at">Blank5=</span>X21, <span class="at">Minutes=</span>X22, <span class="at">FieldGoalsMade=</span>X23, <span class="at">FieldGoalsAttempted=</span>X24, <span class="at">FieldGoalPCT=</span>X25, <span class="at">ThreePointMade=</span>X26, <span class="at">ThreePointAttempts=</span>X27, <span class="at">ThreePointPct=</span>X28, <span class="at">FreeThrowsMade=</span>X29, <span class="at">FreeThrowsAttempted=</span>X30, <span class="at">FreeThrowPCT=</span>X31, <span class="at">OffensiveRebounds=</span>X32, <span class="at">TotalRebounds=</span>X33, <span class="at">Assists=</span>X34, <span class="at">Steals=</span>X35, <span class="at">Blocks=</span>X36, <span class="at">Turnovers=</span>X37, <span class="at">PersonalFouls=</span>X38)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -556,21 +557,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 33
-   Rank School      Games Overa…¹ Overa…² WinPct Overa…³ Overa…⁴ Confe…⁵ Confe…⁶
-  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1     1 Abilene Ch…    30      13      17  0.433   -2.79    0.9        5      11
-2     2 Air Force      32      14      18  0.438    2       2.12       5      13
-3     3 Akron          33      22      11  0.667    4.19   -1.65      13       5
-4     4 Alabama&nbsp;NC…    37      31       6  0.838   23.2     9.65      16       2
-5     5 Alabama A&amp;M    33      15      18  0.455  -10.8    -7.71      10       8
-6     6 Alabama St…    31       8      23  0.258  -16.3    -6.29       6      12
-# … with 23 more variables: HomeWins &lt;dbl&gt;, HomeLosses &lt;dbl&gt;, AwayWins &lt;dbl&gt;,
-#   AwayLosses &lt;dbl&gt;, ForPoints &lt;dbl&gt;, OppPoints &lt;dbl&gt;, Minutes &lt;dbl&gt;,
-#   FieldGoalsMade &lt;dbl&gt;, FieldGoalsAttempted &lt;dbl&gt;, FieldGoalPCT &lt;dbl&gt;,
-#   ThreePointMade &lt;dbl&gt;, ThreePointAttempts &lt;dbl&gt;, ThreePointPct &lt;dbl&gt;,
-#   FreeThrowsMade &lt;dbl&gt;, FreeThrowsAttempted &lt;dbl&gt;, FreeThrowPCT &lt;dbl&gt;,
-#   OffensiveRebounds &lt;dbl&gt;, TotalRebounds &lt;dbl&gt;, Assists &lt;dbl&gt;, Steals &lt;dbl&gt;,
-#   Blocks &lt;dbl&gt;, Turnovers &lt;dbl&gt;, PersonalFouls &lt;dbl&gt;, and abbreviated …</code></pre>
+   Rank School      Games OverallWins OverallLosses WinPct OverallSRS OverallSOS
+  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+1     1 Abilene Ch…    34          16            18  0.471      -4.12      -1.12
+2     2 Air Force      31           9            22  0.29       -4.77       1.43
+3     3 Akron&nbsp;NCAA     35          24            11  0.686       2.77      -2.08
+4     4 Alabama&nbsp;NC…    37          25            12  0.676      20.7       11.8 
+5     5 Alabama A&amp;M    35          12            23  0.343     -14.4       -7.52
+6     6 Alabama St…    32          13            19  0.406     -11.7       -6.87
+# ℹ 25 more variables: ConferenceWins &lt;dbl&gt;, ConferenceLosses &lt;dbl&gt;,
+#   HomeWins &lt;dbl&gt;, HomeLosses &lt;dbl&gt;, AwayWins &lt;dbl&gt;, AwayLosses &lt;dbl&gt;,
+#   ForPoints &lt;dbl&gt;, OppPoints &lt;dbl&gt;, Minutes &lt;dbl&gt;, FieldGoalsMade &lt;dbl&gt;,
+#   FieldGoalsAttempted &lt;dbl&gt;, FieldGoalPCT &lt;dbl&gt;, ThreePointMade &lt;dbl&gt;,
+#   ThreePointAttempts &lt;dbl&gt;, ThreePointPct &lt;dbl&gt;, FreeThrowsMade &lt;dbl&gt;,
+#   FreeThrowsAttempted &lt;dbl&gt;, FreeThrowPCT &lt;dbl&gt;, OffensiveRebounds &lt;dbl&gt;,
+#   TotalRebounds &lt;dbl&gt;, Assists &lt;dbl&gt;, Steals &lt;dbl&gt;, Blocks &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
 
@@ -613,18 +614,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -656,7 +646,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -664,7 +674,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -761,7 +771,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -994,8 +1003,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./advancedrvest.html" class="pagination-link" aria-label="Advanced rvest">
-        <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Advanced rvest</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sportsreferencecsvs.html" class="pagination-link" aria-label="Getting CSVs from Sports Reference">
+        <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Getting CSVs from Sports Reference</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
