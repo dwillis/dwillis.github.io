@@ -417,11 +417,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>If you think of the normal distribution, it means that 84.3 percent of all case are below that 1. If it were -1, it would mean the number is one standard deviation below the mean, and 84.3 percent of cases would be above that -1. So if you have numbers with z-scores of 3 or even 4, that means that number is waaaaaay above the mean.</p>
-<p>So let’s use last year’s Maryland women’s basketball team, which if haven’t been paying attention to current events, was talented but had a few struggles.</p>
+<p>So let’s use last year’s men’s college basketball season to see how we can use z-scores to rank teams. We’ll use a few stats that we think represent team quality: shooting percentage and rebounding margin, both for the team and their opponents. We’ll then combine those z-scores into a composite score.</p>
 <section id="calculating-a-z-score-in-r" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="calculating-a-z-score-in-r"><span class="header-section-number">12.1</span> Calculating a Z score in R</h2>
 <p>For this we’ll need the logs of all college basketball games last season.</p>
-<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/wbblogs24.csv">
+<pre><p><strong>For this walkthrough:</strong></p><p><a href="https://dwillis.github.io/sports-data-files/logs25.csv">
   <button class="btn btn-danger"><i class="fa fa-save"></i> Download csv file</button>
 </a></p></pre>
 <p>Load the tidyverse.</p>
@@ -430,9 +430,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>And load the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gamelogs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wbblogs24.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gamelogs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/logs25.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 11425 Columns: 60
+<pre><code>Rows: 11962 Columns: 60
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr  (10): Season, GameType, TeamFullName, Opponent, HomeAway, W_L, OT, URL,...
@@ -483,12 +483,12 @@ date  (1): Date
 # Groups:   Conference [1]
   Conference Team         FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
   &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1 A-10 WBB   Davidson     0.436       31.3    0.378      27.1    0.878   -0.0939
-2 A-10 WBB   Dayton       0.400       35.7    0.437      28.7   -0.225    1.29  
-3 A-10 WBB   Duquesne     0.424       33.8    0.390      32.4    0.517    0.687 
-4 A-10 WBB   Fordham      0.403       32.5    0.408      30.5   -0.136    0.286 
-5 A-10 WBB   George Mason 0.397       34.9    0.381      32.7   -0.335    1.03  
-6 A-10 WBB   George Wash… 0.370       33.7    0.390      29.7   -1.17     0.680 
+1 A-10 MBB   Davidson     0.455       30.2    0.449      31.3   0.561     -1.18 
+2 A-10 MBB   Dayton       0.461       30.9    0.441      30.0   0.808     -0.780
+3 A-10 MBB   Duquesne     0.433       31.5    0.436      29.7  -0.532     -0.474
+4 A-10 MBB   Fordham      0.424       33.6    0.472      32.6  -0.946      0.638
+5 A-10 MBB   George Mason 0.459       33.0    0.386      29.6   0.721      0.292
+6 A-10 MBB   George Wash… 0.446       31.3    0.424      32.1   0.0873    -0.596
 # ℹ 3 more variables: OppZscore &lt;dbl&gt;, OppRebZScore &lt;dbl&gt;, TotalZscore &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -497,59 +497,63 @@ date  (1): Date
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>teamzscore <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(TotalZscore))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 359 × 11
-# Groups:   Conference [33]
-   Conference   Team      FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
-   &lt;chr&gt;        &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
- 1 SEC WBB      South Ca… 0.495       42.2    0.324      28.3    2.23      1.79 
- 2 MAAC WBB     Fairfield 0.464       33.1    0.361      27.4    2.26      1.26 
- 3 Summit WBB   South Da… 0.476       35.1    0.370      26.5    2.05      0.993
- 4 Sun Belt WBB James Ma… 0.424       42.4    0.363      31.0    1.18      1.60 
- 5 WCC WBB      Gonzaga   0.482       34.2    0.403      25.4    1.82      1.05 
- 6 SWAC WBB     Jackson … 0.397       38.5    0.341      29.9    0.815     1.54 
- 7 Big East WBB Connecti… 0.498       33.5    0.356      27.8    2.26      0.848
- 8 OVC WBB      Southern… 0.452       35.6    0.359      31.1    2.02      1.13 
- 9 MWC WBB      Nevada-L… 0.463       37.6    0.381      28.2    1.69      1.84 
-10 Big 12 WBB   Texas     0.490       36.2    0.384      24.4    1.66      0.793
-# ℹ 349 more rows
+<pre><code># A tibble: 361 × 11
+# Groups:   Conference [31]
+   Conference    Team     FGAvg ReboundAvg OppFGAvg OffRebAvg FGzscore RebZscore
+   &lt;chr&gt;         &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+ 1 ACC MBB       Duke     0.495       35.5    0.385      27.4    2.25      1.65 
+ 2 Ivy MBB       Yale     0.490       35.0    0.410      28.7    1.18      1.24 
+ 3 OVC MBB       Tenness… 0.463       37.5    0.419      30.9    1.81      2.10 
+ 4 WAC MBB       Utah Va… 0.467       35.2    0.415      29.7    1.68      1.33 
+ 5 Big West MBB  Cal Sta… 0.469       35.9    0.405      27.9    1.14      1.82 
+ 6 Summit MBB    South D… 0.473       37.0    0.425      28      0.786     1.60 
+ 7 WCC MBB       Saint M… 0.452       36.4    0.413      26.1   -0.140     1.97 
+ 8 Big South MBB High Po… 0.495       33.2    0.427      27.9    1.69      0.717
+ 9 WCC MBB       Gonzaga  0.500       34.6    0.413      28.9    1.57      1.14 
+10 CAA MBB       UNC Wil… 0.469       36.1    0.431      27.9    1.30      1.63 
+# ℹ 351 more rows
 # ℹ 3 more variables: OppZscore &lt;dbl&gt;, OppRebZScore &lt;dbl&gt;, TotalZscore &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Don’t sleep on Fairfield! If we look for Power Five schools, UConn and South Carolina are at the top, which checks out.</p>
+<p>Don’t sleep on Tennessee State! If we look for Power Five schools, Duke and UConn are at the top, which checks out.</p>
 <p>But closer to home, how is Maryland doing?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>teamzscore <span class="sc">|&gt;</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">"Big Ten WBB"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Conference <span class="sc">==</span> <span class="st">"Big Ten MBB"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(TotalZscore)) <span class="sc">|&gt;</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Team, TotalZscore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Adding missing grouping variables: `Conference`</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 14 × 3
+<pre><code># A tibble: 18 × 3
 # Groups:   Conference [1]
-   Conference  Team           TotalZscore
-   &lt;chr&gt;       &lt;chr&gt;                &lt;dbl&gt;
- 1 Big Ten WBB Iowa                 4.41 
- 2 Big Ten WBB Indiana              3.84 
- 3 Big Ten WBB Nebraska             3.15 
- 4 Big Ten WBB Penn State           1.88 
- 5 Big Ten WBB Illinois             1.20 
- 6 Big Ten WBB Michigan             0.396
- 7 Big Ten WBB Maryland            -0.651
- 8 Big Ten WBB Ohio State          -0.662
- 9 Big Ten WBB Minnesota           -0.856
-10 Big Ten WBB Wisconsin           -0.905
-11 Big Ten WBB Michigan State      -1.17 
-12 Big Ten WBB Rutgers             -1.91 
-13 Big Ten WBB Purdue              -2.54 
-14 Big Ten WBB Northwestern        -6.20 </code></pre>
+   Conference  Team                TotalZscore
+   &lt;chr&gt;       &lt;chr&gt;                     &lt;dbl&gt;
+ 1 Big Ten MBB Michigan State           4.36  
+ 2 Big Ten MBB Michigan                 3.37  
+ 3 Big Ten MBB Illinois                 2.97  
+ 4 Big Ten MBB Maryland                 1.72  
+ 5 Big Ten MBB Purdue                   1.60  
+ 6 Big Ten MBB UCLA                     1.16  
+ 7 Big Ten MBB Southern California      0.661 
+ 8 Big Ten MBB Wisconsin                0.385 
+ 9 Big Ten MBB Indiana                  0.338 
+10 Big Ten MBB Oregon                  -0.0226
+11 Big Ten MBB Ohio State              -0.0662
+12 Big Ten MBB Penn State              -0.0993
+13 Big Ten MBB Nebraska                -0.785 
+14 Big Ten MBB Northwestern            -2.06  
+15 Big Ten MBB Minnesota               -2.51  
+16 Big Ten MBB Iowa                    -3.40  
+17 Big Ten MBB Rutgers                 -3.48  
+18 Big Ten MBB Washington              -4.13  </code></pre>
 </div>
 </div>
-<p>So, as we can see, with our composite Z Score, Maryland is below average; not great. But better than Ohio State. Notice how, by this measure, Indiana and Iowa are far ahead of most of the conference, with Nebraska a somewhat surprising third.</p>
+<p>So, as we can see, with our composite Z Score, Maryland is above average; good but not great. But better than most of their conference rivals. Notice how, by this measure, Michigan State and Michigan are far ahead of most of the conference, with Illinois in third.</p>
 <p>We can limit our results to just Power Five conferences plus the Big East:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>powerfive_plus_one <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SEC WBB"</span>, <span class="st">"Big Ten WBB"</span>, <span class="st">"Pac-12 WBB"</span>, <span class="st">"Big 12 WBB"</span>, <span class="st">"ACC WBB"</span>, <span class="st">"Big East WBB"</span>)</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>powerfive_plus_one <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SEC MBB"</span>, <span class="st">"Big Ten MBB"</span>, <span class="st">"Pac-12 MBB"</span>, <span class="st">"Big 12 MBB"</span>, <span class="st">"ACC MBB"</span>, <span class="st">"Big East MBB"</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>teamzscore <span class="sc">|&gt;</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Conference <span class="sc">%in%</span> powerfive_plus_one) <span class="sc">|&gt;</span> </span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(TotalZscore)) <span class="sc">|&gt;</span></span>
@@ -558,24 +562,24 @@ date  (1): Date
 <pre><code>Adding missing grouping variables: `Conference`</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 80 × 3
-# Groups:   Conference [6]
-   Conference   Team            TotalZscore
-   &lt;chr&gt;        &lt;chr&gt;                 &lt;dbl&gt;
- 1 SEC WBB      South Carolina         7.55
- 2 Big East WBB Connecticut            5.79
- 3 Big 12 WBB   Texas                  5.55
- 4 Pac-12 WBB   Stanford               5.12
- 5 SEC WBB      Louisiana State        5.09
- 6 Pac-12 WBB   UCLA                   4.73
- 7 ACC WBB      Virginia Tech          4.53
- 8 Big Ten WBB  Iowa                   4.41
- 9 Big Ten WBB  Indiana                3.84
-10 ACC WBB      Duke                   3.65
-# ℹ 70 more rows</code></pre>
+<pre><code># A tibble: 79 × 3
+# Groups:   Conference [5]
+   Conference   Team               TotalZscore
+   &lt;chr&gt;        &lt;chr&gt;                    &lt;dbl&gt;
+ 1 ACC MBB      Duke                      8.21
+ 2 ACC MBB      Southern Methodist        4.83
+ 3 Big East MBB Connecticut               4.66
+ 4 Big 12 MBB   Arizona                   4.52
+ 5 Big 12 MBB   Houston                   4.43
+ 6 Big Ten MBB  Michigan State            4.36
+ 7 SEC MBB      Florida                   4.25
+ 8 SEC MBB      Tennessee                 3.43
+ 9 Big East MBB St. John's (NY)           3.38
+10 Big Ten MBB  Michigan                  3.37
+# ℹ 69 more rows</code></pre>
 </div>
 </div>
-<p>This makes a certain amount of sense: three of the Final Four teams - South Carolina, UConn and Iowa are in the top 10. N.C. State, the fourth team, ranks 16th. Virginia Tech is an interesting #7 here. It doesn’t necessarily mean they were the seventh-best team, but given their competition they shot the ball and rebounded the ball very well.</p>
+<p>This makes a certain amount of sense: three of the Final Four teams - Duke, Houston and Florida - are in the top 10. Auburn, the fourth team, ranks 16th. SMU is an interesting #2 here. It doesn’t necessarily mean they were the second-best team, but given their competition they shot the ball and rebounded the ball very well.</p>
 </section>
 <section id="writing-about-z-scores" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="writing-about-z-scores"><span class="header-section-number">12.2</span> Writing about z-scores</h2>
