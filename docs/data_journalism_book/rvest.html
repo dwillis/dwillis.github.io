@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>30&nbsp; Scraping data with Rvest – Data Journalism with R and the Tidyverse</title>
+<title>rvest – Data Journalism with R and the Tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,17 +64,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./basicstats.html" rel="next">
-<link href="./textanalysis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-bc8ce36a273e2a58c7d2d5f8a5007f3f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -87,7 +85,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar docked fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -115,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./rvest.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./rvest.html">Scraping data with Rvest</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -127,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Journalism with R and the Tidyverse</a> 
@@ -143,199 +140,151 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-story.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Learn a new way to read</span></span></a>
+ <span class="menu-text">Learn a new way to read</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-math.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Newsroom math</span></span></a>
+ <span class="menu-text">Newsroom math</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-data-def.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Defining “Data”</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./xl-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./xl-refresher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An Excel Refresher</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./xl-filter-sort.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sorting and filtering to find stories</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./xl-formulas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Formulas in Google Sheets</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./xl-practice-noc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Practice exercise</span></span></a>
+ <span class="menu-text">Defining “Data”</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span></a>
+ <span class="menu-text">Ethics in data journalism</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./publicrecords.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Public records</span></span></a>
+ <span class="menu-text">Public records</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using GitHub</span></span></a>
+ <span class="menu-text">Using GitHub</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+ <span class="menu-text">R Basics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./replication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span></a>
+ <span class="menu-text">Data journalism in the age of replication</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aggregates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Aggregates</span></span></a>
+ <span class="menu-text">Aggregates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./filters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Filters and selections</span></span></a>
+ <span class="menu-text">Filters and selections</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Working with dates</span></span></a>
+ <span class="menu-text">Working with dates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mutating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mutating data</span></span></a>
+ <span class="menu-text">Mutating data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span></a>
+ <span class="menu-text">Data Cleaning Part I: Data smells</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span></a>
+ <span class="menu-text">Data Cleaning Part II: Janitor</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./open-refine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span></a>
+ <span class="menu-text">Data Cleaning Part III: Open Refine</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pdfs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></span></a>
+ <span class="menu-text">Cleaning Data Part IV: PDFs</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./merging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Combining and joining</span></span></a>
+ <span class="menu-text">Combining and joining</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./census.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></span></a>
+ <span class="menu-text">Intro to APIs: The Census</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-reporting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></span></a>
+ <span class="menu-text">Visualizing your data for reporting</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-publication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./geographic-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Geographic data basics</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./geographicanalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Geographic analysis</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./textanalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">An intro to text analysis</span></span></a>
+ <span class="menu-text">Visualizing your data for publication</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rvest.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></span></a>
+ <span class="menu-text">Scraping data with Rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basicstats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></span></a>
+ <span class="menu-text">Basic Stats: Linear Regression and The T-Test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ai_and_llms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">AI and Data Journalism</span></span></a>
+ <span class="menu-text">AI and Data Journalism</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Writing with numbers</span></span></a>
+ <span class="menu-text">Writing with numbers</span></a>
   </div>
 </li>
     </ul>
@@ -343,31 +292,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<section id="scraping-data-with-rvest" class="level1">
+<h1>Scraping data with Rvest</h1>
 <p>Sometimes, governments put data online on a page or in a searchable database. And when you ask them for a copy of the data underneath the website, they say no.</p>
 <p>Why? Because they have a website. That’s it. That’s their reason. They say they don’t have to give you the data because they’ve already given you the data, never mind that they haven’t given to you in a form you can actually load into R with ease.</p>
 <p>Lucky for us, there’s a way for us to write code to get data even when an agency hasn’t made it easy: webscraping.</p>
@@ -475,6 +408,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
+# A tibble: 22 × 2
+   Date               `News Release/News Item`                                  
+   &lt;chr&gt;              &lt;chr&gt;                                                     
+ 1 October 3, 2025    Supreme Court of Maryland holds off-site oral arguments a…
+ 2 October 1, 2025    Media Advisory: Supreme Court of Maryland to hold off-sit…
+ 3 September 26, 2025 Media Advisory: Baltimore City District Court Mental Heal…
+ 4 September 22, 2025 Media Advisory: Circuit Court for Baltimore City Adult Dr…
+ 5 September 9, 2025  Baltimore City District courthouse, 501 E. Fayette St., c…
+ 6 September 2, 2025  Maryland Judiciary celebrates the 20th Anniversary of the…
+ 7 June 27, 2025      Judge Kenneth A. Talley named district administrative jud…
+ 8 June 16, 2025      Media Advisory: Tara H. Jackson is the new Prince George’…
+ 9 May 30, 2025       Ten Baltimore City Public Schools students awarded $20,50…
+10 May 12, 2025       Media Advisory: Circuit Court for Baltimore City’s Adult …
+# ℹ 12 more rows
+
+[[2]]
 # A tibble: 41 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -490,7 +439,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 November 20, 2024 Senior Judge Alan M. Wilner retires as chair of the  Stand…
 # ℹ 31 more rows
 
-[[2]]
+[[3]]
 # A tibble: 37 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -506,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 October 26, 2023  Maryland Judiciary issues statement after suspect in the m…
 # ℹ 27 more rows
 
-[[3]]
+[[4]]
 # A tibble: 48 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -522,7 +471,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 November 10, 2022 Media Advisory: Baltimore City District Court Veterans Tre…
 # ℹ 38 more rows
 
-[[4]]
+[[5]]
 # A tibble: 46 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -538,7 +487,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 November 1, 2021  Maryland lawyers donate 1.03 million hours of legal servic…
 # ℹ 36 more rows
 
-[[5]]
+[[6]]
 # A tibble: 67 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -554,7 +503,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 November 5, 2020  Baltimore County Family Recovery Support Program celebrate…
 # ℹ 57 more rows
 
-[[6]]
+[[7]]
 # A tibble: 53 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -570,7 +519,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 November 13, 2019 Media Advisory: Maryland’s highest court to welcome studen…
 # ℹ 43 more rows
 
-[[7]]
+[[8]]
 # A tibble: 82 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -586,7 +535,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 November 28, 2018 Media Advisory: District Court to hold Schools in the Cour…
 # ℹ 72 more rows
 
-[[8]]
+[[9]]
 # A tibble: 77 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -595,14 +544,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  3 December 15, 2017 Baltimore City District Court Honors Re-Entry Project Grad…
  4 December 14, 2017 Court of Appeals Hosts Youth Conference                    
  5 December 8, 2017  Phase II of construction on Robert C. Murphy Courts of App…
- 6 December 5, 2017  Court of Appeals Hosts United States Naval Academy Midship…
- 7 December 5, 2017  Judicial Data Center Outage - Thursday, December 7, 2017   
+ 6 December 5, 2017  Judicial Data Center Outage - Thursday, December 7, 2017   
+ 7 December 5, 2017  Court of Appeals Hosts United States Naval Academy Midship…
  8 November 30, 2017 Pretrial Pilot Program to Launch in Baltimore County       
  9 November 29, 2017 Maryland Judiciary Hosts Oratorical Contest for Youths fro…
 10 November 28, 2017 Media Advisory: Maryland Judiciary Hosts Students Who Help…
 # ℹ 67 more rows
 
-[[9]]
+[[10]]
 # A tibble: 59 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -610,15 +559,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  2 December 15, 2016 Judiciary Honors Young Artists for Promoting Peace         
  3 December 12, 2016 Maryland Judiciary Expands MDEC and Electronic Filing to L…
  4 December 9, 2016  Media Advisory: &nbsp;Maryland’s Chief Judge Congratulates Youn…
- 5 December 8, 2016  Marilyn Bentley Named Clerk of Baltimore City Circuit Court
- 6 December 8, 2016  Judges to Mentor Washington County Students on Civics      
- 7 December 8, 2016  Judges Mentor Students on Civics                           
+ 5 December 8, 2016  Judges to Mentor Washington County Students on Civics      
+ 6 December 8, 2016  Judges Mentor Students on Civics                           
+ 7 December 8, 2016  Marilyn Bentley Named Clerk of Baltimore City Circuit Court
  8 December 1, 2016  New Email Scam Targets Attorneys                           
  9 November 23, 2016 Media Advisory: Judges to Mentor Montgomery County Student…
 10 November 21, 2016 Judge Brett W. Wilson Named First Judicial Circuit Adminis…
 # ℹ 49 more rows
 
-[[10]]
+[[11]]
 # A tibble: 64 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -634,7 +583,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 November 19, 2015 Media Advisory:Pre-Trial Motions Hearing for State of Mary…
 # ℹ 54 more rows
 
-[[11]]
+[[12]]
 # A tibble: 50 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -650,7 +599,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 November 7, 2014  Media Advisory: Circuit Courts in Maryland Celebrate “Happ…
 # ℹ 40 more rows
 
-[[12]]
+[[13]]
 # A tibble: 26 × 2
    Date              `News Release/News Item`                                   
    &lt;chr&gt;             &lt;chr&gt;                                                      
@@ -659,14 +608,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  3 December 17, 2013 Media Advisory: Judiciary Helps Bring Civics to Baltimore …
  4 December 12, 2013 Harford County Courts Visited by Maryland’s Chief Judge    
  5 December 11, 2013 Cecil County Courts Welcome Maryland’s Chief  Judge        
- 6 December 4, 2013  Maryland’s New Chief Judge Visits Prince George’s County D…
- 7 December 4, 2013  Maryland’s New Chief Judge Visits Charles County Courts    
+ 6 December 4, 2013  Maryland’s New Chief Judge Visits Charles County Courts    
+ 7 December 4, 2013  Maryland’s New Chief Judge Visits Prince George’s County D…
  8 December 2, 2013  State Task Force Begins Study of Civil Right to Counsel fo…
- 9 November 18, 2013 Media Advisory: Circuit Courts in Maryland Celebrate Natio…
-10 November 18, 2013 Media Advisory: Maryland Judiciary Hosts Youths from DJS F…
+ 9 November 18, 2013 Media Advisory: Maryland Judiciary Hosts Youths from DJS F…
+10 November 18, 2013 Media Advisory: Circuit Courts in Maryland Celebrate Natio…
 # ℹ 16 more rows
 
-[[13]]
+[[14]]
 # A tibble: 1 × 2
   Date             `News Release/News Item`                                     
   &lt;chr&gt;            &lt;chr&gt;                                                        
@@ -690,20 +639,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 41 × 2
-   Date              `News Release/News Item`                                   
-   &lt;chr&gt;             &lt;chr&gt;                                                      
- 1 December 22, 2024 Maryland courts, court offices, and administrative offices…
- 2 December 20, 2024 Legionella Bacteria Detected in Baltimore City Circuit and…
- 3 December 11, 2024 Maryland Judiciary Honors Student Winners of 19th Annual C…
- 4 December 11, 2024 Media Advisory: District Court in Anne Arundel County offe…
- 5 December 10, 2024 Media Advisory: District Court in Prince George’s County o…
- 6 December 2, 2024  Media Advisory: Anne Arundel County District Court celebra…
- 7 December 2, 2024  Media Advisory: Maryland Judiciary announces winners of th…
- 8 November 20, 2024 Media Advisory: National Adoption Day celebrations hosted …
- 9 November 20, 2024 Judge Joseph M. Stanalonis named administrative judge for …
-10 November 20, 2024 Senior Judge Alan M. Wilner retires as chair of the  Stand…
-# ℹ 31 more rows</code></pre>
+<pre><code># A tibble: 22 × 2
+   Date               `News Release/News Item`                                  
+   &lt;chr&gt;              &lt;chr&gt;                                                     
+ 1 October 3, 2025    Supreme Court of Maryland holds off-site oral arguments a…
+ 2 October 1, 2025    Media Advisory: Supreme Court of Maryland to hold off-sit…
+ 3 September 26, 2025 Media Advisory: Baltimore City District Court Mental Heal…
+ 4 September 22, 2025 Media Advisory: Circuit Court for Baltimore City Adult Dr…
+ 5 September 9, 2025  Baltimore City District courthouse, 501 E. Fayette St., c…
+ 6 September 2, 2025  Maryland Judiciary celebrates the 20th Anniversary of the…
+ 7 June 27, 2025      Judge Kenneth A. Talley named district administrative jud…
+ 8 June 16, 2025      Media Advisory: Tara H. Jackson is the new Prince George’…
+ 9 May 30, 2025       Ten Baltimore City Public Schools students awarded $20,50…
+10 May 12, 2025       Media Advisory: Circuit Court for Baltimore City’s Adult …
+# ℹ 12 more rows</code></pre>
 </div>
 </div>
 <p>We now have a proper dataframe, albeit with some lengthy column headers.</p>
@@ -724,20 +673,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># show the dataframe</span></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 41 × 2
+<pre><code># A tibble: 22 × 2
    date       title                                                             
    &lt;date&gt;     &lt;chr&gt;                                                             
- 1 2024-12-22 Maryland courts, court offices, and administrative offices will b…
- 2 2024-12-20 Legionella Bacteria Detected in Baltimore City Circuit and Distri…
- 3 2024-12-11 Maryland Judiciary Honors Student Winners of 19th Annual Conflict…
- 4 2024-12-11 Media Advisory: District Court in Anne Arundel County offers Scho…
- 5 2024-12-10 Media Advisory: District Court in Prince George’s County offers S…
- 6 2024-12-02 Media Advisory: Anne Arundel County District Court celebrates its…
- 7 2024-12-02 Media Advisory: Maryland Judiciary announces winners of the 19th …
- 8 2024-11-20 Media Advisory: National Adoption Day celebrations hosted by Mary…
- 9 2024-11-20 Judge Joseph M. Stanalonis named administrative judge for St. Mar…
-10 2024-11-20 Senior Judge Alan M. Wilner retires as chair of the  Standing Com…
-# ℹ 31 more rows</code></pre>
+ 1 2025-10-03 Supreme Court of Maryland holds off-site oral arguments at Easton…
+ 2 2025-10-01 Media Advisory: Supreme Court of Maryland to hold off-site oral a…
+ 3 2025-09-26 Media Advisory: Baltimore City District Court Mental Health Court…
+ 4 2025-09-22 Media Advisory: Circuit Court for Baltimore City Adult Drug Treat…
+ 5 2025-09-09 Baltimore City District courthouse, 501 E. Fayette St., closes Oc…
+ 6 2025-09-02 Maryland Judiciary celebrates the 20th Anniversary of the Annual …
+ 7 2025-06-27 Judge Kenneth A. Talley named district administrative judge for t…
+ 8 2025-06-16 Media Advisory: Tara H. Jackson is the new Prince George’s County…
+ 9 2025-05-30 Ten Baltimore City Public Schools students awarded $20,500 in sch…
+10 2025-05-12 Media Advisory: Circuit Court for Baltimore City’s Adult Drug Tre…
+# ℹ 12 more rows</code></pre>
 </div>
 </div>
 <p>And there we go. We now have a nice tidy dataframe of Maryland state court press releases. We could combine all 11 dataframes if we wanted to have the whole set.</p>
@@ -765,7 +714,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>osp_results <span class="sc">|&gt;</span> <span class="fu">html_elements</span>(<span class="st">'li'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{xml_nodeset (85)}
+<pre><code>{xml_nodeset (91)}
  [1] &lt;li&gt;\n&lt;a href="https://www.facebook.com/OSPMD/" class="sm-facebook" titl ...
  [2] &lt;li&gt;\n&lt;a href="https://twitter.com/#!/@OSP_MD" class="sm-twitter" title= ...
  [3] &lt;li&gt;\n&lt;a href="https://www.instagram.com/osp_md/" class="sm-instagram2"  ...
@@ -813,75 +762,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [14] "State Board of Elections"                                                                                                                                                                                                                            
 [15] "State Ethics Commission"                                                                                                                                                                                                                             
 [16] "Attorney Grievance Commission"                                                                                                                                                                                                                       
-[17] "December 13, 2024 – Orphan’s Court Judge Indicted for Illegal Recording and Misconduct in Office"                                                                                                                                                    
-[18] "November 13, 2024: Former Prince George’s County Council Member Jamel “Mel” Franklin Sentenced to Jail for Felony Theft and Perjury."                                                                                                                
-[19] "November 1, 2024: Easton Police Department Officer Sentenced to Jail on Two Counts of Misconduct in Office"                                                                                                                                          
-[20] "September 11, 2024: Easton Police Department Officer Convicted of Two Charges of Misconduct in Office"                                                                                                                                               
-[21] "August 26, 2024: Former Prince George’s County Council Member Pleads Guilty to Felony Theft Scheme and Perjury"                                                                                                                                      
-[22] "July 18, 2024: Former Anne Arundel County Register of Wills Sentenced for Misconduct in Office"                                                                                                                                                      
-[23] "June 20, 2024: Prince George’s County Councilman Charged with Multiple Counts of Felony Theft Scheme, Embezzlement, and Perjury"                                                                                                                     
-[24] "June 4, 2024: Anne Arundel County Register of Wills Pleads Guilty to Misconduct in Office"                                                                                                                                                           
-[25] "April 4, 2024: Easton Police Department Officer Charged with Misconduct in Office"                                                                                                                                                                   
-[26] "April 3, 2024: John King for Governor Campaign Cited for Authority Line Violations"                                                                                                                                                                  
-[27] "January 26, 2024: Anne Arundel County Register of Wills Charged with Misconduct in Office, Misappropriation by a Fiduciary, and Theft"                                                                                                               
-[28] "January 10, 2024: Former Cecil County Sheriff’s Deputy Sentenced to Prison for Misconduct in Office and Visual Surveillance with Prurient Intent"                                                                                                    
-[29] "November 9, 2023: Baltimore County Man Pleads Guilty to Voting in a Maryland Election without U.S. Citizenship"                                                                                                                                      
-[30] "October 12, 2023: 1776 Project PAC Fined Over $20,000 for Failure to Include Authority Line in Carroll County School Board Race"                                                                                                                     
-[31] "October 11, 2023: Former Cecil County Sheriff’s Deputy Pleads Guilty to Misconduct in Office and Visual Surveillance with Prurient Intent"                                                                                                           
-[32] "October 05, 2023: Baltimore County Man Charged for Voting in a Maryland Election without U.S. Citizenship"                                                                                                                                           
-[33] "August 23, 2023: Cecil County Sheriff’s Office Deputy Charged with Misconduct in Office, Witness Retaliation, Revenge Porn, and Related Offenses"                                                                                                    
-[34] "July 31, 2023: Treasurer for Political Committees “Friends of Cathy Bevins” and the “Baltimore County Victory Slate” Sentenced to Six Months Incarceration"                                                                                          
-[35] "May 25, 2023: Treasurer for Political Committees “Friends of Cathy Bevins” and the “Baltimore County Victory Slate” Pleads Guilty to Felony Theft Scheme and Perjury"                                                                                
-[36] "April 18, 2023: Former Baltimore City State’s Attorney Sentenced to Two Years in Federal Prison for Unlawfully Obtaining Phone Records"                                                                                                              
-[37] "April 13, 2023: Calvert County Sheriff’s Deputy Pleads Guilty To Misconduct In Office"                                                                                                                                                               
-[38] "February 16, 2023: Treasurer to Political Committees “Friends of Cathy Bevins” and the “Baltimore County Victory Slate” Charged with Multiple Counts Of Felony Theft Scheme, Embezzlement, and Perjury"                                              
-[39] "January 13, 2023: Former Maryland State Delegate Richard K. Impallaria Pleads Guilty to Misconduct in Office for Misusing State Funds"                                                                                                               
-[40] "January 9, 2023: Calvert County Sheriff’s Deputy Charged with Misconduct in Office for Engaging in Sexual Relations with a Person Requesting Assistance"                                                                                             
-[41] "December 9, 2022: Former Baltimore City Assistant State’s Attorney Pleads Guilty to Federal Charges For Unlawfully Obtaining Phone Records"                                                                                                          
-[42] "September 30, 2022: Former Baltimore City Assistant State’s Attorney Facing Federal Charges for Unlawfully Obtaining Phone Records"                                                                                                                  
-[43] "September 29, 2022: Treasurer of Political Committee “Team 30 Slate” Pleads Guilty to Theft"                                                                                                                                                         
-[44] "July 27, 2022: Delegate Richard Impallaria charged with Felony Theft and related crimes for schemes related to misuse of state funds"                                                                                                                
-[45] "May 4, 2022: Treasurer of Political Committee “Team 30 Slate” Charged with Theft of Campaign Funds"                                                                                                                                                  
-[46] "April 18, 2022: Andrew Bradshaw, Former Mayor of Cambridge, MD, Pleads Guilty to Five Counts of Distributing Revenge Porn"                                                                                                                           
-[47] "November 30, 2021: Former Baltimore City Homicide Prosecutor Indicted on 88 Charges, including Stalking, Extortion, and Misconduct in Office"                                                                                                        
-[48] "November 23, 2021:  Fairmount Heights Police Officer Charged with Kidnapping, Perjury and Misconduct in Office"                                                                                                                                      
-[49] "November 15, 2021: Mayor of Cambridge Charged with violating Maryland’s Revenge Porn Statute"                                                                                                                                                        
-[50] "October 26, 2021: Non-Profit CEO Sentenced to Two Years in Federal Prison after Pleading Guilty to Wire Fraud in Connection with the Misuse of Federal Funds Intended For The Treatment of Survivors of Domestic Violence and Sexual Assault"        
-[51] "October 5, 2021: Former Executive Director Of Maryland Environmental Service Facing Federal And State Charges For Allegedly Fraudulently Obtaining More Than $276,731 From His Employer, And State Felony Violations Of The Maryland Wiretap Statute"
-[52] "September 23, 2021: Two Additional Baltimore Correctional Employees Plead Guilty, Making a Total of Eight Correctional Employees Convicted of Charges Related to Theft of over $400,000 Dollars of State Funds."                                     
-[53] "August 20, 2021: Ivan Gonzalez, Former Baltimore Police Officer and Candidate for Mayor of Baltimore City, Pleads Guilty to Perjury"                                                                                                                 
-[54] "August 11, 2021: Baltimore Correctional Officer Pleads Guilty to Charges of Felony Theft and Misconduct in Office"                                                                                                                                   
-[55] "August 9, 2021: Edward M. Estes, former Mayor of the City of Glenarden, Pleads Guilty to Misconduct in Office"                                                                                                                                       
-[56] "July 30, 2021:  Lora Walters, former Deputy Director of the Cecil County Board of Elections, Pleads Guilty to Misconduct in Office"                                                                                                                  
-[57] "July 29, 2021: Baltimore Correctional Officers Plead Guilty to Charges of Felony Theft and Misconduct in Office"                                                                                                                                     
-[58] "July 26, 2021: Baltimore City Employee Pleads Guilty to Perjury"                                                                                                                                                                                     
-[59] "July 9, 2021: Correctional Officer at Metropolitan Transition Center in Baltimore Pleads Guilty to Charges of Felony Theft and Misconduct in Office"                                                                                                 
-[60] "June 10, 2021:  Five Correctional Officers charged with Felony Theft and Misconduct in Office"                                                                                                                                                       
-[61] "June 4, 2021:  Lora Walters, former Deputy Director of the Cecil County Board of Elections, charged with Misconduct in Office, Perjury, and other offenses."                                                                                         
-[62] "March 29, 2021: Ivan Gonzalez, Baltimore Police Officer and Candidate for Mayor of Baltimore City, charged with Perjury and other crimes related to his 2020 Mayoral Campaign"                                                                       
-[63] "March 11, 2021: New Bank Fraud and Aggravated Identity Theft Charges Added to Non-Profit CEO’S Previous Federal Indictment Charging Her with Wire Fraud, Bank Fraud, and Aggravated Identity Theft"                                                  
-[64] "January 15, 2021: Correctional Officers and State Employee Charged with Theft and Bribery"                                                                                                                                                           
-[65] "January 13, 2021: Baltimore City Employee Charged with Perjury"                                                                                                                                                                                      
-[66] "November 17, 2020: Edward M. Estes, Mayor of Glen Arden, Maryland, Charged with Violating the Maryland Wiretap Statute and Misconduct in Office"                                                                                                     
-[67] "June 19, 2020: Former Baltimore Mayor Catherine Pugh Pleads Guilty To Perjury"                                                                                                                                                                       
-[68] "March 17, 2020: Level II – Flexible Operations of the Pandemic Flu and Other Infectious Diseases Attendance and Leave Policy"                                                                                                                        
-[69] "February 13, 2020: Devan Martin,  OSP Case #20-5785"                                                                                                                                                                                                 
-[70] "January 17, 2020: Greensboro Police Chief Pleads Guilty to Misconduct in Office"                                                                                                                                                                     
-[71] "January 6, 2020: Charles Blomquist and Sarah David Named Deputy State Prosecutors"                                                                                                                                                                   
-[72] "December 18, 2019: Ex-Baltimore Mayor Catherine Pugh Charged with Perjury"                                                                                                                                                                           
-[73] "December 10, 2019: City of District Heights Mayor Sentenced for Misconduct in Office"                                                                                                                                                                
-[74] "December 5, 2019: Former Baltimore City School Business Manager Pleads Guilty to Theft of School Funds"                                                                                                                                              
-[75] "November 25, 2019: Charlton T. Howard III Sworn in as State Prosecutor"                                                                                                                                                                              
-[76] "November 20, 2019: City of District Heights Mayor Convicted of Misconduct in Office"                                                                                                                                                                 
-[77] "November 19, 2019: Maryland State Police Sergeant Charged with Misconduct in Office"                                                                                                                                                                 
-[78] "November 14, 2019: Greensboro Police Chief Charged with Misconduct in Office"                                                                                                                                                                        
-[79] "November 7, 2019: Former Baltimore City School Business Manager Charged with Theft of School Funds"                                                                                                                                                  
-[80] "Contact Us"                                                                                                                                                                                                                                          
-[81] "Report Fraud"                                                                                                                                                                                                                                        
-[82] "Facebook "                                                                                                                                                                                                                                           
-[83] "Twitter "                                                                                                                                                                                                                                            
-[84] "Instagram  "                                                                                                                                                                                                                                         
-[85] "LinkedIn"                                                                                                                                                                                                                                            </code></pre>
+[17] "September 15, 2025: Maryland Department of Health Police Captain Charged with Misconduct in Office and Theft"                                                                                                                                        
+[18] "July 28, 2025: Former Co-Owner of Mixed Martial Arts Studio Charged with Embezzlement, Identity Fraud, Theft &amp; Other Crimes"                                                                                                                         
+[19] "August 20, 2025: Cecil County Sheriff’s Deputy Charged with Misconduct, Misuse of Law Enforcement Databases, and a Wiretap Violation"                                                                                                                
+[20] "July 16, 2025: Former Legislative Aide Sentenced for Stealing Legislative Scholarship Funds"                                                                                                                                                         
+[21] "March 25, 2025: Former Legislative Aide Pleads Guilty to Felony Theft for Stealing Legislative Scholarship Funds"                                                                                                                                    
+[22] "January 22, 2025: Former Legislative Aide Charged with Felony Theft and Other Charges for Stealing Legislative Scholarship Funds"                                                                                                                    
+[23] "December 13, 2024 – Orphan’s Court Judge Indicted for Illegal Recording and Misconduct in Office"                                                                                                                                                    
+[24] "November 13, 2024: Former Prince George’s County Council Member Jamel “Mel” Franklin Sentenced to Jail for Felony Theft and Perjury."                                                                                                                
+[25] "November 1, 2024: Easton Police Department Officer Sentenced to Jail on Two Counts of Misconduct in Office"                                                                                                                                          
+[26] "September 11, 2024: Easton Police Department Officer Convicted of Two Charges of Misconduct in Office"                                                                                                                                               
+[27] "August 26, 2024: Former Prince George’s County Council Member Pleads Guilty to Felony Theft Scheme and Perjury"                                                                                                                                      
+[28] "July 18, 2024: Former Anne Arundel County Register of Wills Sentenced for Misconduct in Office"                                                                                                                                                      
+[29] "June 20, 2024: Prince George’s County Councilman Charged with Multiple Counts of Felony Theft Scheme, Embezzlement, and Perjury"                                                                                                                     
+[30] "June 4, 2024: Anne Arundel County Register of Wills Pleads Guilty to Misconduct in Office"                                                                                                                                                           
+[31] "April 4, 2024: Easton Police Department Officer Charged with Misconduct in Office"                                                                                                                                                                   
+[32] "April 3, 2024: John King for Governor Campaign Cited for Authority Line Violations"                                                                                                                                                                  
+[33] "January 26, 2024: Anne Arundel County Register of Wills Charged with Misconduct in Office, Misappropriation by a Fiduciary, and Theft"                                                                                                               
+[34] "January 10, 2024: Former Cecil County Sheriff’s Deputy Sentenced to Prison for Misconduct in Office and Visual Surveillance with Prurient Intent"                                                                                                    
+[35] "November 9, 2023: Baltimore County Man Pleads Guilty to Voting in a Maryland Election without U.S. Citizenship"                                                                                                                                      
+[36] "October 12, 2023: 1776 Project PAC Fined Over $20,000 for Failure to Include Authority Line in Carroll County School Board Race"                                                                                                                     
+[37] "October 11, 2023: Former Cecil County Sheriff’s Deputy Pleads Guilty to Misconduct in Office and Visual Surveillance with Prurient Intent"                                                                                                           
+[38] "October 05, 2023: Baltimore County Man Charged for Voting in a Maryland Election without U.S. Citizenship"                                                                                                                                           
+[39] "August 23, 2023: Cecil County Sheriff’s Office Deputy Charged with Misconduct in Office, Witness Retaliation, Revenge Porn, and Related Offenses"                                                                                                    
+[40] "July 31, 2023: Treasurer for Political Committees “Friends of Cathy Bevins” and the “Baltimore County Victory Slate” Sentenced to Six Months Incarceration"                                                                                          
+[41] "May 25, 2023: Treasurer for Political Committees “Friends of Cathy Bevins” and the “Baltimore County Victory Slate” Pleads Guilty to Felony Theft Scheme and Perjury"                                                                                
+[42] "April 18, 2023: Former Baltimore City State’s Attorney Sentenced to Two Years in Federal Prison for Unlawfully Obtaining Phone Records"                                                                                                              
+[43] "April 13, 2023: Calvert County Sheriff’s Deputy Pleads Guilty To Misconduct In Office"                                                                                                                                                               
+[44] "February 16, 2023: Treasurer to Political Committees “Friends of Cathy Bevins” and the “Baltimore County Victory Slate” Charged with Multiple Counts Of Felony Theft Scheme, Embezzlement, and Perjury"                                              
+[45] "January 13, 2023: Former Maryland State Delegate Richard K. Impallaria Pleads Guilty to Misconduct in Office for Misusing State Funds"                                                                                                               
+[46] "January 9, 2023: Calvert County Sheriff’s Deputy Charged with Misconduct in Office for Engaging in Sexual Relations with a Person Requesting Assistance"                                                                                             
+[47] "December 9, 2022: Former Baltimore City Assistant State’s Attorney Pleads Guilty to Federal Charges For Unlawfully Obtaining Phone Records"                                                                                                          
+[48] "September 30, 2022: Former Baltimore City Assistant State’s Attorney Facing Federal Charges for Unlawfully Obtaining Phone Records"                                                                                                                  
+[49] "September 29, 2022: Treasurer of Political Committee “Team 30 Slate” Pleads Guilty to Theft"                                                                                                                                                         
+[50] "July 27, 2022: Delegate Richard Impallaria charged with Felony Theft and related crimes for schemes related to misuse of state funds"                                                                                                                
+[51] "May 4, 2022: Treasurer of Political Committee “Team 30 Slate” Charged with Theft of Campaign Funds"                                                                                                                                                  
+[52] "April 18, 2022: Andrew Bradshaw, Former Mayor of Cambridge, MD, Pleads Guilty to Five Counts of Distributing Revenge Porn"                                                                                                                           
+[53] "November 30, 2021: Former Baltimore City Homicide Prosecutor Indicted on 88 Charges, including Stalking, Extortion, and Misconduct in Office"                                                                                                        
+[54] "November 23, 2021:  Fairmount Heights Police Officer Charged with Kidnapping, Perjury and Misconduct in Office"                                                                                                                                      
+[55] "November 15, 2021: Mayor of Cambridge Charged with violating Maryland’s Revenge Porn Statute"                                                                                                                                                        
+[56] "October 26, 2021: Non-Profit CEO Sentenced to Two Years in Federal Prison after Pleading Guilty to Wire Fraud in Connection with the Misuse of Federal Funds Intended For The Treatment of Survivors of Domestic Violence and Sexual Assault"        
+[57] "October 5, 2021: Former Executive Director Of Maryland Environmental Service Facing Federal And State Charges For Allegedly Fraudulently Obtaining More Than $276,731 From His Employer, And State Felony Violations Of The Maryland Wiretap Statute"
+[58] "September 23, 2021: Two Additional Baltimore Correctional Employees Plead Guilty, Making a Total of Eight Correctional Employees Convicted of Charges Related to Theft of over $400,000 Dollars of State Funds."                                     
+[59] "August 20, 2021: Ivan Gonzalez, Former Baltimore Police Officer and Candidate for Mayor of Baltimore City, Pleads Guilty to Perjury"                                                                                                                 
+[60] "August 11, 2021: Baltimore Correctional Officer Pleads Guilty to Charges of Felony Theft and Misconduct in Office"                                                                                                                                   
+[61] "August 9, 2021: Edward M. Estes, former Mayor of the City of Glenarden, Pleads Guilty to Misconduct in Office"                                                                                                                                       
+[62] "July 30, 2021:  Lora Walters, former Deputy Director of the Cecil County Board of Elections, Pleads Guilty to Misconduct in Office"                                                                                                                  
+[63] "July 29, 2021: Baltimore Correctional Officers Plead Guilty to Charges of Felony Theft and Misconduct in Office"                                                                                                                                     
+[64] "July 26, 2021: Baltimore City Employee Pleads Guilty to Perjury"                                                                                                                                                                                     
+[65] "July 9, 2021: Correctional Officer at Metropolitan Transition Center in Baltimore Pleads Guilty to Charges of Felony Theft and Misconduct in Office"                                                                                                 
+[66] "June 10, 2021:  Five Correctional Officers charged with Felony Theft and Misconduct in Office"                                                                                                                                                       
+[67] "June 4, 2021:  Lora Walters, former Deputy Director of the Cecil County Board of Elections, charged with Misconduct in Office, Perjury, and other offenses."                                                                                         
+[68] "March 29, 2021: Ivan Gonzalez, Baltimore Police Officer and Candidate for Mayor of Baltimore City, charged with Perjury and other crimes related to his 2020 Mayoral Campaign"                                                                       
+[69] "March 11, 2021: New Bank Fraud and Aggravated Identity Theft Charges Added to Non-Profit CEO’S Previous Federal Indictment Charging Her with Wire Fraud, Bank Fraud, and Aggravated Identity Theft"                                                  
+[70] "January 15, 2021: Correctional Officers and State Employee Charged with Theft and Bribery"                                                                                                                                                           
+[71] "January 13, 2021: Baltimore City Employee Charged with Perjury"                                                                                                                                                                                      
+[72] "November 17, 2020: Edward M. Estes, Mayor of Glen Arden, Maryland, Charged with Violating the Maryland Wiretap Statute and Misconduct in Office"                                                                                                     
+[73] "June 19, 2020: Former Baltimore Mayor Catherine Pugh Pleads Guilty To Perjury"                                                                                                                                                                       
+[74] "March 17, 2020: Level II – Flexible Operations of the Pandemic Flu and Other Infectious Diseases Attendance and Leave Policy"                                                                                                                        
+[75] "February 13, 2020: Devan Martin,  OSP Case #20-5785"                                                                                                                                                                                                 
+[76] "January 17, 2020: Greensboro Police Chief Pleads Guilty to Misconduct in Office"                                                                                                                                                                     
+[77] "January 6, 2020: Charles Blomquist and Sarah David Named Deputy State Prosecutors"                                                                                                                                                                   
+[78] "December 18, 2019: Ex-Baltimore Mayor Catherine Pugh Charged with Perjury"                                                                                                                                                                           
+[79] "December 10, 2019: City of District Heights Mayor Sentenced for Misconduct in Office"                                                                                                                                                                
+[80] "December 5, 2019: Former Baltimore City School Business Manager Pleads Guilty to Theft of School Funds"                                                                                                                                              
+[81] "November 25, 2019: Charlton T. Howard III Sworn in as State Prosecutor"                                                                                                                                                                              
+[82] "November 20, 2019: City of District Heights Mayor Convicted of Misconduct in Office"                                                                                                                                                                 
+[83] "November 19, 2019: Maryland State Police Sergeant Charged with Misconduct in Office"                                                                                                                                                                 
+[84] "November 14, 2019: Greensboro Police Chief Charged with Misconduct in Office"                                                                                                                                                                        
+[85] "November 7, 2019: Former Baltimore City School Business Manager Charged with Theft of School Funds"                                                                                                                                                  
+[86] "Contact Us"                                                                                                                                                                                                                                          
+[87] "Report Fraud"                                                                                                                                                                                                                                        
+[88] "Facebook "                                                                                                                                                                                                                                           
+[89] "Twitter "                                                                                                                                                                                                                                            
+[90] "Instagram  "                                                                                                                                                                                                                                         
+[91] "LinkedIn"                                                                                                                                                                                                                                            </code></pre>
 </div>
 </div>
 <p>Ok, so now we can see the press releases. But they are surrounded by a bunch of things we don’t want, and this <em>still</em> isn’t a dataframe. Let’s solve the second problem first with the <code>as_tibble()</code> function:</p>
@@ -903,21 +858,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>releases <span class="ot">&lt;-</span> osp_results <span class="sc">|&gt;</span> <span class="fu">html_elements</span>(<span class="st">'li.listing-item'</span>) <span class="sc">|&gt;</span> <span class="fu">html_text</span>() <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> <span class="fu">separate</span>(value, <span class="fu">c</span>(<span class="st">'date'</span>, <span class="st">'title'</span>), <span class="at">sep=</span><span class="st">":"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Expected 2 pieces. Missing pieces filled with `NA` in 1 rows [1].</code></pre>
+<pre><code>Warning: Expected 2 pieces. Missing pieces filled with `NA` in 1 rows [7].</code></pre>
 </div>
 </div>
 <p>That worked, but it also exposed a couple of things, as that Warning message indicates: not all of the rows had a colon in them and the <code>title</code> column has a leading space. Let’s fix both of those - we’ll drop the rows where the title is NA and convert the dates into actual dates.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>releases <span class="ot">&lt;-</span> osp_results <span class="sc">|&gt;</span> <span class="fu">html_elements</span>(<span class="st">'li.listing-item'</span>) <span class="sc">|&gt;</span> <span class="fu">html_text</span>() <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> <span class="fu">separate</span>(value, <span class="fu">c</span>(<span class="st">'date'</span>, <span class="st">'title'</span>), <span class="at">sep=</span><span class="st">":"</span>) <span class="sc">|&gt;</span> <span class="fu">drop_na</span>(title) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">title =</span> <span class="fu">str_squish</span>(title), <span class="at">date =</span> <span class="fu">mdy</span>(date))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Expected 2 pieces. Missing pieces filled with `NA` in 1 rows [1].</code></pre>
+<pre><code>Warning: Expected 2 pieces. Missing pieces filled with `NA` in 1 rows [7].</code></pre>
 </div>
 </div>
 <p>And now you have the data.</p>
 
 
+</li></section>
 
-</li></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1000,8 +956,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1112,7 +1066,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1338,18 +1291,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./textanalysis.html" class="pagination-link" aria-label="An intro to text analysis">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">An intro to text analysis</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./basicstats.html" class="pagination-link" aria-label="Basic Stats: Linear Regression and The T-Test">
-        <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

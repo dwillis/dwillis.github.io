@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>19&nbsp; Data Cleaning Part I: Data smells – Data Journalism with R and the Tidyverse</title>
+<title>data-cleaning-part-i – Data Journalism with R and the Tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,17 +64,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./data-cleaning-part-ii.html" rel="next">
-<link href="./mutating.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-bc8ce36a273e2a58c7d2d5f8a5007f3f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -87,7 +85,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar docked fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -115,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-cleaning-part-i.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-cleaning-part-i.html">Data Cleaning Part I: Data smells</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -127,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Journalism with R and the Tidyverse</a> 
@@ -143,199 +140,151 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-story.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Learn a new way to read</span></span></a>
+ <span class="menu-text">Learn a new way to read</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-math.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Newsroom math</span></span></a>
+ <span class="menu-text">Newsroom math</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-data-def.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Defining “Data”</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./xl-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./xl-refresher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">An Excel Refresher</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./xl-filter-sort.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sorting and filtering to find stories</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./xl-formulas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Formulas in Google Sheets</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./xl-practice-noc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Practice exercise</span></span></a>
+ <span class="menu-text">Defining “Data”</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span></a>
+ <span class="menu-text">Ethics in data journalism</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./publicrecords.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Public records</span></span></a>
+ <span class="menu-text">Public records</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using GitHub</span></span></a>
+ <span class="menu-text">Using GitHub</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+ <span class="menu-text">R Basics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./replication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span></a>
+ <span class="menu-text">Data journalism in the age of replication</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aggregates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Aggregates</span></span></a>
+ <span class="menu-text">Aggregates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./filters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Filters and selections</span></span></a>
+ <span class="menu-text">Filters and selections</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Working with dates</span></span></a>
+ <span class="menu-text">Working with dates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mutating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mutating data</span></span></a>
+ <span class="menu-text">Mutating data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span></a>
+ <span class="menu-text">Data Cleaning Part I: Data smells</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span></a>
+ <span class="menu-text">Data Cleaning Part II: Janitor</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./open-refine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span></a>
+ <span class="menu-text">Data Cleaning Part III: Open Refine</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pdfs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></span></a>
+ <span class="menu-text">Cleaning Data Part IV: PDFs</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./merging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Combining and joining</span></span></a>
+ <span class="menu-text">Combining and joining</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./census.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></span></a>
+ <span class="menu-text">Intro to APIs: The Census</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-reporting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></span></a>
+ <span class="menu-text">Visualizing your data for reporting</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-publication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./geographic-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Geographic data basics</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./geographicanalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Geographic analysis</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./textanalysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">An intro to text analysis</span></span></a>
+ <span class="menu-text">Visualizing your data for publication</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rvest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></span></a>
+ <span class="menu-text">Scraping data with Rvest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basicstats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></span></a>
+ <span class="menu-text">Basic Stats: Linear Regression and The T-Test</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ai_and_llms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">AI and Data Journalism</span></span></a>
+ <span class="menu-text">AI and Data Journalism</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Writing with numbers</span></span></a>
+ <span class="menu-text">Writing with numbers</span></a>
   </div>
 </li>
     </ul>
@@ -343,40 +292,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#wrong-type" id="toc-wrong-type" class="nav-link active" data-scroll-target="#wrong-type"><span class="header-section-number">19.1</span> Wrong Type</a></li>
-  <li><a href="#wrong-spatial-data" id="toc-wrong-spatial-data" class="nav-link" data-scroll-target="#wrong-spatial-data"><span class="header-section-number">19.2</span> Wrong Spatial Data</a></li>
-  <li><a href="#gaps-in-data-missing-data" id="toc-gaps-in-data-missing-data" class="nav-link" data-scroll-target="#gaps-in-data-missing-data"><span class="header-section-number">19.3</span> Gaps in data &amp; Missing data</a></li>
-  <li><a href="#unusual-outliers" id="toc-unusual-outliers" class="nav-link" data-scroll-target="#unusual-outliers"><span class="header-section-number">19.4</span> Unusual Outliers</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<section id="data-cleaning-part-i-data-smells" class="level1">
+<h1>Data Cleaning Part I: Data smells</h1>
 <p>Any time you are given a dataset from anyone, you should immediately be suspicious. Is this data what I think it is? Does it include what I expect? Is there anything I need to know about it? Will it produce the information I expect?</p>
 <p>One of the first things you should do is give it the smell test.</p>
 <p>Failure to give data the smell test <a href="https://source.opennews.org/en-US/learning/handling-data-about-race-and-ethnicity/">can lead you to miss stories and get your butt kicked on a competitive story</a>.</p>
@@ -398,8 +322,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Not all of these data smells are detectable in code. You may have to ask people about the data. You may have to compare it to another dataset yourself. Does the agency that uses the data produce reports from the data? Does your analysis match those reports? That will expose wrongly derived data, or wrong units, or mistakes you made with inclusion or exclusion.</p>
 <p>But with several of these data smells, we can do them first, before we do anything else.</p>
 <p>We’re going to examine several here as they apply to some <a href="https://opendata.maryland.gov/Budget/State-of-Maryland-Payments-Data-FY2008-to-FY2024/7syw-q4cy">Maryland state government payments data</a> and <a href="https://opendata.maryland.gov/Budget/State-of-Maryland-Grant-and-Loan-Data-FY2009-to-FY/absk-avps">Maryland state government grant &amp; loan data</a>.</p>
-<section id="wrong-type" class="level2" data-number="19.1">
-<h2 data-number="19.1" class="anchored" data-anchor-id="wrong-type"><span class="header-section-number">19.1</span> Wrong Type</h2>
+<section id="wrong-type" class="level2">
+<h2 class="anchored" data-anchor-id="wrong-type">Wrong Type</h2>
 <p>First, let’s look at <strong>Wrong Type Of Data</strong>.</p>
 <p>We can sniff that out by looking at the output of <code>readr</code>.</p>
 <p>Let’s load the tidyverse.</p>
@@ -438,16 +362,16 @@ dbl (4): Fiscal Year, Vendor Zip, Amount, Fiscal Period
 <pre><code># A tibble: 369 × 5
      row   col expected actual file                                             
    &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;                                            
- 1  9568     4 a double L4Z4B  /Users/dwillis/code/datajournalismbook-maryland/…
- 2 10117     4 a double L4Y1Z  /Users/dwillis/code/datajournalismbook-maryland/…
- 3 10476     4 a double 0LAND  /Users/dwillis/code/datajournalismbook-maryland/…
- 4 12308     4 a double H4S    /Users/dwillis/code/datajournalismbook-maryland/…
- 5 13084     4 a double N2G    /Users/dwillis/code/datajournalismbook-maryland/…
- 6 15549     4 a double GOR    /Users/dwillis/code/datajournalismbook-maryland/…
- 7 15772     4 a double N5V    /Users/dwillis/code/datajournalismbook-maryland/…
- 8 15844     4 a double T1Y    /Users/dwillis/code/datajournalismbook-maryland/…
- 9 15877     4 a double R2C    /Users/dwillis/code/datajournalismbook-maryland/…
-10 15973     4 a double L4L34  /Users/dwillis/code/datajournalismbook-maryland/…
+ 1  9568     4 a double L4Z4B  /Users/dpwillis/code/datajournalismbook-maryland…
+ 2 10117     4 a double L4Y1Z  /Users/dpwillis/code/datajournalismbook-maryland…
+ 3 10476     4 a double 0LAND  /Users/dpwillis/code/datajournalismbook-maryland…
+ 4 12308     4 a double H4S    /Users/dpwillis/code/datajournalismbook-maryland…
+ 5 13084     4 a double N2G    /Users/dpwillis/code/datajournalismbook-maryland…
+ 6 15549     4 a double GOR    /Users/dpwillis/code/datajournalismbook-maryland…
+ 7 15772     4 a double N5V    /Users/dpwillis/code/datajournalismbook-maryland…
+ 8 15844     4 a double T1Y    /Users/dpwillis/code/datajournalismbook-maryland…
+ 9 15877     4 a double R2C    /Users/dpwillis/code/datajournalismbook-maryland…
+10 15973     4 a double L4L34  /Users/dpwillis/code/datajournalismbook-maryland…
 # ℹ 359 more rows</code></pre>
 </div>
 </div>
@@ -484,8 +408,8 @@ $ Category        &lt;chr&gt; "Vendor Payment", "Vendor Payment", "Vendor Paymen
 </div>
 <p>Things that should be characters – like agency name, vendor name – are characters (chr). Things that should be numbers (dbl) – like amount and fiscal year – are numbers. We’ve seen before that sometimes dates aren’t defined as date datatypes by R - we can fix that using <code>lubridate</code>.</p>
 </section>
-<section id="wrong-spatial-data" class="level2" data-number="19.2">
-<h2 data-number="19.2" class="anchored" data-anchor-id="wrong-spatial-data"><span class="header-section-number">19.2</span> Wrong Spatial Data</h2>
+<section id="wrong-spatial-data" class="level2">
+<h2 class="anchored" data-anchor-id="wrong-spatial-data">Wrong Spatial Data</h2>
 <p>The second smell we can find in code is <strong>wrong spatial data</strong>. Spatial data means data that refers to some geography; in this dataset the only geographical element is the vendor’s zip code. Zip codes should be, at a minimum, five characters long (although composed of numbers, zip codes aren’t used as numbers).</p>
 <p>We can check to see if any of the zip codes are less than five characters by using <a href="https://stringr.tidyverse.org/reference/str_length.html">a function called <code>str_length</code></a> inside a filter:</p>
 <div class="cell">
@@ -515,8 +439,8 @@ $ Category        &lt;chr&gt; "Vendor Payment", "Vendor Payment", "Vendor Paymen
 </div>
 <p>So, yes, we definitely have some zip codes that are less than 5 characters long, which is not good, particularly because we don’t have any other geographical information (such as a state) that would tell us whether we’re missing a leading zero or some other character.</p>
 </section>
-<section id="gaps-in-data-missing-data" class="level2" data-number="19.3">
-<h2 data-number="19.3" class="anchored" data-anchor-id="gaps-in-data-missing-data"><span class="header-section-number">19.3</span> Gaps in data &amp; Missing data</h2>
+<section id="gaps-in-data-missing-data" class="level2">
+<h2 class="anchored" data-anchor-id="gaps-in-data-missing-data">Gaps in data &amp; Missing data</h2>
 <p>Let’s now look at <strong>gaps in data</strong>. These often occur when you have a date or time element in your data, but there are other potential gaps, too. To illustrate those, we’re going to introduce some Maryland state grant and loan data from 2009 forward. Let’s load it and take a look:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>md_grants_loans <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/State_of_Maryland_Grant_and_Loan_Data__FY2009_to_FY2022_20250115.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -561,8 +485,8 @@ dbl (3): Fiscal Year, Amount, Fiscal Period
 </div>
 <p>We can see a couple of issues here: first, there is no loan data for FY 2009. That’s mentioned in <a href="https://opendata.maryland.gov/Budget/State-of-Maryland-Grant-and-Loan-Data-FY2009-to-FY/absk-avps">the source page for the data</a>. It’s good to be aware of all gaps in data, but they don’t always represent a problem. Second, and more problematic, there are a few records where the Category is NA - that data is missing. There also are some inconsistent values - there are 50 records in FY2013 with the category of “L” (probably loans) and one in FY 2017 that is listed as “Contract”.</p>
 </section>
-<section id="unusual-outliers" class="level2" data-number="19.4">
-<h2 data-number="19.4" class="anchored" data-anchor-id="unusual-outliers"><span class="header-section-number">19.4</span> Unusual Outliers</h2>
+<section id="unusual-outliers" class="level2">
+<h2 class="anchored" data-anchor-id="unusual-outliers">Unusual Outliers</h2>
 <p>Any time you are going to focus on a column for analysis, you should check for unusual values. Are there any unusually large values or unusually small values? Are there any values that raise immediate questions about the data? Let’s look at the smallest amounts in the grants and loan data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>md_grants_loans <span class="sc">|&gt;</span> </span>
@@ -588,6 +512,7 @@ dbl (3): Fiscal Year, Amount, Fiscal Period
 <p>There are two grants for less than $100, which might not be problematic at all, but given that just two of 19,000 are for very small amounts you might wonder if there are suggested amounts for applicants and how tiny ones get evaluated compared to very large requests. As journalists, we should be skeptical of information put in front of us and ask why or what it says about the data itself.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -673,8 +598,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -785,7 +708,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1011,18 +933,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./mutating.html" class="pagination-link" aria-label="Mutating data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mutating data</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./data-cleaning-part-ii.html" class="pagination-link" aria-label="Data Cleaning Part II: Janitor">
-        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
