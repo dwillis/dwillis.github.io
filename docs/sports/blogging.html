@@ -388,7 +388,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Before you install Quarto, you should close R Studio. So close R Studio, install it, restart R Studio and come back to this tutorial. Then install Quarto.</p>
 <p>After that, we’re ready to start making a blog. To do that, go to File &gt; New Project and select New Directory, and follow the instructions <a href="https://quarto.org/docs/websites/website-blog.html">here</a>. In the Project Type view, you may have to scroll down to find “Quarto blog” but that’s the choice you want.</p>
 <p>And now we’ve come to our first decision point.</p>
-<p>First, name the directory you’re going to put this into. Keep it simple. Blog is fine. Then decide where on your computer you’re going to put it. Put it somewhere you’re going to remember. Don’t put it on your Desktop. Put it in a folder. Remember what folder because you’re going to need this later. Choose “None” as your engine and check the “Open in new session” box. Do NOT create a new repository at this point, then create the project.</p>
+<p>First, name the directory you’re going to put this into. Keep it simple. Blog is fine. Then decide where on your computer you’re going to put it. Put it somewhere you’re going to remember. Don’t put it on your Desktop. Downloads would work, and ideally it would be “alongside” your class repository. Remember where it is because you’re going to need this later. Choose “None” as your engine and check the “Open in new session” box. Do NOT create a new repository at this point, then create the project.</p>
 <p>When you hit Create Project, you should get an R Studio screen. You might have two files open – _quarto.yml and index.qmd. If you don’t, open them (you can use the files pane in the bottom right). The important one for now is _quarto.yml. This file will look different depending on some choices you make.</p>
 <p>The choices you need to make:</p>
 <ul>
@@ -467,10 +467,10 @@ format:
 <h2 data-number="36.4" class="anchored" data-anchor-id="publishing-your-site"><span class="header-section-number">36.4</span> Publishing your site</h2>
 <p>Quarto will take your .qmd files and create static html. What does static html mean? It means there’s no server creating it on the fly – that’s called dynamic html – so this can be hosted on the simplest of servers.</p>
 <p>Publishing takes a lot of steps to get set up, but once it is, it’s easy.</p>
-<p><strong>Step 1: Get a GitHub account</strong></p>
-<p>Go to <a href="https://GitHub.com/">GitHub</a> and sign up for an account. NOTE: Your username will be part of your website address, and you could potentially be sending this to employers. I’m sure blaze420rryday has been your handle since middle school, but do you want an employer to see that? My GitHub user name is dwillis. See what I’m getting at here?</p>
+<p><strong>Step 1: Your GitHub account</strong></p>
+<p>Go to your <a href="https://GitHub.com/">GitHub</a> account. NOTE: Your username will be part of your website address, and you could potentially be sending this to employers. I’m sure blaze420rryday has been your handle since middle school, but do you want an employer to see that? My GitHub user name is dwillis. See what I’m getting at here?</p>
 <p><strong>Step 2: Set up your website repository</strong></p>
-<p>For the low low price of nothing, GitHub will host a website for you, and we are going to take them up on that bargain. There’s several tricks to getting this to work, but none of them are hard. They just require you to be specific.</p>
+<p>For the low low price of nothing, GitHub will host a website for you, and we are going to take them up on that bargain. There’s several tricks to getting this to work, but none of them are hard. They just require you to be specific. You might already have this done if, for example, you’ve set it up for JOUR352. If so, you can skip to the very next step (where you set up publishing).</p>
 <p>To start, you can click on the plus sign in the top right corner or hit the green new button, depending on what your page looks like vs mine (I’m reasonably active GitHub user, so mine will look different from yours).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -495,11 +495,9 @@ format:
 </div>
 <p><strong>Step 3:</strong> (optional if you’re fine using the command line interface)</p>
 <p>Don’t close your GitHub window.</p>
-<p>In a new tab, <a href="https://desktop.github.com/">download the GitHub Desktop App</a> and install it.</p>
-<p>GitHub is a version control system and a social network mixed together. Version control is like Track Changes in Word, but on steroids. If you plan on a career in analytics or data science, GitHub is a skill you will have to learn, but it’s beyond the scope of this book.</p>
-<p>To work around this, we’re going to use GitHub Desktop to manage our interactions with GitHub. Open GitHub Desktop and log into your GitHub account in the app.</p>
+<p>In a new tab, <a href="https://desktop.github.com/">download the GitHub Desktop App</a> and install it if you don’t have it already. Open GitHub Desktop and log into your GitHub account in the app.</p>
 <p>To get your repository into GitHub Desktop, go back to your tab with your GitHub repository in it. Find the Code button and click it. Click on the Open With GitHub Desktop button.</p>
-<p>In the window that pops up, we need to set the Local Path. <strong>This path needs to be the same place your blog project is located.</strong> Click the Choose button and navigate to where your blog project is located. Then, just click Clone.</p>
+<p>In the window that pops up, we need to set the Local Path. <strong>This path needs to be the same place your blog project is located - so if you put it in Downloads, it’s Downloads.</strong> Click the Choose button and navigate to where your blog project is located. Then, just click Clone.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -514,10 +512,11 @@ format:
 <p>Switch back to your blog project in R Studio. We’re going to output your site and upload it to GitHub.</p>
 <p>To do this, we need to change config.yaml. We need to tell your website project that you want to publish to your GitHub folder, not the default.</p>
 <p>Open <code>_quarto.yml</code> in your blog project. Near the top, below type: website, add this line:</p>
-<pre><code>output-dir: docs</code></pre>
+<pre><code>output-dir: ../sportsblog/docs</code></pre>
+<p>If the name of your directory is something other than “sportsblog”, you’ll want to change it in that line to match the actual directory.</p>
 <p>Save _quarto.yml.</p>
-<p>Then, add a .nojekyll file to the root of your repository that tells GitHub Pages not to do additional processing of your published site using Jekyll (the GitHub default site generation tool). You can <a href="https://quarto.org/docs/publishing/github-pages.html#render-to-docs">follow these instructions</a> on how to do that.</p>
-<p>Once you are ready to build your site, you can do so using the <code>quarto render</code> command via the Terminal and then git push (or using GitHub Desktop).</p>
+<p>Then, add a .nojekyll file to the root of your repository that tells GitHub Pages not to do additional processing of your published site using Jekyll (the GitHub default site generation tool). The easiest way to go that is to create a new text file in your blog project directory named <code>.nojekyll</code> using RStudio. It should be empty. Just make sure it is named exactly that, with the leading period.</p>
+<p>Once you are ready to build your site, you can do so using the <code>quarto render</code> command or hit the Render button in RStudio, and then git push (or using GitHub Desktop).</p>
 <p><strong>Step 5</strong> (GitHub Desktop only)</p>
 <p>Now go to the GitHub Desktop App. You should see something that looks like this, though yours will be different from mine.</p>
 <div class="cell">
