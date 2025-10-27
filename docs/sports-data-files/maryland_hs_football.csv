@@ -1,0 +1,980 @@
+sport,gender,year,school,finish,class
+Football,boys,2003,Aberdeen,CH,2AE
+Football,boys,2011,Aberdeen,SF,3AN
+Football,boys,1986,Aberdeen,QF,2A
+Football,boys,1989,Aberdeen,QF,2A
+Football,boys,1991,Aberdeen,QF,3A
+Football,boys,1994,Aberdeen,QF,2A
+Football,boys,1996,Aberdeen,QF,2A
+Football,boys,1997,Aberdeen,QF,3A
+Football,boys,2004,Aberdeen,RR,2AE
+Football,boys,2013,Aberdeen,RS,3AN
+Football,boys,2014,Aberdeen,RS,3AN
+Football,boys,2015,Aberdeen,RS,3AN
+Football,boys,2021,Aberdeen,RR1,3AN
+Football,boys,2022,Aberdeen,RR1,3AN
+Football,boys,2023,Aberdeen,RR1,3AN
+Football,boys,2024,Aberdeen,RR1,3AN
+Football,boys,1978,Allegany,CH,B
+Football,boys,1980,Allegany,CH,B
+Football,boys,1983,Allegany,CH,B
+Football,boys,1988,Allegany,CH,2A
+Football,boys,1989,Allegany,CH,2A
+Football,boys,1991,Allegany,CH,2A
+Football,boys,2001,Allegany,CH,1A
+Football,boys,2005,Allegany,CH,1AW
+Football,boys,1985,Allegany,RU,B
+Football,boys,1986,Allegany,RU,B
+Football,boys,2007,Allegany,RU,1AW
+Football,boys,1982,Allegany,SF,B
+Football,boys,1994,Allegany,SF,2A
+Football,boys,1997,Allegany,SF,1A
+Football,boys,2004,Allegany,SF,1AW
+Football,boys,2009,Allegany,SF,1AW
+Football,boys,1987,Allegany,QF,B
+Football,boys,1998,Allegany,QF,1A
+Football,boys,2006,Allegany,RR,1AW
+Football,boys,2008,Allegany,RR,1AW
+Football,boys,2015,Allegany,RR,1AW
+Football,boys,2016,Allegany,RR,1AW
+Football,boys,2017,Allegany,RR,1AW
+Football,boys,2012,Allegany,RS,1AW
+Football,boys,2014,Allegany,RS,1AW
+Football,boys,2021,Allegany,RR2,1AW
+Football,boys,2022,Allegany,RR2,1AW
+Football,boys,2023,Allegany,RR2,1AW
+Football,boys,2024,Allegany,RR2,1AW
+Football,boys,1977,x-Andover,SF,AA
+Football,boys,1978,Annapolis,CH,AA
+Football,boys,1984,Annapolis,RU,AA
+Football,boys,2000,Annapolis,RU,3A
+Football,boys,1992,Annapolis,SF,4A
+Football,boys,2016,Annapolis,SF,4AE
+Football,boys,1985,Annapolis,QF,AA
+Football,boys,1986,Annapolis,QF,AA
+Football,boys,1987,Annapolis,QF,AA
+Football,boys,1988,Annapolis,QF,4A
+Football,boys,1989,Annapolis,QF,4A
+Football,boys,1997,Annapolis,QF,4A
+Football,boys,1998,Annapolis,QF,4A
+Football,boys,1999,Annapolis,QF,3A
+Football,boys,2001,Annapolis,QF,3A
+Football,boys,2002,Annapolis,QF,3A
+Football,boys,2009,Annapolis,RS,4AE
+Football,boys,2015,Annapolis,RS,4AE
+Football,boys,2024,Annapolis,RR2,4AE
+Football,boys,2019,Annapolis,RR1,4AE
+Football,boys,2021,Annapolis,RR1,4AE
+Football,boys,2022,Annapolis,RR1,4AE
+Football,boys,2023,Annapolis,RR1,4AE
+Football,boys,1975,Arundel,CH,AA
+Football,boys,2024,Arundel,CH,3AS
+Football,boys,1979,Arundel,RU,A
+Football,boys,2007,Arundel,RU,4AE
+Football,boys,2022,Arundel,RU,4A/3AE
+Football,boys,1976,Arundel,SF,AA
+Football,boys,1978,Arundel,SF,A
+Football,boys,1983,Arundel,SF,AA
+Football,boys,2008,Arundel,SF,4AE
+Football,boys,2021,Arundel,SF,4A/3AE
+Football,boys,1985,Arundel,QF,AA
+Football,boys,1994,Arundel,QF,4A
+Football,boys,1995,Arundel,QF,4A
+Football,boys,2019,Arundel,QF,4AE
+Football,boys,2005,Arundel,RR,4AE
+Football,boys,2009,Arundel,RR,4AE
+Football,boys,2010,Arundel,RR,4AE
+Football,boys,2013,Arundel,RR,4AE
+Football,boys,2014,Arundel,RR,4AE
+Football,boys,2003,Arundel,RS,4AE
+Football,boys,2004,Arundel,RS,4AE
+Football,boys,2006,Arundel,RS,4AE
+Football,boys,2011,Arundel,RS,4AE
+Football,boys,2012,Arundel,RS,4AE
+Football,boys,2017,Arundel,RS,4AE
+Football,boys,2018,Arundel,RS,4AE
+Football,boys,2023,Arundel,RR2,3AS
+Football,boys,1985,Atholton,QF,B
+Football,boys,2021,Atholton,QF,3AS
+Football,boys,2022,Atholton,QF,3AS
+Football,boys,2024,Atholton,QF,3AE
+Football,boys,2005,Atholton,RR,2AS
+Football,boys,2009,Atholton,RR,3AE
+Football,boys,2011,Atholton,RR,3AE
+Football,boys,2012,Atholton,RR,3AE
+Football,boys,2017,Atholton,RR,3AE
+Football,boys,2007,Atholton,RS,3AE
+Football,boys,2010,Atholton,RS,3AE
+Football,boys,2023,Atholton,RR2,3AE
+Football,boys,2019,Atholton,RR1,3AE
+Football,boys,2005,x-Samuel Banks,RS,1AS
+Football,boys,1993,x-Beall,RU,1A
+Football,boys,1997,x-Beall,RU,1A
+Football,boys,2002,x-Beall,RU,1A
+Football,boys,2003,x-Beall,RU,1AW
+Football,boys,1975,x-Beall,SF,C
+Football,boys,1976,x-Beall,SF,C
+Football,boys,1981,x-Beall,SF,C
+Football,boys,1994,x-Beall,SF,1A
+Football,boys,1985,x-Beall,QF,C
+Football,boys,1990,x-Beall,QF,1A
+Football,boys,1995,x-Beall,QF,1A
+Football,boys,2005,x-Beall,RR,1AW
+Football,boys,2006,x-Beall,RS,1AW
+Football,boys,1982,Bel Air,SF,B
+Football,boys,2004,Bel Air,SF,3AN
+Football,boys,1998,Bel Air,QF,3A
+Football,boys,2024,Bel Air,QF,3AN
+Football,boys,2003,Bel Air,RR,3AN
+Football,boys,2014,Bel Air,RR,3AN
+Football,boys,2015,Bel Air,RS,4AN
+Football,boys,2016,Bel Air,RS,4AN
+Football,boys,2022,Bel Air,RR2,3AN
+Football,boys,2023,Bel Air,RR2,3AN
+Football,boys,2021,Bel Air,RR1,3AN
+Football,boys,1982,James M. Bennett,CH,B
+Football,boys,1983,James M. Bennett,CH,C
+Football,boys,1985,James M. Bennett,CH,C
+Football,boys,1984,James M. Bennett,RU,C
+Football,boys,1987,James M. Bennett,SF,B
+Football,boys,1990,James M. Bennett,SF,2A
+Football,boys,1986,James M. Bennett,QF,C
+Football,boys,1988,James M. Bennett,QF,2A
+Football,boys,1989,James M. Bennett,QF,2A
+Football,boys,2018,James M. Bennett,RR,3AE
+Football,boys,2003,James M. Bennett,RS,2AE
+Football,boys,2009,James M. Bennett,RS,3AE
+Football,boys,2015,James M. Bennett,RS,3AE
+Football,boys,2017,James M. Bennett,RS,3AE
+Football,boys,2019,James M. Bennett,RR1,3AS
+Football,boys,2021,James M. Bennett,RR1,3AE
+Football,boys,2022,James M. Bennett,RR1,3AE
+Football,boys,2023,James M. Bennett,RR1,2AE
+Football,boys,2024,James M. Bennett,RR1,2AE
+Football,boys,1995,Bethesda-Chevy Chase,SF,2A
+Football,boys,2023,Bethesda-Chevy Chase,QF,4AN
+Football,boys,2011,Bethesda-Chevy Chase,RS,4AW
+Football,boys,2012,Bethesda-Chevy Chase,RS,4AW
+Football,boys,2021,Bethesda-Chevy Chase,RR1,4AW
+Football,boys,2022,Bethesda-Chevy Chase,RR1,4AW
+Football,boys,1990,Bladensburg,QF,3A
+Football,boys,2021,Bladensburg,RR1,4AN
+Football,boys,2022,Bladensburg,RR1,4AN
+Football,boys,2023,Bladensburg,RR1,4AS
+Football,boys,2021,Montgomery Blair,QF,4AN
+Football,boys,2022,Montgomery Blair,QF,4AN
+Football,boys,2014,Montgomery Blair,RR,4AW
+Football,boys,2015,Montgomery Blair,RS,4AW
+Football,boys,2016,Montgomery Blair,RS,4AW
+Football,boys,2023,Montgomery Blair,RR2,4AN
+Football,boys,2019,Montgomery Blair,RR1,4AN
+Football,boys,2023,James Hubert Blake,SF,4A/3AS
+Football,boys,2021,James Hubert Blake,QF,4A/3AS
+Football,boys,2022,James Hubert Blake,QF,4A/3AS
+Football,boys,2024,James Hubert Blake,QF,4A/3AS
+Football,boys,2012,James Hubert Blake,RR,4AN
+Football,boys,2016,James Hubert Blake,RS,3AS
+Football,boys,2017,James Hubert Blake,RS,3AW
+Football,boys,2018,James Hubert Blake,RS,3AW
+Football,boys,2019,James Hubert Blake,RR1,3AW
+Football,boys,2002,Bohemia Manor,CH,1A
+Football,boys,1985,Bohemia Manor,SF,C
+Football,boys,1988,Bohemia Manor,SF,1A
+Football,boys,1994,Bohemia Manor,QF,1A
+Football,boys,1998,Bohemia Manor,QF,1A
+Football,boys,1999,Bohemia Manor,QF,1A
+Football,boys,2022,Bohemia Manor,QF,1AE
+Football,boys,2010,Bohemia Manor,RR,1AE
+Football,boys,2017,Bohemia Manor,RR,1AE
+Football,boys,2006,Bohemia Manor,RS,1AE
+Football,boys,2008,Bohemia Manor,RS,1AE
+Football,boys,2009,Bohemia Manor,RS,1AE
+Football,boys,2012,Bohemia Manor,RS,1AE
+Football,boys,2013,Bohemia Manor,RS,1AE
+Football,boys,2014,Bohemia Manor,RS,1AE
+Football,boys,2015,Bohemia Manor,RS,1AN
+Football,boys,2016,Bohemia Manor,RS,1AE
+Football,boys,2021,Bohemia Manor,RR2,1AE
+Football,boys,2023,Bohemia Manor,RR2,1AE
+Football,boys,2024,Bohemia Manor,RR2,1AE
+Football,boys,1993,Boonsboro,CH,1A
+Football,boys,1994,Boonsboro,RU,1A
+Football,boys,1975,Boonsboro,SF,B
+Football,boys,2001,Boonsboro,SF,1A
+Football,boys,2021,Boonsboro,QF,2A/1AW
+Football,boys,2024,Boonsboro,QF,1AN
+Football,boys,2011,Boonsboro,RR,1AW
+Football,boys,2005,Boonsboro,RS,1AW
+Football,boys,2006,Boonsboro,RS,1AW
+Football,boys,2007,Boonsboro,RS,1AW
+Football,boys,2008,Boonsboro,RS,1AW
+Football,boys,2009,Boonsboro,RS,1AW
+Football,boys,2012,Boonsboro,RS,1AW
+Football,boys,2015,Boonsboro,RS,1AW
+Football,boys,2016,Boonsboro,RS,1AW
+Football,boys,2017,Boonsboro,RS,1AW
+Football,boys,2018,Boonsboro,RS,1AW
+Football,boys,2019,Boonsboro,RR2,1AW
+Football,boys,2022,Boonsboro,RR2,2A/1AW
+Football,boys,2023,Boonsboro,RR2,1AN
+Football,boys,2001,Bowie,CH,4A
+Football,boys,1976,Bowie,RU,AA
+Football,boys,1979,Bowie,SF,AA
+Football,boys,1987,Bowie,SF,AA
+Football,boys,1985,Bowie,QF,AA
+Football,boys,1986,Bowie,QF,AA
+Football,boys,2006,Bowie,RS,4AS
+Football,boys,2015,Bowie,RS,4AS
+Football,boys,2019,Bowie,RR2,4AS
+Football,boys,2021,Bowie,RR2,4AS
+Football,boys,2023,Bowie,RR2,4AS
+Football,boys,2024,Bowie,RR2,4AS
+Football,boys,2022,Bowie,RR1,4AS
+Football,boys,2003,Broadneck,RU,4AE
+Football,boys,2023,Broadneck,RU,4AE
+Football,boys,1998,Broadneck,SF,3A
+Football,boys,2000,Broadneck,SF,4A
+Football,boys,2004,Broadneck,SF,4AE
+Football,boys,2006,Broadneck,SF,4AE
+Football,boys,2010,Broadneck,SF,4AE
+Football,boys,2015,Broadneck,SF,4AE
+Football,boys,2022,Broadneck,SF,4AE
+Football,boys,2024,Broadneck,SF,4AE
+Football,boys,1997,Broadneck,QF,3A
+Football,boys,2001,Broadneck,QF,4A
+Football,boys,2002,Broadneck,QF,4A
+Football,boys,2021,Broadneck,QF,4AE
+Football,boys,2007,Broadneck,RR,4AE
+Football,boys,2016,Broadneck,RR,4AE
+Football,boys,2017,Broadneck,RR,4AE
+Football,boys,2013,Broadneck,RS,4AE
+Football,boys,2014,Broadneck,RS,4AE
+Football,boys,2018,Broadneck,RS,4AE
+Football,boys,2019,Broadneck,RR1,4AE
+Football,boys,1983,x-Brooklyn Park,SF,C
+Football,boys,1999,Brunswick,RU,1A
+Football,boys,2005,Brunswick,SF,1AN
+Football,boys,2010,Brunswick,SF,1AN
+Football,boys,2012,Brunswick,SF,1AW
+Football,boys,2022,Brunswick,SF,1AN
+Football,boys,1985,Brunswick,QF,C
+Football,boys,1987,Brunswick,QF,C
+Football,boys,1992,Brunswick,QF,1A
+Football,boys,1995,Brunswick,QF,1A
+Football,boys,1998,Brunswick,QF,1A
+Football,boys,2021,Brunswick,QF,1AN
+Football,boys,2011,Brunswick,RS,1AW
+Football,boys,2024,Brunswick,RR2,1AS
+Football,boys,2019,Brunswick,RR1,1AW
+Football,boys,2023,Brunswick,RR1,1AN
+Football,boys,2000,Calvert,CH,3A
+Football,boys,2023,Calvert,RU,2A/1AS
+Football,boys,2002,Calvert,SF,3A
+Football,boys,2016,Calvert,SF,2AS
+Football,boys,2022,Calvert,SF,2A/1AS
+Football,boys,2015,Calvert,RS,2AS
+Football,boys,2019,Calvert,RR2,2A
+Football,boys,2021,Calvert,RR2,2A/1AS
+Football,boys,2024,Calvert,RR2,2A/1AS
+Football,boys,1979,Cambridge-South Dorchester,CH,B
+Football,boys,1995,Cambridge-South Dorchester,CH,1A
+Football,boys,1996,Cambridge-South Dorchester,CH,1A
+Football,boys,1976,Cambridge-South Dorchester,RU,B
+Football,boys,1977,Cambridge-South Dorchester,RU,B
+Football,boys,1978,Cambridge-South Dorchester,RU,B
+Football,boys,1984,Cambridge-South Dorchester,RU,B
+Football,boys,1992,Cambridge-South Dorchester,RU,1A
+Football,boys,1974,Cambridge-South Dorchester,SF,B
+Football,boys,1975,Cambridge-South Dorchester,SF,B
+Football,boys,1983,Cambridge-South Dorchester,SF,B
+Football,boys,1985,Cambridge-South Dorchester,SF,B
+Football,boys,1993,Cambridge-South Dorchester,SF,2A
+Football,boys,1994,Cambridge-South Dorchester,SF,2A
+Football,boys,1997,Cambridge-South Dorchester,SF,1A
+Football,boys,1998,Cambridge-South Dorchester,SF,1A
+Football,boys,1999,Cambridge-South Dorchester,SF,1A
+Football,boys,2013,Cambridge-South Dorchester,SF,1AE
+Football,boys,2014,Cambridge-South Dorchester,SF,1AE
+Football,boys,2019,Cambridge-South Dorchester,SF,1AE
+Football,boys,2023,Cambridge-South Dorchester,SF,1AE
+Football,boys,1987,Cambridge-South Dorchester,QF,B
+Football,boys,1991,Cambridge-South Dorchester,QF,1A
+Football,boys,2000,Cambridge-South Dorchester,QF,1A
+Football,boys,2024,Cambridge-South Dorchester,QF,1AE
+Football,boys,2011,Cambridge-South Dorchester,RR,1AE
+Football,boys,2012,Cambridge-South Dorchester,RR,1AE
+Football,boys,2015,Cambridge-South Dorchester,RR,1AE
+Football,boys,2016,Cambridge-South Dorchester,RR,1AE
+Football,boys,2003,Cambridge-South Dorchester,RS,1AE
+Football,boys,2005,Cambridge-South Dorchester,RS,1AE
+Football,boys,2007,Cambridge-South Dorchester,RS,1AE
+Football,boys,2008,Cambridge-South Dorchester,RS,1AE
+Football,boys,2010,Cambridge-South Dorchester,RS,1AE
+Football,boys,2017,Cambridge-South Dorchester,RS,1AE
+Football,boys,2018,Cambridge-South Dorchester,RS,1AE
+Football,boys,2021,Cambridge-South Dorchester,RR2,2A/1AE
+Football,boys,2022,Cambridge-South Dorchester,RR1,2A/1AE
+Football,boys,2005,Carver Vocational-Technical,RS,3AN
+Football,boys,2009,Carver Vocational-Technical,RS,1AS
+Football,boys,2013,Carver Vocational-Technical,RS,2AN
+Football,boys,2019,Carver Vocational-Technical,RR1,1AN
+Football,boys,2021,Carver Vocational-Technical,RR1,2A/1AN
+Football,boys,2022,Carver Vocational-Technical,RR1,2A/1AN
+Football,boys,2023,Carver Vocational-Technical,RR1,2A/1AE
+Football,boys,2024,Carver Vocational-Technical,RR1,2A/1AE
+Football,boys,2009,Catoctin,CH,1AN
+Football,boys,2019,Catoctin,CH,1AW
+Football,boys,1982,Catoctin,SF,C
+Football,boys,1986,Catoctin,SF,C
+Football,boys,2008,Catoctin,SF,1AN
+Football,boys,2023,Catoctin,QF,1AN
+Football,boys,2003,Catoctin,RR,1AW
+Football,boys,2007,Catoctin,RR,1AN
+Football,boys,2018,Catoctin,RR,1AW
+Football,boys,2005,Catoctin,RS,1AN
+Football,boys,2006,Catoctin,RS,1AN
+Football,boys,2013,Catoctin,RS,2AW
+Football,boys,2019,Catoctin,RR2,1AW
+Football,boys,2022,Catoctin,RR2,2A/1AW
+Football,boys,2023,Catoctin,RR2,1AN
+Football,boys,2021,Catoctin,RR1,1AN
+Football,boys,2022,Catoctin,RR1,1AN
+Football,boys,2024,Catoctin,RR1,1AN
+Football,boys,2011,Catonsville,SF,4AN
+Football,boys,2005,Catonsville,RR,3AN
+Football,boys,2007,Catonsville,RR,3AN
+Football,boys,2004,Catonsville,RS,3AN
+Football,boys,2010,Catonsville,RS,3AN
+Football,boys,2012,Catonsville,RS,4AN
+Football,boys,2024,Catonsville,RR2,4A/3AN
+Football,boys,2019,Catonsville,RR1,4AN
+Football,boys,2021,Catonsville,RR1,4A/3AN
+Football,boys,2022,Catonsville,RR1,4A/3AN
+Football,boys,2023,Catonsville,RR1,4A/3AN
+Football,boys,1980,Centennial,SF,B
+Football,boys,2021,Centennial,RR1,3AS
+Football,boys,2022,Centennial,RR1,3AS
+Football,boys,2023,Centennial,RR1,2AW
+Football,boys,2024,Centennial,RR1,2AW
+Football,boys,2021,Central,RR1,2A/1AN
+Football,boys,2022,Central,RR1,2A/1AN
+Football,boys,2023,Central,RR1,2A/1AE
+Football,boys,2024,Central,RR1,2A/1AE
+Football,boys,2008,Century,SF,2AW
+Football,boys,2009,Century,RS,2AW
+Football,boys,2016,Century,RS,2AW
+Football,boys,2018,Century,RS,2AW
+Football,boys,2019,Century,RR1,2AW
+Football,boys,2021,Century,RR1,2AW
+Football,boys,2022,Century,RR1,2AW
+Football,boys,2023,Century,RR1,2A/1AW
+Football,boys,2024,Century,RR1,2A/1AW
+Football,boys,2018,Chesapeake - AA,SF,3AE
+Football,boys,2023,Chesapeake - AA,QF,3AS
+Football,boys,2015,Chesapeake - AA,RS,3AE
+Football,boys,2017,Chesapeake - AA,RS,3AE
+Football,boys,2022,Chesapeake - AA,RR2,3AE
+Football,boys,2019,Chesapeake - AA,RR1,3AS
+Football,boys,2024,Chesapeake - AA,RR1,3AS
+Football,boys,1984,Chesapeake - BC,SF,B
+Football,boys,2021,Chesapeake - BC,SF,3AE
+Football,boys,1990,Chesapeake - BC,QF,2A
+Football,boys,1991,Chesapeake - BC,QF,2A
+Football,boys,1992,Chesapeake - BC,QF,2A
+Football,boys,2009,Chesapeake - BC,RR,2AN
+Football,boys,2011,Chesapeake - BC,RR,2AN
+Football,boys,2004,Chesapeake - BC,RS,1AN
+Football,boys,2007,Chesapeake - BC,RS,1AN
+Football,boys,2008,Chesapeake - BC,RS,1AN
+Football,boys,2017,Chesapeake - BC,RS,1AN
+Football,boys,2021,Chesapeake - BC,RR1,2A/1AN
+Football,boys,2022,Chesapeake - BC,RR1,2A/1AN
+Football,boys,2023,Chesapeake - BC,RR1,2A/1AN
+Football,boys,2000,Chopticon,SF,3A
+Football,boys,1991,Chopticon,QF,2A
+Football,boys,2007,Chopticon,RS,3AS
+Football,boys,2010,Chopticon,RS,3AS
+Football,boys,2011,Chopticon,RS,3AS
+Football,boys,2014,Chopticon,RS,3AS
+Football,boys,2017,Chopticon,RS,3AS
+Football,boys,2022,Chopticon,RR2,4A/3AE
+Football,boys,2021,Chopticon,RR1,4A/3AE
+Football,boys,2023,Chopticon,RR1,3AS
+Football,boys,2024,Chopticon,RR1,3AS
+Football,boys,1976,Winston Churchill,CH,AA
+Football,boys,1977,Winston Churchill,CH,AA
+Football,boys,1982,Winston Churchill,RU,AA
+Football,boys,1985,Winston Churchill,RU,AA
+Football,boys,1988,Winston Churchill,RU,4A
+Football,boys,1993,Winston Churchill,RU,4A
+Football,boys,1995,Winston Churchill,RU,3A
+Football,boys,1974,Winston Churchill,SF,AA
+Football,boys,1975,Winston Churchill,SF,AA
+Football,boys,1984,Winston Churchill,SF,AA
+Football,boys,2023,Winston Churchill,SF,4AW
+Football,boys,2022,Winston Churchill,QF,4AW
+Football,boys,2004,Winston Churchill,RR,4AW
+Football,boys,2011,Winston Churchill,RR,4AW
+Football,boys,2012,Winston Churchill,RS,4AW
+Football,boys,2018,Winston Churchill,RS,4AW
+Football,boys,2021,Winston Churchill,RR2,4AW
+Football,boys,2024,Winston Churchill,RR2,4AW
+Football,boys,1996,Baltimore City College,SF,2A
+Football,boys,2001,Baltimore City College,SF,2A
+Football,boys,2005,Baltimore City College,SF,3AN
+Football,boys,2023,Baltimore City College,SF,3AN
+Football,boys,1993,Baltimore City College,QF,3A
+Football,boys,2002,Baltimore City College,QF,2A
+Football,boys,2021,Baltimore City College,QF,3AS
+Football,boys,2006,Baltimore City College,RR,3AN
+Football,boys,2010,Baltimore City College,RR,2AN
+Football,boys,2007,Baltimore City College,RS,2AN
+Football,boys,2013,Baltimore City College,RS,3AE
+Football,boys,2014,Baltimore City College,RS,3AE
+Football,boys,2019,Baltimore City College,RR1,3AN
+Football,boys,2024,Baltimore City College,RR1,3AN
+Football,boys,2007,Clarksburg,SF,2AW
+Football,boys,2008,Clarksburg,RS,2AW
+Football,boys,2013,Clarksburg,RS,4AW
+Football,boys,2014,Clarksburg,RS,4AW
+Football,boys,2019,Clarksburg,RR1,4AW
+Football,boys,2021,Clarksburg,RR1,4AW
+Football,boys,2022,Clarksburg,RR1,4AW
+Football,boys,2023,Clarksburg,RR1,4AW
+Football,boys,2024,Clarksburg,RR1,4AW
+Football,boys,2024,Clear Spring,RR2,1AW
+Football,boys,2019,Clear Spring,RR1,1AW
+Football,boys,2022,Clear Spring,RR1,1AW
+Football,boys,2023,Clear Spring,RR1,1AW
+Football,boys,2021,Crofton,RR1,3AE
+Football,boys,2022,Crofton,RR1,3AE
+Football,boys,2023,Crofton,RR1,4A/3AE
+Football,boys,2024,Crofton,RR1,4A/3AE
+Football,boys,1992,Crossland,RU,4A
+Football,boys,1977,Crossland,SF,AA
+Football,boys,1978,Crossland,SF,AA
+Football,boys,1995,Crossland,SF,3A
+Football,boys,2018,Crossland,RS,2AN
+Football,boys,2019,Crossland,RR1,2AS
+Football,boys,2021,Crossland,RR1,2A/1AS
+Football,boys,2022,Crossland,RR1,2A/1AS
+Football,boys,2023,Crossland,RR1,2AS
+Football,boys,2024,Crossland,RR1,2AS
+Football,boys,1981,Damascus,CH,B
+Football,boys,1992,Damascus,CH,2A
+Football,boys,1993,Damascus,CH,2A
+Football,boys,1996,Damascus,CH,3A
+Football,boys,2003,Damascus,CH,4AW
+Football,boys,2005,Damascus,CH,4AW
+Football,boys,2007,Damascus,CH,3AW
+Football,boys,2015,Damascus,CH,3AW
+Football,boys,2016,Damascus,CH,3AW
+Football,boys,2017,Damascus,CH,2AW
+Football,boys,2019,Damascus,CH,3AW
+Football,boys,2022,Damascus,CH,3AW
+Football,boys,1989,Damascus,RU,2A
+Football,boys,1990,Damascus,RU,2A
+Football,boys,2004,Damascus,RU,4AW
+Football,boys,2014,Damascus,RU,3AW
+Football,boys,1999,Damascus,SF,3A
+Football,boys,2002,Damascus,SF,4A
+Football,boys,2010,Damascus,SF,3AW
+Football,boys,1987,Damascus,QF,B
+Football,boys,1998,Damascus,QF,3A
+Football,boys,2000,Damascus,QF,3A
+Football,boys,2001,Damascus,QF,4A
+Football,boys,2024,Damascus,QF,2AW
+Football,boys,2011,Damascus,RR,3AW
+Football,boys,2018,Damascus,RR,2AW
+Football,boys,2006,Damascus,RS,4AW
+Football,boys,2008,Damascus,RS,3AW
+Football,boys,2009,Damascus,RS,3AW
+Football,boys,2012,Damascus,RS,3AW
+Football,boys,2013,Damascus,RS,3AW
+Football,boys,2021,Damascus,RR2,3AW
+Football,boys,2023,Damascus,RR2,2AW
+Football,boys,2023,Stephen Decatur,CH,2AE
+Football,boys,2024,Stephen Decatur,CH,2AE
+Football,boys,1988,Stephen Decatur,SF,1A
+Football,boys,2004,Stephen Decatur,SF,2AE
+Football,boys,2022,Stephen Decatur,SF,2AE
+Football,boys,2000,Stephen Decatur,QF,2A
+Football,boys,2002,Stephen Decatur,QF,2A
+Football,boys,2021,Stephen Decatur,QF,2AE
+Football,boys,2003,Stephen Decatur,RR,2AE
+Football,boys,2005,Stephen Decatur,RR,2AE
+Football,boys,2008,Stephen Decatur,RS,3AE
+Football,boys,2010,Stephen Decatur,RS,3AE
+Football,boys,2011,Stephen Decatur,RS,3AE
+Football,boys,2013,Stephen Decatur,RS,3AS
+Football,boys,2007,Digital Harbor,RS,1AS
+Football,boys,2011,Digital Harbor,RS,3AN
+Football,boys,2024,Digital Harbor,RR2,4A/3AN
+Football,boys,2019,Digital Harbor,RR1,2AN
+Football,boys,2021,Digital Harbor,RR1,3AS
+Football,boys,2022,Digital Harbor,RR1,3AS
+Football,boys,2023,Digital Harbor,RR1,4A/3AN
+Football,boys,2013,Frederick Douglass - B,RU,1AS
+Football,boys,2014,Frederick Douglass - B,RU,1AS
+Football,boys,2010,Frederick Douglass - B,RS,2AN
+Football,boys,2012,Frederick Douglass - B,RS,2AN
+Football,boys,2018,Frederick Douglass - B,RS,1AN
+Football,boys,2021,Frederick Douglass - B,RR2,1AS
+Football,boys,2022,Frederick Douglass - B,RR2,1AS
+Football,boys,2019,Frederick Douglass - B,RR1,1AN
+Football,boys,2023,Frederick Douglass - B,RR1,1AS
+Football,boys,2014,Frederick Douglass - PG,CH,2AS
+Football,boys,2021,Frederick Douglass - PG,CH,2AS
+Football,boys,1975,Frederick Douglass - PG,RU,A
+Football,boys,2011,Frederick Douglass - PG,RU,2AS
+Football,boys,2012,Frederick Douglass - PG,RU,2AS
+Football,boys,2018,Frederick Douglass - PG,RU,1AS
+Football,boys,1990,Frederick Douglass - PG,SF,2A
+Football,boys,1991,Frederick Douglass - PG,SF,3A
+Football,boys,1993,Frederick Douglass - PG,SF,3A
+Football,boys,2000,Frederick Douglass - PG,SF,3A
+Football,boys,2004,Frederick Douglass - PG,SF,3AE
+Football,boys,2005,Frederick Douglass - PG,SF,4AS
+Football,boys,2009,Frederick Douglass - PG,SF,2AS
+Football,boys,2024,Frederick Douglass - PG,SF,2A/1ASN
+Football,boys,1992,Frederick Douglass - PG,QF,3A
+Football,boys,1995,Frederick Douglass - PG,QF,3A
+Football,boys,1996,Frederick Douglass - PG,QF,3A
+Football,boys,2019,Frederick Douglass - PG,QF,2AS
+Football,boys,2003,Frederick Douglass - PG,RR,3AE
+Football,boys,2008,Frederick Douglass - PG,RR,2AS
+Football,boys,2017,Frederick Douglass - PG,RR,1AS
+Football,boys,2006,Frederick Douglass - PG,RS,2AS
+Football,boys,2007,Frederick Douglass - PG,RS,2AS
+Football,boys,2010,Frederick Douglass - PG,RS,2AS
+Football,boys,2013,Frederick Douglass - PG,RS,2AS
+Football,boys,2022,Frederick Douglass - PG,RR2,2AS
+Football,boys,2023,Frederick Douglass - PG,RR2,2A/1AS
+Football,boys,2008,x-WEB DuBois,RR,1AS
+Football,boys,2003,x-WEB DuBois,RS,1AS
+Football,boys,2004,x-WEB DuBois,RS,1AS
+Football,boys,2011,x-WEB DuBois,RS,1AS
+Football,boys,2012,x-WEB DuBois,RS,1AS
+Football,boys,2013,x-WEB DuBois,RS,1AS
+Football,boys,1978,Dulaney,SF,AA
+Football,boys,2004,Dulaney,RS,4AN
+Football,boys,2022,Dulaney,RR2,4A/3AN
+Football,boys,2019,Dulaney,RR1,4AN
+Football,boys,2023,Dulaney,RR1,4A/3AN
+Football,boys,2024,Dulaney,RR1,4A/3AN
+Football,boys,1994,Paul Laurence Dunbar,CH,2A
+Football,boys,1995,Paul Laurence Dunbar,CH,3A
+Football,boys,2004,Paul Laurence Dunbar,CH,1AS
+Football,boys,2006,Paul Laurence Dunbar,CH,1AS
+Football,boys,2007,Paul Laurence Dunbar,CH,1AS
+Football,boys,2008,Paul Laurence Dunbar,CH,1AS
+Football,boys,2010,Paul Laurence Dunbar,CH,1AS
+Football,boys,2011,Paul Laurence Dunbar,CH,1AS
+Football,boys,2012,Paul Laurence Dunbar,CH,1AS
+Football,boys,2017,Paul Laurence Dunbar,CH,1AN
+Football,boys,2021,Paul Laurence Dunbar,CH,2A/1AN
+Football,boys,2022,Paul Laurence Dunbar,CH,2A/1AN
+Football,boys,2023,Paul Laurence Dunbar,CH,2A/1AE
+Football,boys,1997,Paul Laurence Dunbar,RU,2A
+Football,boys,2014,Paul Laurence Dunbar,RU,2AN
+Football,boys,2019,Paul Laurence Dunbar,RU,1AN
+Football,boys,2024,Paul Laurence Dunbar,RU,2A/1AE
+Football,boys,1993,Paul Laurence Dunbar,SF,2A
+Football,boys,1996,Paul Laurence Dunbar,SF,3A
+Football,boys,2003,Paul Laurence Dunbar,SF,1AS
+Football,boys,2005,Paul Laurence Dunbar,SF,1AS
+Football,boys,2009,Paul Laurence Dunbar,SF,1AS
+Football,boys,2015,Paul Laurence Dunbar,SF,2AN
+Football,boys,2016,Paul Laurence Dunbar,SF,2AN
+Football,boys,2018,Paul Laurence Dunbar,SF,1AN
+Football,boys,1999,Paul Laurence Dunbar,QF,2A
+Football,boys,2002,Paul Laurence Dunbar,QF,1A
+Football,boys,2013,Paul Laurence Dunbar,RR,2AN
+Football,boys,2015,Dundalk,RU,3AN
+Football,boys,2021,Dundalk,RU,4A/3AN
+Football,boys,2022,Dundalk,SF,4A/3AN
+Football,boys,1990,Dundalk,QF,3A
+Football,boys,2002,Dundalk,QF,3A
+Football,boys,2024,Dundalk,QF,4AE
+Football,boys,2012,Dundalk,RR,2AN
+Football,boys,2018,Dundalk,RR,3AN
+Football,boys,2003,Dundalk,RS,3AN
+Football,boys,2009,Dundalk,RS,2AN
+Football,boys,2010,Dundalk,RS,2AN
+Football,boys,2011,Dundalk,RS,2AN
+Football,boys,2016,Dundalk,RS,3AN
+Football,boys,2019,Dundalk,RR2,3AN
+Football,boys,2023,Dundalk,RR2,4AE
+Football,boys,1988,Duval,CH,3A
+Football,boys,1989,Duval,SF,3A
+Football,boys,2014,Duval,SF,4AS
+Football,boys,2013,Duval,RR,4AS
+Football,boys,2007,Duval,RS,4AS
+Football,boys,2012,Duval,RS,4AS
+Football,boys,2015,Duval,RS,4AS
+Football,boys,2016,Duval,RS,4AS
+Football,boys,2022,Duval,RR2,4AS
+Football,boys,2021,Duval,RR1,4AS
+Football,boys,2023,Duval,RR1,4AS
+Football,boys,2024,Duval,RR1,4AS
+Football,boys,2009,Eastern Technical,CH,2AN
+Football,boys,1998,Eastern Technical,RU,3A
+Football,boys,2007,Eastern Technical,RU,2AN
+Football,boys,2008,Eastern Technical,RU,2AN
+Football,boys,2003,Eastern Technical,SF,2AN
+Football,boys,2010,Eastern Technical,SF,2AN
+Football,boys,1997,Eastern Technical,QF,3A
+Football,boys,2000,Eastern Technical,QF,3A
+Football,boys,2001,Eastern Technical,QF,2A
+Football,boys,2004,Eastern Technical,RR,2AN
+Football,boys,2014,Eastern Technical,RR,2AN
+Football,boys,2018,Eastern Technical,RR,2AN
+Football,boys,2005,Eastern Technical,RS,2AN
+Football,boys,2006,Eastern Technical,RS,2AN
+Football,boys,2015,Eastern Technical,RS,2AN
+Football,boys,2019,Eastern Technical,RR1,2AN
+Football,boys,2021,Eastern Technical,RR1,2AN
+Football,boys,2022,Eastern Technical,RR1,2AN
+Football,boys,1981,Easton,SF,B
+Football,boys,1986,Easton,SF,C
+Football,boys,1992,Easton,SF,1A
+Football,boys,1993,Easton,SF,1A
+Football,boys,1989,Easton,QF,1A
+Football,boys,1990,Easton,QF,1A
+Football,boys,1991,Easton,QF,1A
+Football,boys,2024,Easton,QF,2AE
+Football,boys,2014,Easton,RR,2AE
+Football,boys,2013,Easton,RS,2AE
+Football,boys,2019,Easton,RR1,2AE
+Football,boys,2021,Easton,RR1,2AE
+Football,boys,2022,Easton,RR1,2AE
+Football,boys,2023,Easton,RR1,2AE
+Football,boys,1979,Edgewood,SF,B
+Football,boys,1988,Edgewood,QF,2A
+Football,boys,1989,Edgewood,QF,2A
+Football,boys,1991,Edgewood,QF,2A
+Football,boys,1998,Edgewood,QF,2A
+Football,boys,2017,Edgewood,RR,3AN
+Football,boys,2003,Edgewood,RS,2AE
+Football,boys,2006,Edgewood,RS,3AE
+Football,boys,2018,Edgewood,RS,3AN
+Football,boys,2021,Edgewood,RR2,3AN
+Football,boys,2022,Edgewood,RR2,3AN
+Football,boys,2023,Edgewood,RR2,3AN
+Football,boys,2024,Edgewood,RR2,3AN
+Football,boys,2019,Edgewood,RR1,3AN
+Football,boys,2006,Edmondson-Westside,CH,2AN
+Football,boys,1999,Edmondson-Westside,RU,2A
+Football,boys,2000,Edmondson-Westside,SF,2A
+Football,boys,2002,Edmondson-Westside,SF,2A
+Football,boys,2011,Edmondson-Westside,SF,2AN
+Football,boys,2012,Edmondson-Westside,SF,2AN
+Football,boys,2016,Edmondson-Westside,SF,1AS
+Football,boys,2021,Edmondson-Westside,SF,1AS
+Football,boys,2019,Edmondson-Westside,QF,1AN
+Football,boys,2007,Edmondson-Westside,RR,2AN
+Football,boys,2008,Edmondson-Westside,RR,2AN
+Football,boys,2013,Edmondson-Westside,RR,1AS
+Football,boys,2014,Edmondson-Westside,RR,1AS
+Football,boys,2015,Edmondson-Westside,RR,1AS
+Football,boys,2004,Edmondson-Westside,RS,2AN
+Football,boys,2017,Edmondson-Westside,RS,2AN
+Football,boys,2018,Edmondson-Westside,RS,2AN
+Football,boys,2022,Edmondson-Westside,RR2,1AS
+Football,boys,2024,Edmondson-Westside,RR1,2A/1AE
+Football,boys,1998,Albert Einstein,QF,2A
+Football,boys,2017,Albert Einstein,RS,4AW
+Football,boys,2019,Albert Einstein,RR2,4AN
+Football,boys,2021,Albert Einstein,RR2,4AN
+Football,boys,2022,Albert Einstein,RR2,4AN
+Football,boys,2023,Albert Einstein,RR2,4A/3AS
+Football,boys,2024,Albert Einstein,RR1,4A/3AS
+Football,boys,2000,Elkton,CH,1A
+Football,boys,1980,Elkton,RU,B
+Football,boys,2016,Elkton,RU,2AE
+Football,boys,1978,Elkton,SF,B
+Football,boys,1996,Elkton,SF,1A
+Football,boys,1999,Elkton,SF,1A
+Football,boys,2001,Elkton,SF,1A
+Football,boys,2006,Elkton,SF,1AE
+Football,boys,2007,Elkton,SF,2AE
+Football,boys,2012,Elkton,SF,2AE
+Football,boys,2018,Elkton,SF,2AE
+Football,boys,2019,Elkton,SF,2AE
+Football,boys,1992,Elkton,QF,2A
+Football,boys,1994,Elkton,QF,2A
+Football,boys,1997,Elkton,QF,1A
+Football,boys,2002,Elkton,QF,1A
+Football,boys,2021,Elkton,QF,2A/1AE
+Football,boys,2022,Elkton,QF,2A/1AE
+Football,boys,2024,Elkton,QF,2A/1AN
+Football,boys,2005,Elkton,RR,1AE
+Football,boys,2015,Elkton,RR,2AE
+Football,boys,2003,Elkton,RS,1AN
+Football,boys,2008,Elkton,RS,2AE
+Football,boys,2017,Elkton,RS,2AE
+Football,boys,2023,Elkton,RR2,2A/1AN
+Football,boys,1983,Fairmont Heights,RU,A
+Football,boys,1987,Fairmont Heights,RU,B
+Football,boys,1985,Fairmont Heights,SF,A
+Football,boys,1989,Fairmont Heights,QF,2A
+Football,boys,1998,Fairmont Heights,QF,2A
+Football,boys,2019,Fairmont Heights,QF,1AS
+Football,boys,2014,Fairmont Heights,RS,1AN
+Football,boys,2015,Fairmont Heights,RS,1AN
+Football,boys,2016,Fairmont Heights,RS,1AN
+Football,boys,2017,Fairmont Heights,RS,1AS
+Football,boys,2021,Fairmont Heights,RR2,2A/1AN
+Football,boys,2022,Fairmont Heights,RR2,2A/1AN
+Football,boys,2023,Fairmont Heights,RR1,2A/1AE
+Football,boys,2024,Fairmont Heights,RR1,2A/1AE
+Football,boys,2010,Fallston,RR,2AE
+Football,boys,2013,Fallston,RR,2AE
+Football,boys,2011,Fallston,RS,2AE
+Football,boys,2014,Fallston,RS,2AE
+Football,boys,2019,Fallston,RR2,1AE
+Football,boys,2021,Fallston,RR2,2A/1AE
+Football,boys,2022,Fallston,RR1,2A/1AE
+Football,boys,2023,Fallston,RR1,2A/1AN
+Football,boys,2024,Fallston,RR1,2A/1AN
+Football,boys,2022,Charles H. Flowers,RU,4AS
+Football,boys,2011,Charles H. Flowers,SF,4AS
+Football,boys,2021,Charles H. Flowers,SF,4AS
+Football,boys,2024,Charles H. Flowers,SF,4AS
+Football,boys,2019,Charles H. Flowers,QF,4AS
+Football,boys,2003,Charles H. Flowers,RR,4AS
+Football,boys,2004,Charles H. Flowers,RR,4AS
+Football,boys,2005,Charles H. Flowers,RR,4AS
+Football,boys,2006,Charles H. Flowers,RR,4AS
+Football,boys,2008,Charles H. Flowers,RR,4AS
+Football,boys,2009,Charles H. Flowers,RR,4AS
+Football,boys,2018,Charles H. Flowers,RR,4AS
+Football,boys,2010,Charles H. Flowers,RS,4AS
+Football,boys,2013,Charles H. Flowers,RS,4AS
+Football,boys,2016,Charles H. Flowers,RS,4AS
+Football,boys,2017,Charles H. Flowers,RS,4AS
+Football,boys,2023,Charles H. Flowers,RR2,4AS
+Football,boys,2023,Forest Park,SF,2A/1AE
+Football,boys,1995,Forest Park,QF,2A
+Football,boys,1998,Forest Park,QF,1A
+Football,boys,2000,Forest Park,QF,1A
+Football,boys,2001,Forest Park,QF,1A
+Football,boys,2021,Forest Park,QF,1AS
+Football,boys,2022,Forest Park,QF,1AS
+Football,boys,2019,Forest Park,RR2,1AN
+Football,boys,2024,Forest Park,RR2,2A/1AE
+Football,boys,2009,Forest Park,RR,1AS
+Football,boys,2010,Forest Park,RR,1AS
+Football,boys,2012,Forest Park,RR,1AS
+Football,boys,2004,Forest Park,RS,1AS
+Football,boys,2005,Forest Park,RS,1AS
+Football,boys,2006,Forest Park,RS,1AS
+Football,boys,2015,Forest Park,RS,1AS
+Football,boys,2017,Forest Park,RS,2AN
+Football,boys,1999,x-Forestville,CH,1A
+Football,boys,1988,x-Forestville,RU,2A
+Football,boys,1998,x-Forestville,RU,1A
+Football,boys,2000,x-Forestville,RU,1A
+Football,boys,1986,x-Forestville,SF,2A
+Football,boys,2015,x-Forestville,SF,1AN
+Football,boys,1987,x-Forestville,QF,2A
+Football,boys,1997,x-Forestville,QF,1A
+Football,boys,2006,x-Forestville,RR,1AS
+Football,boys,2007,x-Forestville,RS,1AS
+Football,boys,2008,x-Forestville,RS,1AS
+Football,boys,2009,x-Forestville,RS,1AS
+Football,boys,2010,x-Forestville,RS,1AS
+Football,boys,2012,x-Forestville,RS,1AS
+Football,boys,2013,x-Forestville,RS,1AN
+Football,boys,2014,x-Forestville,RS,1AN
+Football,boys,1975,Fort Hill,CH,A
+Football,boys,1997,Fort Hill,CH,2A
+Football,boys,2013,Fort Hill,CH,1AW
+Football,boys,2014,Fort Hill,CH,1AW
+Football,boys,2015,Fort Hill,CH,1AW
+Football,boys,2016,Fort Hill,CH,1AW
+Football,boys,2018,Fort Hill,CH,1AW
+Football,boys,2021,Fort Hill,CH,1AW
+Football,boys,2022,Fort Hill,CH,1AW
+Football,boys,2023,Fort Hill,CH,1AW
+Football,boys,2024,Fort Hill,CH,1AW
+Football,boys,1986,Fort Hill,RU,A
+Football,boys,1994,Fort Hill,RU,2A
+Football,boys,1996,Fort Hill,RU,2A
+Football,boys,1998,Fort Hill,RU,2A
+Football,boys,2006,Fort Hill,RU,1AW
+Football,boys,2008,Fort Hill,RU,1AW
+Football,boys,2017,Fort Hill,RU,1AW
+Football,boys,1974,Fort Hill,SF,A
+Football,boys,1977,Fort Hill,SF,B
+Football,boys,1979,Fort Hill,SF,B
+Football,boys,1984,Fort Hill,SF,A
+Football,boys,1985,Fort Hill,SF,A
+Football,boys,1987,Fort Hill,SF,A
+Football,boys,1992,Fort Hill,SF,2A
+Football,boys,1995,Fort Hill,SF,2A
+Football,boys,2004,Fort Hill,SF,2AW
+Football,boys,2010,Fort Hill,SF,1AW
+Football,boys,2011,Fort Hill,SF,1AW
+Football,boys,2019,Fort Hill,SF,1AW
+Football,boys,1990,Fort Hill,QF,2A
+Football,boys,1993,Fort Hill,QF,2A
+Football,boys,2000,Fort Hill,QF,2A
+Football,boys,2007,Fort Hill,RR,1AW
+Football,boys,2009,Fort Hill,RR,1AW
+Football,boys,2012,Fort Hill,RR,1AW
+Football,boys,2003,Fort Hill,RS,2AW
+Football,boys,2005,Fort Hill,RS,1AW
+Football,boys,2021,Benjamin Franklin,RR1,1AS
+Football,boys,2022,Benjamin Franklin,RR1,1AS
+Football,boys,2023,Benjamin Franklin,RR1,1AS
+Football,boys,2024,Benjamin Franklin,RR1,1AS
+Football,boys,2013,Franklin,CH,3AN
+Football,boys,2014,Franklin,CH,3AN
+Football,boys,2018,Franklin,CH,3AN
+Football,boys,1978,Franklin,RU,A
+Football,boys,2010,Franklin,RU,3AN
+Football,boys,2016,Franklin,RU,3AN
+Football,boys,2006,Franklin,SF,3AN
+Football,boys,1985,Franklin,QF,A
+Football,boys,1986,Franklin,QF,A
+Football,boys,1987,Franklin,QF,A
+Football,boys,1988,Franklin,QF,3A
+Football,boys,1994,Franklin,QF,3A
+Football,boys,2019,Franklin,QF,3AN
+Football,boys,2021,Franklin,QF,3AN
+Football,boys,2022,Franklin,QF,3AN
+Football,boys,2023,Franklin,QF,3AN
+Football,boys,2024,Franklin,QF,3AN
+Football,boys,2009,Franklin,RR,3AN
+Football,boys,2012,Franklin,RR,3AN
+Football,boys,2015,Franklin,RR,3AN
+Football,boys,2007,Franklin,RS,3AN
+Football,boys,2008,Franklin,RS,3AN
+Football,boys,2011,Franklin,RS,3AN
+Football,boys,2017,Franklin,RS,3AN
+Football,boys,1985,Frederick,RU,A
+Football,boys,2021,Frederick,SF,3AW
+Football,boys,1986,Frederick,QF,A
+Football,boys,1987,Frederick,QF,A
+Football,boys,2023,Frederick,QF,4A/3AW
+Football,boys,2024,Frederick,QF,4A/3AW
+Football,boys,2004,Frederick,RR,3AW
+Football,boys,2022,Frederick,RR2,3AW
+Football,boys,2019,Frederick,RR1,3AW
+Football,boys,1974,Friendly,CH,A
+Football,boys,1978,Friendly,CH,A
+Football,boys,1983,Friendly,CH,AA
+Football,boys,1998,Friendly,CH,3A
+Football,boys,2006,Friendly,CH,3AS
+Football,boys,1977,Friendly,RU,A
+Football,boys,1981,Friendly,RU,AA
+Football,boys,1980,Friendly,SF,AA
+Football,boys,1988,Friendly,SF,4A
+Football,boys,1997,Friendly,SF,3A
+Football,boys,1987,Friendly,QF,AA
+Football,boys,1989,Friendly,QF,4A
+Football,boys,1992,Friendly,QF,4A
+Football,boys,2004,Friendly,RR,2AS
+Football,boys,2010,Friendly,RR,3AS
+Football,boys,2003,Friendly,RS,2AS
+Football,boys,2005,Friendly,RS,3AS
+Football,boys,2008,Friendly,RS,3AS
+Football,boys,2012,Friendly,RS,3AS
+Football,boys,2019,Friendly,RR1,1AS
+Football,boys,2021,Friendly,RR1,2A/1AS
+Football,boys,2022,Friendly,RR1,2A/1AS
+Football,boys,2023,Friendly,RR1,2A/1AS
+Football,boys,2024,Friendly,RR1,2A/1AS
+Football,boys,2015,x-Friendship Academy of Engineering & Technology (FAET),SF,1AS
+Football,boys,2013,x-Friendship Academy of Engineering & Technology (FAET),RS,1AN
+Football,boys,2014,x-Friendship Academy of Engineering & Technology (FAET),RS,1AN
+Football,boys,2016,x-Friendship Academy of Engineering & Technology (FAET),RS,1AS
+Football,boys,1986,Gaithersburg,CH,AA
+Football,boys,1992,Gaithersburg,CH,4A
+Football,boys,2000,Gaithersburg,CH,4A
+Football,boys,1989,Gaithersburg,RU,4A
+Football,boys,1995,Gaithersburg,RU,4A
+Football,boys,1999,Gaithersburg,RU,4A
+Football,boys,2001,Gaithersburg,SF,4A
+Football,boys,2002,Gaithersburg,SF,4A
+Football,boys,2010,Gaithersburg,SF,4AW
+Football,boys,1997,Gaithersburg,QF,4A
+Football,boys,1998,Gaithersburg,QF,4A
+Football,boys,2003,Gaithersburg,RR,4AW
+Football,boys,2005,Gaithersburg,RS,4AW
+Football,boys,2006,Gaithersburg,RS,4AW
+Football,boys,2011,Gaithersburg,RS,4AW
+Football,boys,2013,Gaithersburg,RS,4AW
+Football,boys,2022,Gaithersburg,RR2,4AW
+Football,boys,2023,Gaithersburg,RR2,4AW
+Football,boys,2019,Gaithersburg,RR1,4AW
+Football,boys,2021,Gaithersburg,RR1,4AW
+Football,boys,2024,Gaithersburg,RR1,4AW
+Football,boys,2022,Glen Burnie,RR2,4AE
+Football,boys,2023,Glen Burnie,RR2,4AE
+Football,boys,2024,Glen Burnie,RR2,4AE
+Football,boys,2021,Glen Burnie,RR1,4AE
+Football,boys,2018,Glenelg,RU,2AS
+Football,boys,1977,Glenelg,SF,B
+Football,boys,2000,Glenelg,SF,1A
+Football,boys,2014,Glenelg,SF,3AE
+Football,boys,2016,Glenelg,SF,3AE
+Football,boys,2017,Glenelg,SF,2AE
+Football,boys,1985,Glenelg,QF,B
+Football,boys,1992,Glenelg,QF,2A
+Football,boys,2001,Glenelg,QF,2A
+Football,boys,2002,Glenelg,QF,2A
+Football,boys,2021,Glenelg,QF,2AW
+Football,boys,2003,Glenelg,RR,2AS
+Football,boys,2011,Glenelg,RR,2AS
+Football,boys,2015,Glenelg,RR,3AE
+Football,boys,2004,Glenelg,RS,2AS
+Football,boys,2005,Glenelg,RS,2AS
+Football,boys,2006,Glenelg,RS,2AS
+Football,boys,2009,Glenelg,RS,2AS
+Football,boys,2013,Glenelg,RS,3AE
+Football,boys,2019,Glenelg,RR2,2AW
+Football,boys,2023,Glenelg,RR2,2AW
+Football,boys,2024,Glenelg,RR2,2AW
+Football,boys,2022,Glenelg,RR1,2AW
+Football,boys,1981,Great Mills,RU,B
+Football,boys,1989,Great Mills,QF,3A
+Football,boys,2023,Great Mills,RR2,4A/3AE
+Football,boys,2024,Great Mills,RR2,4A/3AE
+Football,boys,2021,Great Mills,RR1,4A/3AE
+Football,boys,2022,Great Mills,RR1,4A/3AE
+Football,boys,2024,Green Street Academy,QF,1AS
+Football,boys,2022,Green Street Academy,RR2,1AE
+Football,boys,2023,Green Street Academy,RR2,1AS
+Football,boys,2024,Guilford Park,RR1,3AE
+Football,boys,2005,Gwynn Park,CH,3AS
+Football,boys,2000,Gwynn Park,RU,2A
+Football,boys,2017,Gwynn Park,RU,2AN
+Football,boys,1992,Gwynn Park,SF,3A
+Football,boys,2003,Gwynn Park,SF,3AE
+Football,boys,1996,Gwynn Park,QF,3A
+Football,boys,2001,Gwynn Park,QF,3A
+Football,boys,2002,Gwynn Park,QF,3A
+Football,boys,2021,Gwynn Park,QF,2A/1AS
+Football,boys,2004,Gwynn Park,RR,3AE
+Football,boys,2006,Gwynn Park,RR,3AS
+Football,boys,2009,Gwynn Park,RR,2AS
+Football,boys,2012,Gwynn Park,RR,2AS
+Football,boys,2013,Gwynn Park,RR,2AS
+Football,boys,2015,Gwynn Park,RR,2AS
+Football,boys,2008,Gwynn Park,RS,2AS
+Football,boys,2011,Gwynn Park,RS,2AS
+Football,boys,2016,Gwynn Park,RS,2AS
+Football,boys,2019,Gwynn Park,RR2,1AS
+Football,boys,2023,Gwynn Park,RR2,2AS
+Football,boys,2024,Gwynn Park,RR2,2AS
+Football,boys,2022,Gwynn Park,RR1,2A/1AS
+Football,boys,1985,Hammond,QF,B
+Football,boys,2010,Hammond,RR,2AS
+Football,boys,2013,Hammond,RS,2AS
+Football,boys,2019,Hammond,RR1,3AE
+Football,boys,2021,Hammond,RR1,2AW
+Football,boys,2022,Hammond,RR1,2AW
+Football,boys,2023,Hammond,RR1,2AW
+Football,boys,2024,Hammond,RR1,2AW
