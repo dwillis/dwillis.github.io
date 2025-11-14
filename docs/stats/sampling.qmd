@@ -1,0 +1,338 @@
+# Sampling and Populations
+
+It's two weeks before the election, and a polling firm releases its latest survey: "Candidate Johnson leads by 5 points among likely voters." The news cycles run with it. Cable shows debate it. Campaign strategists adjust their messaging.
+
+But dig into the fine print: the poll surveyed 800 people. Eight hundred, out of millions of voters in the state. How can 800 people possibly tell you what millions think?
+
+This is the magic—and the mathematics—of sampling. Done right, a small sample really can represent a large population. Done wrong, it's worthless or worse: misleading. As a journalist, you need to know the difference.
+
+## Why Journalists Care About Samples
+
+Most data you'll encounter in journalism comes from samples, not complete populations:
+
+- **Political polls** survey 1,000 voters, not all 150 million registered voters
+- **Medical studies** test drugs on hundreds of patients, not millions
+- **Economic reports** survey a sample of households, not every family
+- **Restaurant inspections** check some establishments, not all of them every day
+- **Product recalls** test batches, not every single item produced
+
+You're constantly reporting on conclusions drawn from samples. You need to know when those conclusions are trustworthy and when they're not.
+
+## The Core Concept
+
+A **population** is everyone or everything you want to understand:
+- All voters in a state
+- Every student in a school district
+- All crimes committed in a year
+
+A **sample** is the subset you actually measure:
+- The 1,000 voters who answered your poll
+- The 500 students who took your survey
+- The crimes that were reported to police
+
+The goal: learn about the population by studying the sample. Simple in concept, tricky in practice.
+
+## When Good Samples Go Bad
+
+Before we dive into the math, let's understand what can go wrong. In 1936, the Literary Digest magazine polled over 2 million people and predicted Alf Landon would defeat Franklin Roosevelt in a landslide. Roosevelt won in an actual landslide, carrying 46 of 48 states.
+
+What happened? The magazine sampled from telephone directories and automobile registration lists. In 1936, during the Great Depression, who had phones and cars? Wealthy people. The Digest had a huge sample—but it was completely unrepresentative.
+
+Size matters, but **representativeness matters more**.
+
+## Setting Up Our Exploration
+
+Let's explore sampling with simulations. This will help us understand how samples behave:
+
+```{r setup, message=FALSE}
+library(tidyverse)
+```
+
+## Creating a Population
+
+To really understand sampling, we'll create our own population first. Imagine we have the complete data on ages for 1,000 people aged 18-80:
+
+```{r create-population}
+# Set seed so we all get the same "random" results
+set.seed(42)
+
+# Our complete population: 1,000 people with ages 18-80
+population <- tibble(
+  id = 1:1000,
+  age = sample(18:80, 1000, replace = TRUE)
+)
+
+# What's the TRUE population mean?
+population_mean <- mean(population$age)
+population_sd <- sd(population$age)
+
+cat("True population mean age:", round(population_mean, 2), "\n")
+cat("True population SD:", round(population_sd, 2), "\n")
+```
+
+In real journalism, you almost never know these true values. That's why you sample. But for our learning purposes, we'll pretend we have the complete population so we can see how well our samples estimate the truth.
+
+## Taking a Sample
+
+Now let's take a random sample of 100 people from our population:
+
+```{r sample-data}
+sample_data <- population |>
+  slice_sample(n = 100)
+
+sample_mean <- mean(sample_data$age)
+sample_sd <- sd(sample_data$age)
+
+cat("Sample mean age:", round(sample_mean, 2), "\n")
+cat("Sample SD:", round(sample_sd, 2), "\n")
+cat("\nDifference from true mean:", round(sample_mean - population_mean, 2), "\n")
+```
+
+Your sample mean probably came pretty close to the population mean, but not exactly. That's normal! Every random sample will be slightly different. This variation is called **sampling error**, and it's not actually an error—it's natural random variation.
+
+## The Magic of Random Sampling
+
+Here's the remarkable thing about random sampling: even though individual samples vary, they vary in predictable ways. Let's take 50 different samples and see what happens:
+
+```{r multiple-samples, fig.width=10, fig.height=6}
+# Take 50 different samples, each with 100 people
+many_samples <- map_df(1:50, function(i) {
+  population |>
+    slice_sample(n = 100) |>
+    summarize(
+      sample_id = i,
+      mean_age = mean(age)
+    )
+})
+
+# Plot the distribution of sample means
+ggplot(many_samples, aes(x = mean_age)) +
+  geom_histogram(bins = 20, fill = "steelblue", color = "white") +
+  geom_vline(xintercept = population_mean, color = "red",
+             linetype = "dashed", linewidth = 1) +
+  theme_minimal() +
+  labs(
+    title = "Distribution of 50 Sample Means",
+    subtitle = paste("Red line shows true population mean:",
+                     round(population_mean, 2)),
+    x = "Sample Mean Age",
+    y = "Number of Samples",
+    caption = "Each bar represents samples with similar means"
+  )
+```
+
+Look at that! The sample means cluster around the true population mean (the red line). This is the **Central Limit Theorem** in action, one of the most powerful ideas in statistics. It tells us that sample means follow a predictable pattern, even when individual samples vary.
+
+This is why polling works. Yes, each poll gives slightly different results. But if done correctly, those results cluster around the truth.
+
+## Sample Size Matters
+
+You might think: "Bigger samples must always be better." That's true, but with diminishing returns. Let's compare different sample sizes:
+
+```{r sample-size-comparison, fig.width=10, fig.height=6}
+# Try different sample sizes
+sample_sizes <- c(10, 25, 50, 100, 200)
+
+results <- map_df(sample_sizes, function(n) {
+  # Take 50 samples of each size
+  map_df(1:50, function(i) {
+    population |>
+      slice_sample(n = n) |>
+      summarize(
+        sample_size = n,
+        sample_id = i,
+        mean_age = mean(age)
+      )
+  })
+})
+
+# Visualize how sample size affects variability
+ggplot(results, aes(x = factor(sample_size), y = mean_age)) +
+  geom_boxplot(fill = "steelblue", alpha = 0.6) +
+  geom_hline(yintercept = population_mean, color = "red",
+             linetype = "dashed", linewidth = 1) +
+  theme_minimal() +
+  labs(
+    title = "How Sample Size Affects Estimate Accuracy",
+    subtitle = "Larger samples produce more consistent estimates (narrower boxes)",
+    x = "Sample Size",
+    y = "Sample Mean Age",
+    caption = "Each box shows the distribution of 50 sample means; red line is true population mean"
+  )
+```
+
+Notice how the boxes get narrower as sample size increases. With 10 people, your estimates swing wildly. With 200, they're much more consistent. But look at the difference between 100 and 200—it's smaller than the difference between 10 and 25. You get huge gains from increasing small samples, but smaller gains from increasing large samples.
+
+This explains why most major polls survey 1,000-1,500 people. Going from 1,000 to 3,000 respondents would cost three times as much but wouldn't triple the accuracy.
+
+## The Standard Error
+
+The **standard error** quantifies how much sample means typically vary. It's calculated as:
+
+```
+SE = population_SD / sqrt(sample_size)
+```
+
+Let's see how it changes with sample size:
+
+```{r standard-error, fig.width=10, fig.height=6}
+se_comparison <- tibble(
+  sample_size = c(10, 25, 50, 100, 200, 500, 1000, 1500),
+  standard_error = population_sd / sqrt(sample_size)
+)
+
+ggplot(se_comparison, aes(x = sample_size, y = standard_error)) +
+  geom_line(color = "steelblue", linewidth = 1.2) +
+  geom_point(size = 3, color = "steelblue") +
+  theme_minimal() +
+  labs(
+    title = "Standard Error Decreases as Sample Size Increases",
+    subtitle = "But notice the curve flattens—diminishing returns from larger samples",
+    x = "Sample Size",
+    y = "Standard Error",
+    caption = "Standard error measures typical variation in sample estimates"
+  )
+```
+
+The curve drops steeply at first, then flattens. This is why polls rarely go beyond 1,500 respondents—you're paying more for smaller improvements.
+
+## Margin of Error: What Polls Report
+
+When you read "this poll has a margin of error of ±3%," what does that mean? It's related to the standard error, but multiplied by about 2 to get a 95% confidence level:
+
+```
+Margin of Error ≈ 2 × SE
+```
+
+For our sample of 100:
+
+```{r margin-of-error}
+sample_size <- 100
+se <- population_sd / sqrt(sample_size)
+moe <- 2 * se
+
+cat("For a sample of", sample_size, ":\n")
+cat("Standard Error:", round(se, 2), "\n")
+cat("Margin of Error (95% confidence):", round(moe, 2), "\n\n")
+
+cat("If our sample mean is", round(sample_mean, 2), "\n")
+cat("We're 95% confident the population mean is between",
+    round(sample_mean - moe, 2), "and", round(sample_mean + moe, 2))
+```
+
+In plain English: if we sampled 100 people and got a mean age of 49, we're 95% confident the true population mean is between roughly 45 and 53. That's what the margin of error tells you—the range of uncertainty.
+
+## When Polls Say "Too Close to Call"
+
+This is why close elections are hard to call. Suppose a poll of 1,000 voters shows:
+- Candidate A: 49%
+- Candidate B: 48%
+- Margin of error: ±3%
+
+Candidate A's real support could be anywhere from 46% to 52%. Candidate B's could be 45% to 51%. Those ranges overlap completely. The one-point lead in the poll doesn't tell you who's actually ahead.
+
+Responsible news organizations report this as "within the margin of error" or "statistically tied." Irresponsible ones write "Candidate A leads."
+
+## The Critical Importance of Random Sampling
+
+Everything we've discussed assumes **random sampling**: every member of the population has an equal chance of selection. Break that assumption, and the math doesn't work.
+
+Common ways sampling goes wrong:
+
+**Convenience sampling**: "We surveyed people at the mall." Who goes to malls? Not everyone. Your results won't represent people who don't go to malls.
+
+**Voluntary response**: "Vote in our online poll!" Who responds? People with strong opinions. Your results will be skewed toward the extremes.
+
+**Phone polls that don't call cell phones**: Who only has landlines in 2025? Older people. You'll miss younger voters.
+
+**Low response rates**: If only 5% of people you contact respond, are those responders representative? Probably not.
+
+This is why you should be skeptical of:
+- Twitter polls
+- Online surveys anyone can take
+- "Call in and vote" segments on TV
+- Mall intercepts
+- Convenience samples of any kind
+
+None of these are random samples. None of them can be trusted to represent anything beyond the people who participated.
+
+## Evaluating Polls Like a Journalist
+
+When a poll crosses your desk, ask:
+
+**How many people were surveyed?**
+- Under 100: Be very skeptical
+- 400-500: Okay for rough estimates (MOE ≈ ±5%)
+- 1,000-1,500: Standard for most polls (MOE ≈ ±3%)
+- Over 2,000: Very precise, but expensive
+
+**How were they selected?**
+- Random digit dialing: Good
+- Registered voter lists: Usually good
+- Online panel: Depends on the panel
+- Self-selected: Worthless
+
+**What was the response rate?**
+- Over 30%: Excellent
+- 10-30%: Typical these days
+- Under 10%: Raises concerns about non-response bias
+
+**Who was sampled?**
+- All adults: Relevant for general opinion
+- Registered voters: Better for election polls
+- Likely voters: Best for predicting elections, but depends on who counts as "likely"
+
+**Is the margin of error reported?**
+- If yes: Good, they're being transparent
+- If no: Red flag—they're hiding uncertainty
+
+## A Real-World Example
+
+Let's put this together with a realistic scenario. An election poll surveys 850 likely voters:
+- Candidate Smith: 47%
+- Candidate Jones: 45%
+- Undecided: 8%
+
+The margin of error is about ±3.4% (you can calculate: 1 / sqrt(850) ≈ 0.034 or 3.4%).
+
+How should you report this?
+
+**Bad headline**: "Smith Opens Up 2-Point Lead"
+
+**Good headline**: "Race Remains Tight, Within Margin of Error"
+
+**Good lede**: "Democrat Sarah Smith holds a narrow edge over Republican Tom Jones in the race for governor, leading 47% to 45% among likely voters in a new poll. The two-point gap falls within the poll's 3.4-percentage-point margin of error, indicating the race remains highly competitive with three weeks until Election Day."
+
+This is honest reporting. It gives readers the numbers but also explains what those numbers mean—and don't mean.
+
+## What About Subgroups?
+
+Polls often report results for subgroups: "Among women, Smith leads 52-42%." Be careful here. If the full poll surveyed 850 people and women are half the sample, you're looking at about 425 women. The margin of error for that subgroup is higher—about ±4.8%.
+
+The smaller the subgroup, the larger the margin of error. This is why you should be skeptical of conclusions based on small subgroups: "Among left-handed voters aged 18-24 in rural areas..." might be based on 15 people.
+
+## The Paradox of Polling
+
+Here's something that surprises people: you don't need a larger sample to poll a larger population. A sample of 1,000 gives you about the same margin of error whether you're polling a city of 100,000 or a country of 300 million.
+
+What matters is the sample size, not the percentage of the population you're sampling. This seems wrong intuitively, but it's true mathematically. (Well, it breaks down when you're sampling a huge fraction of a small population, but that's rare in journalism.)
+
+This is why national polls don't need millions of respondents. One thousand randomly selected people really can represent 330 million Americans, as long as they're truly randomly selected.
+
+## Trying It Yourself
+
+Now it's your turn to experiment. Using the code we've written:
+
+1. What happens if you take a sample of only 25 people? Run the code several times. How much do the results vary?
+
+2. Calculate the margin of error for a poll of 400 people. Then calculate it for 1,600 people. Did quadrupling the sample size cut the margin of error in half?
+
+3. If a poll shows 52% support for a measure with a margin of error of ±3%, can you confidently say that more than half the population supports it?
+
+These aren't academic questions. They're the kinds of decisions you'll make in the newsroom: Is this poll reliable? Is this difference meaningful? Should we make this the lead story?
+
+## Looking Ahead
+
+We've learned how samples work and when to trust them. But knowing a sample is reliable doesn't tell you whether a difference you observe is meaningful or just random chance. That's where statistical significance comes in—a topic we'll cover in a later chapter.
+
+For now, remember: good samples make good journalism. Bad samples make bad journalism, no matter how many decimal places you report. Your job is to know the difference.

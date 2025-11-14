@@ -1,0 +1,241 @@
+# Calculating Crime Rates
+
+On a Tuesday morning in the newsroom, your editor drops a spreadsheet on your desk. "The state just released the annual crime data," she says. "Which Maryland jurisdiction is the most dangerous?"
+
+You open the file and immediately see that Baltimore City had 15,347 crimes last year, while tiny Kent County had only 89. The story seems obvious: Baltimore is drowning in crime while Kent County is a haven of safety. You start drafting a headline.
+
+But then something nags at you. Baltimore City has over 600,000 people. Kent County has about 20,000. Of course Baltimore has more crimes - it has more people, more streets, more cars, more houses, more everything. The question isn't which place has more crimes. The question is: **which place is actually more dangerous?**
+
+This is where rates come in. And understanding how to calculate and interpret them is one of the most fundamental skills in data journalism. Get it wrong, and you'll mislead your readers. Get it right, and you'll tell them something meaningful about their communities.
+
+## The Trap of Raw Numbers
+
+Every journalist learns early in their career: numbers need context. But nowhere is this more critical than when comparing counts across different populations. Yet this mistake appears in news stories every day:
+
+- "City A had 1,000 car thefts, City B had 500 - City A has a car theft problem!"
+- "State X recorded 50 COVID deaths, State Y recorded 25 - State X is the hardest hit!"
+- "District 1 schools had 200 failing students, District 2 had 100 - District 1 is failing!"
+
+All of these statements might be misleading if the populations differ. A city with twice the population should have roughly twice the crimes, all else being equal. To make fair comparisons, we need to standardize by population: we need **rates**.
+
+## Setting Up Your Workspace
+
+Let's work through this with real Maryland crime data. First, we'll load the tools we need:
+
+```{r setup, message=FALSE}
+library(tidyverse)
+library(janitor)
+```
+
+The `tidyverse` gives us the data manipulation tools we need, while `janitor` - as its name suggests - helps us clean up messy data. Government data often comes with spaces in column names, special characters, and inconsistent capitalization. Janitor fixes all of that with a single function.
+
+## Loading and Examining the Data
+
+Maryland, like most states, tracks crime statistics by jurisdiction and publishes them annually. Let's load several years of data:
+
+```{r load-data, message=FALSE}
+crimes <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/md_annual_crime.csv") |>
+  clean_names()
+
+# What does the data look like?
+glimpse(crimes)
+```
+
+Notice what `clean_names()` did. Column names like "Grand Total" became "grand_total", and "Violent Crime Total" became "violent_crime_total". Much easier to type, no quotes needed, and no confusion about whether that space is a tab or two spaces.
+
+Let's look at a few rows to understand what we're working with:
+
+```{r}
+head(crimes)
+```
+
+Each row represents one jurisdiction in one year. We can see the total crimes, but without population context, these numbers don't tell us much about relative danger.
+
+## The Math Behind Rates
+
+A rate is simply a standardized way of expressing a count. The formula is:
+
+```
+rate = (count / population) × standard_unit
+```
+
+That "standard unit" is crucial. We need to pick a number that makes the rates easy to understand. For crime, the convention is either **per 10,000 people** or **per 100,000 people**. Violent crimes are rare enough that per 100,000 makes sense. Total crime is more common, so per 10,000 works well.
+
+Why not just say "per person"? Because the numbers would be tiny and hard to grasp: "Baltimore has 0.024 crimes per person" doesn't help readers understand the risk. But "Baltimore has 240 crimes per 10,000 people" - that's concrete. In a neighborhood of 10,000 people, you'd expect about 240 crimes.
+
+## Calculating the Rates
+
+Let's start with the total crime rate. We'll calculate it per 10,000 people:
+
+```{r total-rate}
+crimes <- crimes |>
+  mutate(total_rate = grand_total / population * 10000)
+
+# Now look at the jurisdictions ranked by rate, not raw count
+crimes |>
+  select(year, jurisdiction, population, grand_total, total_rate) |>
+  arrange(desc(total_rate))
+```
+
+Look at that! The rankings change completely when we account for population. Small jurisdictions might have low raw crime counts but high rates. Large jurisdictions might have high raw counts but moderate rates.
+
+This is the story you almost wrote incorrectly. The raw numbers told you one thing; the rates tell you something else entirely.
+
+## Breaking Down by Crime Type
+
+Maryland distinguishes between violent crimes (murder, rape, robbery, aggravated assault) and property crimes (burglary, larceny, motor vehicle theft). These are fundamentally different types of crime, affecting communities in different ways. A jurisdiction might have low violent crime but high property crime, or vice versa.
+
+Let's calculate rates for each:
+
+```{r crime-type-rates}
+crimes_with_rates <- crimes |>
+  mutate(
+    violent_rate = violent_crime_total / population * 10000,
+    property_rate = property_crime_total / population * 10000
+  )
+
+# Which jurisdictions have the highest violent crime rates?
+crimes_with_rates |>
+  filter(year == max(year)) |>  # Just the most recent year
+  select(jurisdiction, violent_rate, property_rate) |>
+  arrange(desc(violent_rate)) |>
+  head(10)
+```
+
+Now you can see which jurisdictions have the most serious crime problems. This is the kind of analysis that leads to real accountability journalism - which communities are struggling with violence? Where should state resources be focused?
+
+## Tracking Change Over Time
+
+Raw crime rates matter, but the trend matters too. Is crime getting better or worse? By how much? Let's calculate the change from the earliest year in our data to the most recent:
+
+```{r trend-analysis}
+crime_trends <- crimes_with_rates |>
+  group_by(jurisdiction) |>
+  arrange(year) |>
+  summarize(
+    first_year = first(year),
+    first_rate = first(total_rate),
+    last_year = last(year),
+    last_rate = last(total_rate),
+    change = last_rate - first_rate,
+    pct_change = (change / first_rate) * 100
+  ) |>
+  arrange(desc(abs(change)))
+
+# Show the biggest changes (both increases and decreases)
+head(crime_trends, 10)
+```
+
+This is where the real stories emerge. Which jurisdiction saw the biggest improvement? Which saw the biggest deterioration? What changed in those communities - new police chief? Economic shifts? Different reporting practices?
+
+Every outlier in this data is a potential story. Your job as a journalist is to find the numbers that don't fit the pattern, then figure out why.
+
+## Visualizing the Trends
+
+Tables are precise, but visualizations help readers grasp patterns quickly. Let's look at how crime rates have changed in Maryland's major jurisdictions:
+
+```{r crime-viz, fig.width=10, fig.height=6}
+# Focus on the four largest jurisdictions
+major_jurisdictions <- c("Baltimore City", "Baltimore County",
+                         "Montgomery County", "Prince George's County")
+
+crimes_with_rates |>
+  filter(jurisdiction %in% major_jurisdictions) |>
+  ggplot(aes(x = year, y = total_rate, color = jurisdiction)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2) +
+  theme_minimal() +
+  labs(
+    title = "Crime Rates in Major Maryland Jurisdictions",
+    subtitle = "Total crimes per 10,000 population",
+    x = "Year",
+    y = "Crime Rate (per 10,000)",
+    color = "Jurisdiction",
+    caption = "Source: Maryland crime statistics"
+  ) +
+  theme(legend.position = "bottom")
+```
+
+The lines tell stories. Did crime spike during a particular year? What was happening then? Do all jurisdictions move together, or does each have its own pattern? These visual patterns raise questions that you, as a reporter, need to answer.
+
+## Comparing Crime Types
+
+Different crimes tell different stories about a community. Let's look at Baltimore City's violent versus property crime:
+
+```{r crime-type-viz, fig.width=10, fig.height=6}
+crimes_with_rates |>
+  filter(jurisdiction == "Baltimore City") |>
+  select(year, violent_rate, property_rate) |>
+  pivot_longer(cols = c(violent_rate, property_rate),
+               names_to = "crime_type",
+               values_to = "rate") |>
+  ggplot(aes(x = year, y = rate, color = crime_type)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2) +
+  theme_minimal() +
+  labs(
+    title = "Violent vs. Property Crime Rates in Baltimore City",
+    subtitle = "Crimes per 10,000 population",
+    x = "Year",
+    y = "Crime Rate (per 10,000)",
+    color = "Crime Type"
+  ) +
+  scale_color_manual(
+    values = c("violent_rate" = "#d62728", "property_rate" = "#1f77b4"),
+    labels = c("Property Crime", "Violent Crime")
+  )
+```
+
+Property crime dominates the totals, which is typical. But violent crime, though rarer, has a disproportionate impact on how safe people feel. Both trends matter, but they matter differently.
+
+## What Rates Can't Tell You
+
+Rates are powerful, but they're not perfect. As you interpret these numbers, keep several caveats in mind:
+
+**Reporting rates vary**. These statistics only capture crimes reported to police. Some communities might have higher reporting rates than others due to trust in law enforcement, language barriers, or cultural factors. A low crime rate might mean low crime, or it might mean low reporting.
+
+**Definitions change**. If a jurisdiction changes how it classifies certain crimes, the numbers will shift even if actual crime doesn't. Always check with sources about methodology changes.
+
+**Population estimates**. We're dividing by population, so if the population estimates are wrong, our rates are wrong. This is especially tricky for rapidly growing or shrinking communities.
+
+**Small numbers amplify errors**. In a jurisdiction with 1,000 people, one extra crime changes the rate noticeably. In a jurisdiction with 1 million people, one crime barely registers. Be cautious about making much of small jurisdictions' year-to-year swings.
+
+**Rates create a denominator problem**. If population shrinks significantly but crime stays constant, the rate goes up even though residents aren't experiencing more crime. This happens in declining cities and can create misleading headlines.
+
+## Writing the Story
+
+So you've calculated the rates, made your visualizations, and found your patterns. How do you write about this?
+
+**Bad approach:**
+"Baltimore City had 15,347 crimes last year, the highest in the state."
+
+**Better approach:**
+"Baltimore City's crime rate of 250 per 10,000 residents remains higher than the state average of 180, though it has declined 15% since 2015. The city's rate is now comparable to Prince George's County and lower than it has been in two decades."
+
+The second approach gives context, shows trends, makes fair comparisons, and helps readers understand what the numbers mean for their community.
+
+## The Iron Rule
+
+Before we move on, let me emphasize the most important rule in crime reporting:
+
+**Never compare raw crime counts between jurisdictions of different sizes.**
+
+If you take away one thing from this chapter, make it that. It's wrong, it's misleading, and it happens in news stories every day. You're better than that now. You know how to calculate rates.
+
+## Trying It Yourself
+
+Now it's your turn to practice. Using the crime data we've loaded, answer these questions:
+
+1. Which Maryland jurisdiction had the largest **decrease** in crime rate from the first year to the last year in our data?
+
+2. Pick a jurisdiction you're familiar with. How has its crime rate changed? Is it following the statewide trend or diverging from it?
+
+3. Look at the jurisdiction with the highest property crime rate. What's its violent crime rate like? High also, or low? What might that tell you about the community?
+
+These aren't just exercises - they're the kinds of questions real reporters ask real data every day. Each answer might be the start of a story.
+
+## Looking Ahead
+
+We've mastered rates, but that's just the beginning. In the next chapters, we'll learn how to tell whether differences in rates are meaningful or just random variation, how to identify outliers that deserve investigation, and how to find relationships between crime and other factors like poverty, unemployment, or policy changes.
+
+Crime data is some of the most important data journalists work with. It affects where people live, how they feel about their communities, and how they vote. Now you can analyze it correctly and tell the truth about what's actually happening in the places you cover.

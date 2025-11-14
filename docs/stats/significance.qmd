@@ -1,0 +1,398 @@
+# Statistical Significance: Separating Real from Random
+
+The email from the school district's PR office lands in your inbox at 9 AM: "New Reading Program Shows Dramatic Results!" The press release includes quotes from the superintendent and a chart showing that students in the pilot program scored 3 points higher on reading tests than students who didn't participate.
+
+Three points sounds good. But you've covered education long enough to be skeptical. Students' scores bounce around naturally from year to year. Teachers vary. The weather on test day matters. Random chance matters. How do you know if these 3 points represent a genuine improvement, or just normal variation?
+
+This is the fundamental question of statistical significance: **Could this result have happened by chance?**
+
+## The Core Problem
+
+Every time you compare two groups, you'll find differences. Always. Even if you randomly split a classroom in half and do absolutely nothing different to each group, their test averages will differ slightly. That's random variation.
+
+Your job as a journalist: figure out when a difference is **real** and when it's just **noise**.
+
+This matters because:
+- Politicians claim their policies "worked" based on tiny, random fluctuations
+- Companies announce "breakthrough" treatments that barely outperform placebo
+- School districts justify expensive programs with marginal, unreliable results
+- Researchers publish flashy findings that don't replicate
+
+Statistical significance testing helps you sort the real from the random.
+
+## What "Statistically Significant" Actually Means
+
+When statisticians say a result is "statistically significant," they mean:
+
+**"If there were actually no real difference, we'd see a difference this large by random chance less than 5% of the time."**
+
+That 5% threshold is called **alpha**, usually written as α = 0.05. It's arbitrary, but it's the standard.
+
+Here's what significance does NOT mean:
+- ✗ "This effect is large or important"
+- ✗ "This proves the hypothesis is true"
+- ✗ "This will definitely replicate"
+- ✗ "You should make this your lead story"
+
+It only means: "This probably isn't just random noise."
+
+## Understanding P-Values
+
+The **p-value** is the probability you'd see a result this extreme (or more extreme) if there were actually no real effect.
+
+**Examples:**
+- **p = 0.03**: If there's no real difference, you'd see a difference this big only 3% of the time by chance. That's significant (p < 0.05).
+- **p = 0.15**: You'd see this difference 15% of the time by chance. That's NOT significant (p ≥ 0.05). Could easily be random.
+- **p = 0.001**: You'd see this 0.1% of the time by chance. Highly significant. Very unlikely to be random.
+
+**The conventional rule:**
+- p < 0.05: Statistically significant ✓
+- p ≥ 0.05: Not statistically significant ✗
+
+But remember: p-values aren't everything. A tiny effect can be "significant" with a huge sample. A large effect might not be "significant" with a small sample.
+
+## Setting Up
+
+```{r setup, message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(janitor)
+```
+
+## T-Tests: Comparing Two Groups
+
+The most common significance test in journalism is the **t-test**, which compares the means of two groups.
+
+**Types of t-tests:**
+- **One-sample t-test**: Compare one group to a known value
+- **Two-sample t-test**: Compare two independent groups
+- **Paired t-test**: Compare the same group at two different times
+
+## A Real Example: Are Maryland Basketball Players Shorter?
+
+You're writing a preview of the University of Maryland women's basketball season, and a coach mentions that Maryland tends to recruit shorter, quicker players compared to other Division I programs. Is that true statistically?
+
+Let's test it:
+
+```{r load-basketball, message=FALSE}
+# Load all D-I women's basketball rosters
+wbb_rosters <- read_csv("https://raw.githubusercontent.com/Sports-Roster-Data/womens-college-basketball/main/wbb_rosters_2024_25.csv") |>
+  filter(!is.na(total_inches)) |>
+  filter(division == "I")
+
+# Get Maryland's roster
+maryland <- wbb_rosters |>
+  filter(ncaa_id == 392)
+
+# Get a random sample of 100 D-I players for comparison
+set.seed(42)
+population_sample <- wbb_rosters[sample(nrow(wbb_rosters), 100), ]
+
+glimpse(maryland)
+```
+
+## Setting Up the Hypotheses
+
+Every significance test starts with two competing hypotheses:
+
+**Null Hypothesis (H₀)**: There's no real difference. Maryland players are the same height as Division I players generally.
+
+**Alternative Hypothesis (H₁)**: There is a real difference. Maryland players are significantly different in height.
+
+The t-test will tell us: Should we reject the null hypothesis, or is the difference we observe just random variation?
+
+## Comparing the Averages
+
+Let's look at the raw numbers first:
+
+```{r compare-means}
+# Maryland average
+maryland_mean <- mean(maryland$total_inches)
+
+# Sample average
+sample_mean <- mean(population_sample$total_inches)
+
+# Difference
+difference <- maryland_mean - sample_mean
+
+cat("Maryland average height:", round(maryland_mean, 2), "inches\n")
+cat("Sample average height:", round(sample_mean, 2), "inches\n")
+cat("Difference:", round(difference, 2), "inches\n")
+```
+
+There's a difference. But is it statistically significant, or could it easily have happened by random sampling variation?
+
+## Running the T-Test
+
+```{r t-test}
+# Perform t-test comparing Maryland to the sample mean
+result <- t.test(
+  x = maryland$total_inches,
+  mu = sample_mean,
+  alternative = "two.sided"
+)
+
+result
+```
+
+Let's break down this output:
+
+**t-statistic**: A measure of how many standard errors the difference is. Larger absolute values mean more extreme differences.
+
+**p-value**: The probability you'd see a difference this large by chance if there's no real difference. This is what we care about most.
+
+**95% confidence interval**: The range where we're 95% confident the true Maryland average falls.
+
+**sample estimates**: The mean we calculated.
+
+Now let's interpret it in plain English:
+
+```{r interpret}
+if (result$p.value < 0.05) {
+  cat("SIGNIFICANT: p =", round(result$p.value, 4), "\n")
+  cat("We reject the null hypothesis.\n")
+  cat("There IS a statistically significant difference in height.\n")
+} else {
+  cat("NOT SIGNIFICANT: p =", round(result$p.value, 4), "\n")
+  cat("We fail to reject the null hypothesis.\n")
+  cat("There is NO statistically significant difference in height.\n")
+}
+```
+
+## Visualizing the Comparison
+
+Let's see what this looks like graphically:
+
+```{r height-viz, fig.width=10, fig.height=6}
+# Combine data for visualization
+comparison_data <- bind_rows(
+  maryland |> mutate(group = "Maryland"),
+  population_sample |> mutate(group = "D-I Sample")
+)
+
+ggplot(comparison_data, aes(x = group, y = total_inches, fill = group)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.3, size = 2) +
+  theme_minimal() +
+  labs(
+    title = "Height Comparison: Maryland vs. Division I Sample",
+    subtitle = paste("p-value =", round(result$p.value, 4)),
+    x = NULL,
+    y = "Height (inches)",
+    fill = "Group"
+  ) +
+  scale_fill_manual(values = c("Maryland" = "#E03A3E", "D-I Sample" = "steelblue"))
+```
+
+The boxplot shows the distributions. If they overlap substantially and the p-value is high, the difference isn't significant. If they're clearly separated and p < 0.05, you've got a real difference.
+
+## Another Example: Does a Training Program Work?
+
+Back to that school district press release. They claim their new reading program worked. Students averaged 73 points before the program and 76 points after. That's 3 points higher.
+
+But you need more information:
+- How many students?
+- What's the standard deviation (how much do scores typically vary)?
+- Could this be random fluctuation?
+
+You call the district and get the details:
+- **Before program**: 50 students, mean = 73, SD = 8
+- **After program**: 50 students, mean = 76, SD = 8
+
+Let's simulate this and test significance:
+
+```{r training-example}
+# Simulate the data based on what the district told us
+set.seed(42)
+before_scores <- rnorm(50, mean = 73, sd = 8)
+after_scores <- rnorm(50, mean = 76, sd = 8)
+
+# Run a two-sample t-test
+training_test <- t.test(after_scores, before_scores)
+
+training_test
+```
+
+Let's interpret:
+
+```{r training-interpret}
+difference <- mean(after_scores) - mean(before_scores)
+
+cat("Average improvement:", round(difference, 2), "points\n")
+cat("P-value:", round(training_test$p.value, 4), "\n\n")
+
+if (training_test$p.value < 0.05) {
+  cat("The improvement IS statistically significant.\n")
+  cat("It's unlikely this happened by chance.\n")
+} else {
+  cat("The improvement is NOT statistically significant.\n")
+  cat("This could easily be random variation.\n")
+}
+```
+
+Now you can write honestly: "The district's pilot reading program showed a 3-point average improvement, which was statistically significant (p = [value]). However, experts caution that the program needs to be tested with more students and over a longer period before drawing firm conclusions."
+
+## Confidence Intervals: Another Way to Think About It
+
+The t-test also gives you a **95% confidence interval**. This tells you: "We're 95% confident the true difference falls within this range."
+
+```{r conf-interval}
+cat("95% Confidence Interval for the difference:\n")
+cat(round(training_test$conf.int[1], 2), "to", round(training_test$conf.int[2], 2), "points\n")
+```
+
+If the confidence interval includes zero, the difference isn't significant (it could plausibly be zero). If the interval doesn't include zero, the difference is significant (it's very unlikely to be zero).
+
+## The Two Types of Errors
+
+Statistical testing isn't perfect. You can make two kinds of mistakes:
+
+**Type I Error (False Positive):**
+- You conclude there's a difference when there isn't one
+- You're seeing patterns in randomness
+- Probability = α (usually 0.05)
+- Example: "The drug works!" when it actually doesn't
+
+**Type II Error (False Negative):**
+- You conclude there's no difference when there actually is one
+- You're missing a real effect
+- Example: "The drug doesn't work" when it actually does
+
+The 0.05 threshold means we accept a 5% chance of false positives. In 20 studies where there's no real effect, we'd expect 1 to show "significance" by pure chance.
+
+This is why replication matters. One significant result could be that unlucky 1-in-20. Multiple significant results are more convincing.
+
+## Effect Size vs. Statistical Significance
+
+Here's a critical distinction journalists often miss:
+
+**Statistical significance**: Is the effect real (not random)?
+
+**Effect size**: How big is the effect?
+
+These are different questions! You can have:
+
+**Significant but tiny**: A drug improves symptoms by 0.1%, p = 0.001. Technically significant, but who cares?
+
+**Large but not significant**: Crime dropped 30%, p = 0.08. Not technically significant, but 30% is notable. Maybe you need more data.
+
+Always report both:
+- ✓ "Test scores improved 8 points (p = 0.003)"
+- ✗ "Test scores improved significantly" (how much?)
+
+## The Problem of P-Hacking
+
+Here's how dishonest researchers (and politicians) manipulate significance:
+
+**P-hacking:** Testing multiple outcomes until you find one with p < 0.05, then reporting only that one.
+
+Example: A company tests a drug on 20 different symptoms. By chance, one will be "significant" even if the drug does nothing. They report only that one and bury the other 19.
+
+Red flags:
+- Multiple outcomes tested, only one reported
+- Subgroup analyses ("It works in left-handed women over 40!")
+- Changing hypotheses after seeing data
+- Excluding "outliers" until p < 0.05
+
+Honest science pre-registers hypotheses and reports all tests, significant or not.
+
+## Reporting Significance Responsibly
+
+You're back at your desk, ready to write about the reading program. How do you report it?
+
+**Bad version:**
+"New reading program dramatically improves scores, district study shows."
+
+**Better version:**
+"Students in a new district reading program scored an average of 3 points higher on standardized tests than students in traditional classrooms, a difference that was statistically significant (p = 0.03), according to a district-funded pilot study of 50 students. The program will now be expanded to all elementary schools.
+
+Independent education researchers caution that the study's small size and short duration make it difficult to draw firm conclusions. Dr. Jane Smith of State University, who was not involved in the study, noted that test score improvements often fade over time. 'A 3-point gain, while statistically significant, represents about 4% improvement,' Smith said. 'We'd need to see this sustained over multiple years with larger samples before declaring success.'"
+
+Notice what this includes:
+- The actual numbers (3 points)
+- Statistical significance (p = 0.03)
+- Sample size (50 students)
+- Independent expert perspective
+- Context about practical significance (4% improvement)
+- Limitations (small sample, short duration)
+
+## Common Mistakes to Avoid
+
+**Don't say "proven"**: Statistical tests don't prove anything. They show evidence.
+
+**Don't report "trending toward significance"**: p = 0.08 is NOT significant. Don't spin it.
+
+**Don't ignore practical significance**: A 0.1% improvement with p = 0.001 is still meaningless.
+
+**Don't forget sample size**: Always report it. p-values depend heavily on sample size.
+
+**Don't confuse significance with causation**: A significant difference doesn't prove causation. Could be confounders.
+
+**Don't cherry-pick**: If you test 20 things and report only the one significant result, you're misleading readers.
+
+## When You Encounter P-Values in the Wild
+
+You're reading a research paper or press release. Here's your checklist:
+
+**Check the p-value:**
+- p < 0.05? Significant
+- p ≥ 0.05? Not significant
+- p not reported? Red flag
+
+**Check the effect size:**
+- Is the difference large enough to matter?
+- Don't let "significant" fool you if the effect is tiny
+
+**Check the sample size:**
+- n > 100? Pretty reliable
+- n = 20? Be skeptical, even if p < 0.05
+- n not reported? Red flag
+
+**Check for multiple comparisons:**
+- Did they test one hypothesis or twenty?
+- If twenty, expect one "significant" result by chance
+
+**Check for pre-registration:**
+- Did they decide what to test before collecting data?
+- Or did they fish for significant results after?
+
+## When to Use T-Tests
+
+**Good for:**
+- Comparing two groups (treatment vs. control, before vs. after, etc.)
+- Roughly normal data, or large samples (n > 30)
+- Simple, straightforward comparisons
+
+**Not good for:**
+- More than two groups (use ANOVA—next chapter!)
+- Severely non-normal data with small samples (use non-parametric tests)
+- Complex relationships with multiple predictors (use regression)
+
+## The Bottom Line
+
+Statistical significance is a tool, not a magic answer. It helps you separate signal from noise, but it doesn't tell you everything:
+
+- **Significant ≠ important**: Report effect size too
+- **Significant ≠ proven**: Could still be a fluke; replication matters
+- **Significant ≠ causal**: Association doesn't prove causation
+- **Not significant ≠ non-existent**: Could be real but underpowered
+
+Your job: Use significance tests to evaluate claims critically, then report findings accurately, including all the caveats.
+
+## Your Turn
+
+Test your understanding:
+
+1. A study of 500 people finds that meditation lowers blood pressure by 2 points (p = 0.001). Is this result statistically significant? Is it practically significant? How would you report it?
+
+2. A school district pilot program improves graduation rates from 85% to 88% in a sample of 30 students (p = 0.12). The superintendent wants to expand the program. What do you tell them?
+
+3. A politician claims their jobs program "significantly increased employment by 200 jobs (p = 0.04)." You find out they tested 15 different outcomes and reported only this one. What's the problem?
+
+## Looking Ahead
+
+We've learned how to compare two groups. But what if you want to compare three groups? Five groups? Ten groups?
+
+That's where **ANOVA** (Analysis of Variance) comes in. It's the next chapter, and it extends everything we've learned here to handle multiple groups at once. Instead of asking "Is Group A different from Group B?", we'll ask "Are any of these groups different from each other?"
+
+For now, remember: statistical significance is your BS detector for claims about differences between groups. Use it, but use it wisely.
