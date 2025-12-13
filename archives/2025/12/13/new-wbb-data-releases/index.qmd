@@ -1,0 +1,34 @@
+---
+title: "Two New NCAA WBB Data Releases: Rosters and Coaches"
+author: "Derek Willis"
+date: "2025-12-13"
+format:
+  html:
+    df-print: paged
+    toc: true
+engine: knitr
+---
+
+Today I'm releasing two datasets on women's college basketball, one an update and the other a brand new collection, both tied to the 2025-26 season. The first is [roster data for 1,074 NCAA teams across all three divisions](https://github.com/Sports-Roster-Data/womens-college-basketball/blob/main/wbb_rosters_2025_26.csv), and the second is [coaching history data](https://github.com/Sports-Roster-Data/womens-college-basketball/tree/main/coaches) for as many NCAA coaches as I was able to scrape. I'll describe them in turn, starting with the roster data.
+
+### Roster Data
+
+This is the most comprehensive set of women's college basketball players ever publicly released, as far as I can tell, and it includes the features of the previous roster data I've published: standardized data on height, position and academic year, as well as identifying the hometowns and countries of nearly every player listed on an NCAA roster.
+
+In previous years I've published roster data with the goal of having a comprehensive set for Division I teams, and as many D-II and D-III teams as possible. This year I've obtained complete rosters for every NCAA team. Partly this was due to greater diligence on my part, and partly on the code-writing assistance of Claude Code, which composed nearly all of the scrapers for this task. That code is available [here](https://github.com/dwillis/wbb/blob/main/ncaa/rosters/rosters.py).
+
+There are, of course, some caveats. First, not every team provided the same information for each player, while others have decided not to differentiate between positions, [labeling all players "Shooter"](https://msueagles.com/sports/womens-basketball/roster) or [simply leaving that field blank](https://ballstatesports.com/sports/womens-basketball/roster). Alvero College, a D-III team, [lists exactly two players on its current roster](https://athletics.alverno.edu/sports/womens-basketball/roster). Second, these rosters will change - players will leave teams or possibly be added, depending on the circumstances. Consider this an early-season snapshot.
+
+As in previous seasons, one of the columns that is not standardized (and cannot be considered complete) is the "previous_school" field. This is due to several reasons: first, many roster pages simply omit previous schools entirely, or depending on the player. Second, the way previous schools are listed varies widely, from full school names to abbreviations. And this doesn't include how the data appears for players who have transferred more than once; multiple schools are listed in a single column. I'm working on ways to standardize that information and would welcome input. Similarly, high schools are not standardized, although I've got plans for attempting that.
+
+### Coaching Histories
+
+This [dataset](https://github.com/Sports-Roster-Data/womens-college-basketball/blob/main/coaches/coaches_with_history.csv), which was compiled and edited by students in my [sports data analysis and visualization course at the University of Maryland](https://thescoop.org/sports/), features positions for all of the _current_ NCAA coaches I was able to scrape from official team sites, and coaching histories for as many of those that had them. I made extensive use of a Large Language Model (Claude 4.5 Haiku) to structure the information published on coaches' pages [like this one](https://umterps.com/sports/womens-basketball/roster/coaches/brenda-frese/2642), which often includes a narrative description of a coach's work history and sometimes has a table of previous positions held. As varied as roster pages are, coaching pages are even more so.
+
+The bottom line on this data is that I'm confident that we are missing job history data on many coaches, and in particular those at lower divisions and among staff positions. As a class, we discussed removing staff positions but opted to keep them in the published data, since some coaches have them included in their career history. This data does not include any coaches who are not currently working at an NCAA school, which means it quickly will go out of date.
+
+We standardized the job titles and NCAA school names, but otherwise did not for high schools and other organizations (including non-NCAA teams) that appear in the data. We did add a `category` column to classify the type of organization that should be helpful. There's also a column called `gender` that we added as an experiment; it is based on pronouns used in the coaching biography text, and as a result is incomplete. The README for the coaches data has more details.
+
+### How You Can Help
+
+I welcome corrections and suggestions for both datasets. If you're comfortable using GitHub, you can create an [issue](https://github.com/Sports-Roster-Data/womens-college-basketball/issues) in the repository. If that's not your thing, you can email me or find me on [BlueSky](https://bsky.app/profile/dwillis.bsky.social).
