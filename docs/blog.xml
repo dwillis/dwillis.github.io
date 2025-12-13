@@ -10,7 +10,42 @@
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Sun, 19 Oct 2025 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 13 Dec 2025 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Two New NCAA WBB Data Releases: Rosters and Coaches</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2025/12/13/new-wbb-data-releases/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Today I’m releasing two datasets on women’s college basketball, one an update and the other a brand new collection, both tied to the 2025-26 season. The first is <a href="https://github.com/Sports-Roster-Data/womens-college-basketball/blob/main/wbb_rosters_2025_26.csv">roster data for 1,074 NCAA teams across all three divisions</a>, and the second is <a href="https://github.com/Sports-Roster-Data/womens-college-basketball/tree/main/coaches">coaching history data</a> for as many NCAA coaches as I was able to scrape. I’ll describe them in turn, starting with the roster data.</p>
+<section id="roster-data" class="level3">
+<h3 class="anchored" data-anchor-id="roster-data">Roster Data</h3>
+<p>This is the most comprehensive set of women’s college basketball players ever publicly released, as far as I can tell, and it includes the features of the previous roster data I’ve published: standardized data on height, position and academic year, as well as identifying the hometowns and countries of nearly every player listed on an NCAA roster.</p>
+<p>In previous years I’ve published roster data with the goal of having a comprehensive set for Division I teams, and as many D-II and D-III teams as possible. This year I’ve obtained complete rosters for every NCAA team. Partly this was due to greater diligence on my part, and partly on the code-writing assistance of Claude Code, which composed nearly all of the scrapers for this task. That code is available <a href="https://github.com/dwillis/wbb/blob/main/ncaa/rosters/rosters.py">here</a>.</p>
+<p>There are, of course, some caveats. First, not every team provided the same information for each player, while others have decided not to differentiate between positions, <a href="https://msueagles.com/sports/womens-basketball/roster">labeling all players “Shooter”</a> or <a href="https://ballstatesports.com/sports/womens-basketball/roster">simply leaving that field blank</a>. Alvero College, a D-III team, <a href="https://athletics.alverno.edu/sports/womens-basketball/roster">lists exactly two players on its current roster</a>. Second, these rosters will change - players will leave teams or possibly be added, depending on the circumstances. Consider this an early-season snapshot.</p>
+<p>As in previous seasons, one of the columns that is not standardized (and cannot be considered complete) is the “previous_school” field. This is due to several reasons: first, many roster pages simply omit previous schools entirely, or depending on the player. Second, the way previous schools are listed varies widely, from full school names to abbreviations. And this doesn’t include how the data appears for players who have transferred more than once; multiple schools are listed in a single column. I’m working on ways to standardize that information and would welcome input. Similarly, high schools are not standardized, although I’ve got plans for attempting that.</p>
+</section>
+<section id="coaching-histories" class="level3">
+<h3 class="anchored" data-anchor-id="coaching-histories">Coaching Histories</h3>
+<p>This <a href="https://github.com/Sports-Roster-Data/womens-college-basketball/blob/main/coaches/coaches_with_history.csv">dataset</a>, which was compiled and edited by students in my <a href="https://thescoop.org/sports/">sports data analysis and visualization course at the University of Maryland</a>, features positions for all of the <em>current</em> NCAA coaches I was able to scrape from official team sites, and coaching histories for as many of those that had them. I made extensive use of a Large Language Model (Claude 4.5 Haiku) to structure the information published on coaches’ pages <a href="https://umterps.com/sports/womens-basketball/roster/coaches/brenda-frese/2642">like this one</a>, which often includes a narrative description of a coach’s work history and sometimes has a table of previous positions held. As varied as roster pages are, coaching pages are even more so.</p>
+<p>The bottom line on this data is that I’m confident that we are missing job history data on many coaches, and in particular those at lower divisions and among staff positions. As a class, we discussed removing staff positions but opted to keep them in the published data, since some coaches have them included in their career history. This data does not include any coaches who are not currently working at an NCAA school, which means it quickly will go out of date.</p>
+<p>We standardized the job titles and NCAA school names, but otherwise did not for high schools and other organizations (including non-NCAA teams) that appear in the data. We did add a <code>category</code> column to classify the type of organization that should be helpful. There’s also a column called <code>gender</code> that we added as an experiment; it is based on pronouns used in the coaching biography text, and as a result is incomplete. The README for the coaches data has more details.</p>
+</section>
+<section id="how-you-can-help" class="level3">
+<h3 class="anchored" data-anchor-id="how-you-can-help">How You Can Help</h3>
+<p>I welcome corrections and suggestions for both datasets. If you’re comfortable using GitHub, you can create an <a href="https://github.com/Sports-Roster-Data/womens-college-basketball/issues">issue</a> in the repository. If that’s not your thing, you can email me or find me on <a href="https://bsky.app/profile/dwillis.bsky.social">BlueSky</a>.</p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2025/12/13/new-wbb-data-releases/</guid>
+  <pubDate>Sat, 13 Dec 2025 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>First Release of NCAA WBB 2025-26 Roster Data</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -3269,29 +3304,6 @@ font-style: inherit;">select</span>(year, pos_team, def_pos_team, period, down, 
   <category>wtf</category>
   <guid>https://www.thescoop.org/archives/2023/10/17/third-and-six/</guid>
   <pubDate>Tue, 17 Oct 2023 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Teaching News Apps with Codespaces - The Results</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/05/27/teaching-news-apps-with-codespaces-results/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>The News Applications course I teach at Maryland has two big projects: building a bot/notification system of some kind and a more “traditional” news app that involves browsing, searching and displaying data. Since the students had been working in GitHub’s Codespaces this semester, we didn’t have to worry about final deployment issues, which can be both annoying and non-trivial. Plus, I could spin up a version of their work pretty much anytime, which was helpful for providing feedback.</p>
-<p>It’s tough to compare the final news app projects to those from the previous year’s class, in part because of that environmental difference, but also because the 2022 version was the first time out for me teaching that course. Presumably I’ve gotten a bit better at doing that. What I can say is that removing the barrier posed by setting up and maintaining working virtual environments yielded a lot of benefits, and I won’t be going back.</p>
-<p>I’d like to show some of the final projects (screenshots only, since these aren’t deployed anywhere) to illustrate what’s possible in a semester-long course when you don’t have to spend as much time on configuration and installation issues. In each case, the student in question gave me permission to display these screenshots. A couple of things they have in common: all of these were built using Python’s handy Flask library, along with some JavaScript. Most of them involve loading data from some external source, although one of them does text extraction from PDFs scraped using Selenium. One of the advantages of using Codespaces has been that I can see and run those setup and loading tasks; I don’t just see the final result.</p>
-<p>The first is an app that displays information about sites with <a href="https://www.epa.gov/pfas/pfas-explained">PFAS contamination</a> - long-lasting chemicals whose components can take years to break down. Amanda Hernandez, who graduated in May, made this app that allows users to find places on a map and bring up details, or to search a table presented using the DataTables JS library.</p>
-<p><img src="https://www.thescoop.org/archives/2023/05/27/teaching-news-apps-with-codespaces-results/pfas_homepage.png" class="img-fluid"></p>
-<p>While News Apps isn’t a design course - and I’m not the person to teach one - we do look at the work done by newsrooms like ProPublica and others for some basic guidelines. Many of the students come into the class having taken design-related courses previously, too.</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/05/27/teaching-news-apps-with-codespaces-results/</guid>
-  <pubDate>Sat, 27 May 2023 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
