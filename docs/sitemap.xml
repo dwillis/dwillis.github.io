@@ -165,6 +165,10 @@
     <lastmod>2024-06-03T14:50:24.906Z</lastmod>
   </url>
   <url>
+    <loc>https://www.thescoop.org/archives/2025/12/13/new-wbb-data-releases/index.html</loc>
+    <lastmod>2025-12-13T17:15:58.734Z</lastmod>
+  </url>
+  <url>
     <loc>https://www.thescoop.org/archives/2025/06/24/interviewing-fec-filings-with-llm-fecfile/index.html</loc>
     <lastmod>2025-06-24T17:11:14.287Z</lastmod>
   </url>
@@ -173,8 +177,8 @@
     <lastmod>2025-06-04T02:00:15.336Z</lastmod>
   </url>
   <url>
-    <loc>https://www.thescoop.org/archives/2025/08/01/making-scraping-better-with-ai-assistance/index.html</loc>
-    <lastmod>2025-08-05T22:01:39.702Z</lastmod>
+    <loc>https://www.thescoop.org/archives/2025/10/19/ncaawbb-roster-data-release/index.html</loc>
+    <lastmod>2025-10-19T20:02:43.745Z</lastmod>
   </url>
   <url>
     <loc>https://www.thescoop.org/archives/2025/05/24/vibe-coding-for-domain-experts/index.html</loc>
@@ -305,12 +309,20 @@
     <lastmod>2025-02-28T22:52:32.598Z</lastmod>
   </url>
   <url>
+    <loc>https://www.thescoop.org/archives/2025/08/01/making-scraping-better-with-ai-assistance/index.html</loc>
+    <lastmod>2025-08-05T22:01:39.702Z</lastmod>
+  </url>
+  <url>
     <loc>https://www.thescoop.org/archives/2025/01/27/llm-extraction-challenge-fundraising-emails/index.html</loc>
     <lastmod>2025-01-27T18:32:00.133Z</lastmod>
   </url>
   <url>
     <loc>https://www.thescoop.org/archives/2025/06/09/how-openelections-uses-llms/index.html</loc>
     <lastmod>2025-06-09T01:04:40.077Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.thescoop.org/archives/2025/12/23/all-the-claude-things/index.html</loc>
+    <lastmod>2025-12-23T03:09:27.813Z</lastmod>
   </url>
   <url>
     <loc>https://www.thescoop.org/archives/2024/01/27/a-better-way-to-process-mississippi-precinct-results/index.html</loc>
@@ -475,13 +487,5 @@
   <url>
     <loc>https://www.thescoop.org/help/index.html</loc>
     <lastmod>2023-10-25T19:04:25.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.thescoop.org/archives/2025/10/19/ncaawbb-roster-data-release/index.html</loc>
-    <lastmod>2025-10-19T20:02:43.745Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.thescoop.org/archives/2025/12/13/new-wbb-data-releases/index.html</loc>
-    <lastmod>2025-12-13T17:15:58.734Z</lastmod>
   </url>
 </urlset>

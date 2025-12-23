@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Derek Willis">
+<meta name="dcterms.date" content="2025-12-23">
 
-<title>Derek Willis</title>
+<title>All the Claude (Code) Things – Derek Willis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +25,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-65ca90d89e2c3335137106c442d07137.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<script src="../../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap-65ca90d89e2c3335137106c442d07137.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,86 +68,27 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
+<link href="../../../../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../../../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-title','listing-description','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      page: 18,
-    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta name="twitter:title" content="Derek Willis">
-<meta name="twitter:image" content="https://www.thescoop.org/images/middle_school.png">
+<meta name="twitter:title" content="All the Claude (Code) Things – Derek Willis">
+<meta name="twitter:description" content="Academic and journalist">
 <meta name="twitter:creator" content="@derekwillis">
-<meta name="twitter:image-height" content="855">
-<meta name="twitter:image-width" content="2520">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/dwillis.png" alt="" class="navbar-logo">
+    <a href="../../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../../images/dwillis.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../../../index.html">
     <span class="navbar-title">Derek Willis</span>
     </a>
   </div>
@@ -158,7 +99,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="./blog.xml"> <i class="bi bi-rss" role="img" aria-label="feed">
+    <a class="nav-link" href="../../../../../blog.xml"> <i class="bi bi-rss" role="img" aria-label="feed">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -173,14 +114,42 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">All the Claude (Code) Things</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">All the Claude (Code) Things</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Derek Willis </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 23, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
         <div class="sidebar-tools-main tools-wide">
@@ -192,43 +161,43 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../about" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./now" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../now" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Now</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./then" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../then" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Then</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./help" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../help" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ways I Can Help</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./thefix" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../thefix" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The Fix</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blog.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../blog.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blog</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./teaching" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../teaching" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
   </div>
 </li>
@@ -237,85 +206,63 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#simple-apps" id="toc-simple-apps" class="nav-link active" data-scroll-target="#simple-apps">Simple Apps</a></li>
+  <li><a href="#command-line-utilities-scrapers" id="toc-command-line-utilities-scrapers" class="nav-link" data-scroll-target="#command-line-utilities-scrapers">Command-Line Utilities &amp; Scrapers</a></li>
+  <li><a href="#resurrected-apps" id="toc-resurrected-apps" class="nav-link" data-scroll-target="#resurrected-apps">Resurrected Apps</a></li>
+  <li><a href="#the-takeaway" id="toc-the-takeaway" class="nav-link" data-scroll-target="#the-takeaway">The Takeaway</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<section id="hi-im-derek.-i-love-using-data-to-find-and-tell-stories.-and-asking-questions." class="level3">
-<h3 class="anchored" data-anchor-id="hi-im-derek.-i-love-using-data-to-find-and-tell-stories.-and-asking-questions.">Hi, I’m Derek. I love using data to find and tell stories. And asking questions.</h3>
-<p><img src="images/middle_school.png" class="img-fluid"></p>
 
+<p>Of nearly all of the potential uses for Large Language Models, perhaps the best and most defensible is using them to write code. During the recently-completed fall semester, I co-taught <a href="https://www.cs.umd.edu/class/fall2025/cmsc398z/">a Computer Science class with Bill Pugh</a> that explored some good ways to do that. We used a lot of Claude Code for that class, and it quickly has become my favorite coding model. And then, in the middle of November, the folks at Anthropic released Claude Code on the Web and gave paid users free credits to use it. I got $250 worth, and I had a lot of ideas.</p>
+<p>I didn’t use all of the $250 in credits, but I made it to about $25. I had Claude Code revive a few very old (10+ years) projects, make significant progress on some long-stalled codebases and put the finishing touches on complex problems. There were the now-familiar moments when the model got caught in unproductive loops, as well as over-engineered approaches to simpler tasks. But on the whole, a couple of weeks of Claude Code on the web proved very useful. Here’s some of what I had Claude Code do.</p>
+<section id="simple-apps" class="level3">
+<h3 class="anchored" data-anchor-id="simple-apps">Simple Apps</h3>
+<p>One of the sweet spots for coding models are simple HTML/CSS/JS applications - often deployed on GitHub Pages - based on some data you’ve got in a repository. I have a lot of data sitting around in repositories, so I had Claude Code make some apps, because not everyone wants to look at a CSV file.</p>
+<ul>
+<li><a href="https://thescoop.org/umdwbb-data/">Maryland Women’s Basketball Data</a>. I’ve been collecting and storing JSON files with game-level information from women’s college basketball for a few years now. But few people want to look at JSON files in a browser, so this was a great candidate for a simple web app. This one took a number of attempts at refinement, and I needed to get specific with Claude Code about some of the things I wanted, especially the details of each game. But I also asked for an assist network analysis without providing any other instructions, and what I got is pretty great. It updates every day via GitHub Actions.</li>
+<li><a href="https://thescoop.org/wapo-alerts/">Post Ping</a>. I’ve been collecting SMS alerts from the Washington Post since March 2024, and here is the entirety of my instructions: “Create a slightly whimsical webpage that presents the alert data in several ways: a quick look at the alerts from the previous 24 hours, a searchable filter on title, another on target topic. Have a line chart showing the trend of alerts and title the page “Post Ping”. Use JS CSS HTML.” I think we can all agree that the font is perhaps too “whimsical”, but Claude Code did everything I asked for and produced a site I actually look at.</li>
+<li><a href="https://newsappsumd.github.io/fredscanner/">Frederick County Fire &amp; Rescue Incidents</a>. Working with a Maryland newspaper,I wrote a scraper to track emergency response incidents and provide them as an RSS feed reporters could subscribe to. That wasn’t really effective, but this simple searchable and browsable database that Claude Code built was more useful.</li>
+<li><a href="https://thescoop.org/umpd-logs/build/">UMPD Logs</a>. A former student, Rachel Marconi, <a href="https://rachelmarconi.github.io/na-gov-upgrade/build/index.html">originally built this app</a> for my news apps class, and I had Claude add some visual upgrades and some topline summary data with minimal effort.</li>
+<li><a href="https://thescoop.org/mcjw25/">Hattiesburg (Miss.) Public Notices</a>. For a presentation at a conference on local news hosted at Southern Miss, I had Claude Code build an app that allows users to comb through public notices from the Hattiesburg American, using an LLM to provide a newsworthiness value to each announcement.</li>
+<li><a href="https://thescoop.org/wv_football/">WV Football Game Viewer</a>. For a 2023 Mountain State Spotlight story on transfers in West Virginia high school football, I <a href="https://thescoop.org/archives/2023/11/13/wv-football-blowouts/">scraped game scores</a> to measure blowouts. Claude Code took that data and made a simple website of it.</li>
+</ul>
+</section>
+<section id="command-line-utilities-scrapers" class="level3">
+<h3 class="anchored" data-anchor-id="command-line-utilities-scrapers">Command-Line Utilities &amp; Scrapers</h3>
+<p>Building pipelines for data is a big part of my work (and teaching), and mostly that has meant writing single Python scripts do do the work of obtaining and transforming data. This set of Claude Code work led to more robust and predictable CLI tools.</p>
+<ul>
+<li><a href="https://github.com/dwillis/testudo">Testudo</a>. I picked up the original code for this project, which scrapes <a href="https://app.testudo.umd.edu/soc/">Maryland’s Schedule of Classes site</a>, from Ed Summers. It was good code, but it also had some constraints: users could only scrape all of the classes for a given term, producing JSON files and a single CSV file with the combined data. Using Claude Code, I added a bunch of features, including optional scraping for syllabi. Plus tests and better documentation. It is a much better-organized and more reliable piece of software now.</li>
+<li><a href="https://github.com/dwillis/python-statement">python-statement</a>. Years ago, I extracted <a href="https://github.com/dwillis/statement">a Ruby gem that scraped press releases</a> from the congressional news app I worked on at The New York Times. It was super useful but became a pain to maintain, and I haven’t written much Ruby in the past five years. So I had Claude Code port it to Python, where I hope to keep it going with some student help. Translating code from one language to another is very much in an LLM’s wheelhouse, although it was interesting and somewhat disappointing that given hundreds of methods, Claude literally gave up, coming up with lines such as “# … and more methods here”. These coding assistants really are like disinterested interns some times, but I would not have done this myself.</li>
+<li><a href="https://github.com/Sports-Roster-Data/">College Sports Rosters</a>. For a few years I’ve maintained scrapers to extract player information from official collegiate roster sites for women’s basketball and volleyball. I based the latter code on the former, but that involved a lot of work and maintenance was an issue, making expanding to other sports an unappealing prospect. Claude Code changed that, not only producing very serviceable code for men’s and women’s soccer, lacrosse and women’s field hockey, but also creating <a href="https://github.com/Sports-Roster-Data/utilities">common utilities</a> shared across repositories. And it cleaned up and reorganized the original <a href="https://github.com/dwillis/wbb/blob/main/ncaa/rosters/rosters.py">women’s basketball scraper code</a>, making it much easier to work with.</li>
+<li><a href="https://github.com/dwillis/all-foreign-gifts-around-us">Foreign Gifts to U.S. Officials</a>. I first built this repo to show off <a href="https://thescoop.org/archives/2024/06/22/all-foreign-gifts-around-us/">the ability of LLMs to parse weirdly-structured PDFs</a>, and my code was kind of a mess. Claude Code polished it up and reorganized the files, adding a CLI and a way to visualize the data. Improving or extending existing codebases is a pretty solid use case for these coding assistants.</li>
+</ul>
+</section>
+<section id="resurrected-apps" class="level3">
+<h3 class="anchored" data-anchor-id="resurrected-apps">Resurrected Apps</h3>
+<p>I’ll do a follow-up post on this category, because it is the most ambitious use case I could imagine: taking a code base that is large, old and unmaintained and bringing it back to life. I pointed Claude Code at several of these, including <a href="https://github.com/dwillis/senate_disbursements">official Senate disbursements</a> (one of the white whales of the open government movement), a Django app <a href="https://github.com/dwillis/django-irs-filings">to download and parse IRS campaign finance filings</a> and even <a href="https://github.com/dwillis/fumblerooski">Fumblerooski</a>, the first Django app I ever made. Oh, and a still-private repo containing the codebase of Capitol Words, <a href="https://www.propublica.org/nerds/sunlight-labs-takeover-update">a former Sunlight Foundation joint that ProPublica briefly took over and tried to resurrect</a>.</p>
+<p>Why a separate post on these? Because unlike the other projects mentioned above, these are substantial and complicated codebases. I’ll need some time to dig into them and assess the changes. I’m sure some of them will be incomplete or screwed up in some way - I didn’t give many instructions aside from “update the code so it runs now” and tried to simplify things where I could. The results - as with most things generated by AI - sound impressive, but the devil’s in the details.</p>
+</section>
+<section id="the-takeaway" class="level3">
+<h3 class="anchored" data-anchor-id="the-takeaway">The Takeaway</h3>
+<p>Properly guided by users who know what they are doing, these coding assistants can be super useful. They certain can make quick work of what my friend and colleague <a href="https://www.niemanlab.org/2025/12/the-rise-of-the-throwaway-news-app/">Matt Waite calls the “throwaway news app”</a>, a simple HTML/JS/CSS site that can make data and information accessible. That alone is a huge benefit, if newsrooms are smart about how they do it. The way I employed Claude Code during that mid-November stretch wasn’t ideal; a deadline often means things get left behind or neglected. But since then, I’ve made good use of Claude Code and a few other assistants, especially in writing tests, documentation and helping me draft plans for upgrades. Although these tools are designed for coding, you can throw other tasks at them, which sometimes is an improvement over a chat interface since they can use tools to help them understand and operate on files. I often use Claude Code to help me understand an unfamiliar code base, for example.</p>
+<p>The other lesson I’ve learned is that these models write code <em>quickly</em>, and that’s often not a great thing. But you can slow them down, both through direct instruction and via what I call “constitutional” documents like Claude.md that contain basic operational principles: do X this way, wait for confirmation before doing Y, etc. The “magic” of these assistants is that they seem like they can drive the bus. But you’re the one who should be behind the wheel.</p>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1766466000000" data-listing-file-modified-sort="1766459367813" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1471">
-<a href="./archives/2025/12/23/all-the-claude-things/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-All the Claude (Code) Things
-</h5>
-<div class="card-text listing-description">
-Of nearly all of the potential uses for Large Language Models, perhaps the best and most defensible is using them to write code. During the recently-completed fall semester…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Dec 23, 2025
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1765602000000" data-listing-file-modified-sort="1765646158734" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="675">
-<a href="./archives/2025/12/13/new-wbb-data-releases/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Two New NCAA WBB Data Releases: Rosters and Coaches
-</h5>
-<div class="card-text listing-description">
-Today I’m releasing two datasets on women’s college basketball, one an update and the other a brand new collection, both tied to the 2025-26 season. The first is roster data…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Dec 13, 2025
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-date-sort="1760846400000" data-listing-file-modified-sort="1760904163745" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="477">
-<a href="./archives/2025/10/19/ncaawbb-roster-data-release/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-First Release of NCAA WBB 2025-26 Roster Data
-</h5>
-<div class="card-text listing-description">
-A few years ago I started publishing roster data for women’s college basketball, thanks to the assistance of students in my Sports Data Analysis and Visualization class at…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Oct 19, 2025
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
