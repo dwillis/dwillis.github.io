@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Return to Sender: Using LLMs to Identify Political Fundraising Sponsors</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+      color: #2c3e50;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .slide {
+      background: white;
+      border-radius: 12px;
+      padding: 60px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h1 {
+      font-family: Georgia, serif;
+      font-size: 42px;
+      color: #1e3a5f;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-family: Georgia, serif;
+      font-size: 24px;
+      color: #1e3a5f;
+      margin-bottom: 16px;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: #7f8c8d;
+      margin-top: 12px;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #95a5a6;
+      margin-top: 20px;
+    }
+
+    /* Slide 1 - Title */
+    .title-slide {
+      text-align: left;
+      justify-content: flex-start;
+      padding-top: 100px;
+    }
+
+    .title-slide h1 {
+      font-size: 48px;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    /* Slide 2 - Challenge */
+    .card {
+      background: #ecf0f1;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .card.highlight {
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1e3a5f;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card-grid .card {
+      margin-bottom: 0;
+    }
+
+    .card-grid .card h3 {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .card-grid .card p {
+      font-size: 12px;
+    }
+
+    .highlight-text {
+      color: #ff6b6b;
+      font-weight: bold;
+    }
+
+    /* Slide 3 - Study Design */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 20px;
+      margin-bottom: 24px;
+    }
+
+    .metric-box {
+      text-align: center;
+      padding: 24px;
+      border-radius: 8px;
+      color: white;
+    }
+
+    .metric-box.blue {
+      background: #1e3a5f;
+    }
+
+    .metric-box.red {
+      background: #ff6b6b;
+    }
+
+    .metric-box.teal {
+      background: #4ecdc4;
+    }
+
+    .metric-number {
+      font-size: 56px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.9;
+    }
+
+    .metric-description {
+      font-size: 12px;
+      color: #666;
+      margin-top: 12px;
+      line-height: 1.4;
+    }
+
+    /* Slide 4 - Key Findings */
+    .findings-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .finding-card {
+      padding: 28px;
+      border-radius: 8px;
+      border-left: 4px solid;
+    }
+
+    .finding-card.green {
+      background: #e8f5e9;
+      border-color: #4caf50;
+    }
+
+    .finding-card.orange {
+      background: #fff3e0;
+      border-color: #ff9800;
+    }
+
+    .finding-card.blue {
+      background: #e3f2fd;
+      border-color: #2196f3;
+    }
+
+    .finding-number {
+      font-size: 52px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      line-height: 1;
+    }
+
+    .finding-card.green .finding-number {
+      color: #2e7d32;
+    }
+
+    .finding-card.orange .finding-number {
+      color: #e65100;
+    }
+
+    .finding-card.blue .finding-number {
+      color: #1565c0;
+    }
+
+    .finding-label {
+      font-size: 15px;
+      color: inherit;
+    }
+
+    .data-box {
+      background: #1e3a5f;
+      padding: 32px;
+      border-radius: 8px;
+      color: white;
+      margin-top: 24px;
+    }
+
+    .data-box h3 {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .data-box p {
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 0.95;
+      margin-bottom: 16px;
+    }
+
+    .data-box a {
+      font-size: 16px;
+      font-weight: bold;
+      color: #4ecdc4;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .data-box a:hover {
+      text-decoration: underline;
+    }
+
+    /* Slide 5 - Failure Patterns */
+    .failure-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .failure-card {
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid;
+    }
+
+    .failure-card.yellow {
+      background: #fff3cd;
+      border-color: #ffc107;
+      color: #856404;
+    }
+
+    .failure-card.pink {
+      background: #f8d7da;
+      border-color: #dc3545;
+      color: #721c24;
+    }
+
+    .failure-card.cyan {
+      background: #d1ecf1;
+      border-color: #17a2b8;
+      color: #0c5460;
+    }
+
+    .failure-card.gray {
+      background: #e2e3e5;
+      border-color: #6c757d;
+      color: #383d41;
+    }
+
+    .failure-card h3 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .failure-card p {
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .key-finding-box {
+      background: #1e3a5f;
+      padding: 24px;
+      border-radius: 8px;
+      color: white;
+      margin-top: 20px;
+    }
+
+    .key-finding-box h3 {
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .key-finding-box p {
+      font-size: 13px;
+      line-height: 1.6;
+      opacity: 0.95;
+      margin: 0;
+    }
+
+    /* Slide 6 - Implications */
+    .implications-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .implications-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .implication-card {
+      padding: 22px;
+      border-radius: 8px;
+      border-left: 4px solid;
+    }
+
+    .implication-card.green {
+      background: #d4edda;
+      border-color: #28a745;
+      color: #155724;
+    }
+
+    .implication-card.blue {
+      background: #e7f3ff;
+      border-color: #0066cc;
+      color: #004085;
+    }
+
+    .implication-card.yellow {
+      background: #fff3cd;
+      border-color: #ffc107;
+      color: #856404;
+    }
+
+    .implication-card.light-gray {
+      background: #f8f9fa;
+      border-color: #6c757d;
+      color: #495057;
+    }
+
+    .implication-card h3 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .implication-card ul {
+      font-size: 12px;
+      line-height: 1.6;
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .implication-card li {
+      margin-bottom: 4px;
+    }
+
+    .implication-card p {
+      font-size: 12px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .slide {
+        padding: 40px 30px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .title-slide h1 {
+        font-size: 36px;
+      }
+
+      .card-grid,
+      .metrics-row,
+      .findings-row,
+      .failure-grid,
+      .implications-row {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-number {
+        font-size: 48px;
+      }
+
+      .finding-number {
+        font-size: 42px;
+      }
+    }
+
+    .link-box {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #6c757d;
+      margin-top: 20px;
+    }
+
+    .link-box h3 {
+      font-size: 15px;
+      font-weight: bold;
+      color: #495057;
+      margin-bottom: 8px;
+    }
+
+    .link-box a {
+      font-size: 14px;
+      font-weight: bold;
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    .link-box a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Slide 1: Title -->
+    <div class="slide title-slide">
+      <h1>Return to Sender: Using LLMs to Identify Political Fundraising Sponsors</h1>
+      <p class="subtitle">Derek Willis | University of Maryland</p>
+      <p class="note">Research on automating committee name extraction from political emails</p>
+    </div>
+
+    <!-- Slide 2: The Challenge -->
+    <div class="slide">
+      <h1>The Challenge</h1>
+      
+      <div class="card highlight">
+        <h3>Political fundraising emails generate <span class="highlight-text">hundreds of millions</span> of dollars annually</h3>
+        <p>But disclaimers vary widely in format, making automated extraction difficult</p>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>❌ Variable Format</h3>
+          <p>Different phrasing, lengths, positions</p>
+        </div>
+        
+        <div class="card">
+          <h3>❌ No Standard IDs</h3>
+          <p>Committee names, not unique identifiers</p>
+        </div>
+        
+        <div class="card">
+          <h3>❌ Scale Problem</h3>
+          <p>Hundreds of thousands of emails to process</p>
+        </div>
+      </div>
+
+      <p class="note">Manual extraction infeasible at scale; linking to FEC data requires accurate committee identification</p>
+    </div>
+
+    <!-- Slide 3: Study Design -->
+    <div class="slide">
+      <h1>Study Design</h1>
+
+      <div class="metrics-row">
+        <div class="metric-box blue">
+          <div class="metric-number">1,000</div>
+          <div class="metric-label">Email Sample</div>
+          <div class="metric-description" style="color: rgba(255,255,255,0.85); margin-top: 12px;">November 2024 fundraising emails from federal and state campaigns</div>
+        </div>
+
+        <div class="metric-box red">
+          <div class="metric-number">47</div>
+          <div class="metric-label">LLMs Tested</div>
+          <div class="metric-description" style="color: rgba(255,255,255,0.85); margin-top: 12px;">Commercial (GPT-4, Claude, Gemini) and open-source models</div>
+        </div>
+
+        <div class="metric-box teal">
+          <div class="metric-number">1</div>
+          <div class="metric-label">Simple Prompt</div>
+          <div class="metric-description" style="color: rgba(255,255,255,0.85); margin-top: 12px;">Single extraction instruction across all models</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Evaluation Method</h3>
+        <p>Exact match against human-coded committee names • Case-insensitive • Strict metric for conservative performance estimates</p>
+      </div>
+    </div>
+
+    <!-- Slide 4: Key Findings -->
+    <div class="slide">
+      <h1>Key Findings</h1>
+
+      <div class="findings-row">
+        <div class="finding-card green">
+          <div class="finding-number">96.9%</div>
+          <div class="finding-label">Top accuracy (GPT-4o)</div>
+        </div>
+
+        <div class="finding-card orange">
+          <div class="finding-number">95.5%</div>
+          <div class="finding-label">Best open-source (Qwen 2.5)</div>
+        </div>
+
+        <div class="finding-card blue">
+          <div class="finding-number">24-97%</div>
+          <div class="finding-label">Performance range across 47 models</div>
+        </div>
+      </div>
+
+      <div class="data-box">
+        <h3>Complete Results Available</h3>
+        <p>Full dataset with all 47 models tested on 1,000 emails including accuracy scores, precision, recall, and F1 metrics</p>
+        <a href="https://thescoop.org/LLM-Extraction-Challenge/" target="_blank">Interactive Leaderboard →</a>
+      </div>
+    </div>
+
+    <!-- Slide 5: Failure Patterns -->
+    <div class="slide">
+      <h1>Failure Patterns</h1>
+
+      <div class="failure-grid">
+        <div class="failure-card yellow">
+          <h3>False Negatives</h3>
+          <p>Committee present but not detected — most common in smaller models (&lt;7B parameters)</p>
+        </div>
+
+        <div class="failure-card pink">
+          <h3>Over-Extraction</h3>
+          <p>Including extra text like "Not authorized by any candidate"</p>
+        </div>
+
+        <div class="failure-card cyan">
+          <h3>Partial Extraction</h3>
+          <p>Truncated names (e.g., "Pennsylvania Democratic" vs. full committee name)</p>
+        </div>
+
+        <div class="failure-card gray">
+          <h3>Format Violations</h3>
+          <p>Invalid JSON or malformed output — common in models without structured output support</p>
+        </div>
+      </div>
+
+      <div class="key-finding-box">
+        <h3>Key Finding</h3>
+        <p>Model size matters: Large models (30B+ params) show subtle errors; smaller models (&lt;7B) exhibit severe failures including complete task misunderstanding</p>
+      </div>
+
+      <div class="link-box">
+        <h3>📊 Explore Full Results</h3>
+        <a href="https://political-emails.datasette.cloud/data/llm_matches" target="_blank">View complete model-by-model results →</a>
+      </div>
+    </div>
+
+    <!-- Slide 6: Implications -->
+    <div class="slide">
+      <h1>Implications & Next Steps</h1>
+
+      <div class="implications-row">
+        <div class="implications-col">
+          <div class="implication-card green">
+            <h3>✓ Applications</h3>
+            <ul>
+              <li>Link emails to FEC records</li>
+              <li>Scale messaging research</li>
+            </ul>
+          </div>
+
+          <div class="implication-card blue">
+            <h3>🔬 Future Research</h3>
+            <ul>
+              <li>Diverse time periods</li>
+              <li>State and local campaigns</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="implications-col">
+          <div class="implication-card yellow">
+            <h3>⚠️ Limitations</h3>
+            <ul>
+              <li>November 2024 only</li>
+              <li>Federal campaign focus</li>
+            </ul>
+          </div>
+
+          <div class="implication-card light-gray">
+            <h3>💻 Open Source</h3>
+            <p>Code and data on GitHub</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="note" style="margin-top: 30px;">github.com/dwillis/LLM-Extraction-Challenge • political-emails.datasette.cloud</p>
+    </div>
+
+  </div>
+</body>
+</html>
