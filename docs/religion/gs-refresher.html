@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; A Google Sheets Refresher – Data Journalism with R and the Tidyverse</title>
+<title>gs-refresher – Data Journalism with R and the Tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,18 +30,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./gs-filter-sort.html" rel="next">
-<link href="./gs-intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1e717e05cdb46e97d600a3b41640c6da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f0604607799fff6796e44cec71ca6aeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -81,7 +80,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gs-refresher.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Google Sheets Refresher</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Data Journalism with R and the Tidyverse
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -93,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Journalism with R and the Tidyverse</a> 
@@ -109,121 +110,115 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-story.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Learn a new way to read</span></span></a>
+ <span class="menu-text">Learn a new way to read</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-math.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Newsroom math</span></span></a>
+ <span class="menu-text">Newsroom math</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-data-def.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Defining “Data”</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./gs-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./gs-refresher.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Google Sheets Refresher</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./gs-filter-sort.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sorting and filtering to find stories</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./gs-pivot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Grouping with pivot tables</span></span></a>
+ <span class="menu-text">Defining “Data”</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span></a>
+ <span class="menu-text">Ethics in data journalism</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./publicrecords.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Public records</span></span></a>
+ <span class="menu-text">Public records</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Using GitHub</span></span></a>
+ <span class="menu-text">Using GitHub</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+ <span class="menu-text">R Basics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./replication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span></a>
+ <span class="menu-text">Data journalism in the age of replication</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aggregates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregates</span></span></a>
+ <span class="menu-text">Aggregates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./filters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Filters and selections</span></span></a>
+ <span class="menu-text">Filters and selections</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Working with dates</span></span></a>
+ <span class="menu-text">Working with dates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mutating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Mutating data</span></span></a>
+ <span class="menu-text">Mutating data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span></a>
+ <span class="menu-text">Data Cleaning Part I: Data smells</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span></a>
+ <span class="menu-text">Data Cleaning Part II: Janitor</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./open-refine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span></a>
+ <span class="menu-text">Data Cleaning Part III: Open Refine</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pdfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning Data Part IV: PDFs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./merging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Combining and joining</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./census.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to APIs: The Census</span></a>
   </div>
 </li>
     </ul>
@@ -231,51 +226,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#re-learning-sheets-from-the-ground-up" id="toc-re-learning-sheets-from-the-ground-up" class="nav-link active" data-scroll-target="#re-learning-sheets-from-the-ground-up"><span class="header-section-number">6.1</span> Re-learning Sheets from the ground up</a>
-  <ul class="collapse">
-  <li><a href="#the-spreadsheet-grid" id="toc-the-spreadsheet-grid" class="nav-link" data-scroll-target="#the-spreadsheet-grid"><span class="header-section-number">6.1.1</span> The spreadsheet grid</a></li>
-  <li><a href="#mouse-shapes" id="toc-mouse-shapes" class="nav-link" data-scroll-target="#mouse-shapes"><span class="header-section-number">6.1.2</span> Mouse shapes</a></li>
-  <li><a href="#selecting-cells-and-ranges" id="toc-selecting-cells-and-ranges" class="nav-link" data-scroll-target="#selecting-cells-and-ranges"><span class="header-section-number">6.1.3</span> Selecting cells and ranges</a></li>
-  <li><a href="#reading-the-screen" id="toc-reading-the-screen" class="nav-link" data-scroll-target="#reading-the-screen"><span class="header-section-number">6.1.4</span> Reading the screen</a></li>
-  <li><a href="#entering-data" id="toc-entering-data" class="nav-link" data-scroll-target="#entering-data"><span class="header-section-number">6.1.5</span> Entering data</a></li>
-  <li><a href="#locking-in-headings" id="toc-locking-in-headings" class="nav-link" data-scroll-target="#locking-in-headings"><span class="header-section-number">6.1.6</span> Locking in headings</a></li>
-  <li><a href="#formatting-tricks" id="toc-formatting-tricks" class="nav-link" data-scroll-target="#formatting-tricks"><span class="header-section-number">6.1.7</span> Formatting tricks</a></li>
-  </ul></li>
-  <li><a href="#getting-started-with-a-dataset" id="toc-getting-started-with-a-dataset" class="nav-link" data-scroll-target="#getting-started-with-a-dataset"><span class="header-section-number">6.2</span> Getting started with a dataset</a>
-  <ul class="collapse">
-  <li><a href="#first-steps" id="toc-first-steps" class="nav-link" data-scroll-target="#first-steps"><span class="header-section-number">6.2.1</span> First steps</a></li>
-  <li><a href="#interview-your-data" id="toc-interview-your-data" class="nav-link" data-scroll-target="#interview-your-data"><span class="header-section-number">6.2.2</span> Interview your data</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Google Sheets Refresher</span></h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<section id="a-google-sheets-refresher" class="level1">
+<h1>A Google Sheets Refresher</h1>
 <p>Spreadsheets are everywhere, so it’s worth re-learning how to use them well. Reporters usually use spreadsheets in three ways:</p>
 <ul>
 <li><p>To create original databases of events for sorting, filtering and counting. Examples include a long-running court case; the details of each opioid death in a city; a list of police shootings and their documents; or even a list of your own public records requests or contact log.</p></li>
@@ -284,18 +243,18 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>(This guide uses Google Sheets, which works on any operating system with a web browser. The keyboard shortcuts listed work on both Mac and PC.)</p>
 <p>Some reporters flinch at typing in 30 or 100 entries into a spreadsheet. You shouldn’t. If you learn to take notes in a structured way, you’ll always be able to find and verify your work. If you try to calculate a sum of 30 numbers on a calculator, you’ll have to type them all in at least twice anyway. Also, getting used to these easy tasks on a spreadsheet keeps your muscles trained for when you need to do more.</p>
-<section id="re-learning-sheets-from-the-ground-up" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="re-learning-sheets-from-the-ground-up"><span class="header-section-number">6.1</span> Re-learning Sheets from the ground up</h2>
-<section id="the-spreadsheet-grid" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="the-spreadsheet-grid"><span class="header-section-number">6.1.1</span> The spreadsheet grid</h3>
+<section id="re-learning-sheets-from-the-ground-up" class="level2">
+<h2 class="anchored" data-anchor-id="re-learning-sheets-from-the-ground-up">Re-learning Sheets from the ground up</h2>
+<section id="the-spreadsheet-grid" class="level3">
+<h3 class="anchored" data-anchor-id="the-spreadsheet-grid">The spreadsheet grid</h3>
 <div class="pl-2rem float-right col-md-4">
 <p><img src="images/sheets-refresher-battleship.png" class="img-fluid"></p>
 </div>
 <p>When you start up a spreadsheet (try entering sheet.new into your browser!), you’ll see letters across the top and numbers down the side. If you ever played Battleship, you’ll recognize the idea – every little square, or cell, is referenced by the intersection of its column letter and row number:</p>
 <p>B2 is the cell that is currently active. You can tell because it’s outlined in the sheet and it’s shown on the upper left corner.</p>
 </section>
-<section id="mouse-shapes" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="mouse-shapes"><span class="header-section-number">6.1.2</span> Mouse shapes</h3>
+<section id="mouse-shapes" class="level3">
+<h3 class="anchored" data-anchor-id="mouse-shapes">Mouse shapes</h3>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 70%">
@@ -313,8 +272,8 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </section>
-<section id="selecting-cells-and-ranges" class="level3" data-number="6.1.3">
-<h3 data-number="6.1.3" class="anchored" data-anchor-id="selecting-cells-and-ranges"><span class="header-section-number">6.1.3</span> Selecting cells and ranges</h3>
+<section id="selecting-cells-and-ranges" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-cells-and-ranges">Selecting cells and ranges</h3>
 <p>Spreadsheets act only on the cells or regions you have selected. If you begin typing, you’ll start entering information into the currently selected cell.</p>
 <p>To select: Hold the cursor over the cell and click ONCE – <em>not twice</em>. Check the formula bar to make sure you’ve selected what you think you’ve got. You can also look at the bottom right of your spreadsheet for more information.</p>
 <p>You’ll often work with <em>ranges</em> of cells in formulas. These are defined by the corners of the area you want to work on – often a column of information. In the example below, the range is A1:B6, with the “:” referring to the word “through”.</p>
@@ -333,18 +292,18 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p><em>To select a column or row</em> : Hover the cursor over the letter at the top of the column. For a row, hover it over the row number in the margin</p>
 </section>
-<section id="reading-the-screen" class="level3 mt-4" style="clear:both" data-number="6.1.4">
-<h3 data-number="6.1.4" class="anchored" data-anchor-id="reading-the-screen"><span class="header-section-number">6.1.4</span> Reading the screen</h3>
+<section id="reading-the-screen" class="level3 mt-4" style="clear:both">
+<h3 class="anchored" data-anchor-id="reading-the-screen">Reading the screen</h3>
 </section>
 <p>The areas of the spreadsheet have different visual clues, and learning to read them will make your life much easier.</p>
-<section id="entering-data" class="level3" data-number="6.1.5">
-<h3 data-number="6.1.5" class="anchored" data-anchor-id="entering-data"><span class="header-section-number">6.1.5</span> Entering data</h3>
+<section id="entering-data" class="level3">
+<h3 class="anchored" data-anchor-id="entering-data">Entering data</h3>
 <p>Select the cell and start typing. The information you type won’t be locked into the cell until you hit the Return / Enter key, or move your selection to another cell. Hit “Escape” to cancel the entry.</p>
 <p>You can’t do a lot of things while you’re editing, so if you have a lot of greyed out menu items, look at your formula bar to see if you are still editing a cell.</p>
 <p>If you’re having trouble getting to a menu item or seeing the result of your work, try hitting “Escape” and try again. You may not have actually entered the information into the sheet.</p>
 </section>
-<section id="locking-in-headings" class="level3" data-number="6.1.6">
-<h3 data-number="6.1.6" class="anchored" data-anchor-id="locking-in-headings"><span class="header-section-number">6.1.6</span> Locking in headings</h3>
+<section id="locking-in-headings" class="level3">
+<h3 class="anchored" data-anchor-id="locking-in-headings">Locking in headings</h3>
 <p>As your spreadsheet grows vertically with more rows, you’ll want to be able to see the top all the time. When it grows horizontally with more columns, you’ll probably want to see columns in the left, such as names. This is called “Freezing Panes” – you freeze part of the page so it stays in place when you move around.</p>
 <p>In Google Sheets, this is done via the View -&gt; Freeze menu:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -354,20 +313,20 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 </section>
-<section id="formatting-tricks" class="level3" data-number="6.1.7">
-<h3 data-number="6.1.7" class="anchored" data-anchor-id="formatting-tricks"><span class="header-section-number">6.1.7</span> Formatting tricks</h3>
+<section id="formatting-tricks" class="level3">
+<h3 class="anchored" data-anchor-id="formatting-tricks">Formatting tricks</h3>
 <ul>
 <li><p>Use the toolbar buttons or the Format menu to make numbers easier to read.</p></li>
 <li><p>If a column is filled with a lot of text, select the column and look in the toolbar for the “Wrap text” button (it looks like text wrapping around an image). This means that when you double-click to widen a column, it will get taller, not wider. This is good when you need to save valuable real estate on the screen.</p></li>
 </ul>
 </section>
 </section>
-<section id="getting-started-with-a-dataset" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="getting-started-with-a-dataset"><span class="header-section-number">6.2</span> Getting started with a dataset</h2>
+<section id="getting-started-with-a-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started-with-a-dataset">Getting started with a dataset</h2>
 <p><strong>SLOW DOWN!</strong> Don’t do anything until you understand what you have in front of you and can predict what your next mouse click will do to it.</p>
 <p>Most data we encounter was created by someone else for some purpose other than ours. This means that you can’t assume anything. It may not be complete. It may be inaccurate. It may mean something completely different than it appears at first blush.</p>
-<section id="first-steps" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="first-steps"><span class="header-section-number">6.2.1</span> First steps</h3>
+<section id="first-steps" class="level3">
+<h3 class="anchored" data-anchor-id="first-steps">First steps</h3>
 <ul>
 <li>Document where you got the spreadsheet and how you can get back to the original.</li>
 <li>Read anything you can about what it contains. Look for documentation that comes with the data.</li>
@@ -376,22 +335,23 @@ ul.task-list li input[type="checkbox"] {
 <li>Check your corners – look at the top left and bottom right. Is the data all in one area? Are there footnotes or other non-data sections mixed in? We’re going to want to fix that later.</li>
 </ul>
 </section>
-<section id="interview-your-data" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="interview-your-data"><span class="header-section-number">6.2.2</span> Interview your data</h3>
-<section id="headings" class="level4" data-number="6.2.2.1">
-<h4 data-number="6.2.2.1" class="anchored" data-anchor-id="headings"><span class="header-section-number">6.2.2.1</span> Headings</h4>
+<section id="interview-your-data" class="level3">
+<h3 class="anchored" data-anchor-id="interview-your-data">Interview your data</h3>
+<section id="headings" class="level4">
+<h4 class="anchored" data-anchor-id="headings">Headings</h4>
 <p>The most fraught part of data reporting is understanding what each <em>column</em> actually means. These often have cryptic, bureaucratic names. You may need to go back to the source of the data to be sure you actually understand them.</p>
 <p>If your data doesn’t have any headings, that’s going to be your first priority. In effect, you’ll need to build what we call a <em>data dictionary</em> or <em>record layout</em> if one hasn’t been provided. Many reporters create these as a page in a dataset.</p>
 </section>
-<section id="unit-of-analysis" class="level4" data-number="6.2.2.2">
-<h4 data-number="6.2.2.2" class="anchored" data-anchor-id="unit-of-analysis"><span class="header-section-number">6.2.2.2</span> Unit of analysis</h4>
+<section id="unit-of-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="unit-of-analysis">Unit of analysis</h4>
 <p>A <em>unit of analysis</em> refers to the items that are listed in the rows of your dataset. Ideally, every row should be at the same unit of analysis – a person, an inspection, or a city, for example. Summaries should be separated by a blank row, or moved to a different sheet. Think of this as the noun you’d use to describe every row.</p>
 </section>
-<section id="row-numbers" class="level4" data-number="6.2.2.3">
-<h4 data-number="6.2.2.3" class="anchored" data-anchor-id="row-numbers"><span class="header-section-number">6.2.2.3</span> Row numbers</h4>
+<section id="row-numbers" class="level4">
+<h4 class="anchored" data-anchor-id="row-numbers">Row numbers</h4>
 <p>The data was probably given to you in some sort of natural sort order. Different computer systems sort differently – some are case-sensitive, others are not. It may depend on when and where the data was created! The order of the data may even depend on a column you don’t have. If you don’t do something now, you’ll never be able to get back to the original order, which could have meaning for both the agency and for fact-checking.</p>
 
 
+</section>
 </section>
 </section>
 </section>
@@ -448,13 +408,14 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -796,18 +757,6 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./gs-intro.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./gs-filter-sort.html" class="pagination-link" aria-label="Sorting and filtering to find stories">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sorting and filtering to find stories</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

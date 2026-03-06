@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Grouping with pivot tables – Data Journalism with R and the Tidyverse</title>
+<title>gs-pivot – Data Journalism with R and the Tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,18 +30,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ethics.html" rel="next">
-<link href="./gs-filter-sort.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1e717e05cdb46e97d600a3b41640c6da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f0604607799fff6796e44cec71ca6aeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -81,7 +80,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gs-pivot.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Grouping with pivot tables</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Data Journalism with R and the Tidyverse
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -93,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Journalism with R and the Tidyverse</a> 
@@ -109,121 +110,115 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-story.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Learn a new way to read</span></span></a>
+ <span class="menu-text">Learn a new way to read</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-math.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Newsroom math</span></span></a>
+ <span class="menu-text">Newsroom math</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-data-def.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Defining “Data”</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./gs-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./gs-refresher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Google Sheets Refresher</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./gs-filter-sort.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sorting and filtering to find stories</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./gs-pivot.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Grouping with pivot tables</span></span></a>
+ <span class="menu-text">Defining “Data”</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span></a>
+ <span class="menu-text">Ethics in data journalism</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./publicrecords.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Public records</span></span></a>
+ <span class="menu-text">Public records</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Using GitHub</span></span></a>
+ <span class="menu-text">Using GitHub</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+ <span class="menu-text">R Basics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./replication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span></a>
+ <span class="menu-text">Data journalism in the age of replication</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aggregates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Aggregates</span></span></a>
+ <span class="menu-text">Aggregates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./filters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Filters and selections</span></span></a>
+ <span class="menu-text">Filters and selections</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Working with dates</span></span></a>
+ <span class="menu-text">Working with dates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mutating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Mutating data</span></span></a>
+ <span class="menu-text">Mutating data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span></a>
+ <span class="menu-text">Data Cleaning Part I: Data smells</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span></a>
+ <span class="menu-text">Data Cleaning Part II: Janitor</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./open-refine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span></a>
+ <span class="menu-text">Data Cleaning Part III: Open Refine</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pdfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning Data Part IV: PDFs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./merging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Combining and joining</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./census.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to APIs: The Census</span></a>
   </div>
 </li>
     </ul>
@@ -231,52 +226,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#confusing-grouping-with-sorting-or-arranging" id="toc-confusing-grouping-with-sorting-or-arranging" class="nav-link active" data-scroll-target="#confusing-grouping-with-sorting-or-arranging">Confusing grouping with sorting or arranging</a></li>
-  <li><a href="#when-to-use-filter-vs.-pivot-tables" id="toc-when-to-use-filter-vs.-pivot-tables" class="nav-link" data-scroll-target="#when-to-use-filter-vs.-pivot-tables">When to use filter vs.&nbsp;pivot tables</a></li>
-  <li><a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">8.1</span> Tutorial</a>
-  <ul class="collapse">
-  <li><a href="#setting-up-the-pivot-table" id="toc-setting-up-the-pivot-table" class="nav-link" data-scroll-target="#setting-up-the-pivot-table">Setting up the pivot table</a></li>
-  <li><a href="#counting-or-how-many" id="toc-counting-or-how-many" class="nav-link" data-scroll-target="#counting-or-how-many">Counting, or “how many”?</a></li>
-  <li><a href="#even-more-variables" id="toc-even-more-variables" class="nav-link" data-scroll-target="#even-more-variables">Even more variables</a></li>
-  </ul></li>
-  <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq"><span class="header-section-number">8.2</span> FAQ</a>
-  <ul class="collapse">
-  <li><a href="#everything-disappeared" id="toc-everything-disappeared" class="nav-link" data-scroll-target="#everything-disappeared">Everything disappeared!</a></li>
-  <li><a href="#i-have-too-many-columns" id="toc-i-have-too-many-columns" class="nav-link" data-scroll-target="#i-have-too-many-columns">I have too many columns</a></li>
-  <li><a href="#things-arent-adding-up" id="toc-things-arent-adding-up" class="nav-link" data-scroll-target="#things-arent-adding-up">Things aren’t adding up</a></li>
-  <li><a href="#its-a-crazy-number" id="toc-its-a-crazy-number" class="nav-link" data-scroll-target="#its-a-crazy-number">It’s a crazy number!</a></li>
-  <li><a href="#this-is-so-frustrating---i-cant-get-what-i-want" id="toc-this-is-so-frustrating---i-cant-get-what-i-want" class="nav-link" data-scroll-target="#this-is-so-frustrating---i-cant-get-what-i-want">This is so frustrating - I can’t get what I want</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><span id="gs-pivot" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Grouping with pivot tables</span></span></h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<section id="gs-pivot" class="level1">
+<h1>Grouping with pivot tables</h1>
 <p>To get totals for out of state contributions to Maryland’s 2022 gubernatorial primary candidates, Stephen Neukam downloaded data from the State Board of Elections for Wes Moore and other candidates. Make a copy of <a href="https://docs.google.com/spreadsheets/d/1MRpGN-9mJGKZIvKbiCVayKWUNVi75eYxTCcpQapTVjs/edit?usp=sharing">this Google Sheet</a> so we can work with that data.</p>
 <p><a href="https://cnsmaryland.org/2022/03/03/millions-in-out-of-state-donations-help-fuel-high-profile-maryland-democratic-governor-candidates/">Neukam’s story</a> is about out-of-state contributions:</p>
 <blockquote class="blockquote">
@@ -303,8 +261,8 @@ ul.task-list li input[type="checkbox"] {
 <p>A pivot table is used when you <em>just want to see summaries</em> – does my ZIP code have more crime than others? Are robberies more common than car theft in my Zip code, and how does that compare to others?</p>
 <p>In practice, you’ll go back and forth between summary and detail. They’re both important, just different.</p>
 </section>
-<section id="tutorial" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="tutorial"><span class="header-section-number">8.1</span> Tutorial</h2>
+<section id="tutorial" class="level2">
+<h2 class="anchored" data-anchor-id="tutorial">Tutorial</h2>
 <section id="setting-up-the-pivot-table" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="setting-up-the-pivot-table">Setting up the pivot table</h3>
 <p>Start with your cursor somewhere in your data, and choose <em>Insert</em>, then <em>Pivot table</em>. Then hit the <em>Create</em> button.</p>
@@ -343,8 +301,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Your choices here are limited: Copy and paste the values of the pivot table into a new sheet and sort there, or create a new variable by concatenating the name of the month and state into one column.</p>
 </section>
 </section>
-<section id="faq" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="faq"><span class="header-section-number">8.2</span> FAQ</h2>
+<section id="faq" class="level2">
+<h2 class="anchored" data-anchor-id="faq">FAQ</h2>
 <section id="everything-disappeared" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="everything-disappeared">Everything disappeared!</h3>
 <p>If you select something outside of that pivot table on the left, the menu on the right disappears. Select something in the pivot table area and it will likely come back.</p>
@@ -366,6 +324,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Right? It’s time to go to a programming language!</p>
 
 
+</section>
 </section>
 </section>
 
@@ -421,13 +380,14 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -769,18 +729,6 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./gs-filter-sort.html" class="pagination-link" aria-label="Sorting and filtering to find stories">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Sorting and filtering to find stories</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./ethics.html" class="pagination-link" aria-label="Ethics in data journalism">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
