@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -67,15 +67,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f0604607799fff6796e44cec71ca6aeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-473ecfdd1bb03d67fb01ee48dc260190.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -310,20 +309,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We’re going to use a library called <code>tidycensus</code> which makes calls to the Census API in a very tidy way, and gives you back tidy data. That means we don’t have to go through the process of importing the data from a file. I can’t tell you how amazing this is, speaking from experience. The documentation for this library is <a href="https://walker-data.com/tidycensus/">here</a>. Another R library for working with Census APIs (there is more than one) is <a href="https://github.com/hrecht/censusapi">this one</a> from Hannah Recht, a journalist with Kaiser Health News.</p>
 <p>First we need to install <code>tidycensus</code> using the console: <code>install.packages("tidycensus", dependencies = TRUE)</code>. You also should install the <code>sf</code> and <code>rgdal</code> packages.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To use the API, you need an API key. To get that, you need to <a href="https://api.census.gov/data/key_signup.html">apply for an API key with the Census Bureau</a>. It takes a few minutes and you need to activate your key via email. Once you have your key, you need to set that for this session. Just FYI: Your key is your key. Do not share it around.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">census_api_key</span>(<span class="st">"YOUR KEY HERE"</span>, <span class="at">install=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">census_api_key</span>(<span class="st">"YOUR KEY HERE"</span>, <span class="at">install=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The two main functions in tidycensus are <code>get_decennial</code>, which retrieves data from the 2000, 2010 and 2020 Censuses, and <code>get_acs</code>, which pulls data from the American Community Survey, a between-Censuses annual survey that provides estimates, not hard counts, but asks more detailed questions. If you’re new to Census data, there’s <a href="http://walker-data.com/umich-workshop/census-data-in-r/slides/#1">a very good set of slides from Kyle Walker</a>, the creator of tidycensus, and he’s working on a <a href="https://walker-data.com/census-r/index.html">book</a> that you can read for free online.</p>
 <p>It’s important to keep in mind that Census data represents people - you, your neighbors and total strangers. It also requires some level of definitions, especially about race &amp; ethnicity, that may or may not match how you define yourself or how others define themselves.</p>
 <p>So to give you some idea of how complicated the data is, let’s pull up just one file from the decennial Census. We’ll use Summary File 1, or SF1. That has the major population and housing stuff.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sf1 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2010</span>, <span class="st">"sf1"</span>, <span class="at">cache =</span> <span class="cn">TRUE</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sf1 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2010</span>, <span class="st">"sf1"</span>, <span class="at">cache =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sf1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sf1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8,959 × 3
    name    label                                concept         
@@ -344,9 +344,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Note: There are thousands of variables in SF1. That’s not a typo. Open it in your environment by double clicking. As you scroll down, you’ll get an idea of what you’ve got to choose from.</p>
 <p>If you think that’s crazy, try the SF3 file from 2000.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sf3 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2000</span>, <span class="st">"sf3"</span>, <span class="at">cache =</span> <span class="cn">TRUE</span>)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sf3 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2000</span>, <span class="st">"sf3"</span>, <span class="at">cache =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sf3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sf3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 16,520 × 3
    name    label                                       concept                  
@@ -368,29 +368,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>So let’s try to answer a question using the Census. What is the fastest growing state since 2000?</p>
 <p>To answer this, we need to pull the total population by state in each of the decennial census. Here’s 2000.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p00 <span class="ot">&lt;-</span> <span class="fu">get_decennial</span>(<span class="at">geography =</span> <span class="st">"state"</span>, <span class="at">variables =</span> <span class="st">"P001001"</span>, <span class="at">year =</span> <span class="dv">2000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p00 <span class="ot">&lt;-</span> <span class="fu">get_decennial</span>(<span class="at">geography =</span> <span class="st">"state"</span>, <span class="at">variables =</span> <span class="st">"P001001"</span>, <span class="at">year =</span> <span class="dv">2000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now 2010.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p10 <span class="ot">&lt;-</span> <span class="fu">get_decennial</span>(<span class="at">geography =</span> <span class="st">"state"</span>, <span class="at">variables =</span> <span class="st">"P001001"</span>, <span class="at">year =</span> <span class="dv">2010</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p10 <span class="ot">&lt;-</span> <span class="fu">get_decennial</span>(<span class="at">geography =</span> <span class="st">"state"</span>, <span class="at">variables =</span> <span class="st">"P001001"</span>, <span class="at">year =</span> <span class="dv">2010</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s take a peek at 2010.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p10</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As you can see, we have a GEOID, NAME, then variable and value. Variable and value are going to be the same. Because those are named the same thing, to merge them together, we need to rename them.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p10 <span class="sc">|&gt;</span> <span class="fu">select</span>(GEOID, NAME, value) <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">Population2010=</span>value) <span class="ot">-&gt;</span> p2010</span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p10 <span class="sc">|&gt;</span> <span class="fu">select</span>(GEOID, NAME, value) <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">Population2010=</span>value) <span class="ot">-&gt;</span> p2010</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>p00 <span class="sc">|&gt;</span> <span class="fu">select</span>(GEOID, NAME, value) <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">Population2000=</span>value) <span class="ot">-&gt;</span> p2000</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>p00 <span class="sc">|&gt;</span> <span class="fu">select</span>(GEOID, NAME, value) <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">Population2000=</span>value) <span class="ot">-&gt;</span> p2000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we join the data together.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>alldata <span class="ot">&lt;-</span> p2000 <span class="sc">|&gt;</span> <span class="fu">inner_join</span>(p2010)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>alldata <span class="ot">&lt;-</span> p2000 <span class="sc">|&gt;</span> <span class="fu">inner_join</span>(p2010)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And now we calculate the percent change.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alldata <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">change =</span> ((Population2010<span class="sc">-</span>Population2000)<span class="sc">/</span>Population2000)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(change))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alldata <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">change =</span> ((Population2010<span class="sc">-</span>Population2000)<span class="sc">/</span>Population2000)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(change))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And just like that: Nevada.</p>
 <p>You may be asking: hey, wasn’t there a 2020 Census? Where’s that data? The answer is that it’s coming, slowly - the Census Bureau has a <a href="https://www.census.gov/programs-surveys/popest/about/schedule.html">schedule of releases</a>.</p>
@@ -401,16 +401,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>What is Maryland’s richest county?</p>
 <p>We can measure this by median household income. That variable is <code>B19013_001</code>, so we can get that data like this (I’m narrowing it to the top 20 for simplicity):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">medincome =</span> <span class="st">"B19013_001"</span>),</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">state =</span> <span class="st">"MD"</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">year =</span> <span class="dv">2024</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">year =</span> <span class="dv">2024</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Getting data from the 2020-2024 5-year ACS</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> md <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(estimate)) <span class="sc">|&gt;</span> <span class="fu">top_n</span>(<span class="dv">20</span>, estimate)</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> md <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(estimate)) <span class="sc">|&gt;</span> <span class="fu">top_n</span>(<span class="dv">20</span>, estimate)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>md</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 5
    GEOID NAME                             variable  estimate   moe
@@ -439,7 +439,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Howard, Calvert, Montgomery, Anne Arundel, Charles. What do they all have in common? Lots of suburban flight from DC and Baltimore. But do the margins of error let us say one county is richer than the other. We can find this out visually using error bars. Don’t worry much about the code here – we’ll cover that soon enough.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>md <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>md <span class="sc">|&gt;</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">NAME =</span> <span class="fu">gsub</span>(<span class="st">" County, Maryland"</span>, <span class="st">""</span>, NAME)) <span class="sc">|&gt;</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> <span class="fu">reorder</span>(NAME, estimate))) <span class="sc">+</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> estimate <span class="sc">-</span> moe, <span class="at">xmax =</span> estimate <span class="sc">+</span> moe)) <span class="sc">+</span></span>
@@ -447,9 +447,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Household income by county in Maryland"</span>,</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"2020-2024 American Community Survey"</span>,</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>,</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"ACS estimate (bars represent margin of error)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"ACS estimate (bars represent margin of error)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: `geom_errobarh()` was deprecated in ggplot2 4.0.0.
+<pre><code>Warning: `geom_errorbarh()` was deprecated in ggplot2 4.0.0.
 ℹ Please use the `orientation` argument of `geom_errorbar()` instead.</code></pre>
 </div>
 <div class="cell-output-display">
@@ -461,36 +461,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>As you can see, some of the error bars are quite wide. Some are narrow. But if the bars overlap, it means the difference between the two counties is within the margin of error, and the differences aren’t statistically significant. So is the difference between Calvert and Montgomery significant? Nope. Is the difference between Howard and everyone else significant? Yes it is.</p>
-<p>Let’s ask another question of the ACS – did any counties lose income from the time of the global financial crisis to the current 5-year window?</p>
+<p>Let’s ask another question of the ACS – has every Maryland county’s median income recovered from the time of the global financial crisis to the current 5-year window?</p>
 <p>Let’s re-label our first household income data.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>md24 <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,</span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>md24 <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">medincome =</span> <span class="st">"B19013_001"</span>),</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">state =</span> <span class="st">"MD"</span>,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">year =</span> <span class="dv">2024</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">year =</span> <span class="dv">2024</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Getting data from the 2020-2024 5-year ACS</code></pre>
 </div>
 </div>
 <p>And now we grab the 2010 median household income.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>md10 <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,</span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>md10 <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">medincome =</span> <span class="st">"B19013_001"</span>),</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">state =</span> <span class="st">"MD"</span>,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">year =</span> <span class="dv">2010</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">year =</span> <span class="dv">2010</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Getting data from the 2006-2010 5-year ACS</code></pre>
 </div>
 </div>
 <p>What I’m going to do next is a lot, but each step is simple. I’m going to join the data together, so each county has one line of data. Then I’m going to rename some fields that repeat. Then I’m going to calculate the minimum and maximum value of the estimate using the margin of error. That’ll help me later. After that, I’m going to calculate a percent change and sort it by that change.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>md10 <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>md10 <span class="sc">|&gt;</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(md24, <span class="fu">join_by</span>(GEOID, NAME)) <span class="sc">|&gt;</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">estimate2010=</span>estimate.x, <span class="at">estimate2024=</span>estimate.y) <span class="sc">|&gt;</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">min2010 =</span> estimate2010<span class="sc">-</span>moe.x, <span class="at">max2010 =</span> estimate2010<span class="sc">+</span>moe.x, <span class="at">min2024 =</span> estimate2024<span class="sc">-</span>moe.y, <span class="at">max2024 =</span> estimate2024<span class="sc">+</span>moe.y) <span class="sc">|&gt;</span></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>variable.x, <span class="sc">-</span>variable.y, <span class="sc">-</span>moe.x, <span class="sc">-</span>moe.y) <span class="sc">|&gt;</span></span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">change =</span> ((estimate2024<span class="sc">-</span>estimate2010)<span class="sc">/</span>estimate2010)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(change)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 24 × 9
    GEOID NAME   estimate2010 estimate2024 min2010 max2010 min2024 max2024 change
@@ -513,7 +513,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Look at the min and max values for both. Is the change statistically significant?</p>
 <p>The ACS data has lots of variables, just like the decennial Census does. To browse them, you can do this:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>v24 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2024</span>, <span class="st">"acs5"</span>, <span class="at">cache=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>v24 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2024</span>, <span class="st">"acs5"</span>, <span class="at">cache=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And then view <code>v24</code> to see what kinds of variables are available via the API.</p>
 </section>
@@ -525,14 +525,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="sorting-results">Sorting Results</h2>
 <p>You’ll notice that we’ve used <code>arrange</code> to sort the results of tidycensus functions, although that’s done after we create a new variable to hold the data. There’s another way to use <code>arrange</code> that you should know about, one that you can use for exploratory analysis. An example using median household income:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>md24 <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,</span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>md24 <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">medincome =</span> <span class="st">"B19013_001"</span>),</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">state =</span> <span class="st">"MD"</span>,</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">year =</span> <span class="dv">2024</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">year =</span> <span class="dv">2024</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Getting data from the 2020-2024 5-year ACS</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(md24, <span class="fu">desc</span>(estimate))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(md24, <span class="fu">desc</span>(estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 24 × 5
    GEOID NAME                          variable  estimate   moe
@@ -556,8 +556,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="combining-with-other-data">Combining with Other Data</h2>
 <p>Combining Census data with other types of data really unlocks its power for journalism. In this case, we’ll use some 2019-20 data from Maryland high schools, including the number of graduates and the number of students who enrolled in college the next fall semester, plus the percentage. We also have the zip code of the high school, which will enable us to bring in Census data. Let’s load the CSV file and make sure the zip code is a character column, because that’s what we’ll need to join.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>md_high_schools <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/md_high_schools.csv"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip =</span> <span class="fu">as.character</span>(zip))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>md_high_schools <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/md_high_schools.csv"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip =</span> <span class="fu">as.character</span>(zip))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 201 Columns: 7
 ── Column specification ────────────────────────────────────────────────────────
@@ -571,27 +571,27 @@ dbl (4): zip, high_school_graduates, enrollment, percent_of_high_school_grad...
 </div>
 <p>The Census Bureau has Zip Code Tabulation Areas - they are mostly identical to what we know as zip codes, with some small differences. In most cases we can use them interchangeably. Let’s get ZCTA household income data from the ACS using tidycensus for each zip code in <code>md_high_schools</code>. Run the following codeblock to retrieve household income data for all Maryland ZCTAs first, then join them to <code>md_high_schools</code> using the GEOID column. We’ll also create min and max values and drop any rows where we don’t have income estimates. What’s one question we could ask of this data now that we have enrollment percentages and household income for the high school’s zip code? What might make the answer harder to interpret?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>md_zipcodes <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography=</span><span class="st">"zcta"</span>, <span class="at">variables =</span> <span class="st">"B19013_001"</span>, <span class="at">state=</span><span class="st">'MD'</span>, <span class="at">year=</span><span class="dv">2019</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>md_zipcodes <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography=</span><span class="st">"zcta"</span>, <span class="at">variables =</span> <span class="st">"B19013_001"</span>, <span class="at">state=</span><span class="st">'MD'</span>, <span class="at">year=</span><span class="dv">2019</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Getting data from the 2015-2019 5-year ACS</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>md_high_schools_with_acs <span class="ot">&lt;-</span> md_high_schools <span class="sc">|&gt;</span> <span class="fu">left_join</span>(md_zipcodes, <span class="at">by=</span><span class="fu">c</span>(<span class="st">'zip'</span><span class="ot">=</span><span class="st">'GEOID'</span>))</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>md_high_schools_with_acs <span class="ot">&lt;-</span> md_high_schools_with_acs <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">min=</span>(estimate<span class="sc">-</span>moe), <span class="at">max=</span>(estimate<span class="sc">+</span>moe)) <span class="sc">|&gt;</span> <span class="fu">drop_na</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>md_high_schools_with_acs <span class="ot">&lt;-</span> md_high_schools <span class="sc">|&gt;</span> <span class="fu">left_join</span>(md_zipcodes, <span class="at">by=</span><span class="fu">c</span>(<span class="st">'zip'</span><span class="ot">=</span><span class="st">'GEOID'</span>))</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>md_high_schools_with_acs <span class="ot">&lt;-</span> md_high_schools_with_acs <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">min=</span>(estimate<span class="sc">-</span>moe), <span class="at">max=</span>(estimate<span class="sc">+</span>moe)) <span class="sc">|&gt;</span> <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now let’s look at the average household income for high schools that have 60% or more graduates immediately enrolling in college, and then look at those with less than 40%. What do you see here?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>md_high_schools_with_acs <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>md_high_schools_with_acs <span class="sc">|&gt;</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(percent_of_high_school_graduates_enrolled <span class="sc">&gt;=</span> <span class="dv">60</span>) <span class="sc">|&gt;</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_income =</span> <span class="fu">mean</span>(estimate), <span class="at">count =</span><span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_income =</span> <span class="fu">mean</span>(estimate), <span class="at">count =</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   avg_income count
        &lt;dbl&gt; &lt;int&gt;
 1    111448.    50</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>md_high_schools_with_acs <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>md_high_schools_with_acs <span class="sc">|&gt;</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(percent_of_high_school_graduates_enrolled <span class="sc">&lt;=</span> <span class="dv">40</span>) <span class="sc">|&gt;</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_income =</span> <span class="fu">mean</span>(estimate), <span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_income =</span> <span class="fu">mean</span>(estimate), <span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   avg_income count
@@ -604,9 +604,9 @@ dbl (4): zip, high_school_graduates, enrollment, percent_of_high_school_grad...
 <h2 class="anchored" data-anchor-id="joining-census-data-with-u.s.-religion-census-data">Joining Census Data with U.S. Religion Census Data</h2>
 <p>Now that we’ve learned how to work with Census API data, let’s combine it with data from the 2020 U.S. Religion Census. This will let us explore the relationship between demographic characteristics and religious adherence patterns.</p>
 <p>The key to joining these datasets is the FIPS code - a standardized geographic identifier used by the Census Bureau. State FIPS codes are 2 digits, and county FIPS codes are 5 digits (state + county).</p>
-<p>Let’s start by reading in the U.S. Religion Census data at both the state and county levels:</p>
+<p>Let’s start by reading in the U.S. Religion Census data at both the state and county levels. We’ll use <code>clean_names()</code> to convert the column names to a consistent format: lowercase, with spaces and special characters replaced by underscores. One thing to note: R column names can’t start with a number, so <code>2020 Population</code> becomes <code>x2020_population</code> – the <code>x</code> is added automatically as a prefix.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>religion_state <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/usreligioncensus_state_2020.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>religion_state <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/usreligioncensus_state_2020.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 51 Columns: 20
 ── Column specification ────────────────────────────────────────────────────────
@@ -618,7 +618,7 @@ num (5): 2020 Population, Congregations, Adherents, # of Congregations, # of...
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>religion_county <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/usreligioncensus_county_2020.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>religion_county <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/usreligioncensus_county_2020.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 3143 Columns: 21
 ── Column specification ────────────────────────────────────────────────────────
@@ -630,69 +630,69 @@ num (10): 2020 Population, Population Rank, Congregations, Congregations Ran...
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(religion_state)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(religion_state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 51
 Columns: 20
-$ `State Code`                           &lt;chr&gt; "01", "02", "04", "05", "06", "…
-$ `State Name`                           &lt;chr&gt; "Alabama", "Alaska", "Arizona",…
-$ `2020 Population`                      &lt;dbl&gt; 5024279, 733391, 7151502, 30115…
-$ `Population Rank`                      &lt;dbl&gt; 24, 48, 14, 33, 1, 21, 29, 45, …
-$ Congregations                          &lt;dbl&gt; 10756, 1264, 5244, 7428, 23567,…
-$ `Congregations Rank`                   &lt;dbl&gt; 11, 45, 28, 18, 2, 32, 35, 47, …
-$ `Congregations per 100,000 Population` &lt;dbl&gt; 214.1, 172.4, 73.3, 246.7, 59.6…
-$ `Congregations Per 100,000 Pop. Rank`  &lt;dbl&gt; 5, 11, 45, 1, 50, 44, 42, 35, 3…
-$ Adherents                              &lt;dbl&gt; 3195509, 258020, 3151361, 17395…
-$ `Adherents Rank`                       &lt;dbl&gt; 15, 49, 17, 30, 1, 28, 31, 45, …
-$ `Adherents as % of Population`         &lt;chr&gt; "63.60%", "35.18%", "44.07%", "…
-$ `Adherents as % of Population Rank`    &lt;dbl&gt; 2, 47, 35, 6, 34, 46, 28, 40, 7…
-$ `Largest Body by # of Congregations`   &lt;chr&gt; "Southern Baptist Convention", …
-$ `# of Congregations`                   &lt;dbl&gt; 3265, 194, 932, 1551, 2323, 568…
-$ `% of All Congregations`               &lt;chr&gt; "30.4%", "15.3%", "17.8%", "20.…
-$ `Largest Body by # of Adherents`       &lt;chr&gt; "Southern Baptist Convention", …
-$ `# of Adherents`                       &lt;dbl&gt; 1255396, 73930, 1522410, 607751…
-$ `% of All Adherents`                   &lt;chr&gt; "39.3%", "28.7%", "48.3%", "34.…
-$ `Diversity Index Value`                &lt;dbl&gt; 0.6776, 0.5413, 0.6261, 0.6649,…
-$ `Diversity Index Value Rank`           &lt;dbl&gt; 9, 47, 32, 16, 33, 45, 31, 37, …</code></pre>
+$ state_code                              &lt;chr&gt; "01", "02", "04", "05", "06", …
+$ state_name                              &lt;chr&gt; "Alabama", "Alaska", "Arizona"…
+$ x2020_population                        &lt;dbl&gt; 5024279, 733391, 7151502, 3011…
+$ population_rank                         &lt;dbl&gt; 24, 48, 14, 33, 1, 21, 29, 45,…
+$ congregations                           &lt;dbl&gt; 10756, 1264, 5244, 7428, 23567…
+$ congregations_rank                      &lt;dbl&gt; 11, 45, 28, 18, 2, 32, 35, 47,…
+$ congregations_per_100_000_population    &lt;dbl&gt; 214.1, 172.4, 73.3, 246.7, 59.…
+$ congregations_per_100_000_pop_rank      &lt;dbl&gt; 5, 11, 45, 1, 50, 44, 42, 35, …
+$ adherents                               &lt;dbl&gt; 3195509, 258020, 3151361, 1739…
+$ adherents_rank                          &lt;dbl&gt; 15, 49, 17, 30, 1, 28, 31, 45,…
+$ adherents_as_percent_of_population      &lt;chr&gt; "63.60%", "35.18%", "44.07%", …
+$ adherents_as_percent_of_population_rank &lt;dbl&gt; 2, 47, 35, 6, 34, 46, 28, 40, …
+$ largest_body_by_number_of_congregations &lt;chr&gt; "Southern Baptist Convention",…
+$ number_of_congregations                 &lt;dbl&gt; 3265, 194, 932, 1551, 2323, 56…
+$ percent_of_all_congregations            &lt;chr&gt; "30.4%", "15.3%", "17.8%", "20…
+$ largest_body_by_number_of_adherents     &lt;chr&gt; "Southern Baptist Convention",…
+$ number_of_adherents                     &lt;dbl&gt; 1255396, 73930, 1522410, 60775…
+$ percent_of_all_adherents                &lt;chr&gt; "39.3%", "28.7%", "48.3%", "34…
+$ diversity_index_value                   &lt;dbl&gt; 0.6776, 0.5413, 0.6261, 0.6649…
+$ diversity_index_value_rank              &lt;dbl&gt; 9, 47, 32, 16, 33, 45, 31, 37,…</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(religion_county)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(religion_county)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 3,143
 Columns: 21
-$ FIPS                                   &lt;chr&gt; "01001", "01003", "01005", "010…
-$ `State Name`                           &lt;chr&gt; "Alabama", "Alabama", "Alabama"…
-$ `County Name`                          &lt;chr&gt; "Autauga County", "Baldwin Coun…
-$ `2020 Population`                      &lt;dbl&gt; 58805, 231767, 25223, 22293, 59…
-$ `Population Rank`                      &lt;dbl&gt; 886, 296, 1595, 1699, 882, 2385…
-$ Congregations                          &lt;dbl&gt; 110, 285, 93, 81, 145, 43, 89, …
-$ `Congregations Rank`                   &lt;dbl&gt; 804, 236, 972, 1134, 556, 1908,…
-$ `Congregations Per 100,000 Population` &lt;dbl&gt; 187.1, 123.0, 368.7, 363.3, 245…
-$ `Congregations Per 100,000 Pop. Rank`  &lt;dbl&gt; 1825, 2478, 524, 543, 1317, 344…
-$ Adherents                              &lt;dbl&gt; 30249, 124351, 17330, 10887, 33…
-$ `Adherents Rank`                       &lt;dbl&gt; 825, 264, 1249, 1675, 747, 2368…
-$ `Adherents as % of Population`         &lt;chr&gt; "51.44%", "53.65%", "68.71%", "…
-$ `Adherents as % of Population Rank`    &lt;dbl&gt; 1273, 1111, 409, 1472, 912, 160…
-$ `Largest Body by # of Congregations`   &lt;chr&gt; "Southern Baptist Convention", …
-$ `# of Congregations`                   &lt;dbl&gt; 34, 68, 25, 42, 74, 10, 36, 88,…
-$ `% of All Congregations`               &lt;chr&gt; "30.9%", "23.9%", "26.9%", "51.…
-$ `Largest Body by # of Adherents`       &lt;chr&gt; "Southern Baptist Convention", …
-$ `# of Adherents`                       &lt;dbl&gt; 17115, 37107, 4884, 8003, 23602…
-$ `% of All Adherents`                   &lt;chr&gt; "56.6%", "29.8%", "28.2%", "73.…
-$ `Diversity Index Value`                &lt;dbl&gt; 0.5943, 0.6756, 0.7306, 0.5428,…
-$ `Diversity Index Value Rank`           &lt;dbl&gt; 1597, 539, 92, 2234, 1696, 1058…</code></pre>
+$ fips                                    &lt;chr&gt; "01001", "01003", "01005", "01…
+$ state_name                              &lt;chr&gt; "Alabama", "Alabama", "Alabama…
+$ county_name                             &lt;chr&gt; "Autauga County", "Baldwin Cou…
+$ x2020_population                        &lt;dbl&gt; 58805, 231767, 25223, 22293, 5…
+$ population_rank                         &lt;dbl&gt; 886, 296, 1595, 1699, 882, 238…
+$ congregations                           &lt;dbl&gt; 110, 285, 93, 81, 145, 43, 89,…
+$ congregations_rank                      &lt;dbl&gt; 804, 236, 972, 1134, 556, 1908…
+$ congregations_per_100_000_population    &lt;dbl&gt; 187.1, 123.0, 368.7, 363.3, 24…
+$ congregations_per_100_000_pop_rank      &lt;dbl&gt; 1825, 2478, 524, 543, 1317, 34…
+$ adherents                               &lt;dbl&gt; 30249, 124351, 17330, 10887, 3…
+$ adherents_rank                          &lt;dbl&gt; 825, 264, 1249, 1675, 747, 236…
+$ adherents_as_percent_of_population      &lt;chr&gt; "51.44%", "53.65%", "68.71%", …
+$ adherents_as_percent_of_population_rank &lt;dbl&gt; 1273, 1111, 409, 1472, 912, 16…
+$ largest_body_by_number_of_congregations &lt;chr&gt; "Southern Baptist Convention",…
+$ number_of_congregations                 &lt;dbl&gt; 34, 68, 25, 42, 74, 10, 36, 88…
+$ percent_of_all_congregations            &lt;chr&gt; "30.9%", "23.9%", "26.9%", "51…
+$ largest_body_by_number_of_adherents     &lt;chr&gt; "Southern Baptist Convention",…
+$ number_of_adherents                     &lt;dbl&gt; 17115, 37107, 4884, 8003, 2360…
+$ percent_of_all_adherents                &lt;chr&gt; "56.6%", "29.8%", "28.2%", "73…
+$ diversity_index_value                   &lt;dbl&gt; 0.5943, 0.6756, 0.7306, 0.5428…
+$ diversity_index_value_rank              &lt;dbl&gt; 1597, 539, 92, 2234, 1696, 105…</code></pre>
 </div>
 </div>
-<p>Notice that the state data has a “State Code” column (FIPS code) and the county data has a “FIPS” column (5-digit county FIPS). These are the keys we’ll use to join with Census data.</p>
+<p>Notice that the state data has a <code>state_code</code> column (FIPS code) and the county data has a <code>fips</code> column (5-digit county FIPS). These are the keys we’ll use to join with Census data.</p>
 <section id="state-level-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="state-level-analysis">State-Level Analysis</h3>
 <p>Let’s get state-level population data from the 2020 Census and join it with the religion census data to explore which states have the highest percentage of religious adherents.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get 2020 state population from Census</span></span>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get 2020 state population from Census</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>state_pop_2020 <span class="ot">&lt;-</span> <span class="fu">get_decennial</span>(</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">geography =</span> <span class="st">"state"</span>,</span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="st">"P1_001N"</span>,  <span class="co"># Total population</span></span>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2020</span></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Getting data from the 2020 decennial Census</code></pre>
 </div>
@@ -706,24 +706,24 @@ introduces errors into data to preserve respondent confidentiality.
 ℹ See https://www.census.gov/library/fact-sheets/2021/protecting-the-confidentiality-of-the-2020-census-redistricting-data.html for additional guidance.
 This message is displayed once per session.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean the religion data and prepare for joining</span></span>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean the religion data and prepare for joining</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>religion_state_clean <span class="ot">&lt;-</span> religion_state <span class="sc">|&gt;</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Make sure State Code is character for joining</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">State Code</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.character</span>(<span class="st">`</span><span class="at">State Code</span><span class="st">`</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Make sure state_code is character for joining</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state_code =</span> <span class="fu">as.character</span>(state_code)) <span class="sc">|&gt;</span></span>
 <span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pad single-digit state codes with leading zero</span></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">State Code</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">str_pad</span>(<span class="st">`</span><span class="at">State Code</span><span class="st">`</span>, <span class="at">width =</span> <span class="dv">2</span>, <span class="at">pad =</span> <span class="st">"0"</span>))</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state_code =</span> <span class="fu">str_pad</span>(state_code, <span class="at">width =</span> <span class="dv">2</span>, <span class="at">pad =</span> <span class="st">"0"</span>))</span>
 <span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Join the datasets</span></span>
 <span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>state_religion_combined <span class="ot">&lt;-</span> state_pop_2020 <span class="sc">|&gt;</span></span>
-<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(religion_state_clean, <span class="fu">join_by</span>(GEOID <span class="sc">==</span> <span class="st">`</span><span class="at">State Code</span><span class="st">`</span>))</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(religion_state_clean, <span class="fu">join_by</span>(GEOID <span class="sc">==</span> state_code))</span>
 <span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="co"># View the combined data</span></span>
 <span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>state_religion_combined <span class="sc">|&gt;</span></span>
-<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, value, <span class="st">`</span><span class="at">State Name</span><span class="st">`</span>, Adherents, <span class="st">`</span><span class="at">Adherents as % of Population</span><span class="st">`</span>, <span class="st">`</span><span class="at">Diversity Index Value</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
-<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">Adherents as % of Population</span><span class="st">`</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, value, state_name, adherents, adherents_as_percent_of_population, diversity_index_value) <span class="sc">|&gt;</span></span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(adherents_as_percent_of_population))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 51 × 6
-   NAME                    value `State Name`   Adherents Adherents as % of Po…¹
+   NAME                    value state_name     adherents adherents_as_percent…¹
    &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;                 
  1 Utah                  3271616 Utah             2489571 76.10%                
  2 Alabama               5024279 Alabama          3195509 63.60%                
@@ -736,179 +736,175 @@ This message is displayed once per session.</code></pre>
  9 South Dakota           886667 South Dakota      491026 55.38%                
 10 Texas                29145505 Texas           16045479 55.05%                
 # ℹ 41 more rows
-# ℹ abbreviated name: ¹​`Adherents as % of Population`
-# ℹ 1 more variable: `Diversity Index Value` &lt;dbl&gt;</code></pre>
+# ℹ abbreviated name: ¹​adherents_as_percent_of_population
+# ℹ 1 more variable: diversity_index_value &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>The U.S. Religion Census calculates a diversity index that measures how religiously diverse each state is. Let’s examine religious diversity by state to see if there are any patterns:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Most diverse states</span></span>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Most diverse states</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>state_religion_combined <span class="sc">|&gt;</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, value, <span class="st">`</span><span class="at">Diversity Index Value</span><span class="st">`</span>, Adherents, <span class="st">`</span><span class="at">Adherents as % of Population</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">Diversity Index Value</span><span class="st">`</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, value, diversity_index_value, adherents, adherents_as_percent_of_population) <span class="sc">|&gt;</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(diversity_index_value)) <span class="sc">|&gt;</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 5
-   NAME            value Diversity Index Valu…¹ Adherents Adherents as % of Po…²
-   &lt;chr&gt;           &lt;dbl&gt;                  &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                 
- 1 District of C… 6.90e5                  0.751    389241 56.45%                
- 2 Louisiana      4.66e6                  0.727   2949420 63.32%                
- 3 South Dakota   8.87e5                  0.705    491026 55.38%                
- 4 Texas          2.91e7                  0.699  16045479 55.05%                
- 5 North Dakota   7.79e5                  0.697    428647 55.02%                
- 6 Idaho          1.84e6                  0.685    969901 52.74%                
- 7 North Carolina 1.04e7                  0.683   5443737 52.15%                
- 8 Illinois       1.28e7                  0.681   6510363 50.81%                
- 9 Alabama        5.02e6                  0.678   3195509 63.60%                
-10 South Carolina 5.12e6                  0.677   2695900 52.67%                
-# ℹ abbreviated names: ¹​`Diversity Index Value`,
-#   ²​`Adherents as % of Population`</code></pre>
+   NAME             value diversity_index_value adherents adherents_as_percent…¹
+   &lt;chr&gt;            &lt;dbl&gt;                 &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                 
+ 1 District of Co… 6.90e5                 0.751    389241 56.45%                
+ 2 Louisiana       4.66e6                 0.727   2949420 63.32%                
+ 3 South Dakota    8.87e5                 0.705    491026 55.38%                
+ 4 Texas           2.91e7                 0.699  16045479 55.05%                
+ 5 North Dakota    7.79e5                 0.697    428647 55.02%                
+ 6 Idaho           1.84e6                 0.685    969901 52.74%                
+ 7 North Carolina  1.04e7                 0.683   5443737 52.15%                
+ 8 Illinois        1.28e7                 0.681   6510363 50.81%                
+ 9 Alabama         5.02e6                 0.678   3195509 63.60%                
+10 South Carolina  5.12e6                 0.677   2695900 52.67%                
+# ℹ abbreviated name: ¹​adherents_as_percent_of_population</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare to least diverse</span></span>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare to least diverse</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>state_religion_combined <span class="sc">|&gt;</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, value, <span class="st">`</span><span class="at">Diversity Index Value</span><span class="st">`</span>, Adherents, <span class="st">`</span><span class="at">Adherents as % of Population</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">Diversity Index Value</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, value, diversity_index_value, adherents, adherents_as_percent_of_population) <span class="sc">|&gt;</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(diversity_index_value) <span class="sc">|&gt;</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 5
-   NAME            value Diversity Index Valu…¹ Adherents Adherents as % of Po…²
-   &lt;chr&gt;           &lt;dbl&gt;                  &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                 
- 1 New Hampshire 1377529                  0.441    374948 27.22%                
- 2 Maine         1362359                  0.489    419523 30.79%                
- 3 Utah          3271616                  0.516   2489571 76.10%                
- 4 Oregon        4237256                  0.522   1405973 33.18%                
- 5 Alaska         733391                  0.541    258020 35.18%                
- 6 Montana       1084225                  0.542    377713 34.84%                
- 7 Colorado      5773714                  0.544   2044440 35.41%                
- 8 Vermont        643077                  0.559    242017 37.63%                
- 9 West Virginia 1793716                  0.566    677633 37.78%                
-10 Nevada        3104614                  0.590   1291778 41.61%                
-# ℹ abbreviated names: ¹​`Diversity Index Value`,
-#   ²​`Adherents as % of Population`</code></pre>
+   NAME            value diversity_index_value adherents adherents_as_percent_…¹
+   &lt;chr&gt;           &lt;dbl&gt;                 &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                  
+ 1 New Hampshire 1377529                 0.441    374948 27.22%                 
+ 2 Maine         1362359                 0.489    419523 30.79%                 
+ 3 Utah          3271616                 0.516   2489571 76.10%                 
+ 4 Oregon        4237256                 0.522   1405973 33.18%                 
+ 5 Alaska         733391                 0.541    258020 35.18%                 
+ 6 Montana       1084225                 0.542    377713 34.84%                 
+ 7 Colorado      5773714                 0.544   2044440 35.41%                 
+ 8 Vermont        643077                 0.559    242017 37.63%                 
+ 9 West Virginia 1793716                 0.566    677633 37.78%                 
+10 Nevada        3104614                 0.590   1291778 41.61%                 
+# ℹ abbreviated name: ¹​adherents_as_percent_of_population</code></pre>
 </div>
 </div>
 </section>
 <section id="county-level-analysis-maryland-example" class="level3">
 <h3 class="anchored" data-anchor-id="county-level-analysis-maryland-example">County-Level Analysis: Maryland Example</h3>
 <p>Now let’s work with county-level data to explore Maryland counties specifically. We’ll join ACS income data with religion census data to see if there’s a relationship between median household income and religious adherence.</p>
+<p>The religion census data includes a <code>congregations_per_100_000_population</code> column, but that rate isn’t very intuitive for Maryland counties – many of which have well under 100,000 people. Garrett County, for example, has about 29,000 people and 96 congregations, which works out to 333 per 100,000. But Garrett County’s population is very far from 100,000 people, so that number is hard to grasp. A per-1,000 rate is more useful here: Garrett County has about 3.3 congregations per 1,000 residents, or roughly 1 for every 300 people.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Maryland county median income</span></span>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Maryland county median income</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>md_income <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">geography =</span> <span class="st">"county"</span>,</span>
 <span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">medincome =</span> <span class="st">"B19013_001"</span>),</span>
 <span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">state =</span> <span class="st">"MD"</span>,</span>
 <span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2021</span></span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Getting data from the 2017-2021 5-year ACS</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter religion data for Maryland counties only</span></span>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter religion data for Maryland counties only</span></span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>md_religion <span class="ot">&lt;-</span> religion_county <span class="sc">|&gt;</span></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">State Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Maryland"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">FIPS =</span> <span class="fu">as.character</span>(FIPS))</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Join the data</span></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>md_combined <span class="ot">&lt;-</span> md_income <span class="sc">|&gt;</span></span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(md_religion, <span class="fu">join_by</span>(GEOID <span class="sc">==</span> FIPS))</span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine the relationship between income and religious adherence</span></span>
-<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>md_combined <span class="sc">|&gt;</span></span>
-<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, estimate, <span class="st">`</span><span class="at">County Name</span><span class="st">`</span>, <span class="st">`</span><span class="at">Adherents as % of Population</span><span class="st">`</span>, <span class="st">`</span><span class="at">Diversity Index Value</span><span class="st">`</span>, Congregations) <span class="sc">|&gt;</span></span>
-<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(estimate))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state_name <span class="sc">==</span> <span class="st">"Maryland"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fips =</span> <span class="fu">as.character</span>(fips)) <span class="sc">|&gt;</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">congregations_per_1k =</span> congregations <span class="sc">/</span> x2020_population <span class="sc">*</span> <span class="dv">1000</span>)</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Join the data</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>md_combined <span class="ot">&lt;-</span> md_income <span class="sc">|&gt;</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(md_religion, <span class="fu">join_by</span>(GEOID <span class="sc">==</span> fips))</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine the relationship between income and religious adherence</span></span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>md_combined <span class="sc">|&gt;</span></span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, estimate, county_name, adherents_as_percent_of_population, diversity_index_value, congregations_per_1k) <span class="sc">|&gt;</span></span>
+<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 24 × 6
-   NAME     estimate `County Name` Adherents as % of Po…¹ Diversity Index Valu…²
-   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;                                   &lt;dbl&gt;
- 1 Howard …   129549 Howard County 43.10%                                  0.628
- 2 Calvert…   120295 Calvert Coun… 41.19%                                  0.594
- 3 Montgom…   117345 Montgomery C… 53.42%                                  0.693
- 4 Anne Ar…   108048 Anne Arundel… 33.86%                                  0.528
- 5 Charles…   107808 Charles Coun… 39.86%                                  0.581
- 6 Frederi…   106129 Frederick Co… 36.68%                                  0.565
- 7 Carroll…   104708 Carroll Coun… 39.79%                                  0.592
- 8 St. Mar…   102859 St. Mary's C… 44.32%                                  0.622
- 9 Queen A…    99597 Queen Anne's… 40.91%                                  0.594
-10 Harford…    98495 Harford Coun… 34.98%                                  0.541
+   NAME        estimate county_name adherents_as_percent…¹ diversity_index_value
+   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                                  &lt;dbl&gt;
+ 1 Howard Cou…   129549 Howard Cou… 43.10%                                 0.628
+ 2 Calvert Co…   120295 Calvert Co… 41.19%                                 0.594
+ 3 Montgomery…   117345 Montgomery… 53.42%                                 0.693
+ 4 Anne Arund…   108048 Anne Arund… 33.86%                                 0.528
+ 5 Charles Co…   107808 Charles Co… 39.86%                                 0.581
+ 6 Frederick …   106129 Frederick … 36.68%                                 0.565
+ 7 Carroll Co…   104708 Carroll Co… 39.79%                                 0.592
+ 8 St. Mary's…   102859 St. Mary's… 44.32%                                 0.622
+ 9 Queen Anne…    99597 Queen Anne… 40.91%                                 0.594
+10 Harford Co…    98495 Harford Co… 34.98%                                 0.541
 # ℹ 14 more rows
-# ℹ abbreviated names: ¹​`Adherents as % of Population`,
-#   ²​`Diversity Index Value`
-# ℹ 1 more variable: Congregations &lt;dbl&gt;</code></pre>
+# ℹ abbreviated name: ¹​adherents_as_percent_of_population
+# ℹ 1 more variable: congregations_per_1k &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>We can dig deeper into the Maryland data by looking at which counties have the most religious diversity and how that relates to other characteristics:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Most diverse Maryland counties</span></span>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Most diverse Maryland counties</span></span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>md_combined <span class="sc">|&gt;</span></span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, estimate, <span class="st">`</span><span class="at">Diversity Index Value</span><span class="st">`</span>, <span class="st">`</span><span class="at">Adherents as % of Population</span><span class="st">`</span>, <span class="st">`</span><span class="at">Largest Body by # of Adherents</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">Diversity Index Value</span><span class="st">`</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, estimate, diversity_index_value, adherents_as_percent_of_population, largest_body_by_number_of_adherents) <span class="sc">|&gt;</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(diversity_index_value)) <span class="sc">|&gt;</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 5
-   NAME                   estimate Diversity Index Valu…¹ Adherents as % of Po…²
-   &lt;chr&gt;                     &lt;dbl&gt;                  &lt;dbl&gt; &lt;chr&gt;                 
- 1 Worcester County, Mar…    71262                  0.752 63.92%                
- 2 Baltimore city, Maryl…    54124                  0.714 51.33%                
- 3 Prince George's Count…    91124                  0.701 50.04%                
- 4 Montgomery County, Ma…   117345                  0.693 53.42%                
- 5 Talbot County, Maryla…    79349                  0.678 49.65%                
- 6 Howard County, Maryla…   129549                  0.628 43.10%                
- 7 St. Mary's County, Ma…   102859                  0.622 44.32%                
- 8 Allegany County, Mary…    51090                  0.601 40.88%                
- 9 Wicomico County, Mary…    63610                  0.601 40.36%                
-10 Calvert County, Maryl…   120295                  0.594 41.19%                
-# ℹ abbreviated names: ¹​`Diversity Index Value`,
-#   ²​`Adherents as % of Population`
-# ℹ 1 more variable: `Largest Body by # of Adherents` &lt;chr&gt;</code></pre>
+   NAME                    estimate diversity_index_value adherents_as_percent…¹
+   &lt;chr&gt;                      &lt;dbl&gt;                 &lt;dbl&gt; &lt;chr&gt;                 
+ 1 Worcester County, Mary…    71262                 0.752 63.92%                
+ 2 Baltimore city, Maryla…    54124                 0.714 51.33%                
+ 3 Prince George's County…    91124                 0.701 50.04%                
+ 4 Montgomery County, Mar…   117345                 0.693 53.42%                
+ 5 Talbot County, Maryland    79349                 0.678 49.65%                
+ 6 Howard County, Maryland   129549                 0.628 43.10%                
+ 7 St. Mary's County, Mar…   102859                 0.622 44.32%                
+ 8 Allegany County, Maryl…    51090                 0.601 40.88%                
+ 9 Wicomico County, Maryl…    63610                 0.601 40.36%                
+10 Calvert County, Maryla…   120295                 0.594 41.19%                
+# ℹ abbreviated name: ¹​adherents_as_percent_of_population
+# ℹ 1 more variable: largest_body_by_number_of_adherents &lt;chr&gt;</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Least diverse Maryland counties</span></span>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Least diverse Maryland counties</span></span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>md_combined <span class="sc">|&gt;</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, estimate, <span class="st">`</span><span class="at">Diversity Index Value</span><span class="st">`</span>, <span class="st">`</span><span class="at">Adherents as % of Population</span><span class="st">`</span>, <span class="st">`</span><span class="at">Largest Body by # of Adherents</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">Diversity Index Value</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, estimate, diversity_index_value, adherents_as_percent_of_population, largest_body_by_number_of_adherents) <span class="sc">|&gt;</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(diversity_index_value) <span class="sc">|&gt;</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 5
-   NAME                   estimate Diversity Index Valu…¹ Adherents as % of Po…²
-   &lt;chr&gt;                     &lt;dbl&gt;                  &lt;dbl&gt; &lt;chr&gt;                 
- 1 Somerset County, Mary…    48661                  0.382 22.59%                
- 2 Cecil County, Maryland    81817                  0.485 29.81%                
- 3 Anne Arundel County, …   108048                  0.528 33.86%                
- 4 Harford County, Maryl…    98495                  0.541 34.98%                
- 5 Dorchester County, Ma…    55652                  0.544 35.62%                
- 6 Baltimore County, Mar…    81846                  0.548 34.66%                
- 7 Caroline County, Mary…    63027                  0.550 35.55%                
- 8 Garrett County, Maryl…    58011                  0.556 37.75%                
- 9 Frederick County, Mar…   106129                  0.565 36.68%                
-10 Washington County, Ma…    67349                  0.569 37.97%                
-# ℹ abbreviated names: ¹​`Diversity Index Value`,
-#   ²​`Adherents as % of Population`
-# ℹ 1 more variable: `Largest Body by # of Adherents` &lt;chr&gt;</code></pre>
+   NAME                    estimate diversity_index_value adherents_as_percent…¹
+   &lt;chr&gt;                      &lt;dbl&gt;                 &lt;dbl&gt; &lt;chr&gt;                 
+ 1 Somerset County, Maryl…    48661                 0.382 22.59%                
+ 2 Cecil County, Maryland     81817                 0.485 29.81%                
+ 3 Anne Arundel County, M…   108048                 0.528 33.86%                
+ 4 Harford County, Maryla…    98495                 0.541 34.98%                
+ 5 Dorchester County, Mar…    55652                 0.544 35.62%                
+ 6 Baltimore County, Mary…    81846                 0.548 34.66%                
+ 7 Caroline County, Maryl…    63027                 0.550 35.55%                
+ 8 Garrett County, Maryla…    58011                 0.556 37.75%                
+ 9 Frederick County, Mary…   106129                 0.565 36.68%                
+10 Washington County, Mar…    67349                 0.569 37.97%                
+# ℹ abbreviated name: ¹​adherents_as_percent_of_population
+# ℹ 1 more variable: largest_body_by_number_of_adherents &lt;chr&gt;</code></pre>
 </div>
 </div>
 </section>
 <section id="exploring-congregations-per-capita" class="level3">
 <h3 class="anchored" data-anchor-id="exploring-congregations-per-capita">Exploring Congregations Per Capita</h3>
-<p>Let’s explore whether wealthier counties have more or fewer congregations per capita:</p>
+<p>Let’s explore whether wealthier counties have more or fewer congregations per capita, using our per-1,000 rate:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>md_combined <span class="sc">|&gt;</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, estimate, <span class="st">`</span><span class="at">Congregations Per 100,000 Population</span><span class="st">`</span>, <span class="st">`</span><span class="at">Adherents as % of Population</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">Congregations Per 100,000 Population</span><span class="st">`</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>md_combined <span class="sc">|&gt;</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME, estimate, congregations_per_1k, adherents_as_percent_of_population) <span class="sc">|&gt;</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(congregations_per_1k)) <span class="sc">|&gt;</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 4
-   NAME                   estimate Congregations Per 10…¹ Adherents as % of Po…²
-   &lt;chr&gt;                     &lt;dbl&gt;                  &lt;dbl&gt; &lt;chr&gt;                 
- 1 Garrett County, Maryl…    58011                   333. 37.75%                
- 2 Kent County, Maryland     64451                   250  38.95%                
- 3 Dorchester County, Ma…    55652                   249  35.62%                
- 4 Worcester County, Mar…    71262                   214. 63.92%                
- 5 Allegany County, Mary…    51090                   213. 40.88%                
- 6 Somerset County, Mary…    48661                   199  22.59%                
- 7 Talbot County, Maryla…    79349                   181. 49.65%                
- 8 Caroline County, Mary…    63027                   180. 35.55%                
- 9 Wicomico County, Mary…    63610                   156. 40.36%                
-10 Washington County, Ma…    67349                   150  37.97%                
-# ℹ abbreviated names: ¹​`Congregations Per 100,000 Population`,
-#   ²​`Adherents as % of Population`</code></pre>
+   NAME                     estimate congregations_per_1k adherents_as_percent…¹
+   &lt;chr&gt;                       &lt;dbl&gt;                &lt;dbl&gt; &lt;chr&gt;                 
+ 1 Garrett County, Maryland    58011                 3.33 37.75%                
+ 2 Kent County, Maryland       64451                 2.50 38.95%                
+ 3 Dorchester County, Mary…    55652                 2.49 35.62%                
+ 4 Worcester County, Maryl…    71262                 2.13 63.92%                
+ 5 Allegany County, Maryla…    51090                 2.13 40.88%                
+ 6 Somerset County, Maryla…    48661                 1.99 22.59%                
+ 7 Talbot County, Maryland     79349                 1.81 49.65%                
+ 8 Caroline County, Maryla…    63027                 1.80 35.55%                
+ 9 Wicomico County, Maryla…    63610                 1.56 40.36%                
+10 Washington County, Mary…    67349                 1.50 37.97%                
+# ℹ abbreviated name: ¹​adherents_as_percent_of_population</code></pre>
 </div>
 </div>
 <p>This combination of Census demographic data with U.S. Religion Census data opens up many possibilities for analyzing the relationship between community characteristics and religious patterns. The FIPS code system makes it straightforward to join these datasets at both state and county levels, allowing for rich comparative analysis.</p>
@@ -970,14 +966,13 @@ This message is displayed once per session.</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
