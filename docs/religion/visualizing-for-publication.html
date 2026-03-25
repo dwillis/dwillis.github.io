@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -69,15 +69,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./visualizing-for-reporting.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f44d2fa0b39953e31839d49989be9305.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1e717e05cdb46e97d600a3b41640c6da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -337,13 +336,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The tool we’re going to use is called <a href="https://www.datawrapper.de/">Datawrapper</a>.</p>
 <p>First, let’s get some data and work with it. We’ll use county-level data from the U.S. Religion Census 2020 — a project that counts congregations and religious adherents across every U.S. county through denominational reporting. We’ve already filtered it to Maryland’s 24 jurisdictions. Let’s look at it.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>md_religion <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/md_religion_bar.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>md_religion <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/md_religion_bar.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(md_religion)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(md_religion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   `County Name`       Congregations Adherents `Largest Body by # of Adherents`  
@@ -365,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/datawrapper1.png" class="img-fluid figure-img" width="677"></p>
+<p><img src="images/datawrapper1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -375,7 +374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/datawrapper2.png" class="img-fluid figure-img" width="1013"></p>
+<p><img src="images/datawrapper2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -385,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/datawrapper3.png" class="img-fluid figure-img" width="511"></p>
+<p><img src="images/datawrapper3.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -396,7 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/datawrapper4.png" class="img-fluid figure-img" width="288"></p>
+<p><img src="images/datawrapper4.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -407,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/datawrapper5.png" class="img-fluid figure-img" width="429"></p>
+<p><img src="images/datawrapper5.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -417,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/datawrapper6.png" class="img-fluid figure-img" width="606"></p>
+<p><img src="images/datawrapper6.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -426,17 +425,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="21.1.1" class="anchored" data-anchor-id="making-a-map"><span class="header-section-number">21.1.1</span> Making a Map</h3>
 <p>Let’s create a choropleth map — one that shows variations in religious adherence rates across Maryland counties. We’ll read in county-level religion census data, which includes FIPS codes that Datawrapper needs to place each county on a map.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>md_religion_county <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/md_religion_choropleth.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>md_religion_county <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/md_religion_choropleth.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In order to make a map, we need to be able to tell Datawrapper that a certain column contains geographic information (besides the name of the county). The easiest way to do that for U.S. maps is to use something called a <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html">FIPS Code</a>. You should read about them so you understand what they are, and think of them as a unique identifier for some geographical entity like a state or county. Our <code>md_religion_county</code> dataframe already has a FIPS code for each county.</p>
 <p>Right now, the “Adherents as % of Population” column is stored as text with a percent sign (like <code>"40.88%"</code>). We need to convert it to a plain number so Datawrapper can use it to color the map.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>md_religion_county <span class="ot">&lt;-</span> md_religion_county <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>md_religion_county <span class="ot">&lt;-</span> md_religion_county <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_adherents =</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(<span class="st">`</span><span class="at">Adherents as % of Population</span><span class="st">`</span>, <span class="st">"%"</span>))</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(md_religion_county, <span class="st">"data/md_religion_choropleth.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(md_religion_county, <span class="st">"data/md_religion_choropleth.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Go back to Datawrapper and click on “New Map”. Click on “Choropleth map” and then choose “USA &gt;&gt; Counties (2022)” for the map base and click the Proceed button.</p>
 <p>Now we can upload the <code>md_religion_choropleth.csv</code> file we just saved using the Upload File button. It should look like the following image:</p>
@@ -444,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/datawrapper7.png" class="img-fluid figure-img" width="674"></p>
+<p><img src="images/datawrapper7.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -454,7 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/datawrapper8.png" class="img-fluid figure-img" width="274"></p>
+<p><img src="images/datawrapper8.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -526,14 +525,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

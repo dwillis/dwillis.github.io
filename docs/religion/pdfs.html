@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -69,15 +69,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./open-refine.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f44d2fa0b39953e31839d49989be9305.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1e717e05cdb46e97d600a3b41640c6da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -339,8 +338,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>There is a version of Tabula that will run inside of R – a library called Tabulizer – but the truth is I’m having the hardest time installing it on my machine, which leads me to believe that trying to install it across a classroom of various machines would be disastrous. The standalone version works just fine, and it provides a useful way for you to see what’s actually going on.</p>
 <p>Unfortunately, harvesting tables from PDFs with Tabula is an exercise in getting your hopes up, only to have them dashed. We’ll start with an example. First, let’s load the tidyverse and janitor.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="easy-does-it" class="level2" data-number="17.1">
 <h2 data-number="17.1" class="anchored" data-anchor-id="easy-does-it"><span class="header-section-number">17.1</span> Easy does it</h2>
@@ -351,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/asarb1.png" class="img-fluid figure-img" width="862"></p>
+<p><img src="images/asarb1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -361,14 +360,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/asarb2.png" class="img-fluid figure-img" width="1560"></p>
+<p><img src="images/asarb2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>You can now export that extracted table to a CSV file using the “Export” button. And then we can read it into R:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>adherents <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tabula-ASARB_Standard_Denominational_Adherents_2022.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>adherents <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tabula-ASARB_Standard_Denominational_Adherents_2022.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 19 Columns: 8
 ── Column specification ────────────────────────────────────────────────────────
@@ -385,7 +384,7 @@ Adherents
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>adherents</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>adherents</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 19 × 8
    Name     `Statistical\rYear` `Full/Active\rMembers` `Other\rMembers` Children
@@ -422,7 +421,7 @@ Adherents
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/census1.png" class="img-fluid figure-img" width="611"></p>
+<p><img src="images/census1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -433,7 +432,7 @@ Adherents
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/census2.png" class="img-fluid figure-img" width="886"></p>
+<p><img src="images/census2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -443,7 +442,7 @@ Adherents
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/census3.png" class="img-fluid figure-img" width="710"></p>
+<p><img src="images/census3.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -453,14 +452,14 @@ Adherents
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="images/census4.png" class="img-fluid figure-img" width="891"></p>
+<p><img src="images/census4.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>You can now export that extracted table to a CSV file using the “Export” button. And then we can read it into R and clean up the column names and some other things:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>adherents <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tabula-11s0077.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>adherents <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tabula-11s0077.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 25 Columns: 10
 ── Column specification ────────────────────────────────────────────────────────
@@ -472,7 +471,7 @@ num (3): 133,377, 6,544, 2,813
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>adherents</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>adherents</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 25 × 10
    u_s               x133_377 x47_4 x6_544  x2_1 mo     x2_813 x50_3 x59   x1_0 
@@ -495,7 +494,7 @@ num (3): 133,377, 6,544, 2,813
 <h2 data-number="17.3" class="anchored" data-anchor-id="cleaning-up-the-data-in-r"><span class="header-section-number">17.3</span> Cleaning up the data in R</h2>
 <p>The good news is that we have data we don’t have to retype. The bad news is, we have a few things to fix, starting with the fact that the headers shouldn’t be headers. Let’s start by re-importing it and specifying that the first row doesn’t have column headers:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>census_adherents <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tabula-11s0077.csv"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>census_adherents <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tabula-11s0077.csv"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 26 Columns: 10
 ── Column specification ────────────────────────────────────────────────────────
@@ -507,7 +506,7 @@ num (3): X2, X4, X7
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>census_adherents</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>census_adherents</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 26 × 10
    x1                        x2 x3       x4 x5    x6        x7    x8 x9    x10  
@@ -527,9 +526,9 @@ num (3): X2, X4, X7
 </div>
 <p>Ok, now we have all the data. But we need actual headers. Let’s add those using <code>rename()</code>, keeping in mind that the new name comes <em>first</em>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>census_adherents <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tabula-11s0077.csv"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>census_adherents <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tabula-11s0077.csv"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">state =</span> x1, <span class="at">christian_2000 =</span> x2, <span class="at">christian_2000_pct =</span> x3, <span class="at">jewish_2009 =</span> x4, <span class="at">jewish_2009_pct =</span> x5, <span class="at">state2 =</span> x6, <span class="at">christian_2000_2 =</span> x7, <span class="at">christian_2000_pct_2 =</span> x8,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">jewish_2009_2 =</span> x9, <span class="at">jewish_2009_pct_2 =</span> x10)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">jewish_2009_2 =</span> x9, <span class="at">jewish_2009_pct_2 =</span> x10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 26 Columns: 10
 ── Column specification ────────────────────────────────────────────────────────
@@ -541,7 +540,7 @@ num (3): X2, X4, X7
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>census_adherents</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>census_adherents</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 26 × 10
    state    christian_2000 christian_2000_pct jewish_2009 jewish_2009_pct state2
@@ -565,14 +564,14 @@ num (3): X2, X4, X7
 <h3 data-number="17.3.1" class="anchored" data-anchor-id="splitting-and-recombining"><span class="header-section-number">17.3.1</span> Splitting and recombining</h3>
 <p>We have two sets of columns here, one for each half of the page. Let’s split them apart and then recombine them vertically. We’ll do that using <code>select()</code> to grab the columns we want, <code>rename()</code> to make the column names the same and then <code>bind_rows()</code> to stack them vertically (we’ll learn more about <code>bind_rows()</code> soon). We also make sure that both sets of columns are numeric.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>left_half <span class="ot">&lt;-</span> census_adherents <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>left_half <span class="ot">&lt;-</span> census_adherents <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(state, christian_2000, christian_2000_pct, jewish_2009, jewish_2009_pct) <span class="sc">|&gt;</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">christian_2000 =</span> <span class="fu">as.numeric</span>(christian_2000),</span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">christian_2000_pct =</span> <span class="fu">as.numeric</span>(christian_2000_pct),</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">jewish_2009 =</span> <span class="fu">as.numeric</span>(jewish_2009),</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">jewish_2009_pct =</span> <span class="fu">as.numeric</span>(jewish_2009_pct)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: There were 2 warnings in `mutate()`.
 The first warning was:
@@ -581,7 +580,7 @@ Caused by warning:
 ! NAs introduced by coercion
 ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>right_half <span class="ot">&lt;-</span> census_adherents <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>right_half <span class="ot">&lt;-</span> census_adherents <span class="sc">|&gt;</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(state2, christian_2000_2, christian_2000_pct_2, jewish_2009_2, jewish_2009_pct_2) <span class="sc">|&gt;</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">state =</span> state2,</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">christian_2000 =</span> christian_2000_2,</span>
@@ -593,7 +592,7 @@ Caused by warning:
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">christian_2000_pct =</span> <span class="fu">as.numeric</span>(christian_2000_pct),</span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">jewish_2009 =</span> <span class="fu">as.numeric</span>(jewish_2009),</span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">jewish_2009_pct =</span> <span class="fu">as.numeric</span>(jewish_2009_pct)</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: There were 2 warnings in `mutate()`.
 The first warning was:
@@ -602,11 +601,11 @@ Caused by warning:
 ! NAs introduced by coercion
 ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>census_adherents_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(left_half, right_half) <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>census_adherents_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(left_half, right_half) <span class="sc">|&gt;</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(state))  <span class="co"># Remove any empty rows</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the result</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>census_adherents_combined</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>census_adherents_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 52 × 5
    state           christian_2000 christian_2000_pct jewish_2009 jewish_2009_pct
@@ -626,7 +625,7 @@ Caused by warning:
 </div>
 <p>You’ll notice that some of the values are showing up as <code>NA</code> - that’s because they couldn’t be converted to numbers. What’s causing those NAs is that the values in them were “47 .4” and “2 .1” - those can’t be successfully converted into numbers without removing the space. We’ll use a function called <code>str_replace()</code> to remove those extra spaces in all of the data columns (the Jewish populations of North and South Dakota are so small that they don’t get actual values here) before re-running the code from above.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>census_adherents <span class="ot">&lt;-</span> census_adherents <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>census_adherents <span class="ot">&lt;-</span> census_adherents <span class="sc">|&gt;</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">christian_2000_pct =</span> <span class="fu">str_replace</span>(christian_2000_pct, <span class="st">" </span><span class="sc">\\</span><span class="st">."</span>, <span class="st">"."</span>),</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">jewish_2009_pct =</span> <span class="fu">str_replace</span>(jewish_2009_pct, <span class="st">" </span><span class="sc">\\</span><span class="st">."</span>, <span class="st">"."</span>),</span>
@@ -655,7 +654,7 @@ Caused by warning:
 <span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">christian_2000_pct =</span> <span class="fu">as.numeric</span>(christian_2000_pct),</span>
 <span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">jewish_2009 =</span> <span class="fu">as.numeric</span>(jewish_2009),</span>
 <span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">jewish_2009_pct =</span> <span class="fu">as.numeric</span>(jewish_2009_pct)</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: There were 2 warnings in `mutate()`.
 The first warning was:
@@ -664,11 +663,11 @@ Caused by warning:
 ! NAs introduced by coercion
 ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>census_adherents_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(left_half, right_half) <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>census_adherents_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(left_half, right_half) <span class="sc">|&gt;</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(state))  <span class="co"># Remove any empty rows</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the result</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>census_adherents_combined</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>census_adherents_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 52 × 5
    state           christian_2000 christian_2000_pct jewish_2009 jewish_2009_pct
@@ -688,10 +687,10 @@ Caused by warning:
 </div>
 <p>We could stop here, but there are a bunch of periods in the state column and it’s better to remove them - it will make filtering easier. Let’s use <code>str_remove_all()</code> to do that, too. First we’ll replace all periods and then all spaces:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>census_adherents_combined <span class="ot">&lt;-</span> census_adherents_combined <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>census_adherents_combined <span class="ot">&lt;-</span> census_adherents_combined <span class="sc">|&gt;</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state =</span> <span class="fu">str_remove_all</span>(state, <span class="st">"</span><span class="sc">\\</span><span class="st">."</span>) <span class="sc">|&gt;</span> <span class="fu">str_remove_all</span>(<span class="st">" "</span>))</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>census_adherents_combined</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>census_adherents_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 52 × 5
    state christian_2000 christian_2000_pct jewish_2009 jewish_2009_pct
@@ -773,14 +772,13 @@ Caused by warning:
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
