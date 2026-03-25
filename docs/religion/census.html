@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>census – Data Journalism with R and the Tidyverse</title>
+<title>19&nbsp; Intro to APIs: The Census – Data Journalism with R and the Tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,6 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./visualizing-for-reporting.html" rel="next">
+<link href="./merging.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -75,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f0604607799fff6796e44cec71ca6aeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f44d2fa0b39953e31839d49989be9305.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -88,6 +90,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar docked fullcontent quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -115,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./census.html">Intro to APIs: The Census</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./census.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -127,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Journalism with R and the Tidyverse</a> 
@@ -143,151 +146,151 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Journalism with R and the Tidyverse</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Journalism with R and the Tidyverse</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-story.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Learn a new way to read</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Learn a new way to read</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-math.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Newsroom math</span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Newsroom math</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-data-def.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Defining “Data”</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Defining “Data”</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ethics in data journalism</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./publicrecords.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Public records</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Public records</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Using GitHub</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Using GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R Basics</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./replication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data journalism in the age of replication</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aggregates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Aggregates</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Aggregates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./filters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Filters and selections</span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Filters and selections</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Working with dates</span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Working with dates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mutating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mutating data</span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mutating data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Cleaning Part I: Data smells</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Cleaning Part II: Janitor</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./open-refine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Cleaning Part III: Open Refine</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pdfs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Cleaning Data Part IV: PDFs</span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./merging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Combining and joining</span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Combining and joining</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./census.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Intro to APIs: The Census</span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-reporting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Visualizing your data for reporting</span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-publication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Visualizing your data for publication</span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rvest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scraping data with Rvest</span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basicstats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basic Stats: Linear Regression and The T-Test</span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ai_and_llms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">AI and Data Journalism</span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">AI and Data Journalism</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Writing with numbers</span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Writing with numbers</span></span></a>
   </div>
 </li>
     </ul>
@@ -295,15 +298,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-acs" id="toc-the-acs" class="nav-link active" data-scroll-target="#the-acs"><span class="header-section-number">19.1</span> The ACS</a></li>
+  <li><a href="#wide-results" id="toc-wide-results" class="nav-link" data-scroll-target="#wide-results"><span class="header-section-number">19.2</span> “Wide” Results</a></li>
+  <li><a href="#sorting-results" id="toc-sorting-results" class="nav-link" data-scroll-target="#sorting-results"><span class="header-section-number">19.3</span> Sorting Results</a></li>
+  <li><a href="#combining-with-other-data" id="toc-combining-with-other-data" class="nav-link" data-scroll-target="#combining-with-other-data"><span class="header-section-number">19.4</span> Combining with Other Data</a></li>
+  <li><a href="#joining-census-data-with-u.s.-religion-census-data" id="toc-joining-census-data-with-u.s.-religion-census-data" class="nav-link" data-scroll-target="#joining-census-data-with-u.s.-religion-census-data"><span class="header-section-number">19.5</span> Joining Census Data with U.S. Religion Census Data</a>
+  <ul class="collapse">
+  <li><a href="#state-level-analysis" id="toc-state-level-analysis" class="nav-link" data-scroll-target="#state-level-analysis"><span class="header-section-number">19.5.1</span> State-Level Analysis</a></li>
+  <li><a href="#county-level-analysis-maryland-example" id="toc-county-level-analysis-maryland-example" class="nav-link" data-scroll-target="#county-level-analysis-maryland-example"><span class="header-section-number">19.5.2</span> County-Level Analysis: Maryland Example</a></li>
+  <li><a href="#exploring-congregations-per-capita" id="toc-exploring-congregations-per-capita" class="nav-link" data-scroll-target="#exploring-congregations-per-capita"><span class="header-section-number">19.5.3</span> Exploring Congregations Per Capita</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="intro-to-apis-the-census" class="level1">
-<h1>Intro to APIs: The Census</h1>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
 <p>There is truly an astonishing amount of data collected by the US Census Bureau. First, there’s the Census that most people know – the every 10 year census. That’s the one mandated by the Constitution where the government attempts to count every person in the US. It’s a mind-boggling feat to even try, and billions get spent on it. That data is used first for determining how many representatives each state gets in Congress. From there, the Census gets used to divide up billions of dollars of federal spending.</p>
 <p>To answer the questions the government needs to do that, a ton of data gets collected. That, unfortunately, means the Census is exceedingly complicated to work with. The good news is, the Census has an API – an application programming interface. What that means is we can get data directly through the Census Bureau via calls over the internet.</p>
 <p>Let’s demonstrate.</p>
@@ -395,8 +429,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>And just like that: Nevada.</p>
 <p>You may be asking: hey, wasn’t there a 2020 Census? Where’s that data? The answer is that it’s coming, slowly - the Census Bureau has a <a href="https://www.census.gov/programs-surveys/popest/about/schedule.html">schedule of releases</a>.</p>
-<section id="the-acs" class="level2">
-<h2 class="anchored" data-anchor-id="the-acs">The ACS</h2>
+<section id="the-acs" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="the-acs"><span class="header-section-number">19.1</span> The ACS</h2>
 <p>In 2010, the Census Bureau replaced SF3 with the American Community Survey. The Good News is that the data would be updated on a rolling basis. The bad news is that it’s more complicated because it’s more like survey data with a large sample. That means there’s margins of error and confidence intervals to worry about. By default, using <code>get_acs</code> fetches data from the 5-year estimates, but you can specify 1-year estimates for jurisdictions with at least 65,000 people (many counties and cities).</p>
 <p>Here’s an example using the 5-year ACS estimates:</p>
 <p>What is Maryland’s richest county?</p>
@@ -518,12 +552,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>And then view <code>v24</code> to see what kinds of variables are available via the API.</p>
 </section>
-<section id="wide-results" class="level2">
-<h2 class="anchored" data-anchor-id="wide-results">“Wide” Results</h2>
+<section id="wide-results" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="wide-results"><span class="header-section-number">19.2</span> “Wide” Results</h2>
 <p>Although one of the chief strengths of tidycensus is that it offers a, well, tidy display of Census data, it also has the ability to view multiple variables spread across columns. This can be useful for creating percentages and comparing multiple variables.</p>
 </section>
-<section id="sorting-results" class="level2">
-<h2 class="anchored" data-anchor-id="sorting-results">Sorting Results</h2>
+<section id="sorting-results" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="sorting-results"><span class="header-section-number">19.3</span> Sorting Results</h2>
 <p>You’ll notice that we’ve used <code>arrange</code> to sort the results of tidycensus functions, although that’s done after we create a new variable to hold the data. There’s another way to use <code>arrange</code> that you should know about, one that you can use for exploratory analysis. An example using median household income:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>md24 <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,</span>
@@ -553,8 +587,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>In this case we don’t save the sorted results to a variable, we can just see the output in the console.</p>
 </section>
-<section id="combining-with-other-data" class="level2">
-<h2 class="anchored" data-anchor-id="combining-with-other-data">Combining with Other Data</h2>
+<section id="combining-with-other-data" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="combining-with-other-data"><span class="header-section-number">19.4</span> Combining with Other Data</h2>
 <p>Combining Census data with other types of data really unlocks its power for journalism. In this case, we’ll use some 2019-20 data from Maryland high schools, including the number of graduates and the number of students who enrolled in college the next fall semester, plus the percentage. We also have the zip code of the high school, which will enable us to bring in Census data. Let’s load the CSV file and make sure the zip code is a character column, because that’s what we’ll need to join.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>md_high_schools <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/md_high_schools.csv"</span>) <span class="sc">|&gt;</span></span>
@@ -601,8 +635,8 @@ dbl (4): zip, high_school_graduates, enrollment, percent_of_high_school_grad...
 </div>
 </div>
 </section>
-<section id="joining-census-data-with-u.s.-religion-census-data" class="level2">
-<h2 class="anchored" data-anchor-id="joining-census-data-with-u.s.-religion-census-data">Joining Census Data with U.S. Religion Census Data</h2>
+<section id="joining-census-data-with-u.s.-religion-census-data" class="level2" data-number="19.5">
+<h2 data-number="19.5" class="anchored" data-anchor-id="joining-census-data-with-u.s.-religion-census-data"><span class="header-section-number">19.5</span> Joining Census Data with U.S. Religion Census Data</h2>
 <p>Now that we’ve learned how to work with Census API data, let’s combine it with data from the 2020 U.S. Religion Census. This will let us explore the relationship between demographic characteristics and religious adherence patterns.</p>
 <p>The key to joining these datasets is the FIPS code - a standardized geographic identifier used by the Census Bureau. State FIPS codes are 2 digits, and county FIPS codes are 5 digits (state + county).</p>
 <p>Let’s start by reading in the U.S. Religion Census data at both the state and county levels. We’ll use <code>clean_names()</code> to convert the column names to a consistent format: lowercase, with spaces and special characters replaced by underscores. One thing to note: R column names can’t start with a number, so <code>2020 Population</code> becomes <code>x2020_population</code> – the <code>x</code> is added automatically as a prefix.</p>
@@ -684,8 +718,8 @@ $ diversity_index_value_rank              &lt;dbl&gt; 1597, 539, 92, 2234, 1696,
 </div>
 </div>
 <p>Notice that the state data has a <code>state_code</code> column (FIPS code) and the county data has a <code>fips</code> column (5-digit county FIPS). These are the keys we’ll use to join with Census data.</p>
-<section id="state-level-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="state-level-analysis">State-Level Analysis</h3>
+<section id="state-level-analysis" class="level3" data-number="19.5.1">
+<h3 data-number="19.5.1" class="anchored" data-anchor-id="state-level-analysis"><span class="header-section-number">19.5.1</span> State-Level Analysis</h3>
 <p>Let’s get state-level population data from the 2020 Census and join it with the religion census data to explore which states have the highest percentage of religious adherents.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get 2020 state population from Census</span></span>
@@ -787,8 +821,8 @@ This message is displayed once per session.</code></pre>
 </div>
 </div>
 </section>
-<section id="county-level-analysis-maryland-example" class="level3">
-<h3 class="anchored" data-anchor-id="county-level-analysis-maryland-example">County-Level Analysis: Maryland Example</h3>
+<section id="county-level-analysis-maryland-example" class="level3" data-number="19.5.2">
+<h3 data-number="19.5.2" class="anchored" data-anchor-id="county-level-analysis-maryland-example"><span class="header-section-number">19.5.2</span> County-Level Analysis: Maryland Example</h3>
 <p>Now let’s work with county-level data to explore Maryland counties specifically. We’ll join ACS income data with religion census data to see if there’s a relationship between median household income and religious adherence.</p>
 <p>The religion census data includes a <code>congregations_per_100_000_population</code> column, but that rate isn’t very intuitive for Maryland counties – many of which have well under 100,000 people. Garrett County, for example, has about 29,000 people and 96 congregations, which works out to 333 per 100,000. But Garrett County’s population is very far from 100,000 people, so that number is hard to grasp. A per-1,000 rate is more useful here: Garrett County has about 3.3 congregations per 1,000 residents, or roughly 1 for every 300 people.</p>
 <div class="cell">
@@ -883,8 +917,8 @@ This message is displayed once per session.</code></pre>
 </div>
 </div>
 </section>
-<section id="exploring-congregations-per-capita" class="level3">
-<h3 class="anchored" data-anchor-id="exploring-congregations-per-capita">Exploring Congregations Per Capita</h3>
+<section id="exploring-congregations-per-capita" class="level3" data-number="19.5.3">
+<h3 data-number="19.5.3" class="anchored" data-anchor-id="exploring-congregations-per-capita"><span class="header-section-number">19.5.3</span> Exploring Congregations Per Capita</h3>
 <p>Let’s explore whether wealthier counties have more or fewer congregations per capita, using our per-1,000 rate:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>md_combined <span class="sc">|&gt;</span></span>
@@ -911,7 +945,6 @@ This message is displayed once per session.</code></pre>
 <p>This combination of Census demographic data with U.S. Religion Census data opens up many possibilities for analyzing the relationship between community characteristics and religious patterns. The FIPS code system makes it straightforward to join these datasets at both state and county levels, allowing for rich comparative analysis.</p>
 
 
-</section>
 </section>
 </section>
 
@@ -1316,6 +1349,18 @@ This message is displayed once per session.</code></pre>
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./merging.html" class="pagination-link" aria-label="Combining and joining">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Combining and joining</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./visualizing-for-reporting.html" class="pagination-link" aria-label="Visualizing your data for reporting">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

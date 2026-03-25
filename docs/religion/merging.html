@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>merging – Data Journalism with R and the Tidyverse</title>
+<title>18&nbsp; Combining and joining – Data Journalism with R and the Tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,6 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./census.html" rel="next">
+<link href="./pdfs.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -75,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f0604607799fff6796e44cec71ca6aeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f44d2fa0b39953e31839d49989be9305.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -88,6 +90,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar docked fullcontent quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -115,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./merging.html">Combining and joining</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./merging.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Combining and joining</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -127,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Journalism with R and the Tidyverse</a> 
@@ -143,151 +146,151 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Journalism with R and the Tidyverse</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Journalism with R and the Tidyverse</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-story.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Learn a new way to read</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Learn a new way to read</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-math.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Newsroom math</span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Newsroom math</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-data-def.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Defining “Data”</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Defining “Data”</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ethics in data journalism</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./publicrecords.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Public records</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Public records</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Using GitHub</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Using GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R Basics</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./replication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data journalism in the age of replication</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aggregates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Aggregates</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Aggregates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./filters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Filters and selections</span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Filters and selections</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Working with dates</span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Working with dates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mutating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mutating data</span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mutating data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Cleaning Part I: Data smells</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Cleaning Part II: Janitor</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./open-refine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Cleaning Part III: Open Refine</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pdfs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Cleaning Data Part IV: PDFs</span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./merging.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Combining and joining</span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Combining and joining</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./census.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Intro to APIs: The Census</span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-reporting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Visualizing your data for reporting</span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-publication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Visualizing your data for publication</span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rvest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scraping data with Rvest</span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basicstats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basic Stats: Linear Regression and The T-Test</span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ai_and_llms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">AI and Data Journalism</span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">AI and Data Journalism</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Writing with numbers</span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Writing with numbers</span></span></a>
   </div>
 </li>
     </ul>
@@ -295,20 +298,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#combining-data-stacking" id="toc-combining-data-stacking" class="nav-link active" data-scroll-target="#combining-data-stacking"><span class="header-section-number">18.1</span> Combining data (stacking)</a></li>
+  <li><a href="#reshaping-data-with-pivot-functions" id="toc-reshaping-data-with-pivot-functions" class="nav-link" data-scroll-target="#reshaping-data-with-pivot-functions"><span class="header-section-number">18.2</span> Reshaping data with pivot functions</a>
+  <ul class="collapse">
+  <li><a href="#converting-from-long-to-wide-format" id="toc-converting-from-long-to-wide-format" class="nav-link" data-scroll-target="#converting-from-long-to-wide-format"><span class="header-section-number">18.2.1</span> Converting from long to wide format</a></li>
+  <li><a href="#converting-from-wide-to-long-format" id="toc-converting-from-wide-to-long-format" class="nav-link" data-scroll-target="#converting-from-wide-to-long-format"><span class="header-section-number">18.2.2</span> Converting from wide to long format</a></li>
+  </ul></li>
+  <li><a href="#joining-data" id="toc-joining-data" class="nav-link" data-scroll-target="#joining-data"><span class="header-section-number">18.3</span> Joining data</a>
+  <ul class="collapse">
+  <li><a href="#understanding-the-relationship-between-datasets" id="toc-understanding-the-relationship-between-datasets" class="nav-link" data-scroll-target="#understanding-the-relationship-between-datasets"><span class="header-section-number">18.3.1</span> Understanding the relationship between datasets</a></li>
+  <li><a href="#types-of-joins" id="toc-types-of-joins" class="nav-link" data-scroll-target="#types-of-joins"><span class="header-section-number">18.3.2</span> Types of joins</a></li>
+  <li><a href="#understanding-one-to-many-joins" id="toc-understanding-one-to-many-joins" class="nav-link" data-scroll-target="#understanding-one-to-many-joins"><span class="header-section-number">18.3.3</span> Understanding one-to-many joins</a></li>
+  <li><a href="#anti-joins-for-finding-missing-data" id="toc-anti-joins-for-finding-missing-data" class="nav-link" data-scroll-target="#anti-joins-for-finding-missing-data"><span class="header-section-number">18.3.4</span> Anti-joins for finding missing data</a></li>
+  <li><a href="#handling-data-type-mismatches" id="toc-handling-data-type-mismatches" class="nav-link" data-scroll-target="#handling-data-type-mismatches"><span class="header-section-number">18.3.5</span> Handling data type mismatches</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Combining and joining</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="combining-and-joining" class="level1">
-<h1>Combining and joining</h1>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
 <p>Often, as data journalists, we’re looking at data across time or at data stored in multiple tables. And to do that, we need to merge, reshape, and join data together.</p>
 <p>We might have data in multiple files that needs to be combined. We might have data in a “wide” format that needs to be converted to “long” format for analysis. And we might have datasets that need to be joined together on common elements.</p>
 <p>Let’s explore these techniques using FEC contribution data from Maryland clergy and United Methodist church membership data.</p>
-<section id="combining-data-stacking" class="level2">
-<h2 class="anchored" data-anchor-id="combining-data-stacking">Combining data (stacking)</h2>
+<section id="combining-data-stacking" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="combining-data-stacking"><span class="header-section-number">18.1</span> Combining data (stacking)</h2>
 <p>Let’s say that we have Maryland clergy contribution data from five different election cycles in five different files. They have the same record layout. We can combine them into a single dataframe.</p>
 <p>Let’s do what we need to import them properly. I’ve merged it all into one step for each of the datasets.</p>
 <div class="cell">
@@ -384,8 +422,8 @@ dttm  (1): contribution_receipt_date
 <p>And boom, like that, we have more than 42,000 rows of data together instead of five dataframes. Now we can ask more interesting questions like how clergy giving patterns have changed over time.</p>
 <p>There are plenty of uses for <code>bind_rows</code>: any regularly updated data that comes in the same format like crime reports, award recipients, or campaign contributions across multiple election cycles.</p>
 </section>
-<section id="reshaping-data-with-pivot-functions" class="level2">
-<h2 class="anchored" data-anchor-id="reshaping-data-with-pivot-functions">Reshaping data with pivot functions</h2>
+<section id="reshaping-data-with-pivot-functions" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="reshaping-data-with-pivot-functions"><span class="header-section-number">18.2</span> Reshaping data with pivot functions</h2>
 <p>Now that we have all our contribution data in one place, let’s explore how to reshape it. Sometimes data is easier to analyze or visualize in different formats. R provides two key functions for this: <code>pivot_wider</code> and <code>pivot_longer</code>.</p>
 <p>Before we can reshape the data, we need to summarize it. Let’s calculate the total amount each person contributed in each election cycle.</p>
 <div class="cell">
@@ -407,8 +445,8 @@ $ total_amount                &lt;dbl&gt; 200.00, 33.00, 25.00, 100.00, 70.24, 1
 $ num_contributions           &lt;int&gt; 2, 8, 1, 1, 3, 4, 1, 7, 6, 40, 4, 3, 33, 3…</code></pre>
 </div>
 </div>
-<section id="converting-from-long-to-wide-format" class="level3">
-<h3 class="anchored" data-anchor-id="converting-from-long-to-wide-format">Converting from long to wide format</h3>
+<section id="converting-from-long-to-wide-format" class="level3" data-number="18.2.1">
+<h3 data-number="18.2.1" class="anchored" data-anchor-id="converting-from-long-to-wide-format"><span class="header-section-number">18.2.1</span> Converting from long to wide format</h3>
 <p>Right now our data is in “long” format - each row represents one person’s contributions in one election cycle. But what if we want to see all of someone’s contributions across cycles in a single row? That’s where <code>pivot_wider</code> comes in.</p>
 <p>Before we pivot, we need to select only the columns we want to reshape. We’ll keep <code>contributor_name</code>, <code>two_year_transaction_period</code>, and <code>total_amount</code>. This ensures we get exactly one row per contributor in the wide format.</p>
 <div class="cell">
@@ -455,8 +493,8 @@ $ `2016`           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 </div>
 </div>
 </section>
-<section id="converting-from-wide-to-long-format" class="level3">
-<h3 class="anchored" data-anchor-id="converting-from-wide-to-long-format">Converting from wide to long format</h3>
+<section id="converting-from-wide-to-long-format" class="level3" data-number="18.2.2">
+<h3 data-number="18.2.2" class="anchored" data-anchor-id="converting-from-wide-to-long-format"><span class="header-section-number">18.2.2</span> Converting from wide to long format</h3>
 <p>Sometimes you need to convert data from wide back to long format. This is common when preparing data for visualization with ggplot2, which generally prefers long format data.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>clergy_long <span class="ot">&lt;-</span> clergy_wide <span class="sc">|&gt;</span></span>
@@ -484,8 +522,8 @@ $ total_contributions &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 200.00, 0.00, 0.00, 0.
 <p>This long format is now ready for analysis or visualization by election cycle.</p>
 </section>
 </section>
-<section id="joining-data" class="level2">
-<h2 class="anchored" data-anchor-id="joining-data">Joining data</h2>
+<section id="joining-data" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="joining-data"><span class="header-section-number">18.3</span> Joining data</h2>
 <p>More complicated is when you have two separate tables that are connected by a common element or elements. But there’s a verb for that, too: <code>join</code>.</p>
 <p>Let’s start by reading in some United Methodist church clergy data. We have two files: one with basic information about clergy, and another with more detailed church assignment data. Clergy can be assigned to multiple churches over their career, but they are the same person.</p>
 <div class="cell">
@@ -544,8 +582,8 @@ $ URL            &lt;chr&gt; "https://www.umdata.org/pastor?pastor=0124740", "ht
 </div>
 </div>
 <p>You should notice that <code>umdata_people_all</code> has two additional columns: <code>ConferenceId</code> and <code>ConferenceName</code>. These contain the detailed church assignment information. When we join these datasets, we’ll select only these unique columns from <code>umdata_people_all</code> to avoid creating duplicate columns with .x and .y suffixes.</p>
-<section id="understanding-the-relationship-between-datasets" class="level3">
-<h3 class="anchored" data-anchor-id="understanding-the-relationship-between-datasets">Understanding the relationship between datasets</h3>
+<section id="understanding-the-relationship-between-datasets" class="level3" data-number="18.3.1">
+<h3 data-number="18.3.1" class="anchored" data-anchor-id="understanding-the-relationship-between-datasets"><span class="header-section-number">18.3.1</span> Understanding the relationship between datasets</h3>
 <p>Before joining data, it’s crucial to understand how the tables relate to each other.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count unique people in each dataset</span></span>
@@ -577,8 +615,8 @@ $ URL            &lt;chr&gt; "https://www.umdata.org/pastor?pastor=0124740", "ht
 </div>
 <p>The <code>umdata_people_all</code> dataset has many more rows than unique people because each person can have multiple church assignments over time. This is called a one-to-many relationship.</p>
 </section>
-<section id="types-of-joins" class="level3">
-<h3 class="anchored" data-anchor-id="types-of-joins">Types of joins</h3>
+<section id="types-of-joins" class="level3" data-number="18.3.2">
+<h3 data-number="18.3.2" class="anchored" data-anchor-id="types-of-joins"><span class="header-section-number">18.3.2</span> Types of joins</h3>
 <p>There are different kinds of joins. It’s better if you think of two tables sitting next to each other. A <code>left_join</code> takes all the records from the left table and only the records that match in the right one. A <code>right_join</code> does the same thing. An <code>inner_join</code> takes only the records where they are equal. There’s one other join – a <code>full_join</code> which returns all rows of both, regardless of if there’s a match – but I’ve never once had a use for a full join.</p>
 <p>An <code>inner_join</code> keeps only the records that exist in BOTH datasets. Let’s find the people who appear in both datasets.</p>
 <p>Since both datasets share most columns, we’ll select only the unique information from <code>umdata_people_all</code> (ConferenceId and ConferenceName) to avoid duplicate columns with .x and .y suffixes.</p>
@@ -643,8 +681,8 @@ $ ConferenceName &lt;chr&gt; "Alabama-West Florida", "Alabama-West Florida", "Al
 </div>
 <p>Notice that we’re using <code>join_by()</code> to specify the column to join on. Both datasets have a column called <code>GCFAId</code> (General Council on Finance and Administration ID), which uniquely identifies each person in the United Methodist system.</p>
 </section>
-<section id="understanding-one-to-many-joins" class="level3">
-<h3 class="anchored" data-anchor-id="understanding-one-to-many-joins">Understanding one-to-many joins</h3>
+<section id="understanding-one-to-many-joins" class="level3" data-number="18.3.3">
+<h3 data-number="18.3.3" class="anchored" data-anchor-id="understanding-one-to-many-joins"><span class="header-section-number">18.3.3</span> Understanding one-to-many joins</h3>
 <p>When you join a table with unique records to a table with multiple records per key, the result will have multiple rows for each match. Let’s examine this:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the first person</span></span>
@@ -690,8 +728,8 @@ $ ConferenceName &lt;chr&gt; "Alabama-West Florida", "Alabama-West Florida", "Al
 </div>
 </div>
 </section>
-<section id="anti-joins-for-finding-missing-data" class="level3">
-<h3 class="anchored" data-anchor-id="anti-joins-for-finding-missing-data">Anti-joins for finding missing data</h3>
+<section id="anti-joins-for-finding-missing-data" class="level3" data-number="18.3.4">
+<h3 data-number="18.3.4" class="anchored" data-anchor-id="anti-joins-for-finding-missing-data"><span class="header-section-number">18.3.4</span> Anti-joins for finding missing data</h3>
 <p>An <code>anti_join</code> keeps records from the left dataset that DON’T have matches in the right dataset. This is useful for finding missing data:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>people_not_in_all <span class="ot">&lt;-</span> umdata_people <span class="sc">|&gt;</span></span>
@@ -704,8 +742,8 @@ $ ConferenceName &lt;chr&gt; "Alabama-West Florida", "Alabama-West Florida", "Al
 </div>
 <p>In this case, all people in <code>umdata_people</code> also appear in <code>umdata_people_all</code>, so we get zero rows. But if there were people missing from the larger dataset, this would help us find them.</p>
 </section>
-<section id="handling-data-type-mismatches" class="level3">
-<h3 class="anchored" data-anchor-id="handling-data-type-mismatches">Handling data type mismatches</h3>
+<section id="handling-data-type-mismatches" class="level3" data-number="18.3.5">
+<h3 data-number="18.3.5" class="anchored" data-anchor-id="handling-data-type-mismatches"><span class="header-section-number">18.3.5</span> Handling data type mismatches</h3>
 <p>Sometimes joins look like they should work but don’t. Often this is due to the two columns you’re joining on having different data types: joining a <code>&lt;chr&gt;</code> column to a <code>&lt;dbl&gt;</code> column, for example. Let’s walk through an example of that using some demographic data by zip code.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>maryland_zcta <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/maryland_zcta.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -817,7 +855,6 @@ $ REPORT_9_P &lt;chr&gt; "http://mdpgis.mdp.state.md.us/census2010/PDF/00_SF1_9P
 <p>What’s happening here is that we’re telling R to take all of the values in the ZCTA5N column and make them “as.character”. If we wanted to change a column to numeric, we’d do “as.numeric”. When you join two dataframes, the join columns <em>must</em> be the same datatype.</p>
 
 
-</section>
 </section>
 </section>
 
@@ -1222,6 +1259,18 @@ $ REPORT_9_P &lt;chr&gt; "http://mdpgis.mdp.state.md.us/census2010/PDF/00_SF1_9P
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./pdfs.html" class="pagination-link" aria-label="Cleaning Data Part IV: PDFs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./census.html" class="pagination-link" aria-label="Intro to APIs: The Census">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

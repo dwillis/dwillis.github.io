@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>pdfs – Data Journalism with R and the Tidyverse</title>
+<title>17&nbsp; Cleaning Data Part IV: PDFs – Data Journalism with R and the Tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,6 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./merging.html" rel="next">
+<link href="./open-refine.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -75,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f0604607799fff6796e44cec71ca6aeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f44d2fa0b39953e31839d49989be9305.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -88,6 +90,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar docked fullcontent quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -115,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pdfs.html">Cleaning Data Part IV: PDFs</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pdfs.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -127,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Journalism with R and the Tidyverse</a> 
@@ -143,151 +146,151 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Journalism with R and the Tidyverse</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Journalism with R and the Tidyverse</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-story.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Learn a new way to read</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Learn a new way to read</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-math.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Newsroom math</span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Newsroom math</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./start-data-def.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Defining “Data”</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Defining “Data”</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ethics in data journalism</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ethics in data journalism</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./publicrecords.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Public records</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Public records</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Using GitHub</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Using GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R Basics</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./replication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data journalism in the age of replication</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data journalism in the age of replication</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aggregates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Aggregates</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Aggregates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./filters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Filters and selections</span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Filters and selections</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./workingwithdates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Working with dates</span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Working with dates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mutating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mutating data</span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mutating data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-i.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Cleaning Part I: Data smells</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Cleaning Part I: Data smells</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-cleaning-part-ii.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Cleaning Part II: Janitor</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Cleaning Part II: Janitor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./open-refine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Cleaning Part III: Open Refine</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pdfs.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Cleaning Data Part IV: PDFs</span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./merging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Combining and joining</span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Combining and joining</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./census.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Intro to APIs: The Census</span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Intro to APIs: The Census</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-reporting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Visualizing your data for reporting</span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualizing your data for reporting</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visualizing-for-publication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Visualizing your data for publication</span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Visualizing your data for publication</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rvest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scraping data with Rvest</span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Scraping data with Rvest</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./basicstats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basic Stats: Linear Regression and The T-Test</span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Basic Stats: Linear Regression and The T-Test</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ai_and_llms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">AI and Data Journalism</span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">AI and Data Journalism</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./writingwithdata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Writing with numbers</span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Writing with numbers</span></span></a>
   </div>
 </li>
     </ul>
@@ -295,15 +298,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#easy-does-it" id="toc-easy-does-it" class="nav-link active" data-scroll-target="#easy-does-it"><span class="header-section-number">17.1</span> Easy does it</a></li>
+  <li><a href="#when-it-looks-good-but-needs-a-little-fixing" id="toc-when-it-looks-good-but-needs-a-little-fixing" class="nav-link" data-scroll-target="#when-it-looks-good-but-needs-a-little-fixing"><span class="header-section-number">17.2</span> When it looks good, but needs a little fixing</a></li>
+  <li><a href="#cleaning-up-the-data-in-r" id="toc-cleaning-up-the-data-in-r" class="nav-link" data-scroll-target="#cleaning-up-the-data-in-r"><span class="header-section-number">17.3</span> Cleaning up the data in R</a>
+  <ul class="collapse">
+  <li><a href="#splitting-and-recombining" id="toc-splitting-and-recombining" class="nav-link" data-scroll-target="#splitting-and-recombining"><span class="header-section-number">17.3.1</span> Splitting and recombining</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Cleaning Data Part IV: PDFs</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="cleaning-data-part-iv-pdfs" class="level1">
-<h1>Cleaning Data Part IV: PDFs</h1>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
 <p>The next circle of Hell on the Dante’s Inferno of Data Journalism is the PDF. Governments everywhere love the PDF and publish all kinds of records in a PDF. The problem is a PDF isn’t a data format – it’s a middle finger, saying I’ve Got Your Accountability Right Here, Pal.</p>
 <p>It’s so ridiculous that there’s a constellation of tools that do nothing more than try to harvest tables out of PDFs. There are online services like <a href="https://www.cometdocs.com/">CometDocs</a> where you can upload your PDF and point and click your way into an Excel file. There are mobile device apps that take a picture of a table and convert it into a spreadsheet. But one of the best is a tool called <a href="https://tabula.technology/">Tabula</a>. It was build by journalists for journalists.</p>
 <p>There is a version of Tabula that will run inside of R – a library called Tabulizer – but the truth is I’m having the hardest time installing it on my machine, which leads me to believe that trying to install it across a classroom of various machines would be disastrous. The standalone version works just fine, and it provides a useful way for you to see what’s actually going on.</p>
@@ -312,8 +342,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="easy-does-it" class="level2">
-<h2 class="anchored" data-anchor-id="easy-does-it">Easy does it</h2>
+<section id="easy-does-it" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="easy-does-it"><span class="header-section-number">17.1</span> Easy does it</h2>
 <p>Tabula works best when tables in PDFs are clearly defined and have nicely-formatted information. Here’s a perfect example: <a href="http://www.asarb.org/ASARB_Standard_Denominational_Adherents_2022.pdf">denominational counts from the Association of Statisticians of American Religious Bodies</a>.</p>
 <p><a href="https://tabula.technology/">Download and install Tabula</a>. Tabula works much the same way as Open Refine does – it works in the browser by spinning up a small webserver in your computer.</p>
 <p>When Tabula opens, you click browse to find the PDF on your computer somewhere, and then click import. After it imports, click autodetect tables. You’ll see red boxes appear around what Tabula believes are the tables. You’ll see it does a pretty good job at this.</p>
@@ -385,8 +415,8 @@ Adherents
 </div>
 <p>Boom - we’re good to go.</p>
 </section>
-<section id="when-it-looks-good-but-needs-a-little-fixing" class="level2">
-<h2 class="anchored" data-anchor-id="when-it-looks-good-but-needs-a-little-fixing">When it looks good, but needs a little fixing</h2>
+<section id="when-it-looks-good-but-needs-a-little-fixing" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="when-it-looks-good-but-needs-a-little-fixing"><span class="header-section-number">17.2</span> When it looks good, but needs a little fixing</h2>
 <p>Here’s a slightly more involved PDF, from <a href="https://www2.census.gov/library/publications/2010/compendia/statab/130ed/tables/11s0077.pdf">a 2010 Census Bureau report on religious population by state</a>. Specifically, we’re looking at Table 77 which lists the number and percentage of Christian and Jewish adherents by state:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -461,8 +491,8 @@ num (3): 133,377, 6,544, 2,813
 </div>
 </div>
 </section>
-<section id="cleaning-up-the-data-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="cleaning-up-the-data-in-r">Cleaning up the data in R</h2>
+<section id="cleaning-up-the-data-in-r" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="cleaning-up-the-data-in-r"><span class="header-section-number">17.3</span> Cleaning up the data in R</h2>
 <p>The good news is that we have data we don’t have to retype. The bad news is, we have a few things to fix, starting with the fact that the headers shouldn’t be headers. Let’s start by re-importing it and specifying that the first row doesn’t have column headers:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>census_adherents <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tabula-11s0077.csv"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">clean_names</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -531,8 +561,8 @@ num (3): X2, X4, X7
 #   jewish_2009_2 &lt;chr&gt;, jewish_2009_pct_2 &lt;chr&gt;</code></pre>
 </div>
 </div>
-<section id="splitting-and-recombining" class="level3">
-<h3 class="anchored" data-anchor-id="splitting-and-recombining">Splitting and recombining</h3>
+<section id="splitting-and-recombining" class="level3" data-number="17.3.1">
+<h3 data-number="17.3.1" class="anchored" data-anchor-id="splitting-and-recombining"><span class="header-section-number">17.3.1</span> Splitting and recombining</h3>
 <p>We have two sets of columns here, one for each half of the page. Let’s split them apart and then recombine them vertically. We’ll do that using <code>select()</code> to grab the columns we want, <code>rename()</code> to make the column names the same and then <code>bind_rows()</code> to stack them vertically (we’ll learn more about <code>bind_rows()</code> soon). We also make sure that both sets of columns are numeric.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>left_half <span class="ot">&lt;-</span> census_adherents <span class="sc">|&gt;</span></span>
@@ -688,7 +718,6 @@ Caused by warning:
 <p>Here’s the sad truth: THIS IS PRETTY GOOD. It sure beats typing it out. And since many government processes don’t change all that much, you can save the code to process subsequent versions of PDFs.</p>
 
 
-</section>
 </section>
 </section>
 
@@ -1093,6 +1122,18 @@ Caused by warning:
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./open-refine.html" class="pagination-link" aria-label="Data Cleaning Part III: Open Refine">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Cleaning Part III: Open Refine</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./merging.html" class="pagination-link" aria-label="Combining and joining">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Combining and joining</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
