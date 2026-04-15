@@ -1,0 +1,30 @@
+---
+title: "Datasets"
+---
+
+I've loved data since before I understood that's what we called it. As a kid, I made lists of things I wanted to know. I tracked the best high school basketball players - even wrote a BASIC program to help with that - and I would retype news articles into my own databases. When I finally discovered that there was a whole discipline around the practice of collecting, organizing and analyzing data, I was hooked. Luckily for me, I've lived in a golden age of databases, starting with learning SQL in 1994, the explosion of the World Wide Web, the ability to transfer large amounts of information across the Internet to all kinds of devices and our current time where probalistic prediction machines can help turn unstructured information into structured data.
+
+### Data About Collecting Data
+
+Thanks to cheap, abundant storage (on GitHub, mostly), I've been able to collect more and more data across topics that interest me: [politics](https://github.com/dwillis/congress-press), [elections](https://github.com/orgs/openelections/repositories), [sports](https://github.com/orgs/Sports-Roster-Data/repositories), [crime](https://github.com/dwillis/umpd-logs) and [archives](https://github.com/dwillis/uplink). Many of them are automatically updated from a canonical source; others are one-off projects or require a fair amount of maintenance. It's not like there are so many that I've lost count, but there are some times when I come across one that I haven't updated in awhile and it's like greeting an old friend.
+
+This work sometimes warrants a round-up on this site, but mostly I haven't been in the habit of posting incremental updates. But if you want to know about those efforts and don't feel like engaging in GitHub stalking (or would like some actual context), I do have an option for you. I send out periodic emails with an update on various data projects of mine. If you'd like to get those updates, you can sign up below:
+
+```{=html}
+<form
+  action="https://buttondown.com/api/emails/embed-subscribe/dwillis"
+  method="post"
+  class="embeddable-buttondown-form"
+>
+  <label for="bd-email">Enter your email: </label>
+  <input type="email" name="email" id="bd-email" />
+  <input type="submit" value="Subscribe" />
+  <p>
+    <a href="https://buttondown.com/refer/dwillis" target="_blank">
+      Powered by Buttondown.
+    </a>
+  </p>
+</form>
+```
+
+

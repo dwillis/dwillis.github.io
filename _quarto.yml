@@ -6,8 +6,6 @@ website:
   site-url: "https://www.thescoop.org"
   title: "Derek Willis"
   description: "Academic and journalist"
-  twitter-card:
-     creator: "@derekwillis"
   navbar:
     background: dark
     logo: "images/dwillis.png"
@@ -19,10 +17,8 @@ website:
   sidebar:
     style: docked
     tools:
-      - icon: twitter
-        href: "https://twitter.com/derekwillis"
-      - icon: mastodon
-        href: "https://newsie.social/@derekwillis"
+      - icon: bluesky
+        href: "https://bsky.app/profile/dwillis.bsky.social"
       - icon: github
         href: "https://github.com/dwillis"
     contents:
@@ -40,9 +36,11 @@ website:
         href: blog.html
       - text: "Teaching"
         href: teaching
+      - text: "Datasets"
+        href: datasets
 
   page-footer: 
-    left: "© Copyright 2025 Derek Willis. Published using Quarto."
+    left: "© Copyright 2026 Derek Willis. Published using Quarto."
 format:
   html:
     theme: flatly

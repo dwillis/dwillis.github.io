@@ -3,3 +3,6 @@
 /.quarto/
 /_site/
 thescoop.Rproj
+.positai
+
+**/*.quarto_ipynb
