@@ -9,8 +9,82 @@
 <link>https://www.thescoop.org/blog.html</link>
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
-<generator>quarto-1.8.26</generator>
-<lastBuildDate>Sat, 04 Apr 2026 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.9.37</generator>
+<lastBuildDate>Thu, 11 Jun 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Hoops Reloaded</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2026/06/11/hoops-reloaded/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I first need to apologize to and thank a guy named Chuck Morris.</p>
+<p>When we were students at the University of Pittsburgh in the previous century, Chuck and I had several things in common. We both worked at WPTS, the campus radio station. We both were geeks. And, perhaps most unusually given those two factors, we liked sports. OK, we loved sports, and in particular, basketball.</p>
+<p>I can’t remember exactly when I first learned about a PC game called “<a href="https://en.wikipedia.org/wiki/Hoops_(1986_video_game)">Hoops</a>”, but once I did I ordered it and several 3.5-inch floppy disks arrived in the mail, ready for use in my IBM PS/2. That was the first computer I owned, and for the price of $3,200 I got a black and white text screen and 20MB of hard drive space. Hoops was exactly the kind of game that computer was built to run: a black-and-white, text-based game where you could “coach” a team against the computer or an opponent.</p>
+<p>Hoops was released while I was still in high school, but I don’t think I knew about it until college. I certainly hadn’t read the 1987 Sports Illustrated story entitled <a href="https://web.archive.org/web/20201116012050/https://vault.si.com/vault/1987/03/30/warning-hoops-may-be-addictive">“Warning: Hoops May Be Addictive”</a>, but it wasn’t long until I readily agreed with the assessment. I’m not sure if Chuck was as addicted as I was - he probably wasn’t, being far more reasonable than I was - but we spent a lot of time in my dorm room playing that game.</p>
+<p>Here’s how it works, basically: you pick two men’s college basketball teams - the earliest one available was from 1939, I think? - then select the lineups, choose your offensive and defensive strategies. Then you start the game. On the PC appeared lines of basic play-by-play, with commentary like “Jordan drives and stuffs.” Players turned the ball over, picked up fouls and assisted on baskets. You could substitute at dead balls, call timeout and change your offense and defense in multiple ways. It was my favorite game.</p>
+<p>Unless, of course, I lost, particularly on a last-second shot. The game did not supply emotion - there was no crowd noise, for example - so we readily supplied our own coaching frustrations. This is what I owe the apology to Chuck for. Took me too long to be a good loser. Chuck, being the stand-up guy he was, mostly remained silent. Sometimes he even commiserated with me. Chuck, I’m sorry I was an asshole. I hope you can forgive me, or that you’ve forgotten about all of this. Clearly I haven’t.</p>
+<p>For a long time, I hoped that someone might rebuild or update Hoops, but in many ways the world has passed it by. It is a command-line game in a world of flashy user interfaces, a text-based game in a video era. Nobody was going to bring it back to life, not like it was. So I, with the copious assistance of Claude Code, did. With a twist. Introducing <a href="https://github.com/dwillis/hoops-game">Hoops, the women’s version</a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2026/06/11/hoops-reloaded/game.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This fall will mark 10 years since I first bought season tickets to the University of Maryland women’s basketball team. At the time, I was looking for something to do with our kid that was fun, and watching the Terps - one of the nation’s better teams - fit the bill nicely. I hadn’t been a big women’s basketball fan before, but basketball is basketball, and the atmosphere at the games was much more family friendly, in that we could talk about the games and kids got decent access to the players as they ran into the tunnels at halftime and at the end of games. Brenda Frese’s Terps played fast, hard and they won. It was good entertainment.</p>
+<p>Similar to my initial journey into Big East men’s basketball in high school and college, I got hooked quickly, and now I can proudly say that while I have a passing knowledge of current men’s basketball, I definitely know my stuff on the women’s side. It’s also true, however, that until recently, the women’s game has gotten much less attention than the men’s. As a Pitt grad, I knew a lot more about DeJuan Blair than, say, Maya Moore, even though the latter is a Hall of Fame-caliber player. The past several years has closed that gap somewhat, but it’s hard to say that things are parity when a fairly successful Maryland team last season drew far fewer fans than perhaps the worst Maryland men’s team in decades.</p>
+<p>AI couldn’t fix what was wrong with the Terps last season, but having worked with AI coding agents for a bit, I was convinced that I could have them rewrite the Hoops game I loved. If I could find it. I turned over all of the places I stored old computer stuff (I have quite a few, to my wife’s chagrin) but only found a couple of unrelated 3.5” floppy disks. Surely, I figured, the actual code for the game must be available online. Someone smarter than me must have saved a copy on some archive site, right?</p>
+<p>If so, I haven’t found it. The original game was created and marketed before the Web was a thing, and it doesn’t seem to have ever had a dedicated website. There are mentions here and there, but no source code. My idea - that I would have Claude Code read the original source and adapt it - was looking very unlikely. Gathering up what descriptions I had found and my memories of the game, I decided to try and build it from scratch.</p>
+<p>Well, not exactly from scratch, since Claude’s training material included some of the same descriptions of the original game that I had, and possibly more. I knew that I wanted to use Python to do this because I’m more familiar with that language. Creating a text-based game was easy; there are plenty of good libraries for doing that. The difference between building Hoops then and now is that today we have access to a lot more player-specific data and storage is less of an issue. The original game had to exist on at most several 3.5” floppy disks, and that’s not the case with this remake, which weighs in at a fairly hefty 150MB.</p>
+<p>What makes this possible is the data provided through the <code>[wehoop](https://wehoop.sportsdataverse.org/)</code> platform, including player averages and play-by-play data.</p>
+<p>I don’t know exactly how the original game handled possession outcomes, but it seems likely that it used team aggregates and then did probability draws against them. That’s what my version does. After each possession resolves (turnover, made shot, missed shot with rebound), that resolution is assigned to a specific on-court player using weighted random sampling. A shooter is chosen proportional to that player’s historical FGA, a rebounder proportional to their rebounds, a fouler proportional to their foul rate.</p>
+<p>Here’s the sequence that the game goes through on each possession:</p>
+<ol type="1">
+<li>Clock: Sample a possession duration from a triangular distribution centered on the team’s pace-derived mean. End-of-quarter timing adjustments (two-for-one, hold-for-last) modify this.</li>
+<li>Turnover check: Roll against the adjusted turnover rate. If it hits, possession ends.</li>
+<li>Shot attempt: Pick a zone (rim, mid-range, three-point) from the team’s shot mix distribution. Roll against that zone’s eFG%.</li>
+<li>Make/miss consequences: Makes score points and end the possession. Misses go to a rebound roll (offensive rebound rate). Shooting fouls send the team to the free throw line.</li>
+<li>Free throws: Each FT is an independent <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli draw</a> at the team’s FT%.</li>
+</ol>
+<p>An offensive rebound doesn’t restart the possession process, which is a little bit of a fudge, but modeling out second-chance possessions would add another layer of complexity.</p>
+<p>A close read of the previous paragraphs will tell you that individual players don’t truly affect the simulation outcome. A team missing its best player still plays at its season-average rates. To be fair, the original Hoops had this problem as well. Players do get tired, and their performances degrade when they do, according to this formula:</p>
+<pre><code>effectiveness = 1 - 0.15 * fatigue^2</code></pre>
+<p>Player substitutions can only happen at dead balls - fouls, made baskets and timeouts - and follow the NCAA rules, including on subs in the final minute of game play.</p>
+<p>Another thing about both versions is that players who are injured after playing only a few games are available but only for a few minutes - if a player appears in fewer than half of a team’s games, the game caps their average minutes per game using the team’s total games. Here’s how that works using Maryland’s Faith Masonius and Emma Chardon in the 2021-22 season. <a href="https://herhoopstats.com/stats/ncaa/player/2022/natl/faith-masonius-stats-11e9ffdc-015b-0130-9486-12df17ae4e1e/">Masonius averaged 22 minutes a game</a> before tearing her ACL in the ninth game of the season. That’s been reduced to 6.2 MPG in the game.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2026/06/11/hoops-reloaded/roster_mpg.png" class="img-fluid figure-img" width="392"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The whole idea behind Hoops (old and new) is that it’s the next best thing to actually coaching. Users can’t talk to the refs (despite my best efforts in college) or make that impassioned half-time speech. But they can try to ride hot hands, switch up offensive and defensive tactics or call timeouts. Those changes, especially the offensive and defensive ones, can have small but meaningful impacts on games. Same with home court advantage, although the new Hoops offers the ability to play at neutral court venues, and even to run through a conference or NCAA tournament bracket.</p>
+<p>When you play against the computer, you’ll face one of three coaching “personalities”, based on the team’s stats: aggressive, conservative or balanced. An aggressive coach switches to a press earlier when trailing; a conservative coach tolerates more opponent scoring before changing schemes. The computer coach evaluates scheme changes at every dead ball using a rolling window of the last 10 possessions. The rules are heuristic:</p>
+<ul>
+<li>Opponent hitting threes? Switch to zone.</li>
+<li>Trailing big in the fourth quarter? Switch to press and hurry-up offense.</li>
+<li>Leading late? Slow down.</li>
+<li>Current defensive scheme being exploited? Switch to another.</li>
+</ul>
+<p>Once a coach decides on a change, that lasts for at least six possessions to prevent chaotic swapping.</p>
+<p>Right now the game provides access to teams from the 2015-16 season forward. Going back further is possible, although that season provides a clean cutoff in terms of using four 10-minute quarters instead of two 20-minute halves, and a fifth team foul in a quarter triggering two foul shots.</p>
+<p>I’ve <a href="https://github.com/dwillis/hoops-game/releases">released binaries</a> for Mac OS, Windows and Linux, or you can clone the repository and run it from there. Since this isn’t a Mac App Store app, there are a couple of hurdles to overcome to run it on an Apple computer; check the <a href="https://github.com/dwillis/hoops-game/blob/main/RUNNING.md">RUNNING.md document</a> for more details.</p>
+<p>While a guide for how to behave when your team loses a tight game is not included (sorry again, Chuck), if you’ve got ideas for that or any other contributions to the game, I’d love to hear them. This is a nostalgic effort, for sure, but it’s also a testament to a sport that I’ve come to love even more since those evenings sitting next to Chuck Morris, watching the seconds count down. Let’s hoop.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2026/06/11/hoops-reloaded/</guid>
+  <pubDate>Thu, 11 Jun 2026 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Introducing Congress Press</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -204,9 +278,9 @@
 <p>The outcome was a <a href="https://github.com/dwillis/testudo">much more robust and flexible codebase</a> that actually made me want to scrape the data and make use of it. That’s important, because we want software to be <em>useful</em>. Now if I have a question about the courses being offered by a single department, even over time, the CLI tool can fetch those for me and put them into a SQLite database. Here’s an example: a few years ago I helped shame some of my colleagues into posting their syllabi in a timely fashion, and I used the Testudo data to show where Journalism ranked among all of the colleges/departments of the university. It was a clunky process.</p>
 <p>Now, I can run the following command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">uv</span> run python json_to_sqlite.py data/202508 fall25_courses.db</span></code></pre></div>
+font-style: inherit;">uv</span> run python json_to_sqlite.py data/202508 fall25_courses.db</span></code></pre></div></div>
 </div>
 <p>And get a database of courses for this upcoming semester, which now includes the semester of the most recently-posted syllabus (if there is one). So I fire up <a href="https://datasette.io/">Datasette</a> and find that fewer than one in three courses (undergrad and graduate) have a syllabus posted, and while the most common semester for those is Fall 2024, scores of classes have syllabi from 2018 and 2019, and a few even date back to 2015! At least journalism is doing pretty well in terms of posting them, I guess.</p>
 <div class="cell">
@@ -243,7 +317,7 @@ font-style: inherit;">uv</span> run python json_to_sqlite.py data/202508 fall25_
 <p>A common task I find myself doing - and teaching my students to do - is to take some text and upload or paste it into an LLM’s chat window, along with a question or command. Sometimes those conversations extend for awhile, and if you’ve used LLMs long enough you’ve run into occasional issues of continuity, where you have to repeat yourself or provide the same context. Fragments don’t remove this problem completely, but they provide an efficient and replicable process for adapting to it.</p>
 <p>What got me thinking more about fragments was <a href="https://github.com/kevinschaul/llm-fragments-us-legislation">an excellent library</a> by Kevin Schaul of The Washington Post that leverages the Congress.gov API to make it easy to ask a model to summarize or otherwise interview congressional legislation. You grab the text of the bill using the API and send it to an LLM to start that conversation. It’s especially useful for large amounts of text:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># This bill is yuge, so use a model with enough context!</span></span>
 <span id="cb1-2"><span class="ex" style="color: null;
@@ -254,30 +328,30 @@ font-style: inherit;">-f</span> bill:hr1-119 <span class="st" style="color: #207
 background-color: null;
 font-style: inherit;">'Summarize this bill'</span> <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">-m</span> gemini-2.5-pro-preview-05-06</span></code></pre></div>
+font-style: inherit;">-m</span> gemini-2.5-pro-preview-05-06</span></code></pre></div></div>
 </div>
 <p>Schaul’s library is simple - it’s basically a single Python file that does the work of parsing the API output and making it available to your LLM of choice - and seems designed for folks who have a decent idea of what they are looking for in legislation. Now, I’m a Congress geek for sure, but for years federal campaign finance data has been my thing. I’ve helped build APIs, libraries and news apps devoted to making that data more available. Federal Election Commission filings are <a href="https://www.fec.gov/resources/cms-content/documents/rawdatainst.pdf">data files</a>, and there are a number of good projects that help you retrieve and parse them. So it was a natural choice for getting more familiar with fragments.</p>
 <p>Like a lot of my recent coding projects, I turned to an LLM to help me build this one. I started with <a href="https://github.com/eyeseast/llm-documentcloud">a similar effort by Chris Amico</a> that provides access to documents uploaded to the excellent DocumentCloud service via its API. I asked Claude 4 Sonnet to create a basic template for a repository that would do something similar with FEC filings, using <a href="https://github.com/esonderegger/fecfile">Evan Sonderegger’s fecfile parser</a>. It took me about an hour or so to get the library into a basic working prototype, where I could pass in the ID number of a filing and ask a question, like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">llm</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-f</span> fec:1896830 <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"What are the key financial aspects of this filing?"</span></span></code></pre></div>
+font-style: inherit;">"What are the key financial aspects of this filing?"</span></span></code></pre></div></div>
 </div>
 <p>If you were to ask that of virtually any model by uploading the data or PDF version, you’d get back a pretty standard overview of the financials, something like <a href="https://chatgpt.com/share/685ab71d-9674-8008-b544-a071576e8c6c">this from OpenAI’s 4.1 mini model</a>. Which is good, but from a reporter’s standpoint that’s not much more than what you’d get from a brief look at the filing. That feels like the minimum a user should expect here, and that alone could be useful in helping a journalist triage filings.</p>
 <p>But FEC filings are interesting in weird ways, and that’s what I really want help with when trying to decide which ones deserve some attention. I’ve long had a set of heuristics for this, but even so I miss newsworthy stuff. What if I could put some of that into the library itself, so it analyzes filings the way I might? That’s what I’m going for with llm-fecfile.</p>
 <p>In practice, that means hard-coding some instructions in the library, like <a href="https://github.com/dwillis/llm-fecfile/blob/main/llm_fecfile.py#L29-L35">those governing overall tone and style for responses</a> or <a href="https://github.com/dwillis/llm-fecfile/blob/main/llm_fecfile.py#L408-L412">how to handle F99 filings</a>, which often are boilerplate responses to FEC inquiries but can contain details of fraud and other unusual activity. Here’s how llm-fecfile handles one recent one:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> run llm <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-f</span> fec:1897073 <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"anything unusual here?"</span></span></code></pre></div>
+font-style: inherit;">"anything unusual here?"</span></span></code></pre></div></div>
 </div>
 <blockquote class="blockquote">
 <p>This filing is a fairly typical F99 form used to provide a miscellaneous text communication. The content addresses a compliance issue the committee encountered with their May 2025 monthly report. Specifically, the DC Democratic State Committee acknowledges that a refund to Metro Washington Council AFLCIO was made outside the required 30-day window for confirming whether the original contribution was permissible under federal rules. They state they will implement new processes to ensure future compliance with the confirmation requirements.</p>
@@ -452,7 +526,7 @@ font-style: inherit;">"anything unusual here?"</span></span></code></pre></div>
 <p>I had been staring at my <a href="https://thescoop.org/LLM-Extraction-Challenge/">Political Email Extraction Leaderboard</a> since I first published it, and was disappointed by some of the performances I found in extracting committee names from the disclaimers in fundraising messages. Some of the commercial models did worse than I expected, below 90% in some cases, and I was surprised. I should have been more skeptical.</p>
 <p>Once I dug into how I was compiling my stats, I found a pretty simple mistake I made: when matching the committee names produced by LLMs to my ground truth training committees, I was doing an exact match without regard to case sensitivity. So “PA Democratic Party” would not have matched “Pa Democratic Party”. There were not a ton of those kinds of scenarios, but there were some, and as a result, the accuracy of most of the models improved, and in a way that made more sense to me.</p>
 <p>Here’s what I changed, code-wise:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="cf" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">if</span> <span class="st" style="color: #20794D;
@@ -496,9 +570,9 @@ font-style: inherit;">"committee_match"</span>] <span class="op" style="color: #
 background-color: null;
 font-style: inherit;">=</span> <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">False</span></span></code></pre></div>
+font-style: inherit;">False</span></span></code></pre></div></div>
 <p>to this:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="cf" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">if</span> <span class="st" style="color: #20794D;
@@ -558,7 +632,7 @@ font-style: inherit;">"committee_match"</span>] <span class="op" style="color: #
 background-color: null;
 font-style: inherit;">=</span> <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">False</span></span></code></pre></div>
+font-style: inherit;">False</span></span></code></pre></div></div>
 <p>By converting the committee names entirely to lower case and calling <code>strip()</code> on them, I reduced the number of false negatives in my results. This had some visible results. For example, <a href="https://github.com/dwillis/LLM-Extraction-Challenge/blob/f9d75907e47a67ca4b692c7fd1a102af0f467430/fundraising-emails/summary_all_json.csv#L3">GPT-4o previously sat at a less-than-impressive 79.3 percent accuracy</a> and now sits at a <a href="https://github.com/dwillis/LLM-Extraction-Challenge/blob/main/fundraising-emails/summary_all_json.csv#L3">much more impressive 96.7 percent accuracy rate</a>. This makes sense, given what I understood to be GPT-4o’s capabilities, and I should have caught this problem sooner.</p>
 <p>What this means is that the <a href="https://thescoop.org/LLM-Extraction-Challenge/">updated leaderboard</a> is dominated by the commercial models from OpenAI, Anthropic and Google, but Qwen2.5 and Mistral’s Small 3.1 model both scored over 90%, which is impressive in both cases. Check out the new leaders:</p>
 <div class="cell">
@@ -624,7 +698,7 @@ font-style: inherit;">False</span></span></code></pre></div>
 <section id="splitting-the-text-into-job-listings" class="level4">
 <h4 class="anchored" data-anchor-id="splitting-the-text-into-job-listings">Splitting the Text Into Job Listings</h4>
 <p>The job bulletins are lengthy, unstructured text files, and some of them would exceed the input limits of an LLM. The first step was to break them into individual listings using <strong>regex-based chunking</strong>, using the MEM-XXX-YY pattern.</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> re</span>
 <span id="cb1-2"><span class="im" style="color: #00769E;
@@ -653,7 +727,17 @@ font-style: inherit;"># Split on MEM- pattern but keep the delimiter</span></spa
 background-color: null;
 font-style: inherit;">=</span> re.split(<span class="vs" style="color: #20794D;
 background-color: null;
-font-style: inherit;">r'(?=MEM-)'</span>, text)[<span class="dv" style="color: #AD0000;
+font-style: inherit;">r'</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">?=</span><span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">MEM-</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">)</span><span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>, text)[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>:]</span>
 <span id="cb1-8">    <span class="co" style="color: #5E5E5E;
@@ -671,13 +755,13 @@ font-weight: bold;
 font-style: inherit;">in</span> chunks <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">if</span> chunk.strip()]</span></code></pre></div>
+font-style: inherit;">if</span> chunk.strip()]</span></code></pre></div></div>
 <p>This ensured that each <strong>MEM-XXX-YY</strong> entry remained intact, preserving all details associated with each job.</p>
 </section>
 <section id="extracting-key-fields-using-google-gemini" class="level4">
 <h4 class="anchored" data-anchor-id="extracting-key-fields-using-google-gemini">Extracting Key Fields Using Google Gemini</h4>
 <p>Once I had clean job chunks, I passed them through a structured extraction process using <a href="https://ai.google.dev/gemini-api/docs/models/gemini">Google Gemini’s Flash 2.0 model</a>. The llm library makes this very easy, thanks to a plugin that supports Gemini models. Originally I wrote <a href="https://github.com/dwillis/house-jobs/blob/master/parser.py#L35">the prompt to process each listing</a>, but then I asked Gemini to improve my prompt for me. <a href="https://github.com/dwillis/house-jobs/blob/master/parser2.py#L22-L42">It absolutely did</a>, adding not only some formatting instructions but also suggesting I pull out information about equal opportunity hiring statements in the listings:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">command <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">command <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="ss" style="color: #20794D;
 background-color: null;
@@ -829,14 +913,14 @@ background-color: null;
 font-style: inherit;">\\</span></span>
 <span id="cb2-21"><span class="ss" style="color: #20794D;
 background-color: null;
-font-style: inherit;">            Do not process introductory boilerplate language or subscribe/unsubscribe sections as job listings. Format all text fields as UTF-8 strings, convert bullet points to array elements, and maintain paragraph structure in longer text fields. Remove any formatting characters while preserving the semantic structure of the content.'"""</span></span></code></pre></div>
+font-style: inherit;">            Do not process introductory boilerplate language or subscribe/unsubscribe sections as job listings. Format all text fields as UTF-8 strings, convert bullet points to array elements, and maintain paragraph structure in longer text fields. Remove any formatting characters while preserving the semantic structure of the content.'"""</span></span></code></pre></div></div>
 <p>The prompt provides an example of how I wanted the JSON to look, but Simon has actually made that part better today with his <a href="https://simonwillison.net/2025/Feb/28/llm-schemas/">JSON schemas option for llm</a>. I will be using that going forward.</p>
 <p>Oh, and cost? I’m cheap, so I ran this using Gemini’s 1,500 daily API calls on the free tier. Took me a few days. $0.</p>
 </section>
 <section id="and-now-you-have-the-data" class="level4">
 <h4 class="anchored" data-anchor-id="and-now-you-have-the-data">And Now You Have the Data</h4>
 <p>Running that script produced structured JSON data of the PDF version I showed above that looks like this:</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb3-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">{</span></span>
 <span id="cb3-2">    <span class="dt" style="color: #AD0000;
@@ -1014,7 +1098,7 @@ font-weight: bold;
 font-style: inherit;">null</span></span>
 <span id="cb3-27">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">}</span></span></code></pre></div>
+font-style: inherit;">}</span></span></code></pre></div></div>
 <p>There’s a lot of stuff in here, and most of it is still long-ish text. But, now I can treat sections of the job listings individually rather than as a whole. That’s important for several reasons.</p>
 </section>
 <section id="what-this-data-can-tell-us" class="level4">
@@ -1395,7 +1479,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <p>LLMs should be pretty solid at this task, right? Well, maybe. This is much more of a traditional machine learning job in the sense that you’d train a dataset and then use that to help standardize additional records. Tossing some records into an LLM and seeing what happens seems like it might work, so I gave it a try. You can see the results, using ChatGPT’s 4o model, <a href="https://chatgpt.com/share/aab0ab55-e472-4a38-a567-3761fb6bd09e">here</a>. It mostly did not work.</p>
 <p>The good news is that ChatGPT will do actual data analysis using common Python tools like pandas if you give it a CSV file. It’ll show you the code it produced to do that, too. All potentially useful stuff, and crucially that kind of start gives it a bit of credibility (or is it authority?) for many users. Until you look at what it’s actually doing:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Extract the unique purposes</span></span>
 <span id="cb1-2">unique_purposes <span class="op" style="color: #5E5E5E;
@@ -1570,7 +1654,7 @@ font-style: inherit;">=</span>standardized_purposes)</span>
 <span id="cb1-35"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Display the result</span></span>
-<span id="cb1-36">standardized_purposes.head()</span></code></pre></div>
+<span id="cb1-36">standardized_purposes.head()</span></code></pre></div></div>
 </div>
 <p>Did you catch the “in a real-world scenario” comment? Nothing like a machine downgrading the legitimacy of your work tasks to make you feel good about the future, I say.</p>
 <p>This is a little bit of a contrived exercise because had I wanted to do this with a large amount of data I would have needed an approach that goes beyond shoving a CSV file into a Web chat interface. Even so, the choices the demonstration code makes are … interesting. It correctly puts <code>printing</code> and <code>postage</code> together in a category, but absent any human guidance it basically gives up after five categories.</p>
@@ -1659,7 +1743,7 @@ font-style: inherit;"># Display the result</span></span>
 <p>AWS can be a bit of nightmare to start using - the documentation often appears to be written by people who <em>only</em> use Amazon’s offerings and services like Textract are mostly designed for large-scale bulk processing, which can make demos harder than they need to be. But for the quality of the output, it’s worth the effort. For the Mississippi results, we used Python, and in particular the <a href="https://github.com/aws-samples/amazon-textract-textractor">Textractor library</a> written by the AWS folks. It has a straightforward API and while it assumes that your documents are already located on S3, the cost of having them there is trivial for most jobs.</p>
 <p>Here’s one way to approach the Mississippi precinct results: put the 82 PDF files in an S3 bucket (I mirrored them locally just so I could easily compare the original and results). After installing the Textractor library - I used the PDF option -, use Textract’s TABLES feature to have it perform OCR on each document, isolate the tables and then export each document’s table to an Excel file, with each table on a separate sheet in the file. Here’s what that script might look like:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> os</span>
 <span id="cb1-2"><span class="im" style="color: #00769E;
@@ -1753,7 +1837,7 @@ font-style: inherit;">{</span>file_name<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
-font-style: inherit;">.xlsx"</span>)</span></code></pre></div>
+font-style: inherit;">.xlsx"</span>)</span></code></pre></div></div>
 </div>
 <p>Check that screenshot of results from Panola County from above. Here’s what they look like in Excel:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -1794,7 +1878,7 @@ font-style: inherit;">.xlsx"</span>)</span></code></pre></div>
 </div>
 <p>What we want from this page is a JSON array of player objects based on the HTML attributes in the source. Skipping HTML parsing and heading straight to grabbing objects from the DOM makes things easier. Given access to the page, here’s the JavaScript that does it:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><span class="bu" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">Array</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2034,7 +2118,7 @@ background-color: null;
 font-style: inherit;">,</span> url}<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb1-15">    })</span></code></pre></div>
+<span id="cb1-15">    })</span></code></pre></div></div>
 <script type="text/javascript">
 Array.from(document.querySelectorAll('.roster__players .roster-card-item'), el => {
      const id = '';
@@ -2130,624 +2214,6 @@ Adams,Secretary of State,,Rep,Michael Watson,4058</code></pre>
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/</guid>
   <pubDate>Sat, 25 Nov 2023 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>West Virginia High School Football Blowouts</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/11/13/wv-football-blowouts/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>It has been a long time since I covered high school football in any way. The previous century, in fact.</p>
-<p>But when Duncan Slade, the deputy managing editor at Mountain State Spotlight, emailed me in late October to ask for my advice on a story involving West Virginia high school football games, I couldn’t say no. It was an interesting story idea and it involved data, too.</p>
-<p>State legislators passed a law earlier this year that allowed high school athletes to transfer between high schools without sitting out a year, as previously had been the case. One of the anecdotal effects? More blowout games where one team ran up margins of 40, 50 or even 70 points. The question Mountain State Spotlight wanted to answer was: is this real?</p>
-<p>Luckily, there’s good data available to help with that. The <a href="http://wvtailgatecentral.com/">WVTailgateCentral website</a> has game-by-game scores going back to 2009, with the exception of 2017 (the web app’s database credentials <a href="http://wvtailgatecentral.com/hs/fb2017/week_schedule.php?startdate=2017-08-12&amp;enddate=2017-08-20">don’t seem to work for that year</a>). I told Duncan that if it were my story, I’d scrape that site for game data and then calculate average margins, and I offered to do just that.</p>
-<p>One view of WVTailgateCentral is that it’s an old-school site, but that’s good news for would-be scrapers: the uncomplicated HTML that uses a single table and allows you to change the URL so that instead of a week-by-week listing of games you can get <a href="http://www.wvtailgatecentral.com/hs/fb2023/week_schedule.php?startdate=2023-08-01&amp;enddate=2023-11-15">a whole season on a single page</a>. Here’s the <a href="https://github.com/dwillis/wv_football/blob/main/scraper.py">scraper</a> I wrote in Python to retrieve game scores, identify the home state of each team (since this database includes some non-WV games) and calculate the absolute point difference:</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> csv</span>
-<span id="cb1-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> requests</span>
-<span id="cb1-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> bs4 <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> BeautifulSoup</span>
-<span id="cb1-4"></span>
-<span id="cb1-5">years <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2009</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2010</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2011</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2012</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2013</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2014</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2015</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2016</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2018</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2019</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2020</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2021</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2022</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2023</span>]</span>
-<span id="cb1-6"></span>
-<span id="cb1-7">games <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> []</span>
-<span id="cb1-8"></span>
-<span id="cb1-9"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> state_from_team(team):</span>
-<span id="cb1-10">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(KY)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-11">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"KY"</span></span>
-<span id="cb1-12">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(OH)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-13">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"OH"</span></span>
-<span id="cb1-14">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(MD)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-15">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"MD"</span></span>
-<span id="cb1-16">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(VA"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-17">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"VA"</span></span>
-<span id="cb1-18">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(PA)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-19">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"PA"</span></span>
-<span id="cb1-20">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(NC)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-21">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"NC"</span></span>
-<span id="cb1-22">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(ON)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-23">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"ON"</span></span>
-<span id="cb1-24">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(CN)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-25">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"CN"</span></span>
-<span id="cb1-26">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(SC)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-27">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"SC"</span></span>
-<span id="cb1-28">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(DC)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-29">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"DC"</span></span>
-<span id="cb1-30">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(DE)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-31">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"DE"</span></span>
-<span id="cb1-32">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(NY)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-33">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"NY"</span></span>
-<span id="cb1-34">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(NY)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-35">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"NY"</span></span>
-<span id="cb1-36">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(TN)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-37">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"TN"</span></span>
-<span id="cb1-38">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(NJ)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-39">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"NJ"</span></span>
-<span id="cb1-40">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(MI)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-41">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"MI"</span></span>
-<span id="cb1-42">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"(A)"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> team:</span>
-<span id="cb1-43">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"PA"</span></span>
-<span id="cb1-44">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span>:</span>
-<span id="cb1-45">        state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"WV"</span></span>
-<span id="cb1-46">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> state</span>
-<span id="cb1-47"></span>
-<span id="cb1-48"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> year <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> years:</span>
-<span id="cb1-49">    <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(year)</span>
-<span id="cb1-50">    url <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"http://wvtailgatecentral.com/hs/fb</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>year<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">/week_schedule.php?startdate=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>year<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">-08-01&amp;enddate=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>year<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">-12-31"</span></span>
-<span id="cb1-51">    r <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> requests.get(url)</span>
-<span id="cb1-52">    soup <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> BeautifulSoup(r.text, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"html.parser"</span>)</span>
-<span id="cb1-53">    rows <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> soup.find(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'table'</span>).find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'tr'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>:]</span>
-<span id="cb1-54">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> row <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> rows:</span>
-<span id="cb1-55">        date <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>].text</span>
-<span id="cb1-56">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"**"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>].text:</span>
-<span id="cb1-57">            home_team <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>].text.replace(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">" **"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span>)</span>
-<span id="cb1-58">            home_team_score <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>].text</span>
-<span id="cb1-59">            home_team_state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> state_from_team(home_team)</span>
-<span id="cb1-60">            visiting_team <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>].text</span>
-<span id="cb1-61">            visiting_team_score <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>].text</span>
-<span id="cb1-62">            visiting_team_state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> state_from_team(visiting_team)</span>
-<span id="cb1-63">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"**"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>].text:</span>
-<span id="cb1-64">            home_team <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>].text.replace(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">" **"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span>)</span>
-<span id="cb1-65">            home_team_score <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>].text</span>
-<span id="cb1-66">            home_team_state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> state_from_team(home_team)</span>
-<span id="cb1-67">            visiting_team <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>].text</span>
-<span id="cb1-68">            visiting_team_score <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>].text</span>
-<span id="cb1-69">            visiting_team_state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> state_from_team(visiting_team)</span>
-<span id="cb1-70">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span>:</span>
-<span id="cb1-71">            <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"No home team!"</span>)</span>
-<span id="cb1-72">            home_team <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>].text.replace(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">" **"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span>)</span>
-<span id="cb1-73">            home_team_score <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>].text</span>
-<span id="cb1-74">            home_team_state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> state_from_team(home_team)</span>
-<span id="cb1-75">            visiting_team <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>].text</span>
-<span id="cb1-76">            visiting_team_score <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> row.find_all(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'td'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>].text</span>
-<span id="cb1-77">            visiting_team_state <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> state_from_team(visiting_team)</span>
-<span id="cb1-78">        score_diff <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">abs</span>(<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">int</span>(home_team_score) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">int</span>(visiting_team_score))</span>
-<span id="cb1-79">        games.append([year, date, home_team, home_team_score, home_team_state, visiting_team, visiting_team_score, visiting_team_state, score_diff])</span></code></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>2009
-2010
-2011
-2012
-2013
-2014
-2015
-2016
-2018
-2019
-2020
-2021
-No home team!
-No home team!
-No home team!
-2022
-2023</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">with</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">open</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"scores.csv"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"w"</span>) <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> f:</span>
-<span id="cb3-2">    output_file <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> csv.writer(f)</span>
-<span id="cb3-3">    output_file.writerow([<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"year"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"date"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"home_team"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"home_team_score"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"home_team_state"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"visiting_team"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"visiting_team_score"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"visiting_team_state"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"differential"</span>])</span>
-<span id="cb3-4">    output_file.writerows(games)</span></code></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>120</code></pre>
-</div>
-</div>
-<p>It’s certainly possible to do all of this in Python or R, but I like to mix and match, especially when it comes to scraping, since I prefer Python’s tooling. But for quick data exploration and visualization, it’s hard to beat R in Quarto notebooks. You can see my <a href="https://github.com/dwillis/wv_football/blob/main/wv_scores.qmd">code here</a>, or <a href="https://thescoop.org/wv_football/wv_scores.html">check out the HTML version</a>. And the answer to the question is yes, there are a lot of blowout games in 2023, more than ever. It’s not particularly close, either, but there is a wrinkle in the data: the jump in blowouts really started <em>last year</em>, when the transfer rule was still in place. This season’s blowouts are, on average, greater and there are more of them (and in particular <a href="https://datawrapper.dwcdn.net/GgR28/1/">more games with 70+ point margins!</a>), but it’s not like it came out of nowhere.</p>
-<p>You should <a href="https://mountainstatespotlight.org/2023/11/09/high-school-football-transfer-rule-blowouts/">read the story by Henry Culvyhouse</a> that delves into how the state legislature made the change and what some of its biggest backers think now that they’ve seen the results.</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/11/13/wv-football-blowouts/</guid>
-  <pubDate>Mon, 13 Nov 2023 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
