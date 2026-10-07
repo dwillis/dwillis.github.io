@@ -12,6 +12,107 @@
 <generator>quarto-1.9.37</generator>
 <lastBuildDate>Thu, 11 Jun 2026 04:00:00 GMT</lastBuildDate>
 <item>
+  <title>The Annotated Archive, Revisited</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2026/10/07/annotated-archive-revisited/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>I gave a short talk at <a href="https://go.umd.edu/cplusjaa">Computation + Journalism 2026</a> at Northwestern on Oct.&nbsp;3 called “The Annotated Archive, Revisited.” It was 12 minutes, so this is the longer version.</em></p>
+<p>My first job in journalism was in a news library. That made a big impression on me, and I’ve been a little obsessed with archives ever since.</p>
+<p>In 2005, everyone was talking about wikis. I was at The Washington Post, and I had an idea: take the stories we’d published and connect them the way wiki pages link to each other. I built a test case and wrote about it in a post called <a href="https://thescoop.org/thefix/the-annotated-archive/">“The Annotated Archive”</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2026/10/07/annotated-archive-revisited/annotated_archive.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>The 2005 “Annotated Archive” post</figcaption>
+</figure>
+</div>
+<p>The reaction was friendly but skeptical. Turning an existing archive into a wiki was a lot of labor, and nobody had that kind of time.</p>
+<p>It turns out that now it’s not much labor at all. I have a small corpus of about 1,800 articles from <a href="https://github.com/dwillis/uplink">Uplink</a>, the old NICAR newsletter. I OCR’d them, then told Claude that I vaguely remembered the wiki software I used in 2005, a Ruby project called <a href="https://golem.ph.utexas.edu/wiki/instiki/show/HomePage">Instiki</a>. Find it if it still exists, I said, download the source, load the Uplink articles and make a wiki out of them.</p>
+<p>And it mostly did. I smiled at that, and I was also a little alarmed. Like a lot of things models produce, it looks convincing at first glance.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2026/10/07/annotated-archive-revisited/uplink_wiki.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>The Uplink wiki built with Instiki</figcaption>
+</figure>
+</div>
+<section id="but-the-metadata" class="level2">
+<h2 class="anchored" data-anchor-id="but-the-metadata">But the metadata</h2>
+<p>An archive you read one story at a time is a dresser drawer with a bunch of stuff crammed into it. A connected, annotated archive is something else, and the raw material for building one is metadata. Most news archives don’t have much of it.</p>
+<p>Models can close a lot of gaps. They can tell you what a story is about and whether it resembles another story. But the quality of metadata matters, and so do canonical lists of things: people, places, organizations. Leaving those decisions to a model is a bad place to be, even when the output arrives with the confidence of a middle-aged white guy like me.</p>
+<p>Newsrooms used to have people whose job was to care about this. They were news librarians, and they were part of the larger world of special librarians: corporate libraries, military libraries, trade association libraries. I used to go to the Special Libraries Association conference and meet people who kept wonderfully weird collections.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2026/10/07/annotated-archive-revisited/librarians.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>News librarians</figcaption>
+</figure>
+</div>
+<p>The association still exists. Its late, great News Division doesn’t. But we still need what those librarians did.</p>
+</section>
+<section id="extract-one-good-thing" class="level2">
+<h2 class="anchored" data-anchor-id="extract-one-good-thing">Extract one good thing</h2>
+<p>I want to say that I’m a hypocrite on this. A lot of my own approach has been to throw material at a model, see what happens and declare victory. My collection of <a href="https://github.com/dwillis/house-jobs">U.S. House job and internship listings</a> is an example. For more than a decade I’ve been receiving those listings from the U.S. House of Representatives by email, because I’m one of those people who keeps collections of things. My first question was simple: what skills do members of Congress say they want?</p>
+<p>So I ran the listings through a clustering algorithm, or rather had Claude write the code to do that. The answer was that they want everything and also nothing. I could show the results to students, and they’d be impressed for about three seconds before asking what they were looking at.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2026/10/07/annotated-archive-revisited/internship_cluster.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>Clustering results from House job listings</figcaption>
+</figure>
+</div>
+<p>Maybe members of Congress can’t tell you what they want. But I can tell you that this data doesn’t, and that’s because I skipped a step. Instead of applying a model to everything at once, I should have picked one thing and extracted it as metadata, and then analyzed that. The lack of natural friction in LLMs works against us here. Journalists want it now. Good enough is good enough because there’s always tomorrow. Librarians are good at pushing back on that, at telling you that you didn’t actually know what you thought you knew.</p>
+</section>
+<section id="cricket-ocr-and-evaluations" class="level2">
+<h2 class="anchored" data-anchor-id="cricket-ocr-and-evaluations">Cricket, OCR and evaluations</h2>
+<p>My other obsession of mine is old cricket coverage, and lately that’s been <a href="https://archive.acscricket.com/research/tw/tw_newspaper_cuttings_1895/index.html#zoom=z">match reports from 1895 from minor counties matches in England</a>. A group of cricket historian friends and I are trying to index this material so it’s findable. Not the full scorecards, just the basic fact that one club played another on a certain day in a certain year.</p>
+<p>OCR complicates the process of extracting the necessary metadata, although it’s better than it used to be. What I need are evaluations that compare what I produce as a human against what a model, in this case DeepSeek Pro 4.1, produces from the same page.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2026/10/07/annotated-archive-revisited/acscricket.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>1895 minor counties newspaper cuttings</figcaption>
+</figure>
+</div>
+<p>The models can mostly read the text. The problems are usually matters of style. Cricket people write “2nd XI” with Roman numerals; only weirdos spell out “Second Eleven.” Ask a model without instructions and it will often spell it out. That’s close to a match, but not a match, and it makes my job harder. So what I do is I label a set of the matches and then use that to judge the model’s work.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2026/10/07/annotated-archive-revisited/willis_compare.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>Comparing my labels with model output</figcaption>
+</figure>
+</div>
+<p>With proper instructions, I’ve gotten various models up to about 90% agreement with my own work. That might be good enough for some journalism. It’s not good enough for history yet.</p>
+<p>The question isn’t whether a model can do the task. It’s whether we’re giving it enough information and guidance to make success likely. I often just hope it works, and when it does, I congratulate myself on my brilliance.</p>
+</section>
+<section id="a-plan-not-a-hope" class="level2">
+<h2 class="anchored" data-anchor-id="a-plan-not-a-hope">A plan, not a hope</h2>
+<p>If you have an archive or any collection of information that you’ve spent time with, you should already know what it should look like before you feed it to a model. That means you should have a metadata style guide and canonical lists. The style guide covers how you refer to things in the archive and which things matter more than others. The canonical lists are the entities you can’t afford to get wrong.</p>
+<p>For geography, that’s a list of cities, districts or jurisdictions. For people, it starts with questions like: what’s my style on middle names, and do I care about them? Is the group of people large enough that disambiguation will cause problems later? If you cover campaign finance, the answer is yes. At some level, that beat is mostly disambiguation.</p>
+</section>
+<section id="the-start-of-a-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="the-start-of-a-pipeline">The start of a pipeline</h2>
+<p>Some people are working on this. My friend Chase Davis recently released <a href="https://localangle.co/blog/introducing-backfield/">Backfield</a>, a model-driven tool that takes your stories and does extraction, enrichment and classification. It’s early days, and I recommend it. Chase’s heart and head are in the right place.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.thescoop.org/archives/2026/10/07/annotated-archive-revisited/backfield.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>Backfield</figcaption>
+</figure>
+</div>
+<p>But I don’t think we can outsource metadata work and still expect to end up with unique information. We have to define what matters to us, how it should appear and how we’ll use it. A model is often a good first step. It makes the archive less incoherent. Then we still need to apply human coherence and judgment. I’ll like tools like Backfield even more when they let me drive more.</p>
+</section>
+<section id="treat-archives-like-we-value-them" class="level2">
+<h2 class="anchored" data-anchor-id="treat-archives-like-we-value-them">Treat archives like we value them</h2>
+<p>Canonical data leads to better metadata. Better metadata, as any good librarian will tell you, leads to better outcomes: we know more, and we’re more certain about what we know.</p>
+<p>Almost everything a newsroom does connects in some way to its archive. Events that have truly never happened before are rarer than we like to pretend. If the archive can help with coverage, it should, but only if we impose some structure, order and priorities on it first. Right now most newsrooms treat the archive as the place where stories go after publication. We can do better than that, especially now that we have better tools to do it.</p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2026/10/07/annotated-archive-revisited/</guid>
+  <pubDate>Thu, 11 Jun 2026 04:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Hoops Reloaded</title>
   <dc:creator>Derek Willis</dc:creator>
   <link>https://www.thescoop.org/archives/2026/06/11/hoops-reloaded/</link>
@@ -2147,73 +2248,6 @@ Array.from(document.querySelectorAll('.roster__players .roster-card-item'), el =
  ]]></description>
   <guid>https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/</guid>
   <pubDate>Mon, 25 Dec 2023 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Using AI to Parse Election Results</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>If there’s one state that justifies the need for OpenElections, it’s Mississippi. Unlike some other states that don’t have a centralized election results system, Mississippi does. Each of the state’s 82 counties uses the same form to report official results to the Secretary of State. But that form is quite a thing in terms of organization:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/ms_statewide.png" class="img-fluid figure-img"></p>
-<figcaption>Statewide Results</figcaption>
-</figure>
-</div>
-<p>There’s a lot going on here, but the lowlights, from a parsing perspective, start with the counties displayed as vertical column names, followed by the combination of candidate name and party in the same box. Those vertical headers make parsing more complicated; you can extract the text from this file, but very few programs will preserve the layout of those counties. <a href="https://sos.ms.gov/elections/electionresults/2023General/State%20Certified%20Results/2023%20Statewide%20Recapitulation%20Sheet.pdf">This is an electronic PDF</a>, so you can usually export it to a spreadsheet that you’ll then spend time reformatting. Depending on the election, a lot of time.</p>
-<p>This is a very good candidate for AI services because we have a consistent (if not totally logical) structure to the document and we know what the output should look like: in this case, a CSV file with one row per candidate results. That means that a parsed file should look something like this:</p>
-<pre><code>county,office,district,party,candidate,votes
-Adams,Governor,,Dem,Brandon Presley,5782
-Adams,Governor,,Rep,Tate Reeves,3516
-Adams,Governor,,Ind,Gwendolyn Gray,130
-Adams,Lieutenant Governor,,Dem,D. Ryan Grover,5111
-Adams,Lieutenant Governor,,Rep,Delbert Hosemann,4101
-Adams,Secretary of State,,Dem,Ty Pinkins,5162
-Adams,Secretary of State,,Rep,Michael Watson,4058</code></pre>
-<p>I first reached for Claude.ai from the folks at Anthropic, mostly because it handed file uploads slightly before OpenAI added that as a ChatGPT feature. It didn’t start out well, though:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/claude_01.png" class="img-fluid figure-img"></p>
-<figcaption>What file?</figcaption>
-</figure>
-</div>
-<p>Eventually it told me that the PDF was copyrighted material (it is not, being a government work in the public domain). After I told Claude that, it was happy to do the job.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/claude_02.png" class="img-fluid figure-img"></p>
-<figcaption>It’s a start</figcaption>
-</figure>
-</div>
-<p>Well, happy to <em>start</em> the job is more accurate. It’s an annoying thing to deal with a service that takes the instructions but then … doesn’t actually finish the job? Consider it another lesson in prompt editing: I had to tell it to make sure to do all of the counties and candidates. Even so, Claude’s UI means that it spits out the results to the screen, and there seems to be a limit on how much it can produce at one go, so I had to break up the conversion into multiple groups of counties. Still, in the end it worked - at least for the statewide offices I wanted, the ones with a result in every county.</p>
-<p>For state legislative elections, Mississippi uses the same county grid format but puts an “X” in a county where the candidate wasn’t actually on the ballot. That means that if a state legislator only represented one county, she’d have one row with some number of votes and 81 with an “X” for the votes. For whatever reason, that confused both Claude and ChatGPT, in the sense that both were not able to produce the kind of file I wanted. Here’s what I asked Claude to do with state senate results:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/claude_03.png" class="img-fluid figure-img"></p>
-<figcaption>Looks ok…</figcaption>
-</figure>
-</div>
-<p>Looks ok, but since the example used Adams County, the first “result” shows that, too, even though District 1 is in DeSoto County. This is one of the times when AI-generated results look authoritative but are completely wrong.</p>
-<p>I tried ChatGPT-4, which has a couple of features I like when it comes to this sort of task: it narrates its processes and provides a link to a downloadable file for the results (which also has the effect of making the results a surprise):</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/chatgpt_01.png" class="img-fluid figure-img"></p>
-<figcaption>Narration</figcaption>
-</figure>
-</div>
-<p>Eventually it was able to do better than Claude at parsing state senate results (like Claude, I had to tell it to do all of the candidates), but had issues with state house results: the CSV files it produced looked good but placed results in the wrong counties. Eventually I saved the state house results as an Excel file and reworked that using R. You can see <a href="https://github.com/openelections/openelections-data-ms/blob/master/2023/20231107__ms__general__county.csv">the final result on GitHub</a>. In total, this took me a couple of hours, mostly spent experimenting with the correct prompt wording. Going forward it should take less time to do, and I have some ideas for tackling the state house results, too.</p>
-<p>There are tradeoffs here, of course. OpenElections used to sometimes pay folks for data entry services, and some of them were quite good at the job, paying attention to every detail, asking useful questions that helped to understand what we were working with, that sort of thing. AI’s strengths are enough to make that a less attractive option, even if we’re paying $20 a month for a service or using an API. It costs less and takes less time in most cases. There is still a need for human oversight of these processes - ChatGPT’s struggles with state legislative results is the most glaring example - but I suspect even those pitfalls can be lessened or eliminated, and with them the obvious need for people in the loop.</p>
-<p>There should still be people in the loop, if only because the raw materials here - those PDFs published by the state - are the result of a human-designed process that has quirks that are much easier for humans to understand. Perhaps in an ideal scenario, the results are produced in a format that software can understand. But that’s not the world we live in, and we’ll need people who can help translate between the human systems and the digital ones.</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/11/25/using-ai-to-parse-election-results/</guid>
-  <pubDate>Sat, 25 Nov 2023 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

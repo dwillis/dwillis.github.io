@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Derek Willis">
+<meta name="dcterms.date" content="2026-06-11">
 
-<title>Derek Willis</title>
+<title>The Annotated Archive, Revisited – Derek Willis</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,25 +28,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-bfbbcd690f1bdde627d81b87cfd03fc3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<script src="../../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap-bfbbcd690f1bdde627d81b87cfd03fc3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,81 +72,22 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-description','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      page: 18,
-    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent quarto-light">
+<body class="nav-sidebar docked nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/dwillis.png" alt="" class="navbar-logo light-content">
-    <img src="./images/dwillis.png" alt="" class="navbar-logo dark-content">
+    <a href="../../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../../images/dwillis.png" alt="" class="navbar-logo light-content">
+    <img src="../../../../../images/dwillis.png" alt="" class="navbar-logo dark-content">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../../../index.html">
     <span class="navbar-title">Derek Willis</span>
     </a>
   </div>
@@ -157,7 +98,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="./blog.xml"> <i class="bi bi-rss" role="img" aria-label="feed">
+    <a class="nav-link" href="../../../../../blog.xml"> <i class="bi bi-rss" role="img" aria-label="feed">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -172,14 +113,42 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">The Annotated Archive, Revisited</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Annotated Archive, Revisited</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Derek Willis </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 11, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
         <div class="sidebar-tools-main">
@@ -190,49 +159,49 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../about" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./now" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../now" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Now</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./then" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../then" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Then</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./help" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../help" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ways I Can Help</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./thefix" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../thefix" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The Fix</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./blog.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../blog.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blog</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./teaching" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../teaching" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Teaching</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datasets" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../datasets" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Datasets</span></a>
   </div>
 </li>
@@ -241,80 +210,115 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#but-the-metadata" id="toc-but-the-metadata" class="nav-link active" data-scroll-target="#but-the-metadata">But the metadata</a></li>
+  <li><a href="#extract-one-good-thing" id="toc-extract-one-good-thing" class="nav-link" data-scroll-target="#extract-one-good-thing">Extract one good thing</a></li>
+  <li><a href="#cricket-ocr-and-evaluations" id="toc-cricket-ocr-and-evaluations" class="nav-link" data-scroll-target="#cricket-ocr-and-evaluations">Cricket, OCR and evaluations</a></li>
+  <li><a href="#a-plan-not-a-hope" id="toc-a-plan-not-a-hope" class="nav-link" data-scroll-target="#a-plan-not-a-hope">A plan, not a hope</a></li>
+  <li><a href="#the-start-of-a-pipeline" id="toc-the-start-of-a-pipeline" class="nav-link" data-scroll-target="#the-start-of-a-pipeline">The start of a pipeline</a></li>
+  <li><a href="#treat-archives-like-we-value-them" id="toc-treat-archives-like-we-value-them" class="nav-link" data-scroll-target="#treat-archives-like-we-value-them">Treat archives like we value them</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<section id="hi-im-derek.-i-love-using-data-to-find-and-tell-stories.-and-asking-questions." class="level3">
-<h3 class="anchored" data-anchor-id="hi-im-derek.-i-love-using-data-to-find-and-tell-stories.-and-asking-questions.">Hi, I’m Derek. I love using data to find and tell stories. And asking questions.</h3>
-<p><img src="images/middle_school.png" class="img-fluid"></p>
 
+<p><em>I gave a short talk at <a href="https://go.umd.edu/cplusjaa">Computation + Journalism 2026</a> at Northwestern on Oct.&nbsp;3 called “The Annotated Archive, Revisited.” It was 12 minutes, so this is the longer version.</em></p>
+<p>My first job in journalism was in a news library. That made a big impression on me, and I’ve been a little obsessed with archives ever since.</p>
+<p>In 2005, everyone was talking about wikis. I was at The Washington Post, and I had an idea: take the stories we’d published and connect them the way wiki pages link to each other. I built a test case and wrote about it in a post called <a href="https://thescoop.org/thefix/the-annotated-archive/">“The Annotated Archive”</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="annotated_archive.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>The 2005 “Annotated Archive” post</figcaption>
+</figure>
+</div>
+<p>The reaction was friendly but skeptical. Turning an existing archive into a wiki was a lot of labor, and nobody had that kind of time.</p>
+<p>It turns out that now it’s not much labor at all. I have a small corpus of about 1,800 articles from <a href="https://github.com/dwillis/uplink">Uplink</a>, the old NICAR newsletter. I OCR’d them, then told Claude that I vaguely remembered the wiki software I used in 2005, a Ruby project called <a href="https://golem.ph.utexas.edu/wiki/instiki/show/HomePage">Instiki</a>. Find it if it still exists, I said, download the source, load the Uplink articles and make a wiki out of them.</p>
+<p>And it mostly did. I smiled at that, and I was also a little alarmed. Like a lot of things models produce, it looks convincing at first glance.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="uplink_wiki.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>The Uplink wiki built with Instiki</figcaption>
+</figure>
+</div>
+<section id="but-the-metadata" class="level2">
+<h2 class="anchored" data-anchor-id="but-the-metadata">But the metadata</h2>
+<p>An archive you read one story at a time is a dresser drawer with a bunch of stuff crammed into it. A connected, annotated archive is something else, and the raw material for building one is metadata. Most news archives don’t have much of it.</p>
+<p>Models can close a lot of gaps. They can tell you what a story is about and whether it resembles another story. But the quality of metadata matters, and so do canonical lists of things: people, places, organizations. Leaving those decisions to a model is a bad place to be, even when the output arrives with the confidence of a middle-aged white guy like me.</p>
+<p>Newsrooms used to have people whose job was to care about this. They were news librarians, and they were part of the larger world of special librarians: corporate libraries, military libraries, trade association libraries. I used to go to the Special Libraries Association conference and meet people who kept wonderfully weird collections.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="librarians.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>News librarians</figcaption>
+</figure>
+</div>
+<p>The association still exists. Its late, great News Division doesn’t. But we still need what those librarians did.</p>
+</section>
+<section id="extract-one-good-thing" class="level2">
+<h2 class="anchored" data-anchor-id="extract-one-good-thing">Extract one good thing</h2>
+<p>I want to say that I’m a hypocrite on this. A lot of my own approach has been to throw material at a model, see what happens and declare victory. My collection of <a href="https://github.com/dwillis/house-jobs">U.S. House job and internship listings</a> is an example. For more than a decade I’ve been receiving those listings from the U.S. House of Representatives by email, because I’m one of those people who keeps collections of things. My first question was simple: what skills do members of Congress say they want?</p>
+<p>So I ran the listings through a clustering algorithm, or rather had Claude write the code to do that. The answer was that they want everything and also nothing. I could show the results to students, and they’d be impressed for about three seconds before asking what they were looking at.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="internship_cluster.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>Clustering results from House job listings</figcaption>
+</figure>
+</div>
+<p>Maybe members of Congress can’t tell you what they want. But I can tell you that this data doesn’t, and that’s because I skipped a step. Instead of applying a model to everything at once, I should have picked one thing and extracted it as metadata, and then analyzed that. The lack of natural friction in LLMs works against us here. Journalists want it now. Good enough is good enough because there’s always tomorrow. Librarians are good at pushing back on that, at telling you that you didn’t actually know what you thought you knew.</p>
+</section>
+<section id="cricket-ocr-and-evaluations" class="level2">
+<h2 class="anchored" data-anchor-id="cricket-ocr-and-evaluations">Cricket, OCR and evaluations</h2>
+<p>My other obsession of mine is old cricket coverage, and lately that’s been <a href="https://archive.acscricket.com/research/tw/tw_newspaper_cuttings_1895/index.html#zoom=z">match reports from 1895 from minor counties matches in England</a>. A group of cricket historian friends and I are trying to index this material so it’s findable. Not the full scorecards, just the basic fact that one club played another on a certain day in a certain year.</p>
+<p>OCR complicates the process of extracting the necessary metadata, although it’s better than it used to be. What I need are evaluations that compare what I produce as a human against what a model, in this case DeepSeek Pro 4.1, produces from the same page.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="acscricket.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>1895 minor counties newspaper cuttings</figcaption>
+</figure>
+</div>
+<p>The models can mostly read the text. The problems are usually matters of style. Cricket people write “2nd XI” with Roman numerals; only weirdos spell out “Second Eleven.” Ask a model without instructions and it will often spell it out. That’s close to a match, but not a match, and it makes my job harder. So what I do is I label a set of the matches and then use that to judge the model’s work.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="willis_compare.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>Comparing my labels with model output</figcaption>
+</figure>
+</div>
+<p>With proper instructions, I’ve gotten various models up to about 90% agreement with my own work. That might be good enough for some journalism. It’s not good enough for history yet.</p>
+<p>The question isn’t whether a model can do the task. It’s whether we’re giving it enough information and guidance to make success likely. I often just hope it works, and when it does, I congratulate myself on my brilliance.</p>
+</section>
+<section id="a-plan-not-a-hope" class="level2">
+<h2 class="anchored" data-anchor-id="a-plan-not-a-hope">A plan, not a hope</h2>
+<p>If you have an archive or any collection of information that you’ve spent time with, you should already know what it should look like before you feed it to a model. That means you should have a metadata style guide and canonical lists. The style guide covers how you refer to things in the archive and which things matter more than others. The canonical lists are the entities you can’t afford to get wrong.</p>
+<p>For geography, that’s a list of cities, districts or jurisdictions. For people, it starts with questions like: what’s my style on middle names, and do I care about them? Is the group of people large enough that disambiguation will cause problems later? If you cover campaign finance, the answer is yes. At some level, that beat is mostly disambiguation.</p>
+</section>
+<section id="the-start-of-a-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="the-start-of-a-pipeline">The start of a pipeline</h2>
+<p>Some people are working on this. My friend Chase Davis recently released <a href="https://localangle.co/blog/introducing-backfield/">Backfield</a>, a model-driven tool that takes your stories and does extraction, enrichment and classification. It’s early days, and I recommend it. Chase’s heart and head are in the right place.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="backfield.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>Backfield</figcaption>
+</figure>
+</div>
+<p>But I don’t think we can outsource metadata work and still expect to end up with unique information. We have to define what matters to us, how it should appear and how we’ll use it. A model is often a good first step. It makes the archive less incoherent. Then we still need to apply human coherence and judgment. I’ll like tools like Backfield even more when they let me drive more.</p>
+</section>
+<section id="treat-archives-like-we-value-them" class="level2">
+<h2 class="anchored" data-anchor-id="treat-archives-like-we-value-them">Treat archives like we value them</h2>
+<p>Canonical data leads to better metadata. Better metadata, as any good librarian will tell you, leads to better outcomes: we know more, and we’re more certain about what we know.</p>
+<p>Almost everything a newsroom does connects in some way to its archive. Events that have truly never happened before are rarer than we like to pretend. If the archive can help with coverage, it should, but only if we impose some structure, order and priorities on it first. Right now most newsrooms treat the archive as the place where stories go after publication. We can do better than that, especially now that we have better tools to do it.</p>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1781150400000" data-listing-file-modified-sort="1791339499878" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1281">
-<a href="./archives/2026/10/07/annotated-archive-revisited/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-The Annotated Archive, Revisited
-</h5>
-<div class="card-text listing-description delink">
-<em>I gave a short talk at Computation + Journalism 2026 at Northwestern on Oct.&nbsp;3 called “The Annotated Archive, Revisited.” It was 12 minutes, so this is the longer version.</em>
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Jun 11, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1781150400000" data-listing-file-modified-sort="1781181800563" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1815">
-<a href="./archives/2026/06/11/hoops-reloaded/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Hoops Reloaded
-</h5>
-<div class="card-text listing-description delink">
-I first need to apologize to and thank a guy named Chuck Morris.
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Jun 11, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-date-sort="1775275200000" data-listing-file-modified-sort="1775275101898" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="892">
-<a href="./archives/2026/04/04/introducing-congress-press/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Introducing Congress Press
-</h5>
-<div class="card-text listing-description delink">
-I began collecting congressional press releases more than a dozen years ago for the reasons I usually start collecting anything: I was interested in them and there wasn’t a…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Apr 4, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
