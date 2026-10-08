@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>geographic-basics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="geographic-basics_files/libs/clipboard/clipboard.min.js"></script>
+<script src="geographic-basics_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="geographic-basics_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="geographic-basics_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="geographic-basics_files/libs/quarto-html/popper.min.js"></script>
+<script src="geographic-basics_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="geographic-basics_files/libs/quarto-html/anchor.min.js"></script>
+<link href="geographic-basics_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="geographic-basics_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="geographic-basics_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="geographic-basics_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="geographic-basics_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="geographic-data-basics" class="level1">
+<h1>Geographic data basics</h1>
+<p>Up to now, we’ve been looking at patterns in data for what is more than this, or what’s the middle look like. We’ve calculated metrics like percentages, or looked at how data changes over time.</p>
+<p>Another way we can look at the data is geographically. Is there a spatial pattern to our data? Can we learn anything by using distance as a metric? What if we merge non-geographic data into geographic data?</p>
+<p>The bad news is that there isn’t a One Library To Rule Them All when it comes to geo queries in R. But there’s one emerging, called Simple Features, that is very good.</p>
+<p>Go to the console and install it with <code>install.packages("sf")</code></p>
+<p>To understand geographic queries, you have to get a few things in your head first:</p>
+<ol type="1">
+<li>Your query is using planar space. Usually that’s some kind of projection of the world. If you’re lucky, your data is projected, and the software will handle projection differences under the hood without you knowing anything about it.</li>
+<li>Projections are cartographers making opinionated decisions about what the world should look like when you take a spheroid – the earth isn’t perfectly round – and flatten it. Believe it or not, every state in the US has their own geographic projection. There’s dozens upon dozens of them.</li>
+<li>Geographic queries work in layers. In most geographic applications, you’ll have multiple layers. You’ll have a boundary file, and a river file, and a road file, and a flood file and combined together they make the map. But you have to think in layers.</li>
+<li>See 1. With layers, they’re all joined together by the planar space. So you don’t need to join one to the other like we did earlier – the space has done that. So you can query how many X are within the boundaries on layer Y. And it’s the plane that holds them together.</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/geolayers.jpg" class="img-fluid figure-img" width="512"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="importing-and-viewing-data" class="level2">
+<h2 class="anchored" data-anchor-id="importing-and-viewing-data">Importing and viewing data</h2>
+<p>Let’s start with the absolute basics of geographic data: loading and viewing. Load libraries as usual.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>First: an aside on geographic data. There are many formats for geographic data, but data type you’ll see the most is called the shapefile. It comes from a company named ERSI, which created the most widely used GIS software in the world. For years, they were the only game in town, really, and the shapefile became ubiquitous, especially so in government and utilities.</p>
+<p>More often than not, you’ll be dealing with a shapefile. But a shapefile isn’t just a single file – it’s a collection of files that combined make up all the data that allow you to use it. There’s a .shp file – that’s the main file that pulls it all together – but it’s important to note if your shapefiles has a .prj file, which indicates that the projection is specified. You also might be working with a GeoDatabase, or a .gdb file. That’s a slightly different, more compact version of a Shapefile.</p>
+<p>The data we’re going to be working with is a Shapefile of Maryland zip codes from the <a href="https://data.imap.maryland.gov/datasets/38f3f8bc61bb4261b59d71b3642e3cd6_3/explore?location=38.810313%2C-77.268250%2C8.83">state’s GIS data catalog</a>.</p>
+<p>Similar to <code>readr</code>, the <code>sf</code> library has functions to read geographic data. In this case, we’re going to use <code>st_read</code> to read in our zip code data. And then glimpse it to look at the columns.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>md_zips <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/md_zips/BNDY_ZIPCodes11Digit_MDP.shp"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `BNDY_ZIPCodes11Digit_MDP' from data source 
+  `/Users/dwillis/code/datajournalismbook-religion/data/md_zips/BNDY_ZIPCodes11Digit_MDP.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 526 features and 7 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -8848487 ymin: 4567000 xmax: -8354398 ymax: 4825836
+Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(md_zips)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 526
+Columns: 8
+$ OBJECTID   &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …
+$ ZIPCODE2   &lt;chr&gt; "02400121502", "02400121521", "02400121530", "02400121532",…
+$ ZIPNAME    &lt;chr&gt; "Cumberland", "Barton", "Flintstone", "Frostburg", "Lonacon…
+$ EXISTING   &lt;chr&gt; "MDPV2017_18", "MDPV2017_18", "MDPV2017_18", "MDPV2017_18",…
+$ ZIPCODE1   &lt;chr&gt; "21502", "21521", "21530", "21532", "21539", "21540", "2154…
+$ Shape_Leng &lt;dbl&gt; 161775.468, 29199.174, 93603.136, 58275.951, 35065.607, 397…
+$ Shape_Area &lt;dbl&gt; 441770403, 38842463, 267606761, 188918096, 65669461, 108639…
+$ geometry   &lt;MULTIPOLYGON [m]&gt; MULTIPOLYGON (((-8755679 48..., MULTIPOLYGON (…</code></pre>
+</div>
+</div>
+<p>This looks like a normal dataframe, and mostly it is. We have one row per zipcode, and each column is some feature of that zip code: the fipscode, name and more. What sets this data apart from other dataframes we’ve used is the last column, “geometry”, which is of a new data type. It’s not a character or a number, it’s a “Multipolygon”, which is composed of multiple longitude and latitude values. When we plot these on a grid of latitude and longitude, it will draw those shapes on a map.</p>
+<p>Let’s look at these zip codes We have 526 of them, according to this data.</p>
+<p>But where in Maryland are these places? We can simply plot them on a longitude-latitude grid using ggplot and geom_sf.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>md_zips <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="geographic-basics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Each shape is a zip code, with the boundaries plotted according to its degrees of longitude and latitude.</p>
+<p>If you know anything about Maryland, you can pick out the geographic context here. You can basically see where Baltimore is and where the borders of the District of Columbia touch Maryland. But this map is not exactly ideal. It would help to have a county map layered underneath of it, to help make sense of the spatial nature of this data.</p>
+<p>This is where layering becomes more clear. First, we want to go out and get another shapefile, this one showing Maryland county outlines.</p>
+<p>Instead of loading it from our local machine, like we did above, we’re going to use a package to directly download it from the U.S. Census. The package is called <code>tigris</code> and it’s developed by the same person who made <code>tidycensus</code>.</p>
+<p>In the console, install tigris with <code>install.packages('tigris')</code></p>
+<p>Then load it:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigris)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>To enable caching of data, set `options(tigris_use_cache = TRUE)`
+in your R script or .Rprofile.</code></pre>
+</div>
+</div>
+<p>Now, let’s use the counties() function from tigris to pull down a shapefile of all U.S. counties.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>counties <span class="ot">&lt;-</span> <span class="fu">counties</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(counties)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This looks pretty similar to our zip codes shapefile, in that it looked mostly like a normal dataframe with the exception of the new geometry column (this time called <code>geometry</code>, which is pretty common).</p>
+<p>This county shapefile has all 3233 U.S. counties. We only want the Maryland counties, so we’re going to filter the data to only keep Maryland counties. There is no STATE column, but there is a STATEFP column, with each number representing a state. Maryland’s FP number is 24.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>md_counties <span class="ot">&lt;-</span> counties <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STATEFP <span class="sc">==</span> <span class="st">"24"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To see what this looks like, let’s plot it out with ggplot. We can pretty clearly see the shapes of Maryland counties.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>md_counties <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="geographic-basics_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>With this county map, we can layer our places data.</p>
+<p>Something to note: The layers are rendered in the order they appear. So the first geom_sf is rendered first. The second geom_sf is rendered ON TOP OF the first one.</p>
+<p>We’re also going to change things up a bit to put the datasets we want to display INSIDE of the geom_sf() function, instead of starting with a dataframe. We have two to plot now, so it’s easier this way.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>md_counties) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>md_zips) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="geographic-basics_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice the subtle differences at the boundaries?</p>
+<p>Now let’s do something more interesting with geographic data. We’re going to figure out which churches from our statewide churches data are located in Prince George’s County – and then map them. But our churches data doesn’t have a county column. It only has zip codes. So how do we figure out which zip codes are in Prince George’s County?</p>
+<p>This is where the power of geographic data comes in. We already have a zip code shapefile with the geographic boundaries of each zip code, and we can get the geographic boundary of Prince George’s County from our county data. Using a <strong>spatial join</strong>, we can find which zip codes overlap with Prince George’s County – no county column needed. The geography itself connects the two datasets.</p>
+<p>First, let’s load the Maryland churches data. This is a dataframe of churches registered as tax-exempt organizations in Maryland. It has columns for the church name, address, city, state, zip code, and NTEE code (a classification system for nonprofits). Notice the <code>zip5</code> column – that’s the 5-digit zip code we can use to connect this data to our zip code shapefile.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>md_churches <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/churches_md.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 7314 Columns: 29
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (16): EIN, NAME, ICO, STREET, CITY, STATE, ZIP, GROUP, SUBSECTION, RULIN...
+dbl (13): AFFILIATION, CLASSIFICATION, DEDUCTIBILITY, FOUNDATION, ORGANIZATI...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(md_churches)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 7,314
+Columns: 29
+$ EIN              &lt;chr&gt; "010060379", "010549919", "010549978", "010552565", "…
+$ NAME             &lt;chr&gt; "HEALING AND DELIVERANCE MINISTRY INC", "TIME OF GRAC…
+$ ICO              &lt;chr&gt; NA, "% MIGUEL A ROMERO", "% CARNAL BRADLEY PASTOR", N…
+$ STREET           &lt;chr&gt; "14103 BYRNE PARK DR", "501 ROSEMERE AVE", "5611 LANI…
+$ CITY             &lt;chr&gt; "CLARKSBURG", "SILVER SPRING", "SUITLAND", "CROWNSVIL…
+$ STATE            &lt;chr&gt; "MD", "MD", "MD", "MD", "MD", "MD", "MD", "MD", "MD",…
+$ ZIP              &lt;chr&gt; "20871-6337", "20904-3020", "20746-6216", "21032-0797…
+$ GROUP            &lt;chr&gt; "0000", "0000", "0000", "1601", "0000", "8534", "1709…
+$ SUBSECTION       &lt;chr&gt; "03", "03", "03", "03", "03", "03", "03", "03", "03",…
+$ AFFILIATION      &lt;dbl&gt; 3, 3, 3, 9, 3, 9, 9, 3, 9, 3, 9, 3, 3, 3, 3, 3, 3, 3,…
+$ CLASSIFICATION   &lt;dbl&gt; 7000, 7000, 1000, 7000, 7000, 7000, 7000, 7000, 7000,…
+$ RULING           &lt;chr&gt; "201407", "200406", "200207", "196310", "200203", "19…
+$ DEDUCTIBILITY    &lt;dbl&gt; 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ FOUNDATION       &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 1…
+$ ACTIVITY         &lt;chr&gt; "000000000", "000000000", "000000000", "029002000", "…
+$ ORGANIZATION     &lt;dbl&gt; 5, 1, 1, 5, 1, 1, 5, 1, 5, 1, 5, 1, 1, 1, 1, 1, 1, 1,…
+$ STATUS           &lt;chr&gt; "01", "01", "01", "01", "01", "01", "01", "01", "01",…
+$ TAX_PERIOD       &lt;dbl&gt; NA, 202412, NA, NA, NA, NA, NA, NA, 202412, 202412, N…
+$ ASSET_CD         &lt;dbl&gt; 0, 7, 1, 0, 0, 0, 0, 0, 6, 5, 0, 0, 0, 0, 4, 0, 0, 0,…
+$ INCOME_CD        &lt;dbl&gt; 0, 6, 2, 0, 0, 0, 0, 0, 6, 4, 0, 0, 0, 0, 4, 0, 0, 0,…
+$ FILING_REQ_CD    &lt;chr&gt; "06", "06", "06", "06", "06", "06", "06", "06", "06",…
+$ PF_FILING_REQ_CD &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ ACCT_PD          &lt;chr&gt; "12", "12", "12", "12", "12", "12", "12", "12", "12",…
+$ ASSET_AMT        &lt;dbl&gt; NA, 5045077, NA, NA, NA, NA, NA, NA, 2876599, 665794,…
+$ INCOME_AMT       &lt;dbl&gt; NA, 1258914, NA, NA, NA, NA, NA, NA, 1034272, 103537,…
+$ REVENUE_AMT      &lt;dbl&gt; NA, 1258914, NA, NA, NA, NA, NA, NA, 1034272, 103537,…
+$ NTEE_CD          &lt;chr&gt; "X20", "X21", "X20", NA, "X21", NA, NA, "X20", NA, "X…
+$ SORT_NAME        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, "KENNETH HARR…
+$ zip5             &lt;dbl&gt; 20871, 20904, 20746, 21032, 20833, 21078, 20910, 2064…</code></pre>
+</div>
+</div>
+<p>Now we need to filter our county data down to just Prince George’s County. Then we’ll use <code>st_join()</code> to find which zip codes from our shapefile intersect with the county boundary. We need to make sure both layers use the same coordinate reference system (CRS), so we’ll transform the county data to match the zip code data’s CRS.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pg_county <span class="ot">&lt;-</span> md_counties <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(NAME <span class="sc">==</span> <span class="st">"Prince George's"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="fu">st_crs</span>(md_zips))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>pg_zips <span class="ot">&lt;-</span> <span class="fu">st_join</span>(md_zips, pg_county, <span class="at">join =</span> st_intersects) <span class="sc">|&gt;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(NAME))</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>pg_zips</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 64 features and 25 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -8584465 ymin: 4649746 xmax: -8517241 ymax: 4747200
+Projected CRS: WGS 84 / Pseudo-Mercator
+First 10 features:
+   OBJECTID    ZIPCODE2             ZIPNAME    EXISTING ZIPCODE1 Shape_Leng
+1        13 02400320711             Lothian MDPV2015_16    20711   68505.75
+2        15 02400320724              Laurel MDPV2015_16    20724   33586.16
+3        20 02400320755 Fort George G Meade MDPV2015_16    20755   57470.59
+4        24 02400320776             Harwood MDPV2015_16    20776  114638.05
+5        29 02400321035       Davidsonville MDPV2015_16    21035   61981.41
+6        31 02400321054           Gambrills MDPV2015_16    21054   99946.52
+7        39 02400321113             Odenton MDPV2015_16    21113   62248.76
+8        40 02400321114             Crofton MDPV2015_16    21114   33862.31
+9       110 02400920639         Huntingtown MDPV2017_18    20639   84618.19
+10      119 02400920736              Owings MDPV2017_18    20736   73011.67
+   Shape_Area STATEFP COUNTYFP COUNTYNS GEOID        GEOIDFQ            NAME
+1   145828779      24      033 01714670 24033 0500000US24033 Prince George's
+2    33679051      24      033 01714670 24033 0500000US24033 Prince George's
+3    93302121      24      033 01714670 24033 0500000US24033 Prince George's
+4    98768868      24      033 01714670 24033 0500000US24033 Prince George's
+5   119244477      24      033 01714670 24033 0500000US24033 Prince George's
+6    72643329      24      033 01714670 24033 0500000US24033 Prince George's
+7    64737178      24      033 01714670 24033 0500000US24033 Prince George's
+8    21958551      24      033 01714670 24033 0500000US24033 Prince George's
+9   186529130      24      033 01714670 24033 0500000US24033 Prince George's
+10  108242225      24      033 01714670 24033 0500000US24033 Prince George's
+                 NAMELSAD LSAD CLASSFP MTFCC CSAFP CBSAFP METDIVFP FUNCSTAT
+1  Prince George's County   06      H1 G4020   548  47900    47764        A
+2  Prince George's County   06      H1 G4020   548  47900    47764        A
+3  Prince George's County   06      H1 G4020   548  47900    47764        A
+4  Prince George's County   06      H1 G4020   548  47900    47764        A
+5  Prince George's County   06      H1 G4020   548  47900    47764        A
+6  Prince George's County   06      H1 G4020   548  47900    47764        A
+7  Prince George's County   06      H1 G4020   548  47900    47764        A
+8  Prince George's County   06      H1 G4020   548  47900    47764        A
+9  Prince George's County   06      H1 G4020   548  47900    47764        A
+10 Prince George's County   06      H1 G4020   548  47900    47764        A
+        ALAND   AWATER    INTPTLAT     INTPTLON                       geometry
+1  1249914204 42053184 +38.8292778 -076.8481880 MULTIPOLYGON (((-8535874 47...
+2  1249914204 42053184 +38.8292778 -076.8481880 MULTIPOLYGON (((-8548084 47...
+3  1249914204 42053184 +38.8292778 -076.8481880 MULTIPOLYGON (((-8543120 47...
+4  1249914204 42053184 +38.8292778 -076.8481880 MULTIPOLYGON (((-8533005 47...
+5  1249914204 42053184 +38.8292778 -076.8481880 MULTIPOLYGON (((-8529624 47...
+6  1249914204 42053184 +38.8292778 -076.8481880 MULTIPOLYGON (((-8535681 47...
+7  1249914204 42053184 +38.8292778 -076.8481880 MULTIPOLYGON (((-8539183 47...
+8  1249914204 42053184 +38.8292778 -076.8481880 MULTIPOLYGON (((-8535603 47...
+9  1249914204 42053184 +38.8292778 -076.8481880 MULTIPOLYGON (((-8530108 46...
+10 1249914204 42053184 +38.8292778 -076.8481880 MULTIPOLYGON (((-8529441 46...</code></pre>
+</div>
+</div>
+<p>The <code>st_join()</code> function checks which zip code polygons intersect (overlap with) the Prince George’s County polygon. Zip codes that fall outside PG County will have NA values for the county columns, so we filter those out. The result is a set of zip codes that are in Prince George’s County.</p>
+<p>Now we can use those PG County zip codes to filter our churches data. We’ll match the <code>zip5</code> column in the churches data to the <code>ZIPCODE1</code> column in our spatial join results.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pg_churches <span class="ot">&lt;-</span> md_churches <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip5 =</span> <span class="fu">as.character</span>(zip5)) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(zip5 <span class="sc">%in%</span> pg_zips<span class="sc">$</span>ZIPCODE1)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(pg_churches)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2120</code></pre>
+</div>
+</div>
+<p>Now let’s count how many churches are in each PG County zip code and join that count back to the zip code shapefile. This will let us make a choropleth map – where the color of each zip code represents the number of churches in it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pg_church_counts <span class="ot">&lt;-</span> pg_churches <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(zip5) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">church_count =</span> <span class="fu">n</span>())</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>pg_churches_sf <span class="ot">&lt;-</span> pg_zips <span class="sc">|&gt;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(pg_church_counts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"ZIPCODE1"</span> <span class="ot">=</span> <span class="st">"zip5"</span>))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>pg_churches_sf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 64 features and 26 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -8584465 ymin: 4649746 xmax: -8517241 ymax: 4747200
+Projected CRS: WGS 84 / Pseudo-Mercator
+First 10 features:
+   OBJECTID    ZIPCODE2             ZIPNAME    EXISTING ZIPCODE1 Shape_Leng
+1        13 02400320711             Lothian MDPV2015_16    20711   68505.75
+2        15 02400320724              Laurel MDPV2015_16    20724   33586.16
+3        20 02400320755 Fort George G Meade MDPV2015_16    20755   57470.59
+4        24 02400320776             Harwood MDPV2015_16    20776  114638.05
+5        29 02400321035       Davidsonville MDPV2015_16    21035   61981.41
+6        31 02400321054           Gambrills MDPV2015_16    21054   99946.52
+7        39 02400321113             Odenton MDPV2015_16    21113   62248.76
+8        40 02400321114             Crofton MDPV2015_16    21114   33862.31
+9       110 02400920639         Huntingtown MDPV2017_18    20639   84618.19
+10      119 02400920736              Owings MDPV2017_18    20736   73011.67
+   Shape_Area STATEFP COUNTYFP COUNTYNS GEOID        GEOIDFQ            NAME
+1   145828779      24      033 01714670 24033 0500000US24033 Prince George's
+2    33679051      24      033 01714670 24033 0500000US24033 Prince George's
+3    93302121      24      033 01714670 24033 0500000US24033 Prince George's
+4    98768868      24      033 01714670 24033 0500000US24033 Prince George's
+5   119244477      24      033 01714670 24033 0500000US24033 Prince George's
+6    72643329      24      033 01714670 24033 0500000US24033 Prince George's
+7    64737178      24      033 01714670 24033 0500000US24033 Prince George's
+8    21958551      24      033 01714670 24033 0500000US24033 Prince George's
+9   186529130      24      033 01714670 24033 0500000US24033 Prince George's
+10  108242225      24      033 01714670 24033 0500000US24033 Prince George's
+                 NAMELSAD LSAD CLASSFP MTFCC CSAFP CBSAFP METDIVFP FUNCSTAT
+1  Prince George's County   06      H1 G4020   548  47900    47764        A
+2  Prince George's County   06      H1 G4020   548  47900    47764        A
+3  Prince George's County   06      H1 G4020   548  47900    47764        A
+4  Prince George's County   06      H1 G4020   548  47900    47764        A
+5  Prince George's County   06      H1 G4020   548  47900    47764        A
+6  Prince George's County   06      H1 G4020   548  47900    47764        A
+7  Prince George's County   06      H1 G4020   548  47900    47764        A
+8  Prince George's County   06      H1 G4020   548  47900    47764        A
+9  Prince George's County   06      H1 G4020   548  47900    47764        A
+10 Prince George's County   06      H1 G4020   548  47900    47764        A
+        ALAND   AWATER    INTPTLAT     INTPTLON church_count
+1  1249914204 42053184 +38.8292778 -076.8481880            7
+2  1249914204 42053184 +38.8292778 -076.8481880           19
+3  1249914204 42053184 +38.8292778 -076.8481880            3
+4  1249914204 42053184 +38.8292778 -076.8481880            3
+5  1249914204 42053184 +38.8292778 -076.8481880           10
+6  1249914204 42053184 +38.8292778 -076.8481880           12
+7  1249914204 42053184 +38.8292778 -076.8481880           24
+8  1249914204 42053184 +38.8292778 -076.8481880           14
+9  1249914204 42053184 +38.8292778 -076.8481880            8
+10 1249914204 42053184 +38.8292778 -076.8481880            3
+                         geometry
+1  MULTIPOLYGON (((-8535874 47...
+2  MULTIPOLYGON (((-8548084 47...
+3  MULTIPOLYGON (((-8543120 47...
+4  MULTIPOLYGON (((-8533005 47...
+5  MULTIPOLYGON (((-8529624 47...
+6  MULTIPOLYGON (((-8535681 47...
+7  MULTIPOLYGON (((-8539183 47...
+8  MULTIPOLYGON (((-8535603 47...
+9  MULTIPOLYGON (((-8530108 46...
+10 MULTIPOLYGON (((-8529441 46...</code></pre>
+</div>
+</div>
+<p>Now let’s plot the zip code choropleth on top of the Prince George’s County boundary. The <code>fill</code> aesthetic will color each zip code by its church count.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pg_county) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pg_churches_sf, <span class="fu">aes</span>(<span class="at">fill=</span>church_count)) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_b</span>(<span class="at">option=</span><span class="st">"magma"</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Churches in Prince George's County by Zip Code"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="st">"Number of</span><span class="sc">\n</span><span class="st">Churches"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="geographic-basics_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You should see the outline of Prince George’s County with each zip code colored according to how many churches it contains. Are they evenly distributed? Are there clusters? Think about what you know about the county’s geography – where are the more densely populated areas?</p>
+<p>This is a common pattern in data journalism: using spatial joins to connect non-geographic data (like our churches list) to geographic boundaries, and then mapping the results as a choropleth. The key insight is that you don’t always need latitude and longitude coordinates to map data – sometimes a shared geographic identifier like a zip code, combined with a shapefile, is enough.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
