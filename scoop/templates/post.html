@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="title-banner px-4 py-4">
+  <h1 class="mb-2">{{ page.title }}</h1>
+  {% if page.categories %}<div class="mb-2">{% for c in page.categories %}<span class="badge text-bg-secondary me-1">{{ c }}</span>{% endfor %}</div>{% endif %}
+  <dl class="post-meta row mb-0">
+    <div class="col-auto"><dt>Author</dt><dd>{% firstof page.author site.author %}</dd></div>
+    {% if page.date %}<div class="col-auto"><dt>Published</dt><dd>{{ page.date|date:"F j, Y" }}</dd></div>{% endif %}
+  </dl>
+</header>
+<div class="row mx-0">
+  {% include "_toc.html" %}
+  <main class="site-main col px-4 py-3" data-pagefind-body>
+    {{ page.html|safe }}
+    {% if page.tumblr_url %}<p class="text-muted small">Originally posted on <a href="{{ page.tumblr_url }}">Tumblr</a>.</p>{% endif %}
+  </main>
+</div>
+{% endblock %}

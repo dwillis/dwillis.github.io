@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+{% if page.title %}
+<header class="title-banner px-4 py-4">
+  <h1 class="mb-0">{{ page.title }}</h1>
+  {% if page.date %}<dl class="post-meta row mb-0 mt-2"><div class="col-auto"><dt>Published</dt><dd>{{ page.date|date:"F j, Y" }}</dd></div></dl>{% endif %}
+</header>
+{% endif %}
+<div class="row mx-0">
+  {% include "_toc.html" %}
+  <main class="site-main col px-4 py-3" data-pagefind-body>
+    {{ page.html|safe }}
+  </main>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Blog – {{ site.title }}{% endblock %}
+{% block content %}
+<main class="site-main px-4 py-3">
+  {% for post in posts %}
+  <article class="listing-item">
+    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+    {% if post.excerpt %}<p class="mb-1">{{ post.excerpt|truncatewords:50 }}</p>{% endif %}
+    <small class="text-muted">{{ post.date|date:"n/j/y" }} · {% firstof post.author site.author %}</small>
+  </article>
+  {% endfor %}
+</main>
+{% endblock %}

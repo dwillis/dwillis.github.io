@@ -1,0 +1,8 @@
+{% if page.toc and page.toc_html %}
+<nav class="toc d-none d-xl-block col-xl-3 order-xl-2 py-3" aria-label="On this page">
+  <div class="sticky-top pt-2">
+    <h2 class="h6 text-uppercase text-muted">On this page</h2>
+    {{ page.toc_html|safe }}
+  </div>
+</nav>
+{% endif %}

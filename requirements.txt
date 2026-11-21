@@ -1,0 +1,5 @@
+django>=6.1,<6.2
+django-medusa @ git+https://github.com/dwillis/django-medusa.git@v0.4.0
+python-frontmatter
+markdown
+pygments
