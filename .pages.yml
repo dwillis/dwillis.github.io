@@ -1,0 +1,112 @@
+# Pages CMS configuration (https://pagescms.org/docs/configuration/)
+# Content stays as Markdown files; the Django build reads them (see README.md).
+
+media:
+  input: images/uploads
+  output: /images/uploads
+  rename: safe
+
+content:
+  # New posts land at archives/YYYY/MM/DD/<slug-of-title>/index.md,
+  # which is the folder layout the Django build turns into URLs.
+  - name: posts
+    label: Blog posts
+    type: collection
+    path: archives
+    subfolders: true
+    filename: "{year}/{month}/{day}/{primary}/index.md"
+    format: yaml-frontmatter
+    view:
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: author, label: Author, type: string, default: Derek Willis }
+      - { name: date, label: Date, type: date, options: { format: yyyy-MM-dd } }
+      - { name: description, label: Description, type: text }
+      - { name: toc, label: Table of contents, type: boolean, default: false }
+      - { name: body, label: Body, type: rich-text }
+
+  # The Fix index plus one folder per essay: thefix/<slug>/index.md
+  - name: thefix
+    label: The Fix
+    type: collection
+    path: thefix
+    subfolders: true
+    filename: "{primary}/index.md"
+    format: yaml-frontmatter
+    view:
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: author, label: Author, type: string, default: Derek Willis }
+      - { name: date, label: Date, type: date, options: { format: yyyy-MM-dd } }
+      - { name: toc, label: Table of contents, type: boolean, default: true }
+      - { name: body, label: Body, type: rich-text }
+
+  - name: pages
+    label: Pages
+    type: group
+    items:
+      - name: home
+        label: Home
+        type: file
+        path: index.md
+        format: yaml-frontmatter
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: body, label: Body, type: rich-text }
+      - name: about
+        label: About
+        type: file
+        path: about/index.md
+        format: yaml-frontmatter
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: body, label: Body, type: rich-text }
+      - name: now
+        label: Now
+        type: file
+        path: now/index.md
+        format: yaml-frontmatter
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: body, label: Body, type: rich-text }
+      - name: then
+        label: Then
+        type: file
+        path: then/index.md
+        format: yaml-frontmatter
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: description, label: Description, type: text }
+          - { name: body, label: Body, type: rich-text }
+      - name: help
+        label: Ways I Can Help
+        type: file
+        path: help/index.md
+        format: yaml-frontmatter
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: body, label: Body, type: rich-text }
+      - name: teaching
+        label: Teaching
+        type: file
+        path: teaching/index.md
+        format: yaml-frontmatter
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: body, label: Body, type: rich-text }
+      # Plain Markdown editor here: the page embeds a raw HTML signup form
+      # that a rich-text editor could rewrite.
+      - name: datasets
+        label: Datasets
+        type: file
+        path: datasets/index.md
+        format: yaml-frontmatter
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: body, label: Body, type: code, options: { language: markdown } }
