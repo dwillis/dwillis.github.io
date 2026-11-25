@@ -10,7 +10,68 @@
 <atom:link href="https://www.thescoop.org/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Academic and journalist</description>
 <generator>quarto-1.9.37</generator>
-<lastBuildDate>Wed, 07 Oct 2026 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 25 Nov 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Introducing Skipjack</title>
+  <dc:creator>Derek Willis</dc:creator>
+  <link>https://www.thescoop.org/archives/2026/11/25/introducing-skipjack/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>A lot of people have the wrong idea about Maryland elections.</p>
+<p>Because Democrats dominate statewide contests and hold a supermajority in the state legislature, they figure that politics here aren’t interesting. I have a tough time making the case to students that they’ll find excellent stories in Maryland elections.</p>
+<p>But the stories are there if you know where to look, especially if you use the variety of data offered by the <a href="https://elections.maryland.gov/">State Board of Elections</a>.</p>
+<p>For example, Maryland Republicans are at something of a tipping point. According to the monthly voter registration summaries that the SBOE posts, there are fewer than 2,000 registered voters separating the GOP from those who have chosen no party affiliation, a gap that has been narrowing over time. Being the third choice of voters is never good news for a party; even conservative states such as Wyoming and South Dakota have more registered Democrats than any other non-Republican affiliation.</p>
+<p>Or consider Frederick County, which has seen dramatic shifts in its voting behavior. Since 2010, the county has shifted 31 points towards Democrats at the top of the ticket. One county council district went from a D+9 result in 2014 to D+45 twelve years later.</p>
+<p>Perhaps most interesting to me is that the state’s incumbent Democratic Governor, Wes Moore, garnered fewer votes than two other statewide candidates this year in half of the state’s jurisdictions (23 counties plus Baltimore City). That margin includes two liberal candidates that also ran for governor on minor party lines.</p>
+<p>The hard part in finding all of these is partly imagination and partly logistical. The data that provides those insights is split among multiple PDFs, spreadsheets and HTML files on the SBOE site. Data on turnout, early and mail voting, plus same-day registration, can be found in reports under each election, published in the site’s “<a href="https://elections.maryland.gov/press_room/index.html">Press Room</a>”. Voter registration statistics, <a href="https://elections.maryland.gov/voter_registration/stats.html">including monthly reports</a>, are found in PDFs in a different section. And results are in another place.</p>
+<section id="everything-in-one-place" class="level2">
+<h2 class="anchored" data-anchor-id="everything-in-one-place">Everything in One Place</h2>
+<p>But you can’t really get the full picture of the Maryland electorate’s behavior unless you have all of those - and more - in one place. That’s why I built <a href="https://newsappsumd.github.io/skipjack/">Skipjack</a>, a site for helping me understand Maryland voters and their choices. Skipjack collects the separate pieces and ties them together, mostly through geography and time.</p>
+<p><img src="https://www.thescoop.org/archives/2026/11/25/introducing-skipjack/skipjack_hp.png" alt="Skipjack homepage" style="width:100%;display:block;margin-left:auto;margin-right:auto"></p>
+<p>Time is Skipjack’s first organizing principle. When there’s an election - like the one we just had this month - early voting before election day is the first thing on the homepage. After the election it’s results, unofficial and then official. In between, voter registration patterns are the main thing. Skipjack has <a href="https://newsappsumd.github.io/skipjack/results/">results</a> dating back to 2010, and a wide range of information about the results. For the <a href="https://newsappsumd.github.io/skipjack/results/gg26/">2026 general</a>, for example, you can find results by contest and county, plus details on <a href="https://newsappsumd.github.io/skipjack/results/gg26/#incumbents">incumbents</a> running for re-election, thanks to information from the <a href="https://msa.maryland.gov/msa/mdmanual/html/mmtoc.html">Maryland Manual</a>. County results pages provide a listing of results from all contests in that county (here’s <a href="https://newsappsumd.github.io/skipjack/results/gg26/county/charles/">Charles</a>).</p>
+</section>
+<section id="going-deep-on-a-county" class="level2">
+<h2 class="anchored" data-anchor-id="going-deep-on-a-county">Going Deep on a County</h2>
+<p>Let’s say you find something you want to dig into, or a question you want to answer. How has Frederick County changed since 2010? Each county has its own snapshot that describes voter registration, provides context from the state’s voter file and shows how election results have moved during the past 16 years.</p>
+<p>Frederick’s electorate, by Maryland standards, is weird. It’s roughly split between Democrats, Republicans and unaffiliated voters, ranging from 28% to 38% in terms of share.</p>
+<p><img src="https://www.thescoop.org/archives/2026/11/25/introducing-skipjack/skipjack_fredvoters.png" alt="Frederick County party trends" style="width:100%;display:block;margin-left:auto;margin-right:auto"></p>
+<p>That’s made Frederick one of the swingiest counties in the state this century, although mostly that swing has been towards Democrats. Once a reliably GOP place, Frederick County has swung 31 points to the left since 2010 and the margin for the governor’s race this year is 19 points. You can see the change over time in electoral margins by office during that period: although Donald Trump won the county by two points in 2016, Kamala Harris won it by nine in 2024. The shift is more pronounced in some state races. Larry Hogan won the county by 37 points during his 2018 gubernatorial re-election. Wes Moore has won it twice, by double-digits. County council districts that were highly competitive in 2014 are now solidly Democratic.</p>
+<p><img src="https://www.thescoop.org/archives/2026/11/25/introducing-skipjack/skipjack_fredswing.png" alt="Swing in Frederick County offices since 2010" style="width:100%;display:block;margin-left:auto;margin-right:auto"></p>
+<p>Skipjack provides additional context from the Maryland voter file, which lists each voter and their recent history. Because the voter file has to be purchased separately, has individual information and is relatively large, Skipjack does not reproduce it in whole; instead it provides aggregates from it to shed light on electoral participation. The voter file that the site currently uses is from late summer 2026, so it doesn’t have every voter from the 2026 general election, but it has most of them. One of the things you can see is <a href="https://newsappsumd.github.io/skipjack/voters/file/county/frederick/">how many dedicated voters each county has</a> - the folks who vote in every election.</p>
+<p><img src="https://www.thescoop.org/archives/2026/11/25/introducing-skipjack/skipjack_fredhabits.png" alt="Frederick County voter habits" style="width:100%;display:block;margin-left:auto;margin-right:auto"></p>
+<p>Having the voter file also makes it possible to break down the electorate by age and gender. My plan is to get and update the voter file at least twice a year, and probably more often during election years.</p>
+</section>
+<section id="who-the-voters-are" class="level2">
+<h2 class="anchored" data-anchor-id="who-the-voters-are">Who the Voters Are</h2>
+<p>For a more macro view of the electorate, the state produces monthly voter registration totals, including new registrations. That makes it easier to see the partisan composition of the state and how that is changing. Skipjack parses each PDF and makes a map of it, so that you can see <a href="https://newsappsumd.github.io/skipjack/voters/month/2012-11/">November 2012</a>, for example, and then <a href="https://newsappsumd.github.io/skipjack/voters/month/2026-10/">October 2026</a>.</p>
+<p>One of the trends in Maryland (and elsewhere) is the increase in unaffiliated voters, which has some real consequences for a state with closed primary elections. There are multiple counties where the percentage of voters not tied to the Republican or Democratic parties is at or above one-quarter of the electorate. In Howard and Frederick that share is nearly 28%, and although the baseline is low, about one in seven voters in <a href="https://newsappsumd.github.io/skipjack/voters/county/prince-georges/">heavily Democratic Prince George’s County</a> is unaffiliated, a dramatic increase in the past 16 years.</p>
+<p><img src="https://www.thescoop.org/archives/2026/11/25/introducing-skipjack/skipjack_unaffil.png" alt="Unaffiliated voters by county" style="width:100%;display:block;margin-left:auto;margin-right:auto"></p>
+<p>Maryland’s voter file doesn’t have information about a voter’s race, but like many states Black voters play a crucial role in elections. There are risks to estimating the race/ethnicity of a voter based on limited information, but it’s something that campaigns and political scientists do, so Skipjack does it as well. To do so, it uses the <a href="https://github.com/kosukeimai/wru">wru R package</a>, which produces probabilistic predictions of each voter’s race based on their name, zip code and Census data. Skipjack <em>never</em> shows this prediction for individual voters; it only has <a href="https://newsappsumd.github.io/skipjack/voters/race/">estimates for all voters and within each jurisdiction</a>, alongside Census information about those demographics.</p>
+<p><img src="https://www.thescoop.org/archives/2026/11/25/introducing-skipjack/skipjack_race.png" alt="Estimated race of Maryland voters" style="width:100%;display:block;margin-left:auto;margin-right:auto"></p>
+<p>I’m more confident in Skipjack’s estimates for counties that are predominantly one race or another, and less so for those jurisdictions that are more diverse, but in general these estimates seem pretty solid to me. They show that younger voters are more likely to be Hispanic or multi-racial than their older counterparts, with clusters of Hispanic voters in Montgomery and Prince George’s counties and Asian voters in Montgomery and Howard counties.</p>
+</section>
+<section id="predicting-turnout" class="level2">
+<h2 class="anchored" data-anchor-id="predicting-turnout">Predicting Turnout</h2>
+<p>One of my goals in building Skipjack was to use the information that it collects to build a turnout model for the state and each jurisdiction. My assumptions going into this election were that turnout would probably fall between the 2018 and 2022 elections, although the gubernatorial election was not competitive and there was no U.S. Senate race on the ballot in Maryland this year. That limited the polling available in Maryland, so it didn’t play a big role in building the model. <a href="https://newsappsumd.github.io/skipjack/turnout/forecast/">The model</a>, fit in R, is a regression of ballots cast over active registration by county and party in six elections: the 2018 and 2022 midterms, the 2022 and 2026 primaries and the 2024 primary and general. I had it produce turnout estimates for three scenarios: low, central and high turnout.</p>
+<p><img src="https://www.thescoop.org/archives/2026/11/25/introducing-skipjack/skipjack_model.png" alt="Skipjack's 2026 turnout model" style="width:100%;display:block;margin-left:auto;margin-right:auto"></p>
+<p>Because the model relies on previous elections and Census demographics, it’s not as sensitive as some others might be to political events during the year, and in particular to the unpopularity of Donald Trump, who was fairly unpopular in parts of Maryland to begin with. The model’s “central” forecast produced an estimate of 2.33 million votes for the midterm election, and it looks like <a href="https://elections.maryland.gov/press_room/2026_stats/GG26/2026-general_election_night_unofficial_turnout.pdf">we’ll end up with about 2.28 million ballots cast</a>, or about 46,000 fewer than the model predicted. I’m fairly happy with that outcome, although there’s always room for improvement.</p>
+<p>In particular, the model did well in predicting turnout in Baltimore City, Montgomery, Anne Arundel and Talbot counties, and less well in Howard, Garrett, Charles and Carroll counties. There’s not an obvious throughline that explains those results, but I’ll keep digging.</p>
+</section>
+<section id="colophon" class="level2">
+<h2 class="anchored" data-anchor-id="colophon">Colophon</h2>
+<p>I made Skipjack with two main things: my fairly extensive experience with Maryland election data and Claude Code. It would not be the same absent either one. Knowing Maryland election data made it easier for me to decide what I wanted to do and what the limits were, because an LLM doesn’t really know that part. Using Claude Code made it possible for me to prototype and refine my ideas, and in particular helped me think about and design the turnout model. I could have built a simpler model by myself, but I wanted to try and see how far I could reasonably go with assistance. The code for Skipjack, including the plans that I drafted with Claude, is available <a href="https://github.com/NewsAppsUMD/skipjack">here</a>, minus some of the data (the voter file in particular). The site is generated by a series of Python scripts and hosted on GitHub Pages. I invite you to tell me what sucks.</p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://www.thescoop.org/archives/2026/11/25/introducing-skipjack/</guid>
+  <pubDate>Wed, 25 Nov 2026 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>The Annotated Archive, Revisited</title>
   <dc:creator>Derek Willis</dc:creator>
@@ -1955,299 +2016,6 @@ font-style: inherit;">.xlsx"</span>)</span></code></pre></div></div>
  ]]></description>
   <guid>https://www.thescoop.org/archives/2024/01/27/a-better-way-to-process-mississippi-precinct-results/</guid>
   <pubDate>Sat, 27 Jan 2024 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Introducing Women’s College Volleyball Roster Data</title>
-  <dc:creator>Derek Willis</dc:creator>
-  <link>https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Last year some students of mine at Maryland and I worked to produce a comprehensive set of <a href="https://github.com/Sports-Roster-Data/womens-college-basketball">data on women’s college basketball rosters</a>, and while that process involved a lot of manual effort on top of a base of Python scrapers, it also got me thinking: how hard would it be to extend that system to other sports? As it turns out, it wasn’t that hard, which is why today I’m happy to announce the release of <a href="https://github.com/Sports-Roster-Data/womens-volleyball">comprehensive roster data for women’s college volleyball</a> for the 2023 season.</p>
-<p>There are more women playing volleyball than basketball at the college level, thanks to teams that are slightly larger than many basketball teams and the proliferation of teams. We’ve collected more than 920 teams’ rosters, accounting for more than 15,800 players. Texas and Ohio provide the most players per capita, which was somewhat surprising to me given that Texas has so many people. It also has a lot of colleges that play volleyball. Alexa Henry, a graduate student at UMD, spent some time digging into this data and found that Texas is a leading exporter of players, too: even though the state has 49 NCAA volleyball teams, more than 1,630 Texans are on rosters across the nation. At an average of 17 players on each team, Texas players alone could populate nearly 96 entire teams.</p>
-<p>The first step in collecting this data was to take the <a href="https://github.com/dwillis/wbb/blob/master/ncaa/rosters.py">Python scrapers</a> I wrote for basketball rosters and point them towards volleyball rosters. Most universities use the same software for all of their teams, so it was mostly a matter of developing <a href="https://github.com/Sports-Roster-Data/womens-volleyball/blob/main/teams.json">a list of team URLs</a>. The first time I ran the <a href="https://github.com/Sports-Roster-Data/womens-volleyball/blob/main/rosters.py">volleyball scrapers</a> they yielded nearly 12,000 players, which I estimated to be about 80 percent of the total number. I made one big change to help retrieve the remainder: incorporating Simon Willison’s excellent <a href="https://shot-scraper.datasette.io/en/stable/">shot-scraper library</a>.</p>
-<p>Ostensibly a tool for taking automated screenshots, shot-scraper also (as its name suggests) has a useful ability to scrape websites, and in particular ones where JavaScript makes traditional scraping more annoying. College roster pages are a good example of this, because they often fetch JSON after page load. That doesn’t mean you can’t use the traditional requests + BeautifulSoup pattern, but with shot-scraper you can execute JavaScript against the page, and that comes in very handy.</p>
-<p>Here’s an example: the <a href="https://sjsuspartans.com/sports/womens-volleyball/roster">San Jose State roster</a>. It’s a fairly typical example of what college team roster pages look like:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/san_jose_roster.png" class="img-fluid figure-img"></p>
-<figcaption>San Jose State roster</figcaption>
-</figure>
-</div>
-<p>What we want from this page is a JSON array of player objects based on the HTML attributes in the source. Skipping HTML parsing and heading straight to grabbing objects from the DOM makes things easier. Given access to the page, here’s the JavaScript that does it:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">Array</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">from</span>(<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">document</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">querySelectorAll</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'.roster__players .roster-card-item'</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> el <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">=&gt;</span> {</span>
-<span id="cb1-2">     <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">const</span> id <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">''</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-3">     <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">const</span> name <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'.roster-card-item__title-link'</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-4">     <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">const</span> year <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">querySelectorAll</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'.roster-player-card-profile-field__value'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-5">     <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">const</span> height <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">querySelectorAll</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'.roster-player-card-profile-field__value'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>]<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-6">     <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">const</span> position <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'.roster-card-item__position'</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-7">     <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">const</span> hometown <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">".roster-player-card-profile-field__value--hometown"</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-8">     hs_el <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">".roster-player-card-profile-field__value--school"</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-9">     <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">const</span> high_school <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> hs_el <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">?</span> hs_el<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">innerText</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">''</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-10">     ps_el <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">".roster-player-card-profile-field__value--previous_school"</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-11">     <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">const</span> previous_school <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> ps_el <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">?</span> ps_el<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">innerText</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">''</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-12">     <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">const</span> jersey <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">".roster-card-item__jersey-number"</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">innerText</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-13">     <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">const</span> url <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> el<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">querySelector</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"a"</span>)[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'href'</span>]<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-14">     <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> {id<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> name<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> year<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> hometown<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> high_school<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> previous_school<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> height<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> position<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> jersey<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">,</span> url}<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">;</span></span>
-<span id="cb1-15">    })</span></code></pre></div></div>
-<script type="text/javascript">
-Array.from(document.querySelectorAll('.roster__players .roster-card-item'), el => {
-     const id = '';
-     const name = el.querySelector('.roster-card-item__title-link').innerText;
-     const year = el.querySelectorAll('.roster-player-card-profile-field__value')[1].innerText;
-     const height = el.querySelectorAll('.roster-player-card-profile-field__value')[0].innerText;
-     const position = el.querySelector('.roster-card-item__position').innerText;
-     const hometown = el.querySelector(".roster-player-card-profile-field__value--hometown").innerText;
-     hs_el = el.querySelector(".roster-player-card-profile-field__value--school");
-     const high_school = hs_el ? hs_el.innerText : '';
-     ps_el = el.querySelector(".roster-player-card-profile-field__value--previous_school");
-     const previous_school = ps_el ? ps_el.innerText : '';
-     const jersey = el.querySelector(".roster-card-item__jersey-number").innerText;
-     const url = el.querySelector("a")['href'];
-     return {id, name, year, hometown, high_school, previous_school, height, position, jersey, url};
-    })
-</script>
-</div>
-<p>That, plus a little post-processing, produces an array that looks like this (this version is truncated):</p>
-<pre><code>[{'id': '', 'name': 'Jiana Lawson', 'year': 'Senior', 'hometown': 'Tucson, Ariz.', 'high_school': 'Catalina Foothills HS', 'previous_school': '', 'height': '5′10″', 'position': 'MB', 'jersey': '#1', 'url': 'https://sjsuspartans.com/sports/womens-volleyball/roster/season/2023/player/jiana-lawson', 'team_id': 630, 'team': 'San Jose State', 'season': '2023'}, {'id': '', 'name': 'Brooke Bryant', 'year': 'Junior', 'hometown': 'Irvine, Calif.', 'high_school': 'Santa Margarita HS', 'previous_school': '', 'height': '5′11″', 'position': 'RS', 'jersey': '#2', 'url': 'https://sjsuspartans.com/sports/womens-volleyball/roster/season/2023/player/brooke-bryant', 'team_id': 630, 'team': 'San Jose State', 'season': '2023'}]</code></pre>
-<p>The function for San Jose State is <a href="https://github.com/Sports-Roster-Data/womens-volleyball/blob/main/rosters.py#L296-L318">here</a>. It’s not fancy, but it doesn’t need to be. The good news is that shot-scraper can accept pretty much any JavaScript: a ternary operator, string functions, etc. The bad news is that some of these sites have so much JavaScript running on them that it can get a little fussy.</p>
-<p>This doesn’t make scraping one-click simple, a task that AI will probably hasten in most cases. But it does reduce the amount of time I spend wrestling with weird HTML and JS interactions, and it has made it possible for me to gather even more teams’ rosters, cutting down on the manual work needed for this effort. It allows me to ask: what other sports can I collect rosters from?</p>
-
-
-
- ]]></description>
-  <guid>https://www.thescoop.org/archives/2023/12/25/womens-volleyball-roster-data/</guid>
-  <pubDate>Mon, 25 Dec 2023 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
