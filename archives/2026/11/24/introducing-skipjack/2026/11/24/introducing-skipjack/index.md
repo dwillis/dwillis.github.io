@@ -1,7 +1,7 @@
 ---
 title: Introducing Skipjack
 author: Derek Willis
-date: 2026-11-24
+date: 2026-11-25
 toc: false
 ---
 A lot of people have the wrong idea about Maryland elections. 
@@ -17,4 +17,6 @@ Or consider Frederick County, which has seen dramatic shifts in its voting behav
 Perhaps most interesting to me is that the state’s incumbent Democratic Governor, Wes Moore, garnered fewer votes than two other statewide candidates this year in half of the state’s jurisdictions (23 counties plus Baltimore City). That margin includes two liberal candidates that also ran for governor on minor party lines.
 
 The hard part in finding all of these is partly imagination and partly logistical. The data that provides those insights is split among multiple PDFs, spreadsheets and HTML files on the SBOE site. Data on turnout, early and mail voting, plus same-day registration, can be found in reports under each election, published in the site's "[Press Room](https://elections.maryland.gov/press_room/index.html)". Voter registration statistics, [including monthly reports](https://elections.maryland.gov/voter_registration/stats.html), are found in PDFs in a different section. And results are in another place.
+
+But you can't really get the full picture of the Maryland electorate's behavior unless you have all of those - and more - in one place. That's why I built [Skipjack](https://newsappsumd.github.io/skipjack/), a site for helping me understand Maryland voters and their choices. Skipjack collects the separate pieces together and 
 
